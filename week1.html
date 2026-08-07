@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Week 1 Mission: The Psychology Museum</title>
+  <link rel="stylesheet" href="../style.css">
+  <script src="../app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <header class="mission-header">
+    <div class="container">
+      <p><a href="../index.html">Return to Psychology Academy</a></p>
+      <p class="eyebrow">Week 1 Mission</p>
+      <h1>The Psychology Museum</h1>
+      <p class="tagline">Six exhibits are locked. Solve each challenge, collect the code characters, and open the final gallery.</p>
+    </div>
+  </header>
+  <main id="main-content" class="container">
+    <section class="panel" aria-labelledby="mission-briefing-heading">
+      <h2 id="mission-briefing-heading">Mission Briefing</h2>
+      <p>The museum's historical records have been scrambled. Investigate each exhibit and answer the psychology question. Correct answers reveal one code character and add an item to your evidence inventory.</p>
+      <p>Progress and notebook entries are saved in the browser you are currently using.</p>
+    </section>
+    <div class="mission-layout">
+      <div>
+        <section aria-labelledby="museum-floor-heading">
+          <h2 id="museum-floor-heading">Museum Exhibits</h2>
+          <div class="object-grid">
+            <button class="object-button" type="button" data-challenge-id="notebook" aria-pressed="false"><span class="object-icon" aria-hidden="true">📓</span><strong>Wundt's Laboratory Notebook</strong><br>Complete the definition of psychology.<br><span class="status-text">Not yet solved</span></button>
+            <button class="object-button" type="button" data-challenge-id="portrait" aria-pressed="false"><span class="object-icon" aria-hidden="true">🖼️</span><strong>The Portrait Marked 1879</strong><br>Identify an early psychology laboratory founder.<br><span class="status-text">Not yet solved</span></button>
+            <button class="object-button" type="button" data-challenge-id="mirror" aria-pressed="false"><span class="object-icon" aria-hidden="true">🪞</span><strong>The Structuralist Mirror</strong><br>Examine the basic elements of conscious experience.<br><span class="status-text">Not yet solved</span></button>
+            <button class="object-button" type="button" data-challenge-id="compass" aria-pressed="false"><span class="object-icon" aria-hidden="true">🧭</span><strong>The Functionalist Compass</strong><br>Determine how behavior supports adaptation.<br><span class="status-text">Not yet solved</span></button>
+            <button class="object-button" type="button" data-challenge-id="lever" aria-pressed="false"><span class="object-icon" aria-hidden="true">📦</span><strong>Skinner's Lever</strong><br>Identify the perspective focused on observable behavior.<br><span class="status-text">Not yet solved</span></button>
+            <button class="object-button" type="button" data-challenge-id="magnifier" aria-pressed="false"><span class="object-icon" aria-hidden="true">🔍</span><strong>The Scientific Magnifying Glass</strong><br>Separate psychological science from opinion.<br><span class="status-text">Not yet solved</span></button>
+          </div>
+        </section>
+        <div id="challenge-region" tabindex="-1"></div>
+        <section id="final-lock" class="challenge hidden" aria-labelledby="final-lock-heading">
+          <h2 id="final-lock-heading">Final Gallery Lock</h2>
+          <p>Select the code that matches the six characters you collected in exhibit order.</p>
+          <div class="lock-options">
+            <button type="button" data-lock-code="MIND1S">Lock A: MIND1S</button>
+            <button type="button" data-lock-code="MINDS1">Lock B: MINDS1</button>
+            <button type="button" data-lock-code="MENDS1">Lock C: MENDS1</button>
+            <button type="button" data-lock-code="MINDS7">Lock D: MINDS7</button>
+          </div>
+          <div id="lock-feedback" class="feedback" role="status" aria-live="polite"></div>
+        </section>
+      </div>
+      <aside class="sidebar" aria-label="Mission tools">
+        <section class="panel" aria-labelledby="progress-heading"><h2 id="progress-heading">Mission Progress</h2><div class="progress-wrap"><progress id="mission-progress" value="0" max="6">0 of 6</progress></div><p id="progress-text">0 of 6 exhibits solved</p></section>
+        <section class="panel" aria-labelledby="inventory-heading"><h2 id="inventory-heading">Evidence Inventory</h2><ul id="inventory-list"><li>No evidence collected yet.</li></ul></section>
+        <section class="panel" aria-labelledby="code-heading"><h2 id="code-heading">Collected Code Characters</h2><ul id="code-list"><li>No code characters collected yet.</li></ul></section>
+        <section class="panel notebook" aria-labelledby="notebook-heading"><h2 id="notebook-heading">Investigation Notebook</h2><label for="note-observation">Observation notes</label><textarea id="note-observation" data-note-key="observation"></textarea><label for="note-code">Possible final code</label><textarea id="note-code" data-note-key="code"></textarea><label for="note-reflection">Reflection ideas</label><textarea id="note-reflection" data-note-key="reflection"></textarea></section>
+        <section class="panel" aria-labelledby="reset-heading"><h2 id="reset-heading">Reset Mission</h2><p>Use this only when you want to erase all saved Week 1 progress and notes.</p><button class="danger" type="button" id="reset-progress">Reset Week 1 Progress</button></section>
+      </aside>
+    </div>
+  </main>
+  <footer class="site-footer"><div class="container"><p>Psychology Academy · Week 1 · Dr. Tonya Holdaway</p></div></footer>
+</body>
+</html>
