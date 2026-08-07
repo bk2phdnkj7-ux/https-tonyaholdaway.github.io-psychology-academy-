@@ -1,1 +1,1473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
 
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0">
+
+  <title>Week 2: The Research Conservatory</title>
+
+  <style>
+    :root {
+      --ink: #1f2933;
+      --navy: #163a59;
+      --blue: #2f6fa5;
+      --blue-light: #eaf4fb;
+      --green: #315f40;
+      --green-light: #eef8f2;
+      --gold: #745500;
+      --gold-light: #fffaf0;
+      --red: #7b1f1f;
+      --red-light: #fff1f1;
+      --white: #ffffff;
+      --border: #5f7382;
+      --shadow: 0 10px 28px rgba(22, 58, 89, 0.14);
+      --radius: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--ink);
+      background-color: #f4f8f5;
+      line-height: 1.75;
+      font-size: 18px;
+    }
+
+    a {
+      color: #174c74;
+      text-decoration: underline;
+      text-underline-offset: 0.16em;
+      font-weight: bold;
+    }
+
+    button,
+    textarea {
+      font: inherit;
+    }
+
+    button:focus,
+    textarea:focus,
+    a:focus {
+      outline: 4px solid #111111;
+      outline-offset: 3px;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: 16px;
+      top: -100px;
+      z-index: 1000;
+      background-color: var(--white);
+      color: #111111;
+      border: 3px solid #111111;
+      padding: 12px 16px;
+    }
+
+    .skip-link:focus {
+      top: 16px;
+    }
+
+    .container {
+      width: min(1160px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background-color: var(--blue-light);
+      border-bottom: 5px solid var(--blue);
+      padding: 48px 0 42px;
+    }
+
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.62);
+      pointer-events: none;
+      animation: drift 18s linear infinite;
+    }
+
+    .hero::before {
+      width: 180px;
+      height: 60px;
+      left: 8%;
+      top: 28px;
+    }
+
+    .hero::after {
+      width: 230px;
+      height: 72px;
+      right: 6%;
+      top: 84px;
+      animation-duration: 24s;
+    }
+
+    @keyframes drift {
+      0% {
+        transform: translateX(-14px);
+      }
+
+      50% {
+        transform: translateX(14px);
+      }
+
+      100% {
+        transform: translateX(-14px);
+      }
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      font-size: 0.95rem;
+      font-weight: bold;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--navy);
+    }
+
+    .hero h1 {
+      margin: 0;
+      color: var(--navy);
+      line-height: 1.15;
+      font-size: clamp(2.2rem, 6vw, 4.4rem);
+    }
+
+    .hero-text {
+      max-width: 820px;
+      margin: 16px 0 0;
+      font-size: 1.15rem;
+    }
+
+    main {
+      padding: 32px 0 48px;
+    }
+
+    h2,
+    h3 {
+      color: var(--navy);
+      line-height: 1.3;
+    }
+
+    .panel {
+      background-color: var(--white);
+      border: 2px solid var(--border);
+      border-left: 8px solid var(--blue);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .panel-green {
+      border-left-color: var(--green);
+    }
+
+    .panel-gold {
+      border-left-color: var(--gold);
+    }
+
+    .mission-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 340px;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 16px;
+    }
+
+    .station-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 16px;
+    }
+
+    .station-button {
+      width: 100%;
+      min-height: 195px;
+      padding: 18px;
+      text-align: left;
+      color: var(--ink);
+      background-color: var(--white);
+      border: 2px solid var(--border);
+      border-left: 8px solid var(--blue);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      cursor: pointer;
+    }
+
+    .station-button:hover {
+      transform: translateY(-2px);
+    }
+
+    .station-button[aria-pressed="true"] {
+      border-left-color: var(--green);
+      background-color: var(--green-light);
+    }
+
+    .station-icon {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 2.2rem;
+    }
+
+    .station-title {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--navy);
+      font-weight: bold;
+      font-size: 1.06rem;
+    }
+
+    .status-text {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    .challenge {
+      background-color: var(--white);
+      border: 2px solid var(--border);
+      border-left: 8px solid var(--blue);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-top: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .question-text {
+      font-size: 1.08rem;
+      font-weight: bold;
+    }
+
+    .option-list {
+      display: grid;
+      gap: 12px;
+      margin: 18px 0;
+    }
+
+    .option-button,
+    .action-button,
+    .lock-button {
+      width: 100%;
+      padding: 14px 16px;
+      border-radius: 10px;
+      border: 2px solid var(--border);
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .option-button {
+      background-color: var(--white);
+      color: var(--ink);
+    }
+
+    .option-button:hover {
+      background-color: var(--blue-light);
+    }
+
+    .action-button {
+      width: auto;
+      background-color: var(--blue);
+      color: var(--white);
+      border-color: var(--navy);
+      font-weight: bold;
+      text-decoration: underline;
+    }
+
+    .feedback {
+      margin-top: 16px;
+      padding: 16px;
+      background-color: #f8fbfd;
+      color: var(--ink);
+      border: 2px solid var(--border);
+      border-left: 8px solid var(--blue);
+      border-radius: 10px;
+    }
+
+    .feedback.correct {
+      background-color: var(--green-light);
+      color: var(--ink);
+      border-left-color: var(--green);
+    }
+
+    .feedback.correct h3 {
+      color: #214f34;
+    }
+
+    .feedback.incorrect {
+      background-color: var(--red-light);
+      color: var(--ink);
+      border-left-color: var(--red);
+    }
+
+    progress {
+      width: 100%;
+      height: 24px;
+    }
+
+    .inventory-list,
+    .code-list {
+      padding-left: 22px;
+    }
+
+    label {
+      display: block;
+      margin-top: 16px;
+      font-weight: bold;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 92px;
+      margin-top: 6px;
+      padding: 12px;
+      color: var(--ink);
+      background-color: var(--white);
+      border: 2px solid var(--border);
+      border-radius: 8px;
+    }
+
+    .final-lock {
+      margin-top: 24px;
+      padding: 24px;
+      background-color: var(--navy);
+      color: var(--white);
+      border: 3px solid #0d293e;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .final-lock h2 {
+      color: var(--white);
+    }
+
+    .final-lock .feedback {
+      background-color: var(--white);
+      color: var(--ink);
+    }
+
+    .final-lock .feedback.correct {
+      background-color: var(--green-light);
+      color: var(--ink);
+      border-left-color: var(--green);
+    }
+
+    .final-lock .feedback.correct h3 {
+      color: #214f34;
+    }
+
+    .final-lock .feedback.incorrect {
+      background-color: var(--red-light);
+      color: var(--ink);
+      border-left-color: var(--red);
+    }
+
+    .lock-grid {
+      display: grid;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .lock-button {
+      background-color: var(--white);
+      color: var(--navy);
+      font-weight: bold;
+    }
+
+    .danger {
+      background-color: var(--red);
+      border-color: #4f1010;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    footer {
+      background-color: var(--white);
+      border-top: 3px solid var(--border);
+      padding: 20px 0;
+    }
+
+    @media (max-width: 900px) {
+      .mission-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: static;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      .hero::before,
+      .hero::after {
+        animation: none;
+      }
+
+      .station-button:hover {
+        transform: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip-link" href="#main-content">
+    Skip to main content
+  </a>
+
+  <header class="hero">
+    <div class="container">
+      <p class="eyebrow">
+        Week 2 Psychology Mission
+      </p>
+
+      <h1>
+        The Research Conservatory
+      </h1>
+
+      <p class="hero-text">
+        A dramatic headline has appeared in the academy newspaper:
+        “New study proves that studying with music causes higher grades.”
+        Your mission is to investigate the claim, examine the evidence,
+        and determine what the research really shows.
+      </p>
+    </div>
+  </header>
+
+  <main id="main-content" class="container">
+    <section class="panel panel-green" aria-labelledby="briefing-heading">
+      <h2 id="briefing-heading">
+        Mission Briefing
+      </h2>
+
+      <p>
+        Seven research stations have been sealed. Each station focuses on
+        one important part of psychological research.
+      </p>
+
+      <p>
+        Solve all seven challenges, collect the code characters, and unlock
+        the Evidence Archive.
+      </p>
+
+      <p>
+        There is no timer. Hints are available without penalty, and progress
+        is saved automatically in the current browser.
+      </p>
+
+      <p style="margin-bottom: 0;">
+        All text uses dark lettering on light backgrounds so the content
+        remains easy to read.
+      </p>
+    </section>
+
+    <section class="panel panel-gold" aria-labelledby="objectives-heading">
+      <h2 id="objectives-heading">
+        Learning Objectives
+      </h2>
+
+      <p>
+        By completing this mission, you will practice how to:
+      </p>
+
+      <ul>
+        <li>Identify focused, researchable questions.</li>
+        <li>Recognize testable hypotheses.</li>
+        <li>Distinguish independent, dependent, and confounding variables.</li>
+        <li>Select an appropriate research method.</li>
+        <li>Interpret correlation without confusing it with causation.</li>
+        <li>Identify essential ethical protections.</li>
+        <li>Evaluate whether a headline accurately represents a study.</li>
+      </ul>
+    </section>
+
+    <div class="mission-layout">
+      <div>
+        <section aria-labelledby="stations-heading">
+          <h2 id="stations-heading">
+            Research Stations
+          </h2>
+
+          <div class="station-grid">
+            <button
+              class="station-button"
+              type="button"
+              data-challenge="question"
+              aria-pressed="false">
+
+              <span class="station-icon" aria-hidden="true">
+                📝
+              </span>
+
+              <span class="station-title">
+                The Question Desk
+              </span>
+
+              Identify a focused research question.
+
+              <span class="status-text">
+                Not yet solved
+              </span>
+            </button>
+
+            <button
+              class="station-button"
+              type="button"
+              data-challenge="hypothesis"
+              aria-pressed="false">
+
+              <span class="station-icon" aria-hidden="true">
+                🏮
+              </span>
+
+              <span class="station-title">
+                The Hypothesis Lantern
+              </span>
+
+              Choose a specific, testable prediction.
+
+              <span class="status-text">
+                Not yet solved
+              </span>
+            </button>
+
+            <button
+              class="station-button"
+              type="button"
+              data-challenge="variables"
+              aria-pressed="false">
+
+              <span class="station-icon" aria-hidden="true">
+                🗄️
+              </span>
+
+              <span class="station-title">
+                The Variables Cabinet
+              </span>
+
+              Identify the independent variable.
+
+              <span class="status-text">
+                Not yet solved
+              </span>
+            </button>
+
+            <button
+              class="station-button"
+              type="button"
+              data-challenge="methods"
+              aria-pressed="false">
+
+              <span class="station-icon" aria-hidden="true">
+                🌿
+              </span>
+
+              <span class="station-title">
+                The Methods Greenhouse
+              </span>
+
+              Select the best research method.
+
+              <span class="status-text">
+                Not yet solved
+              </span>
+            </button>
+
+            <button
+              class="station-button"
+              type="button"
+              data-challenge="correlation"
+              aria-pressed="false">
+
+              <span class="station-icon" aria-hidden="true">
+                🔭
+              </span>
+
+              <span class="station-title">
+                The Correlation Telescope
+              </span>
+
+              Interpret a relationship accurately.
+
+              <span class="status-text">
+                Not yet solved
+              </span>
+            </button>
+
+            <button
+              class="station-button"
+              type="button"
+              data-challenge="ethics"
+              aria-pressed="false">
+
+              <span class="station-icon" aria-hidden="true">
+                ⚖️
+              </span>
+
+              <span class="station-title">
+                The Ethics Review Chamber
+              </span>
+
+              Protect participants’ rights and safety.
+
+              <span class="status-text">
+                Not yet solved
+              </span>
+            </button>
+
+            <button
+              class="station-button"
+              type="button"
+              data-challenge="evidence"
+              aria-pressed="false">
+
+              <span class="station-icon" aria-hidden="true">
+                📚
+              </span>
+
+              <span class="station-title">
+                The Evidence Archive
+              </span>
+
+              Evaluate the newspaper headline.
+
+              <span class="status-text">
+                Not yet solved
+              </span>
+            </button>
+          </div>
+        </section>
+
+        <div id="challenge-area" tabindex="-1"></div>
+
+        <section
+          id="final-lock"
+          class="final-lock hidden"
+          aria-labelledby="lock-heading">
+
+          <h2 id="lock-heading">
+            Final Evidence Archive Lock
+          </h2>
+
+          <p>
+            You solved all seven research stations. Select the code that
+            matches your collected characters in station order.
+          </p>
+
+          <div class="lock-grid">
+            <button
+              class="lock-button"
+              type="button"
+              data-code="SCIENCE">
+
+              Lock A: SCIENCE
+            </button>
+
+            <button
+              class="lock-button"
+              type="button"
+              data-code="SCIENEC">
+
+              Lock B: SCIENEC
+            </button>
+
+            <button
+              class="lock-button"
+              type="button"
+              data-code="SC1ENCE">
+
+              Lock C: SC1ENCE
+            </button>
+
+            <button
+              class="lock-button"
+              type="button"
+              data-code="SCIENCES">
+
+              Lock D: SCIENCES
+            </button>
+          </div>
+
+          <div
+            id="lock-feedback"
+            class="feedback"
+            role="status"
+            aria-live="polite">
+
+            Select the code that matches your investigation log.
+          </div>
+        </section>
+      </div>
+
+      <aside class="sidebar" aria-label="Mission tools">
+        <section class="panel" aria-labelledby="progress-heading">
+          <h2 id="progress-heading">
+            Mission Progress
+          </h2>
+
+          <progress
+            id="progress-bar"
+            value="0"
+            max="7">
+
+            0 of 7 stations solved
+          </progress>
+
+          <p id="progress-text">
+            0 of 7 stations solved
+          </p>
+        </section>
+
+        <section
+          class="panel panel-green"
+          aria-labelledby="inventory-heading">
+
+          <h2 id="inventory-heading">
+            Evidence Inventory
+          </h2>
+
+          <ul id="inventory-list" class="inventory-list">
+            <li>
+              No evidence collected yet.
+            </li>
+          </ul>
+        </section>
+
+        <section
+          class="panel panel-gold"
+          aria-labelledby="codes-heading">
+
+          <h2 id="codes-heading">
+            Collected Code Characters
+          </h2>
+
+          <ol id="code-list" class="code-list">
+            <li>
+              No code characters collected yet.
+            </li>
+          </ol>
+        </section>
+
+        <section class="panel" aria-labelledby="notes-heading">
+          <h2 id="notes-heading">
+            Research Notebook
+          </h2>
+
+          <label for="question-notes">
+            Research question notes
+          </label>
+
+          <textarea
+            id="question-notes"
+            data-note="question"></textarea>
+
+          <label for="evidence-notes">
+            Evidence and method notes
+          </label>
+
+          <textarea
+            id="evidence-notes"
+            data-note="evidence"></textarea>
+
+          <label for="headline-notes">
+            Final headline evaluation
+          </label>
+
+          <textarea
+            id="headline-notes"
+            data-note="headline"></textarea>
+        </section>
+
+        <section class="panel" aria-labelledby="reset-heading">
+          <h2 id="reset-heading">
+            Reset Mission
+          </h2>
+
+          <p>
+            This erases all saved Week 2 progress and notebook entries.
+          </p>
+
+          <button
+            id="reset-button"
+            class="action-button danger"
+            type="button">
+
+            Reset Week 2 Progress
+          </button>
+        </section>
+      </aside>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>
+        Psychology Academy · Week 2 · Dr. Tonya Holdaway
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    const storageKey = "psychologyResearchWeek2";
+
+    const challenges = {
+      question: {
+        title: "The Question Desk",
+
+        question:
+          "Which option is the strongest research question?",
+
+        answers: [
+          "Is music good?",
+
+          "Do students who study with instrumental music score differently on a memory test than students who study in silence?",
+
+          "Why do some people like music more than others?"
+        ],
+
+        correct: 1,
+
+        explanation:
+          "This question identifies measurable variables and a comparison that can be investigated systematically.",
+
+        hint:
+          "Look for a question that identifies what will be compared and what will be measured.",
+
+        character: "S",
+
+        evidence:
+          "Focused Research Question"
+      },
+
+      hypothesis: {
+        title:
+          "The Hypothesis Lantern",
+
+        question:
+          "Which statement is a testable hypothesis?",
+
+        answers: [
+          "Music is always helpful for everyone.",
+
+          "Students who study with instrumental music will recall more words than students who study in silence.",
+
+          "Music is interesting."
+        ],
+
+        correct: 1,
+
+        explanation:
+          "A testable hypothesis makes a specific prediction that can be evaluated with evidence.",
+
+        hint:
+          "Choose the statement that predicts an observable difference between groups.",
+
+        character: "C",
+
+        evidence:
+          "Testable Hypothesis Card"
+      },
+
+      variables: {
+        title:
+          "The Variables Cabinet",
+
+        question:
+          "In an experiment comparing instrumental music with silence during studying, what is the independent variable?",
+
+        answers: [
+          "The students’ memory-test scores",
+
+          "Whether students study with music or in silence",
+
+          "The students’ final course grades"
+        ],
+
+        correct: 1,
+
+        explanation:
+          "The independent variable is the condition manipulated by the researcher: music or silence.",
+
+        hint:
+          "Ask what the researcher changes.",
+
+        character: "I",
+
+        evidence:
+          "Independent Variable Label"
+      },
+
+      methods: {
+        title:
+          "The Methods Greenhouse",
+
+        question:
+          "Which method is best for testing whether music causes a difference in memory performance?",
+
+        answers: [
+          "A controlled experiment with random assignment",
+
+          "A single case study",
+
+          "An informal conversation with a few students"
+        ],
+
+        correct: 0,
+
+        explanation:
+          "A controlled experiment with random assignment provides the strongest basis for testing cause and effect.",
+
+        hint:
+          "Choose the method that manipulates a variable and controls alternative explanations.",
+
+        character: "E",
+
+        evidence:
+          "Experimental Design Blueprint"
+      },
+
+      correlation: {
+        title:
+          "The Correlation Telescope",
+
+        question:
+          "A survey finds that students who report more study time also report higher grades. What can the researchers conclude?",
+
+        answers: [
+          "More study time definitely causes higher grades.",
+
+          "Study time and grades are related, but the survey does not establish causation.",
+
+          "Grades cause students to study more."
+        ],
+
+        correct: 1,
+
+        explanation:
+          "A correlation shows that variables are related, but it does not by itself demonstrate cause and effect.",
+
+        hint:
+          "Remember that correlation does not automatically prove causation.",
+
+        character: "N",
+
+        evidence:
+          "Correlation Observation Lens"
+      },
+
+      ethics: {
+        title:
+          "The Ethics Review Chamber",
+
+        question:
+          "Which practice is essential before adults participate in a psychological study?",
+
+        answers: [
+          "Researchers guarantee that the hypothesis will be supported.",
+
+          "Participants receive enough information to make a voluntary, informed decision.",
+
+          "Participants are required to remain in the study until it ends."
+        ],
+
+        correct: 1,
+
+        explanation:
+          "Informed consent helps participants understand the study and decide voluntarily whether to participate.",
+
+        hint:
+          "Think about participants’ right to make an informed and voluntary choice.",
+
+        character: "C",
+
+        evidence:
+          "Informed Consent Seal"
+      },
+
+      evidence: {
+        title:
+          "The Evidence Archive",
+
+        question:
+          "A correlational study finds that students who listen to music while studying tend to have slightly higher grades. Which headline is most accurate?",
+
+        answers: [
+          "Study Proves Music Causes Better Grades",
+
+          "Music Guarantees Academic Success",
+
+          "Study Finds an Association Between Studying With Music and Grades"
+        ],
+
+        correct: 2,
+
+        explanation:
+          "The accurate headline describes an association and does not claim that music caused the grade difference.",
+
+        hint:
+          "Choose the headline that matches what a correlational study can actually support.",
+
+        character: "E",
+
+        evidence:
+          "Accurate Headline Proof"
+      }
+    };
+
+    const state = {
+      solved: [],
+      notes: {}
+    };
+
+    function loadProgress() {
+      try {
+        const saved =
+          JSON.parse(localStorage.getItem(storageKey));
+
+        if (saved && typeof saved === "object") {
+          state.solved =
+            Array.isArray(saved.solved)
+              ? saved.solved
+              : [];
+
+          state.notes =
+            saved.notes &&
+            typeof saved.notes === "object"
+              ? saved.notes
+              : {};
+        }
+      } catch (error) {
+        console.warn(
+          "Saved progress could not be loaded."
+        );
+      }
+    }
+
+    function saveProgress() {
+      localStorage.setItem(
+        storageKey,
+        JSON.stringify(state)
+      );
+    }
+
+    function updateDashboard() {
+      const progressBar =
+        document.getElementById("progress-bar");
+
+      const progressText =
+        document.getElementById("progress-text");
+
+      const inventoryList =
+        document.getElementById("inventory-list");
+
+      const codeList =
+        document.getElementById("code-list");
+
+      const finalLock =
+        document.getElementById("final-lock");
+
+      progressBar.value =
+        state.solved.length;
+
+      progressText.textContent =
+        state.solved.length +
+        " of 7 stations solved";
+
+      inventoryList.innerHTML = "";
+
+      codeList.innerHTML = "";
+
+      if (state.solved.length === 0) {
+        inventoryList.innerHTML =
+          "<li>No evidence collected yet.</li>";
+
+        codeList.innerHTML =
+          "<li>No code characters collected yet.</li>";
+      } else {
+        state.solved.forEach(function(id) {
+          const challenge =
+            challenges[id];
+
+          const evidenceItem =
+            document.createElement("li");
+
+          evidenceItem.textContent =
+            challenge.evidence;
+
+          inventoryList.appendChild(
+            evidenceItem
+          );
+
+          const codeItem =
+            document.createElement("li");
+
+          codeItem.textContent =
+            challenge.title +
+            ": " +
+            challenge.character;
+
+          codeList.appendChild(
+            codeItem
+          );
+        });
+      }
+
+      document
+        .querySelectorAll("[data-challenge]")
+        .forEach(function(button) {
+          const id =
+            button.dataset.challenge;
+
+          const solved =
+            state.solved.includes(id);
+
+          button.setAttribute(
+            "aria-pressed",
+            solved ? "true" : "false"
+          );
+
+          const status =
+            button.querySelector(
+              ".status-text"
+            );
+
+          status.textContent =
+            solved
+              ? "Solved"
+              : "Not yet solved";
+        });
+
+      if (state.solved.length === 7) {
+        finalLock.classList.remove(
+          "hidden"
+        );
+      } else {
+        finalLock.classList.add(
+          "hidden"
+        );
+      }
+    }
+
+    function showChallenge(id) {
+      const challenge =
+        challenges[id];
+
+      const challengeArea =
+        document.getElementById(
+          "challenge-area"
+        );
+
+      const answerButtons =
+        challenge.answers
+          .map(function(answer, index) {
+            return `
+              <button
+                class="option-button"
+                type="button"
+                data-answer="${index}">
+                ${answer}
+              </button>
+            `;
+          })
+          .join("");
+
+      challengeArea.innerHTML = `
+        <section
+          class="challenge"
+          aria-labelledby="active-challenge-heading">
+
+          <h2 id="active-challenge-heading">
+            ${challenge.title}
+          </h2>
+
+          <p class="question-text">
+            ${challenge.question}
+          </p>
+
+          <div
+            class="option-list"
+            aria-label="Answer choices">
+
+            ${answerButtons}
+          </div>
+
+          <button
+            id="hint-button"
+            class="action-button"
+            type="button">
+
+            Show Hint
+          </button>
+
+          <div
+            id="challenge-feedback"
+            class="feedback"
+            role="status"
+            aria-live="polite">
+
+            Choose the best answer.
+          </div>
+        </section>
+      `;
+
+      challengeArea
+        .querySelectorAll("[data-answer]")
+        .forEach(function(button) {
+          button.addEventListener(
+            "click",
+            function() {
+              checkAnswer(
+                id,
+                Number(
+                  button.dataset.answer
+                )
+              );
+            }
+          );
+        });
+
+      document
+        .getElementById("hint-button")
+        .addEventListener(
+          "click",
+          function() {
+            const feedback =
+              document.getElementById(
+                "challenge-feedback"
+              );
+
+            feedback.className =
+              "feedback";
+
+            feedback.textContent =
+              "Hint: " +
+              challenge.hint;
+          }
+        );
+
+      challengeArea.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    }
+
+    function checkAnswer(
+      id,
+      selectedAnswer
+    ) {
+      const challenge =
+        challenges[id];
+
+      const feedback =
+        document.getElementById(
+          "challenge-feedback"
+        );
+
+      if (
+        selectedAnswer ===
+        challenge.correct
+      ) {
+        if (
+          !state.solved.includes(id)
+        ) {
+          state.solved.push(id);
+
+          saveProgress();
+        }
+
+        feedback.className =
+          "feedback correct";
+
+        feedback.innerHTML =
+          challenge.explanation +
+          "<br><strong>Code character: " +
+          challenge.character +
+          "</strong>";
+
+        updateDashboard();
+      } else {
+        feedback.className =
+          "feedback incorrect";
+
+        feedback.textContent =
+          "That answer is not correct yet. Review the choices, use the hint, and try again.";
+      }
+    }
+
+    function configureNotebook() {
+      document
+        .querySelectorAll("[data-note]")
+        .forEach(function(textarea) {
+          const noteKey =
+            textarea.dataset.note;
+
+          textarea.value =
+            state.notes[noteKey] || "";
+
+          textarea.addEventListener(
+            "input",
+            function() {
+              state.notes[noteKey] =
+                textarea.value;
+
+              saveProgress();
+            }
+          );
+        });
+    }
+
+    function configureLock() {
+      document
+        .querySelectorAll("[data-code]")
+        .forEach(function(button) {
+          button.addEventListener(
+            "click",
+            function() {
+              const lockFeedback =
+                document.getElementById(
+                  "lock-feedback"
+                );
+
+              if (
+                button.dataset.code ===
+                "SCIENCE"
+              ) {
+                lockFeedback.className =
+                  "feedback correct";
+
+                lockFeedback.innerHTML = `
+                  <h3>
+                    The Evidence Archive Opens
+                  </h3>
+
+                  <p>
+                    You carefully evaluated the research claim and uncovered what the evidence actually supports.
+                  </p>
+
+                  <p>
+                    <strong>
+                      Completion phrase:
+                    </strong>
+                    Strong claims require strong evidence.
+                  </p>
+                `;
+              } else {
+                lockFeedback.className =
+                  "feedback incorrect";
+
+                lockFeedback.textContent =
+                  "The archive remains locked. Check the order of your seven code characters and try again.";
+              }
+            }
+          );
+        });
+    }
+
+    function configureReset() {
+      document
+        .getElementById("reset-button")
+        .addEventListener(
+          "click",
+          function() {
+            const confirmed =
+              window.confirm(
+                "Reset all Week 2 mission progress and notebook entries?"
+              );
+
+            if (!confirmed) {
+              return;
+            }
+
+            localStorage.removeItem(
+              storageKey
+            );
+
+            state.solved = [];
+
+            state.notes = {};
+
+            document
+              .getElementById(
+                "challenge-area"
+              )
+              .innerHTML = "";
+
+            document
+              .querySelectorAll(
+                "[data-note]"
+              )
+              .forEach(
+                function(textarea) {
+                  textarea.value = "";
+                }
+              );
+
+            document
+              .getElementById(
+                "lock-feedback"
+              )
+              .textContent =
+              "Select the code that matches your investigation log.";
+
+            updateDashboard();
+          }
+        );
+    }
+
+    function startMission() {
+      loadProgress();
+
+      document
+        .querySelectorAll(
+          "[data-challenge]"
+        )
+        .forEach(function(button) {
+          button.addEventListener(
+            "click",
+            function() {
+              showChallenge(
+                button.dataset.challenge
+              );
+            }
+          );
+        });
+
+      configureNotebook();
+
+      configureLock();
+
+      configureReset();
+
+      updateDashboard();
+    }
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      startMission
+    );
+  </script>
+</body>
+</html>
