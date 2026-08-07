@@ -278,7 +278,30 @@
     .final-lock h2,
     .final-lock h3 {
       color: var(--white);
-    }
+    }.final-lock .feedback {
+  background-color: var(--white);
+  color: var(--ink);
+}
+
+.final-lock .feedback h3 {
+  color: var(--navy);
+}
+
+.final-lock .feedback.correct {
+  background-color: var(--light-green);
+  color: var(--ink);
+  border-left-color: var(--green);
+}
+
+.final-lock .feedback.correct h3 {
+  color: #214f34;
+}
+
+.final-lock .feedback.incorrect {
+  background-color: #fff2f2;
+  color: var(--ink);
+  border-left-color: var(--danger);
+}
 
     .lock-grid {
       display: grid;
