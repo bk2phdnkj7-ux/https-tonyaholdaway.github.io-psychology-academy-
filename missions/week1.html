@@ -12,6 +12,7 @@
   <style>
     :root {
       --navy: #163a59;
+      --navy-dark: #082236;
       --blue: #2f6fa5;
       --light-blue: #eaf4fb;
       --green: #315f40;
@@ -49,12 +50,14 @@
     }
 
     button,
-    textarea {
+    textarea,
+    input {
       font: inherit;
     }
 
     button:focus,
     textarea:focus,
+    input:focus,
     a:focus {
       outline: 4px solid #111111;
       outline-offset: 3px;
@@ -346,6 +349,52 @@
       cursor: pointer;
     }
 
+    .badge-maker {
+      margin-top: 22px;
+      padding: 20px;
+      background-color: #fffaf0;
+      color: var(--ink);
+      border: 3px solid #8a6b1f;
+      border-radius: 12px;
+    }
+
+    .badge-maker h3 {
+      color: #634900;
+      margin-top: 0;
+    }
+
+    .badge-maker label {
+      color: var(--ink);
+    }
+
+    .badge-name-input {
+      width: 100%;
+      max-width: 500px;
+      margin: 6px 0 14px;
+      padding: 12px;
+      color: var(--ink);
+      background-color: var(--white);
+      border: 2px solid var(--border);
+      border-radius: 8px;
+    }
+
+    .badge-download-button {
+      display: inline-block;
+      background-color: var(--navy);
+      color: var(--white);
+      border: 3px solid var(--navy-dark);
+      border-radius: 9px;
+      padding: 14px 20px;
+      cursor: pointer;
+      font-weight: bold;
+      text-decoration: underline;
+    }
+
+    .badge-status {
+      margin-bottom: 0;
+      font-weight: bold;
+    }
+
     .hidden {
       display: none;
     }
@@ -379,6 +428,7 @@
 </head>
 
 <body>
+
   <a class="skip-link" href="#main-content">
     Skip to main content
   </a>
@@ -403,12 +453,14 @@
         disappeared. Solve each psychology challenge, collect six code
         characters, and unlock the final gallery.
       </p>
+
     </div>
   </header>
 
   <main id="main-content" class="container">
 
     <section class="panel" aria-labelledby="briefing-heading">
+
       <h2 id="briefing-heading">
         Mission Briefing
       </h2>
@@ -427,6 +479,7 @@
       <p style="margin-bottom: 0;">
         There is no timer. You may use hints and try each challenge more than once.
       </p>
+
     </section>
 
     <div class="mission-layout">
@@ -434,60 +487,167 @@
       <div>
 
         <section aria-labelledby="exhibits-heading">
+
           <h2 id="exhibits-heading">
             Museum Exhibits
           </h2>
 
           <div class="exhibit-grid">
 
-            <button class="exhibit-button" type="button" data-challenge="notebook" aria-pressed="false">
-              <span class="exhibit-icon" aria-hidden="true">📓</span>
-              <strong>Wundt's Laboratory Notebook</strong>
-              <span>Identify the scientific definition of psychology.</span>
-              <span class="status-text">Not yet solved</span>
+            <button
+              class="exhibit-button"
+              type="button"
+              data-challenge="notebook"
+              aria-pressed="false">
+
+              <span class="exhibit-icon" aria-hidden="true">
+                📓
+              </span>
+
+              <strong>
+                Wundt's Laboratory Notebook
+              </strong>
+
+              <span>
+                Identify the scientific definition of psychology.
+              </span>
+
+              <span class="status-text">
+                Not yet solved
+              </span>
+
             </button>
 
-            <button class="exhibit-button" type="button" data-challenge="portrait" aria-pressed="false">
-              <span class="exhibit-icon" aria-hidden="true">🖼️</span>
-              <strong>The Portrait Marked 1879</strong>
-              <span>Identify an early psychology laboratory founder.</span>
-              <span class="status-text">Not yet solved</span>
+            <button
+              class="exhibit-button"
+              type="button"
+              data-challenge="portrait"
+              aria-pressed="false">
+
+              <span class="exhibit-icon" aria-hidden="true">
+                🖼️
+              </span>
+
+              <strong>
+                The Portrait Marked 1879
+              </strong>
+
+              <span>
+                Identify an early psychology laboratory founder.
+              </span>
+
+              <span class="status-text">
+                Not yet solved
+              </span>
+
             </button>
 
-            <button class="exhibit-button" type="button" data-challenge="mirror" aria-pressed="false">
-              <span class="exhibit-icon" aria-hidden="true">🪞</span>
-              <strong>The Structuralist Mirror</strong>
-              <span>Examine the basic elements of conscious experience.</span>
-              <span class="status-text">Not yet solved</span>
+            <button
+              class="exhibit-button"
+              type="button"
+              data-challenge="mirror"
+              aria-pressed="false">
+
+              <span class="exhibit-icon" aria-hidden="true">
+                🪞
+              </span>
+
+              <strong>
+                The Structuralist Mirror
+              </strong>
+
+              <span>
+                Examine the basic elements of conscious experience.
+              </span>
+
+              <span class="status-text">
+                Not yet solved
+              </span>
+
             </button>
 
-            <button class="exhibit-button" type="button" data-challenge="compass" aria-pressed="false">
-              <span class="exhibit-icon" aria-hidden="true">🧭</span>
-              <strong>The Functionalist Compass</strong>
-              <span>Determine how behavior supports adaptation.</span>
-              <span class="status-text">Not yet solved</span>
+            <button
+              class="exhibit-button"
+              type="button"
+              data-challenge="compass"
+              aria-pressed="false">
+
+              <span class="exhibit-icon" aria-hidden="true">
+                🧭
+              </span>
+
+              <strong>
+                The Functionalist Compass
+              </strong>
+
+              <span>
+                Determine how behavior supports adaptation.
+              </span>
+
+              <span class="status-text">
+                Not yet solved
+              </span>
+
             </button>
 
-            <button class="exhibit-button" type="button" data-challenge="lever" aria-pressed="false">
-              <span class="exhibit-icon" aria-hidden="true">📦</span>
-              <strong>Skinner's Lever</strong>
-              <span>Identify the perspective focused on observable behavior.</span>
-              <span class="status-text">Not yet solved</span>
+            <button
+              class="exhibit-button"
+              type="button"
+              data-challenge="lever"
+              aria-pressed="false">
+
+              <span class="exhibit-icon" aria-hidden="true">
+                📦
+              </span>
+
+              <strong>
+                Skinner's Lever
+              </strong>
+
+              <span>
+                Identify the perspective focused on observable behavior.
+              </span>
+
+              <span class="status-text">
+                Not yet solved
+              </span>
+
             </button>
 
-            <button class="exhibit-button" type="button" data-challenge="magnifier" aria-pressed="false">
-              <span class="exhibit-icon" aria-hidden="true">🔍</span>
-              <strong>The Scientific Magnifying Glass</strong>
-              <span>Separate psychological science from personal opinion.</span>
-              <span class="status-text">Not yet solved</span>
+            <button
+              class="exhibit-button"
+              type="button"
+              data-challenge="magnifier"
+              aria-pressed="false">
+
+              <span class="exhibit-icon" aria-hidden="true">
+                🔍
+              </span>
+
+              <strong>
+                The Scientific Magnifying Glass
+              </strong>
+
+              <span>
+                Separate psychological science from personal opinion.
+              </span>
+
+              <span class="status-text">
+                Not yet solved
+              </span>
+
             </button>
 
           </div>
+
         </section>
 
         <div id="challenge-area" tabindex="-1"></div>
 
-        <section id="final-lock" class="final-lock hidden" aria-labelledby="lock-heading">
+        <section
+          id="final-lock"
+          class="final-lock hidden"
+          aria-labelledby="lock-heading">
 
           <h2 id="lock-heading">
             Final Gallery Lock
@@ -500,27 +660,50 @@
 
           <div class="lock-grid">
 
-            <button class="lock-button" type="button" data-code="MIND1S">
+            <button
+              class="lock-button"
+              type="button"
+              data-code="MIND1S">
+
               Lock A: MIND1S
             </button>
 
-            <button class="lock-button" type="button" data-code="MINDS1">
+            <button
+              class="lock-button"
+              type="button"
+              data-code="MINDS1">
+
               Lock B: MINDS1
             </button>
 
-            <button class="lock-button" type="button" data-code="MENDS1">
+            <button
+              class="lock-button"
+              type="button"
+              data-code="MENDS1">
+
               Lock C: MENDS1
             </button>
 
-            <button class="lock-button" type="button" data-code="MINDS7">
+            <button
+              class="lock-button"
+              type="button"
+              data-code="MINDS7">
+
               Lock D: MINDS7
             </button>
 
           </div>
 
-          <div id="lock-feedback" class="feedback" role="status" aria-live="polite">
+          <div
+            id="lock-feedback"
+            class="feedback"
+            role="status"
+            aria-live="polite">
+
             Select the code that matches your investigation log.
+
           </div>
+
         </section>
 
       </div>
@@ -528,6 +711,7 @@
       <aside class="sidebar" aria-label="Mission tools">
 
         <section class="panel" aria-labelledby="progress-heading">
+
           <h2 id="progress-heading">
             Mission Progress
           </h2>
@@ -539,29 +723,39 @@
           <p id="progress-text">
             0 of 6 exhibits solved
           </p>
+
         </section>
 
         <section class="panel" aria-labelledby="inventory-heading">
+
           <h2 id="inventory-heading">
             Evidence Inventory
           </h2>
 
           <ul id="inventory-list" class="inventory-list">
-            <li>No evidence collected yet.</li>
+            <li>
+              No evidence collected yet.
+            </li>
           </ul>
+
         </section>
 
         <section class="panel" aria-labelledby="codes-heading">
+
           <h2 id="codes-heading">
             Collected Code Characters
           </h2>
 
           <ol id="code-list" class="code-list">
-            <li>No code characters collected yet.</li>
+            <li>
+              No code characters collected yet.
+            </li>
           </ol>
+
         </section>
 
         <section class="panel" aria-labelledby="notes-heading">
+
           <h2 id="notes-heading">
             Investigation Notebook
           </h2>
@@ -570,22 +764,30 @@
             Observation notes
           </label>
 
-          <textarea id="observation-notes" data-note="observations"></textarea>
+          <textarea
+            id="observation-notes"
+            data-note="observations"></textarea>
 
           <label for="possible-code">
             Possible final code
           </label>
 
-          <textarea id="possible-code" data-note="code"></textarea>
+          <textarea
+            id="possible-code"
+            data-note="code"></textarea>
 
           <label for="reflection-notes">
             Reflection ideas
           </label>
 
-          <textarea id="reflection-notes" data-note="reflection"></textarea>
+          <textarea
+            id="reflection-notes"
+            data-note="reflection"></textarea>
+
         </section>
 
         <section class="panel" aria-labelledby="reset-heading">
+
           <h2 id="reset-heading">
             Reset Mission
           </h2>
@@ -594,34 +796,55 @@
             This will erase all saved Week 1 progress and mission completion.
           </p>
 
-          <button id="reset-button" class="action-button reset-button" type="button">
+          <button
+            id="reset-button"
+            class="action-button reset-button"
+            type="button">
+
             Reset Week 1 Progress
           </button>
+
         </section>
 
       </aside>
 
     </div>
+
   </main>
 
   <footer class="footer">
+
     <div class="container">
+
       <p>
         Psychology Academy · Week 1 · Dr. Tonya Holdaway
       </p>
+
     </div>
+
   </footer>
 
   <script>
+
     const storageKey =
       "psychologyMuseumWeek1";
 
     const completionKey =
       "psychologyAcademyWeek1Complete";
 
+    const challengeOrder = [
+      "notebook",
+      "portrait",
+      "mirror",
+      "compass",
+      "lever",
+      "magnifier"
+    ];
+
     const challenges = {
 
       notebook: {
+
         title:
           "Wundt's Laboratory Notebook",
 
@@ -650,6 +873,7 @@
       },
 
       portrait: {
+
         title:
           "The Portrait Marked 1879",
 
@@ -678,6 +902,7 @@
       },
 
       mirror: {
+
         title:
           "The Structuralist Mirror",
 
@@ -706,6 +931,7 @@
       },
 
       compass: {
+
         title:
           "The Functionalist Compass",
 
@@ -734,6 +960,7 @@
       },
 
       lever: {
+
         title:
           "Skinner's Lever",
 
@@ -762,6 +989,7 @@
       },
 
       magnifier: {
+
         title:
           "The Scientific Magnifying Glass",
 
@@ -796,7 +1024,9 @@
     };
 
     function loadProgress() {
+
       try {
+
         const saved =
           JSON.parse(
             localStorage.getItem(
@@ -804,10 +1034,15 @@
             )
           );
 
-        if (saved && typeof saved === "object") {
+        if (
+          saved &&
+          typeof saved === "object"
+        ) {
 
           state.solved =
-            Array.isArray(saved.solved)
+            Array.isArray(
+              saved.solved
+            )
               ? saved.solved
               : [];
 
@@ -827,13 +1062,27 @@
     }
 
     function saveProgress() {
+
       localStorage.setItem(
         storageKey,
         JSON.stringify(state)
       );
     }
 
+    function getSortedSolved() {
+
+      return challengeOrder.filter(
+        function(id) {
+
+          return state.solved.includes(id);
+        }
+      );
+    }
+
     function updateDashboard() {
+
+      const solved =
+        getSortedSolved();
 
       const progressBar =
         document.getElementById(
@@ -861,16 +1110,18 @@
         );
 
       progressBar.value =
-        state.solved.length;
+        solved.length;
 
       progressText.textContent =
-        state.solved.length +
+        solved.length +
         " of 6 exhibits solved";
 
       inventoryList.innerHTML = "";
       codeList.innerHTML = "";
 
-      if (state.solved.length === 0) {
+      if (
+        solved.length === 0
+      ) {
 
         inventoryList.innerHTML =
           "<li>No evidence collected yet.</li>";
@@ -880,7 +1131,7 @@
 
       } else {
 
-        state.solved.forEach(
+        solved.forEach(
           function(id) {
 
             const challenge =
@@ -925,12 +1176,12 @@
             const id =
               button.dataset.challenge;
 
-            const solved =
+            const solvedMission =
               state.solved.includes(id);
 
             button.setAttribute(
               "aria-pressed",
-              solved
+              solvedMission
                 ? "true"
                 : "false"
             );
@@ -941,13 +1192,15 @@
               );
 
             status.textContent =
-              solved
+              solvedMission
                 ? "Solved"
                 : "Not yet solved";
           }
         );
 
-      if (state.solved.length === 6) {
+      if (
+        solved.length === 6
+      ) {
 
         finalLock.classList.remove(
           "hidden"
@@ -981,6 +1234,7 @@
                   class="answer-button"
                   type="button"
                   data-answer="${index}">
+
                   ${answer}
                 </button>
               `;
@@ -1155,6 +1409,353 @@
         );
     }
 
+    function wrapCanvasText(
+      ctx,
+      text,
+      x,
+      y,
+      maxWidth,
+      lineHeight
+    ) {
+
+      const words =
+        text.split(" ");
+
+      let line = "";
+
+      let currentY = y;
+
+      words.forEach(
+        function(word) {
+
+          const testLine =
+            line + word + " ";
+
+          const width =
+            ctx.measureText(
+              testLine
+            ).width;
+
+          if (
+            width > maxWidth &&
+            line !== ""
+          ) {
+
+            ctx.fillText(
+              line.trim(),
+              x,
+              currentY
+            );
+
+            line =
+              word + " ";
+
+            currentY +=
+              lineHeight;
+
+          } else {
+
+            line =
+              testLine;
+          }
+        }
+      );
+
+      ctx.fillText(
+        line.trim(),
+        x,
+        currentY
+      );
+
+      return currentY;
+    }
+
+    function downloadAchievementBadge() {
+
+      const nameInput =
+        document.getElementById(
+          "badge-name"
+        );
+
+      const badgeStatus =
+        document.getElementById(
+          "badge-status"
+        );
+
+      const studentName =
+        nameInput.value.trim();
+
+      if (!studentName) {
+
+        badgeStatus.textContent =
+          "Please enter your name before downloading your badge.";
+
+        nameInput.focus();
+
+        return;
+      }
+
+      const canvas =
+        document.createElement(
+          "canvas"
+        );
+
+      canvas.width = 1200;
+      canvas.height = 1200;
+
+      const ctx =
+        canvas.getContext(
+          "2d"
+        );
+
+      ctx.fillStyle =
+        "#eef8f2";
+
+      ctx.fillRect(
+        0,
+        0,
+        1200,
+        1200
+      );
+
+      ctx.strokeStyle =
+        "#163a59";
+
+      ctx.lineWidth = 32;
+
+      ctx.strokeRect(
+        38,
+        38,
+        1124,
+        1124
+      );
+
+      ctx.strokeStyle =
+        "#c6a34f";
+
+      ctx.lineWidth = 12;
+
+      ctx.strokeRect(
+        72,
+        72,
+        1056,
+        1056
+      );
+
+      ctx.beginPath();
+
+      ctx.arc(
+        600,
+        310,
+        150,
+        0,
+        Math.PI * 2
+      );
+
+      ctx.fillStyle =
+        "#163a59";
+
+      ctx.fill();
+
+      ctx.strokeStyle =
+        "#c6a34f";
+
+      ctx.lineWidth = 14;
+
+      ctx.stroke();
+
+      ctx.fillStyle =
+        "#ffffff";
+
+      ctx.font =
+        "bold 150px Georgia";
+
+      ctx.textAlign =
+        "center";
+
+      ctx.textBaseline =
+        "middle";
+
+      ctx.fillText(
+        "Ψ",
+        600,
+        310
+      );
+
+      ctx.textBaseline =
+        "alphabetic";
+
+      ctx.fillStyle =
+        "#163a59";
+
+      ctx.font =
+        "bold 42px Arial";
+
+      ctx.fillText(
+        "PSYCHOLOGY ACADEMY",
+        600,
+        125
+      );
+
+      ctx.fillStyle =
+        "#315f40";
+
+      ctx.font =
+        "bold 64px Georgia";
+
+      ctx.fillText(
+        "MUSEUM CURATOR",
+        600,
+        535
+      );
+
+      ctx.fillStyle =
+        "#1f2933";
+
+      ctx.font =
+        "32px Arial";
+
+      ctx.fillText(
+        "Achievement Unlocked",
+        600,
+        590
+      );
+
+      ctx.font =
+        "28px Arial";
+
+      ctx.fillText(
+        "Awarded to",
+        600,
+        665
+      );
+
+      ctx.fillStyle =
+        "#163a59";
+
+      ctx.font =
+        "bold 44px Georgia";
+
+      wrapCanvasText(
+        ctx,
+        studentName,
+        600,
+        725,
+        900,
+        54
+      );
+
+      ctx.fillStyle =
+        "#1f2933";
+
+      ctx.font =
+        "28px Arial";
+
+      ctx.fillText(
+        "For successfully completing",
+        600,
+        810
+      );
+
+      ctx.font =
+        "bold 32px Arial";
+
+      ctx.fillText(
+        "Week 1: The Psychology Museum",
+        600,
+        860
+      );
+
+      ctx.font =
+        "25px Arial";
+
+      ctx.fillText(
+        "Introduction to Psychology",
+        600,
+        910
+      );
+
+      const completionDate =
+        new Date().toLocaleDateString(
+          "en-US",
+          {
+            year: "numeric",
+            month: "long",
+            day: "numeric"
+          }
+        );
+
+      ctx.font =
+        "24px Arial";
+
+      ctx.fillText(
+        "Completed " +
+        completionDate,
+        600,
+        965
+      );
+
+      ctx.font =
+        "22px Arial";
+
+      ctx.fillText(
+        "Verification phrase: Evidence unlocks the mind.",
+        600,
+        1020
+      );
+
+      ctx.font =
+        "bold 24px Georgia";
+
+      ctx.fillStyle =
+        "#315f40";
+
+      ctx.fillText(
+        "Dr. Tonya Holdaway",
+        600,
+        1080
+      );
+
+      const safeName =
+        studentName
+          .replace(
+            /[^a-z0-9]/gi,
+            "-"
+          )
+          .replace(
+            /-+/g,
+            "-"
+          );
+
+      const downloadLink =
+        document.createElement(
+          "a"
+        );
+
+      downloadLink.download =
+        "Psychology-Academy-Week-1-Museum-Curator-" +
+        safeName +
+        ".png";
+
+      downloadLink.href =
+        canvas.toDataURL(
+          "image/png"
+        );
+
+      document.body.appendChild(
+        downloadLink
+      );
+
+      downloadLink.click();
+
+      document.body.removeChild(
+        downloadLink
+      );
+
+      badgeStatus.textContent =
+        "Your Museum Curator badge has been created. Check your Downloads folder.";
+    }
+
     function configureLock() {
 
       document
@@ -1206,9 +1807,53 @@
                       Your Week 1 mission has been recorded as complete.
                     </p>
 
-                    <p>
+                    <div
+                      class="badge-maker"
+                      aria-labelledby="badge-maker-heading">
+
+                      <h3 id="badge-maker-heading">
+                        Achievement Unlocked: Museum Curator
+                      </h3>
+
+                      <p>
+                        You earned your first Psychology Academy achievement.
+                        Enter your name below to create a personalized PNG badge
+                        that you can save, submit, or email to your instructor.
+                      </p>
+
+                      <label for="badge-name">
+                        Name to appear on your badge
+                      </label>
+
+                      <input
+                        id="badge-name"
+                        class="badge-name-input"
+                        type="text"
+                        maxlength="60"
+                        autocomplete="name">
+
+                      <br>
+
+                      <button
+                        id="download-badge-button"
+                        class="badge-download-button"
+                        type="button">
+
+                        Download My Museum Curator Badge
+                      </button>
+
+                      <p
+                        id="badge-status"
+                        class="badge-status"
+                        role="status"
+                        aria-live="polite">
+                      </p>
+
+                    </div>
+
+                    <p style="margin-top: 22px;">
                       Return to Psychology Academy to view your completed
-                      mission status and earned badge.
+                      mission status and badge shelf.
                     </p>
 
                     <a
@@ -1218,6 +1863,15 @@
                       Return to Psychology Academy
                     </a>
                   `;
+
+                  document
+                    .getElementById(
+                      "download-badge-button"
+                    )
+                    .addEventListener(
+                      "click",
+                      downloadAchievementBadge
+                    );
 
                 } else {
 
@@ -1275,6 +1929,7 @@
               )
               .forEach(
                 function(textarea) {
+
                   textarea.value = "";
                 }
               );
@@ -1315,8 +1970,11 @@
         );
 
       configureNotebook();
+
       configureLock();
+
       configureReset();
+
       updateDashboard();
     }
 
@@ -1324,6 +1982,7 @@
       "DOMContentLoaded",
       startMission
     );
+
   </script>
 
 </body>
