@@ -1,1 +1,2686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
 
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0">
+
+  <title>Week 4: The Consciousness Observatory</title>
+
+  <style>
+    :root {
+      --ink: #1f2933;
+      --night: #0f2740;
+      --night-deep: #071826;
+      --blue: #315f87;
+      --blue-light: #eaf3f8;
+      --lavender-light: #f2eff8;
+      --green: #315f40;
+      --green-light: #eef8f2;
+      --gold: #745500;
+      --gold-light: #fff8e8;
+      --red: #7b1f1f;
+      --red-light: #fff1f1;
+      --white: #ffffff;
+      --border: #617486;
+      --shadow: 0 12px 30px rgba(8, 34, 54, 0.18);
+      --radius: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--ink);
+      background-color: #f2f6f8;
+      line-height: 1.7;
+      font-size: 18px;
+    }
+
+    a {
+      color: #174c74;
+      text-decoration: underline;
+      text-underline-offset: 0.16em;
+      font-weight: bold;
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit;
+    }
+
+    button:focus,
+    input:focus,
+    textarea:focus,
+    a:focus {
+      outline: 4px solid #111111;
+      outline-offset: 3px;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: 16px;
+      top: -100px;
+      z-index: 5000;
+      background-color: var(--white);
+      color: #111111;
+      border: 3px solid #111111;
+      padding: 12px 16px;
+    }
+
+    .skip-link:focus {
+      top: 16px;
+    }
+
+    .container {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(
+          circle at 80% 18%,
+          rgba(255,255,255,0.14),
+          transparent 22%
+        ),
+        linear-gradient(
+          to bottom,
+          #102d49 0%,
+          #183b5b 60%,
+          #254d69 100%
+        );
+      color: var(--white);
+      border-bottom: 5px solid #c5a84f;
+      padding: 34px 0 48px;
+    }
+
+    .hero::before {
+      content: "✦   ·   ✧   ·   ✦   ·   ✧   ·   ✦";
+      position: absolute;
+      top: 40px;
+      right: 4%;
+      color: rgba(255,255,255,0.72);
+      letter-spacing: 12px;
+      font-size: 1.3rem;
+      animation: shimmer 5s ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+
+    @keyframes shimmer {
+      from {
+        opacity: 0.35;
+      }
+
+      to {
+        opacity: 0.95;
+      }
+    }
+
+    .academy-link {
+      display: inline-block;
+      margin-bottom: 18px;
+      padding: 10px 15px;
+      background-color: var(--white);
+      color: var(--night);
+      border: 2px solid var(--white);
+      border-radius: 8px;
+      text-decoration: underline;
+      font-weight: bold;
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      font-weight: bold;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      margin: 0;
+      color: var(--white);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.6rem, 7vw, 4.8rem);
+      line-height: 1.08;
+    }
+
+    .hero-subtitle {
+      margin: 10px 0 0;
+      color: #fff7cf;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.2rem, 3vw, 1.8rem);
+    }
+
+    .hero-text {
+      max-width: 820px;
+      margin: 18px 0 0;
+      font-size: 1.1rem;
+    }
+
+    main {
+      padding: 32px 0 54px;
+    }
+
+    h2,
+    h3 {
+      color: var(--night);
+      line-height: 1.3;
+    }
+
+    .panel {
+      background-color: var(--white);
+      border: 2px solid var(--border);
+      border-left: 8px solid var(--blue);
+      border-radius: var(--radius);
+      padding: 23px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .panel-gold {
+      border-left-color: var(--gold);
+    }
+
+    .panel-green {
+      border-left-color: var(--green);
+    }
+
+    .night-panel {
+      background-color: var(--night-deep);
+      color: var(--white);
+      border: 3px solid #07121c;
+      border-radius: var(--radius);
+      padding: 22px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .night-panel h2,
+    .night-panel h3 {
+      color: var(--white);
+    }
+
+    .audio-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .audio-button {
+      background-color: var(--white);
+      color: var(--night);
+      border: 2px solid var(--white);
+      border-radius: 8px;
+      padding: 10px 14px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .mission-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 345px;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 16px;
+    }
+
+    .experience-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(235px, 1fr));
+      gap: 16px;
+    }
+
+    .experience-button {
+      width: 100%;
+      min-height: 205px;
+      padding: 18px;
+      text-align: left;
+      background-color: var(--white);
+      color: var(--ink);
+      border: 2px solid var(--border);
+      border-left: 8px solid var(--blue);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      cursor: pointer;
+    }
+
+    .experience-button:hover {
+      transform: translateY(-2px);
+    }
+
+    .experience-button[aria-pressed="true"] {
+      background-color: var(--green-light);
+      border-left-color: var(--green);
+    }
+
+    .experience-icon {
+      display: block;
+      font-size: 2.3rem;
+      margin-bottom: 8px;
+    }
+
+    .experience-title {
+      display: block;
+      color: var(--night);
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+
+    .status-text {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    .active-area {
+      margin-top: 24px;
+    }
+
+    .activity-card {
+      background-color: var(--white);
+      border: 2px solid var(--border);
+      border-left: 8px solid var(--blue);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .choice-grid {
+      display: grid;
+      gap: 12px;
+      margin: 18px 0;
+    }
+
+    .choice-button,
+    .action-button {
+      width: 100%;
+      padding: 14px 16px;
+      border: 2px solid var(--border);
+      border-radius: 9px;
+      background-color: var(--white);
+      color: var(--ink);
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .action-button {
+      width: auto;
+      background-color: var(--blue);
+      color: var(--white);
+      border-color: var(--night);
+      font-weight: bold;
+      text-decoration: underline;
+    }
+
+    .feedback {
+      margin-top: 16px;
+      padding: 16px;
+      border: 2px solid var(--border);
+      border-left: 8px solid var(--blue);
+      border-radius: 10px;
+      background-color: #f8fbfd;
+      color: var(--ink);
+    }
+
+    .feedback.correct {
+      background-color: var(--green-light);
+      border-left-color: var(--green);
+    }
+
+    .feedback.incorrect {
+      background-color: var(--red-light);
+      border-left-color: var(--red);
+    }
+
+    .video-wrapper {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%;
+      margin: 18px 0;
+      overflow: hidden;
+      border-radius: 10px;
+      border: 2px solid var(--border);
+      background-color: #000000;
+    }
+
+    .video-wrapper iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .sequence-board {
+      display: grid;
+      gap: 10px;
+      margin: 18px 0;
+    }
+
+    .sequence-button {
+      width: 100%;
+      background-color: var(--white);
+      color: var(--ink);
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      padding: 12px;
+      cursor: pointer;
+    }
+
+    .sequence-button.selected {
+      background-color: var(--blue-light);
+      border-color: var(--blue);
+    }
+
+    .inventory-list,
+    .achievement-list {
+      padding-left: 22px;
+    }
+
+    progress {
+      width: 100%;
+      height: 24px;
+    }
+
+    label {
+      display: block;
+      margin-top: 14px;
+      font-weight: bold;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 90px;
+      margin-top: 6px;
+      padding: 10px;
+      border: 2px solid var(--border);
+      border-radius: 8px;
+    }
+
+    .final-case {
+      margin-top: 28px;
+      padding: 25px;
+      background-color: var(--night);
+      color: var(--white);
+      border: 3px solid #061522;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .final-case h2 {
+      color: var(--white);
+    }
+
+    .final-case .feedback {
+      background-color: var(--white);
+      color: var(--ink);
+    }
+
+    .badge-maker {
+      margin-top: 22px;
+      padding: 20px;
+      background-color: var(--gold-light);
+      color: var(--ink);
+      border: 3px solid #80651c;
+      border-radius: 12px;
+    }
+
+    .badge-maker h3 {
+      color: #634900;
+      margin-top: 0;
+    }
+
+    .badge-name-input {
+      width: 100%;
+      max-width: 500px;
+      margin: 6px 0 14px;
+      padding: 12px;
+      border: 2px solid var(--border);
+      border-radius: 8px;
+    }
+
+    .badge-download-button {
+      display: inline-block;
+      background-color: var(--night);
+      color: var(--white);
+      border: 3px solid var(--night-deep);
+      border-radius: 9px;
+      padding: 14px 20px;
+      cursor: pointer;
+      font-weight: bold;
+      text-decoration: underline;
+    }
+
+    .return-button {
+      display: inline-block;
+      margin-top: 14px;
+      padding: 14px 20px;
+      background-color: var(--green);
+      color: var(--white);
+      border: 3px solid #173d26;
+      border-radius: 9px;
+      font-weight: bold;
+      text-decoration: underline;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    footer {
+      background-color: var(--night-deep);
+      color: var(--white);
+      padding: 24px 0;
+      border-top: 4px solid #c5a84f;
+    }
+
+    footer a {
+      color: var(--white);
+    }
+
+    @media (max-width: 920px) {
+      .mission-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: static;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      .hero::before {
+        animation: none;
+      }
+
+      .experience-button:hover {
+        transform: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <a class="skip-link" href="#main-content">
+    Skip to main content
+  </a>
+
+  <header class="hero">
+    <div class="container">
+
+      <a class="academy-link" href="../index.html">
+        Return to Psychology Academy
+      </a>
+
+      <p class="eyebrow">
+        Week 4 Psychology Mission
+      </p>
+
+      <h1>
+        The Consciousness Observatory
+      </h1>
+
+      <p class="hero-subtitle">
+        The Night Shift
+      </p>
+
+      <p class="hero-text">
+        The Observatory has received several unusual overnight reports.
+        Students are forgetting information, sleep schedules are drifting,
+        dreams are becoming vivid, and one Academy resident keeps falling
+        asleep at unexpected times. Your job is to investigate what is
+        happening before morning.
+      </p>
+
+    </div>
+  </header>
+
+  <main id="main-content" class="container">
+
+    <section class="night-panel" aria-labelledby="audio-heading">
+
+      <h2 id="audio-heading">
+        Observatory Atmosphere
+      </h2>
+
+      <p>
+        Optional ambient sound is available for students who want a more
+        immersive experience. Audio never starts automatically.
+      </p>
+
+      <div class="audio-controls">
+
+        <button
+          id="play-audio"
+          class="audio-button"
+          type="button">
+
+          Play Night Ambience
+        </button>
+
+        <button
+          id="pause-audio"
+          class="audio-button"
+          type="button">
+
+          Pause Audio
+        </button>
+
+      </div>
+
+      <audio id="observatory-audio" loop preload="none">
+        <source
+          src="https://cdn.pixabay.com/download/audio/2022/10/25/audio_946bc6dac3.mp3"
+          type="audio/mpeg">
+      </audio>
+
+    </section>
+
+    <section class="panel panel-gold" aria-labelledby="briefing-heading">
+
+      <h2 id="briefing-heading">
+        Night Shift Briefing
+      </h2>
+
+      <p>
+        Complete all six Observatory investigations. Unlike earlier Academy
+        missions, some investigations require you to make decisions and
+        follow evidence rather than simply identify one correct answer.
+      </p>
+
+      <p>
+        Your choices may send you on short detours. Detours are part of the
+        investigation and do not reduce your score.
+      </p>
+
+      <p style="margin-bottom: 0;">
+        Your progress, evidence, notes, and hidden achievements are saved
+        automatically in this browser.
+      </p>
+
+    </section>
+
+    <section class="panel panel-green" aria-labelledby="objectives-heading">
+
+      <h2 id="objectives-heading">
+        Learning Objectives
+      </h2>
+
+      <ul>
+        <li>Describe consciousness and changes in awareness.</li>
+        <li>Explain the role of circadian rhythms in sleep and wakefulness.</li>
+        <li>Recognize major NREM and REM sleep patterns.</li>
+        <li>Connect sleep with learning and memory.</li>
+        <li>Differentiate several common sleep problems and disorders.</li>
+        <li>Evaluate scientific explanations of dreams and altered states.</li>
+        <li>Apply sleep and consciousness concepts to realistic scenarios.</li>
+      </ul>
+
+    </section>
+
+    <div class="mission-layout">
+
+      <div>
+
+        <section aria-labelledby="investigations-heading">
+
+          <h2 id="investigations-heading">
+            Observatory Investigations
+          </h2>
+
+          <div class="experience-grid">
+
+            <button
+              class="experience-button"
+              type="button"
+              data-experience="clock"
+              aria-pressed="false">
+
+              <span class="experience-icon" aria-hidden="true">
+                🕰️
+              </span>
+
+              <span class="experience-title">
+                Circadian Clock Tower
+              </span>
+
+              Investigate why biological timing matters.
+
+              <span class="status-text">
+                Not yet completed
+              </span>
+
+            </button>
+
+            <button
+              class="experience-button"
+              type="button"
+              data-experience="stages"
+              aria-pressed="false">
+
+              <span class="experience-icon" aria-hidden="true">
+                🌙
+              </span>
+
+              <span class="experience-title">
+                Sleep Stage Laboratory
+              </span>
+
+              Reconstruct a simplified sleep cycle.
+
+              <span class="status-text">
+                Not yet completed
+              </span>
+
+            </button>
+
+            <button
+              class="experience-button"
+              type="button"
+              data-experience="video"
+              aria-pressed="false">
+
+              <span class="experience-icon" aria-hidden="true">
+                🎥
+              </span>
+
+              <span class="experience-title">
+                Recovered TED Transmission
+              </span>
+
+              Gather evidence about sleep, learning, and memory.
+
+              <span class="status-text">
+                Not yet completed
+              </span>
+
+            </button>
+
+            <button
+              class="experience-button"
+              type="button"
+              data-experience="student"
+              aria-pressed="false">
+
+              <span class="experience-icon" aria-hidden="true">
+                🧑‍🎓
+              </span>
+
+              <span class="experience-title">
+                The Sleepless Student
+              </span>
+
+              Follow a branching case about sleep deprivation.
+
+              <span class="status-text">
+                Not yet completed
+              </span>
+
+            </button>
+
+            <button
+              class="experience-button"
+              type="button"
+              data-experience="dream"
+              aria-pressed="false">
+
+              <span class="experience-icon" aria-hidden="true">
+                💭
+              </span>
+
+              <span class="experience-title">
+                Dream Archive
+              </span>
+
+              Separate evidence from speculation about dreams.
+
+              <span class="status-text">
+                Not yet completed
+              </span>
+
+            </button>
+
+            <button
+              class="experience-button"
+              type="button"
+              data-experience="clinic"
+              aria-pressed="false">
+
+              <span class="experience-icon" aria-hidden="true">
+                🩺
+              </span>
+
+              <span class="experience-title">
+                Sleep Disorder Clinic
+              </span>
+
+              Investigate a clinical sleep scenario.
+
+              <span class="status-text">
+                Not yet completed
+              </span>
+
+            </button>
+
+          </div>
+
+        </section>
+
+        <div id="active-area" class="active-area" tabindex="-1"></div>
+
+        <section
+          id="final-case"
+          class="final-case hidden"
+          aria-labelledby="final-heading">
+
+          <h2 id="final-heading">
+            Final Case: Observatory Report 04
+          </h2>
+
+          <p>
+            You have collected enough evidence to review the final case.
+          </p>
+
+          <p>
+            Jordan has slept about five hours per night for several days while
+            studying late into the night. Jordan reports difficulty concentrating,
+            trouble recalling material studied the previous evening, daytime
+            sleepiness, and an increasingly irregular sleep schedule.
+          </p>
+
+          <p>
+            Which conclusion best integrates the evidence from your investigation?
+          </p>
+
+          <div class="choice-grid">
+
+            <button
+              class="choice-button"
+              type="button"
+              data-final="wrong1">
+
+              Jordan should simply study later because more waking hours
+              always produce better learning.
+            </button>
+
+            <button
+              class="choice-button"
+              type="button"
+              data-final="correct">
+
+              Insufficient and irregular sleep may be interfering with attention,
+              learning, memory consolidation, and daytime alertness.
+            </button>
+
+            <button
+              class="choice-button"
+              type="button"
+              data-final="wrong2">
+
+              The symptoms prove that Jordan has a specific sleep disorder.
+            </button>
+
+          </div>
+
+          <div
+            id="final-feedback"
+            class="feedback"
+            role="status"
+            aria-live="polite">
+
+            Review the evidence you collected before submitting your conclusion.
+          </div>
+
+        </section>
+
+      </div>
+
+      <aside class="sidebar" aria-label="Observatory tools">
+
+        <section class="panel" aria-labelledby="progress-heading">
+
+          <h2 id="progress-heading">
+            Night Shift Progress
+          </h2>
+
+          <progress
+            id="progress-bar"
+            value="0"
+            max="6">
+
+            0 of 6 investigations completed
+          </progress>
+
+          <p id="progress-text">
+            0 of 6 investigations completed
+          </p>
+
+        </section>
+
+        <section class="panel panel-green" aria-labelledby="inventory-heading">
+
+          <h2 id="inventory-heading">
+            Investigator's Satchel
+          </h2>
+
+          <ul id="inventory-list" class="inventory-list">
+            <li>No evidence collected yet.</li>
+          </ul>
+
+        </section>
+
+        <section class="panel panel-gold" aria-labelledby="achievement-heading">
+
+          <h2 id="achievement-heading">
+            Hidden Achievements
+          </h2>
+
+          <ul id="achievement-list" class="achievement-list">
+            <li>
+              Optional achievements will appear as you investigate.
+            </li>
+          </ul>
+
+        </section>
+
+        <section class="panel" aria-labelledby="notes-heading">
+
+          <h2 id="notes-heading">
+            Observatory Notebook
+          </h2>
+
+          <label for="sleep-notes">
+            Sleep and circadian notes
+          </label>
+
+          <textarea
+            id="sleep-notes"
+            data-note="sleep"></textarea>
+
+          <label for="case-notes">
+            Case evidence
+          </label>
+
+          <textarea
+            id="case-notes"
+            data-note="case"></textarea>
+
+          <label for="final-notes">
+            Final conclusion notes
+          </label>
+
+          <textarea
+            id="final-notes"
+            data-note="final"></textarea>
+
+        </section>
+
+      </aside>
+
+    </div>
+
+  </main>
+
+  <footer>
+
+    <div class="container">
+
+      <p>
+        Psychology Academy · Week 4 · The Consciousness Observatory
+      </p>
+
+      <p>
+        Dr. Tonya Holdaway
+      </p>
+
+      <p>
+        <a href="../index.html">
+          Return to Psychology Academy
+        </a>
+      </p>
+
+    </div>
+
+  </footer>
+
+  <script>
+
+    const storageKey =
+      "psychologyConsciousnessWeek4";
+
+    const completionKey =
+      "psychologyAcademyWeek4Complete";
+
+    const state = {
+      completed: [],
+      evidence: [],
+      achievements: [],
+      notes: {},
+      sequence: []
+    };
+
+    const evidenceMap = {
+      clock:
+        "Circadian Timing Report",
+
+      stages:
+        "Sleep Cycle Diagram",
+
+      video:
+        "Recovered Sleep and Memory Transmission",
+
+      student:
+        "Sleep Deprivation Case File",
+
+      dream:
+        "Dream Archive Notes",
+
+      clinic:
+        "Sleep Disorder Screening Report"
+    };
+
+    function loadState() {
+
+      try {
+
+        const saved =
+          JSON.parse(
+            localStorage.getItem(
+              storageKey
+            )
+          );
+
+        if (saved) {
+
+          state.completed =
+            Array.isArray(saved.completed)
+              ? saved.completed
+              : [];
+
+          state.evidence =
+            Array.isArray(saved.evidence)
+              ? saved.evidence
+              : [];
+
+          state.achievements =
+            Array.isArray(saved.achievements)
+              ? saved.achievements
+              : [];
+
+          state.notes =
+            saved.notes || {};
+
+          state.sequence =
+            Array.isArray(saved.sequence)
+              ? saved.sequence
+              : [];
+        }
+
+      } catch (error) {
+
+        console.warn(
+          "Saved Observatory progress could not be loaded."
+        );
+      }
+    }
+
+    function saveState() {
+
+      localStorage.setItem(
+        storageKey,
+        JSON.stringify(state)
+      );
+    }
+
+    function completeExperience(id) {
+
+      if (
+        !state.completed.includes(id)
+      ) {
+
+        state.completed.push(id);
+
+        state.evidence.push(
+          evidenceMap[id]
+        );
+
+        saveState();
+      }
+
+      updateDashboard();
+    }
+
+    function awardAchievement(
+      achievement
+    ) {
+
+      if (
+        !state.achievements.includes(
+          achievement
+        )
+      ) {
+
+        state.achievements.push(
+          achievement
+        );
+
+        saveState();
+      }
+
+      updateDashboard();
+    }
+
+    function updateDashboard() {
+
+      const progressBar =
+        document.getElementById(
+          "progress-bar"
+        );
+
+      const progressText =
+        document.getElementById(
+          "progress-text"
+        );
+
+      progressBar.value =
+        state.completed.length;
+
+      progressText.textContent =
+        state.completed.length +
+        " of 6 investigations completed";
+
+      const inventoryList =
+        document.getElementById(
+          "inventory-list"
+        );
+
+      inventoryList.innerHTML = "";
+
+      if (
+        state.evidence.length === 0
+      ) {
+
+        inventoryList.innerHTML =
+          "<li>No evidence collected yet.</li>";
+
+      } else {
+
+        state.evidence.forEach(
+          function(item) {
+
+            const li =
+              document.createElement(
+                "li"
+              );
+
+            li.textContent =
+              item;
+
+            inventoryList.appendChild(
+              li
+            );
+          }
+        );
+      }
+
+      const achievementList =
+        document.getElementById(
+          "achievement-list"
+        );
+
+      achievementList.innerHTML = "";
+
+      if (
+        state.achievements.length === 0
+      ) {
+
+        achievementList.innerHTML =
+          "<li>Optional achievements will appear as you investigate.</li>";
+
+      } else {
+
+        state.achievements.forEach(
+          function(item) {
+
+            const li =
+              document.createElement(
+                "li"
+              );
+
+            li.textContent =
+              item;
+
+            achievementList.appendChild(
+              li
+            );
+          }
+        );
+      }
+
+      document
+        .querySelectorAll(
+          "[data-experience]"
+        )
+        .forEach(
+          function(button) {
+
+            const id =
+              button.dataset.experience;
+
+            const complete =
+              state.completed.includes(id);
+
+            button.setAttribute(
+              "aria-pressed",
+              complete
+                ? "true"
+                : "false"
+            );
+
+            button
+              .querySelector(
+                ".status-text"
+              )
+              .textContent =
+              complete
+                ? "Completed"
+                : "Not yet completed";
+          }
+        );
+
+      if (
+        state.completed.length === 6
+      ) {
+
+        document
+          .getElementById(
+            "final-case"
+          )
+          .classList.remove(
+            "hidden"
+          );
+      }
+    }
+
+    function showClockTower() {
+
+      const active =
+        document.getElementById(
+          "active-area"
+        );
+
+      active.innerHTML = `
+        <section class="activity-card">
+
+          <h2>
+            Circadian Clock Tower
+          </h2>
+
+          <p>
+            Maya has recently started working late evening shifts.
+            She sleeps at inconsistent times and reports difficulty
+            feeling alert when she needs to be awake.
+          </p>
+
+          <p>
+            Which concept should you investigate first?
+          </p>
+
+          <div class="choice-grid">
+
+            <button
+              class="choice-button"
+              type="button"
+              data-clock="circadian">
+
+              Circadian rhythm
+            </button>
+
+            <button
+              class="choice-button"
+              type="button"
+              data-clock="memory">
+
+              Long term memory only
+            </button>
+
+            <button
+              class="choice-button"
+              type="button"
+              data-clock="personality">
+
+              Personality traits
+            </button>
+
+          </div>
+
+          <div
+            id="clock-feedback"
+            class="feedback"
+            role="status"
+            aria-live="polite">
+
+            Choose where to begin your investigation.
+          </div>
+
+        </section>
+      `;
+
+      active
+        .querySelectorAll(
+          "[data-clock]"
+        )
+        .forEach(
+          function(button) {
+
+            button.addEventListener(
+              "click",
+              function() {
+
+                const feedback =
+                  document.getElementById(
+                    "clock-feedback"
+                  );
+
+                if (
+                  button.dataset.clock ===
+                  "circadian"
+                ) {
+
+                  feedback.className =
+                    "feedback correct";
+
+                  feedback.innerHTML =
+                    "Good investigation path. Circadian rhythms help regulate recurring biological patterns such as sleep and wakefulness.<br><strong>Evidence collected: Circadian Timing Report</strong>";
+
+                  completeExperience(
+                    "clock"
+                  );
+
+                } else {
+
+                  feedback.className =
+                    "feedback incorrect";
+
+                  feedback.textContent =
+                    "That path does not explain the timing pattern very well. The evidence points toward the body's biological timing system. Try another route.";
+                }
+              }
+            );
+          }
+        );
+
+      active.scrollIntoView({
+        behavior: "smooth"
+      });
+    }
+
+    function showSleepStages() {
+
+      state.sequence = [];
+
+      const active =
+        document.getElementById(
+          "active-area"
+        );
+
+      active.innerHTML = `
+        <section class="activity-card">
+
+          <h2>
+            Sleep Stage Laboratory
+          </h2>
+
+          <p>
+            The sleep-cycle recorder has scrambled a simplified sequence.
+            Select the stages in the order below:
+          </p>
+
+          <p>
+            <strong>
+              Awake → NREM 1 → NREM 2 → NREM 3 → REM
+            </strong>
+          </p>
+
+          <p>
+            Select the four sleep stages in order, beginning after wakefulness.
+          </p>
+
+          <div class="sequence-board">
+
+            <button
+              class="sequence-button"
+              type="button"
+              data-stage="NREM 3">
+
+              NREM 3
+            </button>
+
+            <button
+              class="sequence-button"
+              type="button"
+              data-stage="REM">
+
+              REM
+            </button>
+
+            <button
+              class="sequence-button"
+              type="button"
+              data-stage="NREM 1">
+
+              NREM 1
+            </button>
+
+            <button
+              class="sequence-button"
+              type="button"
+              data-stage="NREM 2">
+
+              NREM 2
+            </button>
+
+          </div>
+
+          <p id="sequence-display">
+            Selected sequence: none
+          </p>
+
+          <button
+            id="check-sequence"
+            class="action-button"
+            type="button">
+
+            Check Sleep Sequence
+          </button>
+
+          <div
+            id="sequence-feedback"
+            class="feedback"
+            role="status"
+            aria-live="polite">
+
+            Build the sequence, then check your answer.
+          </div>
+
+        </section>
+      `;
+
+      active
+        .querySelectorAll(
+          "[data-stage]"
+        )
+        .forEach(
+          function(button) {
+
+            button.addEventListener(
+              "click",
+              function() {
+
+                if (
+                  state.sequence.includes(
+                    button.dataset.stage
+                  )
+                ) {
+                  return;
+                }
+
+                state.sequence.push(
+                  button.dataset.stage
+                );
+
+                button.classList.add(
+                  "selected"
+                );
+
+                document
+                  .getElementById(
+                    "sequence-display"
+                  )
+                  .textContent =
+                  "Selected sequence: " +
+                  state.sequence.join(
+                    " → "
+                  );
+              }
+            );
+          }
+        );
+
+      document
+        .getElementById(
+          "check-sequence"
+        )
+        .addEventListener(
+          "click",
+          function() {
+
+            const correct =
+              [
+                "NREM 1",
+                "NREM 2",
+                "NREM 3",
+                "REM"
+              ];
+
+            const feedback =
+              document.getElementById(
+                "sequence-feedback"
+              );
+
+            if (
+              JSON.stringify(
+                state.sequence
+              ) ===
+              JSON.stringify(
+                correct
+              )
+            ) {
+
+              feedback.className =
+                "feedback correct";
+
+              feedback.innerHTML =
+                "Sleep-cycle sequence restored. Sleep cycles move through NREM stages and REM repeatedly across the night.<br><strong>Evidence collected: Sleep Cycle Diagram</strong>";
+
+              completeExperience(
+                "stages"
+              );
+
+            } else {
+
+              feedback.className =
+                "feedback incorrect";
+
+              feedback.innerHTML =
+                "That sequence does not match the simplified progression. Reset this investigation and try again.";
+
+              const reset =
+                document.createElement(
+                  "button"
+                );
+
+              reset.type =
+                "button";
+
+              reset.className =
+                "action-button";
+
+              reset.textContent =
+                "Reset Sequence";
+
+              reset.addEventListener(
+                "click",
+                showSleepStages
+              );
+
+              feedback.appendChild(
+                document.createElement(
+                  "br"
+                )
+              );
+
+              feedback.appendChild(
+                reset
+              );
+            }
+          }
+        );
+
+      active.scrollIntoView({
+        behavior: "smooth"
+      });
+    }
+
+    function showVideoTransmission() {
+
+      const active =
+        document.getElementById(
+          "active-area"
+        );
+
+      active.innerHTML = `
+        <section class="activity-card">
+
+          <h2>
+            Recovered TED Transmission
+          </h2>
+
+          <p>
+            Observatory systems recovered a transmission from sleep scientist
+            Matt Walker. Investigators believe it contains evidence about the
+            relationship between sleep, learning, memory, and health.
+          </p>
+
+          <div class="video-wrapper">
+
+            <iframe
+              src="https://www.youtube.com/embed/5MuIMqhT8DM"
+              title="Sleep Is Your Superpower by Matt Walker"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen>
+            </iframe>
+
+          </div>
+
+          <p>
+            After watching, which conclusion best reflects the key evidence
+            relevant to this mission?
+          </p>
+
+          <div class="choice-grid">
+
+            <button
+              class="choice-button"
+              type="button"
+              data-video="correct">
+
+              Sleep contributes to learning and memory, so reducing sleep
+              to gain extra study time can undermine the very learning
+              a student is trying to improve.
+            </button>
+
+            <button
+              class="choice-button"
+              type="button"
+              data-video="wrong">
+
+              Sleep has little connection to memory as long as a person
+              spends enough hours studying.
+            </button>
+
+          </div>
+
+          <div
+            id="video-feedback"
+            class="feedback"
+            role="status"
+            aria-live="polite">
+
+            Watch the recovered transmission before selecting your conclusion.
+          </div>
+
+        </section>
+      `;
+
+      active
+        .querySelectorAll(
+          "[data-video]"
+        )
+        .forEach(
+          function(button) {
+
+            button.addEventListener(
+              "click",
+              function() {
+
+                const feedback =
+                  document.getElementById(
+                    "video-feedback"
+                  );
+
+                if (
+                  button.dataset.video ===
+                  "correct"
+                ) {
+
+                  feedback.className =
+                    "feedback correct";
+
+                  feedback.innerHTML =
+                    "Evidence accepted. Sleep plays an important role in learning and memory.<br><strong>Evidence collected: Recovered Sleep and Memory Transmission</strong>";
+
+                  completeExperience(
+                    "video"
+                  );
+
+                } else {
+
+                  feedback.className =
+                    "feedback incorrect";
+
+                  feedback.textContent =
+                    "That interpretation conflicts with the evidence in the transmission. Reconsider the relationship between sleep and learning.";
+                }
+              }
+            );
+          }
+        );
+
+      active.scrollIntoView({
+        behavior: "smooth"
+      });
+    }
+
+    function showSleeplessStudent() {
+
+      const active =
+        document.getElementById(
+          "active-area"
+        );
+
+      active.innerHTML = `
+        <section class="activity-card">
+
+          <h2>
+            The Sleepless Student
+          </h2>
+
+          <p>
+            Jordan has an exam in two days and has been sleeping about
+            five hours each night.
+          </p>
+
+          <p>
+            Jordan says:
+          </p>
+
+          <blockquote>
+            “If I stay awake longer, I get more study time. That should
+            mean I remember more.”
+          </blockquote>
+
+          <p>
+            Which evidence would you investigate first?
+          </p>
+
+          <div class="choice-grid">
+
+            <button
+              class="choice-button"
+              type="button"
+              data-student="memory">
+
+              Examine sleep and memory consolidation.
+            </button>
+
+            <button
+              class="choice-button"
+              type="button"
+              data-student="hours">
+
+              Assume more waking hours automatically produce more learning.
+            </button>
+
+            <button
+              class="choice-button"
+              type="button"
+              data-student="personality">
+
+              Investigate whether Jordan has the wrong personality for exams.
+            </button>
+
+          </div>
+
+          <div
+            id="student-feedback"
+            class="feedback"
+            role="status"
+            aria-live="polite">
+
+            Choose an investigative path.
+          </div>
+
+        </section>
+      `;
+
+      active
+        .querySelectorAll(
+          "[data-student]"
+        )
+        .forEach(
+          function(button) {
+
+            button.addEventListener(
+              "click",
+              function() {
+
+                const feedback =
+                  document.getElementById(
+                    "student-feedback"
+                  );
+
+                if (
+                  button.dataset.student ===
+                  "memory"
+                ) {
+
+                  feedback.className =
+                    "feedback correct";
+
+                  feedback.innerHTML = `
+                    <p>
+                      Strong choice. Sleep supports processes involved in
+                      learning and memory.
+                    </p>
+
+                    <p>
+                      New evidence arrives: Jordan also reports slower
+                      concentration and daytime sleepiness.
+                    </p>
+
+                    <p>
+                      What should your working conclusion be?
+                    </p>
+
+                    <button
+                      id="student-followup"
+                      class="action-button"
+                      type="button">
+
+                      Conclude that insufficient sleep may be impairing
+                      attention and memory
+                    </button>
+                  `;
+
+                  document
+                    .getElementById(
+                      "student-followup"
+                    )
+                    .addEventListener(
+                      "click",
+                      function() {
+
+                        feedback.innerHTML =
+                          "Case evidence accepted.<br><strong>Evidence collected: Sleep Deprivation Case File</strong>";
+
+                        completeExperience(
+                          "student"
+                        );
+
+                        awardAchievement(
+                          "Persistent Scientist: Revised an explanation using new evidence."
+                        );
+                      }
+                    );
+
+                } else {
+
+                  feedback.className =
+                    "feedback incorrect";
+
+                  feedback.textContent =
+                    "Investigation detour: that explanation does not account for Jordan's daytime sleepiness, concentration problems, and memory difficulty. Try another evidence path.";
+                }
+              }
+            );
+          }
+        );
+
+      active.scrollIntoView({
+        behavior: "smooth"
+      });
+    }
+
+    function showDreamArchive() {
+
+      const active =
+        document.getElementById(
+          "active-area"
+        );
+
+      active.innerHTML = `
+        <section class="activity-card">
+
+          <h2>
+            Dream Archive
+          </h2>
+
+          <p>
+            An Academy resident reports a vivid dream and insists that
+            the dream must predict something that will happen tomorrow.
+          </p>
+
+          <p>
+            Which scientific response is most appropriate?
+          </p>
+
+          <div class="choice-grid">
+
+            <button
+              class="choice-button"
+              type="button"
+              data-dream="correct">
+
+              Dreams are genuine psychological experiences, but a vivid dream
+              alone does not provide scientific evidence that it predicts
+              future events.
+            </button>
+
+            <button
+              class="choice-button"
+              type="button"
+              data-dream="wrong1">
+
+              Every vivid dream has one universal hidden meaning.
+            </button>
+
+            <button
+              class="choice-button"
+              type="button"
+              data-dream="wrong2">
+
+              Dreaming does not occur during sleep.
+            </button>
+
+          </div>
+
+          <div
+            id="dream-feedback"
+            class="feedback"
+            role="status"
+            aria-live="polite">
+
+            Evaluate the claim using psychological science.
+          </div>
+
+        </section>
+      `;
+
+      active
+        .querySelectorAll(
+          "[data-dream]"
+        )
+        .forEach(
+          function(button) {
+
+            button.addEventListener(
+              "click",
+              function() {
+
+                const feedback =
+                  document.getElementById(
+                    "dream-feedback"
+                  );
+
+                if (
+                  button.dataset.dream ===
+                  "correct"
+                ) {
+
+                  feedback.className =
+                    "feedback correct";
+
+                  feedback.innerHTML =
+                    "Scientific interpretation accepted. Psychological science distinguishes an interesting experience from unsupported prediction claims.<br><strong>Evidence collected: Dream Archive Notes</strong>";
+
+                  completeExperience(
+                    "dream"
+                  );
+
+                } else {
+
+                  feedback.className =
+                    "feedback incorrect";
+
+                  feedback.textContent =
+                    "That conclusion goes beyond what the evidence supports. Try another interpretation.";
+                }
+              }
+            );
+          }
+        );
+
+      active.scrollIntoView({
+        behavior: "smooth"
+      });
+    }
+
+    function showClinic() {
+
+      const active =
+        document.getElementById(
+          "active-area"
+        );
+
+      active.innerHTML = `
+        <section class="activity-card">
+
+          <h2>
+            Sleep Disorder Clinic
+          </h2>
+
+          <p>
+            A patient reports repeatedly stopping breathing during sleep.
+            Their partner notices loud snoring followed by periods of silence,
+            and the patient experiences significant daytime sleepiness.
+          </p>
+
+          <p>
+            Which sleep disorder is most consistent with this pattern?
+          </p>
+
+          <div class="choice-grid">
+
+            <button
+              class="choice-button"
+              type="button"
+              data-clinic="insomnia">
+
+              Insomnia
+            </button>
+
+            <button
+              class="choice-button"
+              type="button"
+              data-clinic="apnea">
+
+              Sleep apnea
+            </button>
+
+            <button
+              class="choice-button"
+              type="button"
+              data-clinic="walking">
+
+              Sleepwalking
+            </button>
+
+          </div>
+
+          <div
+            id="clinic-feedback"
+            class="feedback"
+            role="status"
+            aria-live="polite">
+
+            Review the symptom pattern before selecting.
+          </div>
+
+        </section>
+      `;
+
+      active
+        .querySelectorAll(
+          "[data-clinic]"
+        )
+        .forEach(
+          function(button) {
+
+            button.addEventListener(
+              "click",
+              function() {
+
+                const feedback =
+                  document.getElementById(
+                    "clinic-feedback"
+                  );
+
+                if (
+                  button.dataset.clinic ===
+                  "apnea"
+                ) {
+
+                  feedback.className =
+                    "feedback correct";
+
+                  feedback.innerHTML =
+                    "The pattern is consistent with sleep apnea, which involves repeated interruptions in breathing during sleep.<br><strong>Evidence collected: Sleep Disorder Screening Report</strong>";
+
+                  completeExperience(
+                    "clinic"
+                  );
+
+                } else {
+
+                  feedback.className =
+                    "feedback incorrect";
+
+                  feedback.textContent =
+                    "That disorder does not best match repeated breathing interruptions with snoring and daytime sleepiness. Review the clues and try again.";
+                }
+              }
+            );
+          }
+        );
+
+      active.scrollIntoView({
+        behavior: "smooth"
+      });
+    }
+
+    function showExperience(id) {
+
+      if (
+        id === "clock"
+      ) {
+        showClockTower();
+      }
+
+      if (
+        id === "stages"
+      ) {
+        showSleepStages();
+      }
+
+      if (
+        id === "video"
+      ) {
+        showVideoTransmission();
+      }
+
+      if (
+        id === "student"
+      ) {
+        showSleeplessStudent();
+      }
+
+      if (
+        id === "dream"
+      ) {
+        showDreamArchive();
+      }
+
+      if (
+        id === "clinic"
+      ) {
+        showClinic();
+      }
+    }
+
+    function configureNotes() {
+
+      document
+        .querySelectorAll(
+          "[data-note]"
+        )
+        .forEach(
+          function(textarea) {
+
+            const key =
+              textarea.dataset.note;
+
+            textarea.value =
+              state.notes[key] || "";
+
+            textarea.addEventListener(
+              "input",
+              function() {
+
+                state.notes[key] =
+                  textarea.value;
+
+                saveState();
+              }
+            );
+          }
+        );
+    }
+
+    function wrapCanvasText(
+      ctx,
+      text,
+      x,
+      y,
+      maxWidth,
+      lineHeight
+    ) {
+
+      const words =
+        text.split(" ");
+
+      let line = "";
+      let currentY = y;
+
+      words.forEach(
+        function(word) {
+
+          const test =
+            line + word + " ";
+
+          if (
+            ctx.measureText(
+              test
+            ).width >
+              maxWidth &&
+            line !== ""
+          ) {
+
+            ctx.fillText(
+              line.trim(),
+              x,
+              currentY
+            );
+
+            line =
+              word + " ";
+
+            currentY +=
+              lineHeight;
+
+          } else {
+
+            line = test;
+          }
+        }
+      );
+
+      ctx.fillText(
+        line.trim(),
+        x,
+        currentY
+      );
+
+      return currentY;
+    }
+
+    function downloadBadge() {
+
+      const name =
+        document
+          .getElementById(
+            "badge-name"
+          )
+          .value
+          .trim();
+
+      const status =
+        document.getElementById(
+          "badge-status"
+        );
+
+      if (!name) {
+
+        status.textContent =
+          "Please enter your name before downloading your badge.";
+
+        return;
+      }
+
+      const canvas =
+        document.createElement(
+          "canvas"
+        );
+
+      canvas.width = 1200;
+      canvas.height = 1200;
+
+      const ctx =
+        canvas.getContext(
+          "2d"
+        );
+
+      ctx.fillStyle =
+        "#f2eff8";
+
+      ctx.fillRect(
+        0,
+        0,
+        1200,
+        1200
+      );
+
+      ctx.strokeStyle =
+        "#102f4a";
+
+      ctx.lineWidth = 32;
+
+      ctx.strokeRect(
+        38,
+        38,
+        1124,
+        1124
+      );
+
+      ctx.strokeStyle =
+        "#c5a84f";
+
+      ctx.lineWidth = 12;
+
+      ctx.strokeRect(
+        72,
+        72,
+        1056,
+        1056
+      );
+
+      ctx.beginPath();
+
+      ctx.arc(
+        600,
+        305,
+        150,
+        0,
+        Math.PI * 2
+      );
+
+      ctx.fillStyle =
+        "#102f4a";
+
+      ctx.fill();
+
+      ctx.strokeStyle =
+        "#c5a84f";
+
+      ctx.lineWidth = 14;
+
+      ctx.stroke();
+
+      ctx.fillStyle =
+        "#ffffff";
+
+      ctx.font =
+        "bold 135px Georgia";
+
+      ctx.textAlign =
+        "center";
+
+      ctx.textBaseline =
+        "middle";
+
+      ctx.fillText(
+        "☾",
+        600,
+        300
+      );
+
+      ctx.textBaseline =
+        "alphabetic";
+
+      ctx.fillStyle =
+        "#102f4a";
+
+      ctx.font =
+        "bold 42px Arial";
+
+      ctx.fillText(
+        "PSYCHOLOGY ACADEMY",
+        600,
+        125
+      );
+
+      ctx.fillStyle =
+        "#5b4c75";
+
+      ctx.font =
+        "bold 58px Georgia";
+
+      ctx.fillText(
+        "NIGHT SHIFT INVESTIGATOR",
+        600,
+        525
+      );
+
+      ctx.fillStyle =
+        "#1f2933";
+
+      ctx.font =
+        "32px Arial";
+
+      ctx.fillText(
+        "Achievement Unlocked",
+        600,
+        585
+      );
+
+      ctx.font =
+        "28px Arial";
+
+      ctx.fillText(
+        "Awarded to",
+        600,
+        660
+      );
+
+      ctx.fillStyle =
+        "#102f4a";
+
+      ctx.font =
+        "bold 44px Georgia";
+
+      wrapCanvasText(
+        ctx,
+        name,
+        600,
+        720,
+        900,
+        52
+      );
+
+      ctx.fillStyle =
+        "#1f2933";
+
+      ctx.font =
+        "28px Arial";
+
+      ctx.fillText(
+        "For successfully completing",
+        600,
+        810
+      );
+
+      ctx.font =
+        "bold 32px Arial";
+
+      ctx.fillText(
+        "Week 4: The Consciousness Observatory",
+        600,
+        860
+      );
+
+      ctx.font =
+        "25px Arial";
+
+      ctx.fillText(
+        "States of Consciousness and Sleep",
+        600,
+        910
+      );
+
+      const date =
+        new Date().toLocaleDateString(
+          "en-US",
+          {
+            year: "numeric",
+            month: "long",
+            day: "numeric"
+          }
+        );
+
+      ctx.font =
+        "24px Arial";
+
+      ctx.fillText(
+        "Completed " + date,
+        600,
+        965
+      );
+
+      ctx.font =
+        "21px Arial";
+
+      wrapCanvasText(
+        ctx,
+        "Verification phrase: Sleep supports attention, learning, memory, and healthy functioning.",
+        600,
+        1020,
+        900,
+        31
+      );
+
+      ctx.font =
+        "bold 24px Georgia";
+
+      ctx.fillStyle =
+        "#315f40";
+
+      ctx.fillText(
+        "Dr. Tonya Holdaway",
+        600,
+        1100
+      );
+
+      const safeName =
+        name
+          .replace(
+            /[^a-z0-9]/gi,
+            "-"
+          )
+          .replace(
+            /-+/g,
+            "-"
+          );
+
+      const link =
+        document.createElement(
+          "a"
+        );
+
+      link.download =
+        "Psychology-Academy-Week-4-Night-Shift-Investigator-" +
+        safeName +
+        ".png";
+
+      link.href =
+        canvas.toDataURL(
+          "image/png"
+        );
+
+      document.body.appendChild(
+        link
+      );
+
+      link.click();
+
+      document.body.removeChild(
+        link
+      );
+
+      status.textContent =
+        "Your Night Shift Investigator badge has been created. Check your Downloads folder.";
+    }
+
+    function configureFinalCase() {
+
+      document
+        .querySelectorAll(
+          "[data-final]"
+        )
+        .forEach(
+          function(button) {
+
+            button.addEventListener(
+              "click",
+              function() {
+
+                const feedback =
+                  document.getElementById(
+                    "final-feedback"
+                  );
+
+                if (
+                  button.dataset.final ===
+                  "correct"
+                ) {
+
+                  localStorage.setItem(
+                    completionKey,
+                    "true"
+                  );
+
+                  feedback.className =
+                    "feedback correct";
+
+                  feedback.innerHTML = `
+                    <h3>
+                      Observatory Case Solved
+                    </h3>
+
+                    <p>
+                      Your conclusion integrates the evidence appropriately.
+                      Insufficient and irregular sleep can interfere with
+                      attention, learning, memory, and daytime functioning.
+                    </p>
+
+                    <p>
+                      <strong>
+                        Completion phrase:
+                      </strong>
+                      Sleep supports attention, learning, memory, and healthy functioning.
+                    </p>
+
+                    <div
+                      class="badge-maker"
+                      aria-labelledby="badge-maker-heading">
+
+                      <h3 id="badge-maker-heading">
+                        Achievement Unlocked: Night Shift Investigator
+                      </h3>
+
+                      <p>
+                        Enter your name below to create your personalized
+                        Week 4 Psychology Academy badge.
+                      </p>
+
+                      <label for="badge-name">
+                        Name to appear on your badge
+                      </label>
+
+                      <input
+                        id="badge-name"
+                        class="badge-name-input"
+                        type="text"
+                        maxlength="60"
+                        autocomplete="name">
+
+                      <br>
+
+                      <button
+                        id="download-badge"
+                        class="badge-download-button"
+                        type="button">
+
+                        Download My Night Shift Investigator Badge
+                      </button>
+
+                      <p
+                        id="badge-status"
+                        role="status"
+                        aria-live="polite">
+                      </p>
+
+                    </div>
+
+                    <a
+                      class="return-button"
+                      href="../index.html">
+
+                      Return to Psychology Academy
+                    </a>
+                  `;
+
+                  document
+                    .getElementById(
+                      "download-badge"
+                    )
+                    .addEventListener(
+                      "click",
+                      downloadBadge
+                    );
+
+                } else {
+
+                  feedback.className =
+                    "feedback incorrect";
+
+                  feedback.textContent =
+                    "That conclusion goes beyond or conflicts with the evidence you collected. Review your satchel and try again.";
+                }
+              }
+            );
+          }
+        );
+    }
+
+    function configureAudio() {
+
+      const audio =
+        document.getElementById(
+          "observatory-audio"
+        );
+
+      document
+        .getElementById(
+          "play-audio"
+        )
+        .addEventListener(
+          "click",
+          function() {
+
+            audio
+              .play()
+              .catch(
+                function() {
+                  alert(
+                    "Your browser blocked the audio source. You can continue the mission without sound."
+                  );
+                }
+              );
+          }
+        );
+
+      document
+        .getElementById(
+          "pause-audio"
+        )
+        .addEventListener(
+          "click",
+          function() {
+
+            audio.pause();
+          }
+        );
+    }
+
+    function startMission() {
+
+      loadState();
+
+      document
+        .querySelectorAll(
+          "[data-experience]"
+        )
+        .forEach(
+          function(button) {
+
+            button.addEventListener(
+              "click",
+              function() {
+
+                showExperience(
+                  button.dataset.experience
+                );
+              }
+            );
+          }
+        );
+
+      configureNotes();
+
+      configureFinalCase();
+
+      configureAudio();
+
+      updateDashboard();
+
+      if (
+        state.completed.length === 6
+      ) {
+
+        awardAchievement(
+          "Curious Mind: Completed every Observatory investigation."
+        );
+      }
+    }
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      startMission
+    );
+
+  </script>
+
+</body>
+</html>
