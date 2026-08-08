@@ -22,11 +22,9 @@
       --gold: #7a5a00;
       --gold-light: #fffaf0;
       --cream: #fffdf7;
-      --stone: #f0ede4;
       --stone-dark: #6b6255;
       --border: #5f7382;
       --white: #ffffff;
-      --red: #7b1f1f;
       --shadow: 0 12px 32px rgba(16, 47, 74, 0.16);
       --shadow-soft: 0 8px 20px rgba(16, 47, 74, 0.10);
       --radius: 18px;
@@ -53,11 +51,6 @@
       color: #174c74;
       text-decoration: underline;
       text-underline-offset: 0.16em;
-    }
-
-    button,
-    a {
-      font: inherit;
     }
 
     a:focus,
@@ -299,8 +292,7 @@
       border-left-color: var(--gold);
     }
 
-    .panel h2,
-    .panel h3 {
+    .panel h2 {
       margin-top: 0;
     }
 
@@ -372,7 +364,6 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      background-color: var(--white);
       border: 3px solid var(--border);
       border-radius: 18px;
       padding: 22px;
@@ -545,7 +536,7 @@
 
     .badge-shelf {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
       gap: 16px;
     }
 
@@ -717,7 +708,7 @@
         </p>
 
         <p style="margin-bottom: 0;">
-          Your first three destinations are now open.
+          Four Academy destinations are now open for exploration.
         </p>
 
         <div class="hero-actions">
@@ -749,8 +740,8 @@
         </h2>
 
         <p>
-          Your Academy homepage can recognize mission progress saved in this
-          browser. Progress completed on another device or browser may not
+          Your Academy homepage recognizes mission progress saved in this
+          browser. Progress completed on another browser or device may not
           appear here.
         </p>
 
@@ -787,6 +778,7 @@
 
     </section>
 
+
     <section id="campus" aria-labelledby="campus-heading">
 
       <div class="section-heading">
@@ -798,10 +790,11 @@
         <p>
           Each destination represents a major area of psychology.
           Available missions contain a working entrance link.
-          Future destinations are clearly labeled as opening later.
+          Future destinations are clearly identified as opening later.
         </p>
 
       </div>
+
 
       <div class="campus-path">
 
@@ -812,6 +805,7 @@
           </h3>
 
           <div class="mission-grid">
+
 
             <article class="mission-card museum-theme">
 
@@ -846,6 +840,7 @@
 
             </article>
 
+
             <article class="mission-card research-theme">
 
               <div>
@@ -878,6 +873,7 @@
               </a>
 
             </article>
+
 
             <article class="mission-card brain-theme">
 
@@ -913,6 +909,7 @@
 
             </article>
 
+
             <article class="mission-card consciousness-theme">
 
               <div>
@@ -930,26 +927,27 @@
                 </h3>
 
                 <p>
-                  Investigate sleep, dreams, altered states, circadian rhythms,
-                  and the mysteries of consciousness.
+                  Take the Night Shift and investigate circadian rhythms,
+                  sleep stages, dreams, sleep deprivation, sleep disorders,
+                  learning, memory, and altered states of consciousness.
                 </p>
 
-                <p class="mission-status coming">
-                  Opening Soon
-                </p>
-
-                <p class="coming-note">
-                  Observatory staff are preparing the nighttime instruments
-                  and sleep research stations.
+                <p class="mission-status available" id="week4-status">
+                  Available Now
                 </p>
 
               </div>
+
+              <a class="mission-link" href="missions/week4.html">
+                Enter the Consciousness Observatory
+              </a>
 
             </article>
 
           </div>
 
         </section>
+
 
         <section class="district" aria-labelledby="cognition-heading">
 
@@ -958,6 +956,7 @@
           </h3>
 
           <div class="mission-grid">
+
 
             <article class="mission-card perception-theme">
 
@@ -981,12 +980,18 @@
                 </p>
 
                 <p class="mission-status coming">
-                  Opening Later
+                  Opening Soon
+                </p>
+
+                <p class="coming-note">
+                  Gallery staff are preparing visual illusions, sensory
+                  experiments, and perceptual mysteries for your next investigation.
                 </p>
 
               </div>
 
             </article>
+
 
             <article class="mission-card learning-theme">
 
@@ -1017,6 +1022,7 @@
 
             </article>
 
+
             <article class="mission-card thinking-theme">
 
               <div>
@@ -1045,6 +1051,7 @@
               </div>
 
             </article>
+
 
             <article class="mission-card memory-theme">
 
@@ -1079,6 +1086,7 @@
 
         </section>
 
+
         <section class="district" aria-labelledby="human-heading">
 
           <h3 id="human-heading" class="district-title">
@@ -1086,6 +1094,7 @@
           </h3>
 
           <div class="mission-grid">
+
 
             <article class="mission-card development-theme">
 
@@ -1116,6 +1125,7 @@
 
             </article>
 
+
             <article class="mission-card emotion-theme">
 
               <div>
@@ -1145,6 +1155,7 @@
 
             </article>
 
+
             <article class="mission-card personality-theme">
 
               <div>
@@ -1173,6 +1184,7 @@
               </div>
 
             </article>
+
 
             <article class="mission-card social-theme">
 
@@ -1207,6 +1219,7 @@
 
         </section>
 
+
         <section class="district" aria-labelledby="applied-heading">
 
           <h3 id="applied-heading" class="district-title">
@@ -1214,6 +1227,7 @@
           </h3>
 
           <div class="mission-grid">
+
 
             <article class="mission-card workplace-theme">
 
@@ -1244,6 +1258,7 @@
 
             </article>
 
+
             <article class="mission-card wellness-theme">
 
               <div>
@@ -1273,6 +1288,7 @@
 
             </article>
 
+
             <article class="mission-card disorders-theme">
 
               <div>
@@ -1301,6 +1317,7 @@
               </div>
 
             </article>
+
 
             <article class="mission-card graduation-theme">
 
@@ -1339,6 +1356,7 @@
 
     </section>
 
+
     <section class="badge-section" aria-labelledby="badges-heading">
 
       <div class="section-heading">
@@ -1348,13 +1366,15 @@
         </h2>
 
         <p>
-          Badges appear when this browser detects that you have completed
-          the corresponding Academy mission.
+          Your Academy badges appear when this browser recognizes that you
+          completed the corresponding mission. Downloadable personalized
+          badges are also available inside each completed mission.
         </p>
 
       </div>
 
       <div class="badge-shelf">
+
 
         <article id="badge-week1" class="badge-card badge-locked">
 
@@ -1372,6 +1392,7 @@
 
         </article>
 
+
         <article id="badge-week2" class="badge-card badge-locked">
 
           <span class="badge-symbol" aria-hidden="true">
@@ -1387,6 +1408,7 @@
           </p>
 
         </article>
+
 
         <article id="badge-week3" class="badge-card badge-locked">
 
@@ -1404,18 +1426,36 @@
 
         </article>
 
-        <article class="badge-card badge-locked">
+
+        <article id="badge-week4" class="badge-card badge-locked">
 
           <span class="badge-symbol" aria-hidden="true">
-            ✨
+            🌙
           </span>
 
           <h3>
-            More Achievements Ahead
+            Night Shift Investigator
+          </h3>
+
+          <p id="badge-week4-text">
+            Complete the Consciousness Observatory to earn this badge.
+          </p>
+
+        </article>
+
+
+        <article class="badge-card badge-locked">
+
+          <span class="badge-symbol" aria-hidden="true">
+            👁️
+          </span>
+
+          <h3>
+            Next Achievement
           </h3>
 
           <p>
-            New badges will be added as additional Academy destinations open.
+            A new achievement will become available when the Perception Gallery opens.
           </p>
 
         </article>
@@ -1423,6 +1463,7 @@
       </div>
 
     </section>
+
 
     <section
       id="mission-directory"
@@ -1453,10 +1494,21 @@
           <thead>
 
             <tr>
-              <th scope="col">Week</th>
-              <th scope="col">Destination</th>
-              <th scope="col">Topic</th>
-              <th scope="col">Status</th>
+              <th scope="col">
+                Week
+              </th>
+
+              <th scope="col">
+                Destination
+              </th>
+
+              <th scope="col">
+                Topic
+              </th>
+
+              <th scope="col">
+                Status
+              </th>
             </tr>
 
           </thead>
@@ -1464,214 +1516,311 @@
           <tbody>
 
             <tr>
-              <th scope="row">1</th>
+              <th scope="row">
+                1
+              </th>
+
               <td>
                 <a href="missions/week1.html">
                   Psychology Museum
                 </a>
               </td>
+
               <td>
                 Introduction to Psychology
               </td>
+
               <td id="directory-week1-status">
                 Available Now
               </td>
             </tr>
 
+
             <tr>
-              <th scope="row">2</th>
+              <th scope="row">
+                2
+              </th>
+
               <td>
                 <a href="missions/week2.html">
                   Research Conservatory
                 </a>
               </td>
+
               <td>
                 Psychological Research
               </td>
+
               <td id="directory-week2-status">
                 Available Now
               </td>
             </tr>
 
+
             <tr>
-              <th scope="row">3</th>
+              <th scope="row">
+                3
+              </th>
+
               <td>
                 <a href="missions/week3.html">
                   Brain Institute
                 </a>
               </td>
+
               <td>
                 Biopsychology
               </td>
+
               <td id="directory-week3-status">
                 Available Now
               </td>
             </tr>
 
+
             <tr>
-              <th scope="row">4</th>
+              <th scope="row">
+                4
+              </th>
+
               <td>
-                Consciousness Observatory
+                <a href="missions/week4.html">
+                  Consciousness Observatory
+                </a>
               </td>
+
               <td>
-                States of Consciousness
+                States of Consciousness and Sleep
               </td>
+
+              <td id="directory-week4-status">
+                Available Now
+              </td>
+            </tr>
+
+
+            <tr>
+              <th scope="row">
+                5
+              </th>
+
+              <td>
+                Perception Gallery
+              </td>
+
+              <td>
+                Sensation and Perception
+              </td>
+
               <td>
                 Opening Soon
               </td>
             </tr>
 
-            <tr>
-              <th scope="row">5</th>
-              <td>
-                Perception Gallery
-              </td>
-              <td>
-                Sensation and Perception
-              </td>
-              <td>
-                Opening Later
-              </td>
-            </tr>
 
             <tr>
-              <th scope="row">6</th>
+              <th scope="row">
+                6
+              </th>
+
               <td>
                 Pavlov Gardens and Skinner Hall
               </td>
+
               <td>
                 Learning
               </td>
+
               <td>
                 Opening Later
               </td>
             </tr>
 
+
             <tr>
-              <th scope="row">7</th>
+              <th scope="row">
+                7
+              </th>
+
               <td>
                 Thinking Workshop
               </td>
+
               <td>
                 Thinking and Intelligence
               </td>
+
               <td>
                 Opening Later
               </td>
             </tr>
 
+
             <tr>
-              <th scope="row">8</th>
+              <th scope="row">
+                8
+              </th>
+
               <td>
                 Memory Library
               </td>
+
               <td>
                 Memory
               </td>
+
               <td>
                 Opening Later
               </td>
             </tr>
 
+
             <tr>
-              <th scope="row">9</th>
+              <th scope="row">
+                9
+              </th>
+
               <td>
                 Development Village
               </td>
+
               <td>
                 Lifespan Development
               </td>
+
               <td>
                 Opening Later
               </td>
             </tr>
 
+
             <tr>
-              <th scope="row">10</th>
+              <th scope="row">
+                10
+              </th>
+
               <td>
                 Motivation and Emotion Gardens
               </td>
+
               <td>
                 Motivation and Emotion
               </td>
+
               <td>
                 Opening Later
               </td>
             </tr>
 
+
             <tr>
-              <th scope="row">11</th>
+              <th scope="row">
+                11
+              </th>
+
               <td>
                 Personality House
               </td>
+
               <td>
                 Personality
               </td>
+
               <td>
                 Opening Later
               </td>
             </tr>
 
+
             <tr>
-              <th scope="row">12</th>
+              <th scope="row">
+                12
+              </th>
+
               <td>
                 Social Psychology Commons
               </td>
+
               <td>
                 Social Psychology
               </td>
+
               <td>
                 Opening Later
               </td>
             </tr>
 
+
             <tr>
-              <th scope="row">13</th>
+              <th scope="row">
+                13
+              </th>
+
               <td>
                 Workplace Psychology Center
               </td>
+
               <td>
                 Industrial Organizational Psychology
               </td>
+
               <td>
                 Opening Later
               </td>
             </tr>
 
+
             <tr>
-              <th scope="row">14</th>
+              <th scope="row">
+                14
+              </th>
+
               <td>
                 Stress and Wellness Retreat
               </td>
+
               <td>
                 Stress, Lifestyle, and Health
               </td>
+
               <td>
                 Opening Later
               </td>
             </tr>
 
+
             <tr>
-              <th scope="row">15</th>
+              <th scope="row">
+                15
+              </th>
+
               <td>
                 Psychological Disorders Center
               </td>
+
               <td>
                 Psychological Disorders
               </td>
+
               <td>
                 Opening Later
               </td>
             </tr>
 
+
             <tr>
-              <th scope="row">16</th>
+              <th scope="row">
+                16
+              </th>
+
               <td>
                 Therapy and Graduation Hall
               </td>
+
               <td>
                 Therapy and Course Reflection
               </td>
+
               <td>
                 Opening Later
               </td>
@@ -1684,6 +1833,7 @@
       </div>
 
     </section>
+
 
     <section
       class="academy-message"
@@ -1715,6 +1865,7 @@
 
   </main>
 
+
   <footer>
 
     <div class="container">
@@ -1735,6 +1886,7 @@
 
   </footer>
 
+
   <script>
 
     const academyMissions = [
@@ -1745,10 +1897,16 @@
         storageKey:
           "psychologyMuseumWeek1",
 
+        progressProperty:
+          "solved",
+
         completionKey:
           "psychologyAcademyWeek1Complete",
 
         requiredCount: 6,
+
+        unitLabel:
+          "exhibits",
 
         statusId:
           "week1-status",
@@ -1766,16 +1924,23 @@
           "Earned: Museum Curator"
       },
 
+
       {
         week: 2,
 
         storageKey:
           "psychologyResearchWeek2",
 
+        progressProperty:
+          "solved",
+
         completionKey:
           "psychologyAcademyWeek2Complete",
 
         requiredCount: 7,
+
+        unitLabel:
+          "stations",
 
         statusId:
           "week2-status",
@@ -1793,16 +1958,23 @@
           "Earned: Research Investigator"
       },
 
+
       {
         week: 3,
 
         storageKey:
           "psychologyBrainWeek3",
 
+        progressProperty:
+          "solved",
+
         completionKey:
           "psychologyAcademyWeek3Complete",
 
         requiredCount: 7,
+
+        unitLabel:
+          "pathways",
 
         statusId:
           "week3-status",
@@ -1818,9 +1990,44 @@
 
         badgeText:
           "Earned: Brain Explorer"
+      },
+
+
+      {
+        week: 4,
+
+        storageKey:
+          "psychologyConsciousnessWeek4",
+
+        progressProperty:
+          "completed",
+
+        completionKey:
+          "psychologyAcademyWeek4Complete",
+
+        requiredCount: 6,
+
+        unitLabel:
+          "investigations",
+
+        statusId:
+          "week4-status",
+
+        directoryStatusId:
+          "directory-week4-status",
+
+        badgeId:
+          "badge-week4",
+
+        badgeTextId:
+          "badge-week4-text",
+
+        badgeText:
+          "Earned: Night Shift Investigator"
       }
 
     ];
+
 
     function getMissionProgress(
       mission
@@ -1838,11 +2045,15 @@
         if (
           saved &&
           Array.isArray(
-            saved.solved
+            saved[
+              mission.progressProperty
+            ]
           )
         ) {
 
-          return saved.solved.length;
+          return saved[
+            mission.progressProperty
+          ].length;
         }
 
       } catch (error) {
@@ -1855,11 +2066,12 @@
       return 0;
     }
 
+
     function updateMissionCard(
       mission
     ) {
 
-      const solvedCount =
+      const progressCount =
         getMissionProgress(
           mission
         );
@@ -1871,7 +2083,7 @@
 
       const missionComplete =
         savedCompletion ||
-        solvedCount >=
+        progressCount >=
         mission.requiredCount;
 
       const statusElement =
@@ -1883,6 +2095,7 @@
         document.getElementById(
           mission.directoryStatusId
         );
+
 
       if (missionComplete) {
 
@@ -1905,11 +2118,13 @@
           );
         }
 
+
         if (directoryStatus) {
 
           directoryStatus.textContent =
             "Mission Completed";
         }
+
 
         const badge =
           document.getElementById(
@@ -1920,6 +2135,7 @@
           document.getElementById(
             mission.badgeTextId
           );
+
 
         if (badge) {
 
@@ -1932,26 +2148,32 @@
           );
         }
 
+
         if (badgeText) {
 
           badgeText.textContent =
             mission.badgeText;
         }
 
+
         return true;
       }
 
-      if (solvedCount > 0) {
+
+      if (progressCount > 0) {
 
         if (statusElement) {
 
           statusElement.textContent =
             "Mission In Progress: " +
-            solvedCount +
+            progressCount +
             " of " +
             mission.requiredCount +
-            " challenges solved";
+            " " +
+            mission.unitLabel +
+            " completed";
         }
+
 
         if (directoryStatus) {
 
@@ -1960,12 +2182,15 @@
         }
       }
 
+
       return false;
     }
+
 
     function updateAcademyProgress() {
 
       let completedCount = 0;
+
 
       academyMissions.forEach(
         function(mission) {
@@ -1982,6 +2207,7 @@
         }
       );
 
+
       const progressBar =
         document.getElementById(
           "academy-progress"
@@ -1997,12 +2223,15 @@
           "explorer-level"
         );
 
+
       progressBar.value =
         completedCount;
+
 
       progressText.textContent =
         completedCount +
         " of 16 Academy missions completed";
+
 
       if (completedCount === 0) {
 
@@ -2010,23 +2239,34 @@
           "Beginning Explorer";
       }
 
+
       if (completedCount === 1) {
 
         explorerLevel.textContent =
           "Curious Investigator";
       }
 
-      if (completedCount >= 2) {
+
+      if (completedCount === 2) {
 
         explorerLevel.textContent =
           "Psychology Pathfinder";
       }
 
-      if (completedCount >= 3) {
+
+      if (completedCount === 3) {
 
         explorerLevel.textContent =
           "Neural Pathfinder";
       }
+
+
+      if (completedCount === 4) {
+
+        explorerLevel.textContent =
+          "Academy Night Scholar";
+      }
+
 
       if (completedCount >= 5) {
 
@@ -2034,11 +2274,13 @@
           "Academy Scholar";
       }
 
+
       if (completedCount >= 10) {
 
         explorerLevel.textContent =
           "Senior Psychology Explorer";
       }
+
 
       if (completedCount >= 16) {
 
@@ -2046,6 +2288,7 @@
           "Psychology Academy Graduate";
       }
     }
+
 
     document.addEventListener(
       "DOMContentLoaded",
