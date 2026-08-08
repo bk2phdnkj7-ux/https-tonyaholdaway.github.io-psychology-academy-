@@ -229,6 +229,13 @@
       font-weight: bold;
     }
 
+    .audio-status {
+      margin-top: 12px;
+      margin-bottom: 0;
+      color: #ffffff;
+      font-weight: bold;
+    }
+
     .mission-layout {
       display: grid;
       grid-template-columns: minmax(0, 1fr) 345px;
@@ -566,8 +573,8 @@
       </h2>
 
       <p>
-        Optional ambient sound is available for students who want a more
-        immersive experience. Audio never starts automatically.
+        Optional ambient sound is available if you want a more immersive
+        experience. Audio never begins automatically.
       </p>
 
       <div class="audio-controls">
@@ -590,10 +597,19 @@
 
       </div>
 
+      <p
+        id="audio-status"
+        class="audio-status"
+        role="status"
+        aria-live="polite">
+        Night ambience is currently paused.
+      </p>
+
       <audio id="observatory-audio" loop preload="none">
         <source
-          src="https://cdn.pixabay.com/download/audio/2022/10/25/audio_946bc6dac3.mp3"
+          src="../assets/audio/freesound_community-night-ambience-17064.mp3"
           type="audio/mpeg">
+        Your browser does not support the audio element.
       </audio>
 
     </section>
@@ -1062,9 +1078,16 @@
 
         state.completed.push(id);
 
-        state.evidence.push(
-          evidenceMap[id]
-        );
+        if (
+          !state.evidence.includes(
+            evidenceMap[id]
+          )
+        ) {
+
+          state.evidence.push(
+            evidenceMap[id]
+          );
+        }
 
         saveState();
       }
@@ -1221,6 +1244,10 @@
           .classList.remove(
             "hidden"
           );
+
+        awardAchievement(
+          "Curious Mind: Completed every Observatory investigation."
+        );
       }
     }
 
@@ -1355,17 +1382,13 @@
 
           <p>
             The sleep-cycle recorder has scrambled a simplified sequence.
-            Select the stages in the order below:
+            Select the stages in this order:
           </p>
 
           <p>
             <strong>
-              Awake → NREM 1 → NREM 2 → NREM 3 → REM
+              NREM 1 → NREM 2 → NREM 3 → REM
             </strong>
-          </p>
-
-          <p>
-            Select the four sleep stages in order, beginning after wakefulness.
           </p>
 
           <div class="sequence-board">
@@ -1477,13 +1500,12 @@
           "click",
           function() {
 
-            const correct =
-              [
-                "NREM 1",
-                "NREM 2",
-                "NREM 3",
-                "REM"
-              ];
+            const correct = [
+              "NREM 1",
+              "NREM 2",
+              "NREM 3",
+              "REM"
+            ];
 
             const feedback =
               document.getElementById(
@@ -2063,39 +2085,27 @@
 
     function showExperience(id) {
 
-      if (
-        id === "clock"
-      ) {
+      if (id === "clock") {
         showClockTower();
       }
 
-      if (
-        id === "stages"
-      ) {
+      if (id === "stages") {
         showSleepStages();
       }
 
-      if (
-        id === "video"
-      ) {
+      if (id === "video") {
         showVideoTransmission();
       }
 
-      if (
-        id === "student"
-      ) {
+      if (id === "student") {
         showSleeplessStudent();
       }
 
-      if (
-        id === "dream"
-      ) {
+      if (id === "dream") {
         showDreamArchive();
       }
 
-      if (
-        id === "clinic"
-      ) {
+      if (id === "clinic") {
         showClinic();
       }
     }
@@ -2153,8 +2163,7 @@
           if (
             ctx.measureText(
               test
-            ).width >
-              maxWidth &&
+            ).width > maxWidth &&
             line !== ""
           ) {
 
@@ -2601,37 +2610,71 @@
           "observatory-audio"
         );
 
-      document
-        .getElementById(
+      const playButton =
+        document.getElementById(
           "play-audio"
-        )
-        .addEventListener(
-          "click",
-          function() {
-
-            audio
-              .play()
-              .catch(
-                function() {
-                  alert(
-                    "Your browser blocked the audio source. You can continue the mission without sound."
-                  );
-                }
-              );
-          }
         );
 
-      document
-        .getElementById(
+      const pauseButton =
+        document.getElementById(
           "pause-audio"
-        )
-        .addEventListener(
-          "click",
-          function() {
-
-            audio.pause();
-          }
         );
+
+      const status =
+        document.getElementById(
+          "audio-status"
+        );
+
+      audio.volume = 0.35;
+
+      playButton.addEventListener(
+        "click",
+        function() {
+
+          audio
+            .play()
+            .then(
+              function() {
+
+                playButton.textContent =
+                  "Night Ambience Playing";
+
+                status.textContent =
+                  "Night ambience is playing at a low volume.";
+              }
+            )
+            .catch(
+              function() {
+
+                status.textContent =
+                  "Your browser could not start the optional ambience. You can continue the mission normally without audio.";
+              }
+            );
+        }
+      );
+
+      pauseButton.addEventListener(
+        "click",
+        function() {
+
+          audio.pause();
+
+          playButton.textContent =
+            "Play Night Ambience";
+
+          status.textContent =
+            "Night ambience is currently paused.";
+        }
+      );
+
+      audio.addEventListener(
+        "error",
+        function() {
+
+          status.textContent =
+            "The optional audio file could not be loaded. The mission remains fully usable without sound.";
+        }
+      );
     }
 
     function startMission() {
@@ -2664,15 +2707,6 @@
       configureAudio();
 
       updateDashboard();
-
-      if (
-        state.completed.length === 6
-      ) {
-
-        awardAchievement(
-          "Curious Mind: Completed every Observatory investigation."
-        );
-      }
     }
 
     document.addEventListener(
@@ -2684,4 +2718,3 @@
 
 </body>
 </html>
-
