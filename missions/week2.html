@@ -13,6 +13,7 @@
     :root {
       --ink: #1f2933;
       --navy: #163a59;
+      --navy-dark: #082236;
       --blue: #2f6fa5;
       --blue-light: #eaf4fb;
       --green: #315f40;
@@ -52,12 +53,14 @@
     }
 
     button,
-    textarea {
+    textarea,
+    input {
       font: inherit;
     }
 
     button:focus,
     textarea:focus,
+    input:focus,
     a:focus {
       outline: 4px solid #111111;
       outline-offset: 3px;
@@ -98,16 +101,28 @@
     .hero {
       position: relative;
       overflow: hidden;
-      background-color: var(--blue-light);
-      border-bottom: 5px solid var(--blue);
-      padding: 38px 0 42px;
+      background:
+        linear-gradient(
+          to bottom,
+          #e7f3f6 0%,
+          #eef8f2 70%,
+          #e4efe6 100%
+        );
+      border-bottom: 5px solid var(--green);
+      padding: 38px 0 44px;
     }
 
-    .hero h1 {
-      margin: 0;
-      color: var(--navy);
-      line-height: 1.15;
-      font-size: clamp(2.2rem, 6vw, 4.4rem);
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: 30px;
+      right: 8%;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.40);
+      border: 2px solid rgba(47, 111, 165, 0.18);
+      pointer-events: none;
     }
 
     .eyebrow {
@@ -117,6 +132,14 @@
       letter-spacing: 0.09em;
       text-transform: uppercase;
       color: var(--navy);
+    }
+
+    .hero h1 {
+      margin: 0;
+      color: var(--navy);
+      line-height: 1.15;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.2rem, 6vw, 4.4rem);
     }
 
     .hero-text {
@@ -185,6 +208,10 @@
       cursor: pointer;
     }
 
+    .station-button:hover {
+      transform: translateY(-2px);
+    }
+
     .station-button[aria-pressed="true"] {
       border-left-color: var(--green);
       background-color: var(--green-light);
@@ -245,6 +272,10 @@
     .option-button {
       background-color: var(--white);
       color: var(--ink);
+    }
+
+    .option-button:hover {
+      background-color: var(--blue-light);
     }
 
     .action-button {
@@ -366,6 +397,48 @@
       font-weight: bold;
     }
 
+    .badge-maker {
+      margin-top: 22px;
+      padding: 20px;
+      background-color: #fffdf7;
+      color: var(--ink);
+      border: 3px solid #80651c;
+      border-radius: 12px;
+    }
+
+    .badge-maker h3 {
+      color: #634900;
+      margin-top: 0;
+    }
+
+    .badge-name-input {
+      width: 100%;
+      max-width: 500px;
+      margin: 6px 0 14px;
+      padding: 12px;
+      color: var(--ink);
+      background-color: var(--white);
+      border: 2px solid var(--border);
+      border-radius: 8px;
+    }
+
+    .badge-download-button {
+      display: inline-block;
+      background-color: var(--navy);
+      color: var(--white);
+      border: 3px solid var(--navy-dark);
+      border-radius: 9px;
+      padding: 14px 20px;
+      cursor: pointer;
+      font-weight: bold;
+      text-decoration: underline;
+    }
+
+    .badge-status {
+      margin-bottom: 0;
+      font-weight: bold;
+    }
+
     .danger {
       background-color: var(--red);
       border-color: #4f1010;
@@ -395,6 +468,10 @@
       html {
         scroll-behavior: auto;
       }
+
+      .station-button:hover {
+        transform: none;
+      }
     }
   </style>
 </head>
@@ -406,6 +483,7 @@
   </a>
 
   <header class="hero">
+
     <div class="container">
 
       <a class="academy-link" href="../index.html">
@@ -421,25 +499,27 @@
       </h1>
 
       <p class="hero-text">
-        A dramatic headline has appeared in the Academy newspaper:
+        A dramatic headline has appeared in the Psychology Academy newspaper:
         “New study proves that studying with music causes higher grades.”
-        Your mission is to investigate the claim, examine the evidence,
-        and determine what the research really shows.
+        Your mission is to investigate the claim, examine the evidence, and
+        determine what the research actually supports.
       </p>
 
     </div>
+
   </header>
 
   <main id="main-content" class="container">
 
     <section class="panel panel-green" aria-labelledby="briefing-heading">
+
       <h2 id="briefing-heading">
         Mission Briefing
       </h2>
 
       <p>
         Seven research stations have been sealed. Each station focuses on
-        one important part of psychological research.
+        an important part of psychological research.
       </p>
 
       <p>
@@ -447,16 +527,27 @@
         the Evidence Archive.
       </p>
 
-      <p style="margin-bottom: 0;">
-        There is no timer. Hints are available without penalty, and progress
-        is saved automatically in the current browser.
+      <p>
+        Your progress and Research Notebook entries are saved automatically
+        in the browser and device you are currently using.
       </p>
+
+      <p style="margin-bottom: 0;">
+        There is no timer. Hints are available without penalty, and you may
+        attempt each challenge more than once.
+      </p>
+
     </section>
 
     <section class="panel panel-gold" aria-labelledby="objectives-heading">
+
       <h2 id="objectives-heading">
         Learning Objectives
       </h2>
+
+      <p>
+        By completing this mission, you will practice how to:
+      </p>
 
       <ul>
         <li>Identify focused, researchable questions.</li>
@@ -467,6 +558,7 @@
         <li>Recognize essential ethical protections.</li>
         <li>Evaluate whether a headline accurately represents research findings.</li>
       </ul>
+
     </section>
 
     <div class="mission-layout">
@@ -474,99 +566,231 @@
       <div>
 
         <section aria-labelledby="stations-heading">
+
           <h2 id="stations-heading">
             Research Stations
           </h2>
 
           <div class="station-grid">
 
-            <button class="station-button" type="button" data-challenge="question" aria-pressed="false">
-              <span class="station-icon" aria-hidden="true">📝</span>
-              <span class="station-title">The Question Desk</span>
+            <button
+              class="station-button"
+              type="button"
+              data-challenge="question"
+              aria-pressed="false">
+
+              <span class="station-icon" aria-hidden="true">
+                📝
+              </span>
+
+              <span class="station-title">
+                The Question Desk
+              </span>
+
               Identify a focused research question.
-              <span class="status-text">Not yet solved</span>
+
+              <span class="status-text">
+                Not yet solved
+              </span>
+
             </button>
 
-            <button class="station-button" type="button" data-challenge="hypothesis" aria-pressed="false">
-              <span class="station-icon" aria-hidden="true">🏮</span>
-              <span class="station-title">The Hypothesis Lantern</span>
+            <button
+              class="station-button"
+              type="button"
+              data-challenge="hypothesis"
+              aria-pressed="false">
+
+              <span class="station-icon" aria-hidden="true">
+                🏮
+              </span>
+
+              <span class="station-title">
+                The Hypothesis Lantern
+              </span>
+
               Choose a specific, testable prediction.
-              <span class="status-text">Not yet solved</span>
+
+              <span class="status-text">
+                Not yet solved
+              </span>
+
             </button>
 
-            <button class="station-button" type="button" data-challenge="variables" aria-pressed="false">
-              <span class="station-icon" aria-hidden="true">🗄️</span>
-              <span class="station-title">The Variables Cabinet</span>
+            <button
+              class="station-button"
+              type="button"
+              data-challenge="variables"
+              aria-pressed="false">
+
+              <span class="station-icon" aria-hidden="true">
+                🗄️
+              </span>
+
+              <span class="station-title">
+                The Variables Cabinet
+              </span>
+
               Identify the independent variable.
-              <span class="status-text">Not yet solved</span>
+
+              <span class="status-text">
+                Not yet solved
+              </span>
+
             </button>
 
-            <button class="station-button" type="button" data-challenge="methods" aria-pressed="false">
-              <span class="station-icon" aria-hidden="true">🌿</span>
-              <span class="station-title">The Methods Greenhouse</span>
+            <button
+              class="station-button"
+              type="button"
+              data-challenge="methods"
+              aria-pressed="false">
+
+              <span class="station-icon" aria-hidden="true">
+                🌿
+              </span>
+
+              <span class="station-title">
+                The Methods Greenhouse
+              </span>
+
               Select the best research method.
-              <span class="status-text">Not yet solved</span>
+
+              <span class="status-text">
+                Not yet solved
+              </span>
+
             </button>
 
-            <button class="station-button" type="button" data-challenge="correlation" aria-pressed="false">
-              <span class="station-icon" aria-hidden="true">🔭</span>
-              <span class="station-title">The Correlation Telescope</span>
+            <button
+              class="station-button"
+              type="button"
+              data-challenge="correlation"
+              aria-pressed="false">
+
+              <span class="station-icon" aria-hidden="true">
+                🔭
+              </span>
+
+              <span class="station-title">
+                The Correlation Telescope
+              </span>
+
               Interpret a relationship accurately.
-              <span class="status-text">Not yet solved</span>
+
+              <span class="status-text">
+                Not yet solved
+              </span>
+
             </button>
 
-            <button class="station-button" type="button" data-challenge="ethics" aria-pressed="false">
-              <span class="station-icon" aria-hidden="true">⚖️</span>
-              <span class="station-title">The Ethics Review Chamber</span>
+            <button
+              class="station-button"
+              type="button"
+              data-challenge="ethics"
+              aria-pressed="false">
+
+              <span class="station-icon" aria-hidden="true">
+                ⚖️
+              </span>
+
+              <span class="station-title">
+                The Ethics Review Chamber
+              </span>
+
               Protect participants' rights and safety.
-              <span class="status-text">Not yet solved</span>
+
+              <span class="status-text">
+                Not yet solved
+              </span>
+
             </button>
 
-            <button class="station-button" type="button" data-challenge="evidence" aria-pressed="false">
-              <span class="station-icon" aria-hidden="true">📚</span>
-              <span class="station-title">The Evidence Archive</span>
+            <button
+              class="station-button"
+              type="button"
+              data-challenge="evidence"
+              aria-pressed="false">
+
+              <span class="station-icon" aria-hidden="true">
+                📚
+              </span>
+
+              <span class="station-title">
+                The Evidence Archive
+              </span>
+
               Evaluate the newspaper headline.
-              <span class="status-text">Not yet solved</span>
+
+              <span class="status-text">
+                Not yet solved
+              </span>
+
             </button>
 
           </div>
+
         </section>
 
         <div id="challenge-area" tabindex="-1"></div>
 
-        <section id="final-lock" class="final-lock hidden" aria-labelledby="lock-heading">
+        <section
+          id="final-lock"
+          class="final-lock hidden"
+          aria-labelledby="lock-heading">
 
           <h2 id="lock-heading">
             Final Evidence Archive Lock
           </h2>
 
           <p>
-            You solved all seven research stations. Select the code that
-            matches your collected characters in station order.
+            You solved all seven research stations. Select the code that matches
+            your collected characters in station order.
           </p>
 
           <div class="lock-grid">
 
-            <button class="lock-button" type="button" data-code="SCIENCE">
+            <button
+              class="lock-button"
+              type="button"
+              data-code="SCIENCE">
+
               Lock A: SCIENCE
             </button>
 
-            <button class="lock-button" type="button" data-code="SCIENEC">
+            <button
+              class="lock-button"
+              type="button"
+              data-code="SCIENEC">
+
               Lock B: SCIENEC
             </button>
 
-            <button class="lock-button" type="button" data-code="SC1ENCE">
+            <button
+              class="lock-button"
+              type="button"
+              data-code="SC1ENCE">
+
               Lock C: SC1ENCE
             </button>
 
-            <button class="lock-button" type="button" data-code="SCIENCES">
+            <button
+              class="lock-button"
+              type="button"
+              data-code="SCIENCES">
+
               Lock D: SCIENCES
             </button>
 
           </div>
 
-          <div id="lock-feedback" class="feedback" role="status" aria-live="polite">
+          <div
+            id="lock-feedback"
+            class="feedback"
+            role="status"
+            aria-live="polite">
+
             Select the code that matches your investigation log.
+
           </div>
 
         </section>
@@ -576,40 +800,55 @@
       <aside class="sidebar" aria-label="Mission tools">
 
         <section class="panel" aria-labelledby="progress-heading">
+
           <h2 id="progress-heading">
             Mission Progress
           </h2>
 
-          <progress id="progress-bar" value="0" max="7">
+          <progress
+            id="progress-bar"
+            value="0"
+            max="7">
+
             0 of 7 stations solved
           </progress>
 
           <p id="progress-text">
             0 of 7 stations solved
           </p>
+
         </section>
 
         <section class="panel panel-green" aria-labelledby="inventory-heading">
+
           <h2 id="inventory-heading">
             Evidence Inventory
           </h2>
 
           <ul id="inventory-list" class="inventory-list">
-            <li>No evidence collected yet.</li>
+            <li>
+              No evidence collected yet.
+            </li>
           </ul>
+
         </section>
 
         <section class="panel panel-gold" aria-labelledby="codes-heading">
+
           <h2 id="codes-heading">
             Collected Code Characters
           </h2>
 
           <ol id="code-list" class="code-list">
-            <li>No code characters collected yet.</li>
+            <li>
+              No code characters collected yet.
+            </li>
           </ol>
+
         </section>
 
         <section class="panel" aria-labelledby="notes-heading">
+
           <h2 id="notes-heading">
             Research Notebook
           </h2>
@@ -618,22 +857,30 @@
             Research question notes
           </label>
 
-          <textarea id="question-notes" data-note="question"></textarea>
+          <textarea
+            id="question-notes"
+            data-note="question"></textarea>
 
           <label for="evidence-notes">
             Evidence and method notes
           </label>
 
-          <textarea id="evidence-notes" data-note="evidence"></textarea>
+          <textarea
+            id="evidence-notes"
+            data-note="evidence"></textarea>
 
           <label for="headline-notes">
             Final headline evaluation
           </label>
 
-          <textarea id="headline-notes" data-note="headline"></textarea>
+          <textarea
+            id="headline-notes"
+            data-note="headline"></textarea>
+
         </section>
 
         <section class="panel" aria-labelledby="reset-heading">
+
           <h2 id="reset-heading">
             Reset Mission
           </h2>
@@ -643,22 +890,32 @@
             and mission completion.
           </p>
 
-          <button id="reset-button" class="action-button danger" type="button">
+          <button
+            id="reset-button"
+            class="action-button danger"
+            type="button">
+
             Reset Week 2 Progress
           </button>
+
         </section>
 
       </aside>
 
     </div>
+
   </main>
 
   <footer>
+
     <div class="container">
+
       <p>
         Psychology Academy · Week 2 · Dr. Tonya Holdaway
       </p>
+
     </div>
+
   </footer>
 
   <script>
@@ -669,9 +926,20 @@
     const completionKey =
       "psychologyAcademyWeek2Complete";
 
+    const challengeOrder = [
+      "question",
+      "hypothesis",
+      "variables",
+      "methods",
+      "correlation",
+      "ethics",
+      "evidence"
+    ];
+
     const challenges = {
 
       question: {
+
         title:
           "The Question Desk",
 
@@ -700,6 +968,7 @@
       },
 
       hypothesis: {
+
         title:
           "The Hypothesis Lantern",
 
@@ -728,6 +997,7 @@
       },
 
       variables: {
+
         title:
           "The Variables Cabinet",
 
@@ -756,6 +1026,7 @@
       },
 
       methods: {
+
         title:
           "The Methods Greenhouse",
 
@@ -784,6 +1055,7 @@
       },
 
       correlation: {
+
         title:
           "The Correlation Telescope",
 
@@ -812,6 +1084,7 @@
       },
 
       ethics: {
+
         title:
           "The Ethics Review Chamber",
 
@@ -840,6 +1113,7 @@
       },
 
       evidence: {
+
         title:
           "The Evidence Archive",
 
@@ -919,7 +1193,20 @@
       );
     }
 
+    function getSortedSolved() {
+
+      return challengeOrder.filter(
+        function(id) {
+
+          return state.solved.includes(id);
+        }
+      );
+    }
+
     function updateDashboard() {
+
+      const solved =
+        getSortedSolved();
 
       const progressBar =
         document.getElementById(
@@ -947,17 +1234,17 @@
         );
 
       progressBar.value =
-        state.solved.length;
+        solved.length;
 
       progressText.textContent =
-        state.solved.length +
+        solved.length +
         " of 7 stations solved";
 
       inventoryList.innerHTML = "";
       codeList.innerHTML = "";
 
       if (
-        state.solved.length === 0
+        solved.length === 0
       ) {
 
         inventoryList.innerHTML =
@@ -968,7 +1255,7 @@
 
       } else {
 
-        state.solved.forEach(
+        solved.forEach(
           function(id) {
 
             const challenge =
@@ -1013,12 +1300,12 @@
             const id =
               button.dataset.challenge;
 
-            const solved =
+            const solvedMission =
               state.solved.includes(id);
 
             button.setAttribute(
               "aria-pressed",
-              solved
+              solvedMission
                 ? "true"
                 : "false"
             );
@@ -1029,14 +1316,14 @@
               );
 
             status.textContent =
-              solved
+              solvedMission
                 ? "Solved"
                 : "Not yet solved";
           }
         );
 
       if (
-        state.solved.length === 7
+        solved.length === 7
       ) {
 
         finalLock.classList.remove(
@@ -1071,6 +1358,7 @@
                   class="option-button"
                   type="button"
                   data-answer="${index}">
+
                   ${answer}
                 </button>
               `;
@@ -1245,6 +1533,352 @@
         );
     }
 
+    function wrapCanvasText(
+      ctx,
+      text,
+      x,
+      y,
+      maxWidth,
+      lineHeight
+    ) {
+
+      const words =
+        text.split(" ");
+
+      let line = "";
+      let currentY = y;
+
+      words.forEach(
+        function(word) {
+
+          const testLine =
+            line + word + " ";
+
+          const width =
+            ctx.measureText(
+              testLine
+            ).width;
+
+          if (
+            width > maxWidth &&
+            line !== ""
+          ) {
+
+            ctx.fillText(
+              line.trim(),
+              x,
+              currentY
+            );
+
+            line =
+              word + " ";
+
+            currentY +=
+              lineHeight;
+
+          } else {
+
+            line =
+              testLine;
+          }
+        }
+      );
+
+      ctx.fillText(
+        line.trim(),
+        x,
+        currentY
+      );
+
+      return currentY;
+    }
+
+    function downloadAchievementBadge() {
+
+      const nameInput =
+        document.getElementById(
+          "badge-name"
+        );
+
+      const badgeStatus =
+        document.getElementById(
+          "badge-status"
+        );
+
+      const studentName =
+        nameInput.value.trim();
+
+      if (!studentName) {
+
+        badgeStatus.textContent =
+          "Please enter your name before downloading your badge.";
+
+        nameInput.focus();
+
+        return;
+      }
+
+      const canvas =
+        document.createElement(
+          "canvas"
+        );
+
+      canvas.width = 1200;
+      canvas.height = 1200;
+
+      const ctx =
+        canvas.getContext(
+          "2d"
+        );
+
+      ctx.fillStyle =
+        "#edf8ef";
+
+      ctx.fillRect(
+        0,
+        0,
+        1200,
+        1200
+      );
+
+      ctx.strokeStyle =
+        "#315f40";
+
+      ctx.lineWidth = 32;
+
+      ctx.strokeRect(
+        38,
+        38,
+        1124,
+        1124
+      );
+
+      ctx.strokeStyle =
+        "#2f6fa5";
+
+      ctx.lineWidth = 12;
+
+      ctx.strokeRect(
+        72,
+        72,
+        1056,
+        1056
+      );
+
+      ctx.beginPath();
+
+      ctx.arc(
+        600,
+        310,
+        150,
+        0,
+        Math.PI * 2
+      );
+
+      ctx.fillStyle =
+        "#163a59";
+
+      ctx.fill();
+
+      ctx.strokeStyle =
+        "#c6a34f";
+
+      ctx.lineWidth = 14;
+
+      ctx.stroke();
+
+      ctx.fillStyle =
+        "#ffffff";
+
+      ctx.font =
+        "bold 150px Georgia";
+
+      ctx.textAlign =
+        "center";
+
+      ctx.textBaseline =
+        "middle";
+
+      ctx.fillText(
+        "Ψ",
+        600,
+        310
+      );
+
+      ctx.textBaseline =
+        "alphabetic";
+
+      ctx.fillStyle =
+        "#163a59";
+
+      ctx.font =
+        "bold 42px Arial";
+
+      ctx.fillText(
+        "PSYCHOLOGY ACADEMY",
+        600,
+        125
+      );
+
+      ctx.fillStyle =
+        "#315f40";
+
+      ctx.font =
+        "bold 58px Georgia";
+
+      ctx.fillText(
+        "RESEARCH INVESTIGATOR",
+        600,
+        535
+      );
+
+      ctx.fillStyle =
+        "#1f2933";
+
+      ctx.font =
+        "32px Arial";
+
+      ctx.fillText(
+        "Achievement Unlocked",
+        600,
+        590
+      );
+
+      ctx.font =
+        "28px Arial";
+
+      ctx.fillText(
+        "Awarded to",
+        600,
+        665
+      );
+
+      ctx.fillStyle =
+        "#163a59";
+
+      ctx.font =
+        "bold 44px Georgia";
+
+      wrapCanvasText(
+        ctx,
+        studentName,
+        600,
+        725,
+        900,
+        54
+      );
+
+      ctx.fillStyle =
+        "#1f2933";
+
+      ctx.font =
+        "28px Arial";
+
+      ctx.fillText(
+        "For successfully completing",
+        600,
+        810
+      );
+
+      ctx.font =
+        "bold 32px Arial";
+
+      ctx.fillText(
+        "Week 2: The Research Conservatory",
+        600,
+        860
+      );
+
+      ctx.font =
+        "25px Arial";
+
+      ctx.fillText(
+        "Psychological Research",
+        600,
+        910
+      );
+
+      const completionDate =
+        new Date().toLocaleDateString(
+          "en-US",
+          {
+            year: "numeric",
+            month: "long",
+            day: "numeric"
+          }
+        );
+
+      ctx.font =
+        "24px Arial";
+
+      ctx.fillText(
+        "Completed " +
+        completionDate,
+        600,
+        965
+      );
+
+      ctx.font =
+        "22px Arial";
+
+      ctx.fillText(
+        "Verification phrase: Strong claims require strong evidence.",
+        600,
+        1020
+      );
+
+      ctx.font =
+        "bold 24px Georgia";
+
+      ctx.fillStyle =
+        "#315f40";
+
+      ctx.fillText(
+        "Dr. Tonya Holdaway",
+        600,
+        1080
+      );
+
+      const safeName =
+        studentName
+          .replace(
+            /[^a-z0-9]/gi,
+            "-"
+          )
+          .replace(
+            /-+/g,
+            "-"
+          );
+
+      const downloadLink =
+        document.createElement(
+          "a"
+        );
+
+      downloadLink.download =
+        "Psychology-Academy-Week-2-Research-Investigator-" +
+        safeName +
+        ".png";
+
+      downloadLink.href =
+        canvas.toDataURL(
+          "image/png"
+        );
+
+      document.body.appendChild(
+        downloadLink
+      );
+
+      downloadLink.click();
+
+      document.body.removeChild(
+        downloadLink
+      );
+
+      badgeStatus.textContent =
+        "Your Research Investigator badge has been created. Check your Downloads folder.";
+    }
+
     function configureLock() {
 
       document
@@ -1297,9 +1931,53 @@
                       Your Week 2 mission has been recorded as complete.
                     </p>
 
-                    <p>
+                    <div
+                      class="badge-maker"
+                      aria-labelledby="badge-maker-heading">
+
+                      <h3 id="badge-maker-heading">
+                        Achievement Unlocked: Research Investigator
+                      </h3>
+
+                      <p>
+                        You successfully completed the Research Conservatory.
+                        Enter your name below to create a personalized PNG badge
+                        that you can save, submit, or email to your instructor.
+                      </p>
+
+                      <label for="badge-name">
+                        Name to appear on your badge
+                      </label>
+
+                      <input
+                        id="badge-name"
+                        class="badge-name-input"
+                        type="text"
+                        maxlength="60"
+                        autocomplete="name">
+
+                      <br>
+
+                      <button
+                        id="download-badge-button"
+                        class="badge-download-button"
+                        type="button">
+
+                        Download My Research Investigator Badge
+                      </button>
+
+                      <p
+                        id="badge-status"
+                        class="badge-status"
+                        role="status"
+                        aria-live="polite">
+                      </p>
+
+                    </div>
+
+                    <p style="margin-top: 22px;">
                       Return to Psychology Academy to view your completed
-                      mission status and earned badge.
+                      mission status and badge shelf.
                     </p>
 
                     <a
@@ -1309,6 +1987,15 @@
                       Return to Psychology Academy
                     </a>
                   `;
+
+                  document
+                    .getElementById(
+                      "download-badge-button"
+                    )
+                    .addEventListener(
+                      "click",
+                      downloadAchievementBadge
+                    );
 
                 } else {
 
@@ -1366,6 +2053,7 @@
               )
               .forEach(
                 function(textarea) {
+
                   textarea.value = "";
                 }
               );
@@ -1406,8 +2094,11 @@
         );
 
       configureNotebook();
+
       configureLock();
+
       configureReset();
+
       updateDashboard();
     }
 
