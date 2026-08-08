@@ -2,62 +2,1329 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Week 1 Mission: The Psychology Museum</title>
-  <link rel="stylesheet" href="../style.css">
-  <script src="../app.js" defer></script>
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0">
+
+  <title>Week 1 Psychology Museum</title>
+
+  <style>
+    :root {
+      --navy: #163a59;
+      --blue: #2f6fa5;
+      --light-blue: #eaf4fb;
+      --green: #315f40;
+      --light-green: #eef8f2;
+      --gold: #745500;
+      --light-gold: #fffaf0;
+      --ink: #1f2933;
+      --border: #687b88;
+      --white: #ffffff;
+      --danger: #7b1f1f;
+      --shadow: 0 8px 24px rgba(22, 58, 89, 0.14);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background-color: #f6f8fa;
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.7;
+      font-size: 18px;
+    }
+
+    a {
+      color: #174c74;
+      text-decoration: underline;
+      text-underline-offset: 0.15em;
+    }
+
+    button,
+    textarea {
+      font: inherit;
+    }
+
+    button:focus,
+    textarea:focus,
+    a:focus {
+      outline: 4px solid #111111;
+      outline-offset: 3px;
+    }
+
+    .skip-link {
+      position: absolute;
+      top: -100px;
+      left: 16px;
+      z-index: 1000;
+      background-color: var(--white);
+      color: #111111;
+      border: 3px solid #111111;
+      padding: 10px 14px;
+    }
+
+    .skip-link:focus {
+      top: 16px;
+    }
+
+    .container {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .academy-link {
+      display: inline-block;
+      margin-bottom: 18px;
+      padding: 10px 15px;
+      background-color: var(--white);
+      color: var(--navy);
+      border: 2px solid var(--navy);
+      border-radius: 8px;
+      font-weight: bold;
+      text-decoration: underline;
+    }
+
+    .hero {
+      background-color: var(--light-blue);
+      border-bottom: 5px solid var(--blue);
+      padding: 36px 0 42px;
+    }
+
+    .hero h1 {
+      margin: 0;
+      color: var(--navy);
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      line-height: 1.2;
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      font-weight: bold;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .hero-text {
+      max-width: 780px;
+      margin: 14px 0 0;
+      font-size: 1.1rem;
+    }
+
+    main {
+      padding: 28px 0 44px;
+    }
+
+    h2,
+    h3 {
+      color: var(--navy);
+      line-height: 1.3;
+    }
+
+    .panel {
+      background-color: var(--white);
+      border: 2px solid var(--border);
+      border-left: 8px solid var(--blue);
+      border-radius: 14px;
+      padding: 22px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .mission-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 310px;
+      gap: 22px;
+      align-items: start;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 12px;
+    }
+
+    .exhibit-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 16px;
+    }
+
+    .exhibit-button {
+      width: 100%;
+      min-height: 175px;
+      background-color: var(--white);
+      color: var(--ink);
+      border: 2px solid var(--border);
+      border-left: 8px solid var(--blue);
+      border-radius: 14px;
+      padding: 18px;
+      text-align: left;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+    }
+
+    .exhibit-button:hover {
+      transform: translateY(-2px);
+    }
+
+    .exhibit-button[aria-pressed="true"] {
+      border-left-color: var(--green);
+      background-color: var(--light-green);
+    }
+
+    .exhibit-icon {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 2.2rem;
+    }
+
+    .status-text {
+      display: block;
+      margin-top: 8px;
+      font-weight: bold;
+    }
+
+    .challenge {
+      background-color: var(--white);
+      border: 2px solid var(--border);
+      border-left: 8px solid var(--blue);
+      border-radius: 14px;
+      padding: 22px;
+      margin-top: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .answer-list {
+      display: grid;
+      gap: 12px;
+      margin: 18px 0;
+    }
+
+    .answer-button,
+    .action-button {
+      width: 100%;
+      background-color: var(--white);
+      color: var(--ink);
+      border: 2px solid var(--border);
+      border-radius: 9px;
+      padding: 12px 14px;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .action-button {
+      width: auto;
+      background-color: var(--blue);
+      color: var(--white);
+      border-color: var(--navy);
+      font-weight: bold;
+      text-decoration: underline;
+    }
+
+    .return-button {
+      display: inline-block;
+      background-color: var(--green);
+      color: var(--white);
+      border: 3px solid #173d26;
+      border-radius: 9px;
+      padding: 14px 20px;
+      margin-top: 10px;
+      font-weight: bold;
+      text-decoration: underline;
+    }
+
+    .reset-button {
+      background-color: var(--danger);
+      border-color: #4f1010;
+    }
+
+    .feedback {
+      background-color: #f8fbfd;
+      border: 2px solid var(--border);
+      border-left: 8px solid var(--blue);
+      border-radius: 9px;
+      padding: 16px;
+      margin-top: 16px;
+      color: var(--ink);
+    }
+
+    .feedback.correct {
+      background-color: var(--light-green);
+      border-left-color: var(--green);
+      color: var(--ink);
+    }
+
+    .feedback.correct h3 {
+      color: #214f34;
+    }
+
+    .feedback.incorrect {
+      background-color: #fff2f2;
+      border-left-color: var(--danger);
+      color: var(--ink);
+    }
+
+    progress {
+      width: 100%;
+      height: 22px;
+    }
+
+    .inventory-list,
+    .code-list {
+      padding-left: 22px;
+    }
+
+    label {
+      display: block;
+      margin-top: 14px;
+      font-weight: bold;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 86px;
+      margin-top: 6px;
+      padding: 10px;
+      color: var(--ink);
+      background-color: var(--white);
+      border: 2px solid var(--border);
+      border-radius: 8px;
+    }
+
+    .final-lock {
+      background-color: var(--navy);
+      color: var(--white);
+      border: 3px solid #0d293e;
+      border-radius: 14px;
+      padding: 24px;
+      margin-top: 24px;
+    }
+
+    .final-lock h2 {
+      color: var(--white);
+    }
+
+    .final-lock .feedback {
+      background-color: var(--white);
+      color: var(--ink);
+    }
+
+    .final-lock .feedback.correct {
+      background-color: var(--light-green);
+      color: var(--ink);
+    }
+
+    .final-lock .feedback.correct h3 {
+      color: #214f34;
+    }
+
+    .final-lock .feedback.incorrect {
+      background-color: #fff2f2;
+      color: var(--ink);
+    }
+
+    .lock-grid {
+      display: grid;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .lock-button {
+      background-color: var(--white);
+      color: var(--navy);
+      border: 2px solid #0d293e;
+      border-radius: 9px;
+      padding: 13px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .footer {
+      background-color: var(--white);
+      border-top: 3px solid var(--border);
+      padding: 20px 0;
+    }
+
+    @media (max-width: 850px) {
+      .mission-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: static;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      .exhibit-button:hover {
+        transform: none;
+      }
+    }
+  </style>
 </head>
+
 <body>
-  <a class="skip-link" href="#main-content">Skip to main content</a>
-  <header class="mission-header">
+  <a class="skip-link" href="#main-content">
+    Skip to main content
+  </a>
+
+  <header class="hero">
     <div class="container">
-      <p><a href="../index.html">Return to Psychology Academy</a></p>
-      <p class="eyebrow">Week 1 Mission</p>
-      <h1>The Psychology Museum</h1>
-      <p class="tagline">Six exhibits are locked. Solve each challenge, collect the code characters, and open the final gallery.</p>
+
+      <a class="academy-link" href="../index.html">
+        Return to Psychology Academy
+      </a>
+
+      <p class="eyebrow">
+        Week 1 Psychology Mission
+      </p>
+
+      <h1>
+        The Psychology Museum
+      </h1>
+
+      <p class="hero-text">
+        Six exhibits have been sealed after the museum's historical records
+        disappeared. Solve each psychology challenge, collect six code
+        characters, and unlock the final gallery.
+      </p>
     </div>
   </header>
+
   <main id="main-content" class="container">
-    <section class="panel" aria-labelledby="mission-briefing-heading">
-      <h2 id="mission-briefing-heading">Mission Briefing</h2>
-      <p>The museum's historical records have been scrambled. Investigate each exhibit and answer the psychology question. Correct answers reveal one code character and add an item to your evidence inventory.</p>
-      <p>Progress and notebook entries are saved in the browser you are currently using.</p>
+
+    <section class="panel" aria-labelledby="briefing-heading">
+      <h2 id="briefing-heading">
+        Mission Briefing
+      </h2>
+
+      <p>
+        Select each museum exhibit and answer the question connected to it.
+        Correct answers reveal one code character and add an item to your
+        evidence inventory.
+      </p>
+
+      <p>
+        Your progress and notebook entries are saved automatically in the
+        browser and device you are currently using.
+      </p>
+
+      <p style="margin-bottom: 0;">
+        There is no timer. You may use hints and try each challenge more than once.
+      </p>
     </section>
+
     <div class="mission-layout">
+
       <div>
-        <section aria-labelledby="museum-floor-heading">
-          <h2 id="museum-floor-heading">Museum Exhibits</h2>
-          <div class="object-grid">
-            <button class="object-button" type="button" data-challenge-id="notebook" aria-pressed="false"><span class="object-icon" aria-hidden="true">📓</span><strong>Wundt's Laboratory Notebook</strong><br>Complete the definition of psychology.<br><span class="status-text">Not yet solved</span></button>
-            <button class="object-button" type="button" data-challenge-id="portrait" aria-pressed="false"><span class="object-icon" aria-hidden="true">🖼️</span><strong>The Portrait Marked 1879</strong><br>Identify an early psychology laboratory founder.<br><span class="status-text">Not yet solved</span></button>
-            <button class="object-button" type="button" data-challenge-id="mirror" aria-pressed="false"><span class="object-icon" aria-hidden="true">🪞</span><strong>The Structuralist Mirror</strong><br>Examine the basic elements of conscious experience.<br><span class="status-text">Not yet solved</span></button>
-            <button class="object-button" type="button" data-challenge-id="compass" aria-pressed="false"><span class="object-icon" aria-hidden="true">🧭</span><strong>The Functionalist Compass</strong><br>Determine how behavior supports adaptation.<br><span class="status-text">Not yet solved</span></button>
-            <button class="object-button" type="button" data-challenge-id="lever" aria-pressed="false"><span class="object-icon" aria-hidden="true">📦</span><strong>Skinner's Lever</strong><br>Identify the perspective focused on observable behavior.<br><span class="status-text">Not yet solved</span></button>
-            <button class="object-button" type="button" data-challenge-id="magnifier" aria-pressed="false"><span class="object-icon" aria-hidden="true">🔍</span><strong>The Scientific Magnifying Glass</strong><br>Separate psychological science from opinion.<br><span class="status-text">Not yet solved</span></button>
+
+        <section aria-labelledby="exhibits-heading">
+          <h2 id="exhibits-heading">
+            Museum Exhibits
+          </h2>
+
+          <div class="exhibit-grid">
+
+            <button class="exhibit-button" type="button" data-challenge="notebook" aria-pressed="false">
+              <span class="exhibit-icon" aria-hidden="true">📓</span>
+              <strong>Wundt's Laboratory Notebook</strong>
+              <span>Identify the scientific definition of psychology.</span>
+              <span class="status-text">Not yet solved</span>
+            </button>
+
+            <button class="exhibit-button" type="button" data-challenge="portrait" aria-pressed="false">
+              <span class="exhibit-icon" aria-hidden="true">🖼️</span>
+              <strong>The Portrait Marked 1879</strong>
+              <span>Identify an early psychology laboratory founder.</span>
+              <span class="status-text">Not yet solved</span>
+            </button>
+
+            <button class="exhibit-button" type="button" data-challenge="mirror" aria-pressed="false">
+              <span class="exhibit-icon" aria-hidden="true">🪞</span>
+              <strong>The Structuralist Mirror</strong>
+              <span>Examine the basic elements of conscious experience.</span>
+              <span class="status-text">Not yet solved</span>
+            </button>
+
+            <button class="exhibit-button" type="button" data-challenge="compass" aria-pressed="false">
+              <span class="exhibit-icon" aria-hidden="true">🧭</span>
+              <strong>The Functionalist Compass</strong>
+              <span>Determine how behavior supports adaptation.</span>
+              <span class="status-text">Not yet solved</span>
+            </button>
+
+            <button class="exhibit-button" type="button" data-challenge="lever" aria-pressed="false">
+              <span class="exhibit-icon" aria-hidden="true">📦</span>
+              <strong>Skinner's Lever</strong>
+              <span>Identify the perspective focused on observable behavior.</span>
+              <span class="status-text">Not yet solved</span>
+            </button>
+
+            <button class="exhibit-button" type="button" data-challenge="magnifier" aria-pressed="false">
+              <span class="exhibit-icon" aria-hidden="true">🔍</span>
+              <strong>The Scientific Magnifying Glass</strong>
+              <span>Separate psychological science from personal opinion.</span>
+              <span class="status-text">Not yet solved</span>
+            </button>
+
           </div>
         </section>
-        <div id="challenge-region" tabindex="-1"></div>
-        <section id="final-lock" class="challenge hidden" aria-labelledby="final-lock-heading">
-          <h2 id="final-lock-heading">Final Gallery Lock</h2>
-          <p>Select the code that matches the six characters you collected in exhibit order.</p>
-          <div class="lock-options">
-            <button type="button" data-lock-code="MIND1S">Lock A: MIND1S</button>
-            <button type="button" data-lock-code="MINDS1">Lock B: MINDS1</button>
-            <button type="button" data-lock-code="MENDS1">Lock C: MENDS1</button>
-            <button type="button" data-lock-code="MINDS7">Lock D: MINDS7</button>
+
+        <div id="challenge-area" tabindex="-1"></div>
+
+        <section id="final-lock" class="final-lock hidden" aria-labelledby="lock-heading">
+
+          <h2 id="lock-heading">
+            Final Gallery Lock
+          </h2>
+
+          <p>
+            You have solved all six exhibits. Select the code that matches the
+            six characters you collected in exhibit order.
+          </p>
+
+          <div class="lock-grid">
+
+            <button class="lock-button" type="button" data-code="MIND1S">
+              Lock A: MIND1S
+            </button>
+
+            <button class="lock-button" type="button" data-code="MINDS1">
+              Lock B: MINDS1
+            </button>
+
+            <button class="lock-button" type="button" data-code="MENDS1">
+              Lock C: MENDS1
+            </button>
+
+            <button class="lock-button" type="button" data-code="MINDS7">
+              Lock D: MINDS7
+            </button>
+
           </div>
-          <div id="lock-feedback" class="feedback" role="status" aria-live="polite"></div>
+
+          <div id="lock-feedback" class="feedback" role="status" aria-live="polite">
+            Select the code that matches your investigation log.
+          </div>
         </section>
+
       </div>
+
       <aside class="sidebar" aria-label="Mission tools">
-        <section class="panel" aria-labelledby="progress-heading"><h2 id="progress-heading">Mission Progress</h2><div class="progress-wrap"><progress id="mission-progress" value="0" max="6">0 of 6</progress></div><p id="progress-text">0 of 6 exhibits solved</p></section>
-        <section class="panel" aria-labelledby="inventory-heading"><h2 id="inventory-heading">Evidence Inventory</h2><ul id="inventory-list"><li>No evidence collected yet.</li></ul></section>
-        <section class="panel" aria-labelledby="code-heading"><h2 id="code-heading">Collected Code Characters</h2><ul id="code-list"><li>No code characters collected yet.</li></ul></section>
-        <section class="panel notebook" aria-labelledby="notebook-heading"><h2 id="notebook-heading">Investigation Notebook</h2><label for="note-observation">Observation notes</label><textarea id="note-observation" data-note-key="observation"></textarea><label for="note-code">Possible final code</label><textarea id="note-code" data-note-key="code"></textarea><label for="note-reflection">Reflection ideas</label><textarea id="note-reflection" data-note-key="reflection"></textarea></section>
-        <section class="panel" aria-labelledby="reset-heading"><h2 id="reset-heading">Reset Mission</h2><p>Use this only when you want to erase all saved Week 1 progress and notes.</p><button class="danger" type="button" id="reset-progress">Reset Week 1 Progress</button></section>
+
+        <section class="panel" aria-labelledby="progress-heading">
+          <h2 id="progress-heading">
+            Mission Progress
+          </h2>
+
+          <progress id="progress-bar" value="0" max="6">
+            0 of 6 exhibits solved
+          </progress>
+
+          <p id="progress-text">
+            0 of 6 exhibits solved
+          </p>
+        </section>
+
+        <section class="panel" aria-labelledby="inventory-heading">
+          <h2 id="inventory-heading">
+            Evidence Inventory
+          </h2>
+
+          <ul id="inventory-list" class="inventory-list">
+            <li>No evidence collected yet.</li>
+          </ul>
+        </section>
+
+        <section class="panel" aria-labelledby="codes-heading">
+          <h2 id="codes-heading">
+            Collected Code Characters
+          </h2>
+
+          <ol id="code-list" class="code-list">
+            <li>No code characters collected yet.</li>
+          </ol>
+        </section>
+
+        <section class="panel" aria-labelledby="notes-heading">
+          <h2 id="notes-heading">
+            Investigation Notebook
+          </h2>
+
+          <label for="observation-notes">
+            Observation notes
+          </label>
+
+          <textarea id="observation-notes" data-note="observations"></textarea>
+
+          <label for="possible-code">
+            Possible final code
+          </label>
+
+          <textarea id="possible-code" data-note="code"></textarea>
+
+          <label for="reflection-notes">
+            Reflection ideas
+          </label>
+
+          <textarea id="reflection-notes" data-note="reflection"></textarea>
+        </section>
+
+        <section class="panel" aria-labelledby="reset-heading">
+          <h2 id="reset-heading">
+            Reset Mission
+          </h2>
+
+          <p>
+            This will erase all saved Week 1 progress and mission completion.
+          </p>
+
+          <button id="reset-button" class="action-button reset-button" type="button">
+            Reset Week 1 Progress
+          </button>
+        </section>
+
       </aside>
+
     </div>
   </main>
-  <footer class="site-footer"><div class="container"><p>Psychology Academy · Week 1 · Dr. Tonya Holdaway</p></div></footer>
+
+  <footer class="footer">
+    <div class="container">
+      <p>
+        Psychology Academy · Week 1 · Dr. Tonya Holdaway
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    const storageKey =
+      "psychologyMuseumWeek1";
+
+    const completionKey =
+      "psychologyAcademyWeek1Complete";
+
+    const challenges = {
+
+      notebook: {
+        title:
+          "Wundt's Laboratory Notebook",
+
+        question:
+          "Which statement best describes psychology?",
+
+        answers: [
+          "The study of dreams and hidden meanings only",
+          "The scientific study of behavior and mental processes",
+          "The study of personality types only"
+        ],
+
+        correct: 1,
+
+        explanation:
+          "Psychology is the scientific study of behavior and mental processes.",
+
+        hint:
+          "Look for the answer that includes both observable behavior and internal mental processes.",
+
+        character:
+          "M",
+
+        evidence:
+          "Wundt Laboratory Note"
+      },
+
+      portrait: {
+        title:
+          "The Portrait Marked 1879",
+
+        question:
+          "Who is most closely associated with establishing an early psychology laboratory in Leipzig in 1879?",
+
+        answers: [
+          "Wilhelm Wundt",
+          "Sigmund Freud",
+          "B. F. Skinner"
+        ],
+
+        correct: 0,
+
+        explanation:
+          "Wilhelm Wundt established a laboratory dedicated to psychological research in Leipzig in 1879.",
+
+        hint:
+          "His last name begins with the letter W.",
+
+        character:
+          "I",
+
+        evidence:
+          "1879 Museum Plaque"
+      },
+
+      mirror: {
+        title:
+          "The Structuralist Mirror",
+
+        question:
+          "Structuralism was primarily interested in:",
+
+        answers: [
+          "How consequences shape voluntary behavior",
+          "The basic elements of conscious experience",
+          "How culture influences group behavior"
+        ],
+
+        correct: 1,
+
+        explanation:
+          "Structuralism attempted to identify the basic elements of conscious experience.",
+
+        hint:
+          "Think about breaking conscious experience into smaller parts.",
+
+        character:
+          "N",
+
+        evidence:
+          "Structuralist Mirror Fragment"
+      },
+
+      compass: {
+        title:
+          "The Functionalist Compass",
+
+        question:
+          "Functionalism focused on:",
+
+        answers: [
+          "How thoughts and behaviors help people adapt",
+          "The interpretation of dreams",
+          "The electrical activity of neurons only"
+        ],
+
+        correct: 0,
+
+        explanation:
+          "Functionalism examined how mental processes and behavior help organisms adapt to their environments.",
+
+        hint:
+          "Ask what purpose a thought or behavior serves.",
+
+        character:
+          "D",
+
+        evidence:
+          "Functionalist Compass"
+      },
+
+      lever: {
+        title:
+          "Skinner's Lever",
+
+        question:
+          "Which perspective emphasizes observable behavior and learning through consequences?",
+
+        answers: [
+          "Behavioral perspective",
+          "Humanistic perspective",
+          "Psychodynamic perspective"
+        ],
+
+        correct: 0,
+
+        explanation:
+          "Behaviorism emphasizes observable behavior and learning through environmental consequences.",
+
+        hint:
+          "Think about reinforcement, punishment, and observable behavior.",
+
+        character:
+          "S",
+
+        evidence:
+          "Behavioral Research Key"
+      },
+
+      magnifier: {
+        title:
+          "The Scientific Magnifying Glass",
+
+        question:
+          "What best separates psychological science from personal opinion?",
+
+        answers: [
+          "Psychological explanations never change",
+          "Psychologists systematically test ideas and evaluate evidence",
+          "Psychologists rely mainly on intuition"
+        ],
+
+        correct: 1,
+
+        explanation:
+          "Psychological science depends on systematic observation, measurement, research, and evidence.",
+
+        hint:
+          "Look for the answer that describes testing and evaluating evidence.",
+
+        character:
+          "1",
+
+        evidence:
+          "Scientific Evidence Lens"
+      }
+    };
+
+    const state = {
+      solved: [],
+      notes: {}
+    };
+
+    function loadProgress() {
+      try {
+        const saved =
+          JSON.parse(
+            localStorage.getItem(
+              storageKey
+            )
+          );
+
+        if (saved && typeof saved === "object") {
+
+          state.solved =
+            Array.isArray(saved.solved)
+              ? saved.solved
+              : [];
+
+          state.notes =
+            saved.notes &&
+            typeof saved.notes === "object"
+              ? saved.notes
+              : {};
+        }
+
+      } catch (error) {
+
+        console.warn(
+          "Saved progress could not be loaded."
+        );
+      }
+    }
+
+    function saveProgress() {
+      localStorage.setItem(
+        storageKey,
+        JSON.stringify(state)
+      );
+    }
+
+    function updateDashboard() {
+
+      const progressBar =
+        document.getElementById(
+          "progress-bar"
+        );
+
+      const progressText =
+        document.getElementById(
+          "progress-text"
+        );
+
+      const inventoryList =
+        document.getElementById(
+          "inventory-list"
+        );
+
+      const codeList =
+        document.getElementById(
+          "code-list"
+        );
+
+      const finalLock =
+        document.getElementById(
+          "final-lock"
+        );
+
+      progressBar.value =
+        state.solved.length;
+
+      progressText.textContent =
+        state.solved.length +
+        " of 6 exhibits solved";
+
+      inventoryList.innerHTML = "";
+      codeList.innerHTML = "";
+
+      if (state.solved.length === 0) {
+
+        inventoryList.innerHTML =
+          "<li>No evidence collected yet.</li>";
+
+        codeList.innerHTML =
+          "<li>No code characters collected yet.</li>";
+
+      } else {
+
+        state.solved.forEach(
+          function(id) {
+
+            const challenge =
+              challenges[id];
+
+            const evidenceItem =
+              document.createElement(
+                "li"
+              );
+
+            evidenceItem.textContent =
+              challenge.evidence;
+
+            inventoryList.appendChild(
+              evidenceItem
+            );
+
+            const codeItem =
+              document.createElement(
+                "li"
+              );
+
+            codeItem.textContent =
+              challenge.title +
+              ": " +
+              challenge.character;
+
+            codeList.appendChild(
+              codeItem
+            );
+          }
+        );
+      }
+
+      document
+        .querySelectorAll(
+          "[data-challenge]"
+        )
+        .forEach(
+          function(button) {
+
+            const id =
+              button.dataset.challenge;
+
+            const solved =
+              state.solved.includes(id);
+
+            button.setAttribute(
+              "aria-pressed",
+              solved
+                ? "true"
+                : "false"
+            );
+
+            const status =
+              button.querySelector(
+                ".status-text"
+              );
+
+            status.textContent =
+              solved
+                ? "Solved"
+                : "Not yet solved";
+          }
+        );
+
+      if (state.solved.length === 6) {
+
+        finalLock.classList.remove(
+          "hidden"
+        );
+
+      } else {
+
+        finalLock.classList.add(
+          "hidden"
+        );
+      }
+    }
+
+    function showChallenge(id) {
+
+      const challenge =
+        challenges[id];
+
+      const challengeArea =
+        document.getElementById(
+          "challenge-area"
+        );
+
+      const answerButtons =
+        challenge.answers
+          .map(
+            function(answer, index) {
+
+              return `
+                <button
+                  class="answer-button"
+                  type="button"
+                  data-answer="${index}">
+                  ${answer}
+                </button>
+              `;
+            }
+          )
+          .join("");
+
+      challengeArea.innerHTML = `
+        <section
+          class="challenge"
+          aria-labelledby="active-challenge-heading">
+
+          <h2 id="active-challenge-heading">
+            ${challenge.title}
+          </h2>
+
+          <p>
+            ${challenge.question}
+          </p>
+
+          <div
+            class="answer-list"
+            aria-label="Answer choices">
+
+            ${answerButtons}
+          </div>
+
+          <button
+            id="hint-button"
+            class="action-button"
+            type="button">
+
+            Show Hint
+          </button>
+
+          <div
+            id="challenge-feedback"
+            class="feedback"
+            role="status"
+            aria-live="polite">
+
+            Choose the best answer.
+          </div>
+
+        </section>
+      `;
+
+      challengeArea
+        .querySelectorAll(
+          "[data-answer]"
+        )
+        .forEach(
+          function(button) {
+
+            button.addEventListener(
+              "click",
+              function() {
+
+                checkAnswer(
+                  id,
+                  Number(
+                    button.dataset.answer
+                  )
+                );
+              }
+            );
+          }
+        );
+
+      document
+        .getElementById(
+          "hint-button"
+        )
+        .addEventListener(
+          "click",
+          function() {
+
+            const feedback =
+              document.getElementById(
+                "challenge-feedback"
+              );
+
+            feedback.className =
+              "feedback";
+
+            feedback.textContent =
+              "Hint: " +
+              challenge.hint;
+          }
+        );
+
+      challengeArea.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    }
+
+    function checkAnswer(
+      id,
+      selectedAnswer
+    ) {
+
+      const challenge =
+        challenges[id];
+
+      const feedback =
+        document.getElementById(
+          "challenge-feedback"
+        );
+
+      if (
+        selectedAnswer ===
+        challenge.correct
+      ) {
+
+        if (
+          !state.solved.includes(id)
+        ) {
+
+          state.solved.push(id);
+
+          saveProgress();
+        }
+
+        feedback.className =
+          "feedback correct";
+
+        feedback.innerHTML =
+          challenge.explanation +
+          "<br><strong>Code character: " +
+          challenge.character +
+          "</strong>";
+
+        updateDashboard();
+
+      } else {
+
+        feedback.className =
+          "feedback incorrect";
+
+        feedback.textContent =
+          "That answer is not correct yet. Review the choices, use the hint, and try again.";
+      }
+    }
+
+    function configureNotebook() {
+
+      document
+        .querySelectorAll(
+          "[data-note]"
+        )
+        .forEach(
+          function(textarea) {
+
+            const noteKey =
+              textarea.dataset.note;
+
+            textarea.value =
+              state.notes[noteKey] || "";
+
+            textarea.addEventListener(
+              "input",
+              function() {
+
+                state.notes[noteKey] =
+                  textarea.value;
+
+                saveProgress();
+              }
+            );
+          }
+        );
+    }
+
+    function configureLock() {
+
+      document
+        .querySelectorAll(
+          "[data-code]"
+        )
+        .forEach(
+          function(button) {
+
+            button.addEventListener(
+              "click",
+              function() {
+
+                const lockFeedback =
+                  document.getElementById(
+                    "lock-feedback"
+                  );
+
+                if (
+                  button.dataset.code ===
+                  "MINDS1"
+                ) {
+
+                  localStorage.setItem(
+                    completionKey,
+                    "true"
+                  );
+
+                  lockFeedback.className =
+                    "feedback correct";
+
+                  lockFeedback.innerHTML = `
+                    <h3>
+                      The Final Gallery Opens
+                    </h3>
+
+                    <p>
+                      You successfully recovered the missing psychology records.
+                    </p>
+
+                    <p>
+                      <strong>
+                        Completion phrase:
+                      </strong>
+                      Evidence unlocks the mind.
+                    </p>
+
+                    <p>
+                      Your Week 1 mission has been recorded as complete.
+                    </p>
+
+                    <p>
+                      Return to Psychology Academy to view your completed
+                      mission status and earned badge.
+                    </p>
+
+                    <a
+                      class="return-button"
+                      href="../index.html">
+
+                      Return to Psychology Academy
+                    </a>
+                  `;
+
+                } else {
+
+                  lockFeedback.className =
+                    "feedback incorrect";
+
+                  lockFeedback.textContent =
+                    "The lock remains closed. Check the order of your six code characters and try again.";
+                }
+              }
+            );
+          }
+        );
+    }
+
+    function configureReset() {
+
+      document
+        .getElementById(
+          "reset-button"
+        )
+        .addEventListener(
+          "click",
+          function() {
+
+            const confirmed =
+              window.confirm(
+                "Reset all Week 1 mission progress, completion status, and notebook entries?"
+              );
+
+            if (!confirmed) {
+              return;
+            }
+
+            localStorage.removeItem(
+              storageKey
+            );
+
+            localStorage.removeItem(
+              completionKey
+            );
+
+            state.solved = [];
+            state.notes = {};
+
+            document
+              .getElementById(
+                "challenge-area"
+              )
+              .innerHTML = "";
+
+            document
+              .querySelectorAll(
+                "[data-note]"
+              )
+              .forEach(
+                function(textarea) {
+                  textarea.value = "";
+                }
+              );
+
+            document
+              .getElementById(
+                "lock-feedback"
+              )
+              .textContent =
+              "Select the code that matches your investigation log.";
+
+            updateDashboard();
+          }
+        );
+    }
+
+    function startMission() {
+
+      loadProgress();
+
+      document
+        .querySelectorAll(
+          "[data-challenge]"
+        )
+        .forEach(
+          function(button) {
+
+            button.addEventListener(
+              "click",
+              function() {
+
+                showChallenge(
+                  button.dataset.challenge
+                );
+              }
+            );
+          }
+        );
+
+      configureNotebook();
+      configureLock();
+      configureReset();
+      updateDashboard();
+    }
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      startMission
+    );
+  </script>
+
 </body>
 </html>
