@@ -232,7 +232,7 @@
     .audio-status {
       margin-top: 12px;
       margin-bottom: 0;
-      color: #ffffff;
+      color: var(--white);
       font-weight: bold;
     }
 
@@ -605,11 +605,15 @@
         Night ambience is currently paused.
       </p>
 
-      <audio id="observatory-audio" loop preload="none">
+      <audio
+        id="observatory-audio"
+        loop
+        preload="metadata">
+
         <source
           src="../assets/audio/freesound_community-night-ambience-17064.mp3"
           type="audio/mpeg">
-        Your browser does not support the audio element.
+
       </audio>
 
     </section>
@@ -1244,10 +1248,6 @@
           .classList.remove(
             "hidden"
           );
-
-        awardAchievement(
-          "Curious Mind: Completed every Observatory investigation."
-        );
       }
     }
 
@@ -1381,7 +1381,7 @@
           </h2>
 
           <p>
-            The sleep-cycle recorder has scrambled a simplified sequence.
+            The sleep cycle recorder has scrambled a simplified sequence.
             Select the stages in this order:
           </p>
 
@@ -1525,7 +1525,7 @@
                 "feedback correct";
 
               feedback.innerHTML =
-                "Sleep-cycle sequence restored. Sleep cycles move through NREM stages and REM repeatedly across the night.<br><strong>Evidence collected: Sleep Cycle Diagram</strong>";
+                "Sleep cycle sequence restored. Sleep cycles move through NREM stages and REM repeatedly across the night.<br><strong>Evidence collected: Sleep Cycle Diagram</strong>";
 
               completeExperience(
                 "stages"
@@ -2161,9 +2161,7 @@
             line + word + " ";
 
           if (
-            ctx.measureText(
-              test
-            ).width > maxWidth &&
+            ctx.measureText(test).width > maxWidth &&
             line !== ""
           ) {
 
@@ -2629,27 +2627,28 @@
 
       playButton.addEventListener(
         "click",
-        function() {
+        async function() {
 
-          audio
-            .play()
-            .then(
-              function() {
+          try {
 
-                playButton.textContent =
-                  "Night Ambience Playing";
+            await audio.play();
 
-                status.textContent =
-                  "Night ambience is playing at a low volume.";
-              }
-            )
-            .catch(
-              function() {
+            playButton.textContent =
+              "Night Ambience Playing";
 
-                status.textContent =
-                  "Your browser could not start the optional ambience. You can continue the mission normally without audio.";
-              }
+            status.textContent =
+              "Night ambience is playing at a low volume.";
+
+          } catch (error) {
+
+            console.error(
+              "Audio playback error:",
+              error
             );
+
+            status.textContent =
+              "Your browser prevented the optional audio from starting. Click Play Night Ambience again, or continue the mission without sound.";
+          }
         }
       );
 
@@ -2664,6 +2663,29 @@
 
           status.textContent =
             "Night ambience is currently paused.";
+        }
+      );
+
+      audio.addEventListener(
+        "play",
+        function() {
+
+          status.textContent =
+            "Night ambience is playing at a low volume.";
+        }
+      );
+
+      audio.addEventListener(
+        "pause",
+        function() {
+
+          if (
+            !audio.ended
+          ) {
+
+            status.textContent =
+              "Night ambience is currently paused.";
+          }
         }
       );
 
@@ -2707,6 +2729,15 @@
       configureAudio();
 
       updateDashboard();
+
+      if (
+        state.completed.length === 6
+      ) {
+
+        awardAchievement(
+          "Curious Mind: Completed every Observatory investigation."
+        );
+      }
     }
 
     document.addEventListener(
