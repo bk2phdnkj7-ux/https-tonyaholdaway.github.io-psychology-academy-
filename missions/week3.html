@@ -190,6 +190,290 @@
       font-size: 1.12rem;
     }
 
+
+    .hero-content {
+      position: relative;
+      z-index: 4;
+    }
+
+    /* =====================================================
+       ANIMATED BRAIN INSTITUTE ATMOSPHERE
+       Decorative only; reduced-motion users receive a static version.
+       ===================================================== */
+
+    .neural-atmosphere {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .neural-grid {
+      position: absolute;
+      inset: 0;
+      opacity: .14;
+      background-image:
+        linear-gradient(rgba(47,111,165,.22) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(47,111,165,.22) 1px, transparent 1px);
+      background-size: 50px 50px;
+    }
+
+    .neural-scan {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: -120px;
+      height: 100px;
+      background:
+        linear-gradient(
+          to bottom,
+          transparent,
+          rgba(255,255,255,.18),
+          rgba(71,127,169,.16),
+          transparent
+        );
+      animation: brain-scan 9s linear infinite;
+    }
+
+    @keyframes brain-scan {
+      from { transform: translateY(0); }
+      to { transform: translateY(760px); }
+    }
+
+    .neuron-sprite {
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      opacity: .34;
+      filter: drop-shadow(0 0 8px rgba(47,111,165,.18));
+      animation: neuron-drift 15s ease-in-out infinite alternate;
+    }
+
+    .neuron-sprite circle {
+      fill: rgba(255,255,255,.78);
+      stroke: #2f6fa5;
+      stroke-width: 3;
+    }
+
+    .neuron-sprite line,
+    .neuron-sprite path {
+      stroke: #2f6fa5;
+      stroke-width: 3;
+      fill: none;
+      stroke-linecap: round;
+    }
+
+    .neuron-1 {
+      left: 3%;
+      top: 48%;
+      animation-duration: 16s;
+    }
+
+    .neuron-2 {
+      right: 7%;
+      top: 18%;
+      width: 145px;
+      height: 145px;
+      animation-duration: 19s;
+      animation-delay: -6s;
+    }
+
+    .neuron-3 {
+      left: 49%;
+      top: 58%;
+      width: 95px;
+      height: 95px;
+      animation-duration: 14s;
+      animation-delay: -4s;
+    }
+
+    @keyframes neuron-drift {
+      0% {
+        transform: translate3d(-10px, 14px, 0) rotate(-4deg);
+      }
+      45% {
+        transform: translate3d(24px, -26px, 0) rotate(5deg);
+      }
+      100% {
+        transform: translate3d(52px, -10px, 0) rotate(-2deg);
+      }
+    }
+
+    .signal-pulse {
+      position: absolute;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background-color: #ffffff;
+      box-shadow:
+        0 0 0 4px rgba(47,111,165,.12),
+        0 0 18px rgba(47,111,165,.55);
+      animation: signal-flight 8s linear infinite;
+    }
+
+    .pulse-1 {
+      left: 8%;
+      top: 28%;
+    }
+
+    .pulse-2 {
+      left: 31%;
+      top: 72%;
+      animation-delay: -3s;
+      animation-duration: 10s;
+    }
+
+    .pulse-3 {
+      left: 68%;
+      top: 46%;
+      animation-delay: -5s;
+      animation-duration: 9s;
+    }
+
+    @keyframes signal-flight {
+      0% {
+        transform: translate(0, 0) scale(.85);
+        opacity: 0;
+      }
+      12% {
+        opacity: .8;
+      }
+      55% {
+        transform: translate(155px, -70px) scale(1.15);
+        opacity: 1;
+      }
+      100% {
+        transform: translate(315px, 12px) scale(.8);
+        opacity: 0;
+      }
+    }
+
+    .brain-system-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 18px;
+      padding: 10px 14px;
+      background-color: rgba(255,255,255,.94);
+      color: var(--navy);
+      border: 2px solid var(--blue);
+      border-radius: 999px;
+      font-weight: bold;
+      box-shadow: var(--shadow);
+    }
+
+    .brain-system-dot {
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      background-color: var(--blue);
+      box-shadow: 0 0 0 0 rgba(47,111,165,.48);
+      animation: brain-system-pulse 2s infinite;
+    }
+
+    @keyframes brain-system-pulse {
+      0% { box-shadow: 0 0 0 0 rgba(47,111,165,.48); }
+      70% { box-shadow: 0 0 0 11px rgba(47,111,165,0); }
+      100% { box-shadow: 0 0 0 0 rgba(47,111,165,0); }
+    }
+
+    /* Instructor voice briefing */
+
+    .instructor-briefing {
+      background:
+        linear-gradient(
+          135deg,
+          #fffdf7,
+          #edf9f7
+        );
+      border: 3px solid var(--green);
+      border-left: 9px solid var(--green);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .instructor-briefing h2 {
+      margin-top: 0;
+      color: var(--navy);
+    }
+
+    .briefing-kicker {
+      margin: 0 0 8px;
+      color: var(--green);
+      font-size: .92rem;
+      font-weight: bold;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+
+    .briefing-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 16px 0 10px;
+    }
+
+    .briefing-button {
+      padding: 11px 16px;
+      background-color: var(--navy);
+      color: var(--white);
+      border: 3px solid var(--navy-dark);
+      border-radius: 9px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .briefing-status {
+      margin: 10px 0 0;
+      color: var(--green);
+      font-weight: bold;
+    }
+
+    .briefing-transcript {
+      margin-top: 16px;
+      padding: 16px;
+      background-color: var(--white);
+      border: 2px solid var(--border);
+      border-left: 7px solid var(--green);
+      border-radius: 10px;
+    }
+
+    .briefing-transcript summary {
+      cursor: pointer;
+      color: var(--navy);
+      font-weight: bold;
+    }
+
+    .crossing-divide {
+      background:
+        linear-gradient(
+          135deg,
+          #eef8f2,
+          #eaf4fb
+        );
+      border: 3px solid var(--blue);
+      border-left: 9px solid var(--blue);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .crossing-divide h2 {
+      margin-top: 0;
+    }
+
+    .field-assignment {
+      margin-top: 16px;
+      padding: 16px;
+      background-color: var(--white);
+      border: 2px solid var(--border);
+      border-radius: 10px;
+    }
+
     main {
       padding: 32px 0 50px;
     }
@@ -646,8 +930,12 @@
       }
 
       .hero::before,
-      .hero::after {
-        animation: none;
+      .hero::after,
+      .neural-scan,
+      .neuron-sprite,
+      .signal-pulse,
+      .brain-system-dot {
+        animation: none !important;
       }
 
       .mission-button:hover {
@@ -664,7 +952,55 @@
   </a>
 
   <header class="hero">
-    <div class="container">
+
+    <div class="neural-atmosphere" aria-hidden="true">
+      <div class="neural-grid"></div>
+      <div class="neural-scan"></div>
+
+      <svg class="neuron-sprite neuron-1" viewBox="0 0 120 120" focusable="false">
+        <circle cx="58" cy="60" r="17"></circle>
+        <line x1="42" y1="52" x2="20" y2="35"></line>
+        <line x1="42" y1="60" x2="13" y2="60"></line>
+        <line x1="44" y1="69" x2="22" y2="87"></line>
+        <line x1="71" y1="50" x2="92" y2="28"></line>
+        <line x1="73" y1="61" x2="109" y2="56"></line>
+        <line x1="70" y1="72" x2="94" y2="95"></line>
+        <line x1="20" y1="35" x2="10" y2="25"></line>
+        <line x1="20" y1="35" x2="12" y2="43"></line>
+        <line x1="94" y1="95" x2="107" y2="106"></line>
+        <line x1="94" y1="95" x2="105" y2="86"></line>
+      </svg>
+
+      <svg class="neuron-sprite neuron-2" viewBox="0 0 120 120" focusable="false">
+        <circle cx="58" cy="60" r="17"></circle>
+        <line x1="42" y1="52" x2="20" y2="35"></line>
+        <line x1="42" y1="60" x2="13" y2="60"></line>
+        <line x1="44" y1="69" x2="22" y2="87"></line>
+        <line x1="71" y1="50" x2="92" y2="28"></line>
+        <line x1="73" y1="61" x2="109" y2="56"></line>
+        <line x1="70" y1="72" x2="94" y2="95"></line>
+        <line x1="20" y1="35" x2="10" y2="25"></line>
+        <line x1="20" y1="35" x2="12" y2="43"></line>
+        <line x1="94" y1="95" x2="107" y2="106"></line>
+        <line x1="94" y1="95" x2="105" y2="86"></line>
+      </svg>
+
+      <svg class="neuron-sprite neuron-3" viewBox="0 0 120 120" focusable="false">
+        <circle cx="58" cy="60" r="17"></circle>
+        <line x1="42" y1="52" x2="20" y2="35"></line>
+        <line x1="42" y1="60" x2="13" y2="60"></line>
+        <line x1="44" y1="69" x2="22" y2="87"></line>
+        <line x1="71" y1="50" x2="92" y2="28"></line>
+        <line x1="73" y1="61" x2="109" y2="56"></line>
+        <line x1="70" y1="72" x2="94" y2="95"></line>
+      </svg>
+
+      <span class="signal-pulse pulse-1"></span>
+      <span class="signal-pulse pulse-2"></span>
+      <span class="signal-pulse pulse-3"></span>
+    </div>
+
+    <div class="container hero-content">
 
       <a class="academy-link" href="../index.html">
         Return to Psychology Academy
@@ -688,6 +1024,14 @@
         is to investigate each laboratory, restore the neural pathways, and
         bring the Institute back online.
       </p>
+
+      <div
+        class="brain-system-status"
+        aria-label="Brain Institute neural systems active">
+
+        <span class="brain-system-dot" aria-hidden="true"></span>
+        Neural Systems Active · Seven Pathways Await Restoration
+      </div>
 
     </div>
   </header>
@@ -713,6 +1057,103 @@
         Each successful mission restores one pathway and reveals one
         character of the Institute recovery code.
       </p>
+
+    </section>
+
+
+    <section
+      class="instructor-briefing"
+      aria-labelledby="instructor-briefing-heading">
+
+      <p class="briefing-kicker">
+        A Message From Your Instructor
+      </p>
+
+      <h2 id="instructor-briefing-heading">
+        🎙️ Week 3 Mission Briefing from Dr. Holdaway
+      </h2>
+
+      <p>
+        Before restoring the Brain Institute, you may listen to a short
+        welcome and mission briefing from your instructor, Dr. Tonya Holdaway.
+      </p>
+
+      <p>
+        This recording is optional. The full transcript is available below,
+        and all essential mission directions are also provided in writing.
+      </p>
+
+      <div class="briefing-controls">
+
+        <button
+          id="play-instructor-briefing"
+          class="briefing-button"
+          type="button">
+
+          ▶ Listen to Dr. Holdaway's Briefing
+        </button>
+
+        <button
+          id="pause-instructor-briefing"
+          class="briefing-button"
+          type="button">
+
+          ⏸ Pause Briefing
+        </button>
+
+      </div>
+
+      <p
+        id="instructor-briefing-status"
+        class="briefing-status"
+        role="status"
+        aria-live="polite">
+
+        Instructor briefing is currently paused.
+      </p>
+
+      <details class="briefing-transcript">
+
+        <summary>
+          Read the transcript of Dr. Holdaway's message
+        </summary>
+
+        <p>
+          Hello students, welcome to Week 3. As you navigate through this
+          activity, I hope that you have a credible connection between
+          biopsychology and neuroscience and understanding how complex our
+          brain and our nervous system is and how that affects our behavior.
+        </p>
+
+        <p>
+          So this activity will help you understand how neurons communicate,
+          how they travel, and the biological processes that shape the way we
+          think, feel, and behave.
+        </p>
+
+        <p>
+          So during this, I want you to explore the interactive resource
+          provided by University of Utah called Crossing the Divide. I've
+          linked that into this activity.
+        </p>
+
+        <p>
+          And just like last week, please take your time moving through each
+          part of the mission. Explore those connections, and this is meant to
+          be a fun activity. So good luck with your Week 3 mission, and I will
+          see you in class soon.
+        </p>
+
+      </details>
+
+      <audio
+        id="instructor-briefing-audio"
+        preload="metadata">
+
+        <source
+          src="../assets/audio/b6f54398-68d0-4d9d-b304-cbea67ca796b.m4a"
+          type="audio/mp4">
+      </audio>
 
     </section>
 
@@ -790,6 +1231,76 @@
         The resource opens in a new browser tab. Return to the Brain Institute
         when you are ready to continue the mission.
       </p>
+
+    </section>
+
+    <section
+      class="crossing-divide"
+      aria-labelledby="crossing-heading">
+
+      <p class="eyebrow">
+        Neuroscience Field Assignment
+      </p>
+
+      <h2 id="crossing-heading">
+        ⚡ Crossing the Divide: How Neurons Talk to Each Other
+      </h2>
+
+      <p>
+        The Brain Institute has identified a communication failure at the
+        synapse. To prepare for the Signal Transmission Chamber, explore
+        <em>Crossing the Divide</em> from the University of Utah
+        Learn.Genetics program.
+      </p>
+
+      <p>
+        This animated neuroscience tutorial focuses on how neurons communicate
+        with one another. As you explore, pay attention to what happens when a
+        signal reaches the end of one neuron and information must cross the
+        space between cells.
+      </p>
+
+      <a
+        class="resource-button"
+        href="https://learn.genetics.utah.edu/content/neuroscience/crossingdivide/"
+        target="_blank"
+        rel="noopener">
+
+        Launch Crossing the Divide →
+      </a>
+
+      <div class="field-assignment">
+
+        <h3>
+          Bring This Evidence Back to the Brain Institute
+        </h3>
+
+        <p>
+          As you work through the tutorial, keep these questions in mind:
+        </p>
+
+        <ul>
+          <li>
+            What parts of neural communication involve electrical signaling?
+          </li>
+          <li>
+            What happens at the synapse between neurons?
+          </li>
+          <li>
+            Why are neurotransmitters important for communication between cells?
+          </li>
+          <li>
+            How does this process help explain the connection between the nervous
+            system and behavior?
+          </li>
+        </ul>
+
+        <p style="margin-bottom: 0;">
+          The resource opens in a new tab. Return here when you are ready to
+          continue into the Signal Transmission Chamber.
+        </p>
+
+      </div>
 
     </section>
 
@@ -1199,6 +1710,78 @@
   </footer>
 
   <script>
+
+    /* ==================================================
+       DR. HOLDAWAY'S OPTIONAL WEEK 3 MISSION BRIEFING
+       ================================================== */
+
+    const instructorBriefingAudio =
+      document.getElementById(
+        "instructor-briefing-audio"
+      );
+
+    const playInstructorBriefing =
+      document.getElementById(
+        "play-instructor-briefing"
+      );
+
+    const pauseInstructorBriefing =
+      document.getElementById(
+        "pause-instructor-briefing"
+      );
+
+    const instructorBriefingStatus =
+      document.getElementById(
+        "instructor-briefing-status"
+      );
+
+    playInstructorBriefing.addEventListener(
+      "click",
+      async function() {
+
+        try {
+
+          await instructorBriefingAudio.play();
+
+          playInstructorBriefing.textContent =
+            "🎙️ Dr. Holdaway's Briefing Is Playing";
+
+          instructorBriefingStatus.textContent =
+            "You are listening to a message from Dr. Holdaway, your instructor.";
+
+        } catch (error) {
+
+          instructorBriefingStatus.textContent =
+            "Your browser could not begin the instructor briefing. You may read the transcript and continue the mission normally.";
+        }
+      }
+    );
+
+    pauseInstructorBriefing.addEventListener(
+      "click",
+      function() {
+
+        instructorBriefingAudio.pause();
+
+        playInstructorBriefing.textContent =
+          "▶ Listen to Dr. Holdaway's Briefing";
+
+        instructorBriefingStatus.textContent =
+          "Instructor briefing is currently paused.";
+      }
+    );
+
+    instructorBriefingAudio.addEventListener(
+      "ended",
+      function() {
+
+        playInstructorBriefing.textContent =
+          "▶ Listen to Dr. Holdaway's Briefing";
+
+        instructorBriefingStatus.textContent =
+          "Mission briefing complete. The Brain Institute is ready for you.";
+      }
+    );
 
     const storageKey =
       "psychologyBrainWeek3";
