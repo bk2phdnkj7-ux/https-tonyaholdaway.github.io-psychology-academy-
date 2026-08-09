@@ -148,6 +148,195 @@
       font-size: 1.15rem;
     }
 
+
+    .hero-content {
+      position: relative;
+      z-index: 3;
+    }
+
+    .research-atmosphere {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .research-grid {
+      position: absolute;
+      inset: 0;
+      opacity: 0.16;
+      background-image:
+        linear-gradient(rgba(22,58,89,.22) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(22,58,89,.22) 1px, transparent 1px);
+      background-size: 46px 46px;
+    }
+
+    .research-scan {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: -120px;
+      height: 100px;
+      background:
+        linear-gradient(
+          to bottom,
+          transparent,
+          rgba(255,255,255,.18),
+          rgba(72,145,125,.14),
+          transparent
+        );
+      animation: research-scan 10s linear infinite;
+    }
+
+    @keyframes research-scan {
+      from { transform: translateY(0); }
+      to { transform: translateY(760px); }
+    }
+
+    .research-orb {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: rgba(255,255,255,.72);
+      box-shadow: 0 0 18px rgba(255,255,255,.55);
+      animation: float-orb 12s linear infinite;
+    }
+
+    .research-orb:nth-of-type(1) { left: 8%;  top: 74%; animation-duration: 14s; }
+    .research-orb:nth-of-type(2) { left: 18%; top: 30%; animation-duration: 11s; animation-delay: -3s; }
+    .research-orb:nth-of-type(3) { left: 34%; top: 66%; animation-duration: 16s; animation-delay: -7s; }
+    .research-orb:nth-of-type(4) { left: 51%; top: 22%; animation-duration: 13s; animation-delay: -5s; }
+    .research-orb:nth-of-type(5) { left: 67%; top: 72%; animation-duration: 15s; animation-delay: -8s; }
+    .research-orb:nth-of-type(6) { left: 82%; top: 34%; animation-duration: 12s; animation-delay: -4s; }
+    .research-orb:nth-of-type(7) { left: 91%; top: 64%; animation-duration: 17s; animation-delay: -10s; }
+
+    @keyframes float-orb {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: .16;
+      }
+      35% {
+        opacity: .72;
+      }
+      70% {
+        opacity: .34;
+      }
+      100% {
+        transform: translateY(-185px) scale(1.28);
+        opacity: 0;
+      }
+    }
+
+    .research-vine {
+      position: absolute;
+      bottom: 6%;
+      font-size: 3rem;
+      opacity: .28;
+      transform-origin: bottom center;
+      animation: vine-sway 6s ease-in-out infinite alternate;
+    }
+
+    .research-vine.left { left: 2%; }
+    .research-vine.right { right: 2%; animation-delay: -2s; }
+
+    @keyframes vine-sway {
+      from { transform: rotate(-4deg); }
+      to { transform: rotate(5deg); }
+    }
+
+    .system-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 18px;
+      padding: 10px 14px;
+      background-color: rgba(255,255,255,.94);
+      color: var(--green);
+      border: 2px solid var(--green);
+      border-radius: 999px;
+      font-weight: bold;
+      box-shadow: var(--shadow);
+    }
+
+    .system-dot {
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      background-color: #2b7b4d;
+      box-shadow: 0 0 0 0 rgba(43,123,77,.45);
+      animation: system-pulse 2s infinite;
+    }
+
+    @keyframes system-pulse {
+      0% { box-shadow: 0 0 0 0 rgba(43,123,77,.5); }
+      70% { box-shadow: 0 0 0 11px rgba(43,123,77,0); }
+      100% { box-shadow: 0 0 0 0 rgba(43,123,77,0); }
+    }
+
+    .soundscape-wrap {
+      position: relative;
+      z-index: 5;
+      margin-top: -18px;
+      margin-bottom: 28px;
+    }
+
+    .soundscape {
+      background:
+        linear-gradient(
+          135deg,
+          #153f48,
+          #163a59
+        );
+      color: var(--white);
+      border: 4px solid #c6a34f;
+      border-radius: 18px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .soundscape h2 {
+      margin-top: 0;
+      color: var(--white);
+    }
+
+    .sound-controls {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin: 16px 0 12px;
+    }
+
+    .sound-button {
+      padding: 11px 16px;
+      background-color: var(--white);
+      color: var(--navy);
+      border: 3px solid #c6a34f;
+      border-radius: 9px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .volume-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .volume-row input {
+      width: min(240px, 70vw);
+    }
+
+    .audio-status {
+      margin-bottom: 0;
+      font-weight: bold;
+    }
+
     main {
       padding: 32px 0 48px;
     }
@@ -502,6 +691,13 @@
       .station-button:hover {
         transform: none;
       }
+
+      .research-scan,
+      .research-orb,
+      .research-vine,
+      .system-dot {
+        animation: none !important;
+      }
     }
   </style>
 </head>
@@ -514,7 +710,21 @@
 
   <header class="hero">
 
-    <div class="container">
+    <div class="research-atmosphere" aria-hidden="true">
+      <div class="research-grid"></div>
+      <div class="research-scan"></div>
+      <span class="research-orb"></span>
+      <span class="research-orb"></span>
+      <span class="research-orb"></span>
+      <span class="research-orb"></span>
+      <span class="research-orb"></span>
+      <span class="research-orb"></span>
+      <span class="research-orb"></span>
+      <span class="research-vine left">🌿</span>
+      <span class="research-vine right">🍃</span>
+    </div>
+
+    <div class="container hero-content">
 
       <a class="academy-link" href="../index.html">
         Return to Psychology Academy
@@ -535,9 +745,91 @@
         determine what the research actually supports.
       </p>
 
+      <div
+        class="system-status"
+        aria-label="Research systems online">
+
+        <span class="system-dot" aria-hidden="true"></span>
+        Research Systems Online · Evidence Stations Ready
+      </div>
+
     </div>
 
   </header>
+
+
+  <div class="soundscape-wrap">
+    <div class="container">
+
+      <section
+        class="soundscape"
+        aria-labelledby="soundscape-heading">
+
+        <h2 id="soundscape-heading">
+          ✨ Conservatory Discovery Soundscape
+        </h2>
+
+        <p>
+          Turn on the optional mystical instrumental soundtrack while you
+          investigate the Research Conservatory. Audio never begins automatically.
+        </p>
+
+        <div class="sound-controls">
+
+          <button
+            id="play-research-audio"
+            class="sound-button"
+            type="button">
+
+            ▶ Play Discovery Music
+          </button>
+
+          <button
+            id="pause-research-audio"
+            class="sound-button"
+            type="button">
+
+            ⏸ Pause Music
+          </button>
+
+        </div>
+
+        <div class="volume-row">
+          <label for="research-volume">Volume</label>
+
+          <input
+            id="research-volume"
+            type="range"
+            min="0"
+            max="1"
+            step="0.05"
+            value="0.20"
+            aria-label="Research Conservatory soundtrack volume">
+        </div>
+
+        <p
+          id="research-audio-status"
+          class="audio-status"
+          role="status"
+          aria-live="polite">
+
+          Discovery music is currently paused.
+        </p>
+
+        <audio
+          id="research-audio"
+          loop
+          preload="metadata">
+
+          <source
+            src="../assets/audio/freesound_community-mystical-music-54294.mp3"
+            type="audio/mpeg">
+        </audio>
+
+      </section>
+
+    </div>
+  </div>
 
   <main id="main-content" class="container">
 
@@ -949,6 +1241,82 @@
   </footer>
 
   <script>
+
+    /* Optional Research Conservatory soundtrack */
+
+    const researchAudio =
+      document.getElementById(
+        "research-audio"
+      );
+
+    const playResearchAudio =
+      document.getElementById(
+        "play-research-audio"
+      );
+
+    const pauseResearchAudio =
+      document.getElementById(
+        "pause-research-audio"
+      );
+
+    const researchVolume =
+      document.getElementById(
+        "research-volume"
+      );
+
+    const researchAudioStatus =
+      document.getElementById(
+        "research-audio-status"
+      );
+
+    researchAudio.volume = 0.20;
+
+    playResearchAudio.addEventListener(
+      "click",
+      async function() {
+
+        try {
+
+          await researchAudio.play();
+
+          playResearchAudio.textContent =
+            "♪ Discovery Music Playing";
+
+          researchAudioStatus.textContent =
+            "The Conservatory discovery soundtrack is playing.";
+
+        } catch (error) {
+
+          researchAudioStatus.textContent =
+            "Your browser could not begin the optional soundtrack. You can continue the mission normally without audio.";
+        }
+      }
+    );
+
+    pauseResearchAudio.addEventListener(
+      "click",
+      function() {
+
+        researchAudio.pause();
+
+        playResearchAudio.textContent =
+          "▶ Play Discovery Music";
+
+        researchAudioStatus.textContent =
+          "Discovery music is currently paused.";
+      }
+    );
+
+    researchVolume.addEventListener(
+      "input",
+      function() {
+
+        researchAudio.volume =
+          Number(
+            researchVolume.value
+          );
+      }
+    );
 
     const storageKey =
       "psychologyResearchWeek2";
