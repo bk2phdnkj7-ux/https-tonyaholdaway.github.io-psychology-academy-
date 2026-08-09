@@ -356,6 +356,36 @@
       border-left-color: var(--red);
     }
 
+    /* Guided next-investigation navigation */
+    .next-step-wrap {
+      margin-top: 18px;
+      padding-top: 16px;
+      border-top: 2px solid rgba(97, 116, 134, 0.35);
+    }
+
+    .next-step-label {
+      margin: 0 0 10px;
+      font-weight: bold;
+      color: var(--night);
+    }
+
+    .next-step-button {
+      width: 100%;
+      padding: 14px 18px;
+      background-color: var(--green);
+      color: var(--white);
+      border: 3px solid #173d26;
+      border-radius: 10px;
+      font-weight: bold;
+      text-align: center;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    .next-step-button:hover {
+      background-color: #214f34;
+    }
+
     .video-wrapper {
       position: relative;
       width: 100%;
@@ -1001,6 +1031,16 @@
       sequence: []
     };
 
+
+    const experienceOrder = [
+      "clock",
+      "stages",
+      "video",
+      "student",
+      "dream",
+      "clinic"
+    ];
+
     const evidenceMap = {
       clock:
         "Circadian Timing Report",
@@ -1073,6 +1113,229 @@
         JSON.stringify(state)
       );
     }
+
+    function getNextIncompleteExperience(currentId) {
+
+      const currentIndex =
+        experienceOrder.indexOf(currentId);
+
+      for (
+        let i = currentIndex + 1;
+        i < experienceOrder.length;
+        i++
+      ) {
+
+        if (
+          !state.completed.includes(
+            experienceOrder[i]
+          )
+        ) {
+
+          return experienceOrder[i];
+        }
+      }
+
+      for (
+        let i = 0;
+        i < currentIndex;
+        i++
+      ) {
+
+        if (
+          !state.completed.includes(
+            experienceOrder[i]
+          )
+        ) {
+
+          return experienceOrder[i];
+        }
+      }
+
+      return null;
+    }
+
+
+    function getExperienceTitle(id) {
+
+      const button =
+        document.querySelector(
+          '[data-experience="' + id + '"]'
+        );
+
+      if (!button) {
+        return "the next investigation";
+      }
+
+      const title =
+        button.querySelector(
+          ".experience-title"
+        );
+
+      return title
+        ? title.textContent.trim()
+        : "the next investigation";
+    }
+
+
+    function moveToNextExperience(currentId) {
+
+      const nextId =
+        getNextIncompleteExperience(currentId);
+
+      if (nextId) {
+
+        showExperience(nextId);
+
+        window.setTimeout(
+          function() {
+
+            const heading =
+              document.querySelector(
+                "#active-area h2"
+              );
+
+            if (heading) {
+
+              heading.setAttribute(
+                "tabindex",
+                "-1"
+              );
+
+              heading.focus({
+                preventScroll: true
+              });
+            }
+          },
+          350
+        );
+
+        return;
+      }
+
+      const finalCase =
+        document.getElementById(
+          "final-case"
+        );
+
+      finalCase.classList.remove(
+        "hidden"
+      );
+
+      finalCase.scrollIntoView({
+        behavior:
+          window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+          ).matches
+            ? "auto"
+            : "smooth",
+        block: "start"
+      });
+
+      window.setTimeout(
+        function() {
+
+          const finalHeading =
+            document.getElementById(
+              "final-heading"
+            );
+
+          if (finalHeading) {
+
+            finalHeading.setAttribute(
+              "tabindex",
+              "-1"
+            );
+
+            finalHeading.focus({
+              preventScroll: true
+            });
+          }
+        },
+        350
+      );
+    }
+
+
+    function addNextStep(feedback, currentId) {
+
+      if (!feedback) {
+        return;
+      }
+
+      const oldNextStep =
+        feedback.querySelector(
+          ".next-step-wrap"
+        );
+
+      if (oldNextStep) {
+        oldNextStep.remove();
+      }
+
+      const nextId =
+        getNextIncompleteExperience(currentId);
+
+      const wrapper =
+        document.createElement(
+          "div"
+        );
+
+      wrapper.className =
+        "next-step-wrap";
+
+      const label =
+        document.createElement(
+          "p"
+        );
+
+      label.className =
+        "next-step-label";
+
+      label.textContent =
+        nextId
+          ? "Investigation complete. Your next Observatory investigation is ready."
+          : "All six Observatory investigations are complete. Your final case is ready.";
+
+      const button =
+        document.createElement(
+          "button"
+        );
+
+      button.type =
+        "button";
+
+      button.className =
+        "next-step-button";
+
+      button.textContent =
+        nextId
+          ? "Continue to " +
+            getExperienceTitle(nextId) +
+            " →"
+          : "Proceed to Final Case: Observatory Report 04 →";
+
+      button.addEventListener(
+        "click",
+        function() {
+
+          moveToNextExperience(
+            currentId
+          );
+        }
+      );
+
+      wrapper.appendChild(
+        label
+      );
+
+      wrapper.appendChild(
+        button
+      );
+
+      feedback.appendChild(
+        wrapper
+      );
+    }
+
 
     function completeExperience(id) {
 
@@ -1346,6 +1609,11 @@
                     "clock"
                   );
 
+                  addNextStep(
+                    feedback,
+                    "clock"
+                  );
+
                 } else {
 
                   feedback.className =
@@ -1360,7 +1628,13 @@
         );
 
       active.scrollIntoView({
-        behavior: "smooth"
+        behavior:
+          window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+          ).matches
+            ? "auto"
+            : "smooth",
+        block: "start"
       });
     }
 
@@ -1531,6 +1805,11 @@
                 "stages"
               );
 
+                  addNextStep(
+                    feedback,
+                    "stages"
+                  );
+
             } else {
 
               feedback.className =
@@ -1572,7 +1851,13 @@
         );
 
       active.scrollIntoView({
-        behavior: "smooth"
+        behavior:
+          window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+          ).matches
+            ? "auto"
+            : "smooth",
+        block: "start"
       });
     }
 
@@ -1678,6 +1963,11 @@
                     "video"
                   );
 
+                  addNextStep(
+                    feedback,
+                    "video"
+                  );
+
                 } else {
 
                   feedback.className =
@@ -1692,7 +1982,13 @@
         );
 
       active.scrollIntoView({
-        behavior: "smooth"
+        behavior:
+          window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+          ).matches
+            ? "auto"
+            : "smooth",
+        block: "start"
       });
     }
 
@@ -1832,6 +2128,11 @@
                           "student"
                         );
 
+                  addNextStep(
+                    feedback,
+                    "student"
+                  );
+
                         awardAchievement(
                           "Persistent Scientist: Revised an explanation using new evidence."
                         );
@@ -1852,7 +2153,13 @@
         );
 
       active.scrollIntoView({
-        behavior: "smooth"
+        behavior:
+          window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+          ).matches
+            ? "auto"
+            : "smooth",
+        block: "start"
       });
     }
 
@@ -1952,6 +2259,11 @@
                     "dream"
                   );
 
+                  addNextStep(
+                    feedback,
+                    "dream"
+                  );
+
                 } else {
 
                   feedback.className =
@@ -1966,7 +2278,13 @@
         );
 
       active.scrollIntoView({
-        behavior: "smooth"
+        behavior:
+          window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+          ).matches
+            ? "auto"
+            : "smooth",
+        block: "start"
       });
     }
 
@@ -2065,6 +2383,11 @@
                     "clinic"
                   );
 
+                  addNextStep(
+                    feedback,
+                    "clinic"
+                  );
+
                 } else {
 
                   feedback.className =
@@ -2079,7 +2402,13 @@
         );
 
       active.scrollIntoView({
-        behavior: "smooth"
+        behavior:
+          window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+          ).matches
+            ? "auto"
+            : "smooth",
+        block: "start"
       });
     }
 
