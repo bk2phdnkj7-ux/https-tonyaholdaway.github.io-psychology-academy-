@@ -377,6 +377,36 @@
       border-left-color: var(--red);
     }
 
+    /* Guided next-exhibit navigation */
+    .next-step-wrap {
+      margin-top: 18px;
+      padding-top: 16px;
+      border-top: 2px solid rgba(97, 116, 134, 0.35);
+    }
+
+    .next-step-label {
+      margin: 0 0 10px;
+      font-weight: bold;
+      color: var(--navy);
+    }
+
+    .next-step-button {
+      width: 100%;
+      padding: 14px 18px;
+      background-color: var(--green);
+      color: var(--white);
+      border: 3px solid #173d26;
+      border-radius: 10px;
+      font-weight: bold;
+      text-align: center;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    .next-step-button:hover {
+      background-color: #214f34;
+    }
+
     .threshold-zone {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
@@ -1110,6 +1140,17 @@
       notes: {}
     };
 
+
+    const experienceOrder = [
+      "entrance",
+      "threshold",
+      "attention",
+      "senses",
+      "gestalt",
+      "video",
+      "five"
+    ];
+
     const evidenceMap = {
       entrance:
         "Sensation and Perception Distinction Card",
@@ -1180,6 +1221,229 @@
       localStorage.setItem(
         storageKey,
         JSON.stringify(state)
+      );
+    }
+
+
+    function getNextIncompleteExperience(currentId) {
+
+      const currentIndex =
+        experienceOrder.indexOf(currentId);
+
+      for (
+        let i = currentIndex + 1;
+        i < experienceOrder.length;
+        i++
+      ) {
+
+        if (
+          !state.completed.includes(
+            experienceOrder[i]
+          )
+        ) {
+
+          return experienceOrder[i];
+        }
+      }
+
+      for (
+        let i = 0;
+        i < currentIndex;
+        i++
+      ) {
+
+        if (
+          !state.completed.includes(
+            experienceOrder[i]
+          )
+        ) {
+
+          return experienceOrder[i];
+        }
+      }
+
+      return null;
+    }
+
+
+    function getExperienceTitle(id) {
+
+      const button =
+        document.querySelector(
+          '[data-experience="' + id + '"]'
+        );
+
+      if (!button) {
+        return "the next exhibit";
+      }
+
+      const title =
+        button.querySelector(
+          ".room-title"
+        );
+
+      return title
+        ? title.textContent.trim()
+        : "the next exhibit";
+    }
+
+
+    function moveToNextExperience(currentId) {
+
+      const nextId =
+        getNextIncompleteExperience(currentId);
+
+      if (nextId) {
+
+        showExperience(nextId);
+
+        window.setTimeout(
+          function() {
+
+            const heading =
+              document.querySelector(
+                "#active-area h2"
+              );
+
+            if (heading) {
+
+              heading.setAttribute(
+                "tabindex",
+                "-1"
+              );
+
+              heading.focus({
+                preventScroll: true
+              });
+            }
+          },
+          350
+        );
+
+        return;
+      }
+
+      const finalCase =
+        document.getElementById(
+          "final-case"
+        );
+
+      finalCase.classList.remove(
+        "hidden"
+      );
+
+      finalCase.scrollIntoView({
+        behavior:
+          window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+          ).matches
+            ? "auto"
+            : "smooth",
+        block: "start"
+      });
+
+      window.setTimeout(
+        function() {
+
+          const finalHeading =
+            document.getElementById(
+              "final-heading"
+            );
+
+          if (finalHeading) {
+
+            finalHeading.setAttribute(
+              "tabindex",
+              "-1"
+            );
+
+            finalHeading.focus({
+              preventScroll: true
+            });
+          }
+        },
+        350
+      );
+    }
+
+
+    function addNextStep(feedback, currentId) {
+
+      if (!feedback) {
+        return;
+      }
+
+      const oldNextStep =
+        feedback.querySelector(
+          ".next-step-wrap"
+        );
+
+      if (oldNextStep) {
+        oldNextStep.remove();
+      }
+
+      const nextId =
+        getNextIncompleteExperience(currentId);
+
+      const wrapper =
+        document.createElement(
+          "div"
+        );
+
+      wrapper.className =
+        "next-step-wrap";
+
+      const label =
+        document.createElement(
+          "p"
+        );
+
+      label.className =
+        "next-step-label";
+
+      label.textContent =
+        nextId
+          ? "Exhibit complete. Your next Gallery room is ready."
+          : "All seven Gallery exhibits are complete. Your final perception mystery is ready.";
+
+      const button =
+        document.createElement(
+          "button"
+        );
+
+      button.type =
+        "button";
+
+      button.className =
+        "next-step-button";
+
+      button.textContent =
+        nextId
+          ? "Continue to " +
+            getExperienceTitle(nextId) +
+            " →"
+          : "Proceed to the Final Perception Mystery →";
+
+      button.addEventListener(
+        "click",
+        function() {
+
+          moveToNextExperience(
+            currentId
+          );
+        }
+      );
+
+      wrapper.appendChild(
+        label
+      );
+
+      wrapper.appendChild(
+        button
+      );
+
+      feedback.appendChild(
+        wrapper
       );
     }
 
@@ -1462,6 +1726,11 @@
                     "entrance"
                   );
 
+                  addNextStep(
+                    feedback,
+                    "entrance"
+                  );
+
                 } else {
 
                   feedback.className =
@@ -1476,7 +1745,13 @@
         );
 
       active.scrollIntoView({
-        behavior: "smooth"
+        behavior:
+          window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+          ).matches
+            ? "auto"
+            : "smooth",
+        block: "start"
       });
     }
 
@@ -1587,13 +1862,24 @@
                 completeExperience(
                   "threshold"
                 );
+
+                  addNextStep(
+                    feedback,
+                    "threshold"
+                  );
               }
             );
           }
         );
 
       active.scrollIntoView({
-        behavior: "smooth"
+        behavior:
+          window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+          ).matches
+            ? "auto"
+            : "smooth",
+        block: "start"
       });
     }
 
@@ -1714,6 +2000,11 @@
                     "attention"
                   );
 
+                  addNextStep(
+                    feedback,
+                    "attention"
+                  );
+
                 } else {
 
                   feedback.className =
@@ -1728,7 +2019,13 @@
         );
 
       active.scrollIntoView({
-        behavior: "smooth"
+        behavior:
+          window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+          ).matches
+            ? "auto"
+            : "smooth",
+        block: "start"
       });
     }
 
@@ -1845,6 +2142,11 @@
                     "senses"
                   );
 
+                  addNextStep(
+                    feedback,
+                    "senses"
+                  );
+
                 } else {
 
                   feedback.className =
@@ -1859,7 +2161,13 @@
         );
 
       active.scrollIntoView({
-        behavior: "smooth"
+        behavior:
+          window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+          ).matches
+            ? "auto"
+            : "smooth",
+        block: "start"
       });
     }
 
@@ -1963,6 +2271,11 @@
                     "gestalt"
                   );
 
+                  addNextStep(
+                    feedback,
+                    "gestalt"
+                  );
+
                 } else {
 
                   feedback.className =
@@ -1977,7 +2290,13 @@
         );
 
       active.scrollIntoView({
-        behavior: "smooth"
+        behavior:
+          window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+          ).matches
+            ? "auto"
+            : "smooth",
+        block: "start"
       });
     }
 
@@ -2080,6 +2399,11 @@
                     "video"
                   );
 
+                  addNextStep(
+                    feedback,
+                    "video"
+                  );
+
                 } else {
 
                   feedback.className =
@@ -2094,7 +2418,13 @@
         );
 
       active.scrollIntoView({
-        behavior: "smooth"
+        behavior:
+          window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+          ).matches
+            ? "auto"
+            : "smooth",
+        block: "start"
       });
     }
 
@@ -2204,6 +2534,11 @@
                     "five"
                   );
 
+                  addNextStep(
+                    feedback,
+                    "five"
+                  );
+
                   awardAchievement(
                     "Beyond Five: Discovered a more complex model of human sensory systems."
                   );
@@ -2222,7 +2557,13 @@
         );
 
       active.scrollIntoView({
-        behavior: "smooth"
+        behavior:
+          window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+          ).matches
+            ? "auto"
+            : "smooth",
+        block: "start"
       });
     }
 
