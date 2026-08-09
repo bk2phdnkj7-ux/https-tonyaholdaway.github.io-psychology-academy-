@@ -875,6 +875,51 @@
     }
 
 
+    .continue-button {
+
+      display: inline-block;
+
+      width: 100%;
+
+      margin-top: 16px;
+
+      padding: 14px 18px;
+
+      background-color: var(--green);
+
+      color: var(--white);
+
+      border: 3px solid #173d26;
+
+      border-radius: 9px;
+
+      font-weight: bold;
+
+      text-align: center;
+
+      text-decoration: underline;
+
+    }
+
+
+    .continue-button:hover {
+
+      background-color: var(--green-dark);
+
+    }
+
+
+    .next-step-note {
+
+      margin-top: 18px;
+
+      padding-top: 16px;
+
+      border-top: 2px solid #9fc6ad;
+
+    }
+
+
     .reset-button {
 
       background-color: var(--danger);
@@ -1872,7 +1917,8 @@
       <section
         id="final-lock"
         class="final-lock hidden"
-        aria-labelledby="lock-heading">
+        aria-labelledby="lock-heading"
+        tabindex="-1">
 
 
         <h2 id="lock-heading">
@@ -3102,13 +3148,148 @@
       );
 
 
+    const scrollBehavior =
+      window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches
+        ? "auto"
+        : "smooth";
+
+
     challengeArea.scrollIntoView({
 
-      behavior: "smooth",
+      behavior: scrollBehavior,
 
       block: "start"
 
     });
+
+
+    window.setTimeout(
+
+      function() {
+
+        challengeArea.focus({
+          preventScroll: true
+        });
+
+      },
+
+      scrollBehavior === "smooth"
+        ? 450
+        : 0
+
+    );
+
+
+  }
+
+
+  function getNextIncompleteChallenge(
+    currentId
+  ) {
+
+
+    const currentIndex =
+      challengeOrder.indexOf(
+        currentId
+      );
+
+
+    const orderedAfterCurrent =
+      challengeOrder
+        .slice(
+          currentIndex + 1
+        )
+        .concat(
+          challengeOrder.slice(
+            0,
+            currentIndex + 1
+          )
+        );
+
+
+    return orderedAfterCurrent.find(
+
+      function(challengeId) {
+
+        return !state.solved.includes(
+          challengeId
+        );
+
+      }
+
+    ) || null;
+
+
+  }
+
+
+  function moveToNextMissionStep(
+    currentId
+  ) {
+
+
+    const nextId =
+      getNextIncompleteChallenge(
+        currentId
+      );
+
+
+    if (
+      nextId
+    ) {
+
+
+      showChallenge(
+        nextId
+      );
+
+
+      return;
+
+
+    }
+
+
+    const finalLock =
+      document.getElementById(
+        "final-lock"
+      );
+
+
+    const scrollBehavior =
+      window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches
+        ? "auto"
+        : "smooth";
+
+
+    finalLock.scrollIntoView({
+
+      behavior: scrollBehavior,
+
+      block: "start"
+
+    });
+
+
+    window.setTimeout(
+
+      function() {
+
+        finalLock.focus({
+          preventScroll: true
+        });
+
+      },
+
+      scrollBehavior === "smooth"
+        ? 450
+        : 0
+
+    );
 
 
   }
@@ -3154,6 +3335,29 @@
       }
 
 
+      updateDashboard();
+
+
+      const nextId =
+        getNextIncompleteChallenge(
+          id
+        );
+
+
+      const nextStepLabel =
+        nextId
+          ? "Continue to " +
+            challenges[nextId].title +
+            " →"
+          : "Proceed to the Final Gallery Lock →";
+
+
+      const nextStepMessage =
+        nextId
+          ? "Your evidence has been recorded. Continue directly to the next incomplete museum exhibit."
+          : "All six exhibits are solved. Continue directly to the Final Gallery Lock.";
+
+
       feedback.className =
         "feedback correct";
 
@@ -3175,10 +3379,47 @@
           ${challenge.character}
         </strong>
 
+        <div class="next-step-note">
+
+          <strong>
+            Next step
+          </strong>
+
+          <p>
+            ${nextStepMessage}
+          </p>
+
+          <button
+            id="continue-mission-button"
+            class="continue-button"
+            type="button">
+
+            ${nextStepLabel}
+
+          </button>
+
+        </div>
+
       `;
 
 
-      updateDashboard();
+      document
+        .getElementById(
+          "continue-mission-button"
+        )
+        .addEventListener(
+
+          "click",
+
+          function() {
+
+            moveToNextMissionStep(
+              id
+            );
+
+          }
+
+        );
 
 
     } else {
