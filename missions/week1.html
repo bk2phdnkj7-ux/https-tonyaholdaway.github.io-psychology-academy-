@@ -536,6 +536,85 @@
     }
 
 
+
+    /* =====================================================
+       INSTRUCTOR MISSION BRIEFING
+       ===================================================== */
+
+    .instructor-briefing-wrap {
+      margin: 0 auto 34px;
+    }
+
+    .instructor-briefing {
+      max-width: 850px;
+      margin: 0 auto;
+      padding: 24px;
+      background-color: var(--light-blue);
+      border: 3px solid var(--navy);
+      border-left: 9px solid var(--gold);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .instructor-briefing h2 {
+      margin: 0 0 8px;
+      color: var(--navy-dark);
+      font-family: Georgia, "Times New Roman", serif;
+    }
+
+    .instructor-kicker {
+      margin: 0 0 6px;
+      color: var(--green-dark);
+      font-weight: bold;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    .instructor-audio-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 11px;
+      margin: 18px 0 10px;
+    }
+
+    .instructor-audio-button {
+      padding: 11px 17px;
+      background-color: var(--navy);
+      color: var(--white);
+      border: 3px solid var(--navy-dark);
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    .instructor-audio-button.secondary {
+      background-color: var(--white);
+      color: var(--navy-dark);
+      border-color: var(--navy);
+    }
+
+    .instructor-audio-status {
+      margin: 10px 0 0;
+      font-weight: bold;
+    }
+
+    .transcript {
+      margin-top: 18px;
+      padding: 16px 18px;
+      background-color: var(--white);
+      border: 2px solid var(--border);
+      border-radius: 10px;
+    }
+
+    .transcript summary {
+      color: var(--navy);
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .transcript-body {
+      margin-top: 14px;
+    }
+
     /* =====================================================
        MAIN
        ===================================================== */
@@ -1524,6 +1603,134 @@
 </div>
 
 
+
+<!-- ======================================================
+     INSTRUCTOR MISSION BRIEFING
+     ====================================================== -->
+
+<div class="instructor-briefing-wrap">
+
+  <div class="container">
+
+    <section
+      class="instructor-briefing"
+      aria-labelledby="instructor-briefing-heading">
+
+      <p class="instructor-kicker">
+        A Message From Your Instructor
+      </p>
+
+      <h2 id="instructor-briefing-heading">
+        🎙️ Week 1 Mission Briefing from Dr. Holdaway
+      </h2>
+
+      <p>
+        Before you begin your first Psychology Academy investigation,
+        listen to this short welcome from Dr. Holdaway. The message
+        introduces this week's history of psychology mission and what
+        to expect as you explore the museum.
+      </p>
+
+      <p>
+        Audio is optional. A complete transcript is provided below.
+        If the museum investigation soundtrack is playing, it will
+        pause while the instructor message plays so the two audio
+        tracks do not compete.
+      </p>
+
+      <div class="instructor-audio-controls">
+
+        <button
+          id="play-instructor-audio"
+          class="instructor-audio-button"
+          type="button">
+
+          ▶ Listen to Dr. Holdaway's Message
+
+        </button>
+
+        <button
+          id="pause-instructor-audio"
+          class="instructor-audio-button secondary"
+          type="button">
+
+          ⏸ Pause Instructor Message
+
+        </button>
+
+      </div>
+
+      <p
+        id="instructor-audio-status"
+        class="instructor-audio-status"
+        role="status"
+        aria-live="polite">
+
+        Instructor message is currently paused.
+
+      </p>
+
+      <audio
+        id="instructor-audio"
+        preload="metadata">
+
+        <source
+          src="../assets/audio/8887ccf1-bd13-4868-836d-43a6c7b3106d%20(1).m4a"
+          type="audio/mp4">
+
+        Your browser does not support the audio element.
+
+      </audio>
+
+      <details class="transcript">
+
+        <summary>
+          Read the accessible transcript
+        </summary>
+
+        <div class="transcript-body">
+
+          <p>
+            Hi students, and welcome to your very first mission in our
+            Psychology Academy.
+          </p>
+
+          <p>
+            This week we're going to start with where psychology began,
+            its roots, exploring some of the people, ideas, and some of
+            those fundamental perspectives that helped shape psychology
+            as we know it today.
+          </p>
+
+          <p>
+            As you move through this mission, you'll travel through some
+            of the most important moments in psychology history and meet
+            a few of those thinkers that shaped some of the biggest
+            questions we have today.
+          </p>
+
+          <p>
+            So this is part of your first mission. Take your time, click
+            through each part, read the clues, answer the questions, but
+            more importantly, have fun with this. That's why I designed it.
+          </p>
+
+          <p>
+            So are you ready? Your first mission is waiting for you.
+            Good luck, and I will see you in class.
+          </p>
+
+        </div>
+
+      </details>
+
+    </section>
+
+  </div>
+
+</div>
+
+
 <!-- ======================================================
      MAIN
      ====================================================== -->
@@ -2356,6 +2563,204 @@
         Number(
           museumVolume.value
         );
+
+
+    }
+
+  );
+
+
+
+  /* ====================================================
+     INSTRUCTOR MISSION BRIEFING AUDIO
+     ==================================================== */
+
+  const instructorAudio =
+    document.getElementById(
+      "instructor-audio"
+    );
+
+  const playInstructorAudio =
+    document.getElementById(
+      "play-instructor-audio"
+    );
+
+  const pauseInstructorAudio =
+    document.getElementById(
+      "pause-instructor-audio"
+    );
+
+  const instructorAudioStatus =
+    document.getElementById(
+      "instructor-audio-status"
+    );
+
+  let resumeMuseumMusicAfterBriefing =
+    false;
+
+
+  playInstructorAudio.addEventListener(
+
+    "click",
+
+    async function() {
+
+
+      resumeMuseumMusicAfterBriefing =
+        !museumAudio.paused;
+
+
+      if (
+        resumeMuseumMusicAfterBriefing
+      ) {
+
+
+        museumAudio.pause();
+
+
+        museumAudioStatus.textContent =
+          "Investigation music paused while Dr. Holdaway's message plays.";
+
+
+        playMuseumAudio.textContent =
+          "▶ Begin Investigation Music";
+
+
+      }
+
+
+      try {
+
+
+        await instructorAudio.play();
+
+
+        instructorAudioStatus.textContent =
+          "Dr. Holdaway's Week 1 mission briefing is playing.";
+
+
+        playInstructorAudio.textContent =
+          "♪ Dr. Holdaway's Message Playing";
+
+
+      } catch (error) {
+
+
+        instructorAudioStatus.textContent =
+          "Your browser could not begin the instructor message. You may read the complete transcript below.";
+
+
+      }
+
+
+    }
+
+  );
+
+
+  pauseInstructorAudio.addEventListener(
+
+    "click",
+
+    function() {
+
+
+      instructorAudio.pause();
+
+
+      instructorAudioStatus.textContent =
+        "Instructor message is currently paused.";
+
+
+      playInstructorAudio.textContent =
+        "▶ Listen to Dr. Holdaway's Message";
+
+
+    }
+
+  );
+
+
+  instructorAudio.addEventListener(
+
+    "ended",
+
+    async function() {
+
+
+      instructorAudioStatus.textContent =
+        "Instructor mission briefing complete. Your first mission is waiting for you!";
+
+
+      playInstructorAudio.textContent =
+        "▶ Listen Again";
+
+
+      if (
+        resumeMuseumMusicAfterBriefing
+      ) {
+
+
+        try {
+
+
+          await museumAudio.play();
+
+
+          museumAudioStatus.textContent =
+            "Museum investigation music resumed.";
+
+
+          playMuseumAudio.textContent =
+            "♪ Investigation Music Playing";
+
+
+        } catch (error) {
+
+
+          museumAudioStatus.textContent =
+            "The instructor message is complete. Select Begin Investigation Music if you would like to resume the optional soundtrack.";
+
+
+        }
+
+
+      }
+
+
+      resumeMuseumMusicAfterBriefing =
+        false;
+
+
+    }
+
+  );
+
+
+  museumAudio.addEventListener(
+
+    "play",
+
+    function() {
+
+
+      if (
+        !instructorAudio.paused
+      ) {
+
+
+        instructorAudio.pause();
+
+
+        instructorAudioStatus.textContent =
+          "Instructor message paused while the investigation soundtrack plays.";
+
+
+        playInstructorAudio.textContent =
+          "▶ Resume Dr. Holdaway's Message";
+
+
+      }
 
 
     }
