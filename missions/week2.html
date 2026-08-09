@@ -325,6 +325,36 @@
       border-left-color: var(--red);
     }
 
+    /* Guided next-station navigation */
+    .next-step-wrap {
+      margin-top: 18px;
+      padding-top: 16px;
+      border-top: 2px solid rgba(95, 115, 130, 0.35);
+    }
+
+    .next-step-label {
+      margin: 0 0 10px;
+      font-weight: bold;
+      color: var(--navy);
+    }
+
+    .next-step-button {
+      width: 100%;
+      padding: 14px 18px;
+      background-color: var(--green);
+      color: var(--white);
+      border: 3px solid #173d26;
+      border-radius: 10px;
+      font-weight: bold;
+      text-align: center;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    .next-step-button:hover {
+      background-color: #214f34;
+    }
+
     progress {
       width: 100%;
       height: 24px;
@@ -1451,10 +1481,133 @@
         );
 
       challengeArea.scrollIntoView({
-        behavior: "smooth",
+        behavior:
+          window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+          ).matches
+            ? "auto"
+            : "smooth",
         block: "start"
       });
     }
+
+    function getNextIncompleteStation(currentId) {
+
+      const currentIndex =
+        challengeOrder.indexOf(currentId);
+
+      for (
+        let i = currentIndex + 1;
+        i < challengeOrder.length;
+        i++
+      ) {
+
+        if (
+          !state.solved.includes(
+            challengeOrder[i]
+          )
+        ) {
+
+          return challengeOrder[i];
+        }
+      }
+
+      for (
+        let i = 0;
+        i < currentIndex;
+        i++
+      ) {
+
+        if (
+          !state.solved.includes(
+            challengeOrder[i]
+          )
+        ) {
+
+          return challengeOrder[i];
+        }
+      }
+
+      return null;
+    }
+
+
+    function moveToNextStep(currentId) {
+
+      const nextId =
+        getNextIncompleteStation(currentId);
+
+      if (nextId) {
+
+        showChallenge(nextId);
+
+        window.setTimeout(
+          function() {
+
+            const heading =
+              document.getElementById(
+                "active-challenge-heading"
+              );
+
+            if (heading) {
+              heading.setAttribute(
+                "tabindex",
+                "-1"
+              );
+
+              heading.focus({
+                preventScroll: true
+              });
+            }
+          },
+          350
+        );
+
+        return;
+      }
+
+      const finalLock =
+        document.getElementById(
+          "final-lock"
+        );
+
+      finalLock.classList.remove(
+        "hidden"
+      );
+
+      finalLock.scrollIntoView({
+        behavior:
+          window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+          ).matches
+            ? "auto"
+            : "smooth",
+        block: "start"
+      });
+
+      window.setTimeout(
+        function() {
+
+          const lockHeading =
+            document.getElementById(
+              "lock-heading"
+            );
+
+          if (lockHeading) {
+            lockHeading.setAttribute(
+              "tabindex",
+              "-1"
+            );
+
+            lockHeading.focus({
+              preventScroll: true
+            });
+          }
+        },
+        350
+      );
+    }
+
 
     function checkAnswer(
       id,
@@ -1486,13 +1639,40 @@
         feedback.className =
           "feedback correct";
 
+        updateDashboard();
+
+        const nextId =
+          getNextIncompleteStation(id);
+
+        const nextLabel =
+          nextId
+            ? "Continue to " +
+              challenges[nextId].title +
+              " →"
+            : "Proceed to the Final Evidence Archive Lock →";
+
         feedback.innerHTML =
           challenge.explanation +
           "<br><strong>Code character: " +
           challenge.character +
-          "</strong>";
+          "</strong>" +
+          '<div class="next-step-wrap">' +
+          '<p class="next-step-label">You solved this station. Your next step is ready.</p>' +
+          '<button id="next-step-button" class="next-step-button" type="button">' +
+          nextLabel +
+          "</button></div>";
 
-        updateDashboard();
+        document
+          .getElementById(
+            "next-step-button"
+          )
+          .addEventListener(
+            "click",
+            function() {
+
+              moveToNextStep(id);
+            }
+          );
 
       } else {
 
