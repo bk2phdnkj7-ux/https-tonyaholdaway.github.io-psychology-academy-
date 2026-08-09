@@ -1,145 +1,307 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
   <meta charset="UTF-8">
 
   <meta
     name="viewport"
     content="width=device-width, initial-scale=1.0">
 
+  <meta
+    name="description"
+    content="Psychology Academy: an interactive Introduction to Psychology learning experience created by Dr. Tonya Holdaway.">
+
   <title>Psychology Academy | Dr. Tonya Holdaway</title>
 
   <style>
+
     :root {
+
       --ink: #1f2933;
       --navy: #102f4a;
       --navy-dark: #082236;
+
       --blue: #2f6fa5;
       --blue-light: #eaf4fb;
+
       --green: #315f40;
       --green-dark: #214f34;
       --green-light: #eef8f2;
+
       --gold: #7a5a00;
-      --gold-light: #fffaf0;
+      --gold-light: #fff8e8;
+
       --cream: #fffdf7;
-      --stone-dark: #6b6255;
-      --border: #5f7382;
+      --stone: #6b6255;
+
       --white: #ffffff;
-      --shadow: 0 12px 32px rgba(16, 47, 74, 0.16);
-      --shadow-soft: 0 8px 20px rgba(16, 47, 74, 0.10);
+      --border: #5f7382;
+
+      --shadow:
+        0 12px 32px rgba(16, 47, 74, 0.16);
+
+      --shadow-soft:
+        0 8px 20px rgba(16, 47, 74, 0.10);
+
       --radius: 18px;
+
     }
+
 
     * {
       box-sizing: border-box;
     }
 
+
     html {
       scroll-behavior: smooth;
     }
 
+
     body {
+
       margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
+
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
       color: var(--ink);
+
       background-color: #f5f8f5;
+
       line-height: 1.7;
+
       font-size: 18px;
+
     }
 
+
     a {
+
       color: #174c74;
+
       text-decoration: underline;
-      text-underline-offset: 0.16em;
+
+      text-underline-offset: .16em;
+
     }
+
+
+    button {
+
+      font: inherit;
+
+      cursor: pointer;
+
+    }
+
 
     a:focus,
     button:focus {
+
       outline: 4px solid #111111;
+
       outline-offset: 4px;
+
     }
 
+
     .skip-link {
+
       position: absolute;
+
       left: 16px;
+
       top: -100px;
-      z-index: 2000;
-      background-color: var(--white);
+
+      z-index: 5000;
+
+      background: #ffffff;
+
       color: #111111;
+
       border: 3px solid #111111;
+
       padding: 12px 16px;
+
       font-weight: bold;
+
     }
+
 
     .skip-link:focus {
       top: 16px;
     }
 
+
     .container {
-      width: min(1180px, calc(100% - 32px));
+
+      width:
+        min(
+          1180px,
+          calc(100% - 32px)
+        );
+
       margin: 0 auto;
+
     }
 
+
+    /* =========================================================
+       HERO
+       ========================================================= */
+
+
     .academy-hero {
+
       position: relative;
+
       overflow: hidden;
-      min-height: 630px;
+
+      min-height: 690px;
+
       display: flex;
+
       align-items: center;
+
       background:
         linear-gradient(
           to bottom,
-          #dcecf7 0%,
-          #ecf6f7 42%,
-          #dbead9 73%,
-          #c8dec5 100%
+          #d9e9f5 0%,
+          #e8f3f5 38%,
+          #dcead9 72%,
+          #c5dbc2 100%
         );
-      border-bottom: 5px solid var(--navy);
+
+      border-bottom:
+        6px solid var(--navy-dark);
+
     }
+
 
     .academy-hero::before {
+
       content: "";
+
       position: absolute;
+
       left: 0;
+
       right: 0;
+
       bottom: 0;
-      height: 180px;
+
+      height: 190px;
+
       background:
         radial-gradient(
-          ellipse at center,
-          rgba(74, 121, 73, 0.22) 0%,
-          rgba(74, 121, 73, 0.12) 40%,
-          transparent 70%
+          ellipse at 15% 100%,
+          rgba(54, 94, 58, .35) 0 33%,
+          transparent 34%
+        ),
+        radial-gradient(
+          ellipse at 43% 100%,
+          rgba(63, 108, 68, .35) 0 36%,
+          transparent 37%
+        ),
+        radial-gradient(
+          ellipse at 72% 100%,
+          rgba(56, 98, 62, .34) 0 34%,
+          transparent 35%
+        ),
+        radial-gradient(
+          ellipse at 95% 100%,
+          rgba(66, 111, 69, .30) 0 32%,
+          transparent 33%
         );
+
       pointer-events: none;
+
     }
+
+
+    .academy-hero::after {
+
+      content: "";
+
+      position: absolute;
+
+      width: 165px;
+
+      height: 165px;
+
+      top: 75px;
+
+      right: 10%;
+
+      border-radius: 50%;
+
+      background:
+        rgba(255, 233, 163, .60);
+
+      box-shadow:
+        0 0 75px rgba(255, 230, 145, .40);
+
+      pointer-events: none;
+
+    }
+
 
     .cloud {
+
       position: absolute;
-      height: 46px;
+
+      height: 45px;
+
       border-radius: 50px;
-      background-color: rgba(255, 255, 255, 0.72);
+
+      background:
+        rgba(255, 255, 255, .72);
+
       box-shadow:
-        45px -16px 0 10px rgba(255, 255, 255, 0.68),
-        88px 0 0 3px rgba(255, 255, 255, 0.68);
-      animation: cloud-drift 30s linear infinite alternate;
+        45px -16px 0 10px
+        rgba(255, 255, 255, .68),
+        88px 0 0 3px
+        rgba(255, 255, 255, .68);
+
+      animation:
+        cloud-drift 30s linear infinite alternate;
+
       pointer-events: none;
+
     }
+
 
     .cloud-one {
+
       width: 105px;
-      top: 80px;
+
+      top: 82px;
+
       left: 7%;
+
     }
+
 
     .cloud-two {
+
       width: 128px;
-      top: 145px;
-      right: 13%;
+
+      top: 150px;
+
+      right: 18%;
+
       animation-duration: 38s;
+
     }
 
+
     @keyframes cloud-drift {
+
       from {
         transform: translateX(-18px);
       }
@@ -147,603 +309,1755 @@
       to {
         transform: translateX(18px);
       }
+
     }
+
 
     .hero-content {
+
       position: relative;
-      z-index: 2;
-      padding: 72px 0 58px;
+
+      z-index: 4;
+
+      padding:
+        72px 0
+        120px;
+
       text-align: center;
+
     }
+
 
     .academy-seal {
-      width: 100px;
-      height: 100px;
-      margin: 0 auto 18px;
+
+      width: 105px;
+
+      height: 105px;
+
+      margin:
+        0 auto
+        18px;
+
       display: flex;
+
       justify-content: center;
+
       align-items: center;
+
       border-radius: 50%;
-      background-color: var(--navy);
-      color: var(--white);
-      border: 5px solid #c9a95d;
-      box-shadow: var(--shadow);
-      font-size: 2.7rem;
+
+      background-color:
+        var(--navy);
+
+      color:
+        var(--white);
+
+      border:
+        5px solid #c9a95d;
+
+      box-shadow:
+        var(--shadow);
+
+      font-size:
+        2.8rem;
+
     }
+
 
     .eyebrow {
-      margin: 0 0 8px;
-      color: var(--navy);
-      font-size: 0.95rem;
-      font-weight: bold;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
+
+      margin:
+        0 0 8px;
+
+      color:
+        var(--navy);
+
+      font-size:
+        .95rem;
+
+      font-weight:
+        bold;
+
+      text-transform:
+        uppercase;
+
+      letter-spacing:
+        .12em;
+
     }
+
 
     .academy-hero h1 {
+
       margin: 0;
-      color: var(--navy-dark);
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(3rem, 8vw, 6rem);
+
+      color:
+        var(--navy-dark);
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+      font-size:
+        clamp(
+          3rem,
+          8vw,
+          6rem
+        );
+
       line-height: 1.05;
+
     }
+
 
     .academy-tagline {
-      max-width: 800px;
-      margin: 18px auto 0;
-      color: #243d4f;
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(1.15rem, 2.6vw, 1.5rem);
+
+      max-width:
+        800px;
+
+      margin:
+        18px auto 0;
+
+      color:
+        #243d4f;
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+      font-size:
+        clamp(
+          1.15rem,
+          2.6vw,
+          1.55rem
+        );
+
     }
+
 
     .welcome-sign {
-      max-width: 720px;
-      margin: 30px auto 0;
-      background-color: rgba(255, 253, 247, 0.96);
-      color: var(--ink);
-      border: 3px solid var(--stone-dark);
-      border-radius: 16px;
-      padding: 22px;
-      box-shadow: var(--shadow);
+
+      max-width:
+        760px;
+
+      margin:
+        30px auto 0;
+
+      background-color:
+        rgba(
+          255,
+          253,
+          247,
+          .97
+        );
+
+      color:
+        var(--ink);
+
+      border:
+        3px solid var(--stone);
+
+      border-left:
+        9px solid var(--navy);
+
+      border-radius:
+        18px;
+
+      padding:
+        24px;
+
+      box-shadow:
+        var(--shadow);
+
+      text-align: left;
+
     }
+
 
     .welcome-sign h2 {
+
       margin-top: 0;
-      color: var(--navy);
-      font-family: Georgia, "Times New Roman", serif;
+
+      color:
+        var(--navy);
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
     }
 
+
     .hero-actions {
+
       display: flex;
+
       flex-wrap: wrap;
+
       justify-content: center;
+
       gap: 14px;
-      margin-top: 26px;
+
+      margin-top: 24px;
+
     }
+
 
     .primary-button,
     .secondary-button {
+
       display: inline-block;
+
       border-radius: 9px;
+
       padding: 13px 22px;
+
       font-weight: bold;
+
       text-decoration: underline;
+
     }
+
 
     .primary-button {
-      background-color: var(--navy);
-      color: var(--white);
-      border: 3px solid #071c2c;
+
+      background-color:
+        var(--navy);
+
+      color:
+        var(--white);
+
+      border:
+        3px solid #071c2c;
+
     }
+
 
     .secondary-button {
-      background-color: var(--white);
-      color: var(--navy);
-      border: 3px solid var(--navy);
+
+      background-color:
+        var(--white);
+
+      color:
+        var(--navy);
+
+      border:
+        3px solid var(--navy);
+
     }
 
-    main {
-      padding: 38px 0 56px;
+
+    /* =========================================================
+       ACADEMY SOUNDTRACK
+       ========================================================= */
+
+
+    .soundscape-wrap {
+
+      position: relative;
+
+      z-index: 10;
+
+      margin-top: -70px;
+
+      margin-bottom: 38px;
+
     }
+
+
+    .soundscape-panel {
+
+      max-width: 880px;
+
+      margin: 0 auto;
+
+      padding: 24px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #102f4a,
+          #173f4f
+        );
+
+      color:
+        #ffffff;
+
+      border:
+        4px solid #c9a95d;
+
+      border-radius:
+        20px;
+
+      box-shadow:
+        var(--shadow);
+
+      text-align: center;
+
+    }
+
+
+    .soundscape-panel h2 {
+
+      margin:
+        0 0 8px;
+
+      color:
+        #ffffff;
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+      font-size:
+        1.65rem;
+
+    }
+
+
+    .soundscape-panel p {
+
+      margin:
+        8px auto;
+
+      max-width:
+        720px;
+
+    }
+
+
+    .sound-buttons {
+
+      display: flex;
+
+      flex-wrap: wrap;
+
+      justify-content: center;
+
+      gap: 12px;
+
+      margin:
+        17px 0 12px;
+
+    }
+
+
+    .sound-button {
+
+      padding:
+        11px 18px;
+
+      background:
+        #ffffff;
+
+      color:
+        var(--navy-dark);
+
+      border:
+        3px solid #c9a95d;
+
+      border-radius:
+        9px;
+
+      font-weight:
+        bold;
+
+    }
+
+
+    .volume-control {
+
+      display: flex;
+
+      flex-wrap: wrap;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 10px;
+
+      margin-top:
+        12px;
+
+    }
+
+
+    .volume-control input {
+
+      width:
+        min(
+          240px,
+          70vw
+        );
+
+    }
+
+
+    .sound-status {
+
+      margin-bottom: 0;
+
+      font-weight: bold;
+
+    }
+
+
+    .audio-credit {
+
+      font-size: .88rem;
+
+      opacity: .95;
+
+    }
+
+
+    /* =========================================================
+       MAIN CONTENT
+       ========================================================= */
+
+
+    main {
+
+      padding:
+        12px 0 56px;
+
+    }
+
 
     h2,
     h3 {
+
+      color:
+        var(--navy);
+
       line-height: 1.3;
-      color: var(--navy);
+
     }
+
 
     .section-heading {
-      margin-bottom: 18px;
-      text-align: center;
+
+      margin-bottom:
+        18px;
+
+      text-align:
+        center;
+
     }
+
 
     .section-heading h2 {
-      margin-bottom: 8px;
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(1.8rem, 4vw, 2.6rem);
+
+      margin-bottom:
+        8px;
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+      font-size:
+        clamp(
+          1.8rem,
+          4vw,
+          2.6rem
+        );
+
     }
+
 
     .section-heading p {
-      max-width: 760px;
-      margin: 0 auto;
+
+      max-width:
+        780px;
+
+      margin:
+        0 auto;
+
     }
+
+
+    /* =========================================================
+       PROGRESS
+       ========================================================= */
+
 
     .explorer-panel {
-      display: grid;
-      grid-template-columns: minmax(0, 1.4fr) minmax(260px, 0.6fr);
+
+      display:
+        grid;
+
+      grid-template-columns:
+        minmax(0, 1.4fr)
+        minmax(260px, .6fr);
+
       gap: 20px;
-      margin-bottom: 38px;
+
+      margin-bottom:
+        38px;
+
     }
+
 
     .panel {
-      background-color: var(--white);
-      border: 2px solid var(--border);
-      border-left: 8px solid var(--blue);
-      border-radius: var(--radius);
-      padding: 22px;
-      box-shadow: var(--shadow-soft);
+
+      background:
+        var(--white);
+
+      border:
+        2px solid var(--border);
+
+      border-left:
+        8px solid var(--blue);
+
+      border-radius:
+        var(--radius);
+
+      padding:
+        22px;
+
+      box-shadow:
+        var(--shadow-soft);
+
     }
+
 
     .panel-green {
-      border-left-color: var(--green);
+
+      border-left-color:
+        var(--green);
+
     }
+
 
     .panel-gold {
-      border-left-color: var(--gold);
+
+      border-left-color:
+        var(--gold);
+
     }
+
 
     .panel h2 {
+
       margin-top: 0;
+
     }
+
 
     .progress-meter {
+
       width: 100%;
+
       height: 24px;
+
     }
+
 
     .progress-summary {
+
       margin-bottom: 0;
+
       font-weight: bold;
+
     }
+
+
+    /* =========================================================
+       CAMPUS
+       ========================================================= */
+
 
     .campus-path {
+
       position: relative;
-      padding: 28px;
-      margin-bottom: 44px;
-      background-color: #e8f1e6;
-      border: 3px solid #667c65;
-      border-radius: 24px;
-      box-shadow: var(--shadow);
+
+      padding:
+        28px;
+
+      margin-bottom:
+        44px;
+
+      background:
+        #e8f1e6;
+
+      border:
+        3px solid #667c65;
+
+      border-radius:
+        24px;
+
+      box-shadow:
+        var(--shadow);
+
     }
+
 
     .campus-path::before {
+
       content: "";
+
       position: absolute;
+
       top: 20px;
+
       bottom: 20px;
+
       left: 50%;
-      width: 84px;
-      transform: translateX(-50%);
-      border-radius: 50px;
-      background-color: rgba(220, 210, 187, 0.62);
+
+      width: 82px;
+
+      transform:
+        translateX(-50%);
+
+      border-radius:
+        50px;
+
+      background:
+        rgba(
+          220,
+          210,
+          187,
+          .62
+        );
+
       pointer-events: none;
+
     }
+
 
     .district {
+
       position: relative;
+
       z-index: 2;
-      margin-bottom: 42px;
+
+      margin-bottom:
+        42px;
+
     }
+
 
     .district:last-child {
+
       margin-bottom: 0;
+
     }
+
 
     .district-title {
-      display: inline-block;
-      margin: 0 0 18px;
-      padding: 10px 16px;
-      background-color: var(--navy);
-      color: var(--white);
-      border: 3px solid #071c2c;
-      border-radius: 10px;
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: 1.35rem;
+
+      display:
+        inline-block;
+
+      margin:
+        0 0 18px;
+
+      padding:
+        10px 16px;
+
+      background:
+        var(--navy);
+
+      color:
+        #ffffff;
+
+      border:
+        3px solid #071c2c;
+
+      border-radius:
+        10px;
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+      font-size:
+        1.35rem;
+
     }
+
 
     .mission-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 22px;
+
+      display:
+        grid;
+
+      grid-template-columns:
+        repeat(
+          2,
+          minmax(0,1fr)
+        );
+
+      gap:
+        22px;
+
     }
+
 
     .mission-card {
-      position: relative;
-      overflow: hidden;
-      min-height: 300px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      border: 3px solid var(--border);
-      border-radius: 18px;
-      padding: 22px;
-      box-shadow: var(--shadow);
+
+      position:
+        relative;
+
+      overflow:
+        hidden;
+
+      min-height:
+        300px;
+
+      display:
+        flex;
+
+      flex-direction:
+        column;
+
+      justify-content:
+        space-between;
+
+      border:
+        3px solid var(--border);
+
+      border-radius:
+        18px;
+
+      padding:
+        22px;
+
+      box-shadow:
+        var(--shadow);
+
     }
+
 
     .mission-card::after {
+
       content: "";
-      position: absolute;
-      right: -28px;
-      bottom: -28px;
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      background-color: rgba(255, 255, 255, 0.35);
-      pointer-events: none;
+
+      position:
+        absolute;
+
+      right:
+        -28px;
+
+      bottom:
+        -28px;
+
+      width:
+        120px;
+
+      height:
+        120px;
+
+      border-radius:
+        50%;
+
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          .35
+        );
+
+      pointer-events:
+        none;
+
     }
+
 
     .museum-theme {
-      background-color: #fbf4e8;
-      border-color: #7a5a35;
+
+      background:
+        #fbf4e8;
+
+      border-color:
+        #7a5a35;
+
     }
+
 
     .research-theme {
-      background-color: #edf8ef;
-      border-color: #4e7458;
+
+      background:
+        #edf8ef;
+
+      border-color:
+        #4e7458;
+
     }
+
 
     .brain-theme {
-      background-color: #edf5fb;
-      border-color: #3b668a;
+
+      background:
+        #edf5fb;
+
+      border-color:
+        #3b668a;
+
     }
+
 
     .consciousness-theme {
-      background-color: #f3f1f8;
-      border-color: #64577a;
+
+      background:
+        #f3f1f8;
+
+      border-color:
+        #64577a;
+
     }
+
 
     .perception-theme {
-      background-color: #f8f5ed;
-      border-color: #74694c;
+
+      background:
+        #f8f5ed;
+
+      border-color:
+        #74694c;
+
     }
+
 
     .learning-theme {
-      background-color: #eef6f2;
-      border-color: #536f61;
+
+      background:
+        #eef6f2;
+
+      border-color:
+        #536f61;
+
     }
+
 
     .thinking-theme {
-      background-color: #f2f5f8;
-      border-color: #5b6978;
+
+      background:
+        #f2f5f8;
+
+      border-color:
+        #5b6978;
+
     }
+
 
     .memory-theme {
-      background-color: #fbf3e7;
-      border-color: #79613e;
+
+      background:
+        #fbf3e7;
+
+      border-color:
+        #79613e;
+
     }
+
 
     .development-theme {
-      background-color: #f0f7ee;
-      border-color: #52724c;
+
+      background:
+        #f0f7ee;
+
+      border-color:
+        #52724c;
+
     }
+
 
     .emotion-theme {
-      background-color: #fff3ed;
-      border-color: #875b45;
+
+      background:
+        #fff3ed;
+
+      border-color:
+        #875b45;
+
     }
+
 
     .personality-theme {
-      background-color: #f4f0f8;
-      border-color: #6d5b78;
+
+      background:
+        #f4f0f8;
+
+      border-color:
+        #6d5b78;
+
     }
+
 
     .social-theme {
-      background-color: #edf6f8;
-      border-color: #4b6f77;
+
+      background:
+        #edf6f8;
+
+      border-color:
+        #4b6f77;
+
     }
+
 
     .workplace-theme {
-      background-color: #eef2f5;
-      border-color: #55636c;
+
+      background:
+        #eef2f5;
+
+      border-color:
+        #55636c;
+
     }
+
 
     .wellness-theme {
-      background-color: #eef8f2;
-      border-color: #4d7358;
+
+      background:
+        #eef8f2;
+
+      border-color:
+        #4d7358;
+
     }
+
 
     .disorders-theme {
-      background-color: #f2f5f8;
-      border-color: #5d6978;
+
+      background:
+        #f2f5f8;
+
+      border-color:
+        #5d6978;
+
     }
+
 
     .graduation-theme {
-      background-color: #fff8e8;
-      border-color: #80651c;
+
+      background:
+        #fff8e8;
+
+      border-color:
+        #80651c;
+
     }
+
 
     .mission-number {
-      margin: 0 0 5px;
-      font-size: 0.9rem;
-      font-weight: bold;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
+
+      margin:
+        0 0 5px;
+
+      font-size:
+        .9rem;
+
+      font-weight:
+        bold;
+
+      text-transform:
+        uppercase;
+
+      letter-spacing:
+        .08em;
+
     }
+
 
     .mission-icon {
-      display: block;
-      margin-bottom: 8px;
-      font-size: 2.8rem;
+
+      display:
+        block;
+
+      margin-bottom:
+        8px;
+
+      font-size:
+        2.8rem;
+
     }
+
 
     .mission-card h3 {
-      margin: 0 0 10px;
-      color: var(--navy);
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: 1.45rem;
+
+      margin:
+        0 0 10px;
+
+      color:
+        var(--navy);
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+      font-size:
+        1.45rem;
+
     }
+
 
     .mission-status {
-      display: inline-block;
-      width: fit-content;
-      margin: 12px 0;
-      padding: 7px 10px;
-      border: 2px solid var(--border);
-      border-radius: 8px;
-      background-color: var(--white);
-      color: var(--ink);
-      font-size: 0.92rem;
-      font-weight: bold;
+
+      display:
+        inline-block;
+
+      width:
+        fit-content;
+
+      margin:
+        12px 0;
+
+      padding:
+        7px 10px;
+
+      border:
+        2px solid var(--border);
+
+      border-radius:
+        8px;
+
+      background:
+        #ffffff;
+
+      color:
+        var(--ink);
+
+      font-size:
+        .92rem;
+
+      font-weight:
+        bold;
+
     }
+
 
     .mission-status.available {
-      border-color: var(--green);
+
+      border-color:
+        var(--green);
+
     }
+
 
     .mission-status.coming {
-      border-color: var(--gold);
+
+      border-color:
+        var(--gold);
+
     }
+
 
     .mission-status.complete {
-      border-color: var(--green);
-      background-color: var(--green-light);
+
+      border-color:
+        var(--green);
+
+      background:
+        var(--green-light);
+
     }
+
 
     .mission-link {
-      position: relative;
-      z-index: 3;
-      display: inline-block;
-      margin-top: 10px;
-      padding: 12px 16px;
-      background-color: var(--navy);
-      color: var(--white);
-      border: 3px solid #071c2c;
-      border-radius: 8px;
-      font-weight: bold;
-      text-decoration: underline;
+
+      position:
+        relative;
+
+      z-index:
+        3;
+
+      display:
+        inline-block;
+
+      width:
+        fit-content;
+
+      margin-top:
+        10px;
+
+      padding:
+        12px 16px;
+
+      background:
+        var(--navy);
+
+      color:
+        #ffffff;
+
+      border:
+        3px solid #071c2c;
+
+      border-radius:
+        8px;
+
+      font-weight:
+        bold;
+
+      text-decoration:
+        underline;
+
     }
+
 
     .coming-note {
-      margin-top: 12px;
-      padding-top: 12px;
-      border-top: 2px solid rgba(95, 115, 130, 0.45);
-      font-size: 0.96rem;
+
+      margin-top:
+        12px;
+
+      padding-top:
+        12px;
+
+      border-top:
+        2px solid
+        rgba(
+          95,
+          115,
+          130,
+          .45
+        );
+
+      font-size:
+        .96rem;
+
     }
+
+
+    /* =========================================================
+       BADGE SHELF
+       ========================================================= */
+
 
     .badge-section {
-      margin: 44px 0;
+
+      margin:
+        44px 0;
+
     }
+
 
     .badge-shelf {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-      gap: 16px;
+
+      display:
+        grid;
+
+      grid-template-columns:
+        repeat(
+          auto-fit,
+          minmax(
+            210px,
+            1fr
+          )
+        );
+
+      gap:
+        16px;
+
     }
+
 
     .badge-card {
-      background-color: var(--white);
-      border: 2px solid var(--border);
-      border-radius: 14px;
-      padding: 18px;
-      text-align: center;
-      box-shadow: var(--shadow-soft);
+
+      background:
+        #ffffff;
+
+      border:
+        2px solid var(--border);
+
+      border-radius:
+        14px;
+
+      padding:
+        18px;
+
+      text-align:
+        center;
+
+      box-shadow:
+        var(--shadow-soft);
+
     }
+
 
     .badge-symbol {
-      display: block;
-      font-size: 2.5rem;
-      margin-bottom: 8px;
+
+      display:
+        block;
+
+      font-size:
+        2.5rem;
+
+      margin-bottom:
+        8px;
+
     }
+
 
     .badge-earned {
-      border: 3px solid var(--green);
-      background-color: var(--green-light);
+
+      border:
+        3px solid var(--green);
+
+      background:
+        var(--green-light);
+
     }
+
 
     .badge-locked {
-      border-style: dashed;
+
+      border-style:
+        dashed;
+
     }
+
+
+    /* =========================================================
+       DIRECTORY
+       ========================================================= */
+
 
     .directory {
-      margin-top: 44px;
+
+      margin-top:
+        44px;
+
     }
+
+
+    .table-scroll {
+
+      overflow-x:
+        auto;
+
+    }
+
 
     .directory table {
-      width: 100%;
-      border-collapse: collapse;
-      background-color: var(--white);
+
+      width:
+        100%;
+
+      border-collapse:
+        collapse;
+
+      background:
+        #ffffff;
+
     }
 
+
     .directory caption {
-      text-align: left;
-      padding: 0 0 12px;
-      font-weight: bold;
-      font-size: 1.05rem;
+
+      text-align:
+        left;
+
+      padding:
+        0 0 12px;
+
+      font-weight:
+        bold;
+
+      font-size:
+        1.05rem;
+
     }
+
 
     .directory th,
     .directory td {
-      border: 2px solid var(--border);
-      padding: 12px;
-      text-align: left;
-      vertical-align: top;
+
+      border:
+        2px solid var(--border);
+
+      padding:
+        12px;
+
+      text-align:
+        left;
+
+      vertical-align:
+        top;
+
     }
+
 
     .directory th {
-      background-color: #dfeaf2;
-      color: var(--ink);
+
+      background:
+        #dfeaf2;
+
+      color:
+        var(--ink);
+
     }
+
+
+    /* =========================================================
+       MESSAGE
+       ========================================================= */
+
 
     .academy-message {
-      margin-top: 44px;
-      background-color: var(--cream);
-      border: 3px solid #8a6b1f;
-      border-left-width: 9px;
-      border-radius: 16px;
-      padding: 24px;
-      box-shadow: var(--shadow-soft);
+
+      margin-top:
+        44px;
+
+      background:
+        var(--cream);
+
+      border:
+        3px solid #8a6b1f;
+
+      border-left-width:
+        9px;
+
+      border-radius:
+        16px;
+
+      padding:
+        24px;
+
+      box-shadow:
+        var(--shadow-soft);
+
     }
+
 
     .academy-message h2 {
+
       margin-top: 0;
-      font-family: Georgia, "Times New Roman", serif;
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
     }
+
 
     footer {
-      padding: 28px 0;
-      background-color: var(--navy-dark);
-      color: var(--white);
-      text-align: center;
+
+      padding:
+        28px 0;
+
+      background:
+        var(--navy-dark);
+
+      color:
+        #ffffff;
+
+      text-align:
+        center;
+
     }
+
 
     footer p {
-      margin: 5px 0;
+
+      margin:
+        5px 0;
+
     }
 
-    @media (max-width: 900px) {
-      .explorer-panel {
-        grid-template-columns: 1fr;
+
+    @media
+    (max-width: 900px) {
+
+      .explorer-panel,
+      .mission-grid {
+
+        grid-template-columns:
+          1fr;
+
       }
 
-      .mission-grid {
-        grid-template-columns: 1fr;
-      }
 
       .campus-path::before {
-        display: none;
+
+        display:
+          none;
+
       }
+
     }
 
-    @media (max-width: 600px) {
+
+    @media
+    (max-width: 600px) {
+
       body {
-        font-size: 17px;
+
+        font-size:
+          17px;
+
       }
+
 
       .hero-content {
-        padding-top: 52px;
+
+        padding-top:
+          50px;
+
       }
+
 
       .campus-path {
-        padding: 18px;
+
+        padding:
+          18px;
+
       }
+
     }
 
-    @media (prefers-reduced-motion: reduce) {
+
+    @media
+    (prefers-reduced-motion: reduce) {
+
       html {
-        scroll-behavior: auto;
+
+        scroll-behavior:
+          auto;
+
       }
+
 
       .cloud {
-        animation: none;
+
+        animation:
+          none;
+
       }
+
     }
+
   </style>
+
 </head>
+
 
 <body>
 
-  <a class="skip-link" href="#main-content">
+
+  <a
+    class="skip-link"
+    href="#main-content">
+
     Skip to main content
+
   </a>
+
+
+  <!-- =======================================================
+       HERO
+       ======================================================= -->
+
 
   <header class="academy-hero">
 
-    <div class="cloud cloud-one" aria-hidden="true"></div>
-    <div class="cloud cloud-two" aria-hidden="true"></div>
+
+    <div
+      class="cloud cloud-one"
+      aria-hidden="true">
+    </div>
+
+
+    <div
+      class="cloud cloud-two"
+      aria-hidden="true">
+    </div>
+
 
     <div class="container hero-content">
 
-      <div class="academy-seal" aria-hidden="true">
+
+      <div
+        class="academy-seal"
+        aria-hidden="true">
+
         Ψ
+
       </div>
 
+
       <p class="eyebrow">
+
         Introduction to Psychology
+
       </p>
+
 
       <h1>
+
         Psychology Academy
+
       </h1>
 
+
       <p class="academy-tagline">
-        A place of curiosity, evidence, exploration, and discovery.
+
+        A place of curiosity, evidence,
+        exploration, and discovery.
+
       </p>
 
-      <section class="welcome-sign" aria-labelledby="welcome-heading">
+
+      <section
+        class="welcome-sign"
+        aria-labelledby="welcome-heading">
+
 
         <h2 id="welcome-heading">
+
           Welcome, Psychology Explorer
+
         </h2>
 
-        <p>
-          I am Dr. Holdaway, and I am excited you are here.
-          Psychology is not simply something we read about.
-          It is something we experience every day.
-        </p>
 
         <p>
-          Throughout the semester, you will enter different areas of the
-          Academy to investigate behavior, solve mysteries, test ideas,
-          examine evidence, and connect psychology to the world around you.
+
+          I am Dr. Holdaway, and I am excited
+          you are here. Psychology is not simply
+          something we read about. It is something
+          we experience every day.
+
         </p>
+
+
+        <p>
+
+          Throughout the semester, you will enter
+          different areas of the Academy to
+          investigate behavior, solve mysteries,
+          test ideas, examine evidence, and connect
+          psychology to the world around you.
+
+        </p>
+
 
         <p style="margin-bottom: 0;">
-          Five Academy destinations are now open for exploration.
+
+          Five Academy destinations are currently
+          open for exploration. More will appear
+          as our semester journey continues.
+
         </p>
+
 
         <div class="hero-actions">
 
-          <a class="primary-button" href="#campus">
+
+          <a
+            class="primary-button"
+            href="#campus">
+
             Enter the Academy Campus
+
           </a>
 
-          <a class="secondary-button" href="#mission-directory">
+
+          <a
+            class="secondary-button"
+            href="#mission-directory">
+
             View Accessible Mission Directory
+
           </a>
+
 
         </div>
 
+
       </section>
+
 
     </div>
 
+
   </header>
 
-  <main id="main-content" class="container">
 
-    <section class="explorer-panel" aria-label="Psychology Explorer progress">
+  <!-- =======================================================
+       OPTIONAL MUSIC
+       ======================================================= -->
+
+
+  <div class="soundscape-wrap">
+
+
+    <div class="container">
+
+
+      <section
+        class="soundscape-panel"
+        aria-labelledby="soundscape-heading">
+
+
+        <h2 id="soundscape-heading">
+
+          🪄 Academy Soundscape
+
+        </h2>
+
+
+        <p>
+
+          Want a little extra atmosphere while
+          exploring the Academy? Turn on the
+          optional instrumental Academy theme.
+
+        </p>
+
+
+        <p>
+
+          Music never begins automatically,
+          and you can pause it at any time.
+          Sound is not required to understand
+          or complete any Academy mission.
+
+        </p>
+
+
+        <div class="sound-buttons">
+
+
+          <button
+            id="play-academy-music"
+            class="sound-button"
+            type="button">
+
+            ▶ Play Academy Theme
+
+          </button>
+
+
+          <button
+            id="pause-academy-music"
+            class="sound-button"
+            type="button">
+
+            ⏸ Pause Music
+
+          </button>
+
+
+        </div>
+
+
+        <div class="volume-control">
+
+
+          <label for="academy-volume">
+
+            Volume
+
+          </label>
+
+
+          <input
+            id="academy-volume"
+            type="range"
+            min="0"
+            max="1"
+            step="0.05"
+            value="0.22"
+            aria-label="Academy music volume">
+
+
+        </div>
+
+
+        <p
+          id="academy-audio-status"
+          class="sound-status"
+          role="status"
+          aria-live="polite">
+
+          Academy theme is currently paused.
+
+        </p>
+
+
+        <p class="audio-credit">
+
+          Optional instrumental soundscape.
+          Students may continue through the
+          Academy without audio.
+
+        </p>
+
+
+        <audio
+          id="academy-audio"
+          loop
+          preload="metadata">
+
+
+          <source
+            src="assets/audio/luis_humanoide-school-of-magic-inspired-by-harry-potter-289617.mp3"
+            type="audio/mpeg">
+
+
+          Your browser does not support
+          the audio element.
+
+
+        </audio>
+
+
+      </section>
+
+
+    </div>
+
+
+  </div>
+
+
+  <!-- =======================================================
+       MAIN
+       ======================================================= -->
+
+
+  <main
+    id="main-content"
+    class="container">
+
+
+    <!-- PROGRESS -->
+
+
+    <section
+      class="explorer-panel"
+      aria-label="Psychology Explorer progress">
+
 
       <div class="panel panel-green">
 
+
         <h2>
+
           Psychology Explorer Progress
+
         </h2>
 
+
         <p>
-          Your Academy homepage recognizes mission progress saved in this
-          browser. Progress completed on another browser or device may not
-          appear here.
+
+          Your Academy homepage recognizes
+          mission progress saved in this browser.
+
+          Progress completed on another browser
+          or device may not appear here.
+
         </p>
+
 
         <progress
           id="academy-progress"
@@ -752,740 +2066,1401 @@
           max="16">
 
           0 of 16 missions completed
+
         </progress>
 
-        <p id="academy-progress-text" class="progress-summary">
+
+        <p
+          id="academy-progress-text"
+          class="progress-summary">
+
           Checking your Academy progress...
+
         </p>
 
+
       </div>
+
 
       <div class="panel panel-gold">
 
+
         <h2>
+
           Explorer Level
+
         </h2>
 
+
         <p id="explorer-level">
+
           Beginning Explorer
+
         </p>
+
 
         <p style="margin-bottom: 0;">
-          Complete Academy missions to grow your collection of achievements.
+
+          Complete Academy missions to grow
+          your collection of achievements.
+
         </p>
 
+
       </div>
+
 
     </section>
 
 
-    <section id="campus" aria-labelledby="campus-heading">
+    <!-- =====================================================
+         CAMPUS
+         ===================================================== -->
+
+
+    <section
+      id="campus"
+      aria-labelledby="campus-heading">
+
 
       <div class="section-heading">
 
+
         <h2 id="campus-heading">
+
           Psychology Academy Campus
+
         </h2>
 
+
         <p>
-          Each destination represents a major area of psychology.
-          Available missions contain a working entrance link.
-          Future destinations are clearly identified as opening later.
+
+          Each destination represents a major
+          area of psychology. Available missions
+          contain a working entrance link.
+          Future destinations are clearly
+          identified as opening later.
+
         </p>
+
 
       </div>
 
 
       <div class="campus-path">
 
-        <section class="district" aria-labelledby="foundations-heading">
 
-          <h3 id="foundations-heading" class="district-title">
+        <!-- DISTRICT 1 -->
+
+
+        <section
+          class="district"
+          aria-labelledby="foundations-heading">
+
+
+          <h3
+            id="foundations-heading"
+            class="district-title">
+
             Foundational Sciences District
+
           </h3>
+
 
           <div class="mission-grid">
 
 
-            <article class="mission-card museum-theme">
+            <!-- WEEK 1 -->
+
+
+            <article
+              class="mission-card museum-theme">
+
 
               <div>
 
+
                 <p class="mission-number">
+
                   Week 1
+
                 </p>
 
-                <span class="mission-icon" aria-hidden="true">
+
+                <span
+                  class="mission-icon"
+                  aria-hidden="true">
+
                   🏛️
+
                 </span>
 
+
                 <h3>
+
                   The Psychology Museum
+
                 </h3>
 
+
                 <p>
-                  Explore the origins of psychology, important perspectives,
-                  scientific thinking, and the thinkers who helped shape the field.
+
+                  Explore the origins of psychology,
+                  important perspectives, scientific
+                  thinking, and the thinkers who
+                  helped shape the field.
+
                 </p>
 
-                <p class="mission-status available" id="week1-status">
+
+                <p
+                  class="mission-status available"
+                  id="week1-status">
+
                   Available Now
+
                 </p>
+
 
               </div>
 
-              <a class="mission-link" href="missions/week1.html">
+
+              <a
+                class="mission-link"
+                href="missions/week1.html">
+
                 Enter the Psychology Museum
+
               </a>
+
 
             </article>
 
 
-            <article class="mission-card research-theme">
+            <!-- WEEK 2 -->
+
+
+            <article
+              class="mission-card research-theme">
+
 
               <div>
 
+
                 <p class="mission-number">
+
                   Week 2
+
                 </p>
 
-                <span class="mission-icon" aria-hidden="true">
+
+                <span
+                  class="mission-icon"
+                  aria-hidden="true">
+
                   🔬
+
                 </span>
 
+
                 <h3>
+
                   The Research Conservatory
+
                 </h3>
 
+
                 <p>
-                  Investigate questions, hypotheses, variables, research methods,
-                  correlation, ethics, and misleading scientific claims.
+
+                  Investigate questions, hypotheses,
+                  variables, research methods,
+                  correlation, ethics, and misleading
+                  scientific claims.
+
                 </p>
 
-                <p class="mission-status available" id="week2-status">
+
+                <p
+                  class="mission-status available"
+                  id="week2-status">
+
                   Available Now
+
                 </p>
+
 
               </div>
 
-              <a class="mission-link" href="missions/week2.html">
+
+              <a
+                class="mission-link"
+                href="missions/week2.html">
+
                 Enter the Research Conservatory
+
               </a>
+
 
             </article>
 
 
-            <article class="mission-card brain-theme">
+            <!-- WEEK 3 -->
+
+
+            <article
+              class="mission-card brain-theme">
+
 
               <div>
 
+
                 <p class="mission-number">
+
                   Week 3
+
                 </p>
 
-                <span class="mission-icon" aria-hidden="true">
+
+                <span
+                  class="mission-icon"
+                  aria-hidden="true">
+
                   🧠
+
                 </span>
 
+
                 <h3>
+
                   The Brain Institute
+
                 </h3>
 
+
                 <p>
-                  Restore the neural network while exploring neurons,
-                  neurotransmitters, the nervous system, brain structures,
-                  hormones, genetics, and biological influences on behavior.
+
+                  Restore the neural network while
+                  exploring neurons, neurotransmitters,
+                  the nervous system, brain structures,
+                  hormones, genetics, and biological
+                  influences on behavior.
+
                 </p>
 
-                <p class="mission-status available" id="week3-status">
+
+                <p
+                  class="mission-status available"
+                  id="week3-status">
+
                   Available Now
+
                 </p>
+
 
               </div>
 
-              <a class="mission-link" href="missions/week3.html">
+
+              <a
+                class="mission-link"
+                href="missions/week3.html">
+
                 Enter the Brain Institute
+
               </a>
+
 
             </article>
 
 
-            <article class="mission-card consciousness-theme">
+            <!-- WEEK 4 -->
+
+
+            <article
+              class="mission-card consciousness-theme">
+
 
               <div>
 
+
                 <p class="mission-number">
+
                   Week 4
+
                 </p>
 
-                <span class="mission-icon" aria-hidden="true">
+
+                <span
+                  class="mission-icon"
+                  aria-hidden="true">
+
                   🌙
+
                 </span>
 
+
                 <h3>
+
                   The Consciousness Observatory
+
                 </h3>
 
+
                 <p>
-                  Take the Night Shift and investigate circadian rhythms,
-                  sleep stages, dreams, sleep deprivation, sleep disorders,
-                  learning, memory, and altered states of consciousness.
+
+                  Take the Night Shift and investigate
+                  circadian rhythms, sleep stages,
+                  dreams, sleep deprivation, sleep
+                  disorders, learning, memory, and
+                  altered states of consciousness.
+
                 </p>
 
-                <p class="mission-status available" id="week4-status">
+
+                <p
+                  class="mission-status available"
+                  id="week4-status">
+
                   Available Now
+
                 </p>
+
 
               </div>
 
-              <a class="mission-link" href="missions/week4.html">
+
+              <a
+                class="mission-link"
+                href="missions/week4.html">
+
                 Enter the Consciousness Observatory
+
               </a>
 
+
             </article>
+
 
           </div>
+
 
         </section>
 
 
-        <section class="district" aria-labelledby="cognition-heading">
+        <!-- DISTRICT 2 -->
 
-          <h3 id="cognition-heading" class="district-title">
+
+        <section
+          class="district"
+          aria-labelledby="cognition-heading">
+
+
+          <h3
+            id="cognition-heading"
+            class="district-title">
+
             Learning and Cognition District
+
           </h3>
+
 
           <div class="mission-grid">
 
 
-            <article class="mission-card perception-theme">
+            <!-- WEEK 5 -->
+
+
+            <article
+              class="mission-card perception-theme">
+
 
               <div>
 
+
                 <p class="mission-number">
+
                   Week 5
+
                 </p>
 
-                <span class="mission-icon" aria-hidden="true">
+
+                <span
+                  class="mission-icon"
+                  aria-hidden="true">
+
                   👁️
+
                 </span>
 
+
                 <h3>
+
                   The Perception Gallery
+
                 </h3>
 
+
                 <p>
-                  Investigate sensation, perception, thresholds,
-                  selective attention, sensory integration, Gestalt principles,
-                  and the ways the brain interprets the world.
+
+                  Investigate sensation, perception,
+                  thresholds, selective attention,
+                  sensory integration, Gestalt
+                  principles, and the ways the brain
+                  interprets the world.
+
                 </p>
 
-                <p class="mission-status available" id="week5-status">
+
+                <p
+                  class="mission-status available"
+                  id="week5-status">
+
                   Available Now
+
                 </p>
+
 
               </div>
 
-              <a class="mission-link" href="missions/week5.html">
+
+              <a
+                class="mission-link"
+                href="missions/week5.html">
+
                 Enter the Perception Gallery
+
               </a>
+
 
             </article>
 
 
-            <article class="mission-card learning-theme">
+            <!-- WEEK 6 -->
+
+
+            <article
+              class="mission-card learning-theme">
+
 
               <div>
 
+
                 <p class="mission-number">
+
                   Week 6
+
                 </p>
 
-                <span class="mission-icon" aria-hidden="true">
+
+                <span
+                  class="mission-icon"
+                  aria-hidden="true">
+
                   🔔
+
                 </span>
 
+
                 <h3>
+
                   Pavlov Gardens and Skinner Hall
+
                 </h3>
 
+
                 <p>
-                  Discover classical conditioning, operant conditioning,
-                  reinforcement, punishment, and observational learning.
+
+                  Discover classical conditioning,
+                  operant conditioning, reinforcement,
+                  punishment, and observational
+                  learning.
+
                 </p>
 
-                <p class="mission-status coming">
+
+                <p
+                  class="mission-status coming">
+
                   Opening Soon
+
                 </p>
+
 
                 <p class="coming-note">
-                  Academy staff are preparing conditioning trials, learning
-                  puzzles, and behavioral experiments for your next mission.
+
+                  Academy staff are preparing
+                  conditioning trials, learning
+                  puzzles, and behavioral experiments
+                  for your next mission.
+
                 </p>
 
+
               </div>
+
 
             </article>
 
 
-            <article class="mission-card thinking-theme">
+            <!-- WEEK 7 -->
+
+
+            <article
+              class="mission-card thinking-theme">
+
 
               <div>
 
+
                 <p class="mission-number">
+
                   Week 7
+
                 </p>
 
-                <span class="mission-icon" aria-hidden="true">
+
+                <span
+                  class="mission-icon"
+                  aria-hidden="true">
+
                   🧩
+
                 </span>
 
+
                 <h3>
+
                   The Thinking Workshop
+
                 </h3>
 
+
                 <p>
-                  Explore problem solving, language, cognition, decision making,
-                  intelligence, and the ways we organize information.
+
+                  Explore problem solving, language,
+                  cognition, decision making,
+                  intelligence, and the ways we
+                  organize information.
+
                 </p>
+
 
                 <p class="mission-status coming">
+
                   Opening Later
+
                 </p>
 
+
               </div>
+
 
             </article>
 
 
-            <article class="mission-card memory-theme">
+            <!-- WEEK 8 -->
+
+
+            <article
+              class="mission-card memory-theme">
+
 
               <div>
 
+
                 <p class="mission-number">
+
                   Week 8
+
                 </p>
 
-                <span class="mission-icon" aria-hidden="true">
+
+                <span
+                  class="mission-icon"
+                  aria-hidden="true">
+
                   📚
+
                 </span>
 
+
                 <h3>
+
                   The Memory Library
+
                 </h3>
 
+
                 <p>
-                  Investigate encoding, storage, retrieval, forgetting,
-                  reconstructive memory, and strategies for remembering.
+
+                  Investigate encoding, storage,
+                  retrieval, forgetting,
+                  reconstructive memory, and
+                  strategies for remembering.
+
                 </p>
 
+
                 <p class="mission-status coming">
+
                   Opening Later
+
                 </p>
+
 
               </div>
 
+
             </article>
 
+
           </div>
+
 
         </section>
 
 
-        <section class="district" aria-labelledby="human-heading">
+        <!-- DISTRICT 3 -->
 
-          <h3 id="human-heading" class="district-title">
+
+        <section
+          class="district"
+          aria-labelledby="human-heading">
+
+
+          <h3
+            id="human-heading"
+            class="district-title">
+
             Human Experience District
+
           </h3>
+
 
           <div class="mission-grid">
 
 
-            <article class="mission-card development-theme">
+            <!-- WEEK 9 -->
+
+
+            <article
+              class="mission-card development-theme">
+
 
               <div>
 
+
                 <p class="mission-number">
+
                   Week 9
+
                 </p>
 
-                <span class="mission-icon" aria-hidden="true">
+
+                <span
+                  class="mission-icon"
+                  aria-hidden="true">
+
                   🌱
+
                 </span>
 
+
                 <h3>
+
                   Development Village
+
                 </h3>
 
+
                 <p>
-                  Journey through physical, cognitive, emotional, and social
+
+                  Journey through physical,
+                  cognitive, emotional, and social
                   development across the lifespan.
+
                 </p>
+
 
                 <p class="mission-status coming">
+
                   Opening Later
+
                 </p>
 
+
               </div>
+
 
             </article>
 
 
-            <article class="mission-card emotion-theme">
+            <!-- WEEK 10 -->
+
+
+            <article
+              class="mission-card emotion-theme">
+
 
               <div>
 
+
                 <p class="mission-number">
+
                   Week 10
+
                 </p>
 
-                <span class="mission-icon" aria-hidden="true">
+
+                <span
+                  class="mission-icon"
+                  aria-hidden="true">
+
                   🌸
+
                 </span>
 
+
                 <h3>
+
                   Motivation and Emotion Gardens
+
                 </h3>
 
+
                 <p>
-                  Explore motivation, emotion, human needs, achievement,
-                  biological drives, and emotional experience.
+
+                  Explore motivation, emotion,
+                  human needs, achievement,
+                  biological drives, and
+                  emotional experience.
+
                 </p>
+
 
                 <p class="mission-status coming">
+
                   Opening Later
+
                 </p>
 
+
               </div>
+
 
             </article>
 
 
-            <article class="mission-card personality-theme">
+            <!-- WEEK 11 -->
+
+
+            <article
+              class="mission-card personality-theme">
+
 
               <div>
 
+
                 <p class="mission-number">
+
                   Week 11
+
                 </p>
 
-                <span class="mission-icon" aria-hidden="true">
+
+                <span
+                  class="mission-icon"
+                  aria-hidden="true">
+
                   🏡
+
                 </span>
 
+
                 <h3>
+
                   Personality House
+
                 </h3>
 
+
                 <p>
-                  Visit rooms inspired by major theories of personality,
-                  traits, assessment, and individual differences.
+
+                  Visit rooms inspired by major
+                  theories of personality, traits,
+                  assessment, and individual
+                  differences.
+
                 </p>
+
 
                 <p class="mission-status coming">
+
                   Opening Later
+
                 </p>
 
+
               </div>
+
 
             </article>
 
 
-            <article class="mission-card social-theme">
+            <!-- WEEK 12 -->
+
+
+            <article
+              class="mission-card social-theme">
+
 
               <div>
 
+
                 <p class="mission-number">
+
                   Week 12
+
                 </p>
 
-                <span class="mission-icon" aria-hidden="true">
+
+                <span
+                  class="mission-icon"
+                  aria-hidden="true">
+
                   👥
+
                 </span>
 
+
                 <h3>
+
                   Social Psychology Commons
+
                 </h3>
 
+
                 <p>
-                  Explore conformity, persuasion, relationships, prejudice,
-                  helping behavior, groups, and social influence.
+
+                  Explore conformity, persuasion,
+                  relationships, prejudice, helping
+                  behavior, groups, and social
+                  influence.
+
                 </p>
 
+
                 <p class="mission-status coming">
+
                   Opening Later
+
                 </p>
+
 
               </div>
 
+
             </article>
+
 
           </div>
+
 
         </section>
 
 
-        <section class="district" aria-labelledby="applied-heading">
+        <!-- DISTRICT 4 -->
 
-          <h3 id="applied-heading" class="district-title">
+
+        <section
+          class="district"
+          aria-labelledby="applied-heading">
+
+
+          <h3
+            id="applied-heading"
+            class="district-title">
+
             Wellness and Applied Psychology District
+
           </h3>
+
 
           <div class="mission-grid">
 
 
-            <article class="mission-card workplace-theme">
+            <!-- WEEK 13 -->
+
+
+            <article
+              class="mission-card workplace-theme">
+
 
               <div>
 
+
                 <p class="mission-number">
+
                   Week 13
+
                 </p>
 
-                <span class="mission-icon" aria-hidden="true">
+
+                <span
+                  class="mission-icon"
+                  aria-hidden="true">
+
                   🏢
+
                 </span>
 
+
                 <h3>
+
                   Workplace Psychology Center
+
                 </h3>
 
+
                 <p>
-                  Explore psychology in organizations, leadership, work,
-                  motivation, teams, and human performance.
+
+                  Explore psychology in organizations,
+                  leadership, work, motivation, teams,
+                  and human performance.
+
                 </p>
+
 
                 <p class="mission-status coming">
+
                   Opening Later
+
                 </p>
 
+
               </div>
+
 
             </article>
 
 
-            <article class="mission-card wellness-theme">
+            <!-- WEEK 14 -->
+
+
+            <article
+              class="mission-card wellness-theme">
+
 
               <div>
 
+
                 <p class="mission-number">
+
                   Week 14
+
                 </p>
 
-                <span class="mission-icon" aria-hidden="true">
+
+                <span
+                  class="mission-icon"
+                  aria-hidden="true">
+
                   🌿
+
                 </span>
 
+
                 <h3>
+
                   Stress and Wellness Retreat
+
                 </h3>
 
+
                 <p>
-                  Explore stress, coping, health psychology, resilience,
-                  wellness, and the mind body connection.
+
+                  Explore stress, coping, health
+                  psychology, resilience, wellness,
+                  and the mind body connection.
+
                 </p>
+
 
                 <p class="mission-status coming">
+
                   Opening Later
+
                 </p>
 
+
               </div>
+
 
             </article>
 
 
-            <article class="mission-card disorders-theme">
+            <!-- WEEK 15 -->
+
+
+            <article
+              class="mission-card disorders-theme">
+
 
               <div>
 
+
                 <p class="mission-number">
+
                   Week 15
+
                 </p>
 
-                <span class="mission-icon" aria-hidden="true">
+
+                <span
+                  class="mission-icon"
+                  aria-hidden="true">
+
                   🧭
+
                 </span>
 
+
                 <h3>
+
                   Psychological Disorders Center
+
                 </h3>
 
+
                 <p>
-                  Explore psychological disorders, classification,
-                  symptoms, stigma, and evidence based understanding.
+
+                  Explore psychological disorders,
+                  classification, symptoms, stigma,
+                  and evidence based understanding.
+
                 </p>
+
 
                 <p class="mission-status coming">
+
                   Opening Later
+
                 </p>
 
+
               </div>
+
 
             </article>
 
 
-            <article class="mission-card graduation-theme">
+            <!-- WEEK 16 -->
+
+
+            <article
+              class="mission-card graduation-theme">
+
 
               <div>
 
+
                 <p class="mission-number">
+
                   Week 16
+
                 </p>
 
-                <span class="mission-icon" aria-hidden="true">
+
+                <span
+                  class="mission-icon"
+                  aria-hidden="true">
+
                   🎓
+
                 </span>
 
+
                 <h3>
+
                   Therapy and Graduation Hall
+
                 </h3>
 
+
                 <p>
-                  Explore psychological treatment, therapy approaches,
-                  change, reflection, and your final journey through the Academy.
+
+                  Explore psychological treatment,
+                  therapy approaches, change,
+                  reflection, and your final journey
+                  through the Academy.
+
                 </p>
 
+
                 <p class="mission-status coming">
-                  Grand Opening at the End of the Semester
+
+                  Grand Opening at the End
+                  of the Semester
+
                 </p>
+
 
               </div>
 
+
             </article>
+
 
           </div>
 
+
         </section>
+
 
       </div>
+
 
     </section>
 
 
-    <section class="badge-section" aria-labelledby="badges-heading">
+    <!-- =====================================================
+         BADGES
+         ===================================================== -->
+
+
+    <section
+      class="badge-section"
+      aria-labelledby="badge-heading">
+
 
       <div class="section-heading">
 
-        <h2 id="badges-heading">
+
+        <h2 id="badge-heading">
+
           Psychology Explorer Badge Shelf
+
         </h2>
 
+
         <p>
-          Academy badges appear when this browser recognizes that you completed
-          the corresponding mission. Personalized downloadable badges are also
-          available inside completed missions.
+
+          Academy badges appear when this browser
+          recognizes that you completed the
+          corresponding mission.
+
+          Personalized downloadable badges are
+          also available inside completed missions.
+
         </p>
 
+
       </div>
+
 
       <div class="badge-shelf">
 
 
-        <article id="badge-week1" class="badge-card badge-locked">
+        <article
+          id="badge-week1"
+          class="badge-card badge-locked">
 
-          <span class="badge-symbol" aria-hidden="true">
+
+          <span
+            class="badge-symbol"
+            aria-hidden="true">
+
             🏛️
+
           </span>
 
+
           <h3>
+
             Museum Curator
+
           </h3>
+
 
           <p id="badge-week1-text">
-            Complete the Psychology Museum to earn this badge.
+
+            Complete the Psychology Museum
+            to earn this badge.
+
           </p>
+
 
         </article>
 
 
-        <article id="badge-week2" class="badge-card badge-locked">
+        <article
+          id="badge-week2"
+          class="badge-card badge-locked">
 
-          <span class="badge-symbol" aria-hidden="true">
+
+          <span
+            class="badge-symbol"
+            aria-hidden="true">
+
             🔬
+
           </span>
 
+
           <h3>
+
             Research Investigator
+
           </h3>
+
 
           <p id="badge-week2-text">
-            Complete the Research Conservatory to earn this badge.
+
+            Complete the Research Conservatory
+            to earn this badge.
+
           </p>
+
 
         </article>
 
 
-        <article id="badge-week3" class="badge-card badge-locked">
+        <article
+          id="badge-week3"
+          class="badge-card badge-locked">
 
-          <span class="badge-symbol" aria-hidden="true">
+
+          <span
+            class="badge-symbol"
+            aria-hidden="true">
+
             🧠
+
           </span>
 
+
           <h3>
+
             Brain Explorer
+
           </h3>
+
 
           <p id="badge-week3-text">
-            Complete the Brain Institute to earn this badge.
+
+            Complete the Brain Institute
+            to earn this badge.
+
           </p>
+
 
         </article>
 
 
-        <article id="badge-week4" class="badge-card badge-locked">
+        <article
+          id="badge-week4"
+          class="badge-card badge-locked">
 
-          <span class="badge-symbol" aria-hidden="true">
+
+          <span
+            class="badge-symbol"
+            aria-hidden="true">
+
             🌙
+
           </span>
 
+
           <h3>
+
             Night Shift Investigator
+
           </h3>
+
 
           <p id="badge-week4-text">
-            Complete the Consciousness Observatory to earn this badge.
+
+            Complete the Consciousness Observatory
+            to earn this badge.
+
           </p>
+
 
         </article>
 
 
-        <article id="badge-week5" class="badge-card badge-locked">
+        <article
+          id="badge-week5"
+          class="badge-card badge-locked">
 
-          <span class="badge-symbol" aria-hidden="true">
+
+          <span
+            class="badge-symbol"
+            aria-hidden="true">
+
             👁️
+
           </span>
 
+
           <h3>
+
             Perception Detective
+
           </h3>
+
 
           <p id="badge-week5-text">
-            Complete the Perception Gallery to earn this badge.
+
+            Complete the Perception Gallery
+            to earn this badge.
+
           </p>
+
 
         </article>
 
 
-        <article class="badge-card badge-locked">
+        <article
+          class="badge-card badge-locked">
 
-          <span class="badge-symbol" aria-hidden="true">
+
+          <span
+            class="badge-symbol"
+            aria-hidden="true">
+
             🔔
+
           </span>
 
+
           <h3>
+
             Next Achievement
+
           </h3>
 
+
           <p>
-            A new achievement will become available when Pavlov Gardens
+
+            A new achievement will become
+            available when Pavlov Gardens
             and Skinner Hall open.
+
           </p>
 
+
         </article>
+
 
       </div>
 
+
     </section>
+
+
+    <!-- =====================================================
+         ACCESSIBLE DIRECTORY
+         ===================================================== -->
 
 
     <section
@@ -1493,41 +3468,80 @@
       class="directory"
       aria-labelledby="directory-heading">
 
+
       <div class="section-heading">
 
+
         <h2 id="directory-heading">
+
           Accessible Mission Directory
+
         </h2>
 
+
         <p>
-          This directory provides the same Academy destinations in a
+
+          This directory provides the same
+          Academy destinations in a
           straightforward text format.
+
         </p>
+
 
       </div>
 
-      <div style="overflow-x: auto;">
+
+      <div class="table-scroll">
+
 
         <table>
 
+
           <caption>
-            Psychology Academy weekly destinations and availability
+
+            Psychology Academy weekly
+            destinations and availability
+
           </caption>
+
 
           <thead>
 
+
             <tr>
-              <th scope="col">Week</th>
-              <th scope="col">Destination</th>
-              <th scope="col">Topic</th>
-              <th scope="col">Status</th>
+
+
+              <th scope="col">
+                Week
+              </th>
+
+
+              <th scope="col">
+                Destination
+              </th>
+
+
+              <th scope="col">
+                Topic
+              </th>
+
+
+              <th scope="col">
+                Status
+              </th>
+
+
             </tr>
+
 
           </thead>
 
+
           <tbody>
 
+
             <tr>
+
               <th scope="row">1</th>
 
               <td>
@@ -1543,10 +3557,12 @@
               <td id="directory-week1-status">
                 Available Now
               </td>
+
             </tr>
 
 
             <tr>
+
               <th scope="row">2</th>
 
               <td>
@@ -1562,10 +3578,12 @@
               <td id="directory-week2-status">
                 Available Now
               </td>
+
             </tr>
 
 
             <tr>
+
               <th scope="row">3</th>
 
               <td>
@@ -1581,10 +3599,12 @@
               <td id="directory-week3-status">
                 Available Now
               </td>
+
             </tr>
 
 
             <tr>
+
               <th scope="row">4</th>
 
               <td>
@@ -1600,10 +3620,12 @@
               <td id="directory-week4-status">
                 Available Now
               </td>
+
             </tr>
 
 
             <tr>
+
               <th scope="row">5</th>
 
               <td>
@@ -1619,10 +3641,12 @@
               <td id="directory-week5-status">
                 Available Now
               </td>
+
             </tr>
 
 
             <tr>
+
               <th scope="row">6</th>
 
               <td>
@@ -1636,10 +3660,12 @@
               <td>
                 Opening Soon
               </td>
+
             </tr>
 
 
             <tr>
+
               <th scope="row">7</th>
 
               <td>
@@ -1653,10 +3679,12 @@
               <td>
                 Opening Later
               </td>
+
             </tr>
 
 
             <tr>
+
               <th scope="row">8</th>
 
               <td>
@@ -1670,10 +3698,12 @@
               <td>
                 Opening Later
               </td>
+
             </tr>
 
 
             <tr>
+
               <th scope="row">9</th>
 
               <td>
@@ -1687,10 +3717,12 @@
               <td>
                 Opening Later
               </td>
+
             </tr>
 
 
             <tr>
+
               <th scope="row">10</th>
 
               <td>
@@ -1704,10 +3736,12 @@
               <td>
                 Opening Later
               </td>
+
             </tr>
 
 
             <tr>
+
               <th scope="row">11</th>
 
               <td>
@@ -1721,10 +3755,12 @@
               <td>
                 Opening Later
               </td>
+
             </tr>
 
 
             <tr>
+
               <th scope="row">12</th>
 
               <td>
@@ -1738,10 +3774,12 @@
               <td>
                 Opening Later
               </td>
+
             </tr>
 
 
             <tr>
+
               <th scope="row">13</th>
 
               <td>
@@ -1755,10 +3793,12 @@
               <td>
                 Opening Later
               </td>
+
             </tr>
 
 
             <tr>
+
               <th scope="row">14</th>
 
               <td>
@@ -1772,10 +3812,12 @@
               <td>
                 Opening Later
               </td>
+
             </tr>
 
 
             <tr>
+
               <th scope="row">15</th>
 
               <td>
@@ -1789,10 +3831,12 @@
               <td>
                 Opening Later
               </td>
+
             </tr>
 
 
             <tr>
+
               <th scope="row">16</th>
 
               <td>
@@ -1806,203 +3850,542 @@
               <td>
                 Opening Later
               </td>
+
             </tr>
+
 
           </tbody>
 
+
         </table>
+
 
       </div>
 
+
     </section>
+
+
+    <!-- =====================================================
+         MESSAGE
+         ===================================================== -->
 
 
     <section
       class="academy-message"
-      aria-labelledby="academy-message-heading">
+      aria-labelledby="message-heading">
 
-      <h2 id="academy-message-heading">
+
+      <h2 id="message-heading">
+
         A Message from Dr. Holdaway
+
       </h2>
 
-      <p>
-        Psychology becomes more meaningful when we move beyond memorizing
-        definitions and begin asking questions about why people think,
-        feel, learn, remember, develop, and behave the way they do.
-      </p>
 
       <p>
-        Use Psychology Academy as a place to explore those questions.
-        Try things. Make predictions. Use evidence. Make mistakes.
-        Revisit ideas. Stay curious.
+
+        Psychology becomes more meaningful
+        when we move beyond memorizing
+        definitions and begin asking questions
+        about why people think, feel, learn,
+        remember, develop, and behave the way
+        they do.
+
       </p>
+
+
+      <p>
+
+        Use Psychology Academy as a place
+        to explore those questions.
+
+        Try things. Make predictions.
+        Use evidence. Make mistakes.
+        Revisit ideas. Stay curious.
+
+      </p>
+
 
       <p style="margin-bottom: 0;">
-        Every destination you enter is another opportunity to understand
-        psychology and perhaps understand a little more about the world
-        around you.
+
+        Every destination you enter is another
+        opportunity to understand psychology
+        and perhaps understand a little more
+        about the world around you.
+
       </p>
 
+
     </section>
+
 
   </main>
 
 
+  <!-- =======================================================
+       FOOTER
+       ======================================================= -->
+
+
   <footer>
+
 
     <div class="container">
 
+
       <p>
+
         Psychology Academy
+
       </p>
 
-      <p>
-        Introduction to Psychology · Dr. Tonya Holdaway
-      </p>
 
       <p>
-        Built for curiosity, accessibility, and active learning.
+
+        Introduction to Psychology ·
+        Dr. Tonya Holdaway
+
       </p>
+
+
+      <p>
+
+        Built for curiosity,
+        accessibility,
+        and active learning.
+
+      </p>
+
 
     </div>
+
 
   </footer>
 
 
+  <!-- =======================================================
+       JAVASCRIPT
+       ======================================================= -->
+
+
   <script>
+
+
+    /* -------------------------------------------------------
+       OPTIONAL ACADEMY MUSIC
+       ------------------------------------------------------- */
+
+
+    const academyAudio =
+      document.getElementById(
+        "academy-audio"
+      );
+
+
+    const playAcademyMusic =
+      document.getElementById(
+        "play-academy-music"
+      );
+
+
+    const pauseAcademyMusic =
+      document.getElementById(
+        "pause-academy-music"
+      );
+
+
+    const academyVolume =
+      document.getElementById(
+        "academy-volume"
+      );
+
+
+    const academyAudioStatus =
+      document.getElementById(
+        "academy-audio-status"
+      );
+
+
+    academyAudio.volume =
+      0.22;
+
+
+    playAcademyMusic.addEventListener(
+
+      "click",
+
+      async function() {
+
+
+        try {
+
+
+          await academyAudio.play();
+
+
+          academyAudioStatus.textContent =
+            "The Academy theme is playing.";
+
+
+          playAcademyMusic.textContent =
+            "♪ Academy Theme Playing";
+
+
+        } catch (error) {
+
+
+          academyAudioStatus.textContent =
+            "Your browser could not start the optional music. You can continue through the Academy normally without audio.";
+
+
+        }
+
+
+      }
+
+    );
+
+
+    pauseAcademyMusic.addEventListener(
+
+      "click",
+
+      function() {
+
+
+        academyAudio.pause();
+
+
+        academyAudioStatus.textContent =
+          "Academy theme is currently paused.";
+
+
+        playAcademyMusic.textContent =
+          "▶ Play Academy Theme";
+
+
+      }
+
+    );
+
+
+    academyVolume.addEventListener(
+
+      "input",
+
+      function() {
+
+
+        academyAudio.volume =
+          Number(
+            academyVolume.value
+          );
+
+
+      }
+
+    );
+
+
+    academyAudio.addEventListener(
+
+      "ended",
+
+      function() {
+
+
+        academyAudioStatus.textContent =
+          "Academy theme has ended.";
+
+
+      }
+
+    );
+
+
+    /* -------------------------------------------------------
+       EXISTING MISSION PROGRESS
+       ------------------------------------------------------- */
+
 
     const academyMissions = [
 
+
       {
+
         week: 1,
-        storageKey: "psychologyMuseumWeek1",
-        progressProperty: "solved",
-        completionKey: "psychologyAcademyWeek1Complete",
-        requiredCount: 6,
-        unitLabel: "exhibits",
-        statusId: "week1-status",
-        directoryStatusId: "directory-week1-status",
-        badgeId: "badge-week1",
-        badgeTextId: "badge-week1-text",
-        badgeText: "Earned: Museum Curator"
+
+        storageKey:
+          "psychologyMuseumWeek1",
+
+        progressProperty:
+          "solved",
+
+        completionKey:
+          "psychologyAcademyWeek1Complete",
+
+        requiredCount:
+          6,
+
+        unitLabel:
+          "exhibits",
+
+        statusId:
+          "week1-status",
+
+        directoryStatusId:
+          "directory-week1-status",
+
+        badgeId:
+          "badge-week1",
+
+        badgeTextId:
+          "badge-week1-text",
+
+        badgeText:
+          "Earned: Museum Curator"
+
       },
 
+
       {
+
         week: 2,
-        storageKey: "psychologyResearchWeek2",
-        progressProperty: "solved",
-        completionKey: "psychologyAcademyWeek2Complete",
-        requiredCount: 7,
-        unitLabel: "stations",
-        statusId: "week2-status",
-        directoryStatusId: "directory-week2-status",
-        badgeId: "badge-week2",
-        badgeTextId: "badge-week2-text",
-        badgeText: "Earned: Research Investigator"
+
+        storageKey:
+          "psychologyResearchWeek2",
+
+        progressProperty:
+          "solved",
+
+        completionKey:
+          "psychologyAcademyWeek2Complete",
+
+        requiredCount:
+          7,
+
+        unitLabel:
+          "stations",
+
+        statusId:
+          "week2-status",
+
+        directoryStatusId:
+          "directory-week2-status",
+
+        badgeId:
+          "badge-week2",
+
+        badgeTextId:
+          "badge-week2-text",
+
+        badgeText:
+          "Earned: Research Investigator"
+
       },
 
+
       {
+
         week: 3,
-        storageKey: "psychologyBrainWeek3",
-        progressProperty: "solved",
-        completionKey: "psychologyAcademyWeek3Complete",
-        requiredCount: 7,
-        unitLabel: "pathways",
-        statusId: "week3-status",
-        directoryStatusId: "directory-week3-status",
-        badgeId: "badge-week3",
-        badgeTextId: "badge-week3-text",
-        badgeText: "Earned: Brain Explorer"
+
+        storageKey:
+          "psychologyBrainWeek3",
+
+        progressProperty:
+          "solved",
+
+        completionKey:
+          "psychologyAcademyWeek3Complete",
+
+        requiredCount:
+          7,
+
+        unitLabel:
+          "pathways",
+
+        statusId:
+          "week3-status",
+
+        directoryStatusId:
+          "directory-week3-status",
+
+        badgeId:
+          "badge-week3",
+
+        badgeTextId:
+          "badge-week3-text",
+
+        badgeText:
+          "Earned: Brain Explorer"
+
       },
 
+
       {
+
         week: 4,
-        storageKey: "psychologyConsciousnessWeek4",
-        progressProperty: "completed",
-        completionKey: "psychologyAcademyWeek4Complete",
-        requiredCount: 6,
-        unitLabel: "investigations",
-        statusId: "week4-status",
-        directoryStatusId: "directory-week4-status",
-        badgeId: "badge-week4",
-        badgeTextId: "badge-week4-text",
-        badgeText: "Earned: Night Shift Investigator"
+
+        storageKey:
+          "psychologyConsciousnessWeek4",
+
+        progressProperty:
+          "completed",
+
+        completionKey:
+          "psychologyAcademyWeek4Complete",
+
+        requiredCount:
+          6,
+
+        unitLabel:
+          "investigations",
+
+        statusId:
+          "week4-status",
+
+        directoryStatusId:
+          "directory-week4-status",
+
+        badgeId:
+          "badge-week4",
+
+        badgeTextId:
+          "badge-week4-text",
+
+        badgeText:
+          "Earned: Night Shift Investigator"
+
       },
 
+
       {
+
         week: 5,
-        storageKey: "psychologyPerceptionWeek5",
-        progressProperty: "completed",
-        completionKey: "psychologyAcademyWeek5Complete",
-        requiredCount: 7,
-        unitLabel: "exhibits",
-        statusId: "week5-status",
-        directoryStatusId: "directory-week5-status",
-        badgeId: "badge-week5",
-        badgeTextId: "badge-week5-text",
-        badgeText: "Earned: Perception Detective"
+
+        storageKey:
+          "psychologyPerceptionWeek5",
+
+        progressProperty:
+          "completed",
+
+        completionKey:
+          "psychologyAcademyWeek5Complete",
+
+        requiredCount:
+          7,
+
+        unitLabel:
+          "exhibits",
+
+        statusId:
+          "week5-status",
+
+        directoryStatusId:
+          "directory-week5-status",
+
+        badgeId:
+          "badge-week5",
+
+        badgeTextId:
+          "badge-week5-text",
+
+        badgeText:
+          "Earned: Perception Detective"
+
       }
+
 
     ];
 
 
-    function getMissionProgress(mission) {
+    function getMissionProgress(
+      mission
+    ) {
+
 
       try {
 
+
         const saved =
           JSON.parse(
+
             localStorage.getItem(
               mission.storageKey
             )
+
           );
 
+
         if (
+
           saved &&
+
           Array.isArray(
             saved[
               mission.progressProperty
             ]
           )
+
         ) {
+
 
           return saved[
             mission.progressProperty
           ].length;
+
+
         }
 
+
       } catch (error) {
+
 
         console.warn(
           "Mission progress could not be read."
         );
+
+
       }
 
+
       return 0;
+
+
     }
 
 
-    function updateMissionCard(mission) {
+    function updateMissionCard(
+      mission
+    ) {
+
 
       const progressCount =
         getMissionProgress(
           mission
         );
 
+
       const savedCompletion =
         localStorage.getItem(
           mission.completionKey
         ) === "true";
 
+
       const missionComplete =
+
         savedCompletion ||
+
         progressCount >=
-        mission.requiredCount;
+          mission.requiredCount;
+
 
       const statusElement =
         document.getElementById(
           mission.statusId
         );
+
 
       const directoryStatus =
         document.getElementById(
@@ -2010,32 +4393,48 @@
         );
 
 
-      if (missionComplete) {
+      if (
+        missionComplete
+      ) {
+
 
         localStorage.setItem(
           mission.completionKey,
           "true"
         );
 
-        if (statusElement) {
+
+        if (
+          statusElement
+        ) {
+
 
           statusElement.textContent =
-            "Mission Completed";
+            "Mission Completed ✓";
+
 
           statusElement.classList.remove(
             "available"
           );
 
+
           statusElement.classList.add(
             "complete"
           );
+
+
         }
 
 
-        if (directoryStatus) {
+        if (
+          directoryStatus
+        ) {
+
 
           directoryStatus.textContent =
             "Mission Completed";
+
+
         }
 
 
@@ -2044,80 +4443,134 @@
             mission.badgeId
           );
 
+
         const badgeText =
           document.getElementById(
             mission.badgeTextId
           );
 
 
-        if (badge) {
+        if (
+          badge
+        ) {
+
 
           badge.classList.remove(
             "badge-locked"
           );
 
+
           badge.classList.add(
             "badge-earned"
           );
+
+
         }
 
 
-        if (badgeText) {
+        if (
+          badgeText
+        ) {
+
 
           badgeText.textContent =
             mission.badgeText;
+
+
         }
 
 
         return true;
+
+
       }
 
 
-      if (progressCount > 0) {
+      if (
+        progressCount > 0
+      ) {
 
-        if (statusElement) {
+
+        if (
+          statusElement
+        ) {
+
 
           statusElement.textContent =
+
             "Mission In Progress: " +
+
             progressCount +
+
             " of " +
+
             mission.requiredCount +
+
             " " +
+
             mission.unitLabel +
+
             " completed";
+
+
         }
 
 
-        if (directoryStatus) {
+        if (
+          directoryStatus
+        ) {
+
 
           directoryStatus.textContent =
             "In Progress";
+
+
         }
+
+
       }
 
 
       return false;
+
+
     }
 
 
     function updateAcademyProgress() {
 
-      let completedCount = 0;
+
+      let completedCount =
+        0;
 
 
       academyMissions.forEach(
-        function(mission) {
+
+        function(
+          mission
+        ) {
+
 
           const complete =
             updateMissionCard(
               mission
             );
 
-          if (complete) {
 
-            completedCount += 1;
+          if (
+            complete
+          ) {
+
+
+            completedCount +=
+              1;
+
+
           }
+
+
         }
+
       );
 
 
@@ -2126,10 +4579,12 @@
           "academy-progress"
         );
 
+
       const progressText =
         document.getElementById(
           "academy-progress-text"
         );
+
 
       const explorerLevel =
         document.getElementById(
@@ -2142,63 +4597,120 @@
 
 
       progressText.textContent =
+
         completedCount +
+
         " of 16 Academy missions completed";
 
 
-      if (completedCount === 0) {
+      if (
+        completedCount === 0
+      ) {
+
+
         explorerLevel.textContent =
           "Beginning Explorer";
-      }
 
-      if (completedCount === 1) {
+
+      } else if (
+        completedCount === 1
+      ) {
+
+
         explorerLevel.textContent =
           "Curious Investigator";
-      }
 
-      if (completedCount === 2) {
+
+      } else if (
+        completedCount === 2
+      ) {
+
+
         explorerLevel.textContent =
           "Psychology Pathfinder";
-      }
 
-      if (completedCount === 3) {
+
+      } else if (
+        completedCount === 3
+      ) {
+
+
         explorerLevel.textContent =
           "Neural Pathfinder";
-      }
 
-      if (completedCount === 4) {
+
+      } else if (
+        completedCount === 4
+      ) {
+
+
         explorerLevel.textContent =
-          "Academy Night Scholar";
-      }
+          "Academy Investigator";
 
-      if (completedCount === 5) {
+
+      } else if (
+        completedCount >= 5 &&
+        completedCount < 8
+      ) {
+
+
         explorerLevel.textContent =
-          "Perception Pathfinder";
-      }
+          "Experienced Explorer";
 
-      if (completedCount >= 6) {
+
+      } else if (
+        completedCount >= 8 &&
+        completedCount < 12
+      ) {
+
+
         explorerLevel.textContent =
-          "Academy Scholar";
-      }
+          "Psychology Scholar";
 
-      if (completedCount >= 10) {
+
+      } else if (
+        completedCount >= 12 &&
+        completedCount < 16
+      ) {
+
+
         explorerLevel.textContent =
-          "Senior Psychology Explorer";
-      }
+          "Senior Academy Scholar";
 
-      if (completedCount >= 16) {
+
+      } else if (
+        completedCount === 16
+      ) {
+
+
         explorerLevel.textContent =
           "Psychology Academy Graduate";
+
+
       }
+
+
     }
 
 
     document.addEventListener(
+
       "DOMContentLoaded",
-      updateAcademyProgress
+
+      function() {
+
+
+        updateAcademyProgress();
+
+
+      }
+
     );
+
 
   </script>
 
+
 </body>
+
 </html>
