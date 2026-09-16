@@ -1713,7 +1713,7 @@
 
         <p style="margin-bottom: 0;">
 
-          Seven Academy destinations are currently
+          Eight Academy destinations are currently
           open for exploration. More will appear
           as our semester journey continues.
 
@@ -2312,49 +2312,16 @@
             </article>
 
             <!-- WEEK 8 -->
-
-            <article
-              class="mission-card memory-theme">
-
+            <article class="mission-card memory-theme">
               <div>
-
-                <p class="mission-number">
-
-                  Week 8
-
-                </p>
-
-                <span
-                  class="mission-icon"
-                  aria-hidden="true">
-
-                  📚
-
-                </span>
-
-                <h3>
-
-                  The Memory Library
-
-                </h3>
-
-                <p>
-
-                  Investigate encoding, storage,
-                  retrieval, forgetting,
-                  reconstructive memory, and
-                  strategies for remembering.
-
-                </p>
-
-                <p class="mission-status coming">
-
-                  Opening Later
-
-                </p>
-
+                <p class="mission-number">Week 8</p>
+                <span class="mission-icon" aria-hidden="true">📚</span>
+                <h3>The Memory Library</h3>
+                <p>The Lost Archive</p>
+                <p>Try memory demonstrations, light up a brain network, inspect misleading details, and build a study plan. Collect seven fragments, restore the archive, and earn your Memory Archivist badge. Each room links to OpenStax Chapter 8.</p>
+                <p class="mission-status available" id="week8-status">Available Now</p>
               </div>
-
+              <a class="mission-link" href="missions/week8.html">Enter the Memory Library</a>
             </article>
 
           </div>
@@ -2946,6 +2913,11 @@
           <h3>Mindprint Investigator</h3>
           <p id="badge-week7-text">Collect all seven fragments and solve the final case in the Thinking Workshop to earn this badge.</p>
         </article>
+        <article id="badge-week8" class="badge-card badge-locked">
+          <span class="badge-symbol" aria-hidden="true">📚</span>
+          <h3>Memory Archivist</h3>
+          <p id="badge-week8-text">Collect all seven fragments and solve the final case in the Memory Library to earn this badge.</p>
+        </article>
 
 
       </div>
@@ -3131,21 +3103,10 @@
             </tr>
 
             <tr>
-
               <th scope="row">8</th>
-
-              <td>
-                Memory Library
-              </td>
-
-              <td>
-                Memory
-              </td>
-
-              <td>
-                Opening Later
-              </td>
-
+              <td><a href="missions/week8.html">The Memory Library</a><br />The Lost Archive</td>
+              <td>Memory</td>
+              <td id="directory-week8-status">Available Now</td>
             </tr>
 
             <tr>
@@ -3710,6 +3671,22 @@
         badgeTextId: "badge-week7-text",
         badgeText: "Earned: Mindprint Investigator",
         lockedBadgeText: "Collect all seven fragments and solve the final case in the Thinking Workshop to earn this badge."
+      }
+    ,
+      {
+        week: 8,
+        storageKey: "psychologyMemoryWeek8_v1",
+        progressProperty: "solved",
+        completionKey: "psychologyAcademyWeek8Complete",
+        requiredCount: 14,
+        unitLabel: "locks",
+        requiresFinalCase: true,
+        statusId: "week8-status",
+        directoryStatusId: "directory-week8-status",
+        badgeId: "badge-week8",
+        badgeTextId: "badge-week8-text",
+        badgeText: "Earned: Memory Archivist",
+        lockedBadgeText: "Collect all seven fragments and solve the final case in the Memory Library to earn this badge."
       }
     ];
 
