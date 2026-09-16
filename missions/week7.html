@@ -1,1 +1,715 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Week 7: The Thinking Workshop | Psychology Academy</title><style>
+    :root {
+      --ink: #1f2933;
+      --navy: #102f4a;
+      --navy-dark: #071826;
+      --blue: #315f87;
+      --blue-light: #eaf3f8;
+      --green: #315f40;
+      --green-light: #eef8f2;
+      --gold: #745500;
+      --gold-light: #fff8e8;
+      --cream: #fffdf7;
+      --red: #7b1f1f;
+      --red-light: #fff1f1;
+      --white: #ffffff;
+      --border: #617486;
+      --shadow: 0 12px 30px rgba(8, 34, 54, 0.16);
+      --radius: 16px;
+    }
 
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--ink);
+      background-color: #f5f6f3;
+      line-height: 1.7;
+      font-size: 18px;
+    }
+
+    a {
+      color: #174c74;
+      text-decoration: underline;
+      text-underline-offset: 0.16em;
+      font-weight: bold;
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit;
+    }
+
+    button:focus,
+    input:focus,
+    textarea:focus,
+    a:focus {
+      outline: 4px solid #111111;
+      outline-offset: 3px;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: 16px;
+      top: -100px;
+      z-index: 5000;
+      background-color: var(--white);
+      color: #111111;
+      border: 3px solid #111111;
+      padding: 12px 16px;
+    }
+
+    .skip-link:focus {
+      top: 16px;
+    }
+
+    .container {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(
+          circle at 15% 25%,
+          rgba(255,255,255,0.32),
+          transparent 18%
+        ),
+        radial-gradient(
+          circle at 82% 22%,
+          rgba(255,255,255,0.22),
+          transparent 20%
+        ),
+        linear-gradient(
+          to bottom,
+          #dfeaf2 0%,
+          #eef3ec 52%,
+          #f6f1e5 100%
+        );
+      border-bottom: 5px solid var(--navy);
+      padding: 38px 0 48px;
+    }
+
+    .hero::before {
+      content: "◯   ◇   △   ◌   □   ◇   ◯";
+      position: absolute;
+      top: 42px;
+      right: 4%;
+      color: rgba(16, 47, 74, 0.28);
+      font-size: 1.5rem;
+      letter-spacing: 10px;
+      animation: shiftShapes 7s ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+
+    @keyframes shiftShapes {
+      from {
+        transform: translateX(-10px);
+        opacity: 0.35;
+      }
+
+      to {
+        transform: translateX(10px);
+        opacity: 0.75;
+      }
+    }
+
+    .academy-link {
+      display: inline-block;
+      margin-bottom: 18px;
+      padding: 10px 15px;
+      background-color: var(--white);
+      color: var(--navy);
+      border: 2px solid var(--navy);
+      border-radius: 8px;
+      text-decoration: underline;
+      font-weight: bold;
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      color: var(--navy);
+      font-weight: bold;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      margin: 0;
+      color: var(--navy-dark);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.6rem, 7vw, 4.8rem);
+      line-height: 1.08;
+    }
+
+    .hero-subtitle {
+      margin: 10px 0 0;
+      color: #5e4e26;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.25rem, 3vw, 1.85rem);
+    }
+
+    .hero-text {
+      max-width: 850px;
+      margin: 18px 0 0;
+      font-size: 1.1rem;
+    }
+
+    main {
+      padding: 32px 0 54px;
+    }
+
+    h2,
+    h3 {
+      color: var(--navy);
+      line-height: 1.3;
+    }
+
+    .panel {
+      background-color: var(--white);
+      border: 2px solid var(--border);
+      border-left: 8px solid var(--blue);
+      border-radius: var(--radius);
+      padding: 23px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .panel-green {
+      border-left-color: var(--green);
+    }
+
+    .panel-gold {
+      border-left-color: var(--gold);
+    }
+
+    .gallery-panel {
+      background-color: var(--navy-dark);
+      color: var(--white);
+      border: 3px solid #04121c;
+      border-radius: var(--radius);
+      padding: 22px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .gallery-panel h2 {
+      color: var(--white);
+      margin-top: 0;
+    }
+
+    .audio-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .audio-button {
+      background-color: var(--white);
+      color: var(--navy);
+      border: 2px solid var(--white);
+      border-radius: 8px;
+      padding: 10px 14px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .audio-status {
+      margin-top: 12px;
+      margin-bottom: 0;
+      color: var(--white);
+      font-weight: bold;
+    }
+
+    .mission-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 350px;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 16px;
+    }
+
+    .gallery-map {
+      background-color: #eef2e8;
+      border: 3px solid #63705b;
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .gallery-map h2 {
+      margin-top: 0;
+    }
+
+    .room-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .room-button {
+      width: 100%;
+      min-height: 190px;
+      padding: 18px;
+      text-align: left;
+      background-color: var(--white);
+      color: var(--ink);
+      border: 2px solid var(--border);
+      border-left: 8px solid var(--blue);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      cursor: pointer;
+    }
+
+    .room-button:hover {
+      transform: translateY(-2px);
+    }
+
+    .room-button[aria-pressed="true"] {
+      background-color: var(--green-light);
+      border-left-color: var(--green);
+    }
+
+    .room-icon {
+      display: block;
+      font-size: 2.3rem;
+      margin-bottom: 8px;
+    }
+
+    .room-title {
+      display: block;
+      color: var(--navy);
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+
+    .status-text {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    .active-area {
+      margin-top: 26px;
+    }
+
+    .activity-card {
+      background-color: var(--white);
+      border: 2px solid var(--border);
+      border-left: 8px solid var(--blue);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .choice-grid {
+      display: grid;
+      gap: 12px;
+      margin: 18px 0;
+    }
+
+    .choice-button,
+    .action-button,
+    .threshold-button,
+    .gestalt-button {
+      width: 100%;
+      padding: 14px 16px;
+      border: 2px solid var(--border);
+      border-radius: 9px;
+      background-color: var(--white);
+      color: var(--ink);
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .action-button {
+      width: auto;
+      background-color: var(--blue);
+      color: var(--white);
+      border-color: var(--navy);
+      font-weight: bold;
+      text-decoration: underline;
+    }
+
+    .feedback {
+      margin-top: 16px;
+      padding: 16px;
+      border: 2px solid var(--border);
+      border-left: 8px solid var(--blue);
+      border-radius: 10px;
+      background-color: #f8fbfd;
+      color: var(--ink);
+    }
+
+    .feedback.correct {
+      background-color: var(--green-light);
+      border-left-color: var(--green);
+    }
+
+    .feedback.incorrect {
+      background-color: var(--red-light);
+      border-left-color: var(--red);
+    }
+
+    /* Guided next-exhibit navigation */
+    .next-step-wrap {
+      margin-top: 18px;
+      padding-top: 16px;
+      border-top: 2px solid rgba(97, 116, 134, 0.35);
+    }
+
+    .next-step-label {
+      margin: 0 0 10px;
+      font-weight: bold;
+      color: var(--navy);
+    }
+
+    .next-step-button {
+      width: 100%;
+      padding: 14px 18px;
+      background-color: var(--green);
+      color: var(--white);
+      border: 3px solid #173d26;
+      border-radius: 10px;
+      font-weight: bold;
+      text-align: center;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    .next-step-button:hover {
+      background-color: #214f34;
+    }
+
+    .threshold-zone {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+      margin: 18px 0;
+    }
+
+    .threshold-light {
+      min-height: 80px;
+      border: 2px solid #5d6870;
+      border-radius: 8px;
+    }
+
+    .light-1 {
+      background-color: #f4f4f4;
+    }
+
+    .light-2 {
+      background-color: #e7e7e7;
+    }
+
+    .light-3 {
+      background-color: #d2d2d2;
+    }
+
+    .light-4 {
+      background-color: #b8b8b8;
+    }
+
+    .light-5 {
+      background-color: #969696;
+    }
+
+    .gestalt-display {
+      background-color: #fafafa;
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      padding: 24px;
+      margin: 18px 0;
+      text-align: center;
+      font-size: 2rem;
+      letter-spacing: 12px;
+    }
+
+    .video-wrapper {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%;
+      margin: 18px 0;
+      overflow: hidden;
+      border-radius: 10px;
+      border: 2px solid var(--border);
+      background-color: #000000;
+    }
+
+    .video-wrapper iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .resource-button {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 13px 18px;
+      background-color: var(--navy);
+      color: var(--white);
+      border: 3px solid #071826;
+      border-radius: 9px;
+      font-weight: bold;
+      text-decoration: underline;
+    }
+
+    progress {
+      width: 100%;
+      height: 24px;
+    }
+
+    .inventory-list,
+    .achievement-list {
+      padding-left: 22px;
+    }
+
+    label {
+      display: block;
+      margin-top: 14px;
+      font-weight: bold;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 90px;
+      margin-top: 6px;
+      padding: 10px;
+      border: 2px solid var(--border);
+      border-radius: 8px;
+    }
+
+    .final-case {
+      margin-top: 28px;
+      padding: 25px;
+      background-color: var(--navy);
+      color: var(--white);
+      border: 3px solid #071826;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .final-case h2 {
+      color: var(--white);
+    }
+
+    .final-case .feedback {
+      background-color: var(--white);
+      color: var(--ink);
+    }
+
+    .badge-maker {
+      margin-top: 22px;
+      padding: 20px;
+      background-color: var(--gold-light);
+      color: var(--ink);
+      border: 3px solid #80651c;
+      border-radius: 12px;
+    }
+
+    .badge-maker h3 {
+      color: #634900;
+      margin-top: 0;
+    }
+
+    .badge-name-input {
+      width: 100%;
+      max-width: 500px;
+      margin: 6px 0 14px;
+      padding: 12px;
+      border: 2px solid var(--border);
+      border-radius: 8px;
+    }
+
+    .badge-download-button {
+      display: inline-block;
+      background-color: var(--navy);
+      color: var(--white);
+      border: 3px solid var(--navy-dark);
+      border-radius: 9px;
+      padding: 14px 20px;
+      cursor: pointer;
+      font-weight: bold;
+      text-decoration: underline;
+    }
+
+    .return-button {
+      display: inline-block;
+      margin-top: 14px;
+      padding: 14px 20px;
+      background-color: var(--green);
+      color: var(--white);
+      border: 3px solid #173d26;
+      border-radius: 9px;
+      font-weight: bold;
+      text-decoration: underline;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    footer {
+      background-color: var(--navy-dark);
+      color: var(--white);
+      padding: 24px 0;
+      border-top: 4px solid #c5a84f;
+    }
+
+    footer a {
+      color: var(--white);
+    }
+
+    @media (max-width: 920px) {
+      .mission-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: static;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .room-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .threshold-zone {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      .hero::before {
+        animation: none;
+      }
+
+      .room-button:hover {
+        transform: none;
+      }
+    }
+  
+.hero::before{content:"◇   ✦   ◯   ✦   ◇";animation:thoughtDrift 9s ease-in-out infinite alternate;opacity:.35} @keyframes thoughtDrift{from{transform:translate(-12px,0) rotate(-4deg)}to{transform:translate(12px,16px) rotate(4deg)}}button:disabled{opacity:.65;cursor:not-allowed}.lab-scene{background:#eaf3f8;border:2px solid #617486;border-radius:12px;padding:20px;margin:16px 0;text-align:center}.lab-icons{font-size:2.6rem;letter-spacing:12px}.pulse{animation:pulse .6s ease-out}@keyframes pulse{50%{transform:scale(1.07)}}.controls{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0}.controls button{padding:10px 14px}.clue{background:#fff8e8;border:2px solid #745500;padding:14px;border-radius:10px;margin-top:18px}.room-button[aria-pressed="true"]{outline:3px solid #315f40;outline-offset:2px}summary{cursor:pointer;font-weight:bold}select{font:inherit;max-width:100%;padding:10px;border:2px solid #617486;border-radius:6px}fieldset{border:1px solid #617486;border-radius:10px;margin:16px 0;padding:16px}legend{font-weight:bold}input[type=range]{max-width:100%}.gallery-panel label{color:white}.final-case a{color:white}.final-case select{display:block;background:white;color:#1f2933;width:100%}[hidden]{display:none!important}.no-motion *{animation:none!important;scroll-behavior:auto!important;transition:none!important}.choice-button:hover:not(:disabled){background:#eaf3f8}.badge-maker label{color:#1f2933}.quiet{font-size:.9rem}.save-status{font-size:.85rem}h2:focus{outline:3px solid #111;outline-offset:4px} @media(prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important}}@media print{.hero,.gallery-panel,.gallery-map,#active-area,footer,.controls,#reset,.skip-link{display:none}.mission-layout{display:block}.sidebar{position:static}.panel,.final-case{box-shadow:none;color:#111;background:white}body{font-size:12pt}}
+
+.research-link{display:inline-block;background:#eef8f2;border:2px solid #315f40;border-radius:8px;padding:10px 14px;margin:8px 0 14px;color:#214f34}.lab-scene h3{margin-top:0}.lab-scene button{background:white;border:2px solid #315f87;border-radius:8px;color:#102f4a;min-height:44px;cursor:pointer}.token-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:15px 0}.word-token{display:inline-block;background:white;border:2px solid #315f87;border-radius:9px;padding:9px 15px}.slide{animation:wordSlide .55s ease-out}@keyframes wordSlide{from{transform:translateY(-15px);opacity:.5}to{transform:translateY(0);opacity:1}}.mini-maze{display:grid;grid-template-columns:repeat(3,1fr);max-width:260px;gap:6px;margin:15px auto}.maze-cell{display:flex;align-items:center;justify-content:center;min-height:64px;border:2px solid #617486;border-radius:8px;background:white;color:#102f4a}.maze-wall{background:#41566a;color:white}.maze-current{background:#fff0b7;border:3px solid #745500;animation:pulse .4s ease-out}.idea-star{font-size:1.5rem;color:#745500;display:inline-block;animation:wordSlide .5s ease-out}.lab-scene textarea{text-align:left}.lab-scene label{text-align:left}.research-note{font-size:.92rem;text-align:left}.lab-scene .controls{justify-content:center}.signal-light{width:28px;height:28px;background:#315f40;border-radius:50%;display:inline-block}.signal-light.pulse{animation:pulse .8s 2}.lab-scene select{background:white;color:#243342}input:focus,select:focus,summary:focus,textarea:focus{outline:4px solid #102f4a;outline-offset:3px}
+</style></head><body><a class="skip-link" href="#main-content">Skip to main content</a>
+<header class="hero"><div class="container"><a class="academy-link" href="https://bk2phdnkj7-ux.github.io/https-tonyaholdaway.github.io-psychology-academy-/">Return to Psychology Academy</a><p class="eyebrow">Week 7 Psychology Mission</p><h1>The Thinking Workshop</h1><p class="hero-subtitle">The Missing Mindprint</p><p class="hero-text">The Academy’s Mindprint, a guide to thoughtful problem solving, has vanished. Seven workshop rooms hold its fragments. Rebuild the missing pattern by investigating concepts, language, reasoning, creativity, intelligence, and evidence.</p></div></header>
+<main id="main-content" class="container"><noscript><section class="panel">This activity needs JavaScript. Enable it to play, or use the linked OpenStax readings and ask Dr. Holdaway for an alternative activity.</section></noscript>
+<section class="gallery-panel" aria-labelledby="audio-heading"><h2 id="audio-heading">Academy Atmosphere</h2><p>Optional instrumental music and moving thought fragments set the scene. Sound and animation are never required; use the controls below to adjust them. Reduced-motion device settings are also respected.</p><div class="audio-controls"><button id="music" class="audio-button" aria-pressed="false">Play Academy Music</button><button id="motion" class="audio-button" aria-pressed="false">Turn Animations Off</button></div><label for="volume">Music volume</label><input id="volume" type="range" min="0" max="0.3" step="0.01" value="0.08"><p id="audio-status" role="status">Music is off.</p></section>
+<section class="panel panel-gold"><h2>Mission Briefing</h2><p>Open any room, explore its interactive desk, and solve both locks to earn a clue letter. Collect all seven fragments, solve the final case, and arrange the letters to name a sudden realization of a solution.</p><p>No timer and no penalty for retries. All controls work with a keyboard; no dragging or quick reactions are required. Read the feedback, use hints, and try again. Allow about 30–45 minutes. Explorations are teaching illustrations, not intelligence tests or real research results.</p><p>Progress and notes are saved in this browser when storage is available. Download your notebook before changing devices or using a shared computer. This activity does not automatically submit a Canvas grade.</p><p>Interactive desks invite you to explore before answering. You earn each fragment by solving the two locks; creative writing is saved for reflection and is not automatically graded.</p><p id="save-status" class="save-status" role="status"></p></section>
+<section class="panel panel-green"><h2>Your Learning Goals</h2><ul><li>Distinguish concepts, prototypes, and schemas.</li><li>Explain how language structure affects meaning.</li><li>Apply problem-solving strategies and recognize cognitive biases.</li><li>Compare divergent and convergent thinking and intelligence theories.</li><li>Interpret intelligence measures in context.</li></ul><p><strong>Use your textbook as an investigation tool.</strong> Each room includes an “Open the OpenStax Research File” link to the section behind its challenge. Open it whenever you need help, then return here to apply what you read. Using the readings and hints is part of the mission.</p></section>
+<div class="mission-layout"><div><section class="gallery-map"><h2>Thinking Workshop Map</h2><p>Choose a room. You can revisit completed rooms for practice.</p><div id="rooms" class="room-grid"></div></section><div id="active-area" class="active-area"></div>
+<section id="final-case" class="final-case" aria-labelledby="final-heading"><h2 id="final-heading" tabindex="-1">The Mindprint Door</h2><p id="gate-status">Collect all seven evidence fragments to activate the Mindprint Door.</p><form id="final-form" hidden><p>A student proposes several ways to make a study space quieter, selects the option that fits their budget, and revises “Stop being annoying!” to “Could we have a quiet hour from 7 to 8?” A teammate then claims that one online quiz reveals each person's permanent intellectual potential.</p><label for="f1">1. Generating options and then selecting one illustrates:</label><select id="f1" required><option value="">Choose the sequence</option><option>Convergent, then divergent thinking</option><option>Divergent, then convergent thinking</option><option>Confirmation bias, then fixation</option></select><label for="f2">2. What can we reasonably say about the revised request?</label><select id="f2" required><option value="">Choose a conclusion</option><option>It guarantees agreement</option><option>It prevents the listener from thinking differently</option><option>It communicates a specific need and may affect interpretation</option></select><label for="f3">3. What is the strongest response to the online-quiz claim?</label><select id="f3" required><option value="">Choose an evaluation</option><option>Examine validity, reliability, norms, and context before interpreting a score</option><option>A single number captures every ability</option><option>A high score proves unlimited future success</option></select><label for="code">4. Arrange your seven fragment letters into the door word</label><p>Hint: A sudden realization of how to solve a problem. Seven letters, begins with I. Both I fragments belong in your answer.</p><input id="code" class="badge-name-input" maxlength="20" autocomplete="off" required><button class="action-button" type="submit">Restore the Mindprint</button></form><p id="final-feedback" class="feedback" role="status">Your seven evidence fragments will help you restore the Mindprint.</p><div id="badge" class="badge-maker" hidden><h3>Mindprint Restored: Investigator Badge</h3><p>You recovered all seven fragments and restored the Mindprint. Download your notebook and optional badge. Follow your Canvas assignment directions for any required submission.</p><label for="learner">Name for your badge (optional)</label><input id="learner" class="badge-name-input" maxlength="50" placeholder="Mindprint Investigator"><button id="badge-download" class="badge-download-button">Download PNG Badge</button></div></section></div>
+<aside class="sidebar" aria-label="Mission tools"><section class="panel"><h2>Mission Progress</h2><label for="progress-bar">Evidence cards collected</label><progress id="progress-bar" max="7" value="0"></progress><p id="progress-text" role="status"></p></section><section class="panel panel-green"><h2>Evidence Satchel</h2><ul id="inventory-list"></ul></section><section class="panel panel-gold"><h2>Achievements</h2><ul id="achievement-list"></ul></section><section class="panel"><h2>Investigator Notebook</h2><label for="notes">Write an example, a correction, or a question for Dr. Holdaway.</label><textarea id="notes" rows="7"></textarea><div class="controls"><button id="download-notes" class="action-button">Download Notebook</button><button id="reset">Reset This Mission</button></div><div id="reset-confirm" hidden><p>Erase this mission's saved progress and notes on this browser?</p><button id="confirm-reset">Yes, erase this mission</button> <button id="cancel-reset">Keep my progress</button></div></section></aside></div>
+<section class="panel" style="margin-top:28px"><h2>Research Desk</h2><p>Original teaching scenarios aligned with OpenStax <em>Psychology 2e</em>, Chapter 7. The mission illustrates concepts; it does not measure your intelligence.</p><ul><li><a href="https://openstax.org/books/psychology-2e/pages/7-1-what-is-cognition" target="_blank" rel="noopener">7.1 What Is Cognition? (new tab)</a></li><li><a href="https://openstax.org/books/psychology-2e/pages/7-2-language" target="_blank" rel="noopener">7.2 Language (new tab)</a></li><li><a href="https://openstax.org/books/psychology-2e/pages/7-3-problem-solving" target="_blank" rel="noopener">7.3 Problem Solving (new tab)</a></li><li><a href="https://openstax.org/books/psychology-2e/pages/7-4-what-are-intelligence-and-creativity" target="_blank" rel="noopener">7.4 What Are Intelligence and Creativity? (new tab)</a></li><li><a href="https://openstax.org/books/psychology-2e/pages/7-5-measures-of-intelligence" target="_blank" rel="noopener">7.5 Measures of Intelligence (new tab)</a></li><li><a href="https://openstax.org/books/psychology-2e/pages/7-6-the-source-of-intelligence" target="_blank" rel="noopener">7.6 The Source of Intelligence (new tab)</a></li></ul><p class="quiet">Spielman, R. M., Jenkins, W. J., &amp; Lovett, M. D. (2020). <em>Psychology 2e.</em> OpenStax. Links open in a new tab. No external audio or image files are required. Original synthesized music accompanies the mission.</p></section></main><footer><div class="container"><p>Psychology Academy · Week 7 · The Thinking Workshop</p><p>Dr. Tonya Holdaway</p><a href="https://bk2phdnkj7-ux.github.io/https-tonyaholdaway.github.io-psychology-academy-/">Return to Psychology Academy</a></div></footer><script>
+'use strict';
+const $=id=>document.getElementById(id);
+const sections={
+'7.1':['What Is Cognition?','7-1-what-is-cognition'],
+'7.2':['Language','7-2-language'],
+'7.3':['Problem Solving','7-3-problem-solving'],
+'7.4':['What Are Intelligence and Creativity?','7-4-what-are-intelligence-and-creativity'],
+'7.5':['Measures of Intelligence','7-5-measures-of-intelligence'],
+'7.6':['The Source of Intelligence','7-6-the-source-of-intelligence']};
+const rooms=[
+{title:'The Schema Archive',icon:'🗂️',letter:'G',card:'Category Fragment',fact:'A category, its typical example, and an organized expectation are different tools for thinking.',section:'7.1',intro:'A workshop filing system has mixed up categories, representative examples, and expectations. Examine the cards, then restore the labels.',sim:'schema',hint:'A concept is a category. A prototype is a representative example. A schema organizes related expectations.',q:[
+['Nora pictures a robin when someone says “bird,” even though penguins are also birds. What is the robin in this example?',['An algorithm','A prototype','An intelligence score','A morpheme'],1,'The robin is Nora’s representative example of the bird concept. A prototype is not a rule that excludes less typical members.'],
+['An apprentice expects a laboratory visit to involve checking in, receiving instructions, and using equipment. Which concept best explains this expectation?',['A phoneme','A reinforcement schedule','An event schema','A validity coefficient'],2,'An event schema organizes expectations about a familiar sequence of activities. Expectations can be useful while still needing revision.']]},
+{title:'The Language Engine',icon:'💬',letter:'I',card:'Meaning Fragment',fact:'Changing word order can change meaning without changing the words.',section:'7.2',intro:'The engine has the right words but keeps assigning the wrong person to an action. Swap the sentence roles and watch how the message changes.',sim:'language',hint:'Syntax concerns arrangement; semantics concerns meaning. A morpheme is a meaningful unit, and a phoneme is a sound unit.',q:[
+['“The mentor helped the student” becomes “The student helped the mentor.” Which feature was directly changed?',['The phonemes in each word','The number of morphemes','The vocabulary items','The syntax'],3,'Syntax concerns how words are arranged. Rearranging the same words changes who helps whom and therefore affects the sentence’s meaning.'],
+['Which claim about language and thought is most defensible?',['Language can influence interpretation without completely determining thought','People cannot experience anything they cannot name','Language has no relationship to thinking','Different vocabulary proves different levels of intelligence'],0,'Language can shape how people attend to and describe experience. That does not establish that language completely determines thought.']]},
+{title:'The Route Room',icon:'🧭',letter:'T',card:'Strategy Fragment',fact:'A systematic procedure differs from a useful shortcut.',section:'7.3',intro:'Recover a route through a small workshop floor plan. Use the direction buttons; you do not need to drag, move quickly, or use a mouse.',sim:'maze',hint:'An algorithm is a systematic procedure. A heuristic is a shortcut that does not guarantee a correct answer.',q:[
+['A technician systematically checks every candidate code in a finite list until finding the one correct code. What strategy is this?',['Availability heuristic','Functional fixedness','An algorithm','Confirmation bias'],2,'A systematic exhaustive search through a finite list will find the correct listed code if carried out correctly. It can take more time than a shortcut.'],
+['An apprentice chooses the exit that looks closest without checking obstacles. What best describes this strategy?',['A shortcut that guarantees success','A heuristic that may help but can fail','A measure of reliability','An example of crystallized intelligence alone'],1,'Choosing what looks closest is a shortcut. Obstacles may make the seemingly direct route ineffective.']]},
+{title:'The Evidence Mirror',icon:'🔎',letter:'S',card:'Bias Fragment',fact:'A fair investigation looks for evidence that could challenge a belief.',section:'7.3',intro:'A fictional Academy memo claims: “Background music always improves study performance.” Open the evidence folders before evaluating the claim. These records are invented for this exercise, not actual research.',sim:'evidence',hint:'Confirmation bias favors supporting evidence. Functional fixedness limits an object to its familiar use.',q:[
+['The investigator opens only reports that agree with the music claim and ignores conflicting reports. Which bias is illustrated?',['Confirmation bias','Stimulus generalization','Linguistic determinism','A reliable measurement'],0,'Selecting only agreement is confirmation bias. The strongest evaluation considers relevant supporting and conflicting evidence.'],
+['A student needs to prop up a small sign but rejects using a paper cup because “cups are only for drinks.” What is the barrier?',['A prototype','Divergent thinking','A valid algorithm','Functional fixedness'],3,'Functional fixedness limits the cup to its customary use and makes another possible solution harder to see.']]},
+{title:'The Idea Foundry',icon:'✨',letter:'H',card:'Creativity Fragment',fact:'Generate possibilities, then evaluate them against the actual goal.',section:'7.4',intro:'The workshop needs a desk organizer. Imagine up to three uses for an empty paper cup other than drinking, then consider which would work best. Your ideas are saved, but no automatic creativity score is assigned.',sim:'ideas',hint:'Divergent thinking generates possibilities. Convergent thinking narrows them using criteria.',q:[
+['A team lists several possible uses for a cup before judging them. What process does this illustrate?',['Convergent thinking','Divergent thinking','Confirmation bias','Norming'],1,'Generating several possible approaches illustrates divergent thinking. There may be many useful answers.'],
+['The team selects the cup design that is stable, affordable, and fits the desk. What process is emphasized?',['Functional fixedness','General intelligence testing','Convergent thinking','Language development'],2,'The team is narrowing options against criteria. Creative work can involve both generating ideas and evaluating their usefulness.']]},
+{title:'The Intelligence Council',icon:'🧠',letter:'N',card:'Ability Fragment',fact:'Theories organize abilities differently; their evidence and limits matter.',section:'7.4',intro:'Three workshop members analyze costs, invent a design, and organize its installation. Use Sternberg’s framework to inspect their contributions. This activity does not assign you an intelligence type.',sim:'council',hint:'Fluid ability emphasizes unfamiliar reasoning. Crystallized ability draws on acquired knowledge. Sternberg describes analytical, creative, and practical abilities.',q:[
+['A student reasons through an unfamiliar pattern while another explains vocabulary learned in previous courses. Which distinction is illustrated?',['Practical versus emotional intelligence','Reliability versus validity','Syntax versus semantics','Fluid reasoning versus crystallized knowledge'],3,'Reasoning through a novel pattern emphasizes fluid ability. Using learned vocabulary emphasizes crystallized knowledge; real tasks can draw on both.'],
+['Which statement offers the best interpretation of Gardner’s multiple intelligences?',['It broadens attention to human abilities, but evidence for independent intelligences is limited','It proves that everyone has one fixed learning style','It shows that matching all teaching to a preferred format guarantees learning','It makes cognitive assessment unnecessary'],0,'Gardner’s theory is influential in education, but its proposed independent intelligences are debated. It should not be treated as a validated fixed learning-style label.']]},
+{title:'The Assessment Observatory',icon:'📊',letter:'I',card:'Context Fragment',fact:'Consistent scores need valid interpretations and appropriate context.',section:'7.5',extra:'7.6',intro:'A machine claims to measure intelligence by counting how quickly visitors click. Inspect its claims before trusting the result. These controls illustrate measurement ideas; they do not test you.',sim:'assessment',hint:'Reliability concerns consistency. Validity concerns support for a score’s interpretation. Heritability describes population variation under particular conditions.',q:[
+['The machine produces similar scores on repeated trials, but no evidence connects its scores to the intelligence claims it makes. Which conclusion is strongest?',['Consistency alone proves every claim','It may be reliable, but validity for the claimed use is not established','Its scores must be random','It measures every human strength'],1,'Consistent measurement is not enough. Evidence must support the intended interpretation and use of the score.'],
+['A report estimates heritability of intelligence within a population. What does that tell us?',['The genetic percentage of one student’s intelligence','That educational opportunities cannot matter','How much variation is statistically associated with genetic differences in that population and context','That a person’s future ability is permanently fixed'],2,'Heritability describes variation in a studied population under particular conditions. It does not assign a genetic percentage to an individual or rule out environmental influence.']]}
+];
+const KEY='psychologyThinkingWeek7_v1', COMPLETE='psychologyAcademyWeek7Complete';
+let state={solved:[],notes:'',escaped:false,experiment:false,motion:false,ideas:[],evidence:[]},active=-1,storageOK=true;
+try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&typeof s==='object'){state.solved=Array.isArray(s.solved)?[...new Set(s.solved.filter(x=>Number.isInteger(x)&&x>=0&&x<14))]:[];state.notes=typeof s.notes==='string'?s.notes:'';state.escaped=s.escaped===true&&state.solved.length===14;state.experiment=s.experiment===true;state.motion=s.motion===true;state.ideas=Array.isArray(s.ideas)?s.ideas.slice(0,3).map(x=>typeof x==='string'?x:''):[];state.evidence=Array.isArray(s.evidence)?s.evidence.filter(x=>['support','challenge','all'].includes(x)):[];}}catch(e){storageOK=false;}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(state));if(state.escaped)localStorage.setItem(COMPLETE,'true');$('save-status').textContent='Progress and notes saved in this browser.';}catch(e){storageOK=false;$('save-status').textContent='Browser saving is unavailable. Keep this tab open and download your notebook before leaving.';}}
+function done(i){return state.solved.includes(i*2)&&state.solved.includes(i*2+1);}
+function el(tag,text,cls){const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n;}
+function dashboard(){let count=rooms.filter((_,i)=>done(i)).length;$('progress-bar').value=count;$('progress-text').textContent=count+' of 7 evidence cards collected'+(state.escaped?' · Mindprint restored!':'');$('inventory-list').replaceChildren();rooms.forEach((r,i)=>{if(done(i))$('inventory-list').append(el('li',r.card+' — letter '+r.letter+'. '+r.fact));const b=$('room-'+i);if(b){b.querySelector('.status-text').textContent=done(i)?'✓ Clue collected':'Open · '+r.q.filter((_,j)=>state.solved.includes(i*2+j)).length+'/2 locks solved';b.setAttribute('aria-pressed',String(active===i));}});if(!count)$('inventory-list').append(el('li','Solve both locks in a room to collect its clue.'));$('achievement-list').replaceChildren();if(state.experiment)$('achievement-list').append(el('li','Workshop Explorer: Tried an interactive desk.'));if(state.evidence.includes('support')&&state.evidence.includes('challenge'))$('achievement-list').append(el('li','Evidence Seeker: Examined supporting and challenging reports.'));if(state.ideas.filter(x=>x.trim()).length===3)$('achievement-list').append(el('li','Idea Explorer: Recorded three possibilities.'));if(count===7)$('achievement-list').append(el('li','Mindprint Archivist: Recovered all seven fragments.'));if(state.escaped)$('achievement-list').append(el('li','Mindprint Investigator: Restored the Mindprint.'));if(!$('achievement-list').children.length)$('achievement-list').append(el('li','Achievements appear as you investigate.'));$('final-form').hidden=count<7||state.escaped;$('badge').hidden=!state.escaped;$('gate-status').textContent=state.escaped?'Mission complete. Your badge and notebook are ready.':count===7?'All seven fragments recovered. Solve the case and enter the missing word.':'Collect all seven evidence fragments to activate the Mindprint Door.';}
+rooms.forEach((r,i)=>{let b=el('button',undefined,'room-button');b.type='button';b.id='room-'+i;b.setAttribute('aria-pressed','false');const icon=el('span',r.icon,'room-icon');icon.setAttribute('aria-hidden','true');b.append(icon,el('span',r.title,'room-title'),el('span','OpenStax '+r.section),el('span','','status-text'));b.addEventListener('click',()=>openRoom(i));$('rooms').append(b);});
+function openRoom(i){active=i;const r=rooms[i],a=$('active-area');a.replaceChildren();let box=el('section',undefined,'activity-card'),h=el('h2',r.title);h.tabIndex=-1;box.append(h,el('p',r.intro));[r.section,r.extra].filter(Boolean).forEach(key=>{const a=el('a','Open the OpenStax Research File: '+key+' '+sections[key][0]+' (new tab)','research-link');a.href='https://openstax.org/books/psychology-2e/pages/'+sections[key][1];a.target='_blank';a.rel='noopener';box.append(a);});if(r.sim)box.append(simulation(r.sim));const hint=el('details');hint.append(el('summary','Click here to open a research hint'),el('p',r.hint));box.append(hint);r.q.forEach((q,j)=>{let field=el('fieldset');field.append(el('legend','Lock '+(j+1)),el('p',q[0]));const opts=el('div',undefined,'choice-grid'),feedback=el('p',state.solved.includes(i*2+j)?'✓ Previously solved. '+q[3]:'Choose one answer. You may retry.', 'feedback');feedback.id='feedback-'+j;feedback.setAttribute('role','status');q[1].forEach((option,k)=>{let btn=el('button',String.fromCharCode(65+k)+'. '+option,'choice-button');btn.type='button';btn.addEventListener('click',()=>{if(k===q[2]){if(!state.solved.includes(i*2+j))state.solved.push(i*2+j);save();feedback.className='feedback correct';feedback.textContent='✓ Lock solved. '+q[3];updateClue();dashboard();}else{feedback.className='feedback incorrect';feedback.textContent='Not quite. '+r.hint+' Review the scenario and try again.';}});opts.append(btn);});field.append(opts,feedback);box.append(field);});const clue=el('div');clue.id='room-clue';box.append(clue);a.append(box);updateClue();dashboard();h.focus();}
+function updateClue(){const n=$('room-clue');if(!n)return;n.replaceChildren();if(done(active)){const r=rooms[active];n.className='clue';n.append(el('strong','Evidence recovered: '+r.card+' · '+r.letter),el('p',r.fact));let next=el('button',rooms.every((_,i)=>done(i))?'Go to the Mindprint Door':'Continue to the Next Unsolved Room','next-step-button');next.type='button';next.onclick=()=>{let idx=rooms.findIndex((_,i)=>!done(i));if(idx<0){$('final-heading').focus();$('final-case').scrollIntoView({block:'start'});}else openRoom(idx);};n.append(next);}else{n.className='';n.append(el('p','Solve both locks to reveal this room’s clue.'));}}
+function simulation(type){
+ const box=el('div',undefined,'lab-scene'),title=el('h3','Interactive Desk'),status=el('p','Explore with the controls below.');status.setAttribute('role','status');const controls=el('div',undefined,'controls');box.append(title,status);
+ function explored(){state.experiment=true;save();dashboard();}
+ function button(label,fn){const b=el('button',label);b.type='button';b.onclick=()=>{fn();explored();};controls.append(b);return b;}
+ function animate(n){n.classList.remove('slide');void n.offsetWidth;n.classList.add('slide');}
+ if(type==='schema'){
+  const card=el('div','Select an archive card.','word-token');box.append(card);
+  [['Concept','“Bird” names a category, including robins and penguins.'],['Prototype','A robin might be your typical example of a bird.'],['Schema','A library schema might include shelves, borrowing books, and quiet study.']].forEach(([name,text])=>button('Inspect '+name,()=>{card.textContent=text;animate(card);status.textContent=name+' card opened.';}));
+ }else if(type==='language'){
+  let swapped=false;const tokens=el('div',undefined,'token-row');const words=['The mentor','helped','the student'].map(x=>el('span',x,'word-token'));tokens.append(...words);box.append(tokens);status.textContent='The mentor provides help; the student receives it.';
+  button('Swap Who Helps Whom',()=>{swapped=!swapped;words[0].textContent=swapped?'The student':'The mentor';words[2].textContent=swapped?'the mentor':'the student';animate(tokens);status.textContent=swapped?'The student now provides help; the mentor receives it. Same vocabulary, different arrangement.':'The mentor provides help again. Word order carries information about the roles.';});
+ }else if(type==='maze'){
+  let pos=0,steps=0;const maze=el('div',undefined,'mini-maze');maze.setAttribute('aria-hidden','true');const cells=Array.from({length:9},()=>el('div',undefined,'maze-cell'));maze.append(...cells);box.append(maze);
+  function render(){cells.forEach((n,i)=>{n.className='maze-cell'+([1,4].includes(i)?' maze-wall':'')+(i===pos?' maze-current':'');n.textContent=i===pos?'YOU':i===8?'EXIT':[1,4].includes(i)?'Wall':'·';});}
+  status.textContent='Start: row 1, column 1. Walls occupy row 1 column 2 and row 2 column 2. Exit: row 3 column 3.';render();
+  function move(dr,dc){let r=Math.floor(pos/3)+dr,c=pos%3+dc,next=r*3+c;if(r<0||r>2||c<0||c>2||[1,4].includes(next)){status.textContent='Blocked. Position stays at row '+(Math.floor(pos/3)+1)+', column '+(pos%3+1)+'. Try another direction.';return;}pos=next;steps++;render();status.textContent=pos===8?'Exit reached in '+steps+' moves. The direct-looking route had obstacles.':'Now at row '+(r+1)+', column '+(c+1)+'. '+steps+' moves.';}
+  button('Move Up',()=>move(-1,0));button('Move Down',()=>move(1,0));button('Move Left',()=>move(0,-1));button('Move Right',()=>move(0,1));button('Reset Route',()=>{pos=0;steps=0;render();status.textContent='Back at row 1, column 1. Exit: row 3, column 3.';});
+ }else if(type==='evidence'){
+  const folder=el('div',undefined,'word-token');box.append(folder);status.textContent='Claim to inspect: “Background music always improves study performance.”';
+  const records={support:'Fictional record A: One student reports feeling more focused with music. A personal report alone does not establish an effect for everyone.',challenge:'Fictional record B: Another student reports that lyrics distracted them during reading. This challenges the word “always,” but the report alone is not a controlled experiment.',all:'Fictional record C: A better investigation would compare study conditions, define performance, and consider task and person differences.'};
+  [['support','Open Supporting Report'],['challenge','Open Challenging Report'],['all','Open Research Plan']].forEach(([key,label])=>button(label,()=>{folder.textContent=records[key];animate(folder);if(!state.evidence.includes(key))state.evidence.push(key);status.textContent=state.evidence.includes('support')&&state.evidence.includes('challenge')?'Both sides examined. What would stronger evidence require?':'Folder opened. Consider opening a different perspective too.';}));
+ }else if(type==='ideas'){
+  const stars=el('div');stars.setAttribute('aria-hidden','true');box.append(stars);status.textContent='Record up to three different ideas. You can leave these blank and still solve the locks.';
+  for(let i=0;i<3;i++){const label=el('label','Cup idea '+(i+1));label.htmlFor='idea-'+i;const field=el('textarea');field.id='idea-'+i;field.rows=2;field.maxLength=300;field.value=state.ideas[i]||'';field.oninput=()=>{state.ideas[i]=field.value;save();};box.append(label,field);}
+  button('Gather My Ideas',()=>{stars.replaceChildren();let count=state.ideas.filter(x=>x.trim()).length;for(let i=0;i<count;i++)stars.append(el('span','✦','idea-star'));status.textContent=count?count+' ideas recorded. Now compare usefulness, stability, and fit for your desk. This is a record, not a creativity score.':'No ideas recorded yet. Imagine a sorting cup, a sign stand, or another useful design.';});
+ }else if(type==='council'){
+  const card=el('div',undefined,'word-token');box.append(card);[['Analytical','Avery checks the budget and compares the strengths of two designs.'],['Creative','Jordan invents an original design that solves the storage problem.'],['Practical','Morgan coordinates materials and adapts the plan to the workspace.']].forEach(([name,text])=>button('Consult '+name+' Thinking',()=>{card.textContent=text;animate(card);status.textContent='Sternberg’s '+name.toLowerCase()+' category helps describe this contribution. Tasks may involve multiple abilities.';}));
+  box.append(el('p','Theory note: General intelligence describes shared variation across cognitive tasks. Fluid and crystallized abilities can be examined within broader models; they are not exclusive personal “types.”','research-note'));
+ }else if(type==='assessment'){
+  const display=el('div','Machine claim: “Fast clicks reveal your complete intelligence.”','word-token');box.append(display);const records=[['Inspect Consistency','Repeated fictional scores are 61, 62, and 61. Consistency addresses reliability; it does not establish what is being measured.'],['Inspect Validity','No supporting study is provided for the machine’s intelligence claim. Evidence for that interpretation is missing.'],['Inspect Context','Device access, motor demands, language, testing conditions, and comparison samples all deserve attention before interpreting performance.']];records.forEach(([label,text])=>button(label,()=>{display.textContent=text;animate(display);status.textContent='Evidence inspected. A confident claim is not the same as a supported interpretation.';}));
+ }
+ box.append(controls);return box;
+}
+$('notes').value=state.notes;$('notes').oninput=()=>{state.notes=$('notes').value;save();};
+$('final-form').onsubmit=e=>{e.preventDefault();if(!rooms.every((_,i)=>done(i)))return;const results=[$('f1').value==='Divergent, then convergent thinking',$('f2').value==='It communicates a specific need and may affect interpretation',$('f3').value==='Examine validity, reliability, norms, and context before interpreting a score',$('code').value.trim().toUpperCase()==='INSIGHT'];if(results.every(Boolean)){state.escaped=true;save();dashboard();$('final-feedback').textContent='✓ Mindprint restored! You generated alternatives, evaluated a solution, considered how wording may affect interpretation, and questioned an unsupported score claim. Your seven fragments spell INSIGHT.';$('badge-download').focus();}else{$('final-feedback').textContent='Keep investigating: '+results.map((r,i)=>r?'Part '+(i+1)+' solved.':(['Part 1: Which thinking process generates alternatives?','Part 2: Clear wording can help without guaranteeing a reaction.','Part 3: Ask what supports the test interpretation.','Part 4: Use all seven letters, including both Is.'][i])).join(' ');}};
+function download(blob,name){const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+$('download-notes').onclick=()=>{const lines=['PSYCHOLOGY ACADEMY — THE THINKING WORKSHOP','Status: '+(state.escaped?'Mindprint restored':'In progress'),'Evidence: '+rooms.filter((_,i)=>done(i)).length+'/7','',...rooms.filter((_,i)=>done(i)).map(r=>r.card+' ['+r.letter+']: '+r.fact),'','MY NOTES',state.notes,'','CUP IDEAS',...state.ideas.filter(x=>x.trim()),'','EVIDENCE FOLDERS OPENED',...state.evidence,'','READINGS',...Object.entries(sections).map(([k,v])=>k+' '+v[0]+': https://openstax.org/books/psychology-2e/pages/'+v[1]),'','This local record is not an automatically submitted grade.'];download(new Blob([lines.join('\n')],{type:'text/plain;charset=utf-8'}),'thinking-workshop-notebook.txt');};
+$('badge-download').onclick=()=>{if(!state.escaped)return;let c=document.createElement('canvas');c.width=1200;c.height=720;let g=c.getContext('2d');g.fillStyle='#102f4a';g.fillRect(0,0,1200,720);g.strokeStyle='#d4bc70';g.lineWidth=12;g.strokeRect(28,28,1144,664);g.textAlign='center';g.fillStyle='#fff8e8';g.font='bold 30px Arial';g.fillText('PSYCHOLOGY ACADEMY · CHAPTER 7',600,115);g.font='bold 58px Georgia';g.fillText('Mindprint Investigator',600,245);g.font='32px Arial';g.fillText('THE THINKING WORKSHOP · MISSION COMPLETE',600,335);let name=$('learner').value.trim()||'Mindprint Investigator';let size=44;g.font=size+'px Arial';while(g.measureText(name).width>1050){size--;g.font=size+'px Arial';}g.fillText(name,600,450);g.font='26px Arial';g.fillText('Seven mindprint fragments · Final case solved',600,540);g.fillText('Dr. Tonya Holdaway',600,605);c.toBlob(b=>{if(b)download(b,'thinking-workshop-badge.png');});};
+$('reset').onclick=()=>{$('reset-confirm').hidden=false;$('confirm-reset').focus();};$('cancel-reset').onclick=()=>{$('reset-confirm').hidden=true;$('reset').focus();};$('confirm-reset').onclick=()=>{state={solved:[],notes:'',escaped:false,experiment:false,motion:state.motion,ideas:[],evidence:[]};try{localStorage.removeItem(COMPLETE);}catch(e){}save();$('notes').value='';$('learner').value='';$('final-form').reset();$('final-feedback').textContent='Your seven evidence fragments will help you restore the Mindprint.';$('active-area').replaceChildren();active=-1;$('reset-confirm').hidden=true;dashboard();$('room-0').focus();};
+let ctx=null,bus=null,timer=null,musicOn=false,step=0;
+function setMusicUI(){ $('music').textContent=musicOn?'Pause Academy Music':'Play Academy Music';$('music').setAttribute('aria-pressed',String(musicOn));$('audio-status').textContent=musicOn?'Academy music is playing.':'Music is off.';}
+function note(){if(!musicOn||!ctx)return;const melody=[293.66,369.99,440,554.37,329.63,392,493.88,392,293.66,440,587.33,440,277.18,369.99,440,369.99],now=ctx.currentTime;const o=ctx.createOscillator(),g=ctx.createGain();o.type='sine';o.frequency.value=melody[step++%melody.length];g.gain.setValueAtTime(0,now);g.gain.linearRampToValueAtTime(.3,now+.06);g.gain.exponentialRampToValueAtTime(.001,now+1.2);o.connect(g);g.connect(bus);o.start(now);o.stop(now+1.3);o.onended=()=>{o.disconnect();g.disconnect();};}
+async function stopMusic(){musicOn=false;clearInterval(timer);if(ctx)await ctx.suspend();setMusicUI();}
+$('music').onclick=async()=>{try{if(musicOn){await stopMusic();return;}const AC=window.AudioContext||window.webkitAudioContext;if(!AC)throw Error('unsupported');if(!ctx){ctx=new AC();bus=ctx.createGain();bus.connect(ctx.destination);}await ctx.resume();bus.gain.value=Number($('volume').value);musicOn=true;note();timer=setInterval(note,650);setMusicUI();}catch(e){musicOn=false;$('audio-status').textContent='Audio is unavailable in this browser. All activities work without music.';}};
+$('volume').oninput=()=>{if(bus)bus.gain.setTargetAtTime(Number($('volume').value),ctx.currentTime,.05);};document.addEventListener('visibilitychange',()=>{if(document.hidden&&musicOn)stopMusic();});
+function motionUI(){document.body.classList.toggle('no-motion',state.motion);$('motion').setAttribute('aria-pressed',String(state.motion));$('motion').textContent=state.motion?'Turn Animations On':'Turn Animations Off';} $('motion').onclick=()=>{state.motion=!state.motion;motionUI();save();};motionUI();dashboard();save();
+</script></body></html>
