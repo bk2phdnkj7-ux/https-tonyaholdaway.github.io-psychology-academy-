@@ -1,1 +1,674 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Week 6: The Conditioning Vault | Psychology Academy</title><style>
+    :root {
+      --ink: #1f2933;
+      --navy: #102f4a;
+      --navy-dark: #071826;
+      --blue: #315f87;
+      --blue-light: #eaf3f8;
+      --green: #315f40;
+      --green-light: #eef8f2;
+      --gold: #745500;
+      --gold-light: #fff8e8;
+      --cream: #fffdf7;
+      --red: #7b1f1f;
+      --red-light: #fff1f1;
+      --white: #ffffff;
+      --border: #617486;
+      --shadow: 0 12px 30px rgba(8, 34, 54, 0.16);
+      --radius: 16px;
+    }
 
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--ink);
+      background-color: #f5f6f3;
+      line-height: 1.7;
+      font-size: 18px;
+    }
+
+    a {
+      color: #174c74;
+      text-decoration: underline;
+      text-underline-offset: 0.16em;
+      font-weight: bold;
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit;
+    }
+
+    button:focus,
+    input:focus,
+    textarea:focus,
+    a:focus {
+      outline: 4px solid #111111;
+      outline-offset: 3px;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: 16px;
+      top: -100px;
+      z-index: 5000;
+      background-color: var(--white);
+      color: #111111;
+      border: 3px solid #111111;
+      padding: 12px 16px;
+    }
+
+    .skip-link:focus {
+      top: 16px;
+    }
+
+    .container {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(
+          circle at 15% 25%,
+          rgba(255,255,255,0.32),
+          transparent 18%
+        ),
+        radial-gradient(
+          circle at 82% 22%,
+          rgba(255,255,255,0.22),
+          transparent 20%
+        ),
+        linear-gradient(
+          to bottom,
+          #dfeaf2 0%,
+          #eef3ec 52%,
+          #f6f1e5 100%
+        );
+      border-bottom: 5px solid var(--navy);
+      padding: 38px 0 48px;
+    }
+
+    .hero::before {
+      content: "◯   ◇   △   ◌   □   ◇   ◯";
+      position: absolute;
+      top: 42px;
+      right: 4%;
+      color: rgba(16, 47, 74, 0.28);
+      font-size: 1.5rem;
+      letter-spacing: 10px;
+      animation: shiftShapes 7s ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+
+    @keyframes shiftShapes {
+      from {
+        transform: translateX(-10px);
+        opacity: 0.35;
+      }
+
+      to {
+        transform: translateX(10px);
+        opacity: 0.75;
+      }
+    }
+
+    .academy-link {
+      display: inline-block;
+      margin-bottom: 18px;
+      padding: 10px 15px;
+      background-color: var(--white);
+      color: var(--navy);
+      border: 2px solid var(--navy);
+      border-radius: 8px;
+      text-decoration: underline;
+      font-weight: bold;
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      color: var(--navy);
+      font-weight: bold;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      margin: 0;
+      color: var(--navy-dark);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.6rem, 7vw, 4.8rem);
+      line-height: 1.08;
+    }
+
+    .hero-subtitle {
+      margin: 10px 0 0;
+      color: #5e4e26;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.25rem, 3vw, 1.85rem);
+    }
+
+    .hero-text {
+      max-width: 850px;
+      margin: 18px 0 0;
+      font-size: 1.1rem;
+    }
+
+    main {
+      padding: 32px 0 54px;
+    }
+
+    h2,
+    h3 {
+      color: var(--navy);
+      line-height: 1.3;
+    }
+
+    .panel {
+      background-color: var(--white);
+      border: 2px solid var(--border);
+      border-left: 8px solid var(--blue);
+      border-radius: var(--radius);
+      padding: 23px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .panel-green {
+      border-left-color: var(--green);
+    }
+
+    .panel-gold {
+      border-left-color: var(--gold);
+    }
+
+    .gallery-panel {
+      background-color: var(--navy-dark);
+      color: var(--white);
+      border: 3px solid #04121c;
+      border-radius: var(--radius);
+      padding: 22px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .gallery-panel h2 {
+      color: var(--white);
+      margin-top: 0;
+    }
+
+    .audio-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .audio-button {
+      background-color: var(--white);
+      color: var(--navy);
+      border: 2px solid var(--white);
+      border-radius: 8px;
+      padding: 10px 14px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .audio-status {
+      margin-top: 12px;
+      margin-bottom: 0;
+      color: var(--white);
+      font-weight: bold;
+    }
+
+    .mission-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 350px;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 16px;
+    }
+
+    .gallery-map {
+      background-color: #eef2e8;
+      border: 3px solid #63705b;
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .gallery-map h2 {
+      margin-top: 0;
+    }
+
+    .room-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .room-button {
+      width: 100%;
+      min-height: 190px;
+      padding: 18px;
+      text-align: left;
+      background-color: var(--white);
+      color: var(--ink);
+      border: 2px solid var(--border);
+      border-left: 8px solid var(--blue);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      cursor: pointer;
+    }
+
+    .room-button:hover {
+      transform: translateY(-2px);
+    }
+
+    .room-button[aria-pressed="true"] {
+      background-color: var(--green-light);
+      border-left-color: var(--green);
+    }
+
+    .room-icon {
+      display: block;
+      font-size: 2.3rem;
+      margin-bottom: 8px;
+    }
+
+    .room-title {
+      display: block;
+      color: var(--navy);
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+
+    .status-text {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    .active-area {
+      margin-top: 26px;
+    }
+
+    .activity-card {
+      background-color: var(--white);
+      border: 2px solid var(--border);
+      border-left: 8px solid var(--blue);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .choice-grid {
+      display: grid;
+      gap: 12px;
+      margin: 18px 0;
+    }
+
+    .choice-button,
+    .action-button,
+    .threshold-button,
+    .gestalt-button {
+      width: 100%;
+      padding: 14px 16px;
+      border: 2px solid var(--border);
+      border-radius: 9px;
+      background-color: var(--white);
+      color: var(--ink);
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .action-button {
+      width: auto;
+      background-color: var(--blue);
+      color: var(--white);
+      border-color: var(--navy);
+      font-weight: bold;
+      text-decoration: underline;
+    }
+
+    .feedback {
+      margin-top: 16px;
+      padding: 16px;
+      border: 2px solid var(--border);
+      border-left: 8px solid var(--blue);
+      border-radius: 10px;
+      background-color: #f8fbfd;
+      color: var(--ink);
+    }
+
+    .feedback.correct {
+      background-color: var(--green-light);
+      border-left-color: var(--green);
+    }
+
+    .feedback.incorrect {
+      background-color: var(--red-light);
+      border-left-color: var(--red);
+    }
+
+    /* Guided next-exhibit navigation */
+    .next-step-wrap {
+      margin-top: 18px;
+      padding-top: 16px;
+      border-top: 2px solid rgba(97, 116, 134, 0.35);
+    }
+
+    .next-step-label {
+      margin: 0 0 10px;
+      font-weight: bold;
+      color: var(--navy);
+    }
+
+    .next-step-button {
+      width: 100%;
+      padding: 14px 18px;
+      background-color: var(--green);
+      color: var(--white);
+      border: 3px solid #173d26;
+      border-radius: 10px;
+      font-weight: bold;
+      text-align: center;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    .next-step-button:hover {
+      background-color: #214f34;
+    }
+
+    .threshold-zone {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+      margin: 18px 0;
+    }
+
+    .threshold-light {
+      min-height: 80px;
+      border: 2px solid #5d6870;
+      border-radius: 8px;
+    }
+
+    .light-1 {
+      background-color: #f4f4f4;
+    }
+
+    .light-2 {
+      background-color: #e7e7e7;
+    }
+
+    .light-3 {
+      background-color: #d2d2d2;
+    }
+
+    .light-4 {
+      background-color: #b8b8b8;
+    }
+
+    .light-5 {
+      background-color: #969696;
+    }
+
+    .gestalt-display {
+      background-color: #fafafa;
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      padding: 24px;
+      margin: 18px 0;
+      text-align: center;
+      font-size: 2rem;
+      letter-spacing: 12px;
+    }
+
+    .video-wrapper {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%;
+      margin: 18px 0;
+      overflow: hidden;
+      border-radius: 10px;
+      border: 2px solid var(--border);
+      background-color: #000000;
+    }
+
+    .video-wrapper iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .resource-button {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 13px 18px;
+      background-color: var(--navy);
+      color: var(--white);
+      border: 3px solid #071826;
+      border-radius: 9px;
+      font-weight: bold;
+      text-decoration: underline;
+    }
+
+    progress {
+      width: 100%;
+      height: 24px;
+    }
+
+    .inventory-list,
+    .achievement-list {
+      padding-left: 22px;
+    }
+
+    label {
+      display: block;
+      margin-top: 14px;
+      font-weight: bold;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 90px;
+      margin-top: 6px;
+      padding: 10px;
+      border: 2px solid var(--border);
+      border-radius: 8px;
+    }
+
+    .final-case {
+      margin-top: 28px;
+      padding: 25px;
+      background-color: var(--navy);
+      color: var(--white);
+      border: 3px solid #071826;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .final-case h2 {
+      color: var(--white);
+    }
+
+    .final-case .feedback {
+      background-color: var(--white);
+      color: var(--ink);
+    }
+
+    .badge-maker {
+      margin-top: 22px;
+      padding: 20px;
+      background-color: var(--gold-light);
+      color: var(--ink);
+      border: 3px solid #80651c;
+      border-radius: 12px;
+    }
+
+    .badge-maker h3 {
+      color: #634900;
+      margin-top: 0;
+    }
+
+    .badge-name-input {
+      width: 100%;
+      max-width: 500px;
+      margin: 6px 0 14px;
+      padding: 12px;
+      border: 2px solid var(--border);
+      border-radius: 8px;
+    }
+
+    .badge-download-button {
+      display: inline-block;
+      background-color: var(--navy);
+      color: var(--white);
+      border: 3px solid var(--navy-dark);
+      border-radius: 9px;
+      padding: 14px 20px;
+      cursor: pointer;
+      font-weight: bold;
+      text-decoration: underline;
+    }
+
+    .return-button {
+      display: inline-block;
+      margin-top: 14px;
+      padding: 14px 20px;
+      background-color: var(--green);
+      color: var(--white);
+      border: 3px solid #173d26;
+      border-radius: 9px;
+      font-weight: bold;
+      text-decoration: underline;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    footer {
+      background-color: var(--navy-dark);
+      color: var(--white);
+      padding: 24px 0;
+      border-top: 4px solid #c5a84f;
+    }
+
+    footer a {
+      color: var(--white);
+    }
+
+    @media (max-width: 920px) {
+      .mission-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: static;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .room-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .threshold-zone {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      .hero::before {
+        animation: none;
+      }
+
+      .room-button:hover {
+        transform: none;
+      }
+    }
+  
+.hero::before{content:"◇   🔑   ◇";animation:none}button:disabled{opacity:.65;cursor:not-allowed}.lab-scene{background:#eaf3f8;border:2px solid #617486;border-radius:12px;padding:20px;margin:16px 0;text-align:center}.lab-icons{font-size:2.6rem;letter-spacing:12px}.pulse{animation:pulse .6s ease-out}@keyframes pulse{50%{transform:scale(1.07)}}.controls{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0}.controls button{padding:10px 14px}.clue{background:#fff8e8;border:2px solid #745500;padding:14px;border-radius:10px;margin-top:18px}.room-button[aria-pressed="true"]{outline:3px solid #315f40;outline-offset:2px}summary{cursor:pointer;font-weight:bold}select{font:inherit;max-width:100%;padding:10px;border:2px solid #617486;border-radius:6px}fieldset{border:1px solid #617486;border-radius:10px;margin:16px 0;padding:16px}legend{font-weight:bold}input[type=range]{max-width:100%}.gallery-panel label{color:white}.final-case a{color:white}.final-case select{display:block;background:white;color:#1f2933;width:100%}[hidden]{display:none!important}.no-motion *{animation:none!important;scroll-behavior:auto!important;transition:none!important}.choice-button:hover:not(:disabled){background:#eaf3f8}.badge-maker label{color:#1f2933}.quiet{font-size:.9rem}.save-status{font-size:.85rem}h2:focus{outline:3px solid #111;outline-offset:4px} @media(prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important}}@media print{.hero,.gallery-panel,.gallery-map,#active-area,footer,.controls,#reset,.skip-link{display:none}.mission-layout{display:block}.sidebar{position:static}.panel,.final-case{box-shadow:none;color:#111;background:white}body{font-size:12pt}}
+</style></head><body><a class="skip-link" href="#main-content">Skip to main content</a>
+<header class="hero"><div class="container"><a class="academy-link" href="https://bk2phdnkj7-ux.github.io/https-tonyaholdaway.github.io-psychology-academy-/">Return to Psychology Academy</a><p class="eyebrow">Week 6 Psychology Mission</p><h1>The Conditioning Vault</h1><p class="hero-subtitle">Pavlov's signals. Skinner's consequences. Your escape.</p><p class="hero-text">The Academy's learning records are locked inside a vault. Seven research rooms hold the missing clues. Investigate how behavior changes, recover each evidence card, and use what you learn to reopen the archive.</p></div></header>
+<main id="main-content" class="container"><noscript><section class="panel">This activity needs JavaScript. Enable it to play, or use the linked OpenStax readings and ask Dr. Holdaway for an alternative activity.</section></noscript>
+<section class="gallery-panel" aria-labelledby="audio-heading"><h2 id="audio-heading">Academy Atmosphere</h2><p>Optional instrumental music. All clues are also written; sound is never required.</p><div class="audio-controls"><button id="music" class="audio-button" aria-pressed="false">Play Academy Music</button><button id="motion" class="audio-button" aria-pressed="false">Turn Animations Off</button></div><label for="volume">Music volume</label><input id="volume" type="range" min="0" max="0.3" step="0.01" value="0.08"><p id="audio-status" role="status">Music is off.</p></section>
+<section class="panel panel-gold"><h2>Mission Briefing</h2><p>Open any room, explore its evidence, and solve both locks to earn a clue letter. Collect seven letters, then solve the final case and arrange the letters into the seven-letter word that completes “A response acquired through experience has been _______.”</p><p>No timer and no penalty for retries. Read the feedback, use hints, and try again. Allow about 25–40 minutes. Demonstrations are simplified teaching models, not real experimental data.</p><p>Progress and notes are saved in this browser when storage is available. Download your notebook before changing devices or using a shared computer. This activity does not automatically submit a Canvas grade.</p><p id="save-status" class="save-status" role="status"></p></section>
+<section class="panel panel-green"><h2>Your Learning Goals</h2><ul><li>Distinguish classical, operant, and observational learning.</li><li>Identify stimuli and responses in Pavlov's conditioning model.</li><li>Explain extinction, spontaneous recovery, generalization, and discrimination.</li><li>Classify consequences and reinforcement schedules.</li><li>Use shaping and modeling to explain a new skill.</li></ul><p>Pavlov was a physiologist whose research influenced behaviorism. Skinner studied operant conditioning. Bandura's work extends this mission to observational learning.</p></section>
+<div class="mission-layout"><div><section class="gallery-map"><h2>Learning Laboratory Map</h2><p>Choose a room. You can revisit completed rooms for practice.</p><div id="rooms" class="room-grid"></div></section><div id="active-area" class="active-area"></div>
+<section id="final-case" class="final-case" aria-labelledby="final-heading"><h2 id="final-heading" tabindex="-1">The Final Vault</h2><p id="gate-status">Collect all seven evidence cards to activate the vault.</p><form id="final-form" hidden><p>A student watches a tutor demonstrate flashcards, copies the method, and starts earning a token after each completed practice set. Practice increases. Separately, after a tone repeatedly precedes a lemon taste, the tone alone elicits salivation.</p><label for="f1">1. Learning the method by watching the tutor</label><select id="f1" required><option value="">Choose a process</option><option>Classical conditioning</option><option>Operant conditioning</option><option>Observational learning</option></select><label for="f2">2. More practice after tokens are added</label><select id="f2" required><option value="">Choose a consequence</option><option>Negative reinforcement</option><option>Positive reinforcement</option><option>Positive punishment</option></select><label for="f3">3. Salivation to the tone alone</label><select id="f3" required><option value="">Choose a process</option><option>Observational learning</option><option>Operant conditioning</option><option>Classical conditioning</option></select><label for="code">4. Arrange your seven clue letters into the vault word</label><p>Hint: Complete the sentence: “A response acquired through experience has been _______.” Seven letters; begins with L.</p><input id="code" class="badge-name-input" maxlength="20" autocomplete="off" required><button class="action-button" type="submit">Unlock the Vault</button></form><p id="final-feedback" class="feedback" role="status">Your evidence satchel will help you solve the final case.</p><div id="badge" class="badge-maker" hidden><h3>Vault Open: Learning Investigator</h3><p>You recovered all seven clues and solved the final case. Download your notebook and optional badge. Follow your Canvas assignment directions for any required submission.</p><label for="learner">Name for your badge (optional)</label><input id="learner" class="badge-name-input" maxlength="50" placeholder="Learning Investigator"><button id="badge-download" class="badge-download-button">Download PNG Badge</button></div></section></div>
+<aside class="sidebar" aria-label="Mission tools"><section class="panel"><h2>Mission Progress</h2><label for="progress-bar">Evidence cards collected</label><progress id="progress-bar" max="7" value="0"></progress><p id="progress-text" role="status"></p></section><section class="panel panel-green"><h2>Evidence Satchel</h2><ul id="inventory-list"></ul></section><section class="panel panel-gold"><h2>Achievements</h2><ul id="achievement-list"></ul></section><section class="panel"><h2>Investigator Notebook</h2><label for="notes">Write an example, a correction, or a question for Dr. Holdaway.</label><textarea id="notes" rows="7"></textarea><div class="controls"><button id="download-notes" class="action-button">Download Notebook</button><button id="reset">Reset This Mission</button></div><div id="reset-confirm" hidden><p>Erase this mission's saved progress and notes on this browser?</p><button id="confirm-reset">Yes, erase this mission</button> <button id="cancel-reset">Keep my progress</button></div></section></aside></div>
+<section class="panel" style="margin-top:28px"><h2>Research Desk</h2><p>Use these readings whenever you need a clue. Activities and scenarios are original instructional examples aligned with OpenStax <em>Psychology 2e</em>, Chapter 6.</p><ul><li><a href="https://openstax.org/books/psychology-2e/pages/6-1-what-is-learning" target="_blank" rel="noopener">6.1 What Is Learning? (new tab)</a></li><li><a href="https://openstax.org/books/psychology-2e/pages/6-2-classical-conditioning" target="_blank" rel="noopener">6.2 Classical Conditioning (new tab)</a></li><li><a href="https://openstax.org/books/psychology-2e/pages/6-3-operant-conditioning" target="_blank" rel="noopener">6.3 Operant Conditioning (new tab)</a></li><li><a href="https://openstax.org/books/psychology-2e/pages/6-4-observational-learning-modeling" target="_blank" rel="noopener">6.4 Observational Learning (new tab)</a></li></ul><p class="quiet">Spielman, R. M., Jenkins, W. J., &amp; Lovett, M. D. (2020). <em>Psychology 2e.</em> OpenStax. No external audio or image files are required. Music is a simple synthesized sequence created for this activity.</p></section></main><footer><div class="container"><p>Psychology Academy · Week 6 · The Conditioning Vault</p><p>Dr. Tonya Holdaway</p><a href="https://bk2phdnkj7-ux.github.io/https-tonyaholdaway.github.io-psychology-academy-/">Return to Psychology Academy</a></div></footer><script>
+'use strict';
+const $=id=>document.getElementById(id);
+const rooms=[
+{title:"Pavlov's Signal Lab",icon:'🔔',letter:'R',card:'Signal Record',fact:'A learned signal can elicit a response.',section:'6.2',intro:'A tone initially does not elicit salivation. Food does. Explore what changes when the tone repeatedly precedes food.',sim:'pavlov',hint:'Identify what elicits the response before learning, then what elicits it after learning.',q:[
+['Food naturally elicits salivation. Which pairing identifies the unconditioned stimulus and response?',['Tone and salivation','Food and salivation','Salivation and food','Food and tone'],1,'Food is the unconditioned stimulus (UCS); salivation to food is the unconditioned response (UCR).'],
+['After tone–food pairings, the tone alone elicits salivation. What are the tone and salivation now?',['Tone = UCS; salivation = UCR','Tone = response; food = CS','Tone = CS; salivation = CR','Tone = reinforcer; salivation = punishment'],2,'The tone is now a conditioned stimulus (CS). Salivation to that tone is the conditioned response (CR).']]},
+{title:'The Fading Signal',icon:'📉',letter:'E',card:'Extinction Log',fact:'A response can weaken and later briefly return.',section:'6.2',intro:'An archive note says: “The tone was presented repeatedly without food. Salivation declined. After a rest, the tone briefly elicited salivation again.” Decode both events.',hint:'Extinction concerns a weakening response. Spontaneous recovery follows a pause after extinction.',q:[
+['The tone repeatedly occurs without food, and salivation decreases. What is happening?',['Discrimination','Positive punishment','Acquisition','Extinction'],3,'Extinction occurs when the conditioned stimulus is repeatedly presented without the unconditioned stimulus and the conditioned response weakens.'],
+['After a rest, salivation briefly returns to the tone. What is the best interpretation?',['Spontaneous recovery; extinction did not necessarily erase the original learning','Acquisition; the dog must have received food again','Shaping; closer approximations were reinforced','Punishment; the tone removed a reward'],0,'Spontaneous recovery is a return of an extinguished conditioned response after a pause.']]},
+{title:'The Sound Detective',icon:'🎛️',letter:'A',card:'Discrimination Key',fact:'Similar cues can evoke responses, but cues can also be distinguished.',section:'6.2',intro:'An Academy dog learned that a low tone predicts food. Later, a similar medium tone also elicits salivation. After training in which only the low tone predicts food, the dog responds mainly to the low tone.',hint:'Generalization spreads a response to similar stimuli. Discrimination makes the response more selective.',q:[
+['Salivation also occurs to the similar medium tone. Which process fits?',['Extinction','Stimulus generalization','Negative reinforcement','Observational learning'],1,'Stimulus generalization occurs when stimuli resembling the trained cue also elicit the conditioned response.'],
+['After selective training, salivation occurs mainly to the low tone. Which process fits?',['Spontaneous recovery','Variable-ratio reinforcement','Stimulus discrimination','Positive punishment'],2,'Stimulus discrimination involves responding differently to cues associated with different outcomes.']]},
+{title:"Skinner's Consequence Room",icon:'⚙️',letter:'L',card:'Consequence Compass',fact:'Added or removed? Behavior increases or decreases?',section:'6.3',intro:'Skinner examined how consequences shape behavior. Classify each example by the observed change in behavior, not by whether the consequence sounds pleasant.',hint:'Positive means added; negative means removed. Reinforcement increases behavior; punishment decreases it.',q:[
+['An Academy apprentice earns a token after each completed practice set. Practice increases. What process is shown?',['Negative reinforcement','Positive punishment','Negative punishment','Positive reinforcement'],3,'A token is added and practice increases: positive reinforcement. A consequence is a reinforcer because of its effect on behavior.'],
+['Buckling a seat belt stops a reminder sound. The student buckles sooner on later trips. What process is shown?',['Negative reinforcement','Negative punishment','Positive reinforcement','Classical extinction'],0,'An aversive sound is removed and buckling increases: negative reinforcement, not punishment.']]},
+{title:'The Consequence Switchboard',icon:'🔀',letter:'N',card:'Punishment Decoder',fact:'Punishment is defined by a decrease in behavior.',section:'6.3',intro:'Two fictional records describe consequences. Identify the process without treating either record as advice about how people should be treated.',hint:'First confirm that the behavior decreased. Then ask whether something was added or removed.',q:[
+['After unsafe equipment use, a trainee receives an extra corrective task. Unsafe use subsequently decreases. Which classification fits?',['Positive reinforcement','Negative reinforcement','Positive punishment','Negative punishment'],2,'An extra task is added and the target behavior decreases: positive punishment. Classification does not establish that this is the best intervention.'],
+['After repeated interruptions, a participant loses a game privilege. Interruptions decrease. Which classification fits?',['Positive punishment','Negative punishment','Negative reinforcement','Stimulus discrimination'],1,'A privilege is removed and interruptions decrease: negative punishment. Negative does not mean harmful; it identifies removal.']]},
+{title:'The Schedule Engine',icon:'⏱️',letter:'D',card:'Schedule Gear',fact:'Ratio counts responses; interval concerns time.',section:'6.3',intro:'Repair the reinforcement engine. Ratio schedules depend on response counts. Interval schedules reinforce the first eligible response after time passes. Fixed is predictable; variable changes.',sim:'schedule',hint:'Look for a response count versus elapsed time, then predictability versus variability.',q:[
+['A dispenser provides one token after every third lever press. Which schedule runs the engine?',['Fixed ratio','Variable ratio','Fixed interval','Variable interval'],0,'Three responses are required each time: a fixed-ratio schedule. The engine is an illustration, not a prediction of real response rates.'],
+['The first correct check-in after an unpredictable waiting period earns a token. Which schedule is this?',['Fixed ratio','Variable ratio','Fixed interval','Variable interval'],3,'Eligibility depends on varying amounts of time, followed by a response: variable interval. A variable-ratio schedule would vary the number of responses.']]},
+{title:'The New-Skill Workshop',icon:'🧩',letter:'E',card:'Skill Blueprint',fact:'Skills can be shaped through approximations or learned by observing models.',section:'6.4 + 6.3',intro:'One apprentice is reinforced first for opening a practice file, then for completing one item, and finally for completing a full set. Another watches a mentor demonstrate a new method and later reproduces it.',hint:'Shaping reinforces successive approximations. Observational learning involves a model and processes such as attention and retention.',q:[
+['Reinforcement shifts toward increasingly complete versions of the target skill. What is this?',['Extinction','Shaping','Stimulus generalization','Spontaneous recovery'],1,'Shaping reinforces successive approximations to a target behavior, rather than waiting for the full behavior at the start.'],
+['An apprentice watches a mentor and later copies the demonstrated method without having received a reward for watching. What does this illustrate?',['Learning requires direct reinforcement on every trial','The mentor is an unconditioned stimulus','Observational learning can occur without direct reinforcement of the observer','Every copied behavior is a reflex'],2,'Bandura emphasized learning from models. Attention, retention, ability to reproduce the behavior, and motivation help explain whether learning is expressed.']]}
+];
+const KEY='psychologyConditioningWeek6_v1', COMPLETE='psychologyAcademyWeek6Complete';
+let state={solved:[],notes:'',escaped:false,experiment:false,motion:false},active=-1,storageOK=true;
+try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&typeof s==='object'){state.solved=Array.isArray(s.solved)?[...new Set(s.solved.filter(x=>Number.isInteger(x)&&x>=0&&x<14))]:[];state.notes=typeof s.notes==='string'?s.notes:'';state.escaped=s.escaped===true&&state.solved.length===14;state.experiment=s.experiment===true;state.motion=s.motion===true;}}catch(e){storageOK=false;}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(state));if(state.escaped)localStorage.setItem(COMPLETE,'true');$('save-status').textContent='Progress and notes saved in this browser.';}catch(e){storageOK=false;$('save-status').textContent='Browser saving is unavailable. Keep this tab open and download your notebook before leaving.';}}
+function done(i){return state.solved.includes(i*2)&&state.solved.includes(i*2+1);}
+function el(tag,text,cls){const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n;}
+function dashboard(){let count=rooms.filter((_,i)=>done(i)).length;$('progress-bar').value=count;$('progress-text').textContent=count+' of 7 evidence cards collected'+(state.escaped?' · Vault open!':'');$('inventory-list').replaceChildren();rooms.forEach((r,i)=>{if(done(i))$('inventory-list').append(el('li',r.card+' — letter '+r.letter+'. '+r.fact));const b=$('room-'+i);if(b){b.querySelector('.status-text').textContent=done(i)?'✓ Clue collected':'Open · '+r.q.filter((_,j)=>state.solved.includes(i*2+j)).length+'/2 locks solved';b.setAttribute('aria-pressed',String(active===i));}});if(!count)$('inventory-list').append(el('li','Solve both locks in a room to collect its clue.'));$('achievement-list').replaceChildren();if(state.experiment)$('achievement-list').append(el('li','Experimenter: Explored a lab demonstration.'));if(count===7)$('achievement-list').append(el('li','Archive Detective: Recovered all seven cards.'));if(state.escaped)$('achievement-list').append(el('li','Learning Investigator: Opened the vault.'));if(!$('achievement-list').children.length)$('achievement-list').append(el('li','Achievements appear as you investigate.'));$('final-form').hidden=count<7||state.escaped;$('badge').hidden=!state.escaped;$('gate-status').textContent=state.escaped?'Mission complete. Your badge and notebook are ready.':count===7?'All seven cards recovered. Solve the case and enter the vault word.':'Collect all seven evidence cards to activate the vault.';}
+rooms.forEach((r,i)=>{let b=el('button',undefined,'room-button');b.type='button';b.id='room-'+i;b.setAttribute('aria-pressed','false');const icon=el('span',r.icon,'room-icon');icon.setAttribute('aria-hidden','true');b.append(icon,el('span',r.title,'room-title'),el('span','OpenStax '+r.section),el('span','','status-text'));b.addEventListener('click',()=>openRoom(i));$('rooms').append(b);});
+function openRoom(i){active=i;const r=rooms[i],a=$('active-area');a.replaceChildren();let box=el('section',undefined,'activity-card'),h=el('h2',r.title);h.tabIndex=-1;box.append(h,el('p',r.intro));if(r.sim)box.append(simulation(r.sim));const hint=el('details');hint.append(el('summary','Click here to open a research hint'),el('p',r.hint));box.append(hint);r.q.forEach((q,j)=>{let field=el('fieldset');field.append(el('legend','Lock '+(j+1)),el('p',q[0]));const opts=el('div',undefined,'choice-grid'),feedback=el('p',state.solved.includes(i*2+j)?'✓ Previously solved. '+q[3]:'Choose one answer. You may retry.', 'feedback');feedback.id='feedback-'+j;feedback.setAttribute('role','status');q[1].forEach((option,k)=>{let btn=el('button',String.fromCharCode(65+k)+'. '+option,'choice-button');btn.type='button';btn.addEventListener('click',()=>{if(k===q[2]){if(!state.solved.includes(i*2+j))state.solved.push(i*2+j);save();feedback.className='feedback correct';feedback.textContent='✓ Lock solved. '+q[3];updateClue();dashboard();}else{feedback.className='feedback incorrect';feedback.textContent='Not quite. '+r.hint+' Review the scenario and try again.';}});opts.append(btn);});field.append(opts,feedback);box.append(field);});const clue=el('div');clue.id='room-clue';box.append(clue);a.append(box);updateClue();dashboard();h.focus();}
+function updateClue(){const n=$('room-clue');if(!n)return;n.replaceChildren();if(done(active)){const r=rooms[active];n.className='clue';n.append(el('strong','Evidence recovered: '+r.card+' · '+r.letter),el('p',r.fact));let next=el('button',rooms.every((_,i)=>done(i))?'Go to the Final Vault':'Continue to the Next Unsolved Room','next-step-button');next.type='button';next.onclick=()=>{let idx=rooms.findIndex((_,i)=>!done(i));if(idx<0){$('final-heading').focus();$('final-case').scrollIntoView({block:'start'});}else openRoom(idx);};n.append(next);}else{n.className='';n.append(el('p','Solve both locks to reveal this room’s clue.'));}}
+function simulation(type){const box=el('div',undefined,'lab-scene');const icons=el('div',type==='pavlov'?'🔔 🐕 🍽️':'⚙️ 🪙','lab-icons');icons.setAttribute('aria-hidden','true');const status=el('p',type==='pavlov'?'Untrained model: the tone alone does not elicit salivation.':'Fixed-ratio 3 engine: 0 presses, 0 tokens.');status.setAttribute('role','status');box.append(icons,status);const c=el('div',undefined,'controls');let pair=0,press=0;function pulse(){icons.classList.remove('pulse');void icons.offsetWidth;icons.classList.add('pulse');state.experiment=true;save();dashboard();}function button(label,fn){const b=el('button',label);b.type='button';b.onclick=()=>{fn();pulse();};c.append(b);}if(type==='pavlov'){button('Present Tone Alone',()=>status.textContent=pair>=3?'Tone alone → salivation (CR). The tone now functions as a CS.':'Tone alone → no learned salivation in this model.');button('Pair Tone, Then Food',()=>{pair++;status.textContent='Pairing '+pair+': Tone → food → salivation to food (UCR). '+(pair>=3?'Now test the tone alone.':'Try another pairing.');});button('Reset Demonstration',()=>{pair=0;status.textContent='Model reset: tone is neutral with respect to salivation.';});box.append(el('p','Teaching simplification: three pairings unlock the model response; real learning does not follow a universal three-trial rule.','quiet'));}else{button('Press Lever',()=>{press++;status.textContent=press+' presses · '+Math.floor(press/3)+' tokens. '+(press%3===0?'Token delivered after three more presses.':'No token yet.');});button('Reset Engine',()=>{press=0;status.textContent='Fixed-ratio 3 engine: 0 presses, 0 tokens.';});box.append(el('p','Each click represents one response. This device illustrates a contingency, not an animal’s learning rate.','quiet'));}box.append(c);return box;}
+$('notes').value=state.notes;$('notes').oninput=()=>{state.notes=$('notes').value;save();};
+$('final-form').onsubmit=e=>{e.preventDefault();if(!rooms.every((_,i)=>done(i)))return;const results=[$('f1').value==='Observational learning',$('f2').value==='Positive reinforcement',$('f3').value==='Classical conditioning',$('code').value.trim().toUpperCase()==='LEARNED'];if(results.every(Boolean)){state.escaped=true;save();dashboard();$('final-feedback').textContent='✓ Vault open! Watching a model is observational learning; added tokens that increase practice demonstrate positive reinforcement; salivation to the learned tone is classical conditioning. Your clues spell LEARNED.';$('badge-download').focus();}else{$('final-feedback').textContent='Keep investigating: '+results.map((r,i)=>r?'Part '+(i+1)+' solved':(['Part 1: Look for learning from a model.','Part 2: What was added, and did practice increase?','Part 3: Look for an association between two stimuli.','Part 4: Use all seven letters, including both Es.'][i])).join(' ');}};
+function download(blob,name){const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+$('download-notes').onclick=()=>{const lines=['PSYCHOLOGY ACADEMY — THE CONDITIONING VAULT','Status: '+(state.escaped?'Vault opened':'In progress'),'Evidence: '+rooms.filter((_,i)=>done(i)).length+'/7','',...rooms.filter((_,i)=>done(i)).map(r=>r.card+' ['+r.letter+']: '+r.fact),'','MY NOTES',state.notes,'','This local record is not an automatically submitted grade.'];download(new Blob([lines.join('\n')],{type:'text/plain;charset=utf-8'}),'conditioning-vault-notebook.txt');};
+$('badge-download').onclick=()=>{if(!state.escaped)return;let c=document.createElement('canvas');c.width=1200;c.height=720;let g=c.getContext('2d');g.fillStyle='#102f4a';g.fillRect(0,0,1200,720);g.strokeStyle='#d4bc70';g.lineWidth=12;g.strokeRect(28,28,1144,664);g.textAlign='center';g.fillStyle='#fff8e8';g.font='bold 30px Arial';g.fillText('PSYCHOLOGY ACADEMY · CHAPTER 6',600,115);g.font='bold 58px Georgia';g.fillText('Learning Investigator',600,245);g.font='32px Arial';g.fillText('THE CONDITIONING VAULT · MISSION COMPLETE',600,335);let name=$('learner').value.trim()||'Learning Investigator';let size=44;g.font=size+'px Arial';while(g.measureText(name).width>1050){size--;g.font=size+'px Arial';}g.fillText(name,600,450);g.font='26px Arial';g.fillText('Seven evidence cards recovered · Final case solved',600,540);g.fillText('Dr. Tonya Holdaway',600,605);c.toBlob(b=>{if(b)download(b,'conditioning-vault-badge.png');});};
+$('reset').onclick=()=>{$('reset-confirm').hidden=false;$('confirm-reset').focus();};$('cancel-reset').onclick=()=>{$('reset-confirm').hidden=true;$('reset').focus();};$('confirm-reset').onclick=()=>{state={solved:[],notes:'',escaped:false,experiment:false,motion:state.motion};try{localStorage.removeItem(COMPLETE);}catch(e){}save();$('notes').value='';$('learner').value='';$('final-form').reset();$('final-feedback').textContent='Your evidence satchel will help you solve the final case.';$('active-area').replaceChildren();active=-1;$('reset-confirm').hidden=true;dashboard();$('room-0').focus();};
+let ctx=null,bus=null,timer=null,musicOn=false,step=0;
+function setMusicUI(){ $('music').textContent=musicOn?'Pause Academy Music':'Play Academy Music';$('music').setAttribute('aria-pressed',String(musicOn));$('audio-status').textContent=musicOn?'Academy music is playing.':'Music is off.';}
+function note(){if(!musicOn||!ctx)return;const melody=[261.63,329.63,392,329.63,293.66,349.23,440,349.23,246.94,293.66,392,293.66,261.63,329.63,523.25,392],now=ctx.currentTime;const o=ctx.createOscillator(),g=ctx.createGain();o.type='sine';o.frequency.value=melody[step++%melody.length];g.gain.setValueAtTime(0,now);g.gain.linearRampToValueAtTime(.3,now+.06);g.gain.exponentialRampToValueAtTime(.001,now+1.2);o.connect(g);g.connect(bus);o.start(now);o.stop(now+1.3);o.onended=()=>{o.disconnect();g.disconnect();};}
+async function stopMusic(){musicOn=false;clearInterval(timer);if(ctx)await ctx.suspend();setMusicUI();}
+$('music').onclick=async()=>{try{if(musicOn){await stopMusic();return;}const AC=window.AudioContext||window.webkitAudioContext;if(!AC)throw Error('unsupported');if(!ctx){ctx=new AC();bus=ctx.createGain();bus.connect(ctx.destination);}await ctx.resume();bus.gain.value=Number($('volume').value);musicOn=true;note();timer=setInterval(note,650);setMusicUI();}catch(e){musicOn=false;$('audio-status').textContent='Audio is unavailable in this browser. All activities work without music.';}};
+$('volume').oninput=()=>{if(bus)bus.gain.setTargetAtTime(Number($('volume').value),ctx.currentTime,.05);};document.addEventListener('visibilitychange',()=>{if(document.hidden&&musicOn)stopMusic();});
+function motionUI(){document.body.classList.toggle('no-motion',state.motion);$('motion').setAttribute('aria-pressed',String(state.motion));$('motion').textContent=state.motion?'Turn Animations On':'Turn Animations Off';} $('motion').onclick=()=>{state.motion=!state.motion;motionUI();save();};motionUI();dashboard();save();
+</script></body></html>
