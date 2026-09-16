@@ -1623,6 +1623,102 @@
 
     }
 
+    /* Optional Academy animation. Navigation and content remain visible without JavaScript. */
+    .cloud { animation: none; }
+    .hero-content { padding-bottom: 210px; }
+    .academy-motion-tools { margin: 24px auto 0; max-width: 640px; }
+    .academy-motion-button { min-height: 46px; padding: 9px 18px; border: 2px solid #315f40; border-radius: 24px; background: #fffdf7; color: #214f34; font-weight: bold; }
+    .academy-motion-button:disabled { cursor: default; border-color: #5f7382; color: #344b5c; }
+    .academy-motion-status { margin: 7px auto 0; max-width: 530px; color: #243d4f; font-size: .88rem; }
+    .academy-sparkles { position: absolute; inset: 0; pointer-events: none; overflow: hidden; z-index: 3; }
+    .academy-sparkle { position: absolute; left: var(--spark-x); top: var(--spark-y); font-size: var(--spark-size, 20px); color: #967020; opacity: .52; line-height: 1; transform: rotate(0deg); }
+    .campus-skyline { position: absolute; width: 100%; height: 190px; bottom: -1px; left: 0; z-index: 2; pointer-events: none; }
+    .campus-skyline svg { display: block; height: 100%; width: 100%; }
+    .campus-tree { transform-box: fill-box; transform-origin: 50% 100%; }
+    .campus-flag { transform-box: fill-box; transform-origin: 0% 50%; }
+    .campus-window { fill: #f5d887; }
+    .academy-seal { position: relative; }
+    .academy-seal::after { content: ''; position: absolute; inset: -13px; border: 1px solid rgba(122, 90, 0, .4); border-radius: 50%; pointer-events: none; }
+    .mission-card { transition: none; }
+    .mission-card.is-open { isolation: isolate; }
+    .mission-card.is-open::before { content: ''; position: absolute; z-index: -1; inset: 0; pointer-events: none; background: linear-gradient(110deg, transparent 25%, rgba(255,255,255,.65) 48%, transparent 72%); transform: translateX(-130%); }
+    .mission-sparkle { position: absolute; top: 15px; right: 18px; width: 47px; height: 38px; color: #7a5a00; pointer-events: none; font-size: 1.25rem; line-height: 1; }
+    .mission-sparkle span { position: absolute; right: 0; top: 0; display: block; }
+    .mission-sparkle span:nth-child(2) { right: 26px; top: 18px; font-size: .75rem; }
+    .mission-icon { transform-origin: center; width: fit-content; }
+    html.academy-motion-on .cloud { animation: academy-clouds 48s ease-in-out infinite alternate; }
+    html.academy-motion-on .cloud-two { animation-duration: 64s; animation-delay: -24s; }
+    html.academy-motion-on .academy-hero::after { animation: academy-sunlight 12s ease-in-out infinite alternate; }
+    html.academy-motion-on .academy-seal { animation: academy-seal-glow 9s ease-in-out infinite alternate; }
+    html.academy-motion-on .academy-sparkle { animation: academy-stardrift var(--spark-duration, 9s) ease-in-out infinite alternate; animation-delay: var(--spark-delay, 0s); }
+    html.academy-motion-on .campus-window { animation: academy-window-glow 9s ease-in-out infinite alternate; }
+    html.academy-motion-on .campus-window:nth-child(3n) { animation-delay: -4s; }
+    html.academy-motion-on .campus-tree { animation: academy-tree-sway 11s ease-in-out infinite alternate; }
+    html.academy-motion-on .campus-tree:nth-child(even) { animation-delay: -5s; }
+    html.academy-motion-on .campus-flag { animation: academy-flag-wave 6s ease-in-out infinite alternate; }
+    html.academy-motion-on .mission-card { transition: box-shadow .24s ease, border-color .24s ease; }
+    html.academy-motion-on .mission-card.is-open.is-in-view .mission-sparkle span { animation: academy-card-sparkle 7s ease-in-out infinite alternate; }
+    html.academy-motion-on .mission-card.is-open.is-in-view .mission-sparkle span:nth-child(2) { animation-delay: -3s; }
+    html.academy-motion-on .mission-card.card-arriving { animation: academy-card-arrival .55s ease-out both; }
+    html.academy-motion-on .mission-card.is-open:focus-within::before { animation: academy-door-shimmer 1.2s ease-out 1; }
+    html.academy-motion-on .mission-card.is-open:focus-within .mission-icon { animation: academy-icon-greeting .7s ease-in-out 1; }
+    html.academy-motion-on .mission-card.is-open:focus-within { box-shadow: 0 12px 30px rgba(16,47,74,.23), 0 0 0 2px rgba(122,90,0,.2); }
+    html.academy-motion-on .badge-earned.is-in-view .badge-symbol { animation: academy-badge-welcome .8s ease-out 1; }
+    @media (hover: hover) and (pointer: fine) {
+      html.academy-motion-on .mission-card.is-open:hover::before { animation: academy-door-shimmer 1.2s ease-out 1; }
+      html.academy-motion-on .mission-card.is-open:hover .mission-icon { animation: academy-icon-greeting .7s ease-in-out 1; }
+      html.academy-motion-on .mission-card.is-open:hover { box-shadow: 0 12px 30px rgba(16,47,74,.23), 0 0 0 2px rgba(122,90,0,.2); }
+    }
+    @keyframes academy-clouds { from { transform: translateX(-45px); } to { transform: translateX(65px); } }
+    @keyframes academy-sunlight { from { opacity: .65; transform: scale(.97); } to { opacity: .9; transform: scale(1.04); } }
+    @keyframes academy-seal-glow { from { box-shadow: 0 10px 28px rgba(16,47,74,.16), 0 0 0 rgba(201,169,93,0); } to { box-shadow: 0 10px 28px rgba(16,47,74,.16), 0 0 30px rgba(201,169,93,.5); } }
+    @keyframes academy-stardrift { from { transform: translateY(7px) rotate(-10deg) scale(.85); opacity: .32; } to { transform: translateY(-12px) rotate(10deg) scale(1.12); opacity: .7; } }
+    @keyframes academy-window-glow { from { fill: #d8b971; } to { fill: #ffebac; } }
+    @keyframes academy-tree-sway { from { transform: rotate(-1deg); } to { transform: rotate(1.2deg); } }
+    @keyframes academy-flag-wave { from { transform: skewY(-3deg) scaleX(.95); } to { transform: skewY(3deg) scaleX(1); } }
+    @keyframes academy-card-sparkle { from { opacity: .35; transform: scale(.88) rotate(-6deg); } to { opacity: .9; transform: scale(1.08) rotate(6deg); } }
+    @keyframes academy-card-arrival { from { transform: translateY(12px); } to { transform: translateY(0); } }
+    @keyframes academy-door-shimmer { from { transform: translateX(-130%); } to { transform: translateX(130%); } }
+    @keyframes academy-icon-greeting { 0%,100% { transform: rotate(0) scale(1); } 45% { transform: rotate(-5deg) scale(1.06); } }
+    @keyframes academy-badge-welcome { 0%,100% { transform: scale(1); } 45% { transform: scale(1.08); } }
+    html.academy-motion-on.academy-tab-paused *, html.academy-motion-on.academy-tab-paused *::before, html.academy-motion-on.academy-tab-paused *::after { animation-play-state: paused !important; }
+    html:not(.academy-motion-on) { scroll-behavior: auto; }
+    html:not(.academy-motion-on) *, html:not(.academy-motion-on) *::before, html:not(.academy-motion-on) *::after { animation: none !important; transition: none !important; }
+    [hidden] { display: none !important; }
+    @media (max-width: 600px) {
+      .hero-content { padding-bottom: 165px; }
+      .campus-skyline { height: 145px; }
+      .academy-sparkle:nth-child(2n) { display: none; }
+      .academy-motion-tools { max-width: 100%; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto !important; }
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+    @media print {
+      .academy-sparkles, .campus-skyline, .academy-motion-tools, .mission-sparkle { display: none !important; }
+      *, *::before, *::after { animation: none !important; }
+    }
+    /* Enchanted sky and proximity effects, with the same high-contrast reading surfaces. */
+    .academy-hero { background-image: linear-gradient(125deg, #dbeaf5 0%, #e7def2 32%, #f4ead1 61%, #d6e7db 100%); background-size: 220% 220%; }
+    .cloud-three { width: 145px; top: 24px; left: 42%; opacity: .58; }
+    .cloud-four { width: 95px; top: 39%; left: -50px; opacity: .55; }
+    .cloud-five { width: 135px; top: 57%; right: -35px; opacity: .43; }
+    .cloud-six { width: 170px; top: 76%; left: 13%; opacity: .38; }
+    .campus-skyline { overflow: hidden; }
+    .campus-skyline svg { min-width: 1000px; position: relative; left: 50%; transform: translateX(-50%); }
+    html.academy-motion-on .academy-hero { animation: academy-enchanted-sky 35s ease-in-out infinite alternate; }
+    html.academy-motion-on .cloud-three { animation-duration: 72s; animation-delay: -37s; }
+    html.academy-motion-on .cloud-four { animation-duration: 59s; animation-delay: -19s; }
+    html.academy-motion-on .cloud-five { animation-duration: 81s; animation-delay: -49s; }
+    html.academy-motion-on .cloud-six { animation-duration: 67s; animation-delay: -28s; }
+    html.academy-motion-on .academy-sparkles { transform: translate3d(var(--magic-x, 0px), var(--magic-y, 0px), 0); transition: transform .7s ease-out; }
+    html.academy-motion-on .academy-hero.is-pointer-near .academy-sparkle { filter: drop-shadow(0 0 5px rgba(184,132,18,.65)); }
+    html.academy-motion-on .academy-hero.is-pointer-near .campus-window { filter: drop-shadow(0 0 3px rgba(255,208,90,.65)); }
+    html.academy-motion-on .mission-card.is-open:hover .mission-sparkle, html.academy-motion-on .mission-card.is-open:focus-within .mission-sparkle { filter: drop-shadow(0 0 4px rgba(184,132,18,.6)); }
+    @keyframes academy-enchanted-sky { from { background-position: 0% 30%; } to { background-position: 100% 70%; } }
+    @media (max-width: 600px) { .cloud-four, .cloud-six { display: none; } }
+
   </style>
 
 </head>
@@ -1642,6 +1738,45 @@
        ======================================================= -->
 
   <header class="academy-hero">
+<div class="cloud cloud-three" aria-hidden="true"></div>
+<div class="cloud cloud-four" aria-hidden="true"></div>
+<div class="cloud cloud-five" aria-hidden="true"></div>
+<div class="cloud cloud-six" aria-hidden="true"></div>
+<div class="academy-sparkles" aria-hidden="true"><span class="academy-sparkle" style="--spark-x:5%;--spark-y:17%;--spark-size:23px;--spark-duration:9s;--spark-delay:-3s">✦</span><span class="academy-sparkle" style="--spark-x:94%;--spark-y:25%;--spark-size:20px;--spark-duration:11s;--spark-delay:-8s">✦</span><span class="academy-sparkle" style="--spark-x:13%;--spark-y:40%;--spark-size:17px;--spark-duration:10s;--spark-delay:-6s">✦</span><span class="academy-sparkle" style="--spark-x:87%;--spark-y:47%;--spark-size:25px;--spark-duration:12s;--spark-delay:-2s">✦</span><span class="academy-sparkle" style="--spark-x:4%;--spark-y:66%;--spark-size:19px;--spark-duration:13s;--spark-delay:-9s">✦</span><span class="academy-sparkle" style="--spark-x:95%;--spark-y:72%;--spark-size:24px;--spark-duration:10s;--spark-delay:-4s">✦</span><span class="academy-sparkle" style="--spark-x:23%;--spark-y:9%;--spark-size:16px;--spark-duration:14s;--spark-delay:-10s">✦</span><span class="academy-sparkle" style="--spark-x:75%;--spark-y:12%;--spark-size:22px;--spark-duration:12s;--spark-delay:-6s">✦</span><span class="academy-sparkle" style="--spark-x:29%;--spark-y:85%;--spark-size:20px;--spark-duration:10s;--spark-delay:-1s">✦</span><span class="academy-sparkle" style="--spark-x:73%;--spark-y:85%;--spark-size:16px;--spark-duration:11s;--spark-delay:-7s">✦</span><span class="academy-sparkle" style="--spark-x:7%;--spark-y:89%;--spark-size:20px;--spark-duration:13s;--spark-delay:-8s">✦</span><span class="academy-sparkle" style="--spark-x:90%;--spark-y:90%;--spark-size:18px;--spark-duration:14s;--spark-delay:-3s">✦</span></div>
+<div class="campus-skyline" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -24 1200 244" preserveAspectRatio="xMidYMax meet" aria-hidden="true" focusable="false">
+  <path d="M0 186 Q190 134 340 174 T660 177 T980 163 T1200 182 V220 H0Z" fill="#b2c9a5"/>
+  <path d="M0 202 Q190 168 330 197 T640 193 T920 190 T1200 197 V220 H0Z" fill="#789970"/>
+  <g stroke="#254758" stroke-width="2.5" stroke-linejoin="round">
+    <path d="M353 111 H511 V196 H353Z M689 111 H847 V196 H689Z" fill="#d9d3bc"/>
+    <path d="M335 113 L375 82 H506 L530 113Z M670 113 L694 82 H825 L865 113Z" fill="#3c6171"/>
+    <path d="M499 82 H701 V201 H499Z" fill="#e9dfc8"/>
+    <path d="M479 84 L600 39 L721 84Z" fill="#315469"/>
+    <path d="M563 31 H637 V81 H563Z" fill="#e3d8be"/>
+    <path d="M552 32 L600 4 L648 32Z" fill="#254758"/>
+    <path d="M581 162 Q600 139 619 162 V202 H581Z" fill="#193d50"/>
+    <path d="M600 153 V202" fill="none" stroke="#d5b86a"/>
+    <path d="M487 203 H713 M478 211 H722" fill="none" stroke="#5a6e62" stroke-width="5"/>
+    <circle cx="600" cy="55" r="15" fill="#fff8e3"/>
+    <path d="M600 44 V55 L609 60" fill="none"/>
+    <path d="M637 6 V-16" fill="none"/>
+    <path class="campus-flag" d="M637 -14 Q653 -20 672 -10 L669 6 Q651 -5 637 0Z" fill="#783b50" stroke="#c8a75a" stroke-width="1"/>
+    <g class="campus-window" fill="#f5d887"><path d="M519 109 Q528 95 537 109 V132 H519Z M663 109 Q672 95 681 109 V132 H663Z"/></g>
+    <g class="campus-window" fill="#f5d887"><path d="M561 110 Q570 96 579 110 V133 H561Z M621 110 Q630 96 639 110 V133 H621Z"/></g>
+    <g class="campus-window" fill="#f5d887"><path d="M371 132 H391 V157 H371Z M411 132 H431 V157 H411Z M451 132 H471 V157 H451Z"/></g>
+    <g class="campus-window" fill="#f5d887"><path d="M729 132 H749 V157 H729Z M769 132 H789 V157 H769Z M809 132 H829 V157 H809Z"/></g>
+    <path d="M518 149 H537 V179 L528 173 L518 179Z M663 149 H682 V179 L673 173 L663 179Z" fill="#783b50" stroke="#b99b52" stroke-width="1.5"/>
+    <path d="M524 157 H532 M528 153 V165 M669 157 H677 M673 153 V165" stroke="#efd49a" stroke-width="2"/>
+    <path d="M514 145 H686" stroke="#b39c6f"/>
+    <path d="M599 205 L565 220 H635 L601 205Z" fill="#dfceb0" stroke="none"/>
+  </g>
+  <g class="campus-tree"><path d="M186 199 V133" stroke="#725e48" stroke-width="9"/><path d="M138 151 Q123 119 146 99 Q143 68 173 70 Q196 47 217 76 Q249 78 247 112 Q267 145 233 158 Q206 183 181 157 Q154 170 138 151Z" fill="#547852"/><path d="M186 142 L165 119 M188 151 L215 126" stroke="#416541" stroke-width="4"/></g>
+  <g class="campus-tree"><path d="M997 205 V133" stroke="#725e48" stroke-width="9"/><path d="M958 154 Q936 133 957 106 Q952 80 982 77 Q1001 59 1022 84 Q1053 84 1050 119 Q1071 147 1040 164 Q1018 179 997 164 Q971 177 958 154Z" fill="#63875a"/></g>
+  <g class="campus-tree"><path d="M84 210 V167" stroke="#725e48" stroke-width="6"/><ellipse cx="84" cy="148" rx="33" ry="40" fill="#789666"/></g>
+  <g class="campus-tree"><path d="M1118 210 V166" stroke="#725e48" stroke-width="6"/><ellipse cx="1118" cy="149" rx="32" ry="42" fill="#789666"/></g>
+  <path d="M287 203 V147 M912 203 V147" stroke="#35565c" stroke-width="4"/>
+  <g stroke="#35565c" stroke-width="3"><path fill="#f5d887" class="campus-window" d="M280 139 H294 L292 155 H282Z M905 139 H919 L917 155 H907Z"/><path d="M276 138 L287 129 L298 138Z M901 138 L912 129 L923 138Z" fill="#35565c"/></g>
+</svg>
+</div>
 
     <div
       class="cloud cloud-one"
@@ -1681,6 +1816,11 @@
         exploration, and discovery.
 
       </p>
+
+      <div class="academy-motion-tools">
+        <button id="academy-motion-toggle" class="academy-motion-button" type="button" aria-pressed="false" aria-describedby="academy-motion-status" hidden>✦ Animations: Off</button>
+        <p id="academy-motion-status" class="academy-motion-status" role="status">Optional atmosphere. All Academy missions work with animations off.</p>
+      </div>
 
       <section
         class="welcome-sign"
@@ -3909,6 +4049,118 @@
     // Refresh when returning from a mission or updating progress in another tab.
     window.addEventListener("pageshow", updateAcademyProgress);
     window.addEventListener("storage", updateAcademyProgress);
+
+
+    /* Optional motion is separate from mission progress and music. */
+    (function setupAcademyMotion() {
+      const root = document.documentElement;
+      const toggle = document.getElementById('academy-motion-toggle');
+      const status = document.getElementById('academy-motion-status');
+      const preferenceKey = 'psychologyAcademyMotion_v1';
+      const hero = document.querySelector('.academy-hero');
+      const finePointer = typeof window.matchMedia === 'function' ? window.matchMedia('(hover: hover) and (pointer: fine)') : null;
+      let pointerFrame = null;
+      let pointerX = 0, pointerY = 0;
+      function resetPointer() {
+        if (pointerFrame !== null) { window.cancelAnimationFrame(pointerFrame); pointerFrame = null; }
+        hero.classList.remove('is-pointer-near');
+        hero.style.setProperty('--magic-x', '0px');
+        hero.style.setProperty('--magic-y', '0px');
+      }
+      hero.addEventListener('pointermove', function(event) {
+        if (!root.classList.contains('academy-motion-on') || !finePointer || !finePointer.matches || event.pointerType === 'touch' || document.hidden) return;
+        const bounds = hero.getBoundingClientRect();
+        if (!bounds.width || !bounds.height) return;
+        pointerX = Math.max(-1, Math.min(1, (event.clientX - bounds.left) / bounds.width * 2 - 1)) * 12;
+        pointerY = Math.max(-1, Math.min(1, (event.clientY - bounds.top) / bounds.height * 2 - 1)) * 8;
+        if (pointerFrame !== null) return;
+        pointerFrame = window.requestAnimationFrame(function() {
+          pointerFrame = null;
+          hero.classList.add('is-pointer-near');
+          hero.style.setProperty('--magic-x', pointerX.toFixed(2) + 'px');
+          hero.style.setProperty('--magic-y', pointerY.toFixed(2) + 'px');
+        });
+      }, { passive: true });
+      hero.addEventListener('pointerleave', resetPointer);
+      if (finePointer && typeof finePointer.addEventListener === 'function') finePointer.addEventListener('change', resetPointer);
+      const reducedMotion = typeof window.matchMedia === 'function' ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
+      let preferred = 'on';
+      let canSave = true;
+      try {
+        const saved = localStorage.getItem(preferenceKey);
+        if (saved === 'off' || saved === 'on') preferred = saved;
+      } catch (error) { canSave = false; }
+      const cards = Array.from(document.querySelectorAll('.mission-card'));
+      const observedItems = cards.concat(Array.from(document.querySelectorAll('.badge-card')));
+      cards.forEach(function(card) {
+        if (card.querySelector('a.mission-link')) {
+          card.classList.add('is-open');
+          const sparkle = document.createElement('span');
+          sparkle.className = 'mission-sparkle';
+          sparkle.setAttribute('aria-hidden', 'true');
+          for (let i = 0; i < 2; i++) {
+            const star = document.createElement('span');
+            star.textContent = '✦';
+            sparkle.appendChild(star);
+          }
+          card.appendChild(sparkle);
+        }
+        card.addEventListener('animationend', function(event) {
+          if (event.target === card && event.animationName === 'academy-card-arrival') card.classList.remove('card-arriving');
+        });
+        card.addEventListener('focusin', function() { card.classList.remove('card-arriving'); });
+      });
+      function applyPreference() {
+        const reduced = Boolean(reducedMotion && reducedMotion.matches);
+        const enabled = preferred === 'on' && !reduced;
+        root.classList.toggle('academy-motion-on', enabled);
+        root.classList.toggle('academy-tab-paused', document.hidden);
+        toggle.hidden = false;
+        toggle.disabled = reduced;
+        toggle.setAttribute('aria-pressed', String(enabled));
+        toggle.textContent = enabled ? '✦ Animations: On' : '✦ Animations: Off';
+        if (reduced) {
+          status.textContent = 'Animations are off to match your device’s reduced-motion setting.';
+        } else {
+          status.textContent = enabled ? 'Gentle sparkles and campus motion are on. Select the button to turn them off.' : 'Animations are off. Select the button to bring back the campus sparkle.';
+          if (!canSave) status.textContent += ' Your choice applies to this visit.';
+        }
+        if (!enabled) { resetPointer(); cards.forEach(function(card) { card.classList.remove('card-arriving'); }); }
+      }
+      toggle.addEventListener('click', function() {
+        if (reducedMotion && reducedMotion.matches) return;
+        preferred = preferred === 'on' ? 'off' : 'on';
+        try { localStorage.setItem(preferenceKey, preferred); canSave = true; } catch (error) { canSave = false; }
+        applyPreference();
+      });
+      if (reducedMotion) {
+        if (typeof reducedMotion.addEventListener === 'function') reducedMotion.addEventListener('change', applyPreference);
+        else if (typeof reducedMotion.addListener === 'function') reducedMotion.addListener(applyPreference);
+      }
+      document.addEventListener('visibilitychange', function() { root.classList.toggle('academy-tab-paused', document.hidden); if (document.hidden) resetPointer(); });
+      window.addEventListener('storage', function(event) {
+        if (event.key !== preferenceKey && event.key !== null) return;
+        try { preferred = localStorage.getItem(preferenceKey) === 'off' ? 'off' : 'on'; } catch (error) { return; }
+        applyPreference();
+      });
+      window.addEventListener('pageshow', applyPreference);
+      applyPreference();
+      if (typeof window.IntersectionObserver === 'function') {
+        const observer = new window.IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            const item = entry.target;
+            item.classList.toggle('is-in-view', entry.isIntersecting);
+            if (entry.isIntersecting && item.classList.contains('mission-card') && !item.dataset.motionSeen) {
+              item.dataset.motionSeen = 'true';
+              if (root.classList.contains('academy-motion-on')) item.classList.add('card-arriving');
+            }
+          });
+        }, { threshold: 0.12 });
+        observedItems.forEach(function(item) { observer.observe(item); });
+      } else {
+        observedItems.forEach(function(item) { item.classList.add('is-in-view'); });
+      }
+    })();
 
   </script>
 
