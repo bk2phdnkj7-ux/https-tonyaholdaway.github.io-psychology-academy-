@@ -1,1 +1,757 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Week 8: The Memory Library | Psychology Academy</title><style>
+    :root {
+      --ink: #1f2933;
+      --navy: #102f4a;
+      --navy-dark: #071826;
+      --blue: #315f87;
+      --blue-light: #eaf3f8;
+      --green: #315f40;
+      --green-light: #eef8f2;
+      --gold: #745500;
+      --gold-light: #fff8e8;
+      --cream: #fffdf7;
+      --red: #7b1f1f;
+      --red-light: #fff1f1;
+      --white: #ffffff;
+      --border: #617486;
+      --shadow: 0 12px 30px rgba(8, 34, 54, 0.16);
+      --radius: 16px;
+    }
 
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--ink);
+      background-color: #f5f6f3;
+      line-height: 1.7;
+      font-size: 18px;
+    }
+
+    a {
+      color: #174c74;
+      text-decoration: underline;
+      text-underline-offset: 0.16em;
+      font-weight: bold;
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit;
+    }
+
+    button:focus,
+    input:focus,
+    textarea:focus,
+    a:focus {
+      outline: 4px solid #111111;
+      outline-offset: 3px;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: 16px;
+      top: -100px;
+      z-index: 5000;
+      background-color: var(--white);
+      color: #111111;
+      border: 3px solid #111111;
+      padding: 12px 16px;
+    }
+
+    .skip-link:focus {
+      top: 16px;
+    }
+
+    .container {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(
+          circle at 15% 25%,
+          rgba(255,255,255,0.32),
+          transparent 18%
+        ),
+        radial-gradient(
+          circle at 82% 22%,
+          rgba(255,255,255,0.22),
+          transparent 20%
+        ),
+        linear-gradient(
+          to bottom,
+          #dfeaf2 0%,
+          #eef3ec 52%,
+          #f6f1e5 100%
+        );
+      border-bottom: 5px solid var(--navy);
+      padding: 38px 0 48px;
+    }
+
+    .hero::before {
+      content: "◯   ◇   △   ◌   □   ◇   ◯";
+      position: absolute;
+      top: 42px;
+      right: 4%;
+      color: rgba(16, 47, 74, 0.28);
+      font-size: 1.5rem;
+      letter-spacing: 10px;
+      animation: shiftShapes 7s ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+
+    @keyframes shiftShapes {
+      from {
+        transform: translateX(-10px);
+        opacity: 0.35;
+      }
+
+      to {
+        transform: translateX(10px);
+        opacity: 0.75;
+      }
+    }
+
+    .academy-link {
+      display: inline-block;
+      margin-bottom: 18px;
+      padding: 10px 15px;
+      background-color: var(--white);
+      color: var(--navy);
+      border: 2px solid var(--navy);
+      border-radius: 8px;
+      text-decoration: underline;
+      font-weight: bold;
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      color: var(--navy);
+      font-weight: bold;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      margin: 0;
+      color: var(--navy-dark);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.6rem, 7vw, 4.8rem);
+      line-height: 1.08;
+    }
+
+    .hero-subtitle {
+      margin: 10px 0 0;
+      color: #5e4e26;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.25rem, 3vw, 1.85rem);
+    }
+
+    .hero-text {
+      max-width: 850px;
+      margin: 18px 0 0;
+      font-size: 1.1rem;
+    }
+
+    main {
+      padding: 32px 0 54px;
+    }
+
+    h2,
+    h3 {
+      color: var(--navy);
+      line-height: 1.3;
+    }
+
+    .panel {
+      background-color: var(--white);
+      border: 2px solid var(--border);
+      border-left: 8px solid var(--blue);
+      border-radius: var(--radius);
+      padding: 23px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .panel-green {
+      border-left-color: var(--green);
+    }
+
+    .panel-gold {
+      border-left-color: var(--gold);
+    }
+
+    .gallery-panel {
+      background-color: var(--navy-dark);
+      color: var(--white);
+      border: 3px solid #04121c;
+      border-radius: var(--radius);
+      padding: 22px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .gallery-panel h2 {
+      color: var(--white);
+      margin-top: 0;
+    }
+
+    .audio-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .audio-button {
+      background-color: var(--white);
+      color: var(--navy);
+      border: 2px solid var(--white);
+      border-radius: 8px;
+      padding: 10px 14px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .audio-status {
+      margin-top: 12px;
+      margin-bottom: 0;
+      color: var(--white);
+      font-weight: bold;
+    }
+
+    .mission-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 350px;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 16px;
+    }
+
+    .gallery-map {
+      background-color: #eef2e8;
+      border: 3px solid #63705b;
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .gallery-map h2 {
+      margin-top: 0;
+    }
+
+    .room-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .room-button {
+      width: 100%;
+      min-height: 190px;
+      padding: 18px;
+      text-align: left;
+      background-color: var(--white);
+      color: var(--ink);
+      border: 2px solid var(--border);
+      border-left: 8px solid var(--blue);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      cursor: pointer;
+    }
+
+    .room-button:hover {
+      transform: translateY(-2px);
+    }
+
+    .room-button[aria-pressed="true"] {
+      background-color: var(--green-light);
+      border-left-color: var(--green);
+    }
+
+    .room-icon {
+      display: block;
+      font-size: 2.3rem;
+      margin-bottom: 8px;
+    }
+
+    .room-title {
+      display: block;
+      color: var(--navy);
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+
+    .status-text {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    .active-area {
+      margin-top: 26px;
+    }
+
+    .activity-card {
+      background-color: var(--white);
+      border: 2px solid var(--border);
+      border-left: 8px solid var(--blue);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .choice-grid {
+      display: grid;
+      gap: 12px;
+      margin: 18px 0;
+    }
+
+    .choice-button,
+    .action-button,
+    .threshold-button,
+    .gestalt-button {
+      width: 100%;
+      padding: 14px 16px;
+      border: 2px solid var(--border);
+      border-radius: 9px;
+      background-color: var(--white);
+      color: var(--ink);
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .action-button {
+      width: auto;
+      background-color: var(--blue);
+      color: var(--white);
+      border-color: var(--navy);
+      font-weight: bold;
+      text-decoration: underline;
+    }
+
+    .feedback {
+      margin-top: 16px;
+      padding: 16px;
+      border: 2px solid var(--border);
+      border-left: 8px solid var(--blue);
+      border-radius: 10px;
+      background-color: #f8fbfd;
+      color: var(--ink);
+    }
+
+    .feedback.correct {
+      background-color: var(--green-light);
+      border-left-color: var(--green);
+    }
+
+    .feedback.incorrect {
+      background-color: var(--red-light);
+      border-left-color: var(--red);
+    }
+
+    /* Guided next-exhibit navigation */
+    .next-step-wrap {
+      margin-top: 18px;
+      padding-top: 16px;
+      border-top: 2px solid rgba(97, 116, 134, 0.35);
+    }
+
+    .next-step-label {
+      margin: 0 0 10px;
+      font-weight: bold;
+      color: var(--navy);
+    }
+
+    .next-step-button {
+      width: 100%;
+      padding: 14px 18px;
+      background-color: var(--green);
+      color: var(--white);
+      border: 3px solid #173d26;
+      border-radius: 10px;
+      font-weight: bold;
+      text-align: center;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    .next-step-button:hover {
+      background-color: #214f34;
+    }
+
+    .threshold-zone {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+      margin: 18px 0;
+    }
+
+    .threshold-light {
+      min-height: 80px;
+      border: 2px solid #5d6870;
+      border-radius: 8px;
+    }
+
+    .light-1 {
+      background-color: #f4f4f4;
+    }
+
+    .light-2 {
+      background-color: #e7e7e7;
+    }
+
+    .light-3 {
+      background-color: #d2d2d2;
+    }
+
+    .light-4 {
+      background-color: #b8b8b8;
+    }
+
+    .light-5 {
+      background-color: #969696;
+    }
+
+    .gestalt-display {
+      background-color: #fafafa;
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      padding: 24px;
+      margin: 18px 0;
+      text-align: center;
+      font-size: 2rem;
+      letter-spacing: 12px;
+    }
+
+    .video-wrapper {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%;
+      margin: 18px 0;
+      overflow: hidden;
+      border-radius: 10px;
+      border: 2px solid var(--border);
+      background-color: #000000;
+    }
+
+    .video-wrapper iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .resource-button {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 13px 18px;
+      background-color: var(--navy);
+      color: var(--white);
+      border: 3px solid #071826;
+      border-radius: 9px;
+      font-weight: bold;
+      text-decoration: underline;
+    }
+
+    progress {
+      width: 100%;
+      height: 24px;
+    }
+
+    .inventory-list,
+    .achievement-list {
+      padding-left: 22px;
+    }
+
+    label {
+      display: block;
+      margin-top: 14px;
+      font-weight: bold;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 90px;
+      margin-top: 6px;
+      padding: 10px;
+      border: 2px solid var(--border);
+      border-radius: 8px;
+    }
+
+    .final-case {
+      margin-top: 28px;
+      padding: 25px;
+      background-color: var(--navy);
+      color: var(--white);
+      border: 3px solid #071826;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .final-case h2 {
+      color: var(--white);
+    }
+
+    .final-case .feedback {
+      background-color: var(--white);
+      color: var(--ink);
+    }
+
+    .badge-maker {
+      margin-top: 22px;
+      padding: 20px;
+      background-color: var(--gold-light);
+      color: var(--ink);
+      border: 3px solid #80651c;
+      border-radius: 12px;
+    }
+
+    .badge-maker h3 {
+      color: #634900;
+      margin-top: 0;
+    }
+
+    .badge-name-input {
+      width: 100%;
+      max-width: 500px;
+      margin: 6px 0 14px;
+      padding: 12px;
+      border: 2px solid var(--border);
+      border-radius: 8px;
+    }
+
+    .badge-download-button {
+      display: inline-block;
+      background-color: var(--navy);
+      color: var(--white);
+      border: 3px solid var(--navy-dark);
+      border-radius: 9px;
+      padding: 14px 20px;
+      cursor: pointer;
+      font-weight: bold;
+      text-decoration: underline;
+    }
+
+    .return-button {
+      display: inline-block;
+      margin-top: 14px;
+      padding: 14px 20px;
+      background-color: var(--green);
+      color: var(--white);
+      border: 3px solid #173d26;
+      border-radius: 9px;
+      font-weight: bold;
+      text-decoration: underline;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    footer {
+      background-color: var(--navy-dark);
+      color: var(--white);
+      padding: 24px 0;
+      border-top: 4px solid #c5a84f;
+    }
+
+    footer a {
+      color: var(--white);
+    }
+
+    @media (max-width: 920px) {
+      .mission-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: static;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .room-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .threshold-zone {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      .hero::before {
+        animation: none;
+      }
+
+      .room-button:hover {
+        transform: none;
+      }
+    }
+  
+.hero::before{content:"✦   ◇   ✦   ◇   ✦";animation:thoughtDrift 9s ease-in-out infinite alternate;opacity:.35} @keyframes thoughtDrift{from{transform:translate(-12px,0) rotate(-4deg)}to{transform:translate(12px,16px) rotate(4deg)}}button:disabled{opacity:.65;cursor:not-allowed}.lab-scene{background:#eaf3f8;border:2px solid #617486;border-radius:12px;padding:20px;margin:16px 0;text-align:center}.lab-icons{font-size:2.6rem;letter-spacing:12px}.pulse{animation:pulse .6s ease-out}@keyframes pulse{50%{transform:scale(1.07)}}.controls{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0}.controls button{padding:10px 14px}.clue{background:#fff8e8;border:2px solid #745500;padding:14px;border-radius:10px;margin-top:18px}.room-button[aria-pressed="true"]{outline:3px solid #315f40;outline-offset:2px}summary{cursor:pointer;font-weight:bold}select{font:inherit;max-width:100%;padding:10px;border:2px solid #617486;border-radius:6px}fieldset{border:1px solid #617486;border-radius:10px;margin:16px 0;padding:16px}legend{font-weight:bold}input[type=range]{max-width:100%}.gallery-panel label{color:white}.final-case a{color:white}.final-case select{display:block;background:white;color:#1f2933;width:100%}[hidden]{display:none!important}.no-motion *{animation:none!important;scroll-behavior:auto!important;transition:none!important}.choice-button:hover:not(:disabled){background:#eaf3f8}.badge-maker label{color:#1f2933}.quiet{font-size:.9rem}.save-status{font-size:.85rem}h2:focus{outline:3px solid #111;outline-offset:4px} @media(prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important}}@media print{.hero,.gallery-panel,.gallery-map,#active-area,footer,.controls,#reset,.skip-link{display:none}.mission-layout{display:block}.sidebar{position:static}.panel,.final-case{box-shadow:none;color:#111;background:white}body{font-size:12pt}}
+
+.research-link{display:inline-block;background:#eef8f2;border:2px solid #315f40;border-radius:8px;padding:10px 14px;margin:8px 0 14px;color:#214f34}.lab-scene h3{margin-top:0}.lab-scene button{background:white;border:2px solid #315f87;border-radius:8px;color:#102f4a;min-height:44px;cursor:pointer}.token-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:15px 0}.word-token{display:inline-block;background:white;border:2px solid #315f87;border-radius:9px;padding:9px 15px}.slide{animation:wordSlide .55s ease-out}@keyframes wordSlide{from{transform:translateY(-15px);opacity:.5}to{transform:translateY(0);opacity:1}}.mini-maze{display:grid;grid-template-columns:repeat(3,1fr);max-width:260px;gap:6px;margin:15px auto}.maze-cell{display:flex;align-items:center;justify-content:center;min-height:64px;border:2px solid #617486;border-radius:8px;background:white;color:#102f4a}.maze-wall{background:#41566a;color:white}.maze-current{background:#fff0b7;border:3px solid #745500;animation:pulse .4s ease-out}.idea-star{font-size:1.5rem;color:#745500;display:inline-block;animation:wordSlide .5s ease-out}.lab-scene textarea{text-align:left}.lab-scene label{text-align:left}.research-note{font-size:.92rem;text-align:left}.lab-scene .controls{justify-content:center}.signal-light{width:28px;height:28px;background:#315f40;border-radius:50%;display:inline-block}.signal-light.pulse{animation:pulse .8s 2}.lab-scene select{background:white;color:#243342}input:focus,select:focus,summary:focus,textarea:focus{outline:4px solid #102f4a;outline-offset:3px}
+
+.archive-visual{display:flex;gap:34px;justify-content:center;align-items:center;height:90px;margin:18px 0 0;font-size:2.6rem}.archive-visual span{display:inline-block;animation:pageFloat 6s ease-in-out infinite}.archive-visual span:nth-child(2){animation-delay:-2s}.archive-visual span:nth-child(3){animation-delay:-4s}@keyframes pageFloat{0%,100%{transform:translateY(5px) rotate(-7deg)}50%{transform:translateY(-9px) rotate(7deg)}}.memory-flow{display:flex;gap:12px;flex-wrap:wrap;margin:24px 0 0}.memory-flow span{flex:1;min-width:150px;background:white;border:2px solid #315f40;border-radius:10px;padding:12px;text-align:center}.lab-scene input[type=text],.lab-scene textarea{display:block;width:100%;max-width:100%;padding:12px;border:2px solid #617486;border-radius:8px;background:white;color:#1f2933;margin:8px 0 15px}.lab-scene label{display:block;font-weight:bold}.digit-code{font:700 clamp(1.2rem,4vw,2.1rem) monospace;letter-spacing:.12em;background:white;border:2px solid #315f87;border-radius:12px;padding:24px 10px;margin:20px 0;overflow-wrap:anywhere}.brain-network{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:20px auto;max-width:550px;padding:20px;background:radial-gradient(ellipse,#d1e8e2,#eaf3f8);border-radius:20px}.brain-network button{padding:15px 8px;overflow-wrap:anywhere}.brain-network button[aria-pressed=true]{background:#102f4a;color:white;border-color:#745500;box-shadow:0 0 0 5px #f0d995;animation:networkGlow 3s ease-in-out infinite}@keyframes networkGlow{50%{box-shadow:0 0 0 9px #f0d995}}.network-detail,.scene-card{padding:20px;text-align:left;border-left:5px solid #745500;background:#fffdf7;border-radius:10px;min-height:90px}.study-schedule{display:grid;gap:12px;margin:18px 0;text-align:left}.plan-card{background:white;padding:18px;border:2px solid #315f40;border-radius:10px}.plan-card p{margin-bottom:0}.word-token{overflow-wrap:anywhere}.hero .archive-visual{position:relative;z-index:1}.lab-scene select{display:block;width:100%;margin:8px 0 15px}button,input,textarea,select{touch-action:manipulation}@media(max-width:480px){.brain-network{grid-template-columns:1fr}.archive-visual{gap:24px}.lab-scene{padding:14px}.controls button{width:100%}}@media(prefers-reduced-motion:reduce){.archive-visual span,.brain-network button[aria-pressed=true]{animation:none}}
+</style></head><body><a class="skip-link" href="#main-content">Skip to main content</a>
+<header class="hero"><div class="container"><a class="academy-link" href="https://bk2phdnkj7-ux.github.io/https-tonyaholdaway.github.io-psychology-academy-/">Return to Psychology Academy</a><p class="eyebrow">Week 8 Psychology Mission</p><h1>The Memory Library</h1><p class="hero-subtitle">The Lost Archive</p><p class="hero-text">The Academy’s memory archive has lost its catalog. Seven rooms hold the fragments that can restore it. Become a Memory Archivist: investigate how we learn, store, retrieve, and sometimes reconstruct the past.</p><div class="archive-visual" aria-hidden="true"><span>📖</span><span>🗝️</span><span>📚</span></div></div></header>
+<main id="main-content" class="container"><noscript><section class="panel">This activity needs JavaScript. Enable it to play, or use the linked OpenStax readings and ask Dr. Holdaway for an alternative activity.</section></noscript>
+<section class="gallery-panel" aria-labelledby="audio-heading"><h2 id="audio-heading">Academy Atmosphere</h2><p>Optional instrumental music and drifting pages and glowing memory stations set the scene. Sound and animation are never required; use the controls below to adjust them. Reduced-motion device settings are also respected.</p><div class="audio-controls"><button id="music" class="audio-button" aria-pressed="false">Play Academy Music</button><button id="motion" class="audio-button" aria-pressed="false">Turn Animations Off</button></div><label for="volume">Music volume</label><input id="volume" type="range" min="0" max="0.3" step="0.01" value="0.08"><p id="audio-status" role="status">Music is off.</p></section>
+<section class="panel panel-gold"><h2>Mission Briefing</h2><p>Open any room, explore its interactive desk, and solve both locks to earn a clue letter. Collect all seven fragments, solve the final case, and arrange the letters to name the process of retaining information over time.</p><p>No timer and no penalty for retries. All controls work with a keyboard; no dragging or quick reactions are required. Read the feedback, use hints, and try again. Allow about 35–50 minutes, or return later. These demonstrations illustrate memory concepts; they do not measure or diagnose your memory.</p><p>Progress and notes are saved in this browser when storage is available. Download your notebook before changing devices or using a shared computer. This activity does not automatically submit a Canvas grade.</p><p>Interactive desks invite you to explore before answering. You earn each fragment by solving the two locks; your recall results do not affect completion. The notebook keeps your most recent practice summaries, reflections, and study plan.</p><p id="save-status" class="save-status" role="status"></p></section>
+<section class="panel panel-green"><h2>Your Learning Goals</h2><ul><li>Distinguish encoding, storage, retrieval, and major memory systems.</li><li>Connect memory processes with interacting brain structures.</li><li>Recognize amnesia, interference, and the influence of later information.</li><li>Use chunking, meaningful connections, retrieval practice, and spacing in a study plan.</li></ul><p><strong>Use your textbook as an investigation tool.</strong> Every room includes an “Open the OpenStax Research File” link to the Chapter 8 section behind its challenge. Open it whenever you need help, then return here to apply what you read. Using the readings and hints is part of the mission.</p><div class="memory-flow" aria-label="Three memory processes"><span>Encoding · taking in</span><span>Storage · retaining</span><span>Retrieval · bringing back</span></div></section>
+<div class="mission-layout"><div><section class="gallery-map"><h2>Memory Library Map</h2><p>Choose a room. You can revisit completed rooms for practice.</p><div id="rooms" class="room-grid"></div></section><div id="active-area" class="active-area"></div>
+<section id="final-case" class="final-case" aria-labelledby="final-heading"><h2 id="final-heading" tabindex="-1">The Archive Door</h2><p id="gate-status">Collect all seven evidence fragments to activate the Archive Door.</p><form id="final-form" hidden><p>The restored archive needs a dependable study guide. Devon links new terms to examples, practices explaining them across several days, and checks an uncertain recollection against the original notes.</p><label for="f1">1. Linking a new term to a meaningful example supports:</label><select id="f1" required><option value="">Choose a process</option><option value="avoid">Avoiding encoding</option><option value="elaborate">Elaborative encoding</option><option value="forget">Retrograde amnesia</option></select><label for="f2">2. Which follow-up plan best supports durable learning?</label><select id="f2" required><option value="">Choose a plan</option><option value="reread">Reread once until the words look familiar</option><option value="copy">Copy every answer while looking at it</option><option value="practice">Space out recall attempts and check the answers</option></select><label for="f3">3. A vivid recollection conflicts with the original notes. What should Devon do?</label><select id="f3" required><option value="">Choose a response</option><option value="source">Check the source and consider how later information may have influenced recall</option><option value="confidence">Assume confidence proves accuracy</option><option value="diagnosis">Diagnose amnesia from this one disagreement</option></select><label for="code">4. Arrange your seven fragment letters into the archive word</label><p>Hint: Retaining information over time. Seven letters, begins with S. Use every letter from your satchel once.</p><input id="code" class="badge-name-input" maxlength="20" autocomplete="off" required><button class="action-button" type="submit">Restore the Archive</button></form><p id="final-feedback" class="feedback" role="status">Your seven evidence fragments will help you restore the archive.</p><div id="badge" class="badge-maker" hidden><h3>Archive Restored: Memory Archivist Badge</h3><p>You recovered all seven fragments and restored the archive. Your next step: put your study plan into practice. Download your notebook and optional badge. Follow your Canvas assignment directions for any required submission.</p><label for="learner">Name for your badge (optional)</label><input id="learner" class="badge-name-input" maxlength="50" placeholder="Memory Archivist"><button id="badge-download" class="badge-download-button">Download PNG Badge</button></div></section></div>
+<aside class="sidebar" aria-label="Mission tools"><section class="panel"><h2>Mission Progress</h2><label for="progress-bar">Evidence cards collected</label><progress id="progress-bar" max="7" value="0"></progress><p id="progress-text" role="status"></p></section><section class="panel panel-green"><h2>Evidence Satchel</h2><ul id="inventory-list"></ul></section><section class="panel panel-gold"><h2>Achievements</h2><ul id="achievement-list"></ul></section><section class="panel"><h2>Investigator Notebook</h2><label for="notes">Write an example, a correction, or a question for Dr. Holdaway.</label><textarea id="notes" rows="7"></textarea><div class="controls"><button id="download-notes" class="action-button">Download Notebook</button><button id="reset">Reset This Mission</button></div><div id="reset-confirm" hidden><p>Erase this mission's saved progress and notes on this browser?</p><button id="confirm-reset">Yes, erase this mission</button> <button id="cancel-reset">Keep my progress</button></div></section></aside></div>
+<section class="panel" style="margin-top:28px"><h2>Research Desk</h2><p>Original teaching scenarios aligned with OpenStax <em>Psychology 2e</em>, Chapter 8: Memory. The demonstrations are self-paced illustrations, not controlled experiments or clinical assessments.</p><ul><li><a href="https://openstax.org/books/psychology-2e/pages/8-1-how-memory-functions" target="_blank" rel="noopener">8.1 How Memory Functions (new tab)</a></li><li><a href="https://openstax.org/books/psychology-2e/pages/8-2-parts-of-the-brain-involved-with-memory" target="_blank" rel="noopener">8.2 Parts of the Brain Involved with Memory (new tab)</a></li><li><a href="https://openstax.org/books/psychology-2e/pages/8-3-problems-with-memory" target="_blank" rel="noopener">8.3 Problems with Memory (new tab)</a></li><li><a href="https://openstax.org/books/psychology-2e/pages/8-4-ways-to-enhance-memory" target="_blank" rel="noopener">8.4 Ways to Enhance Memory (new tab)</a></li></ul><p class="quiet">Spielman, R. M., Jenkins, W. J., &amp; Lovett, M. D. (2020). <em>Psychology 2e.</em> OpenStax. <a href="https://openstax.org/books/psychology-2e/pages/8-introduction" target="_blank" rel="noopener">Read Chapter 8 free at OpenStax (new tab).</a> No external audio or image files are required. Original synthesized music accompanies the mission.</p></section></main><footer><div class="container"><p>Psychology Academy · Week 8 · The Memory Library</p><p>Dr. Tonya Holdaway</p><a href="https://bk2phdnkj7-ux.github.io/https-tonyaholdaway.github.io-psychology-academy-/">Return to Psychology Academy</a></div></footer><script>
+'use strict';
+const $=id=>document.getElementById(id);
+const sections={
+'8.1':['How Memory Functions','8-1-how-memory-functions'],
+'8.2':['Parts of the Brain Involved with Memory','8-2-parts-of-the-brain-involved-with-memory'],
+'8.3':['Problems with Memory','8-3-problems-with-memory'],
+'8.4':['Ways to Enhance Memory','8-4-ways-to-enhance-memory']};
+const rooms=[
+{title:'The Encoding Atrium',icon:'📥',letter:'R',card:'Encoding Fragment',fact:'Attention and meaningful connections help information enter memory.',section:'8.1',intro:'The archive has scattered its catalog words. Study them at your own pace, hide them, and see what you can bring back. Your recall result is for reflection; the two chapter locks earn the clue.',sim:'encoding',hint:'Encoding brings information into memory; storage retains it; retrieval brings it back into use.',q:[
+['Mina connects the term “encoding” with turning a conversation into written notes. Which memory process is she supporting as she first learns the term?',['Retrieval only','Retroactive interference','Encoding','Loss of stored information'],2,'Mina is giving new information meaning as she learns it. That supports encoding.'],
+['After learning a route, Leo remembers it the next morning and describes it to a friend. Keeping the route over time and then bringing it to mind illustrate:',['Storage, then retrieval','Retrieval, then encoding','Sensory memory only','Interference, then amnesia'],0,'Keeping information over time is storage; bringing it back into use is retrieval.'] ]},
+{title:'The Working-Memory Workbench',icon:'🧩',letter:'S',card:'Chunking Fragment',fact:'Grouping changes how information is organized, not how many digits are printed.',section:'8.1',extra:'8.4',intro:'A long access code is waiting on the workbench. Try studying it as a continuous string or as smaller groups. Compare what you notice without treating one practice attempt as a scientific test.',sim:'chunking',hint:'Working memory actively uses information. Chunking groups items into larger units that can be easier to handle.',q:[
+['A guide keeps two instructions in mind while deciding which one to do first. Which description fits best?',['Working memory is actively holding and using information','The instructions have become permanent sensory memories','The guide must be using procedural memory alone','All information has left memory'],0,'The guide is maintaining information while working with it, a use of working memory.'],
+['A student rewrites 482719635 as 482 / 719 / 635. What has changed?',['The total number of digits','The organization into groups','The code has become a long-term memory automatically','The student’s fixed memory capacity'],1,'The same nine digits have been grouped into three units. Whether grouping helps depends on the task and the learner.'] ]},
+{title:'The Long-Term Shelves',icon:'📚',letter:'A',card:'Memory Systems Fragment',fact:'Remembering a fact, reliving an event, and performing a skill are different uses of memory.',section:'8.1',intro:'Sort the archive’s example cards. Decide whether each one emphasizes general knowledge, a personal event, or a practiced skill. The shelves illuminate a distinction; they do not divide people into memory types.',sim:'shelves',hint:'Semantic memory holds general knowledge; episodic memory concerns experienced events. Procedural memory supports learned skills.',q:[
+['Ari knows that a triangle has three sides, and remembers building a paper triangle with a friend yesterday. These examples emphasize:',['Procedural, then sensory memory','Semantic, then episodic memory','Episodic, then semantic memory','Working memory in both cases only'],1,'Knowing a general fact emphasizes semantic memory; remembering a particular personal event emphasizes episodic memory.'],
+['Someone ties a familiar knot smoothly without consciously listing its steps. Which type of memory is most directly illustrated?',['Episodic','Sensory','Semantic only','Procedural'],3,'The well-practiced skill emphasizes procedural memory, a form of implicit memory.'] ]},
+{title:'The Brain Network Chamber',icon:'🧠',letter:'T',card:'Brain Network Fragment',fact:'Memory depends on interacting brain systems rather than a single all-purpose storage box.',section:'8.2',extra:'8.3',intro:'Light up the archive’s memory network. Inspect each research station, then open the amnesia comparison. This is a concept map, not an anatomical brain drawing.',sim:'brain',hint:'The hippocampus supports new explicit memories. The amygdala contributes to emotional memory; the cerebellum contributes to some learned responses and skills.',q:[
+['A researcher studies how newly learned events become lasting explicit memories. Which structure is especially relevant?',['The retina as the only storage site','The hippocampus','The eardrum','A single neuron that stores every memory'],1,'The hippocampus plays an important role in forming and consolidating new explicit memories. It works with other brain areas.'],
+['After an injury, a fictional patient has great difficulty forming new explicit memories, while some earlier memories remain. Which term fits this pattern?',['Retroactive interference','Ordinary chunking','Anterograde amnesia','Retrograde amnesia only'],2,'Anterograde amnesia affects new memory formation. Retrograde amnesia involves loss of memories from before the injury or onset. Real patterns can vary.'] ]},
+{title:'The Retrieval Lantern',icon:'🏮',letter:'E',card:'Retrieval Fragment',fact:'A useful cue can provide a route to information you studied.',section:'8.1',extra:'8.4',intro:'Learn three location–object pairs. Try recalling an object, request a cue, or inspect recognition options. Every response receives feedback; success on this demonstration is not required to open the locks.',sim:'retrieval',hint:'Recall produces information; recognition identifies previously encountered information among options. Useful cues relate to what was learned.',q:[
+['Without seeing choices, Jo writes the three objects from a studied list. Then Jo selects a studied object from a menu. These tasks emphasize:',['Recognition, then recall','Storage, then encoding only','Recall, then recognition','Procedural memory, then sensory memory'],2,'Producing the objects is recall; selecting a previously studied object from options is recognition.'],
+['After studying the pairing “garden–violin,” a student uses “garden” to help remember “violin.” The word garden is functioning as:',['A retrieval cue','A guarantee of a perfect memory','Retrograde amnesia','An unrelated distractor'],0,'The studied location can act as a retrieval cue for its paired object. A cue can help without guaranteeing success.'] ]},
+{title:'The Reconstruction Mirror',icon:'🔍',letter:'O',card:'Source Check Fragment',fact:'Check whether a remembered detail came from the original event or later information.',section:'8.3',intro:'Read a short fictional library scene. After you hide it, examine a question about it, then compare your response with the source. There is no trick score and no assumption that you will make an error.',sim:'reconstruction',hint:'Later wording can influence remembering. Proactive interference runs from older learning toward newer learning; retroactive interference runs from newer toward older.',q:[
+['A later question mentions a detail absent from a scene. A reader then includes that detail when recalling the scene. Which concept is most directly illustrated?',['Chunking','The misinformation effect','Perfect photographic recall','Procedural learning'],1,'Later information has influenced the account of the earlier event. Checking the original source can expose the added detail.'],
+['Sam keeps entering an old locker code when trying to remember the new code. What is the interference direction?',['New learning disrupts old: retroactive','No interference is possible with numbers','Old learning disrupts new: proactive','A definite sign of amnesia'],2,'The old code is intruding on use of the new code: proactive interference. If the new code disrupted recall of the old code, the direction would be retroactive.'] ]},
+{title:'The Study Strategy Studio',icon:'🗓️',letter:'G',card:'Study Plan Fragment',fact:'Spread practice out, retrieve before checking, and connect ideas to meaning.',section:'8.4',intro:'Build a practical study plan you can take out of the archive. Add a topic and an example, then choose a strategy. Your plan will be included in your downloadable notebook.',sim:'plan',hint:'Spaced practice separates study sessions. Retrieval practice asks you to produce an answer before checking it. Elaboration connects an idea with meaning.',q:[
+['Which plan best combines distributed practice and retrieval practice?',['Reread for two hours immediately before the quiz','Copy a definition while looking at it every time','Wait until the material feels familiar, then stop','Across several days, answer from memory, check feedback, and revisit errors'],3,'The sessions are separated, and each includes retrieval followed by checking. The schedule can be adjusted to the material and the learner.'],
+['Which activity most clearly illustrates elaborative rehearsal?',['Repeating a phrase without considering its meaning','Explaining a concept through a new example and linking it to something already known','Leaving a textbook open nearby','Counting how many letters a term has'],1,'The new example and connection develop meaning. Repetition alone does not make the same meaningful link.'] ]}
+];
+const KEY='psychologyMemoryWeek8_v1', COMPLETE='psychologyAcademyWeek8Complete';
+function initialState(motion=false){return{solved:[],notes:'',escaped:false,experiment:false,motion,visited:[],trials:{},plan:{topic:'',example:'',method:'retrieval'},planBuilt:false};}
+let state=initialState(),active=-1,storageOK=true;
+try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&typeof s==='object'){
+state.solved=Array.isArray(s.solved)?[...new Set(s.solved.filter(x=>Number.isInteger(x)&&x>=0&&x<14))]:[];
+state.notes=typeof s.notes==='string'?s.notes:'';state.escaped=s.escaped===true&&state.solved.length===14;state.experiment=s.experiment===true;state.motion=s.motion===true;
+state.visited=Array.isArray(s.visited)?[...new Set(s.visited.filter(x=>rooms.some(r=>r.sim===x)))]:[];
+if(s.trials&&typeof s.trials==='object')for(const key of ['Word recall','Code reconstruction','Memory sorting','Cued recall','Source-check reflection']){if(typeof s.trials[key]==='string')state.trials[key]=s.trials[key].slice(0,3000);}
+if(s.plan&&typeof s.plan==='object'){state.plan.topic=typeof s.plan.topic==='string'?s.plan.topic.slice(0,600):'';state.plan.example=typeof s.plan.example==='string'?s.plan.example.slice(0,600):'';state.plan.method=['retrieval','elaboration','mnemonic'].includes(s.plan.method)?s.plan.method:'retrieval';}state.planBuilt=s.planBuilt===true;
+}}catch(e){storageOK=false;}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(state));if(state.escaped)localStorage.setItem(COMPLETE,'true');$('save-status').textContent='Progress and notes saved in this browser.';}catch(e){storageOK=false;$('save-status').textContent='Browser saving is unavailable. Keep this tab open and download your notebook before leaving.';}}
+function done(i){return state.solved.includes(i*2)&&state.solved.includes(i*2+1);}
+function el(tag,text,cls){const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n;}
+function dashboard(){let count=rooms.filter((_,i)=>done(i)).length;$('progress-bar').value=count;$('progress-text').textContent=count+' of 7 evidence cards collected'+(state.escaped?' · Archive restored!':'');$('inventory-list').replaceChildren();rooms.forEach((r,i)=>{if(done(i))$('inventory-list').append(el('li',r.card+' — letter '+r.letter+'. '+r.fact));const b=$('room-'+i);if(b){b.querySelector('.status-text').textContent=done(i)?'✓ Clue collected':'Open · '+r.q.filter((_,j)=>state.solved.includes(i*2+j)).length+'/2 locks solved';b.setAttribute('aria-pressed',String(active===i));}});if(!count)$('inventory-list').append(el('li','Solve both locks in a room to collect its clue.'));$('achievement-list').replaceChildren();if(state.experiment)$('achievement-list').append(el('li','Memory Explorer: Tried an interactive desk.'));if(state.visited.length===7)$('achievement-list').append(el('li','Archive Explorer: Visited all seven memory desks.'));if(state.planBuilt)$('achievement-list').append(el('li','Study Strategist: Built a takeaway plan.'));if(count===7)$('achievement-list').append(el('li','Archive Restorer: Recovered all seven fragments.'));if(state.escaped)$('achievement-list').append(el('li','Memory Archivist: Restored the archive.'));if(!$('achievement-list').children.length)$('achievement-list').append(el('li','Achievements appear as you investigate.'));$('final-form').hidden=count<7||state.escaped;$('badge').hidden=!state.escaped;$('gate-status').textContent=state.escaped?'Mission complete. Your badge and notebook are ready.':count===7?'All seven fragments recovered. Solve the case and enter the missing word.':'Collect all seven evidence fragments to activate the Archive Door.';}
+rooms.forEach((r,i)=>{let b=el('button',undefined,'room-button');b.type='button';b.id='room-'+i;b.setAttribute('aria-pressed','false');const icon=el('span',r.icon,'room-icon');icon.setAttribute('aria-hidden','true');b.append(icon,el('span',r.title,'room-title'),el('span','OpenStax '+r.section),el('span','','status-text'));b.addEventListener('click',()=>openRoom(i));$('rooms').append(b);});
+function openRoom(i){active=i;const r=rooms[i],a=$('active-area');a.replaceChildren();let box=el('section',undefined,'activity-card'),h=el('h2',r.title);h.tabIndex=-1;box.append(h,el('p',r.intro));[r.section,r.extra].filter(Boolean).forEach(key=>{const a=el('a','Open the OpenStax Research File: '+key+' '+sections[key][0]+' (new tab)','research-link');a.href='https://openstax.org/books/psychology-2e/pages/'+sections[key][1];a.target='_blank';a.rel='noopener';box.append(a);});if(r.sim)box.append(simulation(r.sim));const hint=el('details');hint.append(el('summary','Click here to open a research hint'),el('p',r.hint));box.append(hint);r.q.forEach((q,j)=>{let field=el('fieldset');field.append(el('legend','Lock '+(j+1)),el('p',q[0]));const opts=el('div',undefined,'choice-grid'),feedback=el('p',state.solved.includes(i*2+j)?'✓ Previously solved. '+q[3]:'Choose one answer. You may retry.', 'feedback');feedback.id='feedback-'+j;feedback.setAttribute('role','status');q[1].forEach((option,k)=>{let btn=el('button',String.fromCharCode(65+k)+'. '+option,'choice-button');btn.type='button';btn.addEventListener('click',()=>{if(k===q[2]){if(!state.solved.includes(i*2+j))state.solved.push(i*2+j);save();feedback.className='feedback correct';feedback.textContent='✓ Lock solved. '+q[3];updateClue();dashboard();}else{feedback.className='feedback incorrect';feedback.textContent='Not quite. '+r.hint+' Review the scenario and try again.';}});opts.append(btn);});field.append(opts,feedback);box.append(field);});const clue=el('div');clue.id='room-clue';box.append(clue);a.append(box);updateClue();dashboard();h.focus();}
+function updateClue(){const n=$('room-clue');if(!n)return;n.replaceChildren();if(done(active)){const r=rooms[active];n.className='clue';n.append(el('strong','Evidence recovered: '+r.card+' · '+r.letter),el('p',r.fact));let next=el('button',rooms.every((_,i)=>done(i))?'Go to the Archive Door':'Continue to the Next Unsolved Room','next-step-button');next.type='button';next.onclick=()=>{let idx=rooms.findIndex((_,i)=>!done(i));if(idx<0){$('final-heading').focus();$('final-case').scrollIntoView({block:'start'});}else openRoom(idx);};n.append(next);}else{n.className='';n.append(el('p','Solve both locks to reveal this room’s clue.'));}}
+function simulation(type){
+ const box=el('div',undefined,'lab-scene'),title=el('h3','Interactive Memory Desk'),status=el('p','Explore with the controls below.');status.setAttribute('role','status');const controls=el('div',undefined,'controls');box.append(title,status);
+ function explored(){state.experiment=true;if(!state.visited.includes(type))state.visited.push(type);save();dashboard();}
+ function button(label,fn,parent=controls){const b=el('button',label);b.type='button';b.onclick=()=>{fn();explored();};parent.append(b);return b;}
+ function animate(n){n.classList.remove('slide');void n.offsetWidth;n.classList.add('slide');}
+ function input(label,id,tag='input'){const l=el('label',label);l.htmlFor=id;const f=el(tag);f.id=id;f.maxLength=600;if(tag==='textarea')f.rows=3;else f.type='text';box.append(l,f);return f;}
+ function record(key,text){state.trials[key]=text;save();}
+ function result(text){status.textContent=text;}
+ if(type==='encoding'){
+  const words=['peach','flute','otter','pear','drum','fox','plum','harp','mole'],display=el('div',undefined,'token-row');words.forEach(w=>display.append(el('span',w,'word-token')));box.append(display);
+  result('Study the nine words. Try making a meaningful connection. When ready, hide the list and recall in any order.');
+  const response=input('After hiding the list, type words separated by spaces or commas.','recall-words','textarea');response.disabled=true;
+  const submit=button('Compare My Recall',()=>{const answers=[...new Set(response.value.toLowerCase().match(/[a-z]+/g)||[])],matched=words.filter(w=>answers.includes(w)),missed=words.filter(w=>!answers.includes(w)),extra=answers.filter(w=>!words.includes(w));const report='Exact word matches: '+matched.length+' of 9. Recalled: '+(matched.join(', ')||'none')+'. Not entered: '+(missed.join(', ')||'none')+'. Other entries: '+(extra.join(', ')||'none')+'. Spelling affects matching; this is a practice record, not a memory assessment.';result(report);record('Word recall',report);display.hidden=false;submit.disabled=true;response.disabled=true;});submit.disabled=true;
+  button('Hide List & Try Recall',()=>{display.hidden=true;response.value='';response.disabled=false;submit.disabled=false;result('The list is hidden. Recall what you can, then compare. There is no timer.');response.focus();});
+  button('Study Again',()=>{display.hidden=false;response.disabled=true;submit.disabled=true;result('List visible. Restudying adds another exposure. Hide the list when you are ready for another attempt.');animate(display);});
+  button('Show Meaning Groups',()=>{display.replaceChildren();[['Fruit','peach · pear · plum'],['Instruments','flute · drum · harp'],['Animals','otter · fox · mole']].forEach(([label,list])=>display.append(el('span',label+': '+list,'word-token')));display.hidden=false;response.disabled=true;submit.disabled=true;result('The same words are grouped by meaning. Any later change in recall could also reflect repeated practice.');animate(display);});
+  box.append(el('p','Chapter connection: A brief sensory trace differs from information you actively hold and use. This self-paced task does not measure sensory-memory duration or isolate any one memory system.','research-note'));
+ }else if(type==='chunking'){
+  let grouped=false;const digits='482719635',display=el('div',digits,'digit-code');display.setAttribute('aria-label','Code: 4 8 2 7 1 9 6 3 5');box.append(display);result('Study the code, then hide it. Grouping changes its presentation. You control the study time.');
+  const response=input('Reconstruct the code (spaces and slashes are allowed).','recall-digits');response.inputMode='numeric';response.disabled=true;
+  const compare=button('Check My Code',()=>{const attempt=response.value.replace(/[\s/]+/g,''),exact=attempt===digits;const report=(exact?'Exact match.':'Your entry did not exactly match.')+' The code is 482 / 719 / 635. Grouping can organize information, but practice, familiarity, and attention also matter.';result(report);record('Code reconstruction',(grouped?'Grouped display. ':'Continuous display. ')+report);display.hidden=false;compare.disabled=true;response.disabled=true;});compare.disabled=true;
+  button('Switch Grouping',()=>{grouped=!grouped;display.textContent=grouped?'482 / 719 / 635':digits;display.hidden=false;compare.disabled=true;response.disabled=true;result(grouped?'Three groups, still nine digits. Look for a pattern or meaning you could use.':'Continuous display, still the same nine digits.');animate(display);});
+  button('Hide Code & Reconstruct',()=>{display.hidden=true;response.value='';response.disabled=false;compare.disabled=false;result('Code hidden. Type it in order, then check.');response.focus();});
+  button('Reveal Code',()=>{display.hidden=false;compare.disabled=true;response.disabled=true;result('Code visible again. Repeated exposure makes this a learning activity, not a controlled comparison.');});
+  box.append(el('p','No capacity score is calculated. Using the same code repeatedly cannot establish that one display caused better memory.','research-note'));
+ }else if(type==='shelves'){
+  const cards=[['Knowing that a compass has cardinal directions.','Semantic'],['Remembering opening an envelope yesterday afternoon.','Episodic'],['Performing a familiar keyboard shortcut without mentally listing the movements.','Procedural']];let current=0;const card=el('p',cards[0][0],'word-token');box.append(card);result('Choose the shelf that best fits the current example.');
+  ['Semantic','Episodic','Procedural'].forEach(kind=>button('File as '+kind,()=>{const right=kind===cards[current][1];result(right?'Correct shelf. '+kind+' memory is emphasized in this example.':'Try again: semantic = knowledge; episodic = event; procedural = skill.');if(right){card.classList.add('pulse');record('Memory sorting','Practiced distinguishing semantic, episodic, and procedural examples.');}}));
+  button('Next Example',()=>{current=(current+1)%cards.length;card.textContent=cards[current][0];result('Example '+(current+1)+' of 3. Which shelf fits best?');animate(card);});
+  box.append(el('p','Semantic and episodic memories are forms of explicit (declarative) memory. Procedural skill memory is implicit. A real activity can involve more than one system.','research-note'));
+ }else if(type==='brain'){
+  const network=el('div',undefined,'brain-network'),detail=el('p','Choose a station to light up its role.','network-detail');box.append(network,detail);
+  const nodes=[['Hippocampus','Supports formation and consolidation of new explicit memories, including events. It does not contain every memory.'],['Amygdala','Contributes to emotional learning and modulation of memory. A vivid or emotional recollection can still contain errors.'],['Cerebellum','Contributes to motor learning and some conditioned responses, such as learned eyeblinks.'],['Prefrontal cortex','Helps support organizing and working with information, and processes involved in encoding and retrieval.']];
+  const buttons=[];nodes.forEach(([name,text])=>{const b=button(name,()=>{buttons.forEach(n=>n.setAttribute('aria-pressed',String(n===b)));detail.textContent=name+': '+text;animate(detail);result('Network station selected. These are interacting systems, not isolated filing cabinets.');},network);b.setAttribute('aria-pressed','false');buttons.push(b);});
+  button('Compare Amnesia Patterns',()=>{detail.textContent='Anterograde: difficulty forming new long-term memories after onset. Retrograde: loss of memories from before onset. Different kinds of memory can be affected differently.';buttons.forEach(n=>n.setAttribute('aria-pressed','false'));result('Compare the direction relative to onset: new learning versus earlier memories.');animate(detail);});
+  box.append(el('p','The connecting lights are a visual metaphor for a network, not a recording of neural activity or a map of anatomical connections.','research-note'));
+ }else if(type==='retrieval'){
+  const pairs=[['garden','violin','a string instrument'],['tower','lemon','a citrus fruit'],['bridge','scarf','something worn around the neck']];let current=0;const display=el('div',undefined,'token-row');pairs.forEach(p=>display.append(el('span',p[0]+' — '+p[1],'word-token')));box.append(display);const prompt=el('p','Study the three pairs at your own pace.');box.append(prompt);const response=input('What object was paired with the location?','recall-pair');response.disabled=true;
+  const options=el('div',undefined,'controls');options.hidden=true;box.append(options);
+  const check=button('Check Recall',()=>{const exact=response.value.trim().toLowerCase()===pairs[current][1];result((exact?'That matches. ':'The studied object was '+pairs[current][1]+'. ')+'Use the feedback to strengthen the location–object connection.');record('Cued recall','Practiced recalling location–object pairs with feedback.');});check.disabled=true;
+  const cue=button('Give Me a Cue',()=>{result('Cue: '+pairs[current][2]+'. The original location is another cue from the learning episode.');});cue.disabled=true;
+  const recognition=button('Show Recognition Choices',()=>{options.hidden=false;result('Now identify the studied object among choices. This changes the task and adds another exposure.');});recognition.disabled=true;
+  ['lemon','scarf','violin','candle'].forEach(word=>button(word,()=>{result(word===pairs[current][1]?'Recognized: '+word+'. Compare this experience with producing the answer yourself.':'That was not the studied pairing. Try another choice or check the study pairs.');},options));
+  button('Hide Pairs & Try Recall',()=>{display.hidden=true;options.hidden=true;response.value='';response.disabled=false;check.disabled=false;cue.disabled=false;recognition.disabled=false;prompt.textContent='What object was paired with “'+pairs[current][0]+'”?';result('Try recalling before asking for a cue or recognition choices.');response.focus();});
+  button('Next Location',()=>{current=(current+1)%pairs.length;display.hidden=true;options.hidden=true;response.value='';response.disabled=false;check.disabled=false;cue.disabled=false;recognition.disabled=false;prompt.textContent='What object was paired with “'+pairs[current][0]+'”?';result('A new location cue is ready.');response.focus();});
+  button('Study the Pairs Again',()=>{display.hidden=false;options.hidden=true;response.disabled=true;check.disabled=true;cue.disabled=true;recognition.disabled=true;result('Restudy the pairings, then hide them for another retrieval attempt.');animate(display);});
+ }else if(type==='reconstruction'){
+  const sceneText='At closing time, a librarian placed a blue notebook beside a brass lamp. A visitor in a green coat returned two books. Rain tapped against the window. The librarian switched off the lamp and carried the notebook upstairs.';
+  const scene=el('p',sceneText,'scene-card');box.append(scene);result('Read the fictional scene, then hide it to continue.');const question=el('p');question.hidden=true;box.append(question);const response=input('Your recollection (you may write “not mentioned” or “unsure”).','scene-response','textarea');response.disabled=true;
+  const reveal=button('Reveal the Source & Debrief',()=>{scene.hidden=false;result('The scene never mentions a broken clock. The question introduced that detail. If you rejected it or felt unsure, that is also a valid observation. One response cannot diagnose your memory or prove that misinformation changed it.');record('Source-check reflection','Response: '+(response.value.trim()||'(no response recorded)')+'. Source check: no broken clock appeared in the original scene.');animate(scene);});reveal.disabled=true;
+  button('Hide Scene & Open Question',()=>{scene.hidden=true;question.hidden=false;question.textContent='Question to inspect: Where was the broken clock in the library?';response.disabled=false;reveal.disabled=false;result('Record what you recall, or say that the detail was absent or uncertain. Then reveal the source.');response.focus();});
+  const interference=el('p',undefined,'network-detail');box.append(interference);
+  button('Old Code → New Code',()=>{interference.textContent='Proactive interference: An old code keeps coming to mind when you need the new one. Earlier learning interferes with later learning.';animate(interference);});
+  button('New Code → Old Code',()=>{interference.textContent='Retroactive interference: After practicing a new code, it becomes harder to recall the old one. Later learning interferes with earlier learning.';animate(interference);});
+  box.append(el('p','A forgotten detail may also reflect incomplete encoding, fading accessibility, or missing cues. Ordinary forgetting alone does not establish amnesia.','research-note'));
+ }else if(type==='plan'){
+  const topic=input('What topic will you study?','study-topic');topic.value=state.plan.topic||'';topic.placeholder='For example: proactive vs. retroactive interference';
+  const example=input('Write a meaningful example or a mnemonic you can explain.','study-example','textarea');example.value=state.plan.example||'';
+  const strategyLabel=el('label','Choose a study method to inspect.');strategyLabel.htmlFor='study-method';const select=el('select');select.id='study-method';[['retrieval','Recall → check → correct'],['elaboration','Explain → connect → retrieve'],['mnemonic','Create a cue → retrieve → check']].forEach(([value,label])=>{const o=el('option',label);o.value=value;select.append(o);});select.value=state.plan.method||'retrieval';box.append(strategyLabel,select);
+  const schedule=el('div',undefined,'study-schedule');box.append(schedule);
+  function sync(){state.plan={topic:topic.value,example:example.value,method:select.value};save();}
+  topic.oninput=sync;example.oninput=sync;select.onchange=sync;
+  function renderPlan(){sync();schedule.replaceChildren();const method={retrieval:'Close your notes and answer from memory; reopen them to check and correct.',elaboration:'Explain the idea with an example, connect it to prior knowledge, then explain again without notes.',mnemonic:'Create a meaningful cue; use it to retrieve the full idea, then check your explanation.'}[select.value];[['Session 1 · Learn','Study '+(topic.value.trim()||'your chosen topic')+'. '+method],['Session 2 · Return after a gap','Try recalling before looking. Check errors, explain the difference, and practice the missed parts.'],['Session 3 · Revisit later','Answer a new application question without notes, then verify. Adjust future practice to what you still miss.']].forEach(([heading,text])=>{const card=el('div',undefined,'plan-card');card.append(el('strong',heading),el('p',text));schedule.append(card);});result('Your three-session plan is saved and included in the notebook. For example, use Days 1, 3, and 6; the best spacing depends on your material and deadline.');state.planBuilt=true;save();dashboard();animate(schedule);}
+  button('Build My Takeaway Plan',renderPlan);if(state.planBuilt)renderPlan();
+  box.append(el('p','Choose real study times that fit your week. These are suggested sessions, not scheduled reminders. A mnemonic is a retrieval aid; it still needs an accurate meaning behind it.','research-note'));
+ }
+ box.append(controls);return box;
+}
+$('notes').value=state.notes;$('notes').oninput=()=>{state.notes=$('notes').value;save();};
+$('final-form').onsubmit=e=>{e.preventDefault();if(!rooms.every((_,i)=>done(i)))return;const results=[$('f1').value==='elaborate',$('f2').value==='practice',$('f3').value==='source',$('code').value.trim().toUpperCase()==='STORAGE'];if(results.every(Boolean)){state.escaped=true;save();dashboard();$('final-feedback').textContent='✓ Archive restored! You connected ideas to meaning, chose spaced retrieval practice, and checked a source. Your seven fragments spell STORAGE. Your Memory Archivist badge is ready.';$('badge-download').focus();}else{$('final-feedback').textContent='Keep investigating: '+results.map((r,i)=>r?'Part '+(i+1)+' solved.':(['Part 1: Meaningful connections support encoding.','Part 2: Separate the sessions and try retrieving before checking.','Part 3: Confidence alone does not settle accuracy.','Part 4: The word names retaining information over time. Use all seven letters.'][i])).join(' ');}};
+function download(blob,name){const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+$('download-notes').onclick=()=>{const methods={retrieval:'Recall, check, and correct.',elaboration:'Explain, connect, then retrieve without notes.',mnemonic:'Create a meaningful cue, retrieve the full idea, and check.'};const lines=['PSYCHOLOGY ACADEMY — THE MEMORY LIBRARY','Chapter 8: Memory','Status: '+(state.escaped?'Archive restored':'In progress'),'Evidence: '+rooms.filter((_,i)=>done(i)).length+'/7','',...rooms.filter((_,i)=>done(i)).map(r=>r.card+' ['+r.letter+']: '+r.fact),'','MY NOTES',state.notes,'','LATEST PRACTICE SUMMARIES (not a memory assessment)',...Object.entries(state.trials).map(([k,v])=>k+': '+v),'','MY TAKEAWAY STUDY PLAN','Topic: '+(state.plan.topic||'(not entered)'),'Meaningful example or mnemonic: '+(state.plan.example||'(not entered)'),'Method: '+methods[state.plan.method],...(state.planBuilt?['Session 1: Learn the topic. '+methods[state.plan.method],'Session 2: Return after a gap; recall first, check errors, explain and practice missed parts.','Session 3: Revisit later; apply the idea without notes, verify, and adjust further practice.','Possible spacing: Days 1, 3, and 6. Adjust to your material and deadline.']:['Build the plan in the Study Strategy Studio.']),'','READINGS',...Object.entries(sections).map(([k,v])=>k+' '+v[0]+': https://openstax.org/books/psychology-2e/pages/'+v[1]),'','This local record is not an automatically submitted grade.'];download(new Blob([lines.join('\n')],{type:'text/plain;charset=utf-8'}),'memory-library-notebook.txt');};
+$('badge-download').onclick=()=>{if(!state.escaped)return;let c=document.createElement('canvas');c.width=1200;c.height=720;let g=c.getContext('2d');g.fillStyle='#102f4a';g.fillRect(0,0,1200,720);g.strokeStyle='#d4bc70';g.lineWidth=12;g.strokeRect(28,28,1144,664);g.textAlign='center';g.fillStyle='#fff8e8';g.font='bold 30px Arial';g.fillText('PSYCHOLOGY ACADEMY · CHAPTER 8',600,115);g.font='bold 58px Georgia';g.fillText('Memory Archivist',600,245);g.font='32px Arial';g.fillText('THE MEMORY LIBRARY · MISSION COMPLETE',600,335);let name=$('learner').value.trim()||'Memory Archivist';let size=44;g.font=size+'px Arial';while(g.measureText(name).width>1050){size--;g.font=size+'px Arial';}g.fillText(name,600,450);g.font='26px Arial';g.fillText('Seven memory fragments · Final case solved',600,540);g.fillText('Dr. Tonya Holdaway',600,605);c.toBlob(b=>{if(b)download(b,'memory-library-badge.png');});};
+$('reset').onclick=()=>{$('reset-confirm').hidden=false;$('confirm-reset').focus();};$('cancel-reset').onclick=()=>{$('reset-confirm').hidden=true;$('reset').focus();};$('confirm-reset').onclick=()=>{state=initialState(state.motion);try{localStorage.removeItem(COMPLETE);}catch(e){}save();$('notes').value='';$('learner').value='';$('final-form').reset();$('final-feedback').textContent='Your seven evidence fragments will help you restore the archive.';$('active-area').replaceChildren();active=-1;$('reset-confirm').hidden=true;dashboard();$('room-0').focus();};
+let ctx=null,bus=null,timer=null,musicOn=false,step=0;
+function setMusicUI(){ $('music').textContent=musicOn?'Pause Academy Music':'Play Academy Music';$('music').setAttribute('aria-pressed',String(musicOn));$('audio-status').textContent=musicOn?'Academy music is playing.':'Music is off.';}
+function note(){if(!musicOn||!ctx)return;const melody=[261.63,329.63,392,523.25,293.66,349.23,440,349.23,261.63,392,523.25,392,246.94,329.63,392,329.63],now=ctx.currentTime;const o=ctx.createOscillator(),g=ctx.createGain();o.type='sine';o.frequency.value=melody[step++%melody.length];g.gain.setValueAtTime(0,now);g.gain.linearRampToValueAtTime(.3,now+.06);g.gain.exponentialRampToValueAtTime(.001,now+1.2);o.connect(g);g.connect(bus);o.start(now);o.stop(now+1.3);o.onended=()=>{o.disconnect();g.disconnect();};}
+async function stopMusic(){musicOn=false;clearInterval(timer);if(ctx)await ctx.suspend();setMusicUI();}
+$('music').onclick=async()=>{try{if(musicOn){await stopMusic();return;}const AC=window.AudioContext||window.webkitAudioContext;if(!AC)throw Error('unsupported');if(!ctx){ctx=new AC();bus=ctx.createGain();bus.connect(ctx.destination);}await ctx.resume();bus.gain.value=Number($('volume').value);musicOn=true;note();timer=setInterval(note,850);setMusicUI();}catch(e){musicOn=false;$('audio-status').textContent='Audio is unavailable in this browser. All activities work without music.';}};
+$('volume').oninput=()=>{if(bus)bus.gain.setTargetAtTime(Number($('volume').value),ctx.currentTime,.05);};document.addEventListener('visibilitychange',()=>{if(document.hidden&&musicOn)stopMusic();});
+function motionUI(){document.body.classList.toggle('no-motion',state.motion);$('motion').setAttribute('aria-pressed',String(state.motion));$('motion').textContent=state.motion?'Turn Animations On':'Turn Animations Off';} $('motion').onclick=()=>{state.motion=!state.motion;motionUI();save();};motionUI();dashboard();save();
+</script></body></html>
