@@ -1,1 +1,2745 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="An interactive Chapter 9 lifespan-development mission with animated learning activities and a downloadable completion badge.">
+<title>Week 9: The Lifespan Conservatory | Psychology Academy</title>
+
+<style>
+:root{
+  --ink:#1f2933;
+  --navy:#102f4a;
+  --navy-dark:#071826;
+  --blue:#315f87;
+  --blue-light:#eaf3f8;
+  --green:#315f40;
+  --green-light:#eef8f2;
+  --gold:#745500;
+  --gold-light:#fff8e8;
+  --cream:#fffdf7;
+  --red:#7b1f1f;
+  --red-light:#fff1f1;
+  --white:#ffffff;
+  --border:#617486;
+  --shadow:0 12px 30px rgba(8,34,54,.16);
+  --radius:16px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  color:var(--ink);
+  background:#f5f6f3;
+  line-height:1.7;
+  font-size:18px;
+}
+a{
+  color:#174c74;
+  text-decoration:underline;
+  text-underline-offset:.16em;
+  font-weight:bold;
+}
+button,input,textarea,select{font:inherit}
+button{touch-action:manipulation}
+button:focus,input:focus,textarea:focus,a:focus{
+  outline:4px solid #111;
+  outline-offset:3px;
+}
+button:focus-visible,a:focus-visible,summary:focus-visible{
+  outline:4px solid #bd7b13;
+  outline-offset:4px;
+}
+button:disabled{opacity:.65;cursor:not-allowed}
+[hidden]{display:none!important}
+.skip-link{
+  position:absolute;
+  left:16px;
+  top:-100px;
+  z-index:5000;
+  background:white;
+  color:#111;
+  border:3px solid #111;
+  padding:12px 16px;
+}
+.skip-link:focus{top:16px}
+.container{width:min(1180px,calc(100% - 32px));margin:0 auto}
+h2,h3{color:var(--navy);line-height:1.3}
+h2:focus{outline:3px solid #111;outline-offset:4px}
+main{padding:32px 0 54px}
+
+.hero{
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(140deg,#081c2c,#153e4a 58%,#273954);
+  color:#f7f2df;
+  padding:38px 0 34px;
+  border-bottom:5px solid #bca164;
+}
+.hero .container{position:relative;z-index:2}
+.academy-link{
+  display:inline-block;
+  margin-bottom:18px;
+  padding:10px 15px;
+  background:#fffaf0;
+  color:var(--navy);
+  border:2px solid var(--navy);
+  border-radius:8px;
+  font-weight:bold;
+}
+.eyebrow{
+  margin:0 0 8px;
+  font-weight:bold;
+  letter-spacing:.09em;
+  text-transform:uppercase;
+}
+.hero .eyebrow{color:#e4cc92}
+.hero h1{
+  margin:0;
+  color:#fff8e8;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:clamp(2.65rem,5.7vw,4.7rem);
+  line-height:1.08;
+}
+.hero-subtitle{
+  margin:10px 0 0;
+  color:#e4cc92;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:clamp(1.25rem,3vw,1.85rem);
+}
+.hero-text{max-width:700px;margin:18px 0 0;font-size:1.03rem}
+.hero-grid{
+  display:grid;
+  grid-template-columns:1.1fr 1fr;
+  gap:30px;
+  align-items:center;
+}
+.hero-story{position:relative}
+.hero-scene{
+  position:relative;
+  min-width:0;
+  border:1px solid #78958c;
+  border-radius:180px 180px 22px 22px;
+  overflow:hidden;
+  background:linear-gradient(#0e243b,#193e48);
+  box-shadow:inset 0 0 65px #b3ba7b15,0 0 40px #0002;
+  aspect-ratio:1.25;
+}
+.hero-scene svg{position:absolute;inset:0;width:100%;height:100%}
+.glass-rib{fill:none;stroke:#c7bd8a;stroke-width:1.5;opacity:.4}
+.tree-trunk{
+  fill:none;
+  stroke:#cead70;
+  stroke-linecap:round;
+  stroke-width:10;
+  stroke-dasharray:650;
+  stroke-dashoffset:650;
+  animation:growBranch 3s ease forwards;
+}
+.tree-branch{
+  fill:none;
+  stroke:#a4b89a;
+  stroke-linecap:round;
+  stroke-width:5;
+  stroke-dasharray:400;
+  stroke-dashoffset:400;
+  animation:growBranch 3s .4s ease forwards;
+}
+.seed-node{
+  fill:#1d4650;
+  stroke:#ddc78e;
+  stroke-width:2;
+  transition:fill .8s,filter .8s;
+}
+.seed-node.lit{fill:#e3c36d;filter:drop-shadow(0 0 9px #d5db83)}
+.leaf-sway{
+  transform-box:fill-box;
+  transform-origin:center bottom;
+  animation:leafSway 5s ease-in-out infinite alternate;
+}
+.floating-book{
+  animation:floatBook 7s ease-in-out infinite;
+  transform-box:fill-box;
+  transform-origin:center;
+}
+.hero-note{
+  position:relative;
+  text-align:center;
+  color:#f2e6bf;
+  font-size:.82rem;
+  letter-spacing:.05em;
+  margin:12px 0 0;
+}
+.cloud{
+  position:absolute;
+  width:220px;
+  height:60px;
+  filter:blur(14px);
+  border-radius:50%;
+  background:#e5efe41c;
+  animation:cloudDrift 28s ease-in-out infinite alternate;
+  pointer-events:none;
+}
+.cloud:nth-child(2){top:10%;left:40%;animation-delay:-14s;width:260px}
+.cloud:nth-child(3){bottom:14%;left:-5%;animation-duration:35s}
+.cloud:nth-child(4){top:47%;right:4%;width:150px;animation-duration:21s}
+.sky-stars{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.sky-star{
+  position:absolute;
+  background:#f5e5a9;
+  border-radius:50%;
+  width:3px;
+  height:3px;
+  opacity:.55;
+  animation:twinkle 5s ease-in-out infinite alternate;
+}
+.pointer-glow{
+  position:absolute;
+  left:var(--pointer-x,60%);
+  top:var(--pointer-y,45%);
+  width:240px;
+  height:240px;
+  border-radius:50%;
+  transform:translate(-50%,-50%);
+  background:radial-gradient(#bddca81e,transparent 68%);
+  pointer-events:none;
+  transition:opacity .4s;
+  opacity:0;
+}
+.hero:hover .pointer-glow{opacity:1}
+.hero:hover .floating-book{animation-duration:3.5s}
+.hero:hover .leaf-sway{animation-duration:2.5s}
+.hero:hover .sky-star{animation-duration:2s}
+
+.panel{
+  background:white;
+  border:2px solid var(--border);
+  border-left:8px solid var(--blue);
+  border-radius:var(--radius);
+  padding:23px;
+  margin-bottom:24px;
+  box-shadow:var(--shadow);
+}
+.panel-green{border-left-color:var(--green)}
+.panel-gold{border-left-color:var(--gold)}
+.gallery-panel{
+  background:var(--navy-dark);
+  color:white;
+  border:3px solid #04121c;
+  border-radius:var(--radius);
+  padding:22px;
+  margin-bottom:24px;
+  box-shadow:var(--shadow);
+}
+.gallery-panel h2{color:white;margin-top:0}
+.gallery-panel p{max-width:830px}
+.gallery-panel label{color:white}
+.gallery-panel button:focus-visible,.hero a:focus-visible{outline-color:#eac778}
+.audio-controls{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.audio-button{
+  min-height:46px;
+  background:white;
+  color:var(--navy);
+  border:2px solid white;
+  border-radius:8px;
+  padding:10px 14px;
+  cursor:pointer;
+  font-weight:bold;
+}
+.audio-status{margin-top:12px;margin-bottom:0;color:white;font-weight:bold}
+.mission-layout{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 320px;
+  gap:24px;
+  align-items:start;
+}
+.sidebar{
+  position:sticky;
+  top:16px;
+  max-height:calc(100vh - 32px);
+  overflow:auto;
+  padding:3px 5px 10px;
+}
+.sidebar .panel{padding:18px;margin-bottom:18px}
+.sidebar h2{font-size:1.2rem;margin-top:0}
+.sidebar progress{accent-color:#315f40}
+.gallery-map{
+  background:#eef2e8;
+  border:3px solid #63705b;
+  border-radius:20px;
+  padding:24px;
+  box-shadow:var(--shadow);
+}
+.gallery-map h2{margin-top:0}
+.room-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.room-button{
+  position:relative;
+  overflow:hidden;
+  width:100%;
+  min-height:200px;
+  padding:18px;
+  text-align:left;
+  background:white;
+  color:var(--ink);
+  border:2px solid var(--border);
+  border-left:8px solid var(--blue);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  cursor:pointer;
+  transition:transform .2s,box-shadow .2s;
+}
+.room-button:hover{box-shadow:0 14px 32px #102f4a28;transform:translateY(-4px)}
+.room-button::after{
+  content:"✧";
+  position:absolute;
+  right:16px;
+  top:14px;
+  font-size:1.65rem;
+  color:#8a6b20;
+  transition:transform .6s;
+}
+.room-button:hover::after{transform:rotate(90deg) scale(1.3)}
+.room-button[aria-pressed="true"]{
+  background:var(--green-light);
+  border-left-color:var(--green);
+  outline:3px solid #315f40;
+  outline-offset:2px;
+}
+.room-button.complete{border-left-color:#315f40;background:#f2f8f0}
+.room-icon{display:block;height:48px;margin-bottom:8px}
+.room-icon svg{width:48px;height:48px;color:#315f40}
+.room-title{display:block;color:var(--navy);font-weight:bold;margin-bottom:6px}
+.status-text{display:block;margin-top:10px;font-weight:bold}
+.active-area{margin-top:26px}
+.activity-card{
+  background:white;
+  border:2px solid var(--border);
+  border-left:8px solid var(--blue);
+  border-radius:var(--radius);
+  padding:24px;
+  box-shadow:var(--shadow);
+}
+.activity-card h2,.final-case h2{scroll-margin-top:18px}
+.choice-grid{display:grid;gap:12px;margin:18px 0}
+.choice-button,.action-button{
+  width:100%;
+  padding:14px 16px;
+  border:2px solid var(--border);
+  border-radius:9px;
+  background:white;
+  color:var(--ink);
+  cursor:pointer;
+  text-align:left;
+}
+.choice-button{transition:background .2s}
+.choice-button:hover:not(:disabled){background:#eaf3f8}
+.choice-button:disabled{opacity:1}
+.choice-button.correct-choice{background:#e5f3df;border-color:#315f40}
+.choice-button.wrong-choice{background:#fff2ed;border-color:#8b3838}
+.choice-button:focus-visible,.action-button:focus-visible{
+  outline:4px solid #7c5200;
+  outline-offset:3px;
+}
+.action-button{
+  width:auto;
+  background:var(--blue);
+  color:white;
+  border-color:var(--navy);
+  font-weight:bold;
+  text-decoration:underline;
+}
+.feedback{
+  margin-top:16px;
+  padding:16px;
+  border:2px solid var(--border);
+  border-left:8px solid var(--blue);
+  border-radius:10px;
+  background:#f8fbfd;
+  color:var(--ink);
+  font-size:.95rem;
+}
+.feedback.correct{background:var(--green-light);border-left-color:var(--green)}
+.feedback.incorrect{background:var(--red-light);border-left-color:var(--red)}
+.next-step-button{
+  width:100%;
+  padding:14px 18px;
+  background:var(--green);
+  color:white;
+  border:3px solid #173d26;
+  border-radius:10px;
+  font-weight:bold;
+  text-align:center;
+  text-decoration:underline;
+  cursor:pointer;
+}
+.next-step-button:hover{background:#214f34}
+progress{width:100%;height:24px}
+.achievement-list{padding-left:22px;font-size:.9rem}
+label{display:block;margin-top:14px;font-weight:bold}
+label small{font-weight:normal}
+textarea{
+  width:100%;
+  min-height:90px;
+  margin-top:6px;
+  padding:10px;
+  border:2px solid var(--border);
+  border-radius:8px;
+}
+select{
+  max-width:100%;
+  padding:10px;
+  border:2px solid #617486;
+  border-radius:6px;
+}
+fieldset{border:1px solid #617486;border-radius:10px;margin:16px 0;padding:16px}
+legend{font-weight:bold}
+summary{cursor:pointer;font-weight:bold}
+input[type="range"]{width:260px;max-width:100%;min-height:32px;accent-color:#d7c389}
+input:focus,select:focus,summary:focus,textarea:focus{
+  outline:4px solid #102f4a;
+  outline-offset:3px;
+}
+select:focus-visible,summary:focus-visible{outline-color:#a27816}
+.final-case{
+  margin-top:28px;
+  padding:25px;
+  background:var(--navy);
+  color:white;
+  border:3px solid #071826;
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+}
+.final-case h2{color:white}
+.final-case .feedback{background:white;color:var(--ink)}
+.final-case a{color:white}
+.final-case select{
+  display:block;
+  width:100%;
+  background:white;
+  color:#1f2933;
+  font-size:1rem;
+}
+.final-case .choice-button{color:#243746;background:white}
+.final-case .badge-maker a{color:#174c74}
+.badge-maker{
+  margin-top:22px;
+  padding:20px;
+  background:var(--gold-light);
+  color:var(--ink);
+  border:3px solid #80651c;
+  border-radius:12px;
+}
+.badge-maker h3{color:#634900;margin-top:0;font-family:Georgia,serif}
+.badge-maker label{color:#1f2933}
+.badge-name-input{
+  display:block;
+  width:100%;
+  max-width:500px;
+  margin:6px 0 14px;
+  padding:12px;
+  border:2px solid var(--border);
+  border-radius:8px;
+}
+.badge-download-button{
+  display:inline-block;
+  background:var(--navy);
+  color:white;
+  border:3px solid var(--navy-dark);
+  border-radius:9px;
+  padding:14px 20px;
+  cursor:pointer;
+  font-weight:bold;
+  text-decoration:underline;
+}
+.return-button{
+  display:inline-block;
+  margin-top:14px;
+  padding:14px 20px;
+  background:var(--green);
+  color:white;
+  border:3px solid #173d26;
+  border-radius:9px;
+  font-weight:bold;
+  text-decoration:underline;
+}
+.badge-preview{display:block;width:100%;height:auto;border-radius:12px;margin-top:15px}
+.badge-tools{display:flex;gap:12px;flex-wrap:wrap}
+.badge-error{font-weight:bold;color:#7b1f1f}
+.notebook-actions{display:flex;flex-direction:column;gap:8px}
+.danger-button{
+  background:white;
+  color:#733126;
+  border:2px solid #733126;
+  border-radius:8px;
+  padding:10px;
+  cursor:pointer;
+}
+.reset-box{padding:14px;background:#fff3eb;border:2px solid #8b4c32;border-radius:8px}
+.reset-box button{margin:6px 6px 0 0}
+.fragment-rack{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:8px;
+  list-style:none;
+  padding:0;
+}
+.fragment{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  min-height:66px;
+  border:2px solid #819285;
+  border-radius:12px;
+  background:#f0f2eb;
+  color:#465249;
+  font-size:1.5rem;
+  font-weight:bold;
+}
+.fragment small{font-size:.65rem;font-weight:normal}
+.fragment.collected{background:#fff3c8;border-color:#8c6a20;color:#624910}
+.legend-note{font-size:.85rem}
+.lab-scene{
+  position:relative;
+  background:linear-gradient(145deg,#eef6f8,#fbf7ea);
+  border:2px solid #8daaa2;
+  border-radius:12px;
+  padding:22px;
+  margin:16px 0;
+  text-align:left;
+  overflow:hidden;
+}
+.lab-scene h3{margin-top:0;font-family:Georgia,serif;font-size:1.3rem}
+.lab-scene button{
+  background:white;
+  border:2px solid #315f87;
+  border-radius:8px;
+  color:#102f4a;
+  min-height:44px;
+  cursor:pointer;
+}
+.lab-scene select{background:white;color:#243342}
+.lab-scene textarea,.lab-scene label{text-align:left}
+.controls{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0}
+.controls button{min-height:44px;padding:10px 13px}
+.lab-scene .controls{justify-content:flex-start}
+.lab-scene button[aria-pressed="true"]{
+  background:#193f50;
+  color:white;
+  border-color:#193f50;
+}
+.scene-art{
+  position:relative;
+  height:240px;
+  margin:15px 0;
+  border-radius:12px;
+  background:radial-gradient(ellipse at 50% 80%,#d4e5d4,#f5f6e8 75%);
+  overflow:hidden;
+  isolation:isolate;
+}
+.scene-art svg{width:100%;height:100%;display:block}
+.scene-caption{
+  padding:12px 15px;
+  border-left:4px solid #8f742f;
+  background:#fffbef;
+  min-height:66px;
+}
+.exploration-check{font-weight:bold;color:#315f40;font-size:.9rem}
+.progress-mini{background:#f1f6f4;border-radius:9px;padding:10px 14px;font-size:.88rem}
+.room-clue{position:relative}
+.clue{
+  background:#fff8e8;
+  border:2px solid #745500;
+  padding:14px;
+  border-radius:10px;
+  margin-top:18px;
+}
+.confetti{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.confetti i{
+  position:absolute;
+  width:7px;
+  height:12px;
+  background:#ba9846;
+  animation:celebrate 1.4s ease-out both;
+}
+.research-link{
+  display:inline-block;
+  background:#eef8f2;
+  border:2px solid #315f40;
+  border-radius:8px;
+  padding:10px 14px;
+  margin:8px 0 14px;
+  color:#214f34;
+}
+.reading-section{margin-bottom:14px}
+.reading-panel summary{color:#163a59}
+.reading-panel h3{font-size:1.08rem}
+.readings-list{padding-left:24px}
+.readings-list li{margin-bottom:9px}
+.footnote{font-size:.88rem}
+.quiet{font-size:.9rem}
+.save-status{font-size:.85rem}
+.muted-note{font-size:.86rem;color:#455b64}
+.sun-ring{
+  transform-origin:center;
+  transform-box:fill-box;
+  animation:orbit 30s linear infinite;
+}
+.wheel-stage{display:grid;grid-template-columns:140px 1fr;gap:18px;align-items:center}
+.wheel{
+  width:135px;
+  height:135px;
+  border:3px solid #bd9b4e;
+  border-radius:50%;
+  position:relative;
+  background:conic-gradient(#d9e8d6,#f5e6bb,#dce7f0,#d9e8d6);
+}
+.wheel-hand{
+  position:absolute;
+  width:4px;
+  height:54px;
+  top:10px;
+  left:calc(50% - 2px);
+  background:#24434d;
+  border-radius:10px;
+  transform-origin:center 55px;
+  transition:transform .8s cubic-bezier(.2,.8,.3,1);
+}
+.wheel::after{content:"✦";position:absolute;top:42px;left:47px;font-size:30px;color:#725116}
+.life-route{
+  height:200px;
+  background:#173b46;
+  border-radius:12px;
+  margin:15px 0;
+  position:relative;
+  overflow:hidden;
+}
+.life-route svg{width:100%;height:100%}
+.timeline-person{transition:transform .8s cubic-bezier(.2,.8,.3,1)}
+.bubble{fill:#fbfaf0;stroke:#6d928c;stroke-width:2;transition:r .6s,cx .6s,cy .6s}
+.floating{
+  animation:floatBook 6s ease-in-out infinite;
+  transform-origin:center;
+  transform-box:fill-box;
+}
+.nursery-cover{transition:transform 1s ease;transform-box:fill-box;transform-origin:bottom}
+.nursery-cover.open{transform:translateY(-160px)}
+.magic-lamp{
+  filter:drop-shadow(0 0 6px #ebc562);
+  animation:softGlow 4s ease-in-out infinite alternate;
+}
+.constellation-dot{transition:fill .4s,r .4s}
+.conservation-jar{transition:all .85s ease}
+.reason-needle{transform-origin:250px 115px;transition:transform 1s ease}
+.scene-spark{animation:twinkle 3s ease-in-out infinite alternate}
+.alt-option{padding:16px;border:2px solid #7d968c;border-radius:10px;background:#f6faf6;margin:12px 0}
+.path-choices{display:flex;flex-wrap:wrap;gap:10px}
+.path-choices button{flex:1;min-width:210px}
+.portal-stars{letter-spacing:12px;font-size:1.6rem;color:#e9d28b}
+.portal-unlocked .portal-stars{animation:softGlow 2s ease-in-out infinite alternate}
+.no-motion *{animation:none!important;scroll-behavior:auto!important;transition:none!important}
+.no-motion .tree-trunk,.no-motion .tree-branch{stroke-dashoffset:0}
+.no-motion .pointer-glow,.no-motion .confetti{display:none}
+.no-motion .room-button:hover{transform:none}
+.sr-only{
+  position:absolute;
+  width:1px;
+  height:1px;
+  padding:0;
+  margin:-1px;
+  overflow:hidden;
+  clip:rect(0,0,0,0);
+  white-space:nowrap;
+  border:0;
+}
+.mobile-progress{display:none}
+footer{
+  background:var(--navy-dark);
+  color:white;
+  padding:24px 0;
+  border-top:4px solid #c5a84f;
+}
+footer a{color:white}
+footer h2{color:white;font-size:1.15rem}
+footer p{font-size:.9rem}
+.footer-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+
+@keyframes growBranch{to{stroke-dashoffset:0}}
+@keyframes leafSway{from{transform:rotate(-3deg)}to{transform:rotate(3deg)}}
+@keyframes floatBook{
+  0%,100%{transform:translateY(0) rotate(-3deg)}
+  50%{transform:translateY(-12px) rotate(3deg)}
+}
+@keyframes orbit{to{transform:rotate(360deg)}}
+@keyframes cloudDrift{from{transform:translateX(-30px)}to{transform:translateX(75px)}}
+@keyframes twinkle{
+  from{opacity:.2;transform:scale(.8)}
+  to{opacity:.85;transform:scale(1.2)}
+}
+@keyframes softGlow{
+  from{filter:drop-shadow(0 0 3px #d4b967)}
+  to{filter:drop-shadow(0 0 9px #d4b967)}
+}
+@keyframes celebrate{
+  from{transform:translateY(-20px) rotate(0);opacity:1}
+  to{transform:translateY(150px) rotate(190deg);opacity:0}
+}
+@media(max-width:1050px){
+  .mission-layout{grid-template-columns:minmax(0,1fr) 280px}
+  .hero-grid{gap:20px}
+  .room-grid{gap:12px}
+  .room-button{padding:14px}
+}
+@media(max-width:920px){
+  .mission-layout{grid-template-columns:1fr}
+  .sidebar{position:static;max-height:none;overflow:visible}
+  .hero-grid{grid-template-columns:1fr .8fr}
+  .hero-scene{aspect-ratio:.9}
+  .hero h1{font-size:3.1rem}
+  .mobile-progress{
+    display:block;
+    position:sticky;
+    bottom:10px;
+    padding:11px 16px;
+    background:#103847;
+    color:white;
+    border:2px solid #d5be78;
+    border-radius:30px;
+    text-align:center;
+    z-index:10;
+    font-size:.88rem;
+    box-shadow:0 4px 20px #0004;
+  }
+  .mobile-progress a{color:white}
+  .gallery-map{padding:18px}
+}
+@media(max-width:700px){
+  .hero-grid{grid-template-columns:1fr}
+  .hero-scene{aspect-ratio:1.5;max-height:310px}
+  .hero h1{font-size:2.8rem}
+  .room-grid{grid-template-columns:1fr 1fr}
+  .room-button{min-height:195px;font-size:.88rem}
+  .room-icon{height:36px}
+  .room-icon svg{height:36px;width:36px}
+  .activity-card,.panel{padding:18px}
+  .lab-scene{padding:15px}
+  .scene-art{height:210px}
+  .footer-grid{grid-template-columns:1fr}
+  .hero-text{font-size:1rem}
+  .wheel-stage{grid-template-columns:1fr}
+  .wheel{margin:auto}
+  .container{width:calc(100% - 24px)}
+  .final-case{padding:18px}
+}
+@media(max-width:400px){
+  .room-grid{grid-template-columns:1fr}
+  .room-button{min-height:150px}
+  .hero h1{font-size:2.4rem}
+  .controls button{width:100%}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation:none!important;
+    transition:none!important;
+    scroll-behavior:auto!important;
+  }
+  .tree-trunk,.tree-branch{stroke-dashoffset:0}
+  .room-button:hover{transform:none}
+  .pointer-glow,.confetti{display:none}
+}
+@media print{
+  .mobile-progress,.hero,.gallery-panel,.gallery-map,.sidebar,
+  .reading-panel,footer,#active-area,#final-form,.badge-tools,
+  #badge-name-label,#learner,#badge-message,.skip-link,
+  main>.panel,main>noscript,.portal-stars{
+    display:none!important;
+  }
+  .mission-layout{display:block}
+  .container{width:100%;max-width:none}
+  main,.final-case,.badge-maker{margin:0!important;padding:0!important}
+  .final-case,.badge-maker{border:0;background:white;color:#111;box-shadow:none}
+  .final-case>h2,.final-case>p,.badge-maker>h3,.badge-maker>p,
+  .badge-maker>.return-button{display:none!important}
+  .badge-preview{max-width:100%;margin:0!important}
+  body{background:white;font-size:12pt}
+}
+</style>
+</head>
+
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+
+<!-- Reusable illustrated icons -->
+<svg aria-hidden="true" width="0" height="0" style="position:absolute;overflow:hidden">
+<defs>
+  <symbol id="icon-star" viewBox="0 0 48 48">
+    <path d="M24 3 30 17 45 24 30 30 24 45 18 30 3 24 18 17Z" fill="#eee0ae" stroke="currentColor" stroke-width="2"/>
+    <circle cx="24" cy="24" r="6" fill="#527361"/>
+  </symbol>
+  <symbol id="icon-seed" viewBox="0 0 48 48">
+    <path d="M24 43V21M24 29C5 30 4 10 6 8c15 0 20 11 18 21ZM24 22C22 8 36 3 43 5c1 11-6 19-19 17Z" fill="#c1d5ac" stroke="currentColor" stroke-width="2"/>
+    <path d="M9 44Q24 34 39 44" fill="none" stroke="currentColor" stroke-width="2"/>
+  </symbol>
+  <symbol id="icon-lantern" viewBox="0 0 48 48">
+    <path d="M18 10V7a6 6 0 0 1 12 0v3M12 12h24l-3 29H15Z" fill="#f6e4a7" stroke="currentColor" stroke-width="2"/>
+    <path d="M9 12h30M10 42h28M24 16v20" stroke="currentColor" stroke-width="2"/>
+    <circle cx="24" cy="25" r="5" fill="#bb8f38"/>
+  </symbol>
+  <symbol id="icon-flask" viewBox="0 0 48 48">
+    <path d="M17 4h14M20 4v14L7 39q-2 5 4 5h26q6 0 4-5L28 18V4" fill="#e1edf0" stroke="currentColor" stroke-width="2"/>
+    <path d="m14 29-7 10q-2 5 4 5h26q6 0 4-5l-7-10Z" fill="#88b5a0"/>
+    <circle cx="22" cy="32" r="2" fill="white"/>
+    <circle cx="29" cy="37" r="3" fill="#f5e2a1"/>
+  </symbol>
+  <symbol id="icon-wheel" viewBox="0 0 48 48">
+    <circle cx="24" cy="24" r="20" fill="#f4e6bc" stroke="currentColor" stroke-width="2"/>
+    <path d="M24 6v36M6 24h36M11 11l26 26M11 37l26-26" stroke="currentColor"/>
+    <circle cx="24" cy="24" r="7" fill="#5d8c7a"/>
+  </symbol>
+  <symbol id="icon-compass" viewBox="0 0 48 48">
+    <circle cx="24" cy="24" r="20" fill="#e0ede3" stroke="currentColor" stroke-width="2"/>
+    <path d="m31 11-3 17-17 9 9-17Z" fill="#c29c43" stroke="currentColor" stroke-width="2"/>
+  </symbol>
+  <symbol id="icon-book" viewBox="0 0 48 48">
+    <path d="M3 8q12-5 21 3 9-8 21-3v30q-12-5-21 3-9-8-21-3Z" fill="#f7ebcb" stroke="currentColor" stroke-width="2"/>
+    <path d="M24 11v30M9 17l9 2M9 24l9 2M30 19l9-2M30 26l9-2" stroke="currentColor" stroke-width="2"/>
+  </symbol>
+  <symbol id="icon-bridge" viewBox="0 0 48 48">
+    <path d="M4 39h40M8 39V17M40 39V17M8 20Q24 37 40 20M16 27v12M24 29v10M32 27v12" fill="none" stroke="currentColor" stroke-width="3"/>
+    <circle cx="24" cy="9" r="6" fill="#e7ce7a"/>
+  </symbol>
+</defs>
+</svg>
+
+<header class="hero" id="hero">
+  <div class="sky-stars" id="sky-stars" aria-hidden="true"></div>
+  <div class="cloud" aria-hidden="true"></div>
+  <div class="cloud" aria-hidden="true"></div>
+  <div class="cloud" aria-hidden="true"></div>
+  <div class="cloud" aria-hidden="true"></div>
+  <div class="pointer-glow" aria-hidden="true"></div>
+
+  <div class="container">
+    <a class="academy-link" href="https://bk2phdnkj7-ux.github.io/https-tonyaholdaway.github.io-psychology-academy-/">
+      Return to Psychology Academy
+    </a>
+
+    <div class="hero-grid">
+      <div class="hero-story">
+        <p class="eyebrow">Week 9 Psychology Mission</p>
+        <h1>The Lifespan<br>Conservatory</h1>
+        <p class="hero-subtitle">The Chronicle of Becoming</p>
+        <p class="hero-text">
+          The Conservatory&rsquo;s living chronicle has scattered into eight glowing
+          fragments. Follow its branching pathways from early development into
+          adulthood. Restore the pages, illuminate the life tree, and open the
+          Chronicle Door.
+        </p>
+        <p class="hero-text">
+          <strong>Eight rooms. Sixteen locks. A lifetime of discovery.</strong>
+        </p>
+      </div>
+
+      <div>
+        <div class="hero-scene" aria-hidden="true">
+          <svg viewBox="0 0 600 460">
+            <defs>
+              <radialGradient id="treeglow">
+                <stop stop-color="#b9ce7e" stop-opacity=".2"/>
+                <stop offset="1" stop-color="#b9ce7e" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+            <circle cx="300" cy="210" r="205" fill="url(#treeglow)"/>
+            <path class="glass-rib" d="M40 450V210A260 205 0 0 1 560 210V450M135 450V200q0-185 165-185t165 185v250M300 10v435M45 200h510M45 290h510M45 380h510"/>
+            <ellipse cx="300" cy="424" rx="177" ry="24" fill="#0a2834"/>
+            <path class="tree-trunk" d="M269 423q50-77 25-165t15-127M291 357q-32 56-61 61M298 370q37 41 65 48"/>
+            <path class="tree-branch" d="M294 325q-96-8-120-88M299 289q77-19 121-104M293 253q-48-8-65-85M299 213q65-34 57-105M297 183q-46-32-51-76M307 153q36-29 45-62M294 327q70 35 117-6M278 366q-64 3-94-43"/>
+
+            <g class="leaf-sway" fill="#5f897b" opacity=".8">
+              <ellipse cx="216" cy="266" rx="26" ry="11" transform="rotate(35 216 266)"/>
+              <ellipse cx="371" cy="248" rx="28" ry="12" transform="rotate(-25 371 248)"/>
+              <ellipse cx="264" cy="211" rx="23" ry="10" transform="rotate(40 264 211)"/>
+              <ellipse cx="335" cy="162" rx="21" ry="9" transform="rotate(-40 335 162)"/>
+              <ellipse cx="353" cy="337" rx="25" ry="10" transform="rotate(15 353 337)"/>
+            </g>
+
+            <g id="tree-nodes">
+              <circle class="seed-node" cx="184" cy="323" r="13"/>
+              <circle class="seed-node" cx="174" cy="237" r="15"/>
+              <circle class="seed-node" cx="228" cy="168" r="12"/>
+              <circle class="seed-node" cx="246" cy="107" r="13"/>
+              <circle class="seed-node" cx="352" cy="91" r="13"/>
+              <circle class="seed-node" cx="356" cy="108" r="9"/>
+              <circle class="seed-node" cx="420" cy="185" r="14"/>
+              <circle class="seed-node" cx="411" cy="321" r="14"/>
+            </g>
+
+            <g class="floating-book">
+              <use href="#icon-book" x="83" y="135" width="54" height="54" color="#dbca95"/>
+            </g>
+            <g class="floating-book" style="animation-delay:-3s">
+              <use href="#icon-lantern" x="463" y="270" width="46" height="46" color="#dfc57d"/>
+            </g>
+            <g fill="#ead28c" class="scene-spark">
+              <path d="m117 268 3 8 8 3-8 3-3 8-3-8-8-3 8-3Z"/>
+              <path d="m450 96 3 8 8 3-8 3-3 8-3-8-8-3 8-3Z"/>
+              <circle cx="370" cy="393" r="2"/>
+              <circle cx="181" cy="106" r="3"/>
+              <circle cx="476" cy="219" r="2"/>
+            </g>
+            <path d="M60 434h480" stroke="#c7b272" stroke-width="4"/>
+          </svg>
+        </div>
+        <p class="hero-note" id="tree-caption">
+          Restore a fragment. Watch a new light appear.
+        </p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main id="main-content" class="container">
+
+  <noscript>
+    <section class="panel">
+      <h2>JavaScript is needed for the mission</h2>
+      <p>
+        Enable JavaScript to use the activities. You can also read
+        <a href="https://openstax.org/books/psychology-2e/pages/9-introduction">OpenStax Chapter 9</a>
+        and contact Dr. Holdaway for an alternative activity.
+      </p>
+    </section>
+  </noscript>
+
+  <section class="gallery-panel" aria-labelledby="audio-heading">
+    <h2 id="audio-heading">Conservatory Atmosphere</h2>
+    <p>
+      Drifting clouds, floating books, and whimsical background music accompany
+      your exploration. Choose the atmosphere that works for you. Every activity
+      also works with sound and motion turned off.
+    </p>
+
+    <!-- Place the MP3 in your repository's assets/audio folder. -->
+    <audio id="background-music" loop preload="none" aria-label="Optional whimsical background music">
+      <source src="../assets/audio/leberch-whimsical-250869.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="audio-controls">
+      <button id="music" class="audio-button" aria-pressed="false">Play Conservatory Music</button>
+      <button id="motion" class="audio-button" aria-pressed="false">Pause Animations</button>
+    </div>
+    <label for="volume">Music volume</label>
+    <input id="volume" type="range" min="0" max="1" step="0.01" value="0.25" aria-describedby="audio-status">
+    <p id="audio-status" class="audio-status" role="status">Music is off.</p>
+    <p id="motion-status" class="quiet"></p>
+  </section>
+
+  <section class="panel panel-gold">
+    <h2>Mission Briefing</h2>
+    <ol>
+      <li>Choose a room and <strong>try at least one control</strong> at its interactive desk.</li>
+      <li>Solve both locks to collect that room&rsquo;s letter. Hints and retries are welcome.</li>
+      <li>Collect all eight fragments, solve the final case, and use the letters to open the Chronicle Door.</li>
+      <li>Enter your name, download your <strong>Week 9 completion badge</strong>, and upload it to your Canvas assignment.</li>
+    </ol>
+    <p>
+      <strong>Your textbook is part of the adventure.</strong>
+      Every challenge includes an <strong>OpenStax Research File</strong> link to
+      the section it comes from. Open a reading whenever you need help, then
+      return to apply the idea.
+    </p>
+    <p>
+      No timer, speed score, or penalty for retries. Allow about 35&ndash;45 minutes.
+      All controls work with a keyboard; dragging is never required. Animations
+      illustrate concepts, not actual research data, diagnoses, or predictions
+      of anyone&rsquo;s development.
+    </p>
+    <p>
+      Use fictional examples throughout; no personal or family history is
+      required. The final room lets you choose a general life-transition
+      activity or a brief, non-graphic Section 9.4 activity. Either route earns
+      the same fragment.
+    </p>
+    <p>
+      Progress is saved in this browser when storage is available. Download your
+      notebook before changing devices. Your badge must be submitted in Canvas;
+      this page does not send grades automatically.
+    </p>
+    <p id="save-status" class="save-status" role="status"></p>
+  </section>
+
+  <section class="panel panel-green">
+    <h2>Your Learning Goals</h2>
+    <ul>
+      <li>Connect physical, cognitive, and psychosocial development with context.</li>
+      <li>Recognize prenatal phases and explain examples of learning in infancy and childhood.</li>
+      <li>Apply Piaget&rsquo;s, Erikson&rsquo;s, and Kohlberg&rsquo;s frameworks while recognizing their limits.</li>
+      <li>Explain development across adolescence and adulthood without treating age as destiny.</li>
+      <li>Consider individual preferences and cultural context during life transitions.</li>
+    </ul>
+  </section>
+
+  <div class="mission-layout">
+    <div>
+      <section class="gallery-map" aria-labelledby="map-heading">
+        <h2 id="map-heading">The Conservatory Map</h2>
+        <p>Follow the rooms in order or choose your own path. Completed rooms stay open for practice.</p>
+        <div class="room-grid" id="rooms"></div>
+      </section>
+
+      <div id="active-area" class="active-area"></div>
+
+      <section id="final-case" class="final-case" aria-labelledby="final-heading">
+        <div class="portal-stars" aria-hidden="true">✧ ✦ ✧</div>
+        <h2 id="final-heading" tabindex="-1">The Chronicle Door</h2>
+        <p id="gate-status">Collect eight fragments to activate the final case.</p>
+
+        <form id="final-form" hidden>
+          <p>
+            At a community garden, a teenager explores whether they enjoy
+            designing signs, an experienced gardener teaches newcomers, and a
+            child notices that spreading six seed packets farther apart does
+            not create more packets. The group welcomes beginners of every age.
+          </p>
+
+          <label for="f1">
+            1. In Erikson&rsquo;s framework, exploring possible roles most closely connects with:
+          </label>
+          <select id="f1" required>
+            <option value="">Choose a concept</option>
+            <option value="conservation">Conservation</option>
+            <option value="identity">Identity exploration</option>
+            <option value="reflex">A newborn reflex</option>
+          </select>
+
+          <label for="f2">
+            2. The child&rsquo;s explanation about the seed packets demonstrates:
+          </label>
+          <select id="f2" required>
+            <option value="">Choose a concept</option>
+            <option value="conservation">Conservation of number</option>
+            <option value="permanence">Object permanence alone</option>
+            <option value="germinal">The germinal phase</option>
+          </select>
+
+          <label for="f3">
+            3. Which conclusion best fits a lifespan perspective?
+          </label>
+          <select id="f3" required>
+            <option value="">Choose a conclusion</option>
+            <option value="fixed">Age alone determines everyone&rsquo;s abilities</option>
+            <option value="end">Learning ends after adolescence</option>
+            <option value="context">Development continues across life and depends on interacting influences</option>
+          </select>
+
+          <label for="code">4. Enter the eight-letter Chronicle word</label>
+          <p class="quiet">
+            Read your fragments in room order. The word completes:
+            &ldquo;Development happens across the whole ________.&rdquo;
+            The word is also visible in your mission title.
+          </p>
+          <input class="badge-name-input" id="code" maxlength="30" autocomplete="off"
+                 autocapitalize="characters" spellcheck="false" required
+                 aria-describedby="final-feedback">
+          <button type="submit" class="action-button">Restore the Chronicle</button>
+        </form>
+
+        <p id="final-feedback" role="status" class="feedback">
+          Your collected fragments will guide the final case.
+        </p>
+
+        <section id="badge" class="badge-maker" hidden aria-labelledby="badge-heading">
+          <h3 id="badge-heading" tabindex="-1">Chronicle Restored &mdash; Claim Your Badge</h3>
+          <p>
+            You explored all eight rooms, solved sixteen locks, and completed
+            the final case. Personalize your badge below.
+          </p>
+          <label id="badge-name-label" for="learner">
+            Name for your completion badge <small>(stays on this page)</small>
+          </label>
+          <input class="badge-name-input" id="learner" maxlength="80"
+                 autocomplete="name" placeholder="Enter your name">
+          <div class="badge-tools">
+            <button id="badge-download" class="badge-download-button">Download My PNG Badge</button>
+            <button id="print-badge" class="action-button">Print Badge / Save as PDF</button>
+          </div>
+          <p id="badge-message" role="status"></p>
+          <canvas id="badge-preview" class="badge-preview" width="1200" height="780"
+                  role="img" aria-label="Preview of your Week 9 Lifespan Explorer completion badge"></canvas>
+          <p>
+            <strong>Finish in Canvas:</strong> Save your badge, return to the
+            Week 9 assignment, and upload the file. This badge records activity
+            completion; your instructor determines credit.
+          </p>
+          <a class="return-button" href="https://bk2phdnkj7-ux.github.io/https-tonyaholdaway.github.io-psychology-academy-/">
+            Return to Psychology Academy
+          </a>
+        </section>
+      </section>
+
+      <section class="panel reading-panel" style="margin-top:24px">
+        <h2>Open the Chapter Library</h2>
+        <details>
+          <summary>Chapter links, theory reminders, and credits</summary>
+          <ul id="reading-links" class="readings-list"></ul>
+          <p>
+            <strong>Read theories as frameworks.</strong> Freud offered a
+            historical account with limited modern support; Vygotsky emphasized
+            social and cultural influences. Piaget, Erikson, and Kohlberg
+            organize different aspects of development. Their models should not
+            be used to label a person from one behavior. See
+            <a href="https://openstax.org/books/psychology-2e/pages/9-2-lifespan-theories"
+               target="_blank" rel="noopener">Section 9.2 (new tab)</a>.
+          </p>
+          <p class="footnote">
+            Concepts are aligned with Spielman, R. M., Jenkins, W. J., &amp;
+            Lovett, M. D. (2020), <em>Psychology 2e</em>, Chapter 9. Access for
+            free at
+            <a href="https://openstax.org/books/psychology-2e/pages/1-introduction"
+               target="_blank" rel="noopener">OpenStax (new tab)</a>.
+            Original fictional scenarios, illustrations, and game interactions
+            were created for this activity. The graphics are symbolic teaching
+            illustrations, not medical images. Background audio:
+            instructor-provided file, <em>leberch-whimsical-250869.mp3</em>.
+          </p>
+        </details>
+      </section>
+    </div>
+
+    <aside class="sidebar" aria-label="Your mission tools">
+      <section class="panel panel-green">
+        <h2>Chronicle Progress</h2>
+        <label for="progress-bar" class="sr-only">Fragments recovered</label>
+        <progress id="progress-bar" value="0" max="8"></progress>
+        <p id="progress-text">0 of 8 fragments recovered</p>
+        <ol id="fragment-rack" class="fragment-rack" aria-label="Fragment letters in room order"></ol>
+        <p class="legend-note">
+          A letter appears when you explore a room and solve both locks.
+        </p>
+        <a href="#final-heading">Go to the Chronicle Door</a>
+      </section>
+
+      <section class="panel">
+        <h2>Your Field Notebook</h2>
+        <label for="notes">Save an idea, question, or connection</label>
+        <textarea id="notes" maxlength="12000"
+                  placeholder="Concept → fictional example → explanation → OpenStax section"></textarea>
+        <p class="quiet">
+          Optional notes are saved here and included in your download. They are
+          not automatically graded. Avoid sensitive personal details.
+        </p>
+        <div class="notebook-actions">
+          <button id="download-notes" class="action-button">Download My Notebook</button>
+          <button id="reset" class="danger-button">Reset This Mission</button>
+        </div>
+        <div id="reset-confirm" class="reset-box" hidden>
+          <p>
+            Clear this Week 9 mission&rsquo;s progress and notes? Download your
+            notebook first if you want to keep it.
+          </p>
+          <button id="confirm-reset" class="danger-button">Yes, Reset Week 9</button>
+          <button id="cancel-reset" class="action-button">Keep My Progress</button>
+        </div>
+      </section>
+
+      <section class="panel panel-gold">
+        <h2>Explorer Milestones</h2>
+        <ul id="achievement-list" class="achievement-list"></ul>
+      </section>
+    </aside>
+  </div>
+
+  <div class="mobile-progress" id="mobile-progress">
+    <a href="#map-heading">Map</a> &middot;
+    <span id="mobile-count">0 / 8 fragments</span> &middot;
+    <a href="#final-heading">Final door</a>
+  </div>
+</main>
+
+<footer>
+  <div class="container footer-grid">
+    <div>
+      <h2>Psychology Academy &bull; Week 9</h2>
+      <p>
+        The Lifespan Conservatory<br>
+        Created for Dr. Tonya Holdaway&rsquo;s psychology students.
+      </p>
+    </div>
+    <div>
+      <h2>Learning has many pathways</h2>
+      <p>
+        Read, experiment, revisit, and take your time. A completed pathway is
+        evidence of exploration, not a measure of intelligence or development.
+      </p>
+    </div>
+  </div>
+</footer>
+
+<script>
+'use strict';
+
+const $ = id => document.getElementById(id);
+const BASE = 'https://openstax.org/books/psychology-2e/pages/';
+
+const sections = {
+  '9.1':['What Is Lifespan Development?','9-1-what-is-lifespan-development'],
+  '9.2':['Lifespan Theories','9-2-lifespan-theories'],
+  '9.3':['Stages of Development','9-3-stages-of-development'],
+  '9.4':['Death and Dying','9-4-death-and-dying'],
+  'Summary':['Chapter 9 Summary','9-summary'],
+  'Key terms':['Chapter 9 Key Terms','9-key-terms']
+};
+
+/* Each room contains an interactive desk and two challenge locks. */
+const rooms = [
+  {
+    title:'The Three-Lens Observatory',
+    icon:'star',
+    letter:'L',
+    section:'9.1',
+    sim:'domains',
+    card:'The Context Lens',
+    intro:'A community garden needs more than one kind of growth. Turn three lenses onto the same scene and see what each reveals.',
+    fact:'Biology, thinking, and relationships interact.',
+    hint:'Ask whether the example emphasizes the body, thinking, or relationships. One activity can involve several domains.',
+    q:[
+      [
+        'Nico learns to follow a new planting diagram. Which domain is most directly emphasized?',
+        ['Physical','Cognitive','Psychosocial'],
+        1,
+        'The task emphasizes interpreting information.'
+      ],
+      [
+        'Two learners have different experiences, opportunities, and biological characteristics. Which explanation best fits development?',
+        ['Only inherited characteristics matter','Only experience matters','Biological and environmental influences interact'],
+        2,
+        'Development reflects interacting influences, not a nature-or-nurture choice.'
+      ]
+    ]
+  },
+  {
+    title:'The Seedlight Chamber',
+    icon:'seed',
+    letter:'I',
+    section:'9.3',
+    sim:'prenatal',
+    card:'The Beginning Lens',
+    intro:'Illuminate three seedlight windows to investigate the sequence before birth. The glowing shapes are symbols, not anatomical images.',
+    fact:'Prenatal development has an ordered sequence.',
+    hint:'The sequence is germinal, embryonic, then fetal. Review what begins during each phase.',
+    q:[
+      [
+        'Put the three prenatal phases in order.',
+        ['Germinal → embryonic → fetal','Fetal → germinal → embryonic','Embryonic → fetal → germinal'],
+        0,
+        'Germinal comes first, followed by embryonic and fetal development.'
+      ],
+      [
+        'An archive note describes the initial formation of major organs. Which phase best fits?',
+        ['Late adulthood','Embryonic','Germinal only'],
+        1,
+        'Major organ structures begin forming during the embryonic phase.'
+      ]
+    ]
+  },
+  {
+    title:'The Hidden-Star Nursery',
+    icon:'lantern',
+    letter:'F',
+    section:'9.2',
+    extra:'9.3',
+    sim:'permanence',
+    card:'The Discovery Lens',
+    intro:'A small star has slipped beneath a velvet cover. Hide it, reveal it, and explore a second card about supportive relationships.',
+    fact:'Hidden does not mean gone.',
+    hint:'Object permanence concerns continued existence. A secure base supports exploration.',
+    q:[
+      [
+        'A child searches beneath the cloth for the star. What understanding does this illustrate?',
+        ['Conservation of volume','Object permanence','Postconventional reasoning'],
+        1,
+        'Searching for the hidden star illustrates understanding that it still exists.'
+      ],
+      [
+        'A caregiver is available while a young child explores a play area. Which attachment idea does this illustrate?',
+        ['The child must never explore','One observation predicts all later relationships','A secure base'],
+        2,
+        'A secure base provides support for exploration. This scene does not diagnose an attachment pattern.'
+      ]
+    ]
+  },
+  {
+    title:'Piaget’s Transformation Studio',
+    icon:'flask',
+    letter:'E',
+    section:'9.2',
+    extra:'Key terms',
+    sim:'conservation',
+    card:'The Thinking Lens',
+    intro:'The jars look different, but did their contents change? Transform the display, then inspect a schema card.',
+    fact:'Appearance and amount are different clues.',
+    hint:'Conservation means quantity stays the same when nothing is added or removed. Accommodation changes an existing schema.',
+    q:[
+      [
+        'Nothing is added or removed as water moves into a taller, narrower jar. A child explains that both jars still contain the same amount. What is demonstrated?',
+        ['Object permanence','Conservation','A newborn reflex'],
+        1,
+        'The explanation tracks quantity despite a change in appearance.'
+      ],
+      [
+        'A child calls every flying object a bird, then creates a separate category for kites. Which process is emphasized?',
+        ['Accommodation','Conservation','Generativity'],
+        0,
+        'The child changes a category to account for new information.'
+      ]
+    ]
+  },
+  {
+    title:'Erikson’s Turning Wheel',
+    icon:'wheel',
+    letter:'S',
+    section:'9.2',
+    sim:'erikson',
+    card:'The Relationship Lens',
+    intro:'Turn the wheel through eight psychosocial themes. These are theoretical lenses, not deadlines or a checklist for judging a person.',
+    fact:'Development includes changing social tasks.',
+    hint:'Identity concerns a sense of self. Generativity includes contributing to others.',
+    q:[
+      [
+        'A teenager tries a robotics club and a theater club while considering what matters to them. Which Erikson theme best fits?',
+        ['Integrity versus despair','Identity versus role confusion','Trust versus mistrust'],
+        1,
+        'Trying possible roles makes identity a useful lens for this example.'
+      ],
+      [
+        'An adult volunteers to teach beginners how to repair bicycles. Which theme is most directly illustrated?',
+        ['Generativity versus stagnation','Autonomy versus shame and doubt','Object permanence'],
+        0,
+        'Sharing skills with others illustrates contribution beyond oneself.'
+      ]
+    ]
+  },
+  {
+    title:'The Compass of Reasons',
+    icon:'compass',
+    letter:'P',
+    section:'9.2',
+    sim:'moral',
+    card:'The Reasoning Lens',
+    intro:'Three volunteers return the same borrowed garden tool, but give different reasons. Rotate the compass to inspect their explanations.',
+    fact:'The reason behind a choice matters.',
+    hint:'Kohlberg examined reasoning: consequences, social expectations, and ethical principles. A statement does not prove behavior.',
+    q:[
+      [
+        '“I return the tools because our agreed rules keep the garden organized.” Which level is most clearly illustrated?',
+        ['Preconventional','Conventional','Postconventional'],
+        1,
+        'The reason emphasizes maintaining shared rules and social order.'
+      ],
+      [
+        'Two people make the same choice for different reasons. What should the investigator conclude?',
+        ['The choice alone reveals their reasoning level','A spoken principle guarantees consistent behavior','Ask about reasoning; behavior alone does not reveal the explanation'],
+        2,
+        'Kohlberg’s framework examines justifications, not only yes-or-no choices.'
+      ]
+    ]
+  },
+  {
+    title:'The Lifelong Learning Terrace',
+    icon:'book',
+    letter:'A',
+    section:'9.3',
+    sim:'lifelong',
+    card:'The Possibility Lens',
+    intro:'Move through a fictional community project. Each chapter introduces a new contribution, not a ranking of ages or abilities.',
+    fact:'Learning and contribution extend across life.',
+    hint:'Age is one part of the context. Opportunities, experience, and individual differences also matter.',
+    q:[
+      [
+        'A new adult learner and an experienced older learner join the same drawing workshop. Which assumption is best supported?',
+        ['Both can learn; their experiences and support needs may differ','The older learner cannot learn a new skill','The younger learner will always learn faster'],
+        0,
+        'A lifespan perspective leaves room for learning and individual variation.'
+      ],
+      [
+        'A club wants to support an older member learning a new app. Which response best preserves participation?',
+        ['Assume someone else must do it','Ask about their goals and offer an adjustable demonstration','Exclude them from the activity'],
+        1,
+        'Ask what helps rather than inferring ability or preference from age.'
+      ]
+    ]
+  },
+  {
+    title:'The Garden of Many Pathways',
+    icon:'bridge',
+    letter:'N',
+    section:'9.1',
+    sim:'pathways',
+    card:'The Respect Lens',
+    intro:'Choose a general life-transition route or a brief Section 9.4 route. Either earns the same fragment. Neither asks for personal experiences.',
+    fact:'Respect individual preferences and context.',
+    hint:'Ask before assuming. A model describes possibilities, not one compulsory experience for everyone.',
+    q:[
+      [
+        'At a new community center, two visitors prefer different ways to join activities. What should the host do?',
+        ['Assign preferences based on age','Ask each person what would help them participate','Require identical participation'],
+        1,
+        'Ask about individual preferences rather than assuming one pathway fits everyone.'
+      ],
+      [
+        'A life-stage diagram shows typical patterns. How should it be used?',
+        ['As a framework considered alongside context and variation','As a fixed schedule every person must follow','As proof that experiences are identical across cultures'],
+        0,
+        'A developmental framework is useful without being a universal timetable.'
+      ]
+    ]
+  }
+];
+
+const careQuestions = [
+  [
+    'Which description best fits the purpose of hospice?',
+    ['Comfort, dignity, and support near the end of life','Making every person follow the same emotional timetable','Focusing only on research measurements'],
+    0,
+    'Hospice emphasizes comfort and supportive care.'
+  ],
+  [
+    'How should Kübler-Ross’s model be interpreted?',
+    ['Everyone must experience all five responses in order','It predicts an exact timeline','It is not a required sequence or a universal checklist'],
+    2,
+    'People may experience different responses, in different orders, or not experience all of them.'
+  ]
+];
+
+/* These keys match the updated Academy homepage. */
+const KEY = 'psychologyLifespanWeek9_v1';
+const COMPLETE = 'psychologyAcademyWeek9Complete';
+
+const fresh = () => ({
+  solved:[],
+  explored:[],
+  notes:'',
+  escaped:false,
+  motionPaused:false,
+  route:'general',
+  settings:{volume:.25}
+});
+
+let state = fresh();
+let active = -1;
+let storageOK = true;
+
+try {
+  const saved = JSON.parse(localStorage.getItem(KEY) || 'null');
+  if (saved && typeof saved === 'object') {
+    state.solved = Array.isArray(saved.solved)
+      ? [...new Set(saved.solved.filter(n => Number.isInteger(n) && n >= 0 && n < 16))]
+      : [];
+    state.explored = Array.isArray(saved.explored)
+      ? [...new Set(saved.explored.filter(n => Number.isInteger(n) && n >= 0 && n < 8))]
+      : [];
+    state.notes = typeof saved.notes === 'string' ? saved.notes.slice(0,12000) : '';
+    state.escaped = saved.escaped === true &&
+      state.solved.length === 16 &&
+      state.explored.length === 8;
+    state.motionPaused = saved.motionPaused === true;
+    state.route = saved.route === 'care' ? 'care' : 'general';
+    const volume = saved.settings && saved.settings.volume;
+    state.settings.volume = Number.isFinite(volume)
+      ? Math.min(1,Math.max(0,volume))
+      : .25;
+  }
+} catch (error) {
+  storageOK = false;
+}
+
+const el = (tag,text,cls) => {
+  const node = document.createElement(tag);
+  if (text !== undefined) node.textContent = text;
+  if (cls) node.className = cls;
+  return node;
+};
+
+const svg = (markup,cls='') => {
+  const wrap = el('div',undefined,cls);
+  wrap.innerHTML = markup;
+  return wrap;
+};
+
+function save() {
+  try {
+    localStorage.setItem(KEY,JSON.stringify(state));
+    if (state.escaped) localStorage.setItem(COMPLETE,'true');
+    storageOK = true;
+  } catch (error) {
+    storageOK = false;
+  }
+
+  const message = storageOK
+    ? 'Progress and notes are saved in this browser.'
+    : 'Browser saving is unavailable. Keep this tab open and download your notebook before leaving.';
+
+  if ($('save-status').textContent !== message) {
+    $('save-status').textContent = message;
+  }
+}
+
+function done(index) {
+  return state.explored.includes(index) &&
+    state.solved.includes(index * 2) &&
+    state.solved.includes(index * 2 + 1);
+}
+
+function getQuestions(index) {
+  return index === 7 && state.route === 'care'
+    ? careQuestions
+    : rooms[index].q;
+}
+
+function countDone() {
+  return rooms.filter((room,index) => done(index)).length;
+}
+
+function updateDashboard() {
+  const count = countDone();
+
+  $('progress-bar').value = count;
+  $('progress-text').textContent =
+    count + ' of 8 fragments recovered' +
+    (state.escaped ? ' · Chronicle restored!' : '');
+
+  $('mobile-count').textContent = count + ' / 8 fragments';
+
+  $('tree-caption').textContent = count
+    ? count + ' of 8 lights restored to the life tree.'
+    : 'Restore a fragment. Watch a new light appear.';
+
+  $('fragment-rack').replaceChildren();
+
+  rooms.forEach((room,index) => {
+    const item = el('li',undefined,'fragment' + (done(index) ? ' collected' : ''));
+    item.setAttribute(
+      'aria-label',
+      'Room ' + (index + 1) + ': ' +
+      (done(index) ? 'letter ' + room.letter : 'not collected')
+    );
+    item.append(
+      el('span',done(index) ? room.letter : '·'),
+      el('small','Room ' + (index + 1))
+    );
+    $('fragment-rack').append(item);
+
+    $('tree-nodes').children[index].classList.toggle('lit',done(index));
+
+    const button = $('room-' + index);
+    if (button) {
+      button.classList.toggle('complete',done(index));
+      button.setAttribute('aria-pressed',String(active === index));
+      button.querySelector('.status-text').textContent = done(index)
+        ? '✓ Fragment ' + room.letter + ' recovered'
+        : (state.explored.includes(index) ? 'Desk explored' : 'Desk waiting') +
+          ' · ' + [0,1].filter(lock => state.solved.includes(index * 2 + lock)).length +
+          '/2 locks';
+    }
+  });
+
+  $('achievement-list').replaceChildren();
+  const milestones = [];
+
+  if (state.explored.length) {
+    milestones.push('First Light: explored an interactive desk.');
+  }
+  if (state.explored.length >= 4) {
+    milestones.push('Curious Scholar: explored four different desks.');
+  }
+  if (state.explored.length === 8) {
+    milestones.push('Pathway Explorer: visited all eight desks.');
+  }
+  if (count === 8) {
+    milestones.push('Chronicle Keeper: recovered all fragments.');
+  }
+  if (state.escaped) {
+    milestones.push('Lifespan Explorer: final case completed.');
+  }
+
+  (milestones.length
+    ? milestones
+    : ['Your milestones will appear as you explore.']
+  ).forEach(text => $('achievement-list').append(el('li',text)));
+
+  $('final-form').hidden = count < 8 || state.escaped;
+  $('badge').hidden = !state.escaped;
+  $('final-case').classList.toggle('portal-unlocked',count === 8);
+
+  $('gate-status').textContent = state.escaped
+    ? 'Mission complete. Personalize and download your badge below.'
+    : count === 8
+      ? 'All eight fragments recovered. The Chronicle Door is ready.'
+      : 'Collect all eight fragments to activate the final case.';
+}
+
+function celebrate(node) {
+  if (reduceMotion()) return;
+
+  const confetti = el('div',undefined,'confetti');
+  confetti.setAttribute('aria-hidden','true');
+
+  for (let index = 0; index < 18; index++) {
+    const piece = el('i');
+    piece.style.left = (index * 17 % 100) + '%';
+    piece.style.animationDelay = (index % 5) * .045 + 's';
+    piece.style.background = ['#c5a14d','#648d78','#7c9fae'][index % 3];
+    confetti.append(piece);
+  }
+
+  node.append(confetti);
+  setTimeout(() => confetti.remove(),1800);
+}
+
+function markExplored(index) {
+  const wasDone = done(index);
+
+  if (!state.explored.includes(index)) {
+    state.explored.push(index);
+  }
+
+  save();
+  updateDashboard();
+  updateClue();
+
+  const message = $('exploration-check');
+  if (message) {
+    message.textContent = '✓ Interactive desk explored. You can keep experimenting.';
+  }
+
+  if (!wasDone && done(index) && $('room-clue')) {
+    celebrate($('room-clue'));
+  }
+}
+
+function researchLink(key) {
+  const link = el(
+    'a',
+    'OpenStax Research File: ' + key + ' — ' + sections[key][0] + ' (new tab)',
+    'research-link'
+  );
+  link.href = BASE + sections[key][1];
+  link.target = '_blank';
+  link.rel = 'noopener';
+  return link;
+}
+
+function openRoom(index,keepFocus=false) {
+  active = index;
+  const room = rooms[index];
+  const area = $('active-area');
+  area.replaceChildren();
+
+  const box = el('section',undefined,'activity-card');
+  const heading = el('h2','Room ' + (index + 1) + ' · ' + room.title);
+
+  heading.id = 'activity-heading';
+  heading.tabIndex = -1;
+  box.setAttribute('aria-labelledby',heading.id);
+  box.append(heading,el('p',room.intro));
+
+  const links = el('div',undefined,'reading-section');
+  const keys = index === 7
+    ? [state.route === 'care' ? '9.4' : '9.1']
+    : [room.section,room.extra].filter(Boolean);
+
+  keys.forEach(key => links.append(researchLink(key)));
+  box.append(links);
+
+  if (index === 7) {
+    const alternative = el('div',undefined,'alt-option');
+    alternative.append(el('strong','Choose your learning route'));
+
+    const buttons = el('div',undefined,'path-choices');
+    [
+      ['general','Everyday life transitions'],
+      ['care','Care and dignity · Section 9.4']
+    ].forEach(([value,label]) => {
+      const button = el('button',label,'choice-button');
+      button.type = 'button';
+      button.setAttribute('aria-pressed',String(state.route === value));
+      button.onclick = () => {
+        if (state.route === value) return;
+        state.route = value;
+        save();
+        openRoom(7);
+      };
+      buttons.append(button);
+    });
+
+    alternative.append(
+      buttons,
+      el(
+        'p',
+        'Both routes count equally. Switching preserves any locks already earned. The Section 9.4 route discusses hospice and responses to loss briefly, without images or personal reflection.',
+        'quiet'
+      )
+    );
+    box.append(alternative);
+  }
+
+  box.append(simulation(room.sim,index));
+
+  const hints = el('details');
+  hints.append(
+    el('summary','Open a research hint'),
+    el(
+      'p',
+      index === 7 && state.route === 'care'
+        ? 'Consider dignity, support, and individual variation. Responses to loss do not follow a compulsory sequence.'
+        : room.hint
+    )
+  );
+  box.append(hints);
+
+  getQuestions(index).forEach((question,lock) => {
+    const field = el('fieldset');
+    const legend = el('legend','Lock ' + (lock + 1));
+    field.append(legend,el('p',question[0]));
+
+    const grid = el('div',undefined,'choice-grid');
+    const feedback = el(
+      'p',
+      state.solved.includes(index * 2 + lock)
+        ? '✓ Lock already earned. You may practice this question again.'
+        : 'Choose an answer. You may retry.',
+      'feedback'
+    );
+
+    feedback.id = 'feedback-' + lock;
+    feedback.setAttribute('role','status');
+
+    question[1].forEach((answer,choice) => {
+      const button = el(
+        'button',
+        String.fromCharCode(65 + choice) + '. ' + answer,
+        'choice-button'
+      );
+      button.type = 'button';
+      button.dataset.choice = choice;
+      button.dataset.lock = lock;
+      button.setAttribute('aria-describedby',feedback.id);
+
+      button.onclick = () => {
+        grid.querySelectorAll('button').forEach(item => {
+          item.classList.remove('correct-choice','wrong-choice');
+        });
+
+        if (choice === question[2]) {
+          const wasDone = done(index);
+
+          if (!state.solved.includes(index * 2 + lock)) {
+            state.solved.push(index * 2 + lock);
+          }
+
+          button.classList.add('correct-choice');
+          feedback.className = 'feedback correct';
+          feedback.textContent = '✓ Lock solved. ' + question[3];
+
+          save();
+          updateDashboard();
+          updateClue();
+
+          if (!wasDone && done(index)) {
+            celebrate($('room-clue'));
+          }
+        } else {
+          button.classList.add('wrong-choice');
+          feedback.className = 'feedback incorrect';
+          feedback.textContent =
+            'Not quite. ' +
+            (index === 7 && state.route === 'care'
+              ? 'Think about comfort and individual variation.'
+              : room.hint) +
+            ' Try again.';
+        }
+      };
+
+      grid.append(button);
+    });
+
+    field.append(grid,feedback);
+    box.append(field);
+  });
+
+  const clue = el('div',undefined,'room-clue');
+  clue.id = 'room-clue';
+  clue.setAttribute('aria-live','polite');
+  box.append(clue);
+
+  area.append(box);
+  updateClue();
+  updateDashboard();
+
+  if (!keepFocus) heading.focus();
+}
+
+function updateClue() {
+  const clue = $('room-clue');
+  if (!clue || active < 0) return;
+
+  const room = rooms[active];
+  clue.replaceChildren();
+
+  if (done(active)) {
+    clue.className = 'clue room-clue';
+    clue.append(
+      el('strong','Fragment ' + room.letter + ' recovered · ' + room.card),
+      el('p',room.fact)
+    );
+
+    const button = el(
+      'button',
+      countDone() === 8
+        ? 'Open the Chronicle Door'
+        : 'Continue to the Next Unfinished Room',
+      'next-step-button'
+    );
+
+    button.type = 'button';
+    button.onclick = () => {
+      const next = rooms.findIndex((room,index) => !done(index));
+      if (next < 0) {
+        $('final-heading').focus();
+      } else {
+        openRoom(next);
+      }
+    };
+
+    clue.append(button);
+  } else {
+    clue.className = 'room-clue';
+    clue.append(
+      el(
+        'p',
+        state.explored.includes(active)
+          ? 'Solve both locks to reveal this fragment.'
+          : 'Try a control at the interactive desk, then solve both locks.',
+        'progress-mini'
+      )
+    );
+  }
+}
+
+/* Build the room map. */
+rooms.forEach((room,index) => {
+  const button = el('button',undefined,'room-button');
+  button.type = 'button';
+  button.id = 'room-' + index;
+  button.setAttribute('aria-pressed','false');
+
+  const icon = svg(
+    '<svg aria-hidden="true"><use href="#icon-' + room.icon + '"/></svg>',
+    'room-icon'
+  );
+
+  button.append(
+    icon,
+    el('span',(index + 1) + '. ' + room.title,'room-title'),
+    el('span',index === 7 ? 'OpenStax 9.1 / 9.4' : 'OpenStax ' + room.section),
+    el('span','','status-text')
+  );
+
+  button.onclick = () => openRoom(index);
+  $('rooms').append(button);
+});
+
+Object.entries(sections).forEach(([key,value]) => {
+  const item = el('li');
+  const link = el('a',key + ' · ' + value[0] + ' (new tab)');
+  link.href = BASE + value[1];
+  link.target = '_blank';
+  link.rel = 'noopener';
+  item.append(link);
+  $('reading-links').append(item);
+});
+
+/* The eight interactive desks. */
+function simulation(type,roomIndex) {
+  const box = el('div',undefined,'lab-scene');
+  box.append(el('h3','Your Interactive Desk'));
+
+  const explored = el(
+    'p',
+    state.explored.includes(roomIndex)
+      ? '✓ Interactive desk explored. You can keep experimenting.'
+      : 'Explore at least one control to activate this room’s fragment.',
+    'exploration-check'
+  );
+  explored.id = 'exploration-check';
+  box.append(explored);
+
+  const controls = el('div',undefined,'controls');
+  const status = el('p',undefined,'scene-caption');
+  status.setAttribute('role','status');
+
+  function button(label,action) {
+    const control = el('button',label);
+    control.type = 'button';
+    control.onclick = () => {
+      action(control);
+      markExplored(roomIndex);
+    };
+    controls.append(control);
+    return control;
+  }
+
+  function art(markup) {
+    const drawing = svg(
+      '<svg viewBox="0 0 500 240" aria-hidden="true">' + markup + '</svg>',
+      'scene-art'
+    );
+    box.append(drawing);
+    return drawing;
+  }
+
+  function press(selected) {
+    controls.querySelectorAll('button').forEach(control => {
+      control.setAttribute('aria-pressed',String(control === selected));
+    });
+  }
+
+  if (type === 'domains') {
+    const drawing = art(`
+      <path d="M112 121 250 70 391 121 250 196Z" fill="none"
+            stroke="#8ba496" stroke-width="2" stroke-dasharray="6 5"/>
+      <g class="floating">
+        <circle class="constellation-dot" cx="112" cy="121" r="36"
+                fill="#d3e2ce" stroke="#385f53" stroke-width="3"/>
+        <use href="#icon-seed" x="88" y="97" width="48" height="48" color="#315f40"/>
+      </g>
+      <g class="floating" style="animation-delay:-2s">
+        <circle class="constellation-dot" cx="250" cy="70" r="36"
+                fill="#d5e6ed" stroke="#315f87" stroke-width="3"/>
+        <use href="#icon-book" x="226" y="46" width="48" height="48" color="#315f87"/>
+      </g>
+      <g class="floating" style="animation-delay:-4s">
+        <circle class="constellation-dot" cx="391" cy="121" r="36"
+                fill="#f5e5b3" stroke="#80621e" stroke-width="3"/>
+        <use href="#icon-bridge" x="367" y="97" width="48" height="48" color="#80621e"/>
+      </g>
+      <circle cx="250" cy="196" r="9" fill="#315f40"/>
+      <text x="112" y="185" text-anchor="middle" fill="#233f3f" font-size="16">Body</text>
+      <text x="250" y="135" text-anchor="middle" fill="#233f3f" font-size="16">Thinking</text>
+      <text x="391" y="185" text-anchor="middle" fill="#233f3f" font-size="16">Relationships</text>
+    `);
+
+    status.textContent = 'One garden project can involve all three domains. Choose a lens.';
+
+    [
+      ['Physical lens','Nico steadies a watering can and coordinates hand movements. Focus: physical development.'],
+      ['Cognitive lens','Nico figures out the planting diagram. Focus: cognitive development.'],
+      ['Psychosocial lens','Nico negotiates a shared plan with a friend. Focus: psychosocial development.']
+    ].forEach(([name,text],index) => {
+      button(name,control => {
+        drawing.querySelectorAll('.constellation-dot').forEach((node,dot) => {
+          node.style.fill = dot === index
+            ? '#e5c26c'
+            : ['#d3e2ce','#d5e6ed','#f5e5b3'][dot];
+          node.setAttribute('r',dot === index ? '43' : '36');
+        });
+        status.textContent = text;
+        press(control);
+      });
+    });
+
+  } else if (type === 'prenatal') {
+    const drawing = art(`
+      <path d="M83 174Q250 215 417 174" stroke="#74927d" stroke-width="3" fill="none"/>
+      <circle cx="250" cy="114" r="85" fill="#fdf9ea" stroke="#bca367" stroke-width="2"/>
+      <g class="sun-ring" stroke="#c2ac72" stroke-width="2">
+        <path d="M250 13v14M351 114h-14M250 215v-14M149 114h14M178 42l10 10M322 42l-10 10M178 186l10-10M322 186l-10-10"/>
+      </g>
+      <g id="seed-cells"></g>
+      <text id="seed-label" x="250" y="221" text-anchor="middle" fill="#214e3c" font-size="17"></text>
+    `);
+
+    const descriptions = [
+      'Germinal phase: early cell division and implantation.',
+      'Embryonic phase: major body structures begin forming.',
+      'Fetal phase: continued growth and maturation.'
+    ];
+
+    function draw(index) {
+      const group = drawing.querySelector('#seed-cells');
+      group.replaceChildren();
+
+      const count = [4,9,16][index];
+      const columns = [2,3,4][index];
+      const size = [20,17,14][index];
+
+      for (let cell = 0; cell < count; cell++) {
+        const circle = document.createElementNS('http://www.w3.org/2000/svg','circle');
+        circle.setAttribute(
+          'cx',
+          String(250 + (cell % columns - (columns - 1) / 2) * (size * 2 + 3))
+        );
+        circle.setAttribute(
+          'cy',
+          String(110 + (Math.floor(cell / columns) - (columns - 1) / 2) * (size * 2 + 3))
+        );
+        circle.setAttribute('r',String(size));
+        circle.setAttribute('fill',['#c3d9af','#9cc7b3','#82b5b4'][index]);
+        circle.setAttribute('stroke','#396655');
+        circle.setAttribute('stroke-width','2');
+        circle.classList.add('bubble');
+        group.append(circle);
+      }
+
+      drawing.querySelector('#seed-label').textContent =
+        ['Germinal','Embryonic','Fetal'][index];
+
+      status.textContent = descriptions[index] +
+        ' The cell-like lights are symbolic, not a count or anatomical model.';
+    }
+
+    draw(0);
+
+    ['Illuminate germinal','Illuminate embryonic','Illuminate fetal'].forEach((name,index) => {
+      button(name,control => {
+        draw(index);
+        press(control);
+      });
+    });
+
+  } else if (type === 'permanence') {
+    const drawing = art(`
+      <ellipse cx="250" cy="210" rx="130" ry="12" fill="#bdd2c5"/>
+      <path d="M117 201h266" stroke="#597766" stroke-width="5"/>
+      <g class="magic-lamp">
+        <use href="#icon-star" x="214" y="116" width="72" height="72" color="#836524"/>
+      </g>
+      <g class="nursery-cover open">
+        <path d="M140 199V109q110-55 220 0v90Z" fill="#284c65" stroke="#153345" stroke-width="3"/>
+        <path d="M155 118q95-36 190 0M170 143v42M218 129v56M270 129v56M320 142v43"
+              stroke="#587a91" stroke-width="3"/>
+        <path d="m250 150 3 8 8 3-8 3-3 8-3-8-8-3 8-3Z" fill="#e3c97e"/>
+      </g>
+      <text x="250" y="34" text-anchor="middle" fill="#204c3e" font-size="17">
+        Can something exist when it is hidden?
+      </text>
+    `);
+
+    status.textContent =
+      'The star is visible. This is a teaching illustration, not an assessment of an infant.';
+
+    button('Hide the star',() => {
+      drawing.querySelector('.nursery-cover').classList.remove('open');
+      status.textContent =
+        'The cover hides the star; the star remains underneath. Object permanence concerns understanding continued existence.';
+    });
+
+    button('Reveal the star',() => {
+      drawing.querySelector('.nursery-cover').classList.add('open');
+      status.textContent =
+        'The star is still there. Moving the cover changes visibility, not existence.';
+    });
+
+    button('Open the secure-base card',() => {
+      status.textContent =
+        'A caregiver stays available while a child investigates a toy. Support and exploration can work together. One scene cannot classify an attachment pattern.';
+    });
+
+  } else if (type === 'conservation') {
+    const drawing = art(`
+      <text x="132" y="31" text-anchor="middle" fill="#193f50" font-size="16">Reference jar</text>
+      <text x="362" y="31" text-anchor="middle" fill="#193f50" font-size="16">Changing jar</text>
+      <path d="M70 89V210h124V89" fill="#ffffff80" stroke="#3e6871" stroke-width="4"/>
+      <rect x="74" y="140" width="116" height="66" fill="#68b0b4"/>
+      <rect class="conservation-jar" id="jar-outline" x="300" y="89" width="124"
+            height="121" fill="#ffffff80" stroke="#3e6871" stroke-width="4"/>
+      <rect class="conservation-jar" id="jar-water" x="304" y="140" width="116"
+            height="66" fill="#68b0b4"/>
+      <text x="132" y="233" text-anchor="middle" fill="#193f50" font-size="16">200 mL</text>
+      <text x="362" y="233" text-anchor="middle" fill="#193f50" font-size="16">200 mL</text>
+      <path d="M220 131h46m-9-9 11 9-11 9" stroke="#987a31" stroke-width="3" fill="none"/>
+    `);
+
+    const water = drawing.querySelector('#jar-water');
+    const jar = drawing.querySelector('#jar-outline');
+
+    function setRectangle(node,values) {
+      for (const [property,value] of Object.entries(values)) {
+        node.style[property] = value + 'px';
+      }
+    }
+
+    status.textContent =
+      'Both jars begin with 200 mL. In this illustration, nothing spills, is added, or is removed.';
+
+    button('Pour into the taller jar',() => {
+      setRectangle(jar,{x:329,y:44,width:66,height:166});
+      setRectangle(water,{x:333,y:74,width:58,height:132});
+      status.textContent =
+        'The right jar is taller and narrower. Each still contains 200 mL: the changed appearance does not change the amount.';
+    });
+
+    button('Pour back',() => {
+      setRectangle(jar,{x:300,y:89,width:124,height:121});
+      setRectangle(water,{x:304,y:140,width:116,height:66});
+      status.textContent =
+        'The original shape is restored. Reversing the transformation helps show why the amount stayed constant.';
+    });
+
+    button('Open a schema card',() => {
+      status.textContent =
+        'Fictional example: calling another bird “bird” fits an existing category (assimilation). Creating a separate category for a kite changes the model (accommodation).';
+    });
+
+    box.append(
+      el(
+        'p',
+        'Piaget associated conservation with concrete operational thinking. His stages are useful frameworks; a single activity is not a developmental assessment.',
+        'muted-note'
+      )
+    );
+
+  } else if (type === 'erikson') {
+    const stage = el('div',undefined,'wheel-stage');
+    const wheel = el('div',undefined,'wheel');
+    wheel.setAttribute('aria-hidden','true');
+
+    const hand = el('div',undefined,'wheel-hand');
+    wheel.append(hand);
+
+    const output = el('div');
+    stage.append(wheel,output);
+    box.append(stage);
+
+    const themes = [
+      ['Trust versus mistrust','Infancy','A familiar caregiver responds predictably.'],
+      ['Autonomy versus shame and doubt','Toddlerhood','A toddler chooses between two hats.'],
+      ['Initiative versus guilt','Preschool years','A child invents a pretend shop.'],
+      ['Industry versus inferiority','School years','A learner practices making a model.'],
+      ['Identity versus role confusion','Adolescence','A teenager explores interests and values.'],
+      ['Intimacy versus isolation','Young adulthood','An adult develops close, reciprocal relationships.'],
+      ['Generativity versus stagnation','Middle adulthood','An adult mentors a new volunteer.'],
+      ['Integrity versus despair','Later adulthood','An adult reflects on meaningful contributions.']
+    ];
+
+    let position = 4;
+    const label = el('label','Choose a theme to illuminate');
+    label.htmlFor = 'stage-selector';
+
+    const select = el('select');
+    select.id = 'stage-selector';
+
+    themes.forEach((theme,index) => {
+      const option = el('option',theme[0]);
+      option.value = index;
+      select.append(option);
+    });
+
+    select.value = position;
+    box.append(label,select);
+
+    function render() {
+      hand.style.transform = 'rotate(' + position * 45 + 'deg)';
+      output.replaceChildren(
+        el('h3',themes[position][0]),
+        el('p',themes[position][1] + ' in Erikson’s framework'),
+        el('p',themes[position][2])
+      );
+      select.value = position;
+      status.textContent =
+        'These are examples of a theory, not deadlines. Culture, context, and individual pathways matter.';
+    }
+
+    select.onchange = () => {
+      position = Number(select.value);
+      render();
+      markExplored(roomIndex);
+    };
+
+    button('Turn to the next theme',() => {
+      position = (position + 1) % themes.length;
+      render();
+    });
+
+    button('Turn to the previous theme',() => {
+      position = (position + themes.length - 1) % themes.length;
+      render();
+    });
+
+    render();
+
+  } else if (type === 'moral') {
+    const drawing = art(`
+      <circle cx="250" cy="115" r="91" fill="#fcf7e6" stroke="#a88a45" stroke-width="3"/>
+      <circle cx="250" cy="115" r="75" fill="none" stroke="#d1c398"
+              stroke-dasharray="2 8" stroke-width="5"/>
+      <path class="reason-needle" d="m250 44 10 71-10 54-10-54Z"
+            fill="#416f72" stroke="#24494b" stroke-width="2"/>
+      <circle cx="250" cy="115" r="9" fill="#d9bb6d"/>
+      <text x="250" y="228" text-anchor="middle" fill="#203f45" font-size="15">
+        Same action · Different reasons
+      </text>
+      <path d="M43 110h52m-9-7 9 7-9 7M405 110h52m-9-7 9 7-9 7"
+            fill="none" stroke="#91aaa0" stroke-width="2"/>
+    `);
+
+    const samples = [
+      [
+        'Reason 1',
+        '“I return the tool so I will not lose borrowing privileges.” Preconventional reasoning emphasizes personal consequences.'
+      ],
+      [
+        'Reason 2',
+        '“I return the tool because keeping our shared rules matters.” Conventional reasoning emphasizes social expectations.'
+      ],
+      [
+        'Reason 3',
+        '“Everyone deserves fair access, so rules should protect that principle.” Postconventional reasoning appeals to ethical principles.'
+      ]
+    ];
+
+    status.textContent =
+      'Turn the compass toward each explanation. This activity does not score anyone’s moral worth.';
+
+    samples.forEach(([name,text],index) => {
+      button(name,control => {
+        drawing.querySelector('.reason-needle').style.transform =
+          'rotate(' + [-65,0,65][index] + 'deg)';
+        status.textContent = text;
+        press(control);
+      });
+    });
+
+  } else if (type === 'lifelong') {
+    const drawing = svg(`
+      <svg viewBox="0 0 500 200" aria-hidden="true">
+        <path d="M43 153Q120 43 211 115T455 68" fill="none"
+              stroke="#c2bf8c" stroke-width="5" stroke-dasharray="4 8"/>
+        <g fill="#93b3a2">
+          <circle cx="58" cy="137" r="8"/>
+          <circle cx="178" cy="96" r="8"/>
+          <circle cx="313" cy="127" r="8"/>
+          <circle cx="442" cy="75" r="8"/>
+        </g>
+        <g class="timeline-person">
+          <circle cx="58" cy="102" r="12" fill="#efdab0"/>
+          <path d="M58 117v24m0-15-14 9m14-9 14 9m-14 6-11 15m11-15 11 15"
+                stroke="#efdab0" stroke-width="5" stroke-linecap="round"/>
+        </g>
+        <g class="scene-spark" fill="#e8d391">
+          <circle cx="114" cy="39" r="2"/>
+          <circle cx="261" cy="43" r="3"/>
+          <circle cx="391" cy="158" r="2"/>
+        </g>
+      </svg>
+    `,'life-route');
+
+    box.append(drawing);
+
+    const chapters = [
+      ['Childhood','A child learns a rhythm game with a friend.',0,0],
+      ['Adolescence','A teenager tries photographing plants for a class project.',120,-41],
+      ['Adulthood','An adult learns a new recipe and shares it with neighbors.',255,-10],
+      ['Later adulthood','An older adult joins a beginner drawing workshop.',384,-62]
+    ];
+
+    let chapter = 0;
+    const label = el('label','Explore the life chapters');
+    label.htmlFor = 'life-slider';
+
+    const range = el('input');
+    range.id = 'life-slider';
+    range.type = 'range';
+    range.min = 0;
+    range.max = 3;
+    range.step = 1;
+    range.value = 0;
+
+    box.append(label,range);
+
+    function render() {
+      const current = chapters[chapter];
+      drawing.querySelector('.timeline-person').style.transform =
+        'translate(' + current[2] + 'px,' + current[3] + 'px)';
+      range.value = chapter;
+      range.setAttribute('aria-valuetext',current[0]);
+      status.textContent =
+        current[0] + ': ' + current[1] +
+        ' This is one possible pathway, not a universal age rule.';
+    }
+
+    range.oninput = () => {
+      chapter = Number(range.value);
+      render();
+      markExplored(roomIndex);
+    };
+
+    button('Next chapter',() => {
+      chapter = (chapter + 1) % chapters.length;
+      render();
+    });
+
+    button('Previous chapter',() => {
+      chapter = (chapter + chapters.length - 1) % chapters.length;
+      render();
+    });
+
+    render();
+
+  } else if (type === 'pathways') {
+    const drawing = art(`
+      <path d="M250 229V160Q150 118 105 65M250 160Q350 118 395 65M250 160V40"
+            fill="none" stroke="#859d7a" stroke-width="9" stroke-linecap="round"/>
+      <g class="floating">
+        <use href="#icon-lantern" x="81" y="24" width="48" height="48" color="#947333"/>
+      </g>
+      <g class="floating" style="animation-delay:-2s">
+        <use href="#icon-lantern" x="226" y="5" width="48" height="48" color="#947333"/>
+      </g>
+      <g class="floating" style="animation-delay:-4s">
+        <use href="#icon-lantern" x="371" y="24" width="48" height="48" color="#947333"/>
+      </g>
+      <ellipse cx="250" cy="225" rx="50" ry="12" fill="#d3dfbd"/>
+    `);
+
+    const isCare = state.route === 'care';
+
+    status.textContent = isCare
+      ? 'Care and dignity route: explore concepts in general terms. No personal reflection is requested.'
+      : 'Everyday transitions route: help a welcoming committee make room for individual preferences.';
+
+    const cards = isCare
+      ? [
+          ['Light the comfort lantern','Hospice emphasizes comfort, dignity, and support near the end of life.'],
+          ['Light the variation lantern','Kübler-Ross’s model is not a required emotional sequence. People may experience some responses, different orders, or none of the proposed stages.'],
+          ['Light the preferences lantern','Ask about individual and cultural preferences instead of assuming that everyone wants the same support.']
+        ]
+      : [
+          ['Light the welcome lantern','A visitor would like a quiet introduction before joining a group. Ask what would help rather than assuming disinterest.'],
+          ['Light the context lantern','Another visitor enjoys meeting everyone at once. Different preferences can both fit a welcoming community.'],
+          ['Light the choice lantern','Offer a choice of a small-group tour or an individual introduction, with room to change the plan.']
+        ];
+
+    cards.forEach(([name,text],index) => {
+      button(name,control => {
+        drawing.querySelectorAll('use').forEach((node,lantern) => {
+          node.style.filter = index === lantern
+            ? 'drop-shadow(0 0 7px #b0903f)'
+            : 'none';
+        });
+        status.textContent = text;
+        press(control);
+      });
+    });
+  }
+
+  box.append(controls,status);
+  return box;
+}
+
+/* Notebook and final case. */
+$('notes').value = state.notes;
+$('notes').oninput = () => {
+  state.notes = $('notes').value;
+  save();
+};
+
+$('final-form').onsubmit = event => {
+  event.preventDefault();
+  if (countDone() !== 8) return;
+
+  const checks = [
+    $('f1').value === 'identity',
+    $('f2').value === 'conservation',
+    $('f3').value === 'context',
+    $('code').value.trim().toUpperCase().replace(/\s/g,'') === 'LIFESPAN'
+  ];
+
+  if (checks.every(Boolean)) {
+    state.escaped = true;
+    save();
+    updateDashboard();
+
+    $('final-feedback').textContent =
+      '✓ Chronicle restored! Identity, conservation, and development across the LIFESPAN connect the final case. Your badge is ready.';
+
+    drawBadge();
+    $('badge-heading').focus();
+    celebrate($('badge'));
+  } else {
+    const hints = [
+      'Part 1: Think about exploring possible roles.',
+      'Part 2: Did spreading the packets change their number?',
+      'Part 3: Consider growth across life and interacting influences.',
+      'Part 4: Read your eight letters in room order.'
+    ];
+
+    $('final-feedback').textContent = checks.map((correct,index) =>
+      correct ? 'Part ' + (index + 1) + ' solved.' : hints[index]
+    ).join(' ');
+  }
+};
+
+function download(blob,name) {
+  const url = URL.createObjectURL(blob);
+  const link = el('a');
+  link.href = url;
+  link.download = name;
+  document.body.append(link);
+  link.click();
+  link.remove();
+  setTimeout(() => URL.revokeObjectURL(url),1500);
+}
+
+$('download-notes').onclick = () => {
+  const lines = [
+    'PSYCHOLOGY ACADEMY · WEEK 9',
+    'THE LIFESPAN CONSERVATORY — THE CHRONICLE OF BECOMING',
+    'Status: ' + (state.escaped ? 'Mission complete' : 'In progress'),
+    'Fragments: ' + countDone() + '/8',
+    'Interactive desks explored: ' + state.explored.length + '/8',
+    'Room 8 route: ' + (
+      state.route === 'care'
+        ? 'Care and dignity · 9.4'
+        : 'Everyday transitions · 9.1'
+    ),
+    '',
+    'COLLECTED FRAGMENTS',
+    ...rooms.filter((room,index) => done(index)).map(room =>
+      room.letter + ' — ' + room.card + ': ' + room.fact
+    ),
+    '',
+    'MY FIELD NOTES',
+    state.notes || '(No notes entered.)',
+    '',
+    'READINGS',
+    ...Object.entries(sections).map(([key,value]) =>
+      key + ' ' + value[0] + ': ' + BASE + value[1]
+    ),
+    '',
+    'Upload your completion badge to Canvas. This notebook is a local learning record, not an automatically submitted grade.'
+  ];
+
+  download(
+    new Blob([lines.join('\n')],{type:'text/plain;charset=utf-8'}),
+    'week9-lifespan-notebook.txt'
+  );
+};
+
+/* Personalized downloadable badge. */
+function drawBadge() {
+  const canvas = $('badge-preview');
+  const context = canvas.getContext('2d');
+  if (!context) return;
+
+  const gradient = context.createLinearGradient(0,0,1200,780);
+  gradient.addColorStop(0,'#0c273c');
+  gradient.addColorStop(1,'#224b46');
+  context.fillStyle = gradient;
+  context.fillRect(0,0,1200,780);
+
+  context.strokeStyle = '#d1b46f';
+  context.lineWidth = 4;
+  context.strokeRect(26,26,1148,728);
+  context.lineWidth = 1;
+  context.strokeRect(38,38,1124,704);
+
+  for (let index = 0; index < 40; index++) {
+    context.beginPath();
+    context.arc(
+      60 + (index * 97) % 1080,
+      55 + (index * 71) % 660,
+      index % 4 === 0 ? 2.5 : 1,
+      0,
+      Math.PI * 2
+    );
+    context.fillStyle = '#d6c79366';
+    context.fill();
+  }
+
+  context.strokeStyle = '#c9b372';
+  context.lineWidth = 5;
+  context.lineCap = 'round';
+  context.beginPath();
+  context.moveTo(600,190);
+  context.lineTo(600,96);
+  context.moveTo(600,157);
+  context.quadraticCurveTo(562,154,550,122);
+  context.moveTo(600,139);
+  context.quadraticCurveTo(640,130,653,102);
+  context.moveTo(600,118);
+  context.lineTo(577,92);
+  context.stroke();
+
+  [
+    [550,122],[653,102],[577,92],
+    [600,96],[573,153],[629,135]
+  ].forEach(([x,y]) => {
+    context.beginPath();
+    context.arc(x,y,8,0,Math.PI * 2);
+    context.fillStyle = '#d7c478';
+    context.fill();
+  });
+
+  context.textAlign = 'center';
+  context.fillStyle = '#f4e8bf';
+  context.font = 'bold 24px Arial';
+  context.fillText('PSYCHOLOGY ACADEMY · WEEK 9',600,237);
+
+  context.font = 'bold 60px Georgia';
+  context.fillText('Lifespan Explorer',600,318);
+
+  context.font = '26px Arial';
+  context.fillText('THE LIFESPAN CONSERVATORY',600,367);
+
+  const name = $('learner').value.trim() || 'Your name will appear here';
+  let size = 43;
+  context.font = size + 'px Georgia';
+
+  while (context.measureText(name).width > 1010 && size > 12) {
+    size--;
+    context.font = size + 'px Georgia';
+  }
+
+  context.fillStyle = '#ffffff';
+  context.fillText(name,600,444);
+
+  'LIFESPAN'.split('').forEach((letter,index) => {
+    const x = 341 + index * 74;
+    context.beginPath();
+    context.arc(x,519,25,0,Math.PI * 2);
+    context.fillStyle = '#e5d09b';
+    context.fill();
+    context.fillStyle = '#173b3f';
+    context.font = 'bold 25px Georgia';
+    context.fillText(letter,x,528);
+  });
+
+  context.fillStyle = '#f4e8bf';
+  context.font = '25px Arial';
+  context.fillText('8 rooms explored · 16 locks solved · Chronicle restored',600,599);
+
+  context.font = '22px Arial';
+  context.fillText('OpenStax Psychology 2e · Chapter 9: Lifespan Development',600,643);
+
+  context.font = 'italic 24px Georgia';
+  context.fillText('Dr. Tonya Holdaway',600,704);
+
+  canvas.setAttribute(
+    'aria-label',
+    'Week 9 Lifespan Explorer completion badge for ' + name +
+    '. Eight rooms explored, sixteen locks solved, final case completed.'
+  );
+}
+
+function validateBadge() {
+  if (!state.escaped || countDone() !== 8) return false;
+
+  const name = $('learner').value.trim();
+  if (!name) {
+    $('badge-message').textContent =
+      'Please enter your name before downloading or printing your badge.';
+    $('badge-message').className = 'badge-error';
+    $('learner').focus();
+    return false;
+  }
+
+  $('badge-message').className = '';
+  drawBadge();
+  return true;
+}
+
+$('learner').oninput = () => {
+  drawBadge();
+  $('badge-message').textContent = '';
+};
+
+$('badge-download').onclick = () => {
+  if (!validateBadge()) return;
+
+  $('badge-preview').toBlob(blob => {
+    if (blob) {
+      download(blob,'week9-lifespan-completion-badge.png');
+      $('badge-message').textContent =
+        'Your PNG badge is ready to save. Upload it to the Week 9 Canvas assignment.';
+    } else {
+      $('badge-message').textContent =
+        'The PNG could not be generated. Try Print Badge / Save as PDF.';
+    }
+  },'image/png');
+};
+
+$('print-badge').onclick = () => {
+  if (validateBadge()) window.print();
+};
+
+/* Reset only this mission. */
+$('reset').onclick = () => {
+  $('reset-confirm').hidden = false;
+  $('confirm-reset').focus();
+};
+
+$('cancel-reset').onclick = () => {
+  $('reset-confirm').hidden = true;
+  $('reset').focus();
+};
+
+$('confirm-reset').onclick = () => {
+  const settings = state.settings;
+  const motionPaused = state.motionPaused;
+
+  state = fresh();
+  state.settings = settings;
+  state.motionPaused = motionPaused;
+  active = -1;
+
+  try {
+    localStorage.removeItem(COMPLETE);
+  } catch (error) {}
+
+  save();
+  $('notes').value = '';
+  $('learner').value = '';
+  $('active-area').replaceChildren();
+  $('final-form').reset();
+  $('final-feedback').textContent = 'Your collected fragments will guide the final case.';
+  $('badge-message').textContent = '';
+  $('reset-confirm').hidden = true;
+  updateDashboard();
+  $('room-0').focus();
+};
+
+/* Motion preferences. */
+const media = matchMedia('(prefers-reduced-motion: reduce)');
+
+function reduceMotion() {
+  return state.motionPaused || media.matches;
+}
+
+function motionUI() {
+  document.body.classList.toggle('no-motion',reduceMotion());
+
+  $('motion').textContent = state.motionPaused
+    ? 'Resume Animations'
+    : 'Pause Animations';
+
+  $('motion').setAttribute('aria-pressed',String(state.motionPaused));
+
+  $('motion-status').textContent = media.matches
+    ? 'Your device’s reduced-motion setting is active. Visual changes appear without animated transitions.'
+    : state.motionPaused
+      ? 'Animations are paused. All controls and learning activities remain available.'
+      : 'Animations are on. Hover near the conservatory to stir its floating objects.';
+}
+
+$('motion').onclick = () => {
+  state.motionPaused = !state.motionPaused;
+  motionUI();
+  save();
+};
+
+if (media.addEventListener) {
+  media.addEventListener('change',motionUI);
+}
+
+/* Optional music: starts only when the learner presses Play. */
+const audio = $('background-music');
+let playPending = false;
+audio.volume = state.settings.volume;
+$('volume').value = state.settings.volume;
+
+function musicUI(message) {
+  const playing = !audio.paused;
+
+  $('music').textContent = playing
+    ? 'Pause Conservatory Music'
+    : 'Play Conservatory Music';
+
+  $('music').setAttribute('aria-pressed',String(playing));
+
+  $('audio-status').textContent = message || (
+    playing
+      ? 'Whimsical background music is playing.'
+      : 'Music is paused.'
+  );
+}
+
+$('music').onclick = async () => {
+  if (playPending) return;
+
+  if (!audio.paused) {
+    audio.pause();
+    musicUI();
+    return;
+  }
+
+  playPending = true;
+  $('music').disabled = true;
+
+  try {
+    await audio.play();
+    musicUI();
+  } catch (error) {
+    musicUI('Music could not start. Try pressing Play again. The mission works without sound.');
+  } finally {
+    playPending = false;
+    $('music').disabled = false;
+  }
+};
+
+audio.addEventListener('error',() => {
+  musicUI('The music could not load. All mission activities still work.');
+});
+
+$('volume').oninput = () => {
+  audio.volume = Number($('volume').value);
+  state.settings.volume = audio.volume;
+  save();
+
+  if (audio.volume === 0) {
+    musicUI('Volume is muted. Raise the volume when you want sound.');
+  } else {
+    musicUI(audio.paused ? 'Music is paused.' : undefined);
+  }
+};
+
+document.addEventListener('visibilitychange',() => {
+  if (document.hidden && !audio.paused) {
+    audio.pause();
+    musicUI('Music paused while this tab is in the background. Press Play to resume.');
+  }
+});
+
+/* Decorative stars and pointer glow. */
+const sky = $('sky-stars');
+
+for (let index = 0; index < 32; index++) {
+  const star = el('i',undefined,'sky-star');
+  star.style.left = (index * 37 % 100) + '%';
+  star.style.top = (index * 29 % 96) + '%';
+  star.style.animationDelay = -(index % 7) + 's';
+  star.style.width = star.style.height = (index % 4 === 0 ? 4 : 2) + 'px';
+  sky.append(star);
+}
+
+$('hero').addEventListener('pointermove',event => {
+  if (reduceMotion()) return;
+
+  const bounds = $('hero').getBoundingClientRect();
+  $('hero').style.setProperty('--pointer-x',(event.clientX - bounds.left) + 'px');
+  $('hero').style.setProperty('--pointer-y',(event.clientY - bounds.top) + 'px');
+},{passive:true});
+
+/* Start the mission. */
+motionUI();
+updateDashboard();
+save();
+
+if (state.escaped) {
+  drawBadge();
+}
+</script>
+</body>
+</html>
