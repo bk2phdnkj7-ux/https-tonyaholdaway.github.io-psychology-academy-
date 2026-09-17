@@ -1,1 +1,1547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="An immersive, animated Week 10 motivation and emotion mission based on OpenStax Psychology 2e, Chapter 10.">
+  <meta name="theme-color" content="#160d2b">
+  <title>Week 10: The Emberheart Atrium | Psychology Academy</title>
+  <style>
+:root {
+  --night: #071426;
+  --indigo: #16244d;
+  --violet: #55327f;
+  --teal: #0d6c75;
+  --aqua: #7bd6d4;
+  --gold: #d8b45b;
+  --gold-dark: #795917;
+  --cream: #fffaf0;
+  --paper: #fffef9;
+  --ink: #1e2a38;
+  --muted: #516173;
+  --green: #246346;
+  --green-soft: #e8f6ed;
+  --red: #8b3038;
+  --red-soft: #fff0f1;
+  --blue-soft: #eaf5f7;
+  --line: #8a9dae;
+  --shadow: 0 18px 50px rgba(6, 20, 38, .17);
+  --radius: 18px;
+}
 
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  min-width: 280px;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 8% 18%, rgba(123, 214, 212, .12), transparent 22rem),
+    radial-gradient(circle at 92% 44%, rgba(85, 50, 127, .11), transparent 26rem),
+    #f4f5f2;
+  font: 18px/1.67 Arial, Helvetica, sans-serif;
+}
+button, input, textarea, select { font: inherit; }
+button { touch-action: manipulation; }
+a { color: #145779; font-weight: 700; text-underline-offset: .16em; }
+:focus-visible { outline: 4px solid #9b6500; outline-offset: 4px; }
+[hidden] { display: none !important; }
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+.skip-link {
+  position: fixed; left: 16px; top: -90px; z-index: 9999;
+  padding: 12px 17px; border: 3px solid #111; border-radius: 8px;
+  color: #111; background: #fff;
+}
+.skip-link:focus { top: 14px; }
+.container { width: min(1200px, calc(100% - 32px)); margin-inline: auto; }
+
+/* Magical gallery sky */
+.sensory-sky { position: fixed; inset: 0; overflow: hidden; pointer-events: none; z-index: -1; }
+.aurora {
+  position: absolute; width: 68vw; height: 35vw; min-height: 260px;
+  border-radius: 50%; filter: blur(55px); opacity: .12; mix-blend-mode: multiply;
+  animation: auroraDrift 18s ease-in-out infinite alternate;
+}
+.aurora.one { top: -14%; left: -14%; background: linear-gradient(90deg, #36c9bd, #7543b7); }
+.aurora.two { right: -22%; top: 35%; background: linear-gradient(90deg, #6b3ca1, #e1bc5a); animation-delay: -8s; }
+.mote {
+  position: absolute; width: 5px; height: 5px; border-radius: 50%;
+  background: #d6b45c; box-shadow: 0 0 10px #f9df92;
+  opacity: .24; animation: moteRise var(--mote-speed, 16s) linear infinite;
+}
+
+/* Hero */
+.hero {
+  position: relative; overflow: hidden; color: #f7f4e9;
+  border-bottom: 5px solid #b8923c;
+  background:
+    radial-gradient(circle at var(--pointer-x, 74%) var(--pointer-y, 36%), rgba(129, 228, 216, .19), transparent 15rem),
+    linear-gradient(135deg, #071426 0%, #152f51 48%, #3e2864 100%);
+  padding: 30px 0 38px;
+}
+.hero::before, .hero::after {
+  content: ""; position: absolute; pointer-events: none; border-radius: 50%; filter: blur(24px);
+}
+.hero::before { width: 34rem; height: 10rem; right: -8rem; top: -4rem; background: #4ac8bd20; animation: cloudDrift 16s ease-in-out infinite alternate; }
+.hero::after { width: 25rem; height: 8rem; left: -7rem; bottom: -3rem; background: #a978d71a; animation: cloudDrift 22s -9s ease-in-out infinite alternate-reverse; }
+.hero .container { position: relative; z-index: 2; }
+.academy-link {
+  display: inline-block; padding: 9px 14px; margin-bottom: 18px;
+  color: #10243c; background: #fff9e9; border: 2px solid #dec16f;
+  border-radius: 10px; text-decoration: underline;
+}
+.hero-grid { display: grid; grid-template-columns: 1.03fr .97fr; gap: 34px; align-items: center; }
+.eyebrow { margin: 0 0 7px; color: #e6ca7b; font-size: .88rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+.hero h1 { margin: 0; color: #fffaf0; font: 700 clamp(2.8rem, 6.4vw, 5.2rem)/.98 Georgia, "Times New Roman", serif; text-wrap: balance; }
+.hero-subtitle { margin: 14px 0 0; color: #8ee3dc; font: 700 clamp(1.2rem, 2.7vw, 1.75rem)/1.25 Georgia, serif; }
+.hero-text { max-width: 700px; margin: 18px 0 0; font-size: 1.03rem; }
+.hero-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+.hero-chip { padding: 6px 11px; border: 1px solid #c9b76b88; border-radius: 999px; color: #fff9df; background: #081a2f88; font-size: .82rem; }
+.hero-scene {
+  position: relative; overflow: hidden; aspect-ratio: 1.42;
+  border: 2px solid #bda864; border-radius: 190px 190px 24px 24px;
+  background: radial-gradient(circle at 50% 44%, #294b64, #091528 73%);
+  box-shadow: inset 0 0 60px #020712, 0 15px 40px #02081277;
+}
+.hero-scene::after {
+  content: "Move near the gallery to stir the light"; position: absolute; left: 50%; bottom: 8px;
+  transform: translateX(-50%); width: max-content; max-width: 90%; color: #f2dfaa;
+  font-size: .72rem; letter-spacing: .04em; text-align: center;
+}
+.hero-scene svg { width: 100%; height: 100%; display: block; }
+.ray-in { stroke: #f8efc0; stroke-width: 7; stroke-linecap: round; stroke-dasharray: 11 14; animation: rayFlow 3.2s linear infinite; }
+.rainbow-ray { fill: none; stroke-width: 5; stroke-linecap: round; stroke-dasharray: 9 13; animation: rayFlow 4s linear infinite; }
+.prism { fill: #eafcff22; stroke: #c4efec; stroke-width: 3; filter: drop-shadow(0 0 8px #82d9d6); animation: prismFloat 5s ease-in-out infinite alternate; transform-box: fill-box; transform-origin: center; }
+.iris-ring { fill: none; stroke: #7fe2dc; stroke-width: 5; filter: drop-shadow(0 0 7px #6cd0c8); transform-origin: 558px 219px; animation: irisBreathe 4.5s ease-in-out infinite; }
+.pupil { fill: #07111d; transform-origin: 558px 219px; animation: pupilShift 7s ease-in-out infinite; }
+.optic-path { fill: none; stroke: #d9b95d; stroke-width: 3; stroke-dasharray: 7 9; animation: rayFlow 5s linear infinite; }
+.hero-star { fill: #f6dd86; animation: twinkle 3.8s ease-in-out infinite alternate; transform-box: fill-box; transform-origin: center; }
+.hero:hover .rainbow-ray, .hero:hover .ray-in { animation-duration: 1.7s; }
+.hero:hover .iris-ring { animation-duration: 2.5s; }
+
+main { padding: 30px 0 56px; }
+h2, h3 { color: #123954; line-height: 1.25; }
+h2 { font-family: Georgia, "Times New Roman", serif; }
+.panel {
+  margin-bottom: 23px; padding: 23px; border: 2px solid #93a6b5; border-left: 8px solid #2b7080;
+  border-radius: var(--radius); background: rgba(255, 254, 249, .97); box-shadow: var(--shadow);
+}
+.panel h2, .panel h3 { margin-top: 0; }
+.panel-gold { border-left-color: #a67b20; }
+.panel-green { border-left-color: #2b6d4b; }
+.atmosphere {
+  position: relative; overflow: hidden; color: #fff;
+  border: 2px solid #b89b54; border-radius: var(--radius); padding: 20px 22px; margin-bottom: 23px;
+  background: linear-gradient(120deg, #0a1b31, #173d52 60%, #352351); box-shadow: var(--shadow);
+}
+.atmosphere::after { content: "✦  ◌  ✧  ◉  ✦"; position: absolute; right: 3%; top: 13px; color: #e4c46e55; font-size: 1.5rem; letter-spacing: 13px; animation: symbolDrift 9s ease-in-out infinite alternate; }
+.atmosphere h2 { position: relative; color: #fff; margin: 0 0 6px; z-index: 1; }
+.atmosphere p, .atmosphere .control-row, .atmosphere label, .atmosphere input { position: relative; z-index: 1; }
+.control-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 13px 0; }
+.control-button, .action-button, .tab-button, .choice-button, .map-button {
+  border: 2px solid #315d72; border-radius: 10px; background: #fff; color: #17384e;
+  padding: 10px 14px; cursor: pointer; font-weight: 700;
+}
+.control-button:hover, .action-button:hover, .tab-button:hover, .choice-button:hover:not(:disabled) { background: #e9f6f4; border-color: #19717a; }
+.atmosphere .control-button { border-color: #f0d995; }
+.atmosphere input[type="range"] { accent-color: #e2c46f; }
+.quiet { font-size: .88rem; }
+.status-light { margin: 0; color: #f8e8b8; font-size: .9rem; }
+.briefing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.briefing-grid .panel { height: 100%; }
+.objective-list { columns: 2; column-gap: 32px; padding-left: 22px; }
+.objective-list li { break-inside: avoid; margin-bottom: 7px; }
+.source-note { padding: 13px 15px; border-radius: 10px; background: #edf6f5; border: 1px solid #91b9b5; }
+
+/* Mission map and navigation */
+.mission-layout { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 24px; align-items: start; }
+.gallery-map {
+  position: relative; overflow: hidden; padding: 24px; margin-bottom: 24px;
+  border: 3px solid #6b7183; border-radius: 22px;
+  background: linear-gradient(145deg, #f0f4ee, #edf2f7); box-shadow: var(--shadow);
+}
+.gallery-map::before {
+  content: ""; position: absolute; inset: 0; opacity: .2; pointer-events: none;
+  background-image: linear-gradient(#38516618 1px, transparent 1px), linear-gradient(90deg, #38516618 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+.gallery-map > * { position: relative; }
+.gallery-map h2 { margin-top: 0; }
+.room-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 15px; }
+.map-button {
+  position: relative; overflow: hidden; min-height: 218px; padding: 16px; text-align: left;
+  border-color: #768b99; background: #fffef8; box-shadow: 0 8px 18px #10273a14;
+  transition: transform .24s ease, box-shadow .24s ease, border-color .24s;
+  transform: perspective(700px) rotateX(var(--tilt-y, 0deg)) rotateY(var(--tilt-x, 0deg));
+}
+.map-button:hover { transform: perspective(700px) translateY(-5px) rotateX(var(--tilt-y, 0deg)) rotateY(var(--tilt-x, 0deg)); box-shadow: 0 15px 29px #10273a2b; border-color: #277786; }
+.map-button[aria-pressed="true"] { outline: 4px solid #8a661c; outline-offset: 1px; }
+.map-button.complete { border-color: #2f7551; background: linear-gradient(#fafff8, #eef9f1); }
+.map-button.complete::after { content: "✓"; position: absolute; top: 10px; right: 12px; display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; color: #fff; background: #2e6a4c; font-weight: 900; }
+.map-art { display: block; width: 100%; height: 82px; margin-bottom: 7px; border-radius: 10px; background: linear-gradient(135deg, #091b31, #253d63); }
+.map-art svg { width: 100%; height: 100%; display: block; }
+.map-title { display: block; color: #173c57; font: 700 1.05rem/1.2 Georgia, serif; }
+.map-subtitle { display: block; min-height: 2.5em; margin-top: 5px; color: #4a5967; font-size: .82rem; line-height: 1.35; }
+.map-status { display: block; margin-top: 9px; color: #66521a; font-size: .76rem; font-weight: 800; text-transform: uppercase; letter-spacing: .04em; }
+.map-button.complete .map-status { color: #246346; }
+.mini-wave { fill: none; stroke: #76ded5; stroke-width: 3; stroke-dasharray: 8 8; animation: rayFlow 4s linear infinite; }
+.mini-orbit { transform-origin: center; transform-box: fill-box; animation: spin 15s linear infinite; }
+.mini-float { transform-origin: center; transform-box: fill-box; animation: prismFloat 4s ease-in-out infinite alternate; }
+
+/* Active learning room */
+.active-area:empty { display: none; }
+.activity-card {
+  position: relative; overflow: hidden; padding: 25px; margin-bottom: 24px;
+  border: 3px solid #6f8290; border-radius: 22px; background: #fffef9; box-shadow: var(--shadow);
+}
+.activity-card::before { content: ""; position: absolute; width: 220px; height: 220px; right: -100px; top: -110px; border-radius: 50%; background: radial-gradient(#76d8d52b, transparent 70%); pointer-events: none; }
+.room-heading { position: relative; display: flex; gap: 14px; justify-content: space-between; align-items: start; }
+.room-heading h2 { margin: 0 0 7px; }
+.room-number { display: inline-block; margin-bottom: 5px; color: #6b4e14; font-size: .78rem; font-weight: 800; text-transform: uppercase; letter-spacing: .09em; }
+.chapter-tag { flex: none; padding: 7px 10px; border: 1px solid #9bb6b7; border-radius: 999px; color: #174c60; background: #ecf8f7; font-size: .76rem; }
+.chapter-tag a { color: inherit; }
+.concept-strip { display: flex; flex-wrap: wrap; gap: 8px; margin: 15px 0; }
+.concept-strip span { padding: 5px 10px; border: 1px solid #d5b862; border-radius: 999px; color: #5c4514; background: #fff8df; font-size: .8rem; font-weight: 700; }
+.activity-instructions { padding: 13px 15px; border-left: 5px solid #26788a; border-radius: 8px; background: #edf7f8; }
+.lab-scene {
+  position: relative; overflow: hidden; margin: 18px 0; padding: 18px;
+  border: 2px solid #7f9eaa; border-radius: 16px;
+  background: radial-gradient(circle at 50% 18%, #fbfff8, #e8f0f2 72%);
+}
+.lab-scene.dark { color: #fff; background: radial-gradient(circle at 50% 35%, #284f68, #071525 75%); border-color: #bda55a; }
+.lab-scene h3 { margin: 0 0 8px; font-size: 1.15rem; }
+.lab-scene.dark h3 { color: #fff; }
+.scene-art { position: relative; overflow: hidden; min-height: 250px; border-radius: 13px; background: linear-gradient(145deg, #0b1e33, #1d3654); }
+.scene-art svg { display: block; width: 100%; height: 100%; min-height: 250px; }
+.scene-caption { min-height: 65px; margin-top: 12px; padding: 12px 14px; border-left: 5px solid #98711d; border-radius: 7px; background: #fff8df; color: #283847; }
+.scene-caption.success { border-color: #2d714d; background: #eaf7ee; }
+.action-button[aria-pressed="true"], .tab-button[aria-pressed="true"] { color: #fff; background: #174b5d; border-color: #174b5d; }
+.action-button.primary { color: #fff; background: #194d61; border-color: #194d61; }
+.action-button.primary:hover { background: #0d6572; }
+.exploration-check { color: #246346; font-weight: 800; }
+.range-grid { display: grid; grid-template-columns: minmax(190px, 1fr) minmax(180px, 1fr); gap: 17px; align-items: center; }
+.range-card { padding: 14px; border: 1px solid #9fb0bc; border-radius: 11px; background: #fff; }
+.range-card label { display: block; font-weight: 800; }
+input[type="range"] { width: 100%; min-height: 34px; accent-color: #176e78; }
+.readout { margin: 7px 0 0; font-size: .9rem; font-weight: 700; }
+.meter { height: 14px; overflow: hidden; margin-top: 9px; border: 1px solid #748896; border-radius: 999px; background: #e7ebed; }
+.meter > span { display: block; width: var(--meter, 0%); height: 100%; background: linear-gradient(90deg, #3c8c83, #ddba5f); transition: width .3s; }
+.lock-zone { margin-top: 24px; padding-top: 20px; border-top: 2px dashed #82949f; }
+.lock-zone h3 { margin-top: 0; }
+.question-card { padding: 17px; margin: 14px 0; border: 2px solid #9baab4; border-radius: 13px; background: #fbfcfa; }
+.question-card.solved { border-color: #2e7550; background: #eff9f2; }
+.question-card legend { padding: 0 6px; font-weight: 800; color: #203f52; }
+.choice-grid { display: grid; gap: 9px; margin-top: 10px; }
+.choice-button { width: 100%; text-align: left; font-weight: 600; }
+.choice-button.correct-choice { border-color: #2e7550; background: #def2e5; color: #17452e; }
+.choice-button.wrong-choice { border-color: #94404a; background: #ffeaec; color: #67242b; }
+.choice-button:disabled { opacity: 1; cursor: default; }
+.feedback { min-height: 1.5em; margin: 9px 0 0; font-size: .91rem; font-weight: 700; }
+.feedback.good { color: #245f42; }
+.feedback.try { color: #7a2b34; }
+.clue-card { position: relative; overflow: hidden; margin-top: 18px; padding: 18px; border: 2px solid #a98129; border-radius: 13px; background: linear-gradient(135deg, #fff8df, #fffef7); }
+.clue-card::after { content: "✦"; position: absolute; right: 16px; top: 10px; color: #b99136; font-size: 2rem; animation: twinkle 2.5s ease-in-out infinite alternate; }
+.fragment-reveal { display: inline-grid; place-items: center; width: 54px; height: 54px; margin-right: 10px; border-radius: 50%; color: #fff; background: linear-gradient(145deg, #5a3683, #173f59); box-shadow: 0 0 0 4px #e2c56d, 0 0 20px #ceb460; font: 800 1.6rem Georgia, serif; }
+.room-nav {
+  display: grid; grid-template-columns: 1fr; gap: 14px; align-items: center;
+  margin-top: 20px; padding: 18px; border: 2px solid #718e9c; border-radius: 15px;
+  background: linear-gradient(135deg, #edf7f6, #fdf9e9); box-shadow: 0 8px 22px #10273a14;
+}
+.room-nav.route-ready { border-color: #a47b22; background: linear-gradient(135deg, #fff9df, #ecf8f3); }
+.room-nav-label { display: block; margin-bottom: 3px; color: #6f5217; font-size: .76rem; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
+.room-nav strong { display: block; color: #153e57; font: 700 1.08rem/1.3 Georgia, serif; }
+.room-nav p { margin: 5px 0 0; color: #4b5b67; font-size: .86rem; }
+.room-nav-actions { display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 9px; }
+.route-button {
+  min-height: 46px; padding: 10px 14px; border: 2px solid #315d72; border-radius: 10px;
+  color: #17384e; background: #fff; cursor: pointer; font-weight: 800;
+}
+.route-button:hover { background: #e7f5f2; border-color: #1b707a; }
+.route-button.primary-route { color: #fff; border-color: #174b5d; background: #174b5d; box-shadow: 0 0 0 3px #fff, 0 0 0 5px #d1b251; }
+.route-button.primary-route:hover { background: #0e6671; }
+.route-button.final-route { background: linear-gradient(135deg, #523477, #173f59); border-color: #d7b95e; }
+.route-button[disabled] { opacity: .58; cursor: not-allowed; box-shadow: none; }
+
+/* Simulations */
+.pathway-stage { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; align-items: stretch; margin: 15px 0; }
+.path-node { position: relative; display: grid; place-items: center; min-height: 106px; padding: 9px; border: 2px solid #72909a; border-radius: 12px; color: #244252; background: #f8fcfb; text-align: center; font-size: .82rem; font-weight: 800; transition: .45s; }
+.path-node::after { content: "→"; position: absolute; right: -16px; z-index: 2; color: #9a7320; font-size: 1.5rem; }
+.path-node:last-child::after { display: none; }
+.path-node.lit { color: #fff; background: #1e6671; border-color: #e1c46b; box-shadow: 0 0 20px #58bdb5aa; transform: translateY(-5px); }
+.path-icon { font-size: 1.7rem; }
+.threshold-sky { position: relative; height: 220px; border-radius: 12px; background: radial-gradient(circle at 50% 70%, #183351, #071322 75%); overflow: hidden; }
+.threshold-star { position: absolute; left: 50%; top: 43%; width: 22px; height: 22px; transform: translate(-50%, -50%); opacity: var(--star-alpha, .05); filter: drop-shadow(0 0 var(--star-glow, 1px) #fff3b5); transition: opacity .25s, filter .25s; }
+.threshold-star::before { content: "✦"; color: #fff8c4; font-size: 28px; }
+.noise-dot { position: absolute; width: 3px; height: 3px; border-radius: 50%; background: #cbe0e8; opacity: .18; animation: noisePulse 4s ease-in-out infinite alternate; }
+.adapt-orb { width: 94px; height: 94px; margin: 22px auto; border-radius: 50%; background: #efce68; box-shadow: 0 0 44px #f6d267; transition: opacity 1.2s, filter 1.2s; }
+.adapt-orb.adapted { opacity: .22; filter: saturate(.4); }
+.wave-stage { min-height: 245px; padding: 15px; border-radius: 13px; color: #fff; background: #071a2e; }
+.wave-stage svg { width: 100%; height: 170px; display: block; }
+#wave-path { fill: none; stroke: #7ce0d7; stroke-width: 5; filter: drop-shadow(0 0 7px currentColor); }
+.wave-axis { stroke: #d8e5e855; stroke-width: 1; }
+.wave-orb { fill: var(--wave-color, #7ce0d7); filter: drop-shadow(0 0 9px var(--wave-color, #7ce0d7)); }
+.eye-stage, .ear-stage { position: relative; min-height: 290px; color: #fff; border-radius: 13px; background: radial-gradient(circle at 45% 45%, #244a65, #081728 75%); }
+.eye-stage svg, .ear-stage svg { width: 100%; height: 290px; display: block; }
+.photon { opacity: 0; transform: translateX(0); }
+.photon.travel { opacity: 1; animation: photonTravel 3.4s ease-in-out forwards; }
+.eye-label, .ear-label { fill: #f7edc8; font: 700 13px Arial, sans-serif; }
+.retina-rods { fill: #8ec6c7; opacity: .3; transition: opacity .4s; }
+.retina-cones { fill: #efc767; opacity: .3; transition: opacity .4s; }
+.eye-stage.rods .retina-rods, .eye-stage.cones .retina-cones { opacity: 1; filter: drop-shadow(0 0 5px currentColor); }
+.depth-scene { position: relative; height: 190px; overflow: hidden; border-radius: 12px; background: linear-gradient(#cde9ee 0 54%, #bed0a1 54%); perspective: 500px; }
+.depth-road { position: absolute; left: 34%; right: 34%; bottom: 0; height: 100%; background: #7b7f7a; clip-path: polygon(47% 0, 53% 0, 100% 100%, 0 100%); }
+.depth-object { position: absolute; left: calc(10% + var(--depth, 45) * .72%); bottom: calc(12% + var(--depth, 45) * .55%); transform: translateX(-50%) scale(calc(.45 + (100 - var(--depth, 45)) * .008)); transition: .4s; font-size: 2.2rem; }
+.sound-pulse { opacity: 0; }
+.sound-pulse.travel { opacity: 1; animation: soundTravel 3.4s ease-in-out forwards; }
+.ossicle { transform-origin: center; transform-box: fill-box; }
+.ear-stage.ringing .ossicle { animation: ossicleMove .35s ease-in-out 8 alternate; }
+.hair-cell { transform-origin: center bottom; transform-box: fill-box; }
+.ear-stage.ringing .hair-cell { animation: hairBend .4s ease-in-out 7 alternate; }
+.localizer { position: relative; height: 190px; border-radius: 12px; background: linear-gradient(#e7f4f4, #d9e6d2); overflow: hidden; }
+.head-icon { position: absolute; left: 50%; bottom: 17px; transform: translateX(-50%); font-size: 5.4rem; }
+.sound-source { position: absolute; left: var(--source-x, 50%); top: 22px; transform: translateX(-50%); transition: left .4s; font-size: 2.2rem; }
+.flavor-lab { display: grid; grid-template-columns: 180px 1fr; gap: 18px; align-items: center; }
+.flask { position: relative; width: 126px; height: 160px; margin: auto; }
+.flask-neck { position: absolute; left: 45px; top: 0; width: 37px; height: 53px; border: 5px solid #55798a; border-bottom: 0; background: #f8ffffcc; }
+.flask-body { position: absolute; left: 12px; bottom: 0; width: 104px; height: 118px; border: 5px solid #55798a; border-radius: 18px 18px 48px 48px; overflow: hidden; background: #f8ffffcc; }
+.flavor-liquid { position: absolute; left: 0; right: 0; bottom: 0; height: var(--flavor-fill, 18%); background: linear-gradient(#f5cf6f, #d4778e); transition: height .7s; }
+.aroma { position: absolute; left: 48px; top: -8px; width: 34px; height: 34px; border: 4px solid #8a5da2; border-color: #8a5da2 transparent transparent; border-radius: 50%; opacity: 0; }
+.flask.aromatic .aroma { opacity: 1; animation: aromaRise 2.6s ease-out infinite; }
+.sense-compass { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+.sense-card { min-height: 100px; padding: 12px; border: 2px solid #8098a3; border-radius: 11px; background: #fff; cursor: pointer; text-align: left; }
+.sense-card:hover, .sense-card[aria-pressed="true"] { background: #eaf7f2; border-color: #2e7550; }
+.attention-stage { position: relative; height: 260px; overflow: hidden; border-radius: 13px; background: #0a1930; }
+.moving-shape { position: absolute; display: grid; place-items: center; width: 42px; height: 42px; color: #fff; border-radius: 50%; background: #3a8f98; animation: shapeDrift var(--shape-speed, 8s) ease-in-out infinite alternate; }
+.moving-shape.square { border-radius: 7px; background: #b38040; }
+.moving-shape.star { background: transparent; color: #f5da79; font-size: 2.3rem; }
+.attention-mask { position: absolute; inset: 0; background: #030a16d9; mask: radial-gradient(circle 64px at var(--focus-x, 30%) 50%, transparent 0 62px, #000 65px); -webkit-mask: radial-gradient(circle 64px at var(--focus-x, 30%) 50%, transparent 0 62px, #000 65px); pointer-events: none; }
+.gestalt-board { min-height: 220px; padding: 22px; border-radius: 13px; background: #f6f3e6; display: grid; place-items: center; }
+.gestalt-board svg { width: 100%; height: 200px; }
+.gestalt-dot { transition: transform .8s ease, fill .5s; transform-box: fill-box; transform-origin: center; }
+.gestalt-board.proximity .left-cluster { transform: translateX(-22px); }
+.gestalt-board.proximity .right-cluster { transform: translateX(22px); }
+.gestalt-board.similarity .alt-dot { fill: #a15a75; }
+.closure-piece { transition: transform .7s ease; transform-box: fill-box; transform-origin: center; }
+.gestalt-board.closure .closure-piece { transform: rotate(0deg) translate(0); }
+.context-glyph { font: 800 3rem Georgia, serif; fill: #203a51; }
+.ambiguous-mark { fill: none; stroke: #203a51; stroke-width: 10; stroke-linecap: round; stroke-linejoin: round; }
+
+/* Sidebar */
+.sidebar { position: sticky; top: 14px; max-height: calc(100vh - 28px); overflow: auto; padding: 2px 4px 10px; }
+.sidebar .panel { padding: 18px; margin-bottom: 17px; box-shadow: 0 8px 22px #071d2b18; }
+.sidebar h2 { margin: 0 0 10px; font-size: 1.16rem; }
+progress { width: 100%; height: 18px; accent-color: #2d7853; }
+.progress-text { margin: 6px 0 0; font-weight: 800; }
+.fragment-rack { display: grid; grid-template-columns: repeat(4, 1fr); gap: 7px; padding: 0; list-style: none; }
+.fragment { display: grid; place-items: center; min-height: 58px; border: 2px solid #8c9a9f; border-radius: 10px; color: #6e7475; background: #edf0ed; font: 800 1.4rem Georgia, serif; }
+.fragment small { font: 400 .59rem Arial, sans-serif; }
+.fragment.collected { color: #fff9dc; border-color: #d9bd65; background: linear-gradient(145deg, #523478, #163d58); box-shadow: 0 0 13px #d8b45b77; }
+.inventory-list, .achievement-list { padding-left: 21px; font-size: .88rem; }
+.inventory-list li, .achievement-list li { margin-bottom: 8px; }
+.notebook textarea { width: 100%; min-height: 105px; padding: 10px; border: 2px solid #7e909c; border-radius: 9px; resize: vertical; }
+.save-status { color: #465b69; font-size: .79rem; }
+.notebook-actions { display: grid; gap: 8px; margin-top: 10px; }
+.danger-button { border: 2px solid #8b3b3b; border-radius: 9px; padding: 9px; color: #762f34; background: #fff; cursor: pointer; font-weight: 700; }
+.reset-box { margin-top: 9px; padding: 11px; border: 1px solid #b56a6a; border-radius: 8px; background: #fff4f4; }
+
+/* Final mystery and badge */
+.final-case {
+  position: relative; overflow: hidden; padding: 27px; margin-bottom: 24px;
+  border: 3px solid #d0af55; border-radius: 22px; color: #fff;
+  background: radial-gradient(circle at 80% 0, #71459666, transparent 18rem), linear-gradient(135deg, #071629, #16475b 66%, #2d214c);
+  box-shadow: var(--shadow);
+}
+.final-case h2, .final-case h3 { color: #fff; }
+.final-case a { color: #afeae3; }
+.final-lock { padding: 17px; margin: 15px 0; border: 1px solid #a8c7c5; border-radius: 12px; background: #fffdf5; color: var(--ink); }
+.final-lock label { display: block; margin-bottom: 7px; font-weight: 800; }
+.final-lock select, .final-lock input { width: 100%; padding: 10px; border: 2px solid #718b98; border-radius: 8px; background: #fff; }
+.final-submit { color: #132c3f; border: 2px solid #f1d981; background: #fff9df; }
+.final-submit:hover { background: #e8f8ef; }
+.portal-code { text-transform: uppercase; letter-spacing: .15em; }
+.badge-maker { margin-top: 24px; padding: 20px; border-radius: 15px; color: #1e2a38; background: #fffdf6; }
+.badge-maker h3 { color: #153b54; }
+.badge-maker label { display: block; font-weight: 800; }
+.badge-maker input { width: min(100%, 520px); padding: 11px; margin: 7px 0 12px; border: 2px solid #718995; border-radius: 8px; }
+.badge-preview { display: block; width: 100%; max-width: 780px; height: auto; margin: 16px auto 0; border: 2px solid #896f2c; border-radius: 12px; box-shadow: 0 12px 26px #081b2d22; }
+.badge-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.confetti { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.confetti i { position: absolute; top: -20px; width: 8px; height: 14px; background: var(--confetti, #d9b457); animation: confettiFall 3s ease-out forwards; }
+.reading-panel details { padding: 12px 0; border-bottom: 1px solid #c7d0d4; }
+.reading-panel summary { cursor: pointer; color: #153f59; font-weight: 800; }
+.reading-panel li { margin-bottom: 8px; }
+.mobile-progress { display: none; }
+footer { padding: 27px 0; color: #eef5ed; background: #071426; border-top: 5px solid #b8923c; }
+.footer-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 25px; }
+footer h2 { color: #fff; margin-top: 0; font-size: 1.15rem; }
+footer a { color: #9fe2dc; }
+footer p { font-size: .9rem; }
+
+/* Motion */
+@keyframes auroraDrift { to { transform: translate(9vw, 6vh) scale(1.14) rotate(8deg); } }
+@keyframes moteRise { from { transform: translateY(110vh) scale(.5); opacity: 0; } 20% { opacity: .32; } to { transform: translateY(-15vh) translateX(45px) scale(1.2); opacity: 0; } }
+@keyframes cloudDrift { to { transform: translateX(80px) scale(1.1); } }
+@keyframes rayFlow { to { stroke-dashoffset: -44; } }
+@keyframes prismFloat { to { transform: translateY(-8px) rotate(1.5deg); } }
+@keyframes irisBreathe { 50% { transform: scale(1.08); stroke-width: 3; } }
+@keyframes pupilShift { 50% { transform: translateX(5px) scale(.82); } }
+@keyframes twinkle { to { opacity: .35; transform: scale(.72) rotate(12deg); } }
+@keyframes symbolDrift { to { transform: translate(-24px, 9px); opacity: .3; } }
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes noisePulse { to { opacity: .38; transform: scale(1.3); } }
+@keyframes photonTravel { 0% { transform: translateX(0); } 28% { transform: translateX(125px); } 52% { transform: translateX(245px); } 77% { transform: translateX(365px); } 100% { transform: translateX(500px); opacity: .15; } }
+@keyframes soundTravel { 0% { transform: translateX(0); } 27% { transform: translateX(120px); } 52% { transform: translateX(245px); } 76% { transform: translateX(365px); } 100% { transform: translateX(505px); opacity: .2; } }
+@keyframes ossicleMove { to { transform: rotate(9deg); } }
+@keyframes hairBend { to { transform: skewX(13deg); } }
+@keyframes aromaRise { from { transform: translateY(15px) scale(.7); } to { transform: translateY(-48px) scale(1.3); opacity: 0; } }
+@keyframes shapeDrift { from { transform: translate(-12px, -8px) rotate(0); } to { transform: translate(45px, 30px) rotate(120deg); } }
+@keyframes confettiFall { to { transform: translate(var(--drift, 20px), 620px) rotate(540deg); opacity: 0; } }
+
+.no-motion *, .no-motion *::before, .no-motion *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+.no-motion .map-button:hover { transform: none; }
+.no-motion .confetti { display: none; }
+
+@media (max-width: 1020px) {
+  .mission-layout { grid-template-columns: minmax(0, 1fr) 285px; }
+  .hero-grid { gap: 20px; }
+  .room-grid { gap: 11px; }
+}
+@media (max-width: 900px) {
+  .mission-layout { grid-template-columns: 1fr; }
+  .sidebar { position: static; max-height: none; overflow: visible; }
+  .hero-grid { grid-template-columns: 1fr .85fr; }
+  .hero h1 { font-size: 3.35rem; }
+  .briefing-grid { grid-template-columns: 1fr; }
+  .mobile-progress { display: block; position: sticky; bottom: 10px; z-index: 40; width: max-content; max-width: calc(100% - 24px); margin: 0 auto; padding: 9px 16px; border: 2px solid #e0c368; border-radius: 999px; color: #fff; background: #0b364a; box-shadow: 0 8px 25px #0005; font-size: .84rem; }
+  .mobile-progress a { color: #fff; }
+}
+@media (max-width: 700px) {
+  body { font-size: 17px; }
+  .hero-grid { grid-template-columns: 1fr; }
+  .hero-scene { max-height: 320px; aspect-ratio: 1.55; }
+  .hero h1 { font-size: clamp(2.5rem, 13vw, 3.35rem); }
+  .room-grid { grid-template-columns: 1fr 1fr; }
+  .map-button { min-height: 206px; padding: 12px; }
+  .map-art { height: 67px; }
+  .objective-list { columns: 1; }
+  .range-grid, .flavor-lab { grid-template-columns: 1fr; }
+  .pathway-stage { grid-template-columns: 1fr 1fr; }
+  .path-node::after { display: none; }
+  .room-heading { display: block; }
+  .chapter-tag { display: inline-block; margin-top: 5px; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .activity-card, .gallery-map, .final-case, .panel { padding: 18px; }
+  .room-nav { grid-template-columns: 1fr; }
+  .room-nav-actions { justify-content: flex-start; }
+}
+@media (max-width: 430px) {
+  .container { width: calc(100% - 22px); }
+  .room-grid { grid-template-columns: 1fr; }
+  .map-button { min-height: 170px; }
+  .map-art { height: 58px; }
+  .pathway-stage, .sense-compass { grid-template-columns: 1fr; }
+  .control-row > button { width: 100%; }
+  .room-nav-actions, .room-nav-actions .route-button { width: 100%; }
+  .fragment-rack { grid-template-columns: repeat(4, 1fr); }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  .map-button:hover { transform: none; }
+  .confetti, .mote { display: none; }
+}
+@media print {
+  .sensory-sky, .hero, .atmosphere, .gallery-map, .active-area, .sidebar, .mobile-progress, footer, .final-form, .badge-actions, .badge-maker label, .badge-maker input, #badge-message { display: none !important; }
+  body { background: #fff; font-size: 12pt; }
+  .mission-layout { display: block; }
+  .final-case { padding: 0; border: 0; color: #111; background: #fff; box-shadow: none; }
+  .final-case > h2, .final-case > p, .final-case > .final-form, .final-case > #final-feedback { display: none; }
+  .badge-maker { padding: 0; }
+  .badge-preview { max-width: 100%; border: 0; box-shadow: none; }
+}
+
+
+/* Week 10: The Emberheart Atrium */
+:root {
+  --emotion-glow: #ffb35c;
+  --emotion-glow-soft: #ffd99a;
+  --emotion-violet: #69458f;
+  --emotion-rose: #c75c77;
+  --emotion-teal: #43b7aa;
+  --lighting-a: #ffb35c;
+  --lighting-b: #8658a9;
+  --lighting-soft: rgba(255, 179, 92, .17);
+}
+body.lighting-calm { --lighting-a: #74d8cb; --lighting-b: #456d9e; --lighting-soft: rgba(116, 216, 203, .18); }
+body.lighting-curious { --lighting-a: #ffc15d; --lighting-b: #7751a5; --lighting-soft: rgba(255, 193, 93, .17); }
+body.lighting-energized { --lighting-a: #ff7a79; --lighting-b: #d4963f; --lighting-soft: rgba(255, 122, 121, .16); }
+body {
+  background:
+    radial-gradient(circle at 8% 18%, var(--lighting-soft), transparent 25rem),
+    radial-gradient(circle at 92% 42%, rgba(98, 72, 148, .13), transparent 28rem),
+    #f5f3f2;
+  transition: background 1.1s ease;
+}
+.hero {
+  background:
+    radial-gradient(circle at var(--pointer-x, 75%) var(--pointer-y, 38%), var(--lighting-soft), transparent 15rem),
+    linear-gradient(135deg, #0b1428 0%, #2a214d 48%, #642c50 100%);
+  border-color: #e0aa4e;
+}
+.hero::before { background: var(--lighting-soft); }
+.hero::after { background: rgba(135, 88, 177, .18); }
+.hero-subtitle { color: #ffc97d; }
+.hero-scene { background: radial-gradient(circle at 50% 45%, #59315b, #10162d 72%); border-color: #e0b456; }
+.hero-scene::after { content: "Move near the Atrium to awaken its emotional light"; }
+.atmosphere { background: linear-gradient(120deg, #111831, #3b2856 56%, #78364f); }
+.atmosphere::after { content: "♡  ✦  ◌  ✧  ◉  ✦"; }
+.gallery-map { background: linear-gradient(145deg, #f6f1ee, #eff3f6); border-color: #796f87; }
+.map-art { background: linear-gradient(135deg, #121b36, #52305b); }
+.map-button:hover { border-color: #ad5872; }
+.activity-card::before { background: radial-gradient(var(--lighting-soft), transparent 70%); }
+.chapter-tag { color: #5d376f; border-color: #b8a0c6; background: #f5eef8; }
+.concept-strip span { border-color: #d9a957; background: #fff4dc; }
+.action-button.primary { background: #583c76; border-color: #583c76; }
+.action-button.primary:hover { background: #734d92; }
+.room-nav.route-ready { border-color: #c58b35; background: linear-gradient(135deg, #fff3dc, #f4edf9); }
+.route-button.primary-route { border-color: #5b3c78; background: #5b3c78; box-shadow: 0 0 0 3px #fff, 0 0 0 5px #dfa84d; }
+.route-button.primary-route:hover { background: #764b92; }
+.route-button.final-route { background: linear-gradient(135deg, #a94867, #513475); }
+.fragment.collected { background: linear-gradient(145deg, #a64464, #4c3475); }
+.fragment-reveal { background: linear-gradient(145deg, #b24d6b, #513676); }
+.final-case { background: radial-gradient(circle at 80% 0, #d75e7f55, transparent 18rem), linear-gradient(135deg, #11162b, #3d295a 60%, #7b354f); }
+
+/* Hero affective sculpture */
+.ember-core { transform-origin: center; transform-box: fill-box; animation: heartPulse 3.8s ease-in-out infinite; filter: drop-shadow(0 0 14px var(--lighting-a)); }
+.brain-lobe { fill: none; stroke: #b996dd; stroke-width: 8; stroke-linecap: round; opacity: .88; }
+.heart-path { fill: url(#heartGradient); stroke: #ffe3ac; stroke-width: 3; }
+.signal-thread { fill: none; stroke: var(--lighting-a); stroke-width: 4; stroke-dasharray: 8 10; animation: signalTravel 3.2s linear infinite; }
+.emotion-orbit { transform-origin: 380px 208px; animation: orbit 25s linear infinite; }
+.emotion-orbit.reverse { animation-direction: reverse; animation-duration: 34s; }
+.orbit-word { fill: #fff6dc; font: 700 14px Arial, sans-serif; letter-spacing: .04em; }
+.glow-ring { fill: none; stroke: var(--lighting-a); stroke-width: 2; opacity: .55; animation: ringBreathe 4s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
+.light-particle { fill: #ffe59d; animation: twinkle 3.1s ease-in-out infinite alternate; transform-box: fill-box; transform-origin: center; }
+
+/* Lighting and sound controls */
+.lighting-choice[aria-pressed="true"] { color: #172438; background: #fff1c9; border-color: #f0c75b; box-shadow: 0 0 0 3px rgba(255, 218, 112, .25); }
+.sound-viz { display: inline-flex; align-items: end; gap: 3px; height: 22px; margin-left: 5px; vertical-align: middle; }
+.sound-viz i { display: block; width: 3px; height: 6px; border-radius: 3px; background: #f0d27a; }
+.sound-on .sound-viz i { animation: equalize .8s ease-in-out infinite alternate; }
+.sound-on .sound-viz i:nth-child(2) { animation-delay: -.3s; }
+.sound-on .sound-viz i:nth-child(3) { animation-delay: -.6s; }
+
+/* Motive Forge */
+.motive-forge { position: relative; min-height: 275px; overflow: hidden; border-radius: 14px; background: radial-gradient(circle at 50% 50%, #513153, #111a31 72%); }
+.motive-platform { position: absolute; left: 50%; bottom: 35px; width: 78%; height: 42px; transform: translateX(-50%) perspective(250px) rotateX(60deg); border: 2px solid #d9bb6a; border-radius: 50%; background: #7cd2c322; box-shadow: 0 0 40px #7cd2c344; }
+.motive-orb { position: absolute; left: calc(12% + var(--motive-position, 50) * .76%); top: 74px; width: 82px; height: 82px; transform: translateX(-50%) rotateY(var(--motive-rotate, 0deg)); border: 4px solid #ffe0a1; border-radius: 50%; background: radial-gradient(circle at 34% 30%, #fff8cf, var(--lighting-a) 30%, #85415e 72%); box-shadow: 0 0 36px var(--lighting-a); transition: left .6s, transform .8s, box-shadow .7s; }
+.motive-orb::after { content: "WHY?"; position: absolute; inset: 0; display: grid; place-items: center; color: #2e1d3c; font-size: .88rem; font-weight: 900; }
+.motive-source { position: absolute; top: 86px; width: 120px; text-align: center; color: #fff8df; font-weight: 800; }
+.motive-source.left { left: 12px; }
+.motive-source.right { right: 12px; }
+.motive-beam { position: absolute; top: 111px; height: 4px; width: 28%; background: linear-gradient(90deg, transparent, var(--lighting-a)); box-shadow: 0 0 10px var(--lighting-a); }
+.motive-beam.left { left: 16%; }
+.motive-beam.right { right: 16%; transform: rotate(180deg); }
+.motive-example { padding: 13px; border: 2px solid #9184a5; border-radius: 10px; background: #fff; }
+
+/* Homeostasis engine */
+.homeostasis-engine { position: relative; min-height: 290px; overflow: hidden; border-radius: 14px; background: radial-gradient(circle, #233f57, #0d172b 72%); }
+.balance-ring { position: absolute; left: 50%; top: 48%; width: 190px; height: 190px; transform: translate(-50%, -50%) rotate(var(--balance-tilt, 0deg)); border: 12px solid #56798c; border-top-color: var(--lighting-a); border-right-color: #9a6dbe; border-radius: 50%; transition: transform .7s, border-color .7s; box-shadow: inset 0 0 25px #0008, 0 0 26px var(--lighting-soft); }
+.balance-ring::before { content: "HOMEOSTASIS"; position: absolute; inset: 0; display: grid; place-items: center; color: #fff4d5; font-size: .85rem; font-weight: 900; letter-spacing: .08em; }
+.setpoint-line { position: absolute; left: 14%; right: 14%; top: 48%; height: 2px; background: #e9d69a88; }
+.drive-spark { position: absolute; left: var(--drive-x, 50%); top: 48%; width: 28px; height: 28px; transform: translate(-50%, -50%); border-radius: 50%; background: #ff896d; box-shadow: 0 0 var(--drive-glow, 8px) #ff765d; transition: left .6s, box-shadow .6s; }
+.engine-label { position: absolute; bottom: 18px; color: #dcecef; font-size: .8rem; font-weight: 700; }
+.engine-label.low { left: 18px; }.engine-label.mid { left: 50%; transform: translateX(-50%); }.engine-label.high { right: 18px; }
+
+/* Arousal observatory */
+.arousal-stage { position: relative; min-height: 310px; overflow: hidden; border-radius: 14px; background: linear-gradient(180deg, #111a32, #282449); }
+.arousal-stage svg { width: 100%; height: 310px; display: block; }
+.arousal-axis { stroke: #cfdae0; stroke-width: 2; }
+.arousal-curve { fill: none; stroke: var(--lighting-a); stroke-width: 7; filter: drop-shadow(0 0 7px var(--lighting-a)); }
+.arousal-curve.secondary { stroke: #75d6cb; opacity: .7; }
+.performance-orb { fill: #fff4b8; stroke: #fff; stroke-width: 3; filter: drop-shadow(0 0 9px #ffd067); transition: cx .45s, cy .45s; }
+.chart-label { fill: #e9f1f0; font: 700 14px Arial, sans-serif; }
+.zone-low { fill: #70b8c022; }.zone-optimal { fill: #f0bd5928; }.zone-high { fill: #d5617822; }
+
+/* Needs constellation */
+.needs-stage { position: relative; min-height: 330px; overflow: hidden; border-radius: 14px; background: radial-gradient(circle at 50% 62%, #49355b, #11162c 72%); perspective: 700px; }
+.needs-tower { position: absolute; left: 50%; top: 54%; width: 360px; height: 270px; transform: translate(-50%, -50%) rotateX(5deg) rotateY(var(--tower-y, -8deg)); transform-style: preserve-3d; transition: transform .8s; }
+.need-tier { position: absolute; left: 50%; width: var(--tier-width); height: 46px; bottom: var(--tier-bottom); transform: translateX(-50%) translateZ(var(--tier-z)); display: grid; place-items: center; border: 2px solid #e5c36f; border-radius: 50%; color: #fff8df; background: var(--tier-color); box-shadow: 0 9px 20px #0005, inset 0 0 14px #fff2; font-size: .78rem; font-weight: 800; cursor: pointer; transition: .5s; }
+.need-tier:hover, .need-tier.active { transform: translateX(-50%) translateZ(calc(var(--tier-z) + 35px)) scale(1.05); filter: brightness(1.25); }
+.constellation-field { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.motive-star { min-height: 112px; padding: 12px; border: 2px solid #87769c; border-radius: 12px; background: #fff; cursor: pointer; text-align: left; }
+.motive-star[aria-pressed="true"] { border-color: #ac7040; background: #fff3df; box-shadow: 0 0 17px #e1aa4c55; }
+.star-symbol { display: block; color: #a14e6e; font-size: 1.55rem; }
+
+/* Hunger signal network */
+.hunger-network { position: relative; min-height: 330px; overflow: hidden; border-radius: 14px; background: radial-gradient(circle at 50% 40%, #314a5e, #10182d 75%); }
+.hunger-network svg { width: 100%; height: 330px; display: block; }
+.signal-line { fill: none; stroke: #e9bd62; stroke-width: 4; stroke-dasharray: 8 9; animation: signalTravel 4s linear infinite; }
+.satiety-line { stroke: #70d1c7; }
+.body-node { transition: transform .5s, filter .5s; transform-box: fill-box; transform-origin: center; }
+.body-node.active { transform: scale(1.14); filter: drop-shadow(0 0 10px var(--lighting-a)); }
+.signal-label { fill: #fff5d6; font: 700 13px Arial, sans-serif; }
+.meal-dial { display: grid; grid-template-columns: repeat(4, 1fr); gap: 9px; }
+.meal-phase { min-height: 95px; padding: 10px; border: 2px solid #879aa6; border-radius: 10px; background: #fff; cursor: pointer; }
+.meal-phase[aria-pressed="true"] { color: #fff; border-color: #5a3b77; background: #5a3b77; }
+.protective-note { padding: 14px; border-left: 6px solid #75629a; border-radius: 9px; background: #f5f0f8; }
+
+/* Human diversity archive */
+.archive-stage { position: relative; min-height: 300px; overflow: hidden; border-radius: 14px; background: radial-gradient(circle at 50% 50%, #51375c, #11172d 72%); }
+.identity-prism { position: absolute; left: 50%; top: 50%; width: 180px; height: 180px; transform: translate(-50%, -50%) rotateX(58deg) rotateZ(45deg); transform-style: preserve-3d; border: 3px solid #f2d27b; background: linear-gradient(135deg, #e46f8a77, #73d3ca66, #a57cd077); box-shadow: 0 0 45px #da8baf55; animation: prismTurn 12s linear infinite; }
+.archive-orbit { position: absolute; left: 50%; top: 50%; width: var(--orbit-size); height: var(--orbit-size); transform: translate(-50%, -50%) rotate(var(--orbit-angle)); border: 1px solid #d9cfad66; border-radius: 50%; }
+.archive-orbit span { position: absolute; left: 50%; top: -15px; transform: translateX(-50%) rotate(calc(-1 * var(--orbit-angle))); color: #fff9e6; font-size: .76rem; font-weight: 800; }
+.archive-card-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+.archive-card { padding: 13px; border: 2px solid #9586a5; border-radius: 11px; background: #fff; cursor: pointer; text-align: left; }
+.archive-card[aria-pressed="true"] { border-color: #a34f6c; background: #fff0f4; }
+.response-cycle { position: relative; width: min(100%, 430px); aspect-ratio: 1; margin: 14px auto; border-radius: 50%; background: conic-gradient(#f0a85b 0 25%, #cb6d86 25% 50%, #8a68b2 50% 75%, #5fc0b8 75%); box-shadow: inset 0 0 0 36px #fffef3, 0 12px 25px #18243b33; }
+.response-cycle::after { content: "research model\A variation exists"; white-space: pre; position: absolute; inset: 35%; display: grid; place-items: center; border-radius: 50%; color: #3b3152; background: #fff; text-align: center; font-size: .78rem; font-weight: 800; }
+.cycle-label { position: absolute; color: #27223c; font-size: .76rem; font-weight: 900; }
+.cycle-label.one { top: 16%; right: 17%; }.cycle-label.two { right: 10%; bottom: 22%; }.cycle-label.three { left: 12%; bottom: 20%; }.cycle-label.four { top: 18%; left: 10%; }
+
+/* Emotion theory theater */
+.theory-theater { position: relative; min-height: 350px; overflow: hidden; border-radius: 14px; background: radial-gradient(circle at 50% 40%, #44345f, #10172c 73%); }
+.theory-node { position: absolute; display: grid; place-items: center; width: 142px; min-height: 78px; padding: 10px; border: 2px solid #d8bd6c; border-radius: 14px; color: #fff; background: #1b3249; box-shadow: 0 9px 22px #0005; text-align: center; font-size: .82rem; font-weight: 800; transition: left .85s, top .85s, transform .85s, background .6s; }
+.theory-node-kicker { display: inline-block; margin-bottom: 3px; padding: 2px 6px; border-radius: 999px; color: #18243c; background: #a8e1db; font-size: .58rem; letter-spacing: .08em; line-height: 1.2; }
+.theory-node.active { background: #8d4664; transform: scale(1.05); box-shadow: 0 0 24px #e68a8a77; }
+.theory-arrow { position: absolute; height: 4px; transform-origin: left center; background: linear-gradient(90deg, #e4c36c, #82d6ce); transition: width .7s, left .7s, top .7s, transform .7s; }
+.theory-arrow::after { content: ""; position: absolute; right: -3px; top: -5px; border-left: 10px solid #82d6ce; border-top: 7px solid transparent; border-bottom: 7px solid transparent; }
+.theory-legend { position: absolute; left: 16px; right: 16px; bottom: 12px; color: #eadfca; font-size: .78rem; text-align: center; }
+
+/* Expression and context */
+.expression-lab { display: grid; grid-template-columns: minmax(250px, .85fr) 1.15fr; gap: 18px; align-items: center; }
+.face-stage { position: relative; min-height: 310px; overflow: hidden; border-radius: 14px; background: linear-gradient(160deg, var(--face-bg-a, #cce7e2), var(--face-bg-b, #584575)); transition: background 1s; }
+.face-stage svg { width: 100%; height: 310px; display: block; }
+.face-skin { fill: #efbb91; stroke: #513d55; stroke-width: 4; }
+.face-eye { fill: #fff; stroke: #513d55; stroke-width: 4; }
+.face-pupil { fill: #2e2740; transition: transform .5s; transform-box: fill-box; transform-origin: center; }
+.face-brow { fill: none; stroke: #513d55; stroke-width: 8; stroke-linecap: round; transition: d .5s; }
+.face-mouth { fill: none; stroke: #8e3f58; stroke-width: 9; stroke-linecap: round; transition: d .5s; }
+.context-lantern { position: absolute; inset: 0; opacity: .2; background: radial-gradient(circle at var(--context-x, 30%) 25%, #fff8bc, transparent 25%); pointer-events: none; }
+.emotion-wheel { position: relative; width: min(100%, 320px); aspect-ratio: 1; margin: 0 auto 14px; border-radius: 50%; background: conic-gradient(#f3c257, #e68175, #956bc0, #64b8d0, #72c49e, #f3c257); box-shadow: inset 0 0 0 55px #fffdf7, 0 10px 25px #12233624; }
+.emotion-wheel::after { content: "emotion\A components"; white-space: pre; position: absolute; inset: 31%; display: grid; place-items: center; border-radius: 50%; color: #543b68; background: #fff; text-align: center; font-size: .83rem; font-weight: 900; }
+.component-chip { position: absolute; padding: 5px 8px; border: 1px solid #7e7190; border-radius: 999px; background: #fff; font-size: .7rem; font-weight: 800; }
+.component-chip.c1 { top: 4%; left: 37%; }.component-chip.c2 { right: -5%; top: 44%; }.component-chip.c3 { bottom: 3%; left: 33%; }.component-chip.c4 { left: -9%; top: 43%; }
+
+/* Completion portal */
+.motivate-code { display: flex; flex-wrap: wrap; gap: 8px; margin: 15px 0; }
+.motivate-code span { display: grid; place-items: center; width: 45px; height: 55px; border: 2px solid #e0bd65; border-radius: 10px; color: #fff6d8; background: #543771; font: 800 1.45rem Georgia, serif; box-shadow: 0 0 13px #f0b65c55; }
+
+@keyframes heartPulse { 50% { transform: scale(1.075); } }
+@keyframes signalTravel { to { stroke-dashoffset: -36; } }
+@keyframes ringBreathe { 50% { transform: scale(1.12); opacity: .22; } }
+@keyframes equalize { to { height: 21px; } }
+@keyframes prismTurn { to { transform: translate(-50%, -50%) rotateX(58deg) rotateZ(405deg); } }
+
+.no-motion .identity-prism { transform: translate(-50%, -50%) rotateX(58deg) rotateZ(45deg); }
+
+@media (max-width: 700px) {
+  .expression-lab { grid-template-columns: 1fr; }
+  .constellation-field, .meal-dial { grid-template-columns: 1fr 1fr; }
+  .needs-tower { width: 300px; }
+  .theory-node { width: 118px; font-size: .72rem; }
+}
+@media (max-width: 430px) {
+  .constellation-field, .meal-dial, .archive-card-grid { grid-template-columns: 1fr; }
+  .needs-tower { width: 250px; }
+  .response-cycle { max-width: 280px; }
+  .theory-node { width: 88px; min-height: 72px; padding: 6px; font-size: .62rem; line-height: 1.28; }
+  .theory-node-kicker { font-size: .48rem; padding: 2px 4px; }
+}
+
+  </style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to the Week 10 mission</a>
+
+<div class="sensory-sky" aria-hidden="true">
+  <div class="aurora one"></div>
+  <div class="aurora two"></div>
+  <div id="motes"></div>
+</div>
+
+<header class="hero" id="top">
+  <div class="container">
+    <a class="academy-link" href="../index.html">← Return to Psychology Academy</a>
+    <div class="hero-grid">
+      <div>
+        <p class="eyebrow">Week 10 Psychology Mission · OpenStax Chapter 10</p>
+        <h1>The Emberheart Atrium</h1>
+        <p class="hero-subtitle">Where needs become action and feelings become meaning.</p>
+        <p class="hero-text">
+          The Academy’s Emberheart has dimmed. Its eight chambers once transformed biological signals, beliefs,
+          social needs, context, and experience into purposeful action and emotion. Reawaken each chamber,
+          compare the major psychological theories, and discover why behavior is never powered by just one force.
+        </p>
+        <div class="hero-chips" aria-label="Mission features">
+          <span class="hero-chip">8 immersive chambers</span>
+          <span class="hero-chip">16 knowledge locks</span>
+          <span class="hero-chip">No timer or penalty</span>
+          <span class="hero-chip">Personalized badge</span>
+        </div>
+      </div>
+
+      <div class="hero-scene" aria-hidden="true">
+        <svg viewBox="0 0 760 430" role="img">
+          <title>An animated heart and brain exchange glowing signals inside a rotating emotional constellation</title>
+          <defs>
+            <linearGradient id="heartGradient" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#ffca75"/>
+              <stop offset=".5" stop-color="#e9657d"/>
+              <stop offset="1" stop-color="#8e55a3"/>
+            </linearGradient>
+            <radialGradient id="coreGradient">
+              <stop offset="0" stop-color="#fff9c8"/>
+              <stop offset=".35" stop-color="#ffb055"/>
+              <stop offset="1" stop-color="#8a3e66"/>
+            </radialGradient>
+          </defs>
+          <path d="M54 388V166Q54 38 188 38h384q134 0 134 128v222" fill="none" stroke="#d9bd6e" stroke-width="3" opacity=".48"/>
+          <circle class="glow-ring" cx="380" cy="208" r="153"/>
+          <circle class="glow-ring" cx="380" cy="208" r="115" style="animation-delay:-1.8s"/>
+          <g class="emotion-orbit">
+            <circle cx="380" cy="55" r="7" fill="#ffd475"/><text class="orbit-word" x="395" y="61">MOTIVE</text>
+            <circle cx="380" cy="361" r="7" fill="#75d5cb"/><text class="orbit-word" x="395" y="367">MEANING</text>
+          </g>
+          <g class="emotion-orbit reverse">
+            <circle cx="533" cy="208" r="7" fill="#e8879b"/><text class="orbit-word" x="545" y="214">EMOTION</text>
+            <circle cx="227" cy="208" r="7" fill="#a88bd0"/><text class="orbit-word" x="145" y="214">ACTION</text>
+          </g>
+          <g transform="translate(182 127)">
+            <path class="brain-lobe" d="M72 36c-26-36-79-7-64 34-25 13-16 60 17 61-4 33 40 47 58 22 20 23 58 2 48-29 34-9 34-55 4-66 5-38-43-58-63-22z"/>
+            <path class="brain-lobe" d="M72 35v121M38 40c30 16 8 44 34 55M18 78c29-7 33 25 54 17m34-54c-31 13-9 39-34 54m54-11c-28-3-34 27-54 11" stroke-width="4"/>
+          </g>
+          <g class="ember-core" transform="translate(315 137)">
+            <circle cx="65" cy="71" r="66" fill="url(#coreGradient)" opacity=".2"/>
+            <path class="heart-path" d="M65 128S5 94 5 45C5 6 55-3 65 28 75-3 125 6 125 45c0 49-60 83-60 83z"/>
+            <circle cx="65" cy="58" r="15" fill="#fff4c7" opacity=".75"/>
+          </g>
+          <g transform="translate(513 128)">
+            <circle cx="65" cy="75" r="69" fill="#56366d88" stroke="#e5c36e" stroke-width="3"/>
+            <path d="M65 18v114M15 75h100M30 35l70 80M100 35l-70 80" stroke="#79d3ca" stroke-width="4" opacity=".8"/>
+            <circle cx="65" cy="75" r="20" fill="#f09a64"/>
+            <circle class="light-particle" cx="65" cy="18" r="6"/><circle class="light-particle" cx="115" cy="75" r="6" style="animation-delay:-1s"/><circle class="light-particle" cx="30" cy="115" r="6" style="animation-delay:-2s"/>
+          </g>
+          <path class="signal-thread" d="M313 205C281 176 271 217 246 210"/>
+          <path class="signal-thread" d="M440 205C479 169 497 219 520 208" style="animation-delay:-1s"/>
+          <text x="186" y="334" fill="#e6d8f1" font-size="15" font-family="Arial">beliefs &amp; goals</text>
+          <text x="337" y="334" fill="#ffe0a3" font-size="15" font-family="Arial">body signals</text>
+          <text x="523" y="334" fill="#b3ebe5" font-size="15" font-family="Arial">context &amp; culture</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main id="main-content" class="container">
+  <section class="atmosphere" aria-labelledby="atmosphere-heading">
+    <h2 id="atmosphere-heading">Shape the Atrium Atmosphere</h2>
+    <p>
+      Choose the gallery lighting that supports your learning. These choices change only the visual environment—not
+      your answers or progress. Music will remain optional and will never begin automatically.
+    </p>
+    <audio id="atrium-audio" loop preload="none" aria-label="Optional Emberheart Atrium music"></audio>
+    <div class="control-row" role="group" aria-label="Gallery lighting">
+      <button class="control-button lighting-choice" type="button" data-lighting="calm" aria-pressed="false">Calm Light</button>
+      <button class="control-button lighting-choice" type="button" data-lighting="curious" aria-pressed="true">Curious Light</button>
+      <button class="control-button lighting-choice" type="button" data-lighting="energized" aria-pressed="false">Energized Light</button>
+    </div>
+    <div class="control-row">
+      <button id="music-toggle" class="control-button" type="button" aria-pressed="false">Play Atrium Music <span class="sound-viz" aria-hidden="true"><i></i><i></i><i></i></span></button>
+      <button id="motion-toggle" class="control-button" type="button" aria-pressed="false">Pause Animations</button>
+      <label for="volume">Music volume</label>
+      <input id="volume" type="range" min="0" max="1" step="0.01" value="0.22">
+    </div>
+    <p id="audio-status" class="status-light" role="status" aria-live="polite">Ambient guitar is ready. Select Play when you would like music.</p>
+    <p id="motion-status" class="status-light"></p>
+  </section>
+
+  <div class="briefing-grid">
+    <section class="panel panel-gold" aria-labelledby="briefing-heading">
+      <h2 id="briefing-heading">Your Mission</h2>
+      <p>
+        Enter each chamber, operate its interactive instrument, and solve two knowledge locks. Every restored chamber
+        releases one letter. In order, the eight letters reveal the code that opens the Emberheart’s final vault.
+      </p>
+      <p>
+        There is no timer, and missed answers simply provide a hint. Navigation buttons beneath every question set take
+        you directly to the next chamber—no scrolling back to the map is required.
+      </p>
+      <p class="source-note">
+        <strong>Each chamber identifies its OpenStax connection.</strong> The activities translate Chapter 10 ideas into
+        visual models; they do not replace the assigned reading.
+      </p>
+    </section>
+
+    <section class="panel panel-green" aria-labelledby="objectives-heading">
+      <h2 id="objectives-heading">What You Will Practice</h2>
+      <ul class="objective-list">
+        <li>Distinguish intrinsic and extrinsic motivation.</li>
+        <li>Apply drive-reduction and arousal theories.</li>
+        <li>Explain self-efficacy and social motives.</li>
+        <li>Evaluate Maslow’s hierarchy thoughtfully.</li>
+        <li>Trace hunger and satiety signals.</li>
+        <li>Distinguish sexuality and gender concepts.</li>
+        <li>Compare major theories of emotion.</li>
+        <li>Connect biology, appraisal, expression, and culture.</li>
+      </ul>
+    </section>
+  </div>
+
+  <section class="panel" aria-labelledby="care-heading">
+    <h2 id="care-heading">A Respectful, Private Learning Space</h2>
+    <p>
+      Chapter 10 includes hunger, eating, sexuality, gender identity, and emotional experience. This mission uses
+      neutral scientific examples and inclusive language. You will never be asked to reveal your eating history,
+      sexual orientation, gender identity, health information, or personal emotional experiences.
+    </p>
+  </section>
+
+  <div class="mission-layout">
+    <div>
+      <section class="gallery-map" aria-labelledby="map-heading">
+        <h2 id="map-heading">The Eight-Chamber Atrium Map</h2>
+        <p>Follow the suggested Chapter 10 route or enter any chamber. Your work saves automatically in this browser.</p>
+        <div id="room-grid" class="room-grid"></div>
+      </section>
+
+      <div id="active-area" class="active-area" tabindex="-1" aria-live="polite"></div>
+
+      <section id="final-case" class="final-case" aria-labelledby="final-heading" hidden>
+        <div id="confetti" class="confetti" aria-hidden="true"></div>
+        <h2 id="final-heading">The Emberheart’s Final Integration</h2>
+        <p>
+          The eight fragments now orbit the central core. Integrate motivation and emotion to explain why the same
+          event can energize different goals, bodily responses, appraisals, and feelings.
+        </p>
+        <div id="motivate-code" class="motivate-code" aria-label="Collected code letters"></div>
+
+        <form id="final-form" class="final-form">
+          <div class="final-lock">
+            <label for="final-one">1. A student chooses a difficult art project because mastering the technique feels satisfying. Which motive is most evident?</label>
+            <select id="final-one" required><option value="">Choose a conclusion</option><option value="intrinsic">Intrinsic motivation</option><option value="drive">Drive reduction only</option><option value="reflex">A reflex</option></select>
+          </div>
+          <div class="final-lock">
+            <label for="final-two">2. The student’s heart rate rises after receiving an unexpected invitation. They examine the context and label the arousal as excitement. Which theory fits best?</label>
+            <select id="final-two" required><option value="">Choose a theory</option><option value="cannon">Cannon–Bard only</option><option value="twofactor">Schachter–Singer two-factor theory</option><option value="drive">Drive-reduction theory</option></select>
+          </div>
+          <div class="final-lock">
+            <label for="final-three">3. Why might another student interpret the same invitation differently?</label>
+            <select id="final-three" required><option value="">Choose an explanation</option><option value="fixed">The event contains one fixed emotion for everyone.</option><option value="appraisal">Appraisal, expectations, experience, goals, and culture can shape emotional meaning.</option><option value="weak">Different emotions indicate weak motivation.</option></select>
+          </div>
+          <div class="final-lock">
+            <label for="portal-code">4. Enter the eight-letter code formed by your chamber fragments.</label>
+            <input id="portal-code" class="portal-code" type="text" maxlength="8" autocomplete="off" spellcheck="false" placeholder="Eight-letter code" required>
+          </div>
+          <button class="control-button final-submit" type="submit">Restore the Emberheart</button>
+        </form>
+        <p id="final-feedback" role="status" aria-live="polite">Complete all eight chambers to illuminate this final vault.</p>
+
+        <section id="badge-maker" class="badge-maker" aria-labelledby="badge-heading" hidden>
+          <h3 id="badge-heading">Your Affective Science Navigator Badge</h3>
+          <p>
+            You connected motives, physiological signals, appraisals, social contexts, emotion theories, and expression.
+            Enter your name, generate your badge, and save the PNG for your Canvas submission.
+          </p>
+          <label for="learner-name">Name to appear on the badge</label>
+          <input id="learner-name" type="text" maxlength="60" autocomplete="name" placeholder="Enter your name">
+          <div class="badge-actions">
+            <button id="generate-badge" class="action-button primary" type="button">Generate My Badge</button>
+            <button id="download-badge" class="action-button" type="button" disabled>Download Badge as PNG</button>
+            <button id="print-badge" class="action-button" type="button">Print Badge</button>
+          </div>
+          <p id="badge-message" role="status" aria-live="polite"></p>
+          <canvas id="badge-canvas" class="badge-preview" width="1400" height="1000" aria-label="Personalized Week 10 Affective Science Navigator completion badge"></canvas>
+        </section>
+      </section>
+    </div>
+
+    <aside class="sidebar" aria-label="Emberheart Atrium tools">
+      <section class="panel" aria-labelledby="progress-heading">
+        <h2 id="progress-heading">Atrium Progress</h2>
+        <progress id="progress-bar" value="0" max="8">0 of 8 chambers complete</progress>
+        <p id="progress-text" class="progress-text">0 of 8 chambers complete</p>
+        <p id="lock-progress" class="quiet">0 of 16 knowledge locks solved</p>
+      </section>
+      <section class="panel panel-gold" aria-labelledby="fragment-heading">
+        <h2 id="fragment-heading">Ember Fragments</h2>
+        <ol id="fragment-rack" class="fragment-rack" aria-label="Collected code fragments"></ol>
+        <p class="quiet">Restore a chamber to illuminate its letter.</p>
+      </section>
+      <section class="panel panel-green" aria-labelledby="evidence-heading">
+        <h2 id="evidence-heading">Scientific Evidence</h2>
+        <ul id="inventory-list" class="inventory-list"><li>No evidence collected yet.</li></ul>
+      </section>
+      <section class="panel" aria-labelledby="achievement-heading">
+        <h2 id="achievement-heading">Discoveries</h2>
+        <ul id="achievement-list" class="achievement-list"><li>Your optional discoveries will appear here.</li></ul>
+      </section>
+      <section class="panel notebook" aria-labelledby="notebook-heading">
+        <h2 id="notebook-heading">Affective Science Notebook</h2>
+        <label for="observation-notes"><strong>Concept that changed or complicated your thinking</strong></label>
+        <textarea id="observation-notes" placeholder="Record a theory, biological signal, cultural factor, or connection..."></textarea>
+        <label for="transfer-notes"><strong>Safe real-world application</strong></label>
+        <textarea id="transfer-notes" placeholder="Apply a concept to studying, teamwork, sports, creativity, or another nonprivate example..."></textarea>
+        <p id="save-status" class="save-status" role="status">Notebook entries save automatically in this browser.</p>
+        <div class="notebook-actions">
+          <button id="download-notes" class="action-button" type="button">Download My Atrium Notes</button>
+          <button id="reset-progress" class="danger-button" type="button">Reset Week 10 Progress</button>
+        </div>
+        <div id="reset-box" class="reset-box" hidden>
+          <strong>Reset all Week 10 progress and notes?</strong>
+          <div class="control-row"><button id="confirm-reset" class="danger-button" type="button">Yes, Reset</button><button id="cancel-reset" class="action-button" type="button">Cancel</button></div>
+        </div>
+      </section>
+    </aside>
+  </div>
+
+  <section class="panel reading-panel" aria-labelledby="reading-heading">
+    <h2 id="reading-heading">Chapter 10 Reading Trail &amp; Credits</h2>
+    <p>These original activities paraphrase and apply concepts from OpenStax <em>Psychology 2e</em>, Chapter 10.</p>
+    <details>
+      <summary>Open the Chapter 10 reading trail</summary>
+      <ul>
+        <li><a href="https://openstax.org/books/psychology-2e/pages/10-1-motivation" target="_blank" rel="noopener">10.1 Motivation</a></li>
+        <li><a href="https://openstax.org/books/psychology-2e/pages/10-2-hunger-and-eating" target="_blank" rel="noopener">10.2 Hunger and Eating</a></li>
+        <li><a href="https://openstax.org/books/psychology-2e/pages/10-3-sexual-behavior-sexuality-and-gender-identity" target="_blank" rel="noopener">10.3 Sexual Behavior, Sexuality, and Gender Identity</a></li>
+        <li><a href="https://openstax.org/books/psychology-2e/pages/10-4-emotion" target="_blank" rel="noopener">10.4 Emotion</a></li>
+      </ul>
+    </details>
+    <p class="quiet">
+      Textbook reference: Spielman, R. M., Jenkins, W. J., &amp; Lovett, M. D. (2020). <em>Psychology 2e</em>. OpenStax.
+      Access for free at <a href="https://openstax.org/books/psychology-2e/pages/1-introduction" target="_blank" rel="noopener">OpenStax</a>.
+    </p>
+  </section>
+</main>
+
+<p id="mobile-progress" class="mobile-progress"><a href="#map-heading">0/8 chambers · 0/16 locks</a></p>
+
+<footer>
+  <div class="container footer-grid">
+    <div><h2>Psychology Academy · Week 10</h2><p>The Emberheart Atrium · Motivation and Emotion · Dr. Tonya Holdaway</p></div>
+    <div><p><a href="#top">Return to the top</a><br><a href="../index.html">Return to Psychology Academy</a></p></div>
+  </div>
+</footer>
+
+  <script>
+(() => {
+  "use strict";
+
+  const STORAGE_KEY = "psychologyMotivationEmotionWeek10_v1";
+  const COMPLETION_KEY = "psychologyAcademyWeek10Complete";
+  const AUDIO_SOURCE = "../assets/audio/asproductionmusic-ambient-guitar-589419.mp3";
+  const TOTAL_LOCKS = 16;
+  const $ = (id) => document.getElementById(id);
+
+  const rooms = [
+    {
+      id: "motive",
+      fragment: "M",
+      title: "The Motive Forge",
+      subtitle: "Mix intrinsic satisfaction with external incentives",
+      source: "10.1 Motivation",
+      sourceUrl: "https://openstax.org/books/psychology-2e/pages/10-1-motivation",
+      concepts: ["intrinsic motivation", "extrinsic motivation", "overjustification effect"],
+      evidence: "Motivation directs behavior toward goals. Intrinsic and extrinsic motives can coexist, and expected tangible rewards may sometimes reduce intrinsic interest.",
+      requiredActions: ["motive-mix", "motive-sort"]
+    },
+    {
+      id: "homeostasis",
+      fragment: "O",
+      title: "The Homeostasis Engine",
+      subtitle: "Watch imbalance create a drive toward restoration",
+      source: "10.1 Motivation",
+      sourceUrl: "https://openstax.org/books/psychology-2e/pages/10-1-motivation",
+      concepts: ["homeostasis", "physiological need", "drive-reduction theory"],
+      evidence: "Drive-reduction theory proposes that deviations from homeostasis create needs and drive states that energize behavior aimed at restoring balance.",
+      requiredActions: ["imbalance", "restore"]
+    },
+    {
+      id: "arousal",
+      fragment: "T",
+      title: "The Arousal Observatory",
+      subtitle: "Find the performance zone for simple and complex tasks",
+      source: "10.1 Motivation",
+      sourceUrl: "https://openstax.org/books/psychology-2e/pages/10-1-motivation",
+      concepts: ["arousal theory", "optimal arousal", "Yerkes–Dodson law"],
+      evidence: "Performance often peaks at an intermediate arousal level, but complex tasks generally reach their optimum at lower arousal than simpler tasks.",
+      requiredActions: ["arousal-slider", "task-mode"]
+    },
+    {
+      id: "needs",
+      fragment: "I",
+      title: "The Confidence & Needs Constellation",
+      subtitle: "Explore self-efficacy, social motives, and Maslow’s model",
+      source: "10.1 Motivation",
+      sourceUrl: "https://openstax.org/books/psychology-2e/pages/10-1-motivation",
+      concepts: ["self-efficacy", "social motives", "hierarchy of needs"],
+      evidence: "Beliefs about capability can influence persistence, and achievement, affiliation, and intimacy are social motives. Maslow’s hierarchy is influential but not a rigid universal law.",
+      requiredActions: ["needs-tier", "social-motive"]
+    },
+    {
+      id: "hunger",
+      fragment: "V",
+      title: "The Hunger Signal Kitchen",
+      subtitle: "Trace biological, social, cultural, and environmental information",
+      source: "10.2 Hunger and Eating",
+      sourceUrl: "https://openstax.org/books/psychology-2e/pages/10-2-hunger-and-eating",
+      concepts: ["hunger signals", "satiety", "hypothalamic integration"],
+      evidence: "Hunger and satiety emerge from interacting signals involving the stomach, blood glucose, gastrointestinal tract, fat cells, hypothalamus, and broader social and environmental contexts.",
+      requiredActions: ["meal-phase", "context-factor"]
+    },
+    {
+      id: "human",
+      fragment: "A",
+      title: "The Human Diversity Archive",
+      subtitle: "Study sexuality and gender concepts without personal disclosure",
+      source: "10.3 Sexual Behavior, Sexuality, and Gender Identity",
+      sourceUrl: "https://openstax.org/books/psychology-2e/pages/10-3-sexual-behavior-sexuality-and-gender-identity",
+      concepts: ["sexual orientation", "gender identity", "sexual response research"],
+      evidence: "Sexual orientation and gender identity are distinct concepts. Kinsey broadened scientific study of sexuality, while Masters and Johnson described a four-phase sexual response model that does not capture every person’s experience.",
+      requiredActions: ["archive-domain", "response-cycle"]
+    },
+    {
+      id: "theories",
+      fragment: "T",
+      title: "The Emotion Theory Theater",
+      subtitle: "Rearrange event, body, appraisal, label, and feeling",
+      source: "10.4 Emotion",
+      sourceUrl: "https://openstax.org/books/psychology-2e/pages/10-4-emotion",
+      concepts: ["James–Lange", "Cannon–Bard", "two-factor theory", "cognitive appraisal"],
+      evidence: "Emotion theories differ mainly in the proposed timing and roles of physiological arousal, conscious feeling, cognitive labels, and appraisal.",
+      requiredActions: ["theory-switch", "sequence-run"]
+    },
+    {
+      id: "expression",
+      fragment: "E",
+      title: "The Expression & Context Masquerade",
+      subtitle: "Combine face, body, brain, situation, and cultural display rules",
+      source: "10.4 Emotion",
+      sourceUrl: "https://openstax.org/books/psychology-2e/pages/10-4-emotion",
+      concepts: ["emotion components", "limbic system", "cultural display rules"],
+      evidence: "Emotions combine subjective experience, expression, appraisal, and physiology. Limbic structures contribute to processing, while context and cultural display rules shape expression and interpretation.",
+      requiredActions: ["face-context", "limbic-map"]
+    }
+  ];
+
+  const questions = [
+    [
+      { prompt: "Which example is primarily intrinsic motivation?", choices: ["Practicing a song because mastering it feels satisfying", "Practicing only to receive a cash prize", "Practicing because someone threatens a penalty"], correct: 0, explanation: "Intrinsic motivation comes from internal satisfaction or enjoyment associated with the activity." },
+      { prompt: "What does the overjustification effect describe?", choices: ["A drive caused by low blood glucose", "A possible reduction in intrinsic interest after expected external rewards are added", "A rise in performance at every arousal level"], correct: 1, explanation: "Expected tangible rewards can sometimes shift how an enjoyable activity is understood and reduce intrinsic motivation." }
+    ],
+    [
+      { prompt: "Homeostasis refers to…", choices: ["maintaining balance or an optimal level within a biological system", "seeking the highest possible arousal at all times", "performing behavior only for praise"], correct: 0, explanation: "Homeostasis is the tendency of a biological system to maintain balance or an optimal internal level." },
+      { prompt: "According to drive-reduction theory, a deviation from homeostasis first creates…", choices: ["a cultural display rule", "a physiological need and drive state", "self-actualization"], correct: 1, explanation: "A physiological need creates a drive state that can direct behavior toward restoring balance." }
+    ],
+    [
+      { prompt: "Which statement best reflects the Yerkes–Dodson law?", choices: ["Every task is best at exactly the same arousal level.", "Complex tasks often perform best at lower arousal than simple tasks.", "Performance always improves as arousal increases."], correct: 1, explanation: "Task difficulty matters: complex tasks generally have a lower optimal arousal level than simple tasks." },
+      { prompt: "Why can both very low and very high arousal reduce performance?", choices: ["Low arousal may bring under-engagement, while excessive arousal can disrupt attention and execution.", "Both states eliminate all motivation permanently.", "Arousal affects only physical tasks."], correct: 0, explanation: "Underarousal and overarousal can impair performance for different reasons; an intermediate zone is often most effective." }
+    ],
+    [
+      { prompt: "Self-efficacy is…", choices: ["belief in one’s capability to complete a task", "the lowest level of Maslow’s hierarchy", "an automatic facial expression"], correct: 0, explanation: "Self-efficacy is a belief about one’s capability, and it can influence challenge choice and persistence." },
+      { prompt: "Which is the most accurate way to use Maslow’s hierarchy?", choices: ["As a rigid law that every culture and person follows identically", "As an influential model of needs that also has important limitations and exceptions", "As proof that social needs never matter until every biological need is perfectly satisfied"], correct: 1, explanation: "Maslow’s hierarchy is a useful historical model, but it has been criticized for subjectivity and limited fit with real-world and cultural variation." }
+    ],
+    [
+      { prompt: "Where are hunger and satiety signals integrated?", choices: ["Only in the stomach", "In brain regions including the hypothalamus and hindbrain", "Only in the pancreas"], correct: 1, explanation: "The brain integrates information from several bodily systems; hypothalamic and hindbrain regions are especially important." },
+      { prompt: "Which statement best reflects the psychology of eating?", choices: ["Eating is controlled only by conscious willpower.", "Eating reflects interacting biological, social, cultural, and economic influences.", "Environmental cues cannot affect eating."], correct: 1, explanation: "The chapter emphasizes that physiological mechanisms interact with powerful social, cultural, and economic influences." }
+    ],
+    [
+      { prompt: "Which distinction is accurate?", choices: ["Sexual orientation concerns patterns of attraction; gender identity concerns one’s sense of gender.", "Sexual orientation and gender identity are two names for the same concept.", "Gender identity is determined by hobbies or clothing."], correct: 0, explanation: "Sexual orientation and gender identity are related aspects of human experience, but they are distinct concepts." },
+      { prompt: "Masters and Johnson are especially associated with research describing…", choices: ["the hierarchy of needs", "the four-phase sexual response cycle", "the Cannon–Bard theory"], correct: 1, explanation: "Their laboratory research described excitement, plateau, orgasm, and resolution, while later work has emphasized human variability." }
+    ],
+    [
+      { prompt: "Which theory proposes that physiological arousal and the conscious emotional experience occur simultaneously?", choices: ["James–Lange", "Cannon–Bard", "Drive-reduction theory"], correct: 1, explanation: "Cannon–Bard proposes simultaneous physiological arousal and emotional experience." },
+      { prompt: "Which theory emphasizes physiological arousal plus a cognitive label based on context?", choices: ["Schachter–Singer two-factor theory", "Instinct theory", "Maslow’s hierarchy"], correct: 0, explanation: "Two-factor theory combines physiological arousal with a cognitive interpretation or label to produce emotional experience." }
+    ],
+    [
+      { prompt: "A cultural display rule is…", choices: ["a fixed biological reflex identical in every setting", "a culturally influenced standard about when and how emotions are expressed", "a measure of metabolic rate"], correct: 1, explanation: "Display rules are culturally shaped standards that influence the types and frequency of emotional displays." },
+      { prompt: "Which statement best describes emotion?", choices: ["Emotion is only a facial expression.", "Emotion can combine subjective experience, expression, appraisal, and physiological response.", "Emotion and mood always mean exactly the same thing."], correct: 1, explanation: "Emotion is multidimensional; mood is typically less intense, longer lasting, and not necessarily tied to a specific event." }
+    ]
+  ];
+
+  const allActions = rooms.flatMap((room) => room.requiredActions);
+  const allRoomIds = rooms.map((room) => room.id);
+  const freshState = () => ({
+    version: 1,
+    completed: [], solved: [], actions: [], evidence: [], achievements: [],
+    notes: { observations: "", transfer: "" },
+    escaped: false, learner: "", motionPaused: false, lighting: "curious",
+    settings: { volume: .22 }
+  });
+
+  let storageAvailable = true;
+  let activeIndex = -1;
+  let currentTheory = "james";
+  let state = loadState();
+
+  function loadState() {
+    const base = freshState();
+    let parsed = null;
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      parsed = raw ? JSON.parse(raw) : null;
+    } catch (error) { storageAvailable = false; }
+    if (!parsed || typeof parsed !== "object") return base;
+    let completeFlag = false;
+    try { completeFlag = localStorage.getItem(COMPLETION_KEY) === "true"; } catch (error) { storageAvailable = false; }
+    return {
+      ...base,
+      completed: Array.isArray(parsed.completed) ? [...new Set(parsed.completed.filter((id) => allRoomIds.includes(id)))] : [],
+      solved: Array.isArray(parsed.solved) ? [...new Set(parsed.solved.filter((n) => Number.isInteger(n) && n >= 0 && n < TOTAL_LOCKS))] : [],
+      actions: Array.isArray(parsed.actions) ? [...new Set(parsed.actions.filter((id) => allActions.includes(id)))] : [],
+      evidence: Array.isArray(parsed.evidence) ? parsed.evidence.filter((item) => typeof item === "string") : [],
+      achievements: Array.isArray(parsed.achievements) ? parsed.achievements.filter((item) => typeof item === "string") : [],
+      notes: {
+        observations: parsed.notes && typeof parsed.notes.observations === "string" ? parsed.notes.observations : "",
+        transfer: parsed.notes && typeof parsed.notes.transfer === "string" ? parsed.notes.transfer : ""
+      },
+      escaped: parsed.escaped === true || completeFlag,
+      learner: typeof parsed.learner === "string" ? parsed.learner.slice(0, 60) : "",
+      motionPaused: parsed.motionPaused === true,
+      lighting: ["calm", "curious", "energized"].includes(parsed.lighting) ? parsed.lighting : "curious",
+      settings: { volume: Number.isFinite(parsed.settings && parsed.settings.volume) ? Math.min(1, Math.max(0, parsed.settings.volume)) : .22 }
+    };
+  }
+
+  function saveState(message = "Progress saved in this browser.") {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      if (state.escaped) localStorage.setItem(COMPLETION_KEY, "true");
+      storageAvailable = true;
+    } catch (error) { storageAvailable = false; }
+    if ($("save-status")) $("save-status").textContent = storageAvailable ? message : "This browser is blocking saved progress. Keep this tab open until you finish.";
+  }
+
+  function miniArt(index) {
+    const art = [
+      `<svg viewBox="0 0 260 82" aria-hidden="true"><circle cx="130" cy="41" r="25" fill="#f0a45d"/><path class="mini-wave" d="M10 41h82M168 41h82"/><text x="112" y="46" fill="#2d2140" font-size="14" font-weight="bold">WHY?</text><text x="16" y="25" fill="#8fe0d7" font-size="11">within</text><text x="209" y="25" fill="#ffd77a" font-size="11">outside</text></svg>`,
+      `<svg viewBox="0 0 260 82" aria-hidden="true"><circle class="mini-orbit" cx="130" cy="41" r="30" fill="none" stroke="#e9bc61" stroke-width="8" stroke-dasharray="35 12"/><circle cx="130" cy="41" r="11" fill="#f07f72"/><path d="M20 41h67M173 41h67" stroke="#78d0c7" stroke-width="3"/></svg>`,
+      `<svg viewBox="0 0 260 82" aria-hidden="true"><path d="M18 68Q130-62 242 68" fill="none" stroke="#f0bd62" stroke-width="5"/><circle class="mini-float" cx="130" cy="10" r="9" fill="#fff3a4"/><path d="M15 69h230" stroke="#8fb0ba"/></svg>`,
+      `<svg viewBox="0 0 260 82" aria-hidden="true"><path d="M58 67h144L178 50H82zm28-23h88l-20-17H106zm24-23h40L130 7z" fill="#a176b9" stroke="#e9ca70" stroke-width="2"/><g fill="#80d2c9"><circle cx="43" cy="25" r="5"/><circle cx="218" cy="48" r="5"/><circle cx="222" cy="18" r="4"/></g></svg>`,
+      `<svg viewBox="0 0 260 82" aria-hidden="true"><path d="M112 26c-31 3-33 47-4 50 32 3 30-24 48-28 20-5 20-29-2-34-17-4-25 10-42 12z" fill="#bb8bc9" stroke="#f0cf78" stroke-width="2"/><path class="mini-wave" d="M6 41h62M177 41h76"/><circle cx="61" cy="41" r="8" fill="#f08a70"/><circle cx="189" cy="41" r="8" fill="#75d2c8"/></svg>`,
+      `<svg viewBox="0 0 260 82" aria-hidden="true"><rect x="99" y="10" width="62" height="62" transform="rotate(45 130 41)" fill="#b36082aa" stroke="#f2ce76" stroke-width="2"/><g fill="#83d5cd"><circle cx="36" cy="41" r="7"/><circle cx="224" cy="41" r="7"/></g><path d="M44 41h48M168 41h48" stroke="#e9c66d" stroke-dasharray="5 5"/></svg>`,
+      `<svg viewBox="0 0 260 82" aria-hidden="true"><rect x="10" y="25" width="55" height="34" rx="8" fill="#456680"/><rect x="102" y="8" width="55" height="34" rx="8" fill="#9c4d6c"/><rect x="195" y="25" width="55" height="34" rx="8" fill="#4a6d77"/><path d="M65 42h34m58-17l35 17" stroke="#e8c76f" stroke-width="3"/><text x="25" y="47" fill="#fff" font-size="10">EVENT</text><text x="116" y="29" fill="#fff" font-size="10">BODY</text><text x="205" y="47" fill="#fff" font-size="10">FEEL</text></svg>`,
+      `<svg viewBox="0 0 260 82" aria-hidden="true"><circle cx="130" cy="41" r="31" fill="#efb68c" stroke="#e7c76e" stroke-width="2"/><circle cx="118" cy="34" r="4"/><circle cx="142" cy="34" r="4"/><path d="M112 55q18-14 36 0" fill="none" stroke="#8c405a" stroke-width="4"/><path class="mini-wave" d="M9 69h242"/><circle class="mini-orbit" cx="130" cy="41" r="40" fill="none" stroke="#81d4ca" stroke-dasharray="3 7"/></svg>`
+    ];
+    return art[index];
+  }
+
+  function renderMap() {
+    $("room-grid").innerHTML = rooms.map((room, index) => {
+      const complete = state.completed.includes(room.id);
+      return `<button id="room-${index}" class="map-button${complete ? " complete" : ""}" type="button" data-room="${index}" aria-pressed="${index === activeIndex}">
+        <span class="map-art">${miniArt(index)}</span><span class="map-title">${index + 1}. ${room.title}</span>
+        <span class="map-subtitle">${room.subtitle}</span><span class="map-status">${complete ? `Complete · Fragment ${room.fragment}` : actionSummary(room)}</span>
+      </button>`;
+    }).join("");
+    document.querySelectorAll("[data-room]").forEach((button) => {
+      button.addEventListener("click", () => openRoom(Number(button.dataset.room)));
+      button.addEventListener("pointermove", (event) => {
+        if (reduceMotion()) return;
+        const rect = button.getBoundingClientRect();
+        button.style.setProperty("--tilt-x", `${(((event.clientX - rect.left) / rect.width) - .5) * 5}deg`);
+        button.style.setProperty("--tilt-y", `${(((event.clientY - rect.top) / rect.height) - .5) * -5}deg`);
+      });
+      button.addEventListener("pointerleave", () => { button.style.removeProperty("--tilt-x"); button.style.removeProperty("--tilt-y"); });
+    });
+  }
+
+  function actionSummary(room) {
+    const done = room.requiredActions.filter((action) => state.actions.includes(action)).length;
+    return done ? `${done}/${room.requiredActions.length} instruments explored` : "Ready to investigate";
+  }
+
+  function roomHeader(index, instructions, labMarkup) {
+    const room = rooms[index];
+    return `<article class="activity-card" aria-labelledby="room-heading-${index}">
+      <div class="room-heading"><div><span class="room-number">Chamber ${index + 1} of 8 · Fragment ${room.fragment}</span><h2 id="room-heading-${index}">${room.title}</h2><p>${room.subtitle}</p></div><span class="chapter-tag">OpenStax connection: <a href="${room.sourceUrl}" target="_blank" rel="noopener">${room.source}</a></span></div>
+      <div class="concept-strip">${room.concepts.map((concept) => `<span>${concept}</span>`).join("")}</div>
+      <p class="activity-instructions"><strong>Investigate:</strong> ${instructions}</p>${labMarkup}
+      <p id="explore-status-${index}" class="exploration-check">${explorationStatus(index)}</p>
+      <section class="lock-zone" aria-labelledby="lock-heading-${index}"><h3 id="lock-heading-${index}">Knowledge Locks</h3><p>Solve both locks. A missed answer gives you a hint and never lowers a score.</p><div id="questions-${index}"></div></section>
+      <div id="clue-holder-${index}">${state.completed.includes(room.id) ? clueMarkup(index) : ""}</div>
+      <div id="room-nav-${index}">${roomNavigationMarkup(index)}</div>
+    </article>`;
+  }
+
+  function explorationStatus(index) {
+    const room = rooms[index];
+    const done = room.requiredActions.filter((action) => state.actions.includes(action)).length;
+    return done === room.requiredActions.length ? "✓ Interactive investigation complete. Now solve both knowledge locks." : `Interactive investigation: ${done} of ${room.requiredActions.length} instruments explored.`;
+  }
+
+  function clueMarkup(index) {
+    const room = rooms[index];
+    return `<div class="clue-card" role="status"><span class="fragment-reveal" aria-hidden="true">${room.fragment}</span><strong>Chamber restored!</strong><br>${room.evidence}</div>`;
+  }
+
+  function roomNavigationMarkup(index) {
+    const currentComplete = state.completed.includes(rooms[index].id);
+    const last = index === rooms.length - 1;
+    let title, text, primary;
+    if (!last) {
+      title = `Next: Chamber ${index + 2} · ${rooms[index + 1].title}`;
+      text = currentComplete ? `Fragment ${rooms[index].fragment} is secure. Continue directly to the next chamber.` : "You may continue now and return later; unfinished work remains saved.";
+      primary = `<button class="route-button primary-route" type="button" data-next-room="${index + 1}">Continue to Next Chamber →</button>`;
+    } else if (state.completed.length === rooms.length) {
+      title = "All eight chambers are restored";
+      text = "Your MOTIVATE fragments are ready. Continue directly to the final integration.";
+      primary = `<button class="route-button primary-route final-route" type="button" data-final-route>Enter the Final Integration ✦</button>`;
+    } else {
+      const remaining = rooms.length - state.completed.length;
+      title = `${remaining} chamber${remaining === 1 ? " remains" : "s remain"}`;
+      text = "Return to the map to revisit a chamber that still needs an instrument or knowledge lock.";
+      primary = `<button class="route-button primary-route" type="button" data-map-route>Find My Remaining Chamber</button>`;
+    }
+    return `<nav class="room-nav${currentComplete ? " route-ready" : ""}" aria-label="Atrium route controls"><div><span class="room-nav-label">Your Route Forward</span><strong>${title}</strong><p>${text}</p></div><div class="room-nav-actions">${index > 0 ? `<button class="route-button" type="button" data-previous-room="${index - 1}">← Previous Chamber</button>` : ""}<button class="route-button" type="button" data-map-route>Atrium Map</button>${primary}</div></nav>`;
+  }
+
+  function wireRoomNavigation(index) {
+    const container = $(`room-nav-${index}`);
+    if (!container) return;
+    container.querySelectorAll("[data-next-room]").forEach((button) => button.addEventListener("click", () => openRoom(Number(button.dataset.nextRoom))));
+    container.querySelectorAll("[data-previous-room]").forEach((button) => button.addEventListener("click", () => openRoom(Number(button.dataset.previousRoom))));
+    container.querySelectorAll("[data-map-route]").forEach((button) => button.addEventListener("click", () => focusAndScroll("map-heading")));
+    container.querySelectorAll("[data-final-route]").forEach((button) => button.addEventListener("click", () => focusAndScroll("final-heading")));
+  }
+
+  function focusAndScroll(id) {
+    const target = $(id);
+    target.setAttribute("tabindex", "-1");
+    target.focus({ preventScroll: true });
+    target.scrollIntoView({ behavior: reduceMotion() ? "auto" : "smooth", block: "start" });
+  }
+
+  function openRoom(index) {
+    activeIndex = index;
+    renderMap();
+    const renderers = [renderMotive, renderHomeostasis, renderArousal, renderNeeds, renderHunger, renderHuman, renderTheories, renderExpression];
+    renderers[index]();
+    renderQuestions(index);
+    wireRoomNavigation(index);
+    focusAndScroll(`room-heading-${index}`);
+  }
+
+  function renderMotive() {
+    const lab = `<section class="lab-scene" aria-labelledby="motive-lab-heading"><h3 id="motive-lab-heading">The Two-Source Motive Forge</h3><p>Intrinsic and extrinsic motives are not opposite ends of one fixed scale. Adjust them independently and watch the goal orb respond to their changing mix.</p>
+      <div id="motive-forge" class="motive-forge" style="--motive-position:50;--motive-rotate:0deg" aria-hidden="true"><span class="motive-source left">INTRINSIC<br><small>interest · satisfaction</small></span><span class="motive-source right">EXTRINSIC<br><small>reward · consequence</small></span><i class="motive-beam left"></i><i class="motive-beam right"></i><div class="motive-orb"></div><div class="motive-platform"></div></div>
+      <div class="range-grid"><div class="range-card"><label for="intrinsic-level">Intrinsic energy: <output id="intrinsic-output">65</output>%</label><input id="intrinsic-level" type="range" min="0" max="100" value="65"></div><div class="range-card"><label for="extrinsic-level">Extrinsic energy: <output id="extrinsic-output">45</output>%</label><input id="extrinsic-level" type="range" min="0" max="100" value="45"></div></div>
+      <div id="motive-caption" class="scene-caption">A student can enjoy learning and also value a grade, credential, or other outcome. Motives often mix and change over time.</div></section>
+      <section class="lab-scene" aria-labelledby="motive-sort-heading"><h3 id="motive-sort-heading">Reveal the Dominant Motive</h3><div class="choice-grid"><button class="motive-example" type="button" data-motive-example="intrinsic"><strong>Creative practice</strong><br>Jordan experiments with animation because discovering a new technique feels rewarding.</button><button class="motive-example" type="button" data-motive-example="extrinsic"><strong>Required training</strong><br>Casey completes a module primarily to earn a workplace certificate.</button><button class="motive-example" type="button" data-motive-example="mixed"><strong>College project</strong><br>Riley enjoys the topic and also wants a strong course grade.</button></div><div id="motive-example-caption" class="scene-caption">Select an example to reveal the strongest source—or mixture—of motivation.</div></section>`;
+    $("active-area").innerHTML = roomHeader(0, "Adjust both motive sources, then examine at least one realistic example. Avoid treating motivation as a single either/or category.", lab);
+    const update = () => {
+      const intrinsic = Number($("intrinsic-level").value), extrinsic = Number($("extrinsic-level").value);
+      $("intrinsic-output").value = intrinsic; $("extrinsic-output").value = extrinsic;
+      $("motive-forge").style.setProperty("--motive-position", 50 + (extrinsic - intrinsic) * .33);
+      $("motive-forge").style.setProperty("--motive-rotate", `${(extrinsic - intrinsic) * 1.6}deg`);
+      $("motive-caption").textContent = intrinsic > extrinsic + 20 ? "Intrinsic energy is strongest in this mix: enjoyment, interest, or satisfaction is doing more of the motivational work." : extrinsic > intrinsic + 20 ? "Extrinsic energy is strongest in this mix: an external outcome or consequence is doing more of the motivational work." : "Both sources are active. Many real behaviors reflect mixed motives rather than one pure cause.";
+      $("motive-caption").classList.add("success"); recordAction("motive-mix", 0);
+    };
+    $("intrinsic-level").addEventListener("input", update); $("extrinsic-level").addEventListener("input", update);
+    document.querySelectorAll("[data-motive-example]").forEach((button) => button.addEventListener("click", () => {
+      const type = button.dataset.motiveExample;
+      const explanations = { intrinsic: "The activity itself supplies satisfaction, making intrinsic motivation most evident.", extrinsic: "The certificate is an external outcome, making extrinsic motivation most evident.", mixed: "Enjoyment and a desired grade operate together. Acknowledging mixed motives is often the most accurate explanation." };
+      $("motive-example-caption").textContent = explanations[type]; $("motive-example-caption").classList.add("success"); recordAction("motive-sort", 0);
+    }));
+  }
+
+  function renderHomeostasis() {
+    const lab = `<section class="lab-scene" aria-labelledby="homeostasis-heading"><h3 id="homeostasis-heading">The Balance Regulator</h3><p>Move the system away from its set range. The farther it moves, the stronger the modeled drive signal becomes.</p>
+      <div id="homeostasis-engine" class="homeostasis-engine" style="--balance-tilt:0deg;--drive-x:50%;--drive-glow:8px" aria-hidden="true"><div class="setpoint-line"></div><div class="balance-ring"></div><div class="drive-spark"></div><span class="engine-label low">deficit</span><span class="engine-label mid">balanced range</span><span class="engine-label high">surplus</span></div>
+      <div class="range-card"><label for="balance-level">Distance from balance: <output id="balance-output">0</output></label><input id="balance-level" type="range" min="-100" max="100" value="0"><div class="meter"><span id="drive-meter" style="--meter:0%"></span></div></div>
+      <div class="control-row"><button id="restore-balance" class="action-button primary" type="button">Activate Restorative Behavior</button></div><div id="homeostasis-caption" class="scene-caption">At the modeled set range, the drive signal is low.</div></section>`;
+    $("active-area").innerHTML = roomHeader(1, "Create an imbalance, observe the drive signal, and then activate a behavior that restores the modeled system toward homeostasis.", lab);
+    const update = (mark = true) => {
+      const value = Number($("balance-level").value), magnitude = Math.abs(value);
+      $("balance-output").value = value; $("homeostasis-engine").style.setProperty("--balance-tilt", `${value * .16}deg`); $("homeostasis-engine").style.setProperty("--drive-x", `${50 + value * .34}%`); $("homeostasis-engine").style.setProperty("--drive-glow", `${8 + magnitude * .3}px`); $("drive-meter").style.setProperty("--meter", `${magnitude}%`);
+      $("homeostasis-caption").textContent = magnitude < 12 ? "The system is near its balanced range, so the modeled drive signal is low." : `A ${value < 0 ? "deficit" : "surplus"} creates a need signal. Drive-reduction theory predicts behavior directed toward restoring balance.`;
+      if (mark) recordAction("imbalance", 1);
+    };
+    $("balance-level").addEventListener("input", () => update(true));
+    $("restore-balance").addEventListener("click", () => {
+      $("balance-level").value = "0"; update(false); $("homeostasis-caption").textContent = "Restorative behavior reduced the modeled drive and returned the system toward homeostasis. Habits can shape which restoring behavior is chosen."; $("homeostasis-caption").classList.add("success"); recordAction("restore", 1);
+    });
+  }
+
+  function renderArousal() {
+    const lab = `<section class="lab-scene" aria-labelledby="arousal-heading"><h3 id="arousal-heading">The Adjustable Performance Sky</h3><p>Choose a task and move the arousal level. The glowing orb shows predicted performance on an inverted-U curve.</p>
+      <div class="control-row" role="group" aria-label="Task complexity"><button class="tab-button" data-task="simple" type="button" aria-pressed="false">Simple, Practiced Task</button><button class="tab-button" data-task="complex" type="button" aria-pressed="true">Complex, Unfamiliar Task</button></div>
+      <div class="arousal-stage"><svg viewBox="0 0 700 310" role="img" aria-labelledby="arousal-title"><title id="arousal-title">Performance as an inverted-U function of arousal</title><rect class="zone-low" x="60" y="20" width="190" height="235"/><rect class="zone-optimal" x="250" y="20" width="210" height="235"/><rect class="zone-high" x="460" y="20" width="185" height="235"/><path class="arousal-axis" d="M60 20v235h585"/><path id="arousal-curve" class="arousal-curve" d=""/><circle id="performance-orb" class="performance-orb" cx="300" cy="100" r="12"/><text class="chart-label" x="70" y="285">low arousal</text><text class="chart-label" x="300" y="285">moderate</text><text class="chart-label" x="545" y="285">high arousal</text><text class="chart-label" x="75" y="43">performance</text></svg></div>
+      <label for="arousal-level"><strong>Arousal level: <output id="arousal-output">45</output>%</strong></label><input id="arousal-level" type="range" min="0" max="100" value="45"><div id="arousal-caption" class="scene-caption">A complex task often reaches its best performance at a lower arousal level.</div></section>`;
+    $("active-area").innerHTML = roomHeader(2, "Compare a practiced task with a complex one. Find each task’s peak rather than assuming that more arousal is always better.", lab);
+    let task = "complex";
+    const makeCurve = () => {
+      const peak = task === "complex" ? 40 : 65, width = task === "complex" ? 42 : 56, points = [];
+      for (let v = 0; v <= 100; v += 2) { const perf = Math.max(5, 100 - Math.pow((v - peak) / width, 2) * 90); const x = 60 + v * 5.85, y = 255 - perf * 2.15; points.push(`${v === 0 ? "M" : "L"}${x.toFixed(1)} ${y.toFixed(1)}`); }
+      $("arousal-curve").setAttribute("d", points.join(" "));
+    };
+    const update = (mark = true) => {
+      const value = Number($("arousal-level").value), peak = task === "complex" ? 40 : 65, width = task === "complex" ? 42 : 56, perf = Math.max(5, 100 - Math.pow((value - peak) / width, 2) * 90);
+      $("arousal-output").value = value; $("performance-orb").setAttribute("cx", String(60 + value * 5.85)); $("performance-orb").setAttribute("cy", String(255 - perf * 2.15));
+      const zone = Math.abs(value - peak) <= 13 ? "near the predicted optimal zone" : value < peak ? "below the predicted optimum, where under-engagement may limit performance" : "above the predicted optimum, where excessive arousal may disrupt performance";
+      $("arousal-caption").textContent = `For this ${task} task, ${value}% arousal is ${zone}. Predicted performance: ${Math.round(perf)}%.`;
+      if (mark) recordAction("arousal-slider", 2);
+    };
+    document.querySelectorAll("[data-task]").forEach((button) => button.addEventListener("click", () => { task = button.dataset.task; document.querySelectorAll("[data-task]").forEach((item) => item.setAttribute("aria-pressed", String(item === button))); makeCurve(); update(false); recordAction("task-mode", 2); }));
+    $("arousal-level").addEventListener("input", () => update(true)); makeCurve(); update(false);
+  }
+
+  function renderNeeds() {
+    const tiers = [
+      ["physiological", "Physiological", "Food, water, shelter, and other survival-related needs form the model’s base.", "310px", "0px", "0px", "rgba(92,181,169,.82)"],
+      ["safety", "Safety", "Security and stability appear above physiological needs in Maslow’s model.", "265px", "45px", "8px", "rgba(81,132,167,.82)"],
+      ["belonging", "Love & Belonging", "Affiliation, relationships, and belonging represent powerful social needs.", "220px", "90px", "16px", "rgba(130,99,177,.82)"],
+      ["esteem", "Esteem", "Confidence, recognition, accomplishment, and self-worth form the esteem tier.", "175px", "135px", "24px", "rgba(190,85,121,.82)"],
+      ["actualization", "Self-Actualization", "Maslow described self-actualization as an ongoing pursuit of one’s potential.", "130px", "180px", "32px", "rgba(230,159,72,.85)"]
+    ];
+    const lab = `<section class="lab-scene" aria-labelledby="needs-heading"><h3 id="needs-heading">The Floating Hierarchy</h3><p>Select each tier to inspect the model. Remember: the tower is a theory, not a required life sequence.</p><div id="needs-stage" class="needs-stage"><div id="needs-tower" class="needs-tower">${tiers.map((tier) => `<button class="need-tier" type="button" data-need="${tier[0]}" style="--tier-width:${tier[3]};--tier-bottom:${tier[4]};--tier-z:${tier[5]};--tier-color:${tier[6]}">${tier[1]}</button>`).join("")}</div></div><div id="needs-caption" class="scene-caption">Maslow proposed movement from physiological needs toward self-actualization, but real people may pursue several needs at once or prioritize them differently.</div></section>
+      <section class="lab-scene" aria-labelledby="constellation-heading"><h3 id="constellation-heading">Self-Belief & Social Motives Constellation</h3><div class="constellation-field"><button class="motive-star" data-social="efficacy" type="button" aria-pressed="false"><span class="star-symbol">✦</span><strong>Self-Efficacy</strong><br><span class="quiet">“I can carry out this task.”</span></button><button class="motive-star" data-social="achievement" type="button" aria-pressed="false"><span class="star-symbol">✧</span><strong>Achievement</strong><br><span class="quiet">Accomplishment and performance</span></button><button class="motive-star" data-social="affiliation" type="button" aria-pressed="false"><span class="star-symbol">✦</span><strong>Affiliation</strong><br><span class="quiet">Positive interaction and belonging</span></button></div><div id="social-caption" class="scene-caption">Select a star to see how beliefs and social motives can energize behavior.</div></section>`;
+    $("active-area").innerHTML = roomHeader(3, "Inspect one tier of Maslow’s model and one self-belief or social motive. Then evaluate the model without treating it as a universal staircase.", lab);
+    const needText = Object.fromEntries(tiers.map((tier) => [tier[0], tier[2]]));
+    document.querySelectorAll("[data-need]").forEach((button) => button.addEventListener("click", () => { document.querySelectorAll("[data-need]").forEach((item) => item.classList.toggle("active", item === button)); $("needs-caption").textContent = `${needText[button.dataset.need]} The hierarchy is influential, but it has been criticized for subjectivity and limited fit with cultural and real-world variation.`; $("needs-caption").classList.add("success"); recordAction("needs-tier", 3); }));
+    const socialText = { efficacy: "Self-efficacy is a belief in one’s capability. Stronger task-specific efficacy can support persistence after setbacks.", achievement: "The need for achievement directs attention toward accomplishment and performance.", affiliation: "The need for affiliation encourages positive interactions and a sense of connection with others." };
+    document.querySelectorAll("[data-social]").forEach((button) => button.addEventListener("click", () => { document.querySelectorAll("[data-social]").forEach((item) => item.setAttribute("aria-pressed", String(item === button))); $("social-caption").textContent = socialText[button.dataset.social]; $("social-caption").classList.add("success"); recordAction("social-motive", 3); }));
+  }
+
+  function renderHunger() {
+    const lab = `<section class="lab-scene" aria-labelledby="hunger-heading"><h3 id="hunger-heading">The Body-to-Brain Signal Network</h3><p>Select a point in a neutral meal timeline. Watch different hunger or satiety information reach the brain.</p><div id="hunger-network" class="hunger-network"><svg viewBox="0 0 700 330" role="img" aria-labelledby="hunger-title"><title id="hunger-title">Signals from the stomach, gastrointestinal tract, pancreas, liver, and fat tissue converge on the brain</title><path class="signal-line" d="M110 247C200 207 252 93 346 76"/><path class="signal-line" d="M252 250C279 199 309 115 352 78"/><path class="signal-line satiety-line" d="M441 247C408 190 390 118 360 79"/><path class="signal-line satiety-line" d="M579 239C488 190 447 112 367 76"/><g id="node-brain" class="body-node"><path d="M304 52c-14-34 36-50 56-25 28-21 67 12 48 40 27 25-10 64-39 45-20 27-64 8-54-24-24-4-27-29-11-36z" fill="#b98bca" stroke="#efd17a" stroke-width="3"/><circle cx="356" cy="72" r="10" fill="#ef8a70"/><text class="signal-label" x="310" y="134">hypothalamus &amp; hindbrain</text></g><g id="node-stomach" class="body-node"><path d="M79 197c-7 54 14 93 61 78 50-16 45-78 13-98-16-10-22 18-31 12-15-10-12-32-12-49" fill="#e99a7b" stroke="#ffe0a0" stroke-width="3"/><text class="signal-label" x="62" y="305">stomach</text></g><g id="node-glucose" class="body-node"><circle cx="254" cy="252" r="37" fill="#d6a356" stroke="#ffe2a0" stroke-width="3"/><path d="M234 252h40M254 232v40" stroke="#fff4d5" stroke-width="6"/><text class="signal-label" x="194" y="305">glucose · pancreas · liver</text></g><g id="node-gi" class="body-node"><path d="M418 222c45-35 88 28 41 43-43 14-39-28-8-27 23 1 27 29 6 42" fill="none" stroke="#75d0c6" stroke-width="13" stroke-linecap="round"/><text class="signal-label" x="402" y="305">gastrointestinal tract</text></g><g id="node-leptin" class="body-node"><circle cx="580" cy="240" r="38" fill="#cb7391" stroke="#ffe0a0" stroke-width="3"/><text x="553" y="247" fill="#fff" font-size="14" font-weight="bold">LEPTIN</text><text class="signal-label" x="548" y="305">fat cells</text></g></svg></div><div class="meal-dial"><button class="meal-phase" data-meal="before" type="button" aria-pressed="false"><strong>Before Eating</strong><br><span class="quiet">hunger-related signals</span></button><button class="meal-phase" data-meal="begin" type="button" aria-pressed="false"><strong>Beginning</strong><br><span class="quiet">sensory and learned cues</span></button><button class="meal-phase" data-meal="after" type="button" aria-pressed="false"><strong>After Eating</strong><br><span class="quiet">GI and glucose signals</span></button><button class="meal-phase" data-meal="long" type="button" aria-pressed="false"><strong>Longer-Term</strong><br><span class="quiet">stored-energy signals</span></button></div><div id="hunger-caption" class="scene-caption">Hunger is not a single stomach switch. The brain integrates changing information from several systems.</div></section>
+      <section class="lab-scene" aria-labelledby="context-factor-heading"><h3 id="context-factor-heading">The Biopsychosocial Table</h3><div class="choice-grid"><button class="archive-card" data-hunger-context="biological" type="button" aria-pressed="false"><strong>Biological</strong><br>Physiology, hormones, glucose, and neural integration</button><button class="archive-card" data-hunger-context="social" type="button" aria-pressed="false"><strong>Social &amp; Cultural</strong><br>Customs, shared meals, availability, and learned expectations</button><button class="archive-card" data-hunger-context="environment" type="button" aria-pressed="false"><strong>Economic &amp; Environmental</strong><br>Access, cost, time, marketing, and surroundings</button></div><div id="hunger-context-caption" class="scene-caption">Select a domain. A complete explanation of eating behavior avoids reducing it to willpower.</div><p class="protective-note"><strong>Learning note:</strong> Bodies, health, and eating experiences vary. This activity teaches regulation and context without rating bodies or asking students to report personal eating information.</p></section>`;
+    $("active-area").innerHTML = roomHeader(4, "Move through one point in the signal timeline and examine one contextual domain. Build a multi-cause explanation rather than a willpower-only story.", lab);
+    const phaseData = {
+      before: [["node-stomach", "node-glucose"], "An empty stomach may contract, and lower blood glucose contributes chemical information associated with hunger."],
+      begin: [["node-brain", "node-stomach"], "Sensory cues, learning, expectation, and bodily signals can all contribute as eating begins."],
+      after: [["node-gi", "node-glucose", "node-brain"], "Rising glucose and signals from food moving through the gastrointestinal tract contribute to satiation."],
+      long: [["node-leptin", "node-brain"], "Fat cells release leptin, one longer-term satiety-related signal among several sources of information integrated by the brain."]
+    };
+    document.querySelectorAll("[data-meal]").forEach((button) => button.addEventListener("click", () => { document.querySelectorAll("[data-meal]").forEach((item) => item.setAttribute("aria-pressed", String(item === button))); document.querySelectorAll(".body-node").forEach((node) => node.classList.remove("active")); phaseData[button.dataset.meal][0].forEach((id) => $(id).classList.add("active")); $("hunger-caption").textContent = phaseData[button.dataset.meal][1]; $("hunger-caption").classList.add("success"); recordAction("meal-phase", 4); }));
+    const contextData = { biological: "Biological systems supply essential information, but no single hormone or organ explains eating by itself.", social: "Culture and social learning influence what, when, how, and with whom people eat.", environment: "Economic and environmental conditions shape available choices; behavior cannot be separated from access and context." };
+    document.querySelectorAll("[data-hunger-context]").forEach((button) => button.addEventListener("click", () => { document.querySelectorAll("[data-hunger-context]").forEach((item) => item.setAttribute("aria-pressed", String(item === button))); $("hunger-context-caption").textContent = contextData[button.dataset.hungerContext]; $("hunger-context-caption").classList.add("success"); recordAction("context-factor", 4); }));
+  }
+
+  function renderHuman() {
+    const lab = `<section class="lab-scene" aria-labelledby="archive-heading"><h3 id="archive-heading">The Concepts-Are-Not-Interchangeable Prism</h3><p>This scientific archive asks about definitions, not your identity or experience. Select a concept to keep related ideas distinct.</p><div class="archive-stage" aria-hidden="true"><div class="identity-prism"></div><div class="archive-orbit" style="--orbit-size:230px;--orbit-angle:18deg"><span>identity</span></div><div class="archive-orbit" style="--orbit-size:285px;--orbit-angle:-22deg"><span>orientation</span></div></div><div class="archive-card-grid"><button class="archive-card" data-archive="orientation" type="button" aria-pressed="false"><strong>Sexual Orientation</strong><br><span class="quiet">Patterns of emotional, romantic, and/or sexual attraction</span></button><button class="archive-card" data-archive="gender" type="button" aria-pressed="false"><strong>Gender Identity</strong><br><span class="quiet">A person’s internal sense of gender</span></button><button class="archive-card" data-archive="expression" type="button" aria-pressed="false"><strong>Gender Expression</strong><br><span class="quiet">Ways gender may be communicated or presented</span></button><button class="archive-card" data-archive="behavior" type="button" aria-pressed="false"><strong>Sexual Behavior</strong><br><span class="quiet">Behavior is not automatically identical to identity or orientation</span></button></div><div id="archive-caption" class="scene-caption">Related concepts should not be collapsed into one category. Terminology can also change across individuals, cultures, and time.</div></section>
+      <section class="lab-scene" aria-labelledby="cycle-heading"><h3 id="cycle-heading">Research History: The Four-Phase Model</h3><p>Masters and Johnson described a cycle of physiological sexual response. Select a phase to examine the historical model while remembering that real experiences vary.</p><div class="response-cycle" aria-hidden="true"><span class="cycle-label one">plateau</span><span class="cycle-label two">orgasm</span><span class="cycle-label three">resolution</span><span class="cycle-label four">excitement</span></div><div class="control-row"><button class="tab-button" data-cycle="excitement" type="button">Excitement</button><button class="tab-button" data-cycle="plateau" type="button">Plateau</button><button class="tab-button" data-cycle="orgasm" type="button">Orgasm</button><button class="tab-button" data-cycle="resolution" type="button">Resolution</button></div><div id="cycle-caption" class="scene-caption">This model was an important research contribution, but it is descriptive—not a required sequence or measure of a person.</div><p class="protective-note"><strong>Privacy reminder:</strong> You are learning research terminology. No personal disclosure is requested or expected.</p></section>`;
+    $("active-area").innerHTML = roomHeader(5, "Inspect one concept in the diversity archive and one phase of the historical response-cycle model. Use precise, respectful language throughout.", lab);
+    const archiveData = { orientation: "Sexual orientation describes patterns of emotional, romantic, and/or sexual attraction toward other people or no people.", gender: "Gender identity refers to a person’s internal sense of being a particular gender, multiple genders, or no gender.", expression: "Gender expression concerns outward communication or presentation and should not be used to assume identity or orientation.", behavior: "Behavior, identity, and attraction are analytically distinct. One should not be treated as automatic proof of another." };
+    document.querySelectorAll("[data-archive]").forEach((button) => button.addEventListener("click", () => { document.querySelectorAll("[data-archive]").forEach((item) => item.setAttribute("aria-pressed", String(item === button))); $("archive-caption").textContent = archiveData[button.dataset.archive]; $("archive-caption").classList.add("success"); recordAction("archive-domain", 5); }));
+    const cycleData = { excitement: "Excitement: the model describes an initial increase in physiological sexual arousal.", plateau: "Plateau: arousal remains elevated and may intensify.", orgasm: "Orgasm: the model describes a brief peak in physiological response.", resolution: "Resolution: physiological arousal declines toward baseline; timing and patterns vary among individuals." };
+    document.querySelectorAll("[data-cycle]").forEach((button) => button.addEventListener("click", () => { document.querySelectorAll("[data-cycle]").forEach((item) => item.setAttribute("aria-pressed", String(item === button))); $("cycle-caption").textContent = `${cycleData[button.dataset.cycle]} This historical model does not define a required experience.`; $("cycle-caption").classList.add("success"); recordAction("response-cycle", 5); }));
+  }
+
+  function renderTheories() {
+    const lab = `<section class="lab-scene" aria-labelledby="theory-heading"><h3 id="theory-heading">The Four-Director Emotion Theater</h3><p>A safe event—receiving an unexpected invitation to display artwork—stays constant. Each theory directs the body, appraisal, label, and feeling in a different order.</p><div class="control-row" role="group" aria-label="Emotion theory"><button class="tab-button" data-theory="james" type="button" aria-pressed="true">James–Lange</button><button class="tab-button" data-theory="cannon" type="button" aria-pressed="false">Cannon–Bard</button><button class="tab-button" data-theory="twofactor" type="button" aria-pressed="false">Two-Factor</button><button class="tab-button" data-theory="lazarus" type="button" aria-pressed="false">Cognitive-Mediational</button></div><div id="theory-theater" class="theory-theater"><div id="node-event" class="theory-node"><span><span class="theory-node-kicker">EVENT</span><br>Unexpected invitation</span></div><div id="node-body" class="theory-node"><span><span class="theory-node-kicker">BODY</span><br>Physiological arousal</span></div><div id="node-appraisal" class="theory-node"><span><span class="theory-node-kicker">THOUGHT</span><br>Appraisal or label</span></div><div id="node-feeling" class="theory-node"><span><span class="theory-node-kicker">FEELING</span><br>Conscious emotion</span></div><i id="arrow-one" class="theory-arrow"></i><i id="arrow-two" class="theory-arrow"></i><i id="arrow-three" class="theory-arrow"></i><p class="theory-legend">The event is identical; the proposed sequence changes.</p></div><div class="control-row"><button id="run-theory" class="action-button primary" type="button">Animate This Theory</button></div><div id="theory-caption" class="scene-caption">James–Lange: the event produces physiological arousal, and awareness of that bodily response contributes to the emotional experience.</div></section>`;
+    $("active-area").innerHTML = roomHeader(6, "Switch among all four theories, then animate at least one sequence. Focus on timing: what happens first, together, or through appraisal?", lab);
+    document.querySelectorAll("[data-theory]").forEach((button) => button.addEventListener("click", () => { currentTheory = button.dataset.theory; document.querySelectorAll("[data-theory]").forEach((item) => item.setAttribute("aria-pressed", String(item === button))); layoutTheory(currentTheory); recordAction("theory-switch", 6); }));
+    $("run-theory").addEventListener("click", () => { animateTheory(); recordAction("sequence-run", 6); });
+    layoutTheory(currentTheory);
+  }
+
+  function layoutTheory(theory) {
+    const nodes = { event: $("node-event"), body: $("node-body"), appraisal: $("node-appraisal"), feeling: $("node-feeling") };
+    Object.values(nodes).forEach((node) => { node.hidden = false; node.classList.remove("active"); });
+    const arrows = [$("arrow-one"), $("arrow-two"), $("arrow-three")]; arrows.forEach((arrow) => { arrow.hidden = false; });
+    const setNode = (node, left, top) => { node.style.left = left; node.style.top = top; };
+    const setArrow = (arrow, left, top, width, angle) => { arrow.style.left = left; arrow.style.top = top; arrow.style.width = width; arrow.style.transform = `rotate(${angle}deg)`; };
+    const captions = {
+      james: "James–Lange: the event produces physiological arousal, and awareness of that bodily response contributes to the emotional experience.",
+      cannon: "Cannon–Bard: the conscious emotion and physiological arousal occur simultaneously and independently after the event.",
+      twofactor: "Schachter–Singer two-factor: physiological arousal is interpreted with a cognitive label drawn from context, producing the emotional experience.",
+      lazarus: "Cognitive-mediational: appraisal of the event comes first and mediates the emotional and physiological response."
+    };
+    if (theory === "james") { setNode(nodes.event, "5%", "112px"); setNode(nodes.body, "38%", "112px"); setNode(nodes.feeling, "72%", "112px"); nodes.appraisal.hidden = true; setArrow(arrows[0], "25%", "151px", "13%", 0); setArrow(arrows[1], "58%", "151px", "14%", 0); arrows[2].hidden = true; }
+    if (theory === "cannon") { setNode(nodes.event, "5%", "112px"); setNode(nodes.body, "58%", "42px"); setNode(nodes.feeling, "58%", "190px"); nodes.appraisal.hidden = true; setArrow(arrows[0], "25%", "145px", "34%", -18); setArrow(arrows[1], "25%", "158px", "34%", 18); arrows[2].hidden = true; }
+    if (theory === "twofactor") { setNode(nodes.event, "3%", "112px"); setNode(nodes.body, "29%", "42px"); setNode(nodes.appraisal, "29%", "190px"); setNode(nodes.feeling, "72%", "112px"); setArrow(arrows[0], "23%", "139px", "8%", -22); setArrow(arrows[1], "23%", "167px", "8%", 22); setArrow(arrows[2], "50%", "151px", "22%", 0); }
+    if (theory === "lazarus") { setNode(nodes.event, "3%", "112px"); setNode(nodes.appraisal, "35%", "112px"); setNode(nodes.body, "72%", "42px"); setNode(nodes.feeling, "72%", "190px"); setArrow(arrows[0], "23%", "151px", "12%", 0); setArrow(arrows[1], "55%", "139px", "18%", -22); setArrow(arrows[2], "55%", "164px", "18%", 22); }
+    $("theory-caption").textContent = captions[theory];
+  }
+
+  function animateTheory() {
+    const order = currentTheory === "james" ? ["node-event", "node-body", "node-feeling"] : currentTheory === "cannon" ? ["node-event", ["node-body", "node-feeling"]] : currentTheory === "twofactor" ? ["node-event", ["node-body", "node-appraisal"], "node-feeling"] : ["node-event", "node-appraisal", ["node-body", "node-feeling"]];
+    document.querySelectorAll(".theory-node").forEach((node) => node.classList.remove("active"));
+    order.forEach((step, index) => {
+      window.setTimeout(() => {
+        (Array.isArray(step) ? step : [step]).forEach((id) => {
+          const node = $(id);
+          if (node) node.classList.add("active");
+        });
+      }, reduceMotion() ? 0 : index * 650);
+    });
+    $("theory-caption").classList.add("success");
+  }
+
+  function renderExpression() {
+    const lab = `<section class="lab-scene" aria-labelledby="expression-heading"><h3 id="expression-heading">The Same Face, Changing Context</h3><p>Adjust the facial pattern, then place it in different neutral situations. Faces matter, but context, voice, body language, experience, and culture also shape interpretation.</p><div class="expression-lab"><div id="face-stage" class="face-stage"><div class="context-lantern"></div><svg viewBox="0 0 330 310" role="img" aria-labelledby="face-title"><title id="face-title">An adjustable illustrated facial expression</title><circle class="face-skin" cx="165" cy="153" r="105"/><ellipse class="face-eye" cx="125" cy="132" rx="22" ry="16"/><ellipse class="face-eye" cx="205" cy="132" rx="22" ry="16"/><circle class="face-pupil" cx="125" cy="132" r="7"/><circle class="face-pupil" cx="205" cy="132" r="7"/><path id="left-brow" class="face-brow" d="M98 98Q125 82 149 98"/><path id="right-brow" class="face-brow" d="M181 98Q205 82 232 98"/><path id="face-mouth" class="face-mouth" d="M115 207Q165 245 215 207"/></svg></div><div><label for="expression-level"><strong>Expression curve: <output id="expression-output">35</output></strong></label><input id="expression-level" type="range" min="-100" max="100" value="35"><div class="control-row"><button class="tab-button" data-face-context="gallery" type="button" aria-pressed="true">Art Gallery</button><button class="tab-button" data-face-context="puzzle" type="button" aria-pressed="false">Challenging Puzzle</button><button class="tab-button" data-face-context="surprise" type="button" aria-pressed="false">Surprise Celebration</button></div><div id="face-caption" class="scene-caption">In an art gallery, this expression might be interpreted as interest, pleasure, politeness, or something else depending on additional cues.</div></div></div></section>
+      <section class="lab-scene" aria-labelledby="limbic-heading"><h3 id="limbic-heading">Emotion Components &amp; Limbic Map</h3><div class="range-grid"><div class="emotion-wheel" aria-hidden="true"><span class="component-chip c1">subjective experience</span><span class="component-chip c2">expression</span><span class="component-chip c3">appraisal</span><span class="component-chip c4">physiology</span></div><div><p>Choose a structure to see one contribution. No single structure “contains” an entire emotion.</p><div class="choice-grid"><button class="archive-card" data-limbic="amygdala" type="button"><strong>Amygdala</strong></button><button class="archive-card" data-limbic="hypothalamus" type="button"><strong>Hypothalamus</strong></button><button class="archive-card" data-limbic="thalamus" type="button"><strong>Thalamus</strong></button><button class="archive-card" data-limbic="hippocampus" type="button"><strong>Hippocampus</strong></button></div></div></div><div id="limbic-caption" class="scene-caption">Emotion involves interacting components and systems—not one “emotion center.”</div><p class="protective-note"><strong>Culture and expression:</strong> Some facial patterns are recognized widely, while cultural display rules influence when, where, and how strongly emotions are expressed. Interpretation should remain contextual and humble.</p></section>`;
+    $("active-area").innerHTML = roomHeader(7, "Change the face and its setting, then inspect one limbic structure. Treat emotional expression as multidimensional rather than a perfect mind-reading code.", lab);
+    const updateFace = () => {
+      const value = Number($("expression-level").value), curve = value * .38;
+      $("expression-output").value = value; $("face-mouth").setAttribute("d", `M115 207Q165 ${207 + curve} 215 207`); $("left-brow").setAttribute("d", `M98 ${98 - value * .06}Q125 ${82 - value * .1} 149 98`); $("right-brow").setAttribute("d", `M181 98Q205 ${82 - value * .1} 232 ${98 - value * .06}`);
+    };
+    $("expression-level").addEventListener("input", updateFace);
+    const contextData = { gallery: ["#cce7e2", "#584575", "In an art gallery, the expression might reflect interest, pleasure, social politeness, or another state depending on additional cues."], puzzle: ["#d5d9e6", "#3d5274", "During a challenging puzzle, the same facial pattern could be interpreted through effort, concentration, satisfaction, or uncertainty."], surprise: ["#ffe2a7", "#b9556f", "At a surprise celebration, the setting may encourage an interpretation such as delight or social excitement—but context still does not guarantee another person’s feeling."] };
+    document.querySelectorAll("[data-face-context]").forEach((button) => button.addEventListener("click", () => { const data = contextData[button.dataset.faceContext]; document.querySelectorAll("[data-face-context]").forEach((item) => item.setAttribute("aria-pressed", String(item === button))); $("face-stage").style.setProperty("--face-bg-a", data[0]); $("face-stage").style.setProperty("--face-bg-b", data[1]); $("face-caption").textContent = data[2]; $("face-caption").classList.add("success"); recordAction("face-context", 7); }));
+    const limbicData = { amygdala: "The amygdala helps process emotional significance and connects sensory information with attention, autonomic responses, and learning.", hypothalamus: "The hypothalamus contributes to activation of the sympathetic nervous system during emotional responses.", thalamus: "The thalamus relays sensory information toward both cortical regions and the amygdala for further processing.", hippocampus: "The hippocampus helps integrate emotional experience with cognition and memory." };
+    document.querySelectorAll("[data-limbic]").forEach((button) => button.addEventListener("click", () => { document.querySelectorAll("[data-limbic]").forEach((item) => item.setAttribute("aria-pressed", String(item === button))); $("limbic-caption").textContent = limbicData[button.dataset.limbic]; $("limbic-caption").classList.add("success"); recordAction("limbic-map", 7); }));
+    updateFace();
+  }
+
+  function recordAction(action, roomIndex) {
+    if (!state.actions.includes(action)) state.actions.push(action);
+    const status = $(`explore-status-${roomIndex}`); if (status) status.textContent = explorationStatus(roomIndex);
+    maybeCompleteRoom(roomIndex); updateDashboard(); saveState();
+  }
+
+  function renderQuestions(roomIndex) {
+    const container = $(`questions-${roomIndex}`);
+    container.innerHTML = questions[roomIndex].map((question, localIndex) => {
+      const lockId = roomIndex * 2 + localIndex, solved = state.solved.includes(lockId);
+      return `<fieldset id="question-${lockId}" class="question-card${solved ? " solved" : ""}"><legend>Lock ${lockId + 1}: ${question.prompt}</legend><div class="choice-grid">${question.choices.map((choice, choiceIndex) => `<button class="choice-button${solved && choiceIndex === question.correct ? " correct-choice" : ""}" type="button" data-lock="${lockId}" data-choice="${choiceIndex}" ${solved ? "disabled" : ""}>${choice}</button>`).join("")}</div><p id="feedback-${lockId}" class="feedback ${solved ? "good" : ""}" role="status">${solved ? `✓ ${question.explanation}` : "Choose the best answer."}</p></fieldset>`;
+    }).join("");
+    container.querySelectorAll("[data-lock]").forEach((button) => button.addEventListener("click", () => checkAnswer(roomIndex, button)));
+  }
+
+  function checkAnswer(roomIndex, button) {
+    const lockId = Number(button.dataset.lock), question = questions[roomIndex][lockId % 2], choice = Number(button.dataset.choice), feedback = $(`feedback-${lockId}`);
+    if (choice === question.correct) {
+      if (!state.solved.includes(lockId)) state.solved.push(lockId);
+      const card = $(`question-${lockId}`); card.classList.add("solved"); card.querySelectorAll("[data-choice]").forEach((item) => { item.disabled = true; if (Number(item.dataset.choice) === question.correct) item.classList.add("correct-choice"); });
+      feedback.textContent = `✓ ${question.explanation}`; feedback.className = "feedback good"; maybeCompleteRoom(roomIndex); updateDashboard(); saveState();
+    } else {
+      button.classList.add("wrong-choice"); feedback.textContent = "Not quite yet. Compare the choices with the interactive model and try again."; feedback.className = "feedback try"; window.setTimeout(() => button.classList.remove("wrong-choice"), 900);
+    }
+  }
+
+  function roomReady(index) {
+    return rooms[index].requiredActions.every((action) => state.actions.includes(action)) && state.solved.includes(index * 2) && state.solved.includes(index * 2 + 1);
+  }
+
+  function maybeCompleteRoom(index) {
+    const room = rooms[index];
+    if (!roomReady(index) || state.completed.includes(room.id)) return;
+    state.completed.push(room.id); if (!state.evidence.includes(room.evidence)) state.evidence.push(room.evidence);
+    if (state.completed.length === 1) addAchievement("First Spark: restored your first Emberheart chamber.");
+    if (room.id === "arousal") addAchievement("Performance Cartographer: mapped two optimal-arousal curves.");
+    if (room.id === "human") addAchievement("Respectful Scientist: distinguished related human-diversity concepts.");
+    if (room.id === "theories") addAchievement("Theory Director: staged competing models of emotion.");
+    if (state.completed.length === rooms.length) addAchievement("Atrium Restorer: completed all eight chambers.");
+    const holder = $(`clue-holder-${index}`); if (holder) holder.innerHTML = clueMarkup(index);
+    const route = $(`room-nav-${index}`); if (route) { route.innerHTML = roomNavigationMarkup(index); wireRoomNavigation(index); }
+    renderMap(); updateDashboard(); saveState("Chamber restored and progress saved.");
+  }
+
+  function addAchievement(text) { if (!state.achievements.includes(text)) state.achievements.push(text); }
+
+  function updateDashboard() {
+    const complete = state.completed.length;
+    $("progress-bar").value = complete; $("progress-bar").textContent = `${complete} of 8 chambers complete`; $("progress-text").textContent = `${complete} of 8 chambers complete`; $("lock-progress").textContent = `${state.solved.length} of ${TOTAL_LOCKS} knowledge locks solved`; $("mobile-progress").innerHTML = `<a href="#map-heading">${complete}/8 chambers · ${state.solved.length}/${TOTAL_LOCKS} locks</a>`;
+    $("fragment-rack").innerHTML = rooms.map((room, index) => { const collected = state.completed.includes(room.id); return `<li class="fragment${collected ? " collected" : ""}">${collected ? room.fragment : "?"}<small>${index + 1}</small><span class="sr-only">${collected ? `Fragment ${room.fragment} collected` : `Fragment ${index + 1} locked`}</span></li>`; }).join("");
+    $("inventory-list").innerHTML = state.evidence.length ? state.evidence.map((item) => `<li>${item}</li>`).join("") : "<li>No evidence collected yet.</li>";
+    $("achievement-list").innerHTML = state.achievements.length ? state.achievements.map((item) => `<li>${item}</li>`).join("") : "<li>Your optional discoveries will appear here.</li>";
+    const ready = complete === rooms.length; $("final-case").hidden = !ready; $("motivate-code").innerHTML = ready ? rooms.map((room) => `<span>${room.fragment}</span>`).join("") : "";
+    if (ready && !state.escaped) $("final-feedback").textContent = "The letters glow in chamber order. Enter the eight-letter code and solve the three synthesis locks.";
+    if (state.escaped) showCompletedFinal(false);
+  }
+
+  function handleFinal(event) {
+    event.preventDefault();
+    const values = [$("final-one").value, $("final-two").value, $("final-three").value, $("portal-code").value.trim().toUpperCase()];
+    const expected = ["intrinsic", "twofactor", "appraisal", "MOTIVATE"];
+    if (!values.every((value, index) => value === expected[index])) {
+      const missed = []; if (values[0] !== expected[0]) missed.push("project motive"); if (values[1] !== expected[1]) missed.push("emotion theory"); if (values[2] !== expected[2]) missed.push("different interpretations"); if (values[3] !== expected[3]) missed.push("fragment code");
+      $("final-feedback").textContent = `The Emberheart is still calibrating. Revisit: ${missed.join(", ")}. Your fragments appear in chamber order.`; return;
+    }
+    state.escaped = true; addAchievement("Affective Science Navigator: restored the Emberheart."); saveState("Mission complete. Your badge is ready."); showCompletedFinal(true); updateDashboard();
+  }
+
+  function showCompletedFinal(celebrate) {
+    $("final-case").hidden = false; $("badge-maker").hidden = false; $("final-form").hidden = true; $("final-feedback").textContent = "✓ Emberheart restored. Motivation and emotion emerge through interacting biological, cognitive, social, cultural, and contextual processes.";
+    if (state.learner) { $("learner-name").value = state.learner; drawBadge(state.learner); $("download-badge").disabled = false; } else drawBadge("Academy Scholar");
+    if (celebrate) launchConfetti();
+  }
+
+  function launchConfetti() {
+    if (reduceMotion()) return;
+    const colors = ["#f3bd58", "#74d4ca", "#a67cc7", "#e56c85", "#ffffff"];
+    $("confetti").innerHTML = Array.from({ length: 56 }, (_, i) => `<i style="left:${(i * 37) % 100}%;--drift:${(i % 2 ? 1 : -1) * (20 + (i % 7) * 7)}px;--confetti:${colors[i % colors.length]};animation-delay:${(i % 12) * .08}s"></i>`).join("");
+    window.setTimeout(() => { $("confetti").innerHTML = ""; }, 4200);
+  }
+
+  function drawBadge(name) {
+    const canvas = $("badge-canvas"), ctx = canvas.getContext("2d"), width = canvas.width, height = canvas.height;
+    const bg = ctx.createLinearGradient(0, 0, width, height); bg.addColorStop(0, "#10162d"); bg.addColorStop(.5, "#4b2e64"); bg.addColorStop(1, "#8a3c58"); ctx.fillStyle = bg; ctx.fillRect(0, 0, width, height);
+    const glow = ctx.createRadialGradient(width / 2, 300, 20, width / 2, 300, 480); glow.addColorStop(0, "rgba(255,190,90,.32)"); glow.addColorStop(1, "rgba(0,0,0,0)"); ctx.fillStyle = glow; ctx.fillRect(0, 0, width, height);
+    ctx.strokeStyle = "#e3bd62"; ctx.lineWidth = 13; ctx.strokeRect(34, 34, width - 68, height - 68); ctx.strokeStyle = "#7bd4ca"; ctx.lineWidth = 3; ctx.strokeRect(55, 55, width - 110, height - 110);
+    ctx.save(); ctx.translate(width / 2, 235); ctx.fillStyle = "#ffb159"; ctx.shadowColor = "#ffb159"; ctx.shadowBlur = 25; ctx.beginPath(); ctx.moveTo(0, 115); ctx.bezierCurveTo(-150, 30, -105, -115, 0, -40); ctx.bezierCurveTo(105, -115, 150, 30, 0, 115); ctx.fill(); ctx.shadowBlur = 0; ctx.strokeStyle = "#fff0b9"; ctx.lineWidth = 5; ctx.stroke(); ctx.fillStyle = "#fff3c4"; ctx.beginPath(); ctx.arc(0, 0, 18, 0, Math.PI * 2); ctx.fill();
+    for (let i = 0; i < 8; i += 1) { const angle = (i / 8) * Math.PI * 2 - Math.PI / 2; const x = Math.cos(angle) * 220, y = Math.sin(angle) * 145; ctx.fillStyle = i % 2 ? "#79d3ca" : "#c896da"; ctx.beginPath(); ctx.arc(x, y, 13, 0, Math.PI * 2); ctx.fill(); ctx.fillStyle = "#fff"; ctx.font = "700 20px Arial"; ctx.textAlign = "center"; ctx.fillText("MOTIVATE"[i], x, y + 7); }
+    ctx.restore();
+    ctx.textAlign = "center"; ctx.fillStyle = "#e7c56d"; ctx.font = "700 32px Arial"; ctx.fillText("PSYCHOLOGY ACADEMY · WEEK 10", width / 2, 415); ctx.fillStyle = "#fff"; ctx.font = "700 66px Georgia"; ctx.fillText("Affective Science Navigator", width / 2, 510); ctx.fillStyle = "#a9ece4"; ctx.font = "31px Georgia"; ctx.fillText("The Emberheart Atrium", width / 2, 563);
+    ctx.fillStyle = "#fff7e3"; ctx.font = "italic 48px Georgia"; fitText(ctx, name, width - 220, 48); ctx.fillText(name, width / 2, 665); ctx.strokeStyle = "#e2bd64"; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(270, 696); ctx.lineTo(width - 270, 696); ctx.stroke();
+    ctx.fillStyle = "#eaf4ef"; ctx.font = "25px Arial"; ctx.fillText("Restored eight chambers · Solved sixteen knowledge locks", width / 2, 758); ctx.fillText("Integrated motivation, biological signals, appraisal, emotion, expression, and culture", width / 2, 803); ctx.fillStyle = "#f0cb6d"; ctx.font = "700 27px Arial"; ctx.fillText("MISSION CODE: MOTIVATE", width / 2, 862); ctx.fillStyle = "#dfe9e6"; ctx.font = "22px Arial"; ctx.fillText(`Completed ${new Date().toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" })} · Dr. Tonya Holdaway`, width / 2, 916);
+  }
+
+  function fitText(ctx, text, maxWidth, startSize) { let size = startSize; while (size > 28 && ctx.measureText(text).width > maxWidth) { size -= 2; ctx.font = `italic ${size}px Georgia`; } }
+  function safeFilename(value) { return value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "student"; }
+  function downloadBlob(blob, filename) { const url = URL.createObjectURL(blob), link = document.createElement("a"); link.href = url; link.download = filename; document.body.appendChild(link); link.click(); link.remove(); window.setTimeout(() => URL.revokeObjectURL(url), 1000); }
+
+  function generateBadge() {
+    const name = $("learner-name").value.trim().replace(/\s+/g, " "); if (!name) { $("badge-message").textContent = "Please enter your name before generating the badge."; $("learner-name").focus(); return; }
+    state.learner = name.slice(0, 60); drawBadge(state.learner); $("download-badge").disabled = false; $("badge-message").textContent = "Your personalized badge is ready. Select Download Badge as PNG."; saveState("Personalized badge name saved.");
+  }
+
+  function downloadBadge() {
+    if (!state.learner) { $("badge-message").textContent = "Generate the badge with your name first."; return; }
+    const canvas = $("badge-canvas"), filename = `week-10-affective-science-navigator-${safeFilename(state.learner)}.png`;
+    if (canvas.toBlob) canvas.toBlob((blob) => { if (!blob) return; downloadBlob(blob, filename); $("badge-message").textContent = "Badge downloaded. Check your Downloads folder, then upload the PNG to Canvas."; }, "image/png");
+    else { const link = document.createElement("a"); link.href = canvas.toDataURL("image/png"); link.download = filename; link.click(); }
+  }
+
+  function downloadNotes() {
+    const lines = ["WEEK 10: THE EMBERHEART ATRIUM", "", `Chambers completed: ${state.completed.length}/8`, `Knowledge locks solved: ${state.solved.length}/16`, "", "COLLECTED EVIDENCE", ...(state.evidence.length ? state.evidence.map((item, index) => `${index + 1}. ${item}`) : ["No evidence collected yet."]), "", "CONCEPT THAT CHANGED OR COMPLICATED MY THINKING", state.notes.observations || "(No note entered)", "", "SAFE REAL-WORLD APPLICATION", state.notes.transfer || "(No note entered)", "", "Textbook: Spielman, R. M., Jenkins, W. J., & Lovett, M. D. (2020). Psychology 2e. OpenStax."];
+    downloadBlob(new Blob([lines.join("\n")], { type: "text/plain;charset=utf-8" }), "week-10-motivation-emotion-notes.txt");
+  }
+
+  const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+  function reduceMotion() { return state.motionPaused || media.matches; }
+  function updateMotion() { document.body.classList.toggle("no-motion", reduceMotion()); $("motion-toggle").textContent = state.motionPaused ? "Resume Animations" : "Pause Animations"; $("motion-toggle").setAttribute("aria-pressed", String(state.motionPaused)); $("motion-status").textContent = media.matches ? "Your device’s reduced-motion preference is active. Activities remain fully usable." : state.motionPaused ? "Animations are paused. Activities remain fully usable." : "Animations are on. Hover near the Atrium to awaken its light."; }
+
+  function applyLighting(value, save = true) {
+    state.lighting = value; document.body.classList.remove("lighting-calm", "lighting-curious", "lighting-energized"); document.body.classList.add(`lighting-${value}`); document.querySelectorAll("[data-lighting]").forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.lighting === value))); if (save) saveState("Lighting preference saved.");
+  }
+
+  function setupAudio() {
+    const audio = $("atrium-audio"), button = $("music-toggle"); audio.volume = state.settings.volume; $("volume").value = String(state.settings.volume);
+    if (!AUDIO_SOURCE) { button.disabled = true; button.textContent = "Music Track Ready to Connect"; $("audio-status").textContent = "Choose the Week 10 audio file, place it in assets/audio, and the track can be connected here."; }
+    else { audio.src = AUDIO_SOURCE; $("audio-status").textContent = "Atrium music is off."; }
+    button.addEventListener("click", async () => { if (!AUDIO_SOURCE) return; if (audio.paused) { try { await audio.play(); button.classList.add("sound-on"); button.setAttribute("aria-pressed", "true"); button.firstChild.textContent = "Pause Atrium Music "; $("audio-status").textContent = "Atrium music is playing."; } catch (error) { $("audio-status").textContent = "The music could not start. The mission works normally without audio."; } } else { audio.pause(); button.classList.remove("sound-on"); button.setAttribute("aria-pressed", "false"); button.firstChild.textContent = "Play Atrium Music "; $("audio-status").textContent = "Atrium music is paused."; } });
+    $("volume").addEventListener("input", (event) => { state.settings.volume = Number(event.target.value); audio.volume = state.settings.volume; saveState("Volume preference saved."); }); audio.addEventListener("error", () => { $("audio-status").textContent = "The selected music file is unavailable. All learning activities still work."; });
+  }
+
+  function setupNotes() {
+    $("observation-notes").value = state.notes.observations; $("transfer-notes").value = state.notes.transfer;
+    $("observation-notes").addEventListener("input", (event) => { state.notes.observations = event.target.value; saveState("Notebook saved."); }); $("transfer-notes").addEventListener("input", (event) => { state.notes.transfer = event.target.value; saveState("Notebook saved."); });
+  }
+
+  function resetMission() {
+    const volume = state.settings.volume, motion = state.motionPaused, lighting = state.lighting; state = freshState(); state.settings.volume = volume; state.motionPaused = motion; state.lighting = lighting; activeIndex = -1;
+    try { localStorage.removeItem(COMPLETION_KEY); } catch (error) { storageAvailable = false; }
+    $("active-area").replaceChildren(); $("observation-notes").value = ""; $("transfer-notes").value = ""; $("learner-name").value = ""; $("final-form").reset(); $("final-form").hidden = false; $("badge-maker").hidden = true; $("download-badge").disabled = true; $("reset-box").hidden = true; saveState("Week 10 progress reset."); renderMap(); updateDashboard(); $("room-0").focus();
+  }
+
+  function createMotes() { $("motes").innerHTML = Array.from({ length: 28 }, (_, i) => `<i class="mote" style="left:${(i * 43) % 100}%;top:${(i * 17) % 100}%;--mote-speed:${13 + (i % 9)}s;animation-delay:-${i % 13}s;background:${i % 3 === 0 ? "#ef8aa0" : i % 3 === 1 ? "#f2cc71" : "#79d5cc"}"></i>`).join(""); }
+
+  function initialize() {
+    createMotes(); applyLighting(state.lighting, false); renderMap(); setupAudio(); setupNotes(); updateMotion(); updateDashboard(); saveState();
+    $("final-form").addEventListener("submit", handleFinal); $("generate-badge").addEventListener("click", generateBadge); $("download-badge").addEventListener("click", downloadBadge); $("print-badge").addEventListener("click", () => window.print()); $("download-notes").addEventListener("click", downloadNotes);
+    $("motion-toggle").addEventListener("click", () => { state.motionPaused = !state.motionPaused; updateMotion(); saveState("Motion preference saved."); }); if (media.addEventListener) media.addEventListener("change", updateMotion);
+    document.querySelectorAll("[data-lighting]").forEach((button) => button.addEventListener("click", () => applyLighting(button.dataset.lighting)));
+    $("reset-progress").addEventListener("click", () => { $("reset-box").hidden = false; $("confirm-reset").focus(); }); $("cancel-reset").addEventListener("click", () => { $("reset-box").hidden = true; $("reset-progress").focus(); }); $("confirm-reset").addEventListener("click", resetMission);
+    $("learner-name").value = state.learner; document.querySelector(".hero").addEventListener("pointermove", (event) => { const rect = event.currentTarget.getBoundingClientRect(); event.currentTarget.style.setProperty("--pointer-x", `${((event.clientX - rect.left) / rect.width) * 100}%`); event.currentTarget.style.setProperty("--pointer-y", `${((event.clientY - rect.top) / rect.height) * 100}%`); });
+  }
+
+  initialize();
+})();
+
+  </script>
+</body>
+</html>
