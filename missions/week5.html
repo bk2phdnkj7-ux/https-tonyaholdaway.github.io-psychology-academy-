@@ -1,3222 +1,1850 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0">
-
-  <title>Week 5: The Perception Gallery</title>
-
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="An immersive, animated Week 5 sensation and perception mission based on OpenStax Psychology 2e, Chapter 5.">
+  <meta name="theme-color" content="#071426">
+  <title>Week 5: The Perception Gallery | Psychology Academy</title>
   <style>
-    :root {
-      --ink: #1f2933;
-      --navy: #102f4a;
-      --navy-dark: #071826;
-      --blue: #315f87;
-      --blue-light: #eaf3f8;
-      --green: #315f40;
-      --green-light: #eef8f2;
-      --gold: #745500;
-      --gold-light: #fff8e8;
-      --cream: #fffdf7;
-      --red: #7b1f1f;
-      --red-light: #fff1f1;
-      --white: #ffffff;
-      --border: #617486;
-      --shadow: 0 12px 30px rgba(8, 34, 54, 0.16);
-      --radius: 16px;
-    }
+:root {
+  --night: #071426;
+  --indigo: #16244d;
+  --violet: #55327f;
+  --teal: #0d6c75;
+  --aqua: #7bd6d4;
+  --gold: #d8b45b;
+  --gold-dark: #795917;
+  --cream: #fffaf0;
+  --paper: #fffef9;
+  --ink: #1e2a38;
+  --muted: #516173;
+  --green: #246346;
+  --green-soft: #e8f6ed;
+  --red: #8b3038;
+  --red-soft: #fff0f1;
+  --blue-soft: #eaf5f7;
+  --line: #8a9dae;
+  --shadow: 0 18px 50px rgba(6, 20, 38, .17);
+  --radius: 18px;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  min-width: 280px;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 8% 18%, rgba(123, 214, 212, .12), transparent 22rem),
+    radial-gradient(circle at 92% 44%, rgba(85, 50, 127, .11), transparent 26rem),
+    #f4f5f2;
+  font: 18px/1.67 Arial, Helvetica, sans-serif;
+}
+button, input, textarea, select { font: inherit; }
+button { touch-action: manipulation; }
+a { color: #145779; font-weight: 700; text-underline-offset: .16em; }
+:focus-visible { outline: 4px solid #9b6500; outline-offset: 4px; }
+[hidden] { display: none !important; }
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+.skip-link {
+  position: fixed; left: 16px; top: -90px; z-index: 9999;
+  padding: 12px 17px; border: 3px solid #111; border-radius: 8px;
+  color: #111; background: #fff;
+}
+.skip-link:focus { top: 14px; }
+.container { width: min(1200px, calc(100% - 32px)); margin-inline: auto; }
+
+/* Magical gallery sky */
+.sensory-sky { position: fixed; inset: 0; overflow: hidden; pointer-events: none; z-index: -1; }
+.aurora {
+  position: absolute; width: 68vw; height: 35vw; min-height: 260px;
+  border-radius: 50%; filter: blur(55px); opacity: .12; mix-blend-mode: multiply;
+  animation: auroraDrift 18s ease-in-out infinite alternate;
+}
+.aurora.one { top: -14%; left: -14%; background: linear-gradient(90deg, #36c9bd, #7543b7); }
+.aurora.two { right: -22%; top: 35%; background: linear-gradient(90deg, #6b3ca1, #e1bc5a); animation-delay: -8s; }
+.mote {
+  position: absolute; width: 5px; height: 5px; border-radius: 50%;
+  background: #d6b45c; box-shadow: 0 0 10px #f9df92;
+  opacity: .24; animation: moteRise var(--mote-speed, 16s) linear infinite;
+}
+
+/* Hero */
+.hero {
+  position: relative; overflow: hidden; color: #f7f4e9;
+  border-bottom: 5px solid #b8923c;
+  background:
+    radial-gradient(circle at var(--pointer-x, 74%) var(--pointer-y, 36%), rgba(129, 228, 216, .19), transparent 15rem),
+    linear-gradient(135deg, #071426 0%, #152f51 48%, #3e2864 100%);
+  padding: 30px 0 38px;
+}
+.hero::before, .hero::after {
+  content: ""; position: absolute; pointer-events: none; border-radius: 50%; filter: blur(24px);
+}
+.hero::before { width: 34rem; height: 10rem; right: -8rem; top: -4rem; background: #4ac8bd20; animation: cloudDrift 16s ease-in-out infinite alternate; }
+.hero::after { width: 25rem; height: 8rem; left: -7rem; bottom: -3rem; background: #a978d71a; animation: cloudDrift 22s -9s ease-in-out infinite alternate-reverse; }
+.hero .container { position: relative; z-index: 2; }
+.academy-link {
+  display: inline-block; padding: 9px 14px; margin-bottom: 18px;
+  color: #10243c; background: #fff9e9; border: 2px solid #dec16f;
+  border-radius: 10px; text-decoration: underline;
+}
+.hero-grid { display: grid; grid-template-columns: 1.03fr .97fr; gap: 34px; align-items: center; }
+.eyebrow { margin: 0 0 7px; color: #e6ca7b; font-size: .88rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+.hero h1 { margin: 0; color: #fffaf0; font: 700 clamp(2.8rem, 6.4vw, 5.2rem)/.98 Georgia, "Times New Roman", serif; text-wrap: balance; }
+.hero-subtitle { margin: 14px 0 0; color: #8ee3dc; font: 700 clamp(1.2rem, 2.7vw, 1.75rem)/1.25 Georgia, serif; }
+.hero-text { max-width: 700px; margin: 18px 0 0; font-size: 1.03rem; }
+.hero-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+.hero-chip { padding: 6px 11px; border: 1px solid #c9b76b88; border-radius: 999px; color: #fff9df; background: #081a2f88; font-size: .82rem; }
+.hero-scene {
+  position: relative; overflow: hidden; aspect-ratio: 1.42;
+  border: 2px solid #bda864; border-radius: 190px 190px 24px 24px;
+  background: radial-gradient(circle at 50% 44%, #294b64, #091528 73%);
+  box-shadow: inset 0 0 60px #020712, 0 15px 40px #02081277;
+}
+.hero-scene::after {
+  content: "Move near the gallery to stir the light"; position: absolute; left: 50%; bottom: 8px;
+  transform: translateX(-50%); width: max-content; max-width: 90%; color: #f2dfaa;
+  font-size: .72rem; letter-spacing: .04em; text-align: center;
+}
+.hero-scene svg { width: 100%; height: 100%; display: block; }
+.ray-in { stroke: #f8efc0; stroke-width: 7; stroke-linecap: round; stroke-dasharray: 11 14; animation: rayFlow 3.2s linear infinite; }
+.rainbow-ray { fill: none; stroke-width: 5; stroke-linecap: round; stroke-dasharray: 9 13; animation: rayFlow 4s linear infinite; }
+.prism { fill: #eafcff22; stroke: #c4efec; stroke-width: 3; filter: drop-shadow(0 0 8px #82d9d6); animation: prismFloat 5s ease-in-out infinite alternate; transform-box: fill-box; transform-origin: center; }
+.iris-ring { fill: none; stroke: #7fe2dc; stroke-width: 5; filter: drop-shadow(0 0 7px #6cd0c8); transform-origin: 558px 219px; animation: irisBreathe 4.5s ease-in-out infinite; }
+.pupil { fill: #07111d; transform-origin: 558px 219px; animation: pupilShift 7s ease-in-out infinite; }
+.optic-path { fill: none; stroke: #d9b95d; stroke-width: 3; stroke-dasharray: 7 9; animation: rayFlow 5s linear infinite; }
+.hero-star { fill: #f6dd86; animation: twinkle 3.8s ease-in-out infinite alternate; transform-box: fill-box; transform-origin: center; }
+.hero:hover .rainbow-ray, .hero:hover .ray-in { animation-duration: 1.7s; }
+.hero:hover .iris-ring { animation-duration: 2.5s; }
+
+main { padding: 30px 0 56px; }
+h2, h3 { color: #123954; line-height: 1.25; }
+h2 { font-family: Georgia, "Times New Roman", serif; }
+.panel {
+  margin-bottom: 23px; padding: 23px; border: 2px solid #93a6b5; border-left: 8px solid #2b7080;
+  border-radius: var(--radius); background: rgba(255, 254, 249, .97); box-shadow: var(--shadow);
+}
+.panel h2, .panel h3 { margin-top: 0; }
+.panel-gold { border-left-color: #a67b20; }
+.panel-green { border-left-color: #2b6d4b; }
+.atmosphere {
+  position: relative; overflow: hidden; color: #fff;
+  border: 2px solid #b89b54; border-radius: var(--radius); padding: 20px 22px; margin-bottom: 23px;
+  background: linear-gradient(120deg, #0a1b31, #173d52 60%, #352351); box-shadow: var(--shadow);
+}
+.atmosphere::after { content: "✦  ◌  ✧  ◉  ✦"; position: absolute; right: 3%; top: 13px; color: #e4c46e55; font-size: 1.5rem; letter-spacing: 13px; animation: symbolDrift 9s ease-in-out infinite alternate; }
+.atmosphere h2 { position: relative; color: #fff; margin: 0 0 6px; z-index: 1; }
+.atmosphere p, .atmosphere .control-row, .atmosphere label, .atmosphere input { position: relative; z-index: 1; }
+.control-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 13px 0; }
+.control-button, .action-button, .tab-button, .choice-button, .map-button {
+  border: 2px solid #315d72; border-radius: 10px; background: #fff; color: #17384e;
+  padding: 10px 14px; cursor: pointer; font-weight: 700;
+}
+.control-button:hover, .action-button:hover, .tab-button:hover, .choice-button:hover:not(:disabled) { background: #e9f6f4; border-color: #19717a; }
+.atmosphere .control-button { border-color: #f0d995; }
+.atmosphere input[type="range"] { accent-color: #e2c46f; }
+.quiet { font-size: .88rem; }
+.status-light { margin: 0; color: #f8e8b8; font-size: .9rem; }
+.briefing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.briefing-grid .panel { height: 100%; }
+.objective-list { columns: 2; column-gap: 32px; padding-left: 22px; }
+.objective-list li { break-inside: avoid; margin-bottom: 7px; }
+.source-note { padding: 13px 15px; border-radius: 10px; background: #edf6f5; border: 1px solid #91b9b5; }
+
+/* Mission map and navigation */
+.mission-layout { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 24px; align-items: start; }
+.gallery-map {
+  position: relative; overflow: hidden; padding: 24px; margin-bottom: 24px;
+  border: 3px solid #6b7183; border-radius: 22px;
+  background: linear-gradient(145deg, #f0f4ee, #edf2f7); box-shadow: var(--shadow);
+}
+.gallery-map::before {
+  content: ""; position: absolute; inset: 0; opacity: .2; pointer-events: none;
+  background-image: linear-gradient(#38516618 1px, transparent 1px), linear-gradient(90deg, #38516618 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+.gallery-map > * { position: relative; }
+.gallery-map h2 { margin-top: 0; }
+.room-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 15px; }
+.map-button {
+  position: relative; overflow: hidden; min-height: 218px; padding: 16px; text-align: left;
+  border-color: #768b99; background: #fffef8; box-shadow: 0 8px 18px #10273a14;
+  transition: transform .24s ease, box-shadow .24s ease, border-color .24s;
+  transform: perspective(700px) rotateX(var(--tilt-y, 0deg)) rotateY(var(--tilt-x, 0deg));
+}
+.map-button:hover { transform: perspective(700px) translateY(-5px) rotateX(var(--tilt-y, 0deg)) rotateY(var(--tilt-x, 0deg)); box-shadow: 0 15px 29px #10273a2b; border-color: #277786; }
+.map-button[aria-pressed="true"] { outline: 4px solid #8a661c; outline-offset: 1px; }
+.map-button.complete { border-color: #2f7551; background: linear-gradient(#fafff8, #eef9f1); }
+.map-button.complete::after { content: "✓"; position: absolute; top: 10px; right: 12px; display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; color: #fff; background: #2e6a4c; font-weight: 900; }
+.map-art { display: block; width: 100%; height: 82px; margin-bottom: 7px; border-radius: 10px; background: linear-gradient(135deg, #091b31, #253d63); }
+.map-art svg { width: 100%; height: 100%; display: block; }
+.map-title { display: block; color: #173c57; font: 700 1.05rem/1.2 Georgia, serif; }
+.map-subtitle { display: block; min-height: 2.5em; margin-top: 5px; color: #4a5967; font-size: .82rem; line-height: 1.35; }
+.map-status { display: block; margin-top: 9px; color: #66521a; font-size: .76rem; font-weight: 800; text-transform: uppercase; letter-spacing: .04em; }
+.map-button.complete .map-status { color: #246346; }
+.mini-wave { fill: none; stroke: #76ded5; stroke-width: 3; stroke-dasharray: 8 8; animation: rayFlow 4s linear infinite; }
+.mini-orbit { transform-origin: center; transform-box: fill-box; animation: spin 15s linear infinite; }
+.mini-float { transform-origin: center; transform-box: fill-box; animation: prismFloat 4s ease-in-out infinite alternate; }
+
+/* Active learning room */
+.active-area:empty { display: none; }
+.activity-card {
+  position: relative; overflow: hidden; padding: 25px; margin-bottom: 24px;
+  border: 3px solid #6f8290; border-radius: 22px; background: #fffef9; box-shadow: var(--shadow);
+}
+.activity-card::before { content: ""; position: absolute; width: 220px; height: 220px; right: -100px; top: -110px; border-radius: 50%; background: radial-gradient(#76d8d52b, transparent 70%); pointer-events: none; }
+.room-heading { position: relative; display: flex; gap: 14px; justify-content: space-between; align-items: start; }
+.room-heading h2 { margin: 0 0 7px; }
+.room-number { display: inline-block; margin-bottom: 5px; color: #6b4e14; font-size: .78rem; font-weight: 800; text-transform: uppercase; letter-spacing: .09em; }
+.chapter-tag { flex: none; padding: 7px 10px; border: 1px solid #9bb6b7; border-radius: 999px; color: #174c60; background: #ecf8f7; font-size: .76rem; }
+.chapter-tag a { color: inherit; }
+.concept-strip { display: flex; flex-wrap: wrap; gap: 8px; margin: 15px 0; }
+.concept-strip span { padding: 5px 10px; border: 1px solid #d5b862; border-radius: 999px; color: #5c4514; background: #fff8df; font-size: .8rem; font-weight: 700; }
+.activity-instructions { padding: 13px 15px; border-left: 5px solid #26788a; border-radius: 8px; background: #edf7f8; }
+.lab-scene {
+  position: relative; overflow: hidden; margin: 18px 0; padding: 18px;
+  border: 2px solid #7f9eaa; border-radius: 16px;
+  background: radial-gradient(circle at 50% 18%, #fbfff8, #e8f0f2 72%);
+}
+.lab-scene.dark { color: #fff; background: radial-gradient(circle at 50% 35%, #284f68, #071525 75%); border-color: #bda55a; }
+.lab-scene h3 { margin: 0 0 8px; font-size: 1.15rem; }
+.lab-scene.dark h3 { color: #fff; }
+.scene-art { position: relative; overflow: hidden; min-height: 250px; border-radius: 13px; background: linear-gradient(145deg, #0b1e33, #1d3654); }
+.scene-art svg { display: block; width: 100%; height: 100%; min-height: 250px; }
+.scene-caption { min-height: 65px; margin-top: 12px; padding: 12px 14px; border-left: 5px solid #98711d; border-radius: 7px; background: #fff8df; color: #283847; }
+.scene-caption.success { border-color: #2d714d; background: #eaf7ee; }
+.action-button[aria-pressed="true"], .tab-button[aria-pressed="true"] { color: #fff; background: #174b5d; border-color: #174b5d; }
+.action-button.primary { color: #fff; background: #194d61; border-color: #194d61; }
+.action-button.primary:hover { background: #0d6572; }
+.exploration-check { color: #246346; font-weight: 800; }
+.range-grid { display: grid; grid-template-columns: minmax(190px, 1fr) minmax(180px, 1fr); gap: 17px; align-items: center; }
+.range-card { padding: 14px; border: 1px solid #9fb0bc; border-radius: 11px; background: #fff; }
+.range-card label { display: block; font-weight: 800; }
+input[type="range"] { width: 100%; min-height: 34px; accent-color: #176e78; }
+.readout { margin: 7px 0 0; font-size: .9rem; font-weight: 700; }
+.meter { height: 14px; overflow: hidden; margin-top: 9px; border: 1px solid #748896; border-radius: 999px; background: #e7ebed; }
+.meter > span { display: block; width: var(--meter, 0%); height: 100%; background: linear-gradient(90deg, #3c8c83, #ddba5f); transition: width .3s; }
+.lock-zone { margin-top: 24px; padding-top: 20px; border-top: 2px dashed #82949f; }
+.lock-zone h3 { margin-top: 0; }
+.question-card { padding: 17px; margin: 14px 0; border: 2px solid #9baab4; border-radius: 13px; background: #fbfcfa; }
+.question-card.solved { border-color: #2e7550; background: #eff9f2; }
+.question-card legend { padding: 0 6px; font-weight: 800; color: #203f52; }
+.choice-grid { display: grid; gap: 9px; margin-top: 10px; }
+.choice-button { width: 100%; text-align: left; font-weight: 600; }
+.choice-button.correct-choice { border-color: #2e7550; background: #def2e5; color: #17452e; }
+.choice-button.wrong-choice { border-color: #94404a; background: #ffeaec; color: #67242b; }
+.choice-button:disabled { opacity: 1; cursor: default; }
+.feedback { min-height: 1.5em; margin: 9px 0 0; font-size: .91rem; font-weight: 700; }
+.feedback.good { color: #245f42; }
+.feedback.try { color: #7a2b34; }
+.clue-card { position: relative; overflow: hidden; margin-top: 18px; padding: 18px; border: 2px solid #a98129; border-radius: 13px; background: linear-gradient(135deg, #fff8df, #fffef7); }
+.clue-card::after { content: "✦"; position: absolute; right: 16px; top: 10px; color: #b99136; font-size: 2rem; animation: twinkle 2.5s ease-in-out infinite alternate; }
+.fragment-reveal { display: inline-grid; place-items: center; width: 54px; height: 54px; margin-right: 10px; border-radius: 50%; color: #fff; background: linear-gradient(145deg, #5a3683, #173f59); box-shadow: 0 0 0 4px #e2c56d, 0 0 20px #ceb460; font: 800 1.6rem Georgia, serif; }
+
+/* Simulations */
+.pathway-stage { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; align-items: stretch; margin: 15px 0; }
+.path-node { position: relative; display: grid; place-items: center; min-height: 106px; padding: 9px; border: 2px solid #72909a; border-radius: 12px; color: #244252; background: #f8fcfb; text-align: center; font-size: .82rem; font-weight: 800; transition: .45s; }
+.path-node::after { content: "→"; position: absolute; right: -16px; z-index: 2; color: #9a7320; font-size: 1.5rem; }
+.path-node:last-child::after { display: none; }
+.path-node.lit { color: #fff; background: #1e6671; border-color: #e1c46b; box-shadow: 0 0 20px #58bdb5aa; transform: translateY(-5px); }
+.path-icon { font-size: 1.7rem; }
+.threshold-sky { position: relative; height: 220px; border-radius: 12px; background: radial-gradient(circle at 50% 70%, #183351, #071322 75%); overflow: hidden; }
+.threshold-star { position: absolute; left: 50%; top: 43%; width: 22px; height: 22px; transform: translate(-50%, -50%); opacity: var(--star-alpha, .05); filter: drop-shadow(0 0 var(--star-glow, 1px) #fff3b5); transition: opacity .25s, filter .25s; }
+.threshold-star::before { content: "✦"; color: #fff8c4; font-size: 28px; }
+.noise-dot { position: absolute; width: 3px; height: 3px; border-radius: 50%; background: #cbe0e8; opacity: .18; animation: noisePulse 4s ease-in-out infinite alternate; }
+.adapt-orb { width: 94px; height: 94px; margin: 22px auto; border-radius: 50%; background: #efce68; box-shadow: 0 0 44px #f6d267; transition: opacity 1.2s, filter 1.2s; }
+.adapt-orb.adapted { opacity: .22; filter: saturate(.4); }
+.wave-stage { min-height: 245px; padding: 15px; border-radius: 13px; color: #fff; background: #071a2e; }
+.wave-stage svg { width: 100%; height: 170px; display: block; }
+#wave-path { fill: none; stroke: #7ce0d7; stroke-width: 5; filter: drop-shadow(0 0 7px currentColor); }
+.wave-axis { stroke: #d8e5e855; stroke-width: 1; }
+.wave-orb { fill: var(--wave-color, #7ce0d7); filter: drop-shadow(0 0 9px var(--wave-color, #7ce0d7)); }
+.eye-stage, .ear-stage { position: relative; min-height: 290px; color: #fff; border-radius: 13px; background: radial-gradient(circle at 45% 45%, #244a65, #081728 75%); }
+.eye-stage svg, .ear-stage svg { width: 100%; height: 290px; display: block; }
+.photon { opacity: 0; transform: translateX(0); }
+.photon.travel { opacity: 1; animation: photonTravel 3.4s ease-in-out forwards; }
+.eye-label, .ear-label { fill: #f7edc8; font: 700 13px Arial, sans-serif; }
+.retina-rods { fill: #8ec6c7; opacity: .3; transition: opacity .4s; }
+.retina-cones { fill: #efc767; opacity: .3; transition: opacity .4s; }
+.eye-stage.rods .retina-rods, .eye-stage.cones .retina-cones { opacity: 1; filter: drop-shadow(0 0 5px currentColor); }
+.depth-scene { position: relative; height: 190px; overflow: hidden; border-radius: 12px; background: linear-gradient(#cde9ee 0 54%, #bed0a1 54%); perspective: 500px; }
+.depth-road { position: absolute; left: 34%; right: 34%; bottom: 0; height: 100%; background: #7b7f7a; clip-path: polygon(47% 0, 53% 0, 100% 100%, 0 100%); }
+.depth-object { position: absolute; left: calc(10% + var(--depth, 45) * .72%); bottom: calc(12% + var(--depth, 45) * .55%); transform: translateX(-50%) scale(calc(.45 + (100 - var(--depth, 45)) * .008)); transition: .4s; font-size: 2.2rem; }
+.sound-pulse { opacity: 0; }
+.sound-pulse.travel { opacity: 1; animation: soundTravel 3.4s ease-in-out forwards; }
+.ossicle { transform-origin: center; transform-box: fill-box; }
+.ear-stage.ringing .ossicle { animation: ossicleMove .35s ease-in-out 8 alternate; }
+.hair-cell { transform-origin: center bottom; transform-box: fill-box; }
+.ear-stage.ringing .hair-cell { animation: hairBend .4s ease-in-out 7 alternate; }
+.localizer { position: relative; height: 190px; border-radius: 12px; background: linear-gradient(#e7f4f4, #d9e6d2); overflow: hidden; }
+.head-icon { position: absolute; left: 50%; bottom: 17px; transform: translateX(-50%); font-size: 5.4rem; }
+.sound-source { position: absolute; left: var(--source-x, 50%); top: 22px; transform: translateX(-50%); transition: left .4s; font-size: 2.2rem; }
+.flavor-lab { display: grid; grid-template-columns: 180px 1fr; gap: 18px; align-items: center; }
+.flask { position: relative; width: 126px; height: 160px; margin: auto; }
+.flask-neck { position: absolute; left: 45px; top: 0; width: 37px; height: 53px; border: 5px solid #55798a; border-bottom: 0; background: #f8ffffcc; }
+.flask-body { position: absolute; left: 12px; bottom: 0; width: 104px; height: 118px; border: 5px solid #55798a; border-radius: 18px 18px 48px 48px; overflow: hidden; background: #f8ffffcc; }
+.flavor-liquid { position: absolute; left: 0; right: 0; bottom: 0; height: var(--flavor-fill, 18%); background: linear-gradient(#f5cf6f, #d4778e); transition: height .7s; }
+.aroma { position: absolute; left: 48px; top: -8px; width: 34px; height: 34px; border: 4px solid #8a5da2; border-color: #8a5da2 transparent transparent; border-radius: 50%; opacity: 0; }
+.flask.aromatic .aroma { opacity: 1; animation: aromaRise 2.6s ease-out infinite; }
+.sense-compass { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+.sense-card { min-height: 100px; padding: 12px; border: 2px solid #8098a3; border-radius: 11px; background: #fff; cursor: pointer; text-align: left; }
+.sense-card:hover, .sense-card[aria-pressed="true"] { background: #eaf7f2; border-color: #2e7550; }
+.attention-stage { position: relative; height: 260px; overflow: hidden; border-radius: 13px; background: #0a1930; }
+.moving-shape { position: absolute; display: grid; place-items: center; width: 42px; height: 42px; color: #fff; border-radius: 50%; background: #3a8f98; animation: shapeDrift var(--shape-speed, 8s) ease-in-out infinite alternate; }
+.moving-shape.square { border-radius: 7px; background: #b38040; }
+.moving-shape.star { background: transparent; color: #f5da79; font-size: 2.3rem; }
+.attention-mask { position: absolute; inset: 0; background: #030a16d9; mask: radial-gradient(circle 64px at var(--focus-x, 30%) 50%, transparent 0 62px, #000 65px); -webkit-mask: radial-gradient(circle 64px at var(--focus-x, 30%) 50%, transparent 0 62px, #000 65px); pointer-events: none; }
+.gestalt-board { min-height: 220px; padding: 22px; border-radius: 13px; background: #f6f3e6; display: grid; place-items: center; }
+.gestalt-board svg { width: 100%; height: 200px; }
+.gestalt-dot { transition: transform .8s ease, fill .5s; transform-box: fill-box; transform-origin: center; }
+.gestalt-board.proximity .left-cluster { transform: translateX(-22px); }
+.gestalt-board.proximity .right-cluster { transform: translateX(22px); }
+.gestalt-board.similarity .alt-dot { fill: #a15a75; }
+.closure-piece { transition: transform .7s ease; transform-box: fill-box; transform-origin: center; }
+.gestalt-board.closure .closure-piece { transform: rotate(0deg) translate(0); }
+.context-glyph { font: 800 3rem Georgia, serif; fill: #203a51; }
+.ambiguous-mark { fill: none; stroke: #203a51; stroke-width: 10; stroke-linecap: round; stroke-linejoin: round; }
+
+/* Sidebar */
+.sidebar { position: sticky; top: 14px; max-height: calc(100vh - 28px); overflow: auto; padding: 2px 4px 10px; }
+.sidebar .panel { padding: 18px; margin-bottom: 17px; box-shadow: 0 8px 22px #071d2b18; }
+.sidebar h2 { margin: 0 0 10px; font-size: 1.16rem; }
+progress { width: 100%; height: 18px; accent-color: #2d7853; }
+.progress-text { margin: 6px 0 0; font-weight: 800; }
+.fragment-rack { display: grid; grid-template-columns: repeat(4, 1fr); gap: 7px; padding: 0; list-style: none; }
+.fragment { display: grid; place-items: center; min-height: 58px; border: 2px solid #8c9a9f; border-radius: 10px; color: #6e7475; background: #edf0ed; font: 800 1.4rem Georgia, serif; }
+.fragment small { font: 400 .59rem Arial, sans-serif; }
+.fragment.collected { color: #fff9dc; border-color: #d9bd65; background: linear-gradient(145deg, #523478, #163d58); box-shadow: 0 0 13px #d8b45b77; }
+.inventory-list, .achievement-list { padding-left: 21px; font-size: .88rem; }
+.inventory-list li, .achievement-list li { margin-bottom: 8px; }
+.notebook textarea { width: 100%; min-height: 105px; padding: 10px; border: 2px solid #7e909c; border-radius: 9px; resize: vertical; }
+.save-status { color: #465b69; font-size: .79rem; }
+.notebook-actions { display: grid; gap: 8px; margin-top: 10px; }
+.danger-button { border: 2px solid #8b3b3b; border-radius: 9px; padding: 9px; color: #762f34; background: #fff; cursor: pointer; font-weight: 700; }
+.reset-box { margin-top: 9px; padding: 11px; border: 1px solid #b56a6a; border-radius: 8px; background: #fff4f4; }
+
+/* Final mystery and badge */
+.final-case {
+  position: relative; overflow: hidden; padding: 27px; margin-bottom: 24px;
+  border: 3px solid #d0af55; border-radius: 22px; color: #fff;
+  background: radial-gradient(circle at 80% 0, #71459666, transparent 18rem), linear-gradient(135deg, #071629, #16475b 66%, #2d214c);
+  box-shadow: var(--shadow);
+}
+.final-case h2, .final-case h3 { color: #fff; }
+.final-case a { color: #afeae3; }
+.final-lock { padding: 17px; margin: 15px 0; border: 1px solid #a8c7c5; border-radius: 12px; background: #fffdf5; color: var(--ink); }
+.final-lock label { display: block; margin-bottom: 7px; font-weight: 800; }
+.final-lock select, .final-lock input { width: 100%; padding: 10px; border: 2px solid #718b98; border-radius: 8px; background: #fff; }
+.final-submit { color: #132c3f; border: 2px solid #f1d981; background: #fff9df; }
+.final-submit:hover { background: #e8f8ef; }
+.portal-code { text-transform: uppercase; letter-spacing: .15em; }
+.badge-maker { margin-top: 24px; padding: 20px; border-radius: 15px; color: #1e2a38; background: #fffdf6; }
+.badge-maker h3 { color: #153b54; }
+.badge-maker label { display: block; font-weight: 800; }
+.badge-maker input { width: min(100%, 520px); padding: 11px; margin: 7px 0 12px; border: 2px solid #718995; border-radius: 8px; }
+.badge-preview { display: block; width: 100%; max-width: 780px; height: auto; margin: 16px auto 0; border: 2px solid #896f2c; border-radius: 12px; box-shadow: 0 12px 26px #081b2d22; }
+.badge-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.confetti { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.confetti i { position: absolute; top: -20px; width: 8px; height: 14px; background: var(--confetti, #d9b457); animation: confettiFall 3s ease-out forwards; }
+.reading-panel details { padding: 12px 0; border-bottom: 1px solid #c7d0d4; }
+.reading-panel summary { cursor: pointer; color: #153f59; font-weight: 800; }
+.reading-panel li { margin-bottom: 8px; }
+.mobile-progress { display: none; }
+footer { padding: 27px 0; color: #eef5ed; background: #071426; border-top: 5px solid #b8923c; }
+.footer-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 25px; }
+footer h2 { color: #fff; margin-top: 0; font-size: 1.15rem; }
+footer a { color: #9fe2dc; }
+footer p { font-size: .9rem; }
+
+/* Motion */
+@keyframes auroraDrift { to { transform: translate(9vw, 6vh) scale(1.14) rotate(8deg); } }
+@keyframes moteRise { from { transform: translateY(110vh) scale(.5); opacity: 0; } 20% { opacity: .32; } to { transform: translateY(-15vh) translateX(45px) scale(1.2); opacity: 0; } }
+@keyframes cloudDrift { to { transform: translateX(80px) scale(1.1); } }
+@keyframes rayFlow { to { stroke-dashoffset: -44; } }
+@keyframes prismFloat { to { transform: translateY(-8px) rotate(1.5deg); } }
+@keyframes irisBreathe { 50% { transform: scale(1.08); stroke-width: 3; } }
+@keyframes pupilShift { 50% { transform: translateX(5px) scale(.82); } }
+@keyframes twinkle { to { opacity: .35; transform: scale(.72) rotate(12deg); } }
+@keyframes symbolDrift { to { transform: translate(-24px, 9px); opacity: .3; } }
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes noisePulse { to { opacity: .38; transform: scale(1.3); } }
+@keyframes photonTravel { 0% { transform: translateX(0); } 28% { transform: translateX(125px); } 52% { transform: translateX(245px); } 77% { transform: translateX(365px); } 100% { transform: translateX(500px); opacity: .15; } }
+@keyframes soundTravel { 0% { transform: translateX(0); } 27% { transform: translateX(120px); } 52% { transform: translateX(245px); } 76% { transform: translateX(365px); } 100% { transform: translateX(505px); opacity: .2; } }
+@keyframes ossicleMove { to { transform: rotate(9deg); } }
+@keyframes hairBend { to { transform: skewX(13deg); } }
+@keyframes aromaRise { from { transform: translateY(15px) scale(.7); } to { transform: translateY(-48px) scale(1.3); opacity: 0; } }
+@keyframes shapeDrift { from { transform: translate(-12px, -8px) rotate(0); } to { transform: translate(45px, 30px) rotate(120deg); } }
+@keyframes confettiFall { to { transform: translate(var(--drift, 20px), 620px) rotate(540deg); opacity: 0; } }
+
+.no-motion *, .no-motion *::before, .no-motion *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+.no-motion .map-button:hover { transform: none; }
+.no-motion .confetti { display: none; }
+
+@media (max-width: 1020px) {
+  .mission-layout { grid-template-columns: minmax(0, 1fr) 285px; }
+  .hero-grid { gap: 20px; }
+  .room-grid { gap: 11px; }
+}
+@media (max-width: 900px) {
+  .mission-layout { grid-template-columns: 1fr; }
+  .sidebar { position: static; max-height: none; overflow: visible; }
+  .hero-grid { grid-template-columns: 1fr .85fr; }
+  .hero h1 { font-size: 3.35rem; }
+  .briefing-grid { grid-template-columns: 1fr; }
+  .mobile-progress { display: block; position: sticky; bottom: 10px; z-index: 40; width: max-content; max-width: calc(100% - 24px); margin: 0 auto; padding: 9px 16px; border: 2px solid #e0c368; border-radius: 999px; color: #fff; background: #0b364a; box-shadow: 0 8px 25px #0005; font-size: .84rem; }
+  .mobile-progress a { color: #fff; }
+}
+@media (max-width: 700px) {
+  body { font-size: 17px; }
+  .hero-grid { grid-template-columns: 1fr; }
+  .hero-scene { max-height: 320px; aspect-ratio: 1.55; }
+  .hero h1 { font-size: clamp(2.5rem, 13vw, 3.35rem); }
+  .room-grid { grid-template-columns: 1fr 1fr; }
+  .map-button { min-height: 206px; padding: 12px; }
+  .map-art { height: 67px; }
+  .objective-list { columns: 1; }
+  .range-grid, .flavor-lab { grid-template-columns: 1fr; }
+  .pathway-stage { grid-template-columns: 1fr 1fr; }
+  .path-node::after { display: none; }
+  .room-heading { display: block; }
+  .chapter-tag { display: inline-block; margin-top: 5px; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .activity-card, .gallery-map, .final-case, .panel { padding: 18px; }
+}
+@media (max-width: 430px) {
+  .container { width: calc(100% - 22px); }
+  .room-grid { grid-template-columns: 1fr; }
+  .map-button { min-height: 170px; }
+  .map-art { height: 58px; }
+  .pathway-stage, .sense-compass { grid-template-columns: 1fr; }
+  .control-row > button { width: 100%; }
+  .fragment-rack { grid-template-columns: repeat(4, 1fr); }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  .map-button:hover { transform: none; }
+  .confetti, .mote { display: none; }
+}
+@media print {
+  .sensory-sky, .hero, .atmosphere, .gallery-map, .active-area, .sidebar, .mobile-progress, footer, .final-form, .badge-actions, .badge-maker label, .badge-maker input, #badge-message { display: none !important; }
+  body { background: #fff; font-size: 12pt; }
+  .mission-layout { display: block; }
+  .final-case { padding: 0; border: 0; color: #111; background: #fff; box-shadow: none; }
+  .final-case > h2, .final-case > p, .final-case > .final-form, .final-case > #final-feedback { display: none; }
+  .badge-maker { padding: 0; }
+  .badge-preview { max-width: 100%; border: 0; box-shadow: none; }
+}
 
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      color: var(--ink);
-      background-color: #f5f6f3;
-      line-height: 1.7;
-      font-size: 18px;
-    }
-
-    a {
-      color: #174c74;
-      text-decoration: underline;
-      text-underline-offset: 0.16em;
-      font-weight: bold;
-    }
-
-    button,
-    input,
-    textarea {
-      font: inherit;
-    }
-
-    button:focus,
-    input:focus,
-    textarea:focus,
-    a:focus {
-      outline: 4px solid #111111;
-      outline-offset: 3px;
-    }
-
-    .skip-link {
-      position: absolute;
-      left: 16px;
-      top: -100px;
-      z-index: 5000;
-      background-color: var(--white);
-      color: #111111;
-      border: 3px solid #111111;
-      padding: 12px 16px;
-    }
-
-    .skip-link:focus {
-      top: 16px;
-    }
-
-    .container {
-      width: min(1180px, calc(100% - 32px));
-      margin: 0 auto;
-    }
-
-    .hero {
-      position: relative;
-      overflow: hidden;
-      background:
-        radial-gradient(
-          circle at 15% 25%,
-          rgba(255,255,255,0.32),
-          transparent 18%
-        ),
-        radial-gradient(
-          circle at 82% 22%,
-          rgba(255,255,255,0.22),
-          transparent 20%
-        ),
-        linear-gradient(
-          to bottom,
-          #dfeaf2 0%,
-          #eef3ec 52%,
-          #f6f1e5 100%
-        );
-      border-bottom: 5px solid var(--navy);
-      padding: 38px 0 48px;
-    }
-
-    .hero::before {
-      content: "◯   ◇   △   ◌   □   ◇   ◯";
-      position: absolute;
-      top: 42px;
-      right: 4%;
-      color: rgba(16, 47, 74, 0.28);
-      font-size: 1.5rem;
-      letter-spacing: 10px;
-      animation: shiftShapes 7s ease-in-out infinite alternate;
-      pointer-events: none;
-    }
-
-    @keyframes shiftShapes {
-      from {
-        transform: translateX(-10px);
-        opacity: 0.35;
-      }
-
-      to {
-        transform: translateX(10px);
-        opacity: 0.75;
-      }
-    }
-
-    .academy-link {
-      display: inline-block;
-      margin-bottom: 18px;
-      padding: 10px 15px;
-      background-color: var(--white);
-      color: var(--navy);
-      border: 2px solid var(--navy);
-      border-radius: 8px;
-      text-decoration: underline;
-      font-weight: bold;
-    }
-
-    .eyebrow {
-      margin: 0 0 8px;
-      color: var(--navy);
-      font-weight: bold;
-      letter-spacing: 0.09em;
-      text-transform: uppercase;
-    }
-
-    .hero h1 {
-      margin: 0;
-      color: var(--navy-dark);
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(2.6rem, 7vw, 4.8rem);
-      line-height: 1.08;
-    }
-
-    .hero-subtitle {
-      margin: 10px 0 0;
-      color: #5e4e26;
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(1.25rem, 3vw, 1.85rem);
-    }
-
-    .hero-text {
-      max-width: 850px;
-      margin: 18px 0 0;
-      font-size: 1.1rem;
-    }
-
-    main {
-      padding: 32px 0 54px;
-    }
-
-    h2,
-    h3 {
-      color: var(--navy);
-      line-height: 1.3;
-    }
-
-    .panel {
-      background-color: var(--white);
-      border: 2px solid var(--border);
-      border-left: 8px solid var(--blue);
-      border-radius: var(--radius);
-      padding: 23px;
-      margin-bottom: 24px;
-      box-shadow: var(--shadow);
-    }
-
-    .panel-green {
-      border-left-color: var(--green);
-    }
-
-    .panel-gold {
-      border-left-color: var(--gold);
-    }
-
-    .gallery-panel {
-      background-color: var(--navy-dark);
-      color: var(--white);
-      border: 3px solid #04121c;
-      border-radius: var(--radius);
-      padding: 22px;
-      margin-bottom: 24px;
-      box-shadow: var(--shadow);
-    }
-
-    .gallery-panel h2 {
-      color: var(--white);
-      margin-top: 0;
-    }
-
-    .audio-controls {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 14px;
-    }
-
-    .audio-button {
-      background-color: var(--white);
-      color: var(--navy);
-      border: 2px solid var(--white);
-      border-radius: 8px;
-      padding: 10px 14px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    .audio-status {
-      margin-top: 12px;
-      margin-bottom: 0;
-      color: var(--white);
-      font-weight: bold;
-    }
-
-    .mission-layout {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) 350px;
-      gap: 24px;
-      align-items: start;
-    }
-
-    .sidebar {
-      position: sticky;
-      top: 16px;
-    }
-
-    .gallery-map {
-      background-color: #eef2e8;
-      border: 3px solid #63705b;
-      border-radius: 20px;
-      padding: 24px;
-      box-shadow: var(--shadow);
-    }
-
-    .gallery-map h2 {
-      margin-top: 0;
-    }
-
-    .room-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
-    }
-
-    .room-button {
-      width: 100%;
-      min-height: 190px;
-      padding: 18px;
-      text-align: left;
-      background-color: var(--white);
-      color: var(--ink);
-      border: 2px solid var(--border);
-      border-left: 8px solid var(--blue);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      cursor: pointer;
-    }
-
-    .room-button:hover {
-      transform: translateY(-2px);
-    }
-
-    .room-button[aria-pressed="true"] {
-      background-color: var(--green-light);
-      border-left-color: var(--green);
-    }
-
-    .room-icon {
-      display: block;
-      font-size: 2.3rem;
-      margin-bottom: 8px;
-    }
-
-    .room-title {
-      display: block;
-      color: var(--navy);
-      font-weight: bold;
-      margin-bottom: 6px;
-    }
-
-    .status-text {
-      display: block;
-      margin-top: 10px;
-      font-weight: bold;
-    }
-
-    .active-area {
-      margin-top: 26px;
-    }
-
-    .activity-card {
-      background-color: var(--white);
-      border: 2px solid var(--border);
-      border-left: 8px solid var(--blue);
-      border-radius: var(--radius);
-      padding: 24px;
-      box-shadow: var(--shadow);
-    }
-
-    .choice-grid {
-      display: grid;
-      gap: 12px;
-      margin: 18px 0;
-    }
-
-    .choice-button,
-    .action-button,
-    .threshold-button,
-    .gestalt-button {
-      width: 100%;
-      padding: 14px 16px;
-      border: 2px solid var(--border);
-      border-radius: 9px;
-      background-color: var(--white);
-      color: var(--ink);
-      cursor: pointer;
-      text-align: left;
-    }
-
-    .action-button {
-      width: auto;
-      background-color: var(--blue);
-      color: var(--white);
-      border-color: var(--navy);
-      font-weight: bold;
-      text-decoration: underline;
-    }
-
-    .feedback {
-      margin-top: 16px;
-      padding: 16px;
-      border: 2px solid var(--border);
-      border-left: 8px solid var(--blue);
-      border-radius: 10px;
-      background-color: #f8fbfd;
-      color: var(--ink);
-    }
-
-    .feedback.correct {
-      background-color: var(--green-light);
-      border-left-color: var(--green);
-    }
-
-    .feedback.incorrect {
-      background-color: var(--red-light);
-      border-left-color: var(--red);
-    }
-
-    /* Guided next-exhibit navigation */
-    .next-step-wrap {
-      margin-top: 18px;
-      padding-top: 16px;
-      border-top: 2px solid rgba(97, 116, 134, 0.35);
-    }
-
-    .next-step-label {
-      margin: 0 0 10px;
-      font-weight: bold;
-      color: var(--navy);
-    }
-
-    .next-step-button {
-      width: 100%;
-      padding: 14px 18px;
-      background-color: var(--green);
-      color: var(--white);
-      border: 3px solid #173d26;
-      border-radius: 10px;
-      font-weight: bold;
-      text-align: center;
-      text-decoration: underline;
-      cursor: pointer;
-    }
-
-    .next-step-button:hover {
-      background-color: #214f34;
-    }
-
-    .threshold-zone {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 10px;
-      margin: 18px 0;
-    }
-
-    .threshold-light {
-      min-height: 80px;
-      border: 2px solid #5d6870;
-      border-radius: 8px;
-    }
-
-    .light-1 {
-      background-color: #f4f4f4;
-    }
-
-    .light-2 {
-      background-color: #e7e7e7;
-    }
-
-    .light-3 {
-      background-color: #d2d2d2;
-    }
-
-    .light-4 {
-      background-color: #b8b8b8;
-    }
-
-    .light-5 {
-      background-color: #969696;
-    }
-
-    .gestalt-display {
-      background-color: #fafafa;
-      border: 2px solid var(--border);
-      border-radius: 10px;
-      padding: 24px;
-      margin: 18px 0;
-      text-align: center;
-      font-size: 2rem;
-      letter-spacing: 12px;
-    }
-
-    .video-wrapper {
-      position: relative;
-      width: 100%;
-      padding-top: 56.25%;
-      margin: 18px 0;
-      overflow: hidden;
-      border-radius: 10px;
-      border: 2px solid var(--border);
-      background-color: #000000;
-    }
-
-    .video-wrapper iframe {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      border: 0;
-    }
-
-    .resource-button {
-      display: inline-block;
-      margin-top: 8px;
-      padding: 13px 18px;
-      background-color: var(--navy);
-      color: var(--white);
-      border: 3px solid #071826;
-      border-radius: 9px;
-      font-weight: bold;
-      text-decoration: underline;
-    }
-
-    progress {
-      width: 100%;
-      height: 24px;
-    }
-
-    .inventory-list,
-    .achievement-list {
-      padding-left: 22px;
-    }
-
-    label {
-      display: block;
-      margin-top: 14px;
-      font-weight: bold;
-    }
-
-    textarea {
-      width: 100%;
-      min-height: 90px;
-      margin-top: 6px;
-      padding: 10px;
-      border: 2px solid var(--border);
-      border-radius: 8px;
-    }
-
-    .final-case {
-      margin-top: 28px;
-      padding: 25px;
-      background-color: var(--navy);
-      color: var(--white);
-      border: 3px solid #071826;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-    }
-
-    .final-case h2 {
-      color: var(--white);
-    }
-
-    .final-case .feedback {
-      background-color: var(--white);
-      color: var(--ink);
-    }
-
-    .badge-maker {
-      margin-top: 22px;
-      padding: 20px;
-      background-color: var(--gold-light);
-      color: var(--ink);
-      border: 3px solid #80651c;
-      border-radius: 12px;
-    }
-
-    .badge-maker h3 {
-      color: #634900;
-      margin-top: 0;
-    }
-
-    .badge-name-input {
-      width: 100%;
-      max-width: 500px;
-      margin: 6px 0 14px;
-      padding: 12px;
-      border: 2px solid var(--border);
-      border-radius: 8px;
-    }
-
-    .badge-download-button {
-      display: inline-block;
-      background-color: var(--navy);
-      color: var(--white);
-      border: 3px solid var(--navy-dark);
-      border-radius: 9px;
-      padding: 14px 20px;
-      cursor: pointer;
-      font-weight: bold;
-      text-decoration: underline;
-    }
-
-    .return-button {
-      display: inline-block;
-      margin-top: 14px;
-      padding: 14px 20px;
-      background-color: var(--green);
-      color: var(--white);
-      border: 3px solid #173d26;
-      border-radius: 9px;
-      font-weight: bold;
-      text-decoration: underline;
-    }
-
-    .hidden {
-      display: none;
-    }
-
-    footer {
-      background-color: var(--navy-dark);
-      color: var(--white);
-      padding: 24px 0;
-      border-top: 4px solid #c5a84f;
-    }
-
-    footer a {
-      color: var(--white);
-    }
-
-    @media (max-width: 920px) {
-      .mission-layout {
-        grid-template-columns: 1fr;
-      }
-
-      .sidebar {
-        position: static;
-      }
-    }
-
-    @media (max-width: 700px) {
-      .room-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .threshold-zone {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      html {
-        scroll-behavior: auto;
-      }
-
-      .hero::before {
-        animation: none;
-      }
-
-      .room-button:hover {
-        transform: none;
-      }
-    }
   </style>
 </head>
-
 <body>
+<a class="skip-link" href="#main-content">Skip to the Week 5 mission</a>
 
-  <a class="skip-link" href="#main-content">
-    Skip to main content
-  </a>
+<div class="sensory-sky" aria-hidden="true">
+  <div class="aurora one"></div>
+  <div class="aurora two"></div>
+  <div id="motes"></div>
+</div>
 
-  <header class="hero">
-    <div class="container">
-
-      <a class="academy-link" href="../index.html">
-        Return to Psychology Academy
-      </a>
-
-      <p class="eyebrow">
-        Week 5 Psychology Mission
-      </p>
-
-      <h1>
-        The Perception Gallery
-      </h1>
-
-      <p class="hero-subtitle">
-        Nothing Is Quite What It Seems
-      </p>
-
-      <p class="hero-text">
-        Something unusual is happening inside the Academy gallery.
-        Visitors are seeing patterns that are not physically present,
-        missing objects directly in front of them, interpreting the same
-        sensory information differently, and insisting that humans have
-        exactly five senses. Your assignment is to investigate what the
-        sensory systems detect and what the brain ultimately perceives.
-      </p>
-
-    </div>
-  </header>
-
-  <main id="main-content" class="container">
-
-    <section class="gallery-panel" aria-labelledby="audio-heading">
-
-      <h2 id="audio-heading">
-        Perception Gallery Atmosphere
-      </h2>
-
-      <p>
-        Optional museum ambience is available if you would like a more
-        immersive gallery experience. Audio never begins automatically.
-      </p>
-
-      <div class="audio-controls">
-
-        <button
-          id="play-audio"
-          class="audio-button"
-          type="button">
-
-          Play Museum Ambience
-        </button>
-
-        <button
-          id="pause-audio"
-          class="audio-button"
-          type="button">
-
-          Pause Audio
-        </button>
-
+<header class="hero" id="top">
+  <div class="container">
+    <a class="academy-link" href="../index.html">← Return to Psychology Academy</a>
+    <div class="hero-grid">
+      <div>
+        <p class="eyebrow">Week 5 Psychology Mission · OpenStax Chapter 5</p>
+        <h1>The Perception Gallery</h1>
+        <p class="hero-subtitle">The mystery begins before you realize you have seen anything.</p>
+        <p class="hero-text">
+          Tonight, the Academy’s Gallery of the Senses has rearranged itself. Light has separated into color,
+          whispers have become waves, and unfinished patterns appear complete. Explore seven enchanted galleries,
+          test what your sensory systems detect, and discover how your brain constructs the world you experience.
+        </p>
+        <div class="hero-chips" aria-label="Mission features">
+          <span class="hero-chip">7 interactive galleries</span>
+          <span class="hero-chip">14 knowledge locks</span>
+          <span class="hero-chip">No timer or penalty</span>
+          <span class="hero-chip">Downloadable badge</span>
+        </div>
       </div>
 
-      <p
-        id="audio-status"
-        class="audio-status"
-        role="status"
-        aria-live="polite">
+      <div class="hero-scene" aria-hidden="true">
+        <svg viewBox="0 0 760 430" role="img">
+          <title>An animated beam of light passes through a prism into an eye and then toward a brain</title>
+          <defs>
+            <linearGradient id="heroArch" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#243e61"/>
+              <stop offset="1" stop-color="#07111f"/>
+            </linearGradient>
+            <radialGradient id="heroEyeWhite">
+              <stop offset="0" stop-color="#f8ffff"/>
+              <stop offset="1" stop-color="#b9d6dd"/>
+            </radialGradient>
+          </defs>
+          <path d="M60 388V164Q60 38 190 38h380q130 0 130 126v224" fill="none" stroke="#d3bc72" stroke-width="3" opacity=".45"/>
+          <path d="M88 388V172Q88 70 198 70h364q110 0 110 102v216" fill="url(#heroArch)" stroke="#5b7d8f" stroke-width="2"/>
+          <circle class="hero-star" cx="142" cy="115" r="4"/><circle class="hero-star" cx="619" cy="108" r="3" style="animation-delay:-1s"/>
+          <circle class="hero-star" cx="390" cy="85" r="3" style="animation-delay:-2s"/><circle class="hero-star" cx="690" cy="214" r="3" style="animation-delay:-.5s"/>
+          <path class="ray-in" d="M105 220H235"/>
+          <path class="prism" d="M250 148l78 138H172z"/>
+          <path class="rainbow-ray" d="M280 220L459 170" stroke="#ef7184"/>
+          <path class="rainbow-ray" d="M280 222L466 194" stroke="#e6b75d" style="animation-delay:-.4s"/>
+          <path class="rainbow-ray" d="M280 224L469 218" stroke="#70d18d" style="animation-delay:-.8s"/>
+          <path class="rainbow-ray" d="M280 226L466 243" stroke="#6fc9e5" style="animation-delay:-1.2s"/>
+          <path class="rainbow-ray" d="M280 228L458 269" stroke="#a487e2" style="animation-delay:-1.6s"/>
+          <path d="M458 219Q558 125 654 219Q558 313 458 219Z" fill="url(#heroEyeWhite)" stroke="#d4c074" stroke-width="3"/>
+          <circle class="iris-ring" cx="558" cy="219" r="44"/>
+          <circle class="pupil" cx="558" cy="219" r="22"/>
+          <path class="optic-path" d="M646 227C680 234 675 290 700 301"/>
+          <path d="M671 313c2-20 17-31 34-25 11-18 38-13 39 8 19 4 20 31 3 39-5 19-31 22-41 7-18 9-37-7-31-25z" fill="#b996dd" stroke="#eadbff" stroke-width="2" opacity=".9"/>
+          <path d="M681 315c15-9 23 13 37 0m-26 20c12-10 22 6 39-4m-8-35c-10 11 6 19-1 32" fill="none" stroke="#5b3b7f" stroke-width="3"/>
+          <text x="115" y="344" fill="#dbeef0" font-family="Arial" font-size="15">stimulus</text>
+          <text x="222" y="344" fill="#dbeef0" font-family="Arial" font-size="15">transduction</text>
+          <text x="493" y="344" fill="#dbeef0" font-family="Arial" font-size="15">sensation</text>
+          <text x="653" y="365" fill="#f1d98a" font-family="Arial" font-size="15">perception</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</header>
 
-        Museum ambience is currently paused.
-      </p>
+<main id="main-content" class="container">
+  <section class="atmosphere" aria-labelledby="atmosphere-heading">
+    <h2 id="atmosphere-heading">Choose Your Gallery Atmosphere</h2>
+    <p>
+      Optional museum ambience and gentle motion can make the mission feel more immersive. Audio never starts by itself,
+      and every learning activity works with sound and animation turned off.
+    </p>
+    <audio id="gallery-audio" loop preload="metadata" aria-label="Optional museum ambience">
+      <source src="../assets/audio/freesound_community-museum-ambience-17352.mp3" type="audio/mpeg">
+    </audio>
+    <div class="control-row">
+      <button id="music-toggle" class="control-button" type="button" aria-pressed="false">Play Museum Ambience</button>
+      <button id="motion-toggle" class="control-button" type="button" aria-pressed="false">Pause Animations</button>
+      <label for="volume">Volume</label>
+      <input id="volume" type="range" min="0" max="1" step="0.01" value="0.24">
+    </div>
+    <p id="audio-status" class="status-light" role="status" aria-live="polite">Museum ambience is off.</p>
+    <p id="motion-status" class="status-light"></p>
+  </section>
 
-      <audio
-        id="gallery-audio"
-        loop
-        preload="metadata">
-
-        <source
-          src="../assets/audio/freesound_community-museum-ambience-17352.mp3"
-          type="audio/mpeg">
-
-      </audio>
-
-    </section>
-
-
+  <div class="briefing-grid">
     <section class="panel panel-gold" aria-labelledby="briefing-heading">
-
-      <h2 id="briefing-heading">
-        Gallery Briefing
-      </h2>
-
+      <h2 id="briefing-heading">Your Mission</h2>
       <p>
-        Seven exhibits are available for investigation. Some involve
-        decisions, some use simulations, and others require you to consult
-        outside research resources.
+        Enter each gallery, use its interactive instrument, and solve two knowledge locks. Every completed gallery
+        releases one letter fragment. Collect all seven fragments to reveal the word that opens the final chamber.
       </p>
-
       <p>
-        There is no timer. Incorrect choices are treated as investigation
-        detours and do not reduce your score.
+        There is no timer. A wrong answer simply gives you a useful hint, and you may retry as often as you need.
+        Your progress and notebook entries save in this browser.
       </p>
-
-      <p style="margin-bottom: 0;">
-        Your completed exhibits, evidence, notes, and hidden achievements
-        are saved automatically in this browser.
+      <p class="source-note">
+        <strong>Look for the “OpenStax connection” in every gallery.</strong> It identifies the section of
+        <em>Psychology 2e</em>, Chapter 5 that supports the activity.
       </p>
-
     </section>
-
 
     <section class="panel panel-green" aria-labelledby="objectives-heading">
-
-      <h2 id="objectives-heading">
-        Learning Objectives
-      </h2>
-
-      <ul>
+      <h2 id="objectives-heading">What You Will Practice</h2>
+      <ul class="objective-list">
         <li>Distinguish sensation from perception.</li>
-        <li>Explain absolute threshold and difference threshold.</li>
-        <li>Describe sensory adaptation and selective attention.</li>
-        <li>Explain how sensory receptors and the nervous system contribute to perception.</li>
-        <li>Recognize that human sensory experience extends beyond the traditional five-sense model.</li>
-        <li>Describe how multiple sensory systems work together.</li>
-        <li>Apply Gestalt principles to perceptual organization.</li>
-        <li>Evaluate how expectations, context, attention, and prior experience influence perception.</li>
+        <li>Explain transduction and sensory thresholds.</li>
+        <li>Connect wave properties with sight and sound.</li>
+        <li>Trace light and sound through sensory systems.</li>
+        <li>Compare rods and cones.</li>
+        <li>Identify senses beyond the traditional five.</li>
+        <li>Apply attention and Gestalt principles.</li>
+        <li>Explain how context shapes perception.</li>
       </ul>
-
     </section>
+  </div>
 
+  <div class="mission-layout">
+    <div>
+      <section class="gallery-map" aria-labelledby="map-heading">
+        <h2 id="map-heading">The Seven-Gallery Map</h2>
+        <p>Select any gallery. The suggested route follows Chapter 5, but you may explore in any order.</p>
+        <div id="room-grid" class="room-grid"></div>
+      </section>
 
-    <div class="mission-layout">
+      <div id="active-area" class="active-area" tabindex="-1" aria-live="polite"></div>
 
-      <div>
+      <section id="final-case" class="final-case" aria-labelledby="final-heading" hidden>
+        <div id="confetti" class="confetti" aria-hidden="true"></div>
+        <h2 id="final-heading">The Curator’s Final Perception Mystery</h2>
+        <p>
+          The seven letter fragments have illuminated the final frame. Use the evidence from the galleries to explain
+          how the same physical world can lead to different perceptual experiences.
+        </p>
 
-        <section class="gallery-map" aria-labelledby="map-heading">
-
-          <h2 id="map-heading">
-            Perception Gallery Map
-          </h2>
-
-          <p>
-            Choose any open room. You may investigate the exhibits in any order.
-          </p>
-
-          <div class="room-grid">
-
-            <button
-              class="room-button"
-              type="button"
-              data-experience="entrance"
-              aria-pressed="false">
-
-              <span class="room-icon" aria-hidden="true">
-                👁️
-              </span>
-
-              <span class="room-title">
-                Entrance Hall
-              </span>
-
-              Sensation or perception?
-
-              <span class="status-text">
-                Not yet completed
-              </span>
-
-            </button>
-
-
-            <button
-              class="room-button"
-              type="button"
-              data-experience="threshold"
-              aria-pressed="false">
-
-              <span class="room-icon" aria-hidden="true">
-                🔍
-              </span>
-
-              <span class="room-title">
-                Threshold Testing Room
-              </span>
-
-              Explore sensory detection.
-
-              <span class="status-text">
-                Not yet completed
-              </span>
-
-            </button>
-
-
-            <button
-              class="room-button"
-              type="button"
-              data-experience="attention"
-              aria-pressed="false">
-
-              <span class="room-icon" aria-hidden="true">
-                🎯
-              </span>
-
-              <span class="room-title">
-                Attention Experiment
-              </span>
-
-              Investigate selective attention.
-
-              <span class="status-text">
-                Not yet completed
-              </span>
-
-            </button>
-
-
-            <button
-              class="room-button"
-              type="button"
-              data-experience="senses"
-              aria-pressed="false">
-
-              <span class="room-icon" aria-hidden="true">
-                🧠
-              </span>
-
-              <span class="room-title">
-                Sensory Integration Lab
-              </span>
-
-              Visit the University of Utah sensory systems lab.
-
-              <span class="status-text">
-                Not yet completed
-              </span>
-
-            </button>
-
-
-            <button
-              class="room-button"
-              type="button"
-              data-experience="gestalt"
-              aria-pressed="false">
-
-              <span class="room-icon" aria-hidden="true">
-                🖼️
-              </span>
-
-              <span class="room-title">
-                Gestalt Gallery
-              </span>
-
-              Restore a distorted artwork.
-
-              <span class="status-text">
-                Not yet completed
-              </span>
-
-            </button>
-
-
-            <button
-              class="room-button"
-              type="button"
-              data-experience="video"
-              aria-pressed="false">
-
-              <span class="room-icon" aria-hidden="true">
-                🎥
-              </span>
-
-              <span class="room-title">
-                Recovered Gallery Film
-              </span>
-
-              Watch and analyze visual perception evidence.
-
-              <span class="status-text">
-                Not yet completed
-              </span>
-
-            </button>
-
-
-            <button
-              class="room-button"
-              type="button"
-              data-experience="five"
-              aria-pressed="false">
-
-              <span class="room-icon" aria-hidden="true">
-                ✋
-              </span>
-
-              <span class="room-title">
-                The Five-Senses Plaque
-              </span>
-
-              Investigate an old Academy claim.
-
-              <span class="status-text">
-                Not yet completed
-              </span>
-
-            </button>
-
+        <form id="final-form" class="final-form">
+          <div class="final-lock">
+            <label for="final-one">1. Two visitors view the same ambiguous image but organize it differently. What best explains this?</label>
+            <select id="final-one" required>
+              <option value="">Choose a conclusion</option>
+              <option value="copy">Perception is always a direct copy of the stimulus.</option>
+              <option value="construct">The brain organizes sensory input using context, expectations, and perceptual principles.</option>
+              <option value="broken">One visitor’s sensory receptors must be broken.</option>
+            </select>
           </div>
-
-        </section>
-
-
-        <div id="active-area" class="active-area" tabindex="-1"></div>
-
-
-        <section
-          id="final-case"
-          class="final-case hidden"
-          aria-labelledby="final-heading">
-
-          <h2 id="final-heading">
-            Final Perception Mystery
-          </h2>
-
-          <p>
-            Two Academy visitors observe the same ambiguous image.
-          </p>
-
-          <p>
-            Visitor A sees one object immediately. Visitor B sees something
-            completely different. After receiving additional context, Visitor A
-            suddenly sees what Visitor B originally described.
-          </p>
-
-          <p>
-            Which conclusion best integrates the evidence from the Gallery?
-          </p>
-
-          <div class="choice-grid">
-
-            <button
-              class="choice-button"
-              type="button"
-              data-final="wrong1">
-
-              The sensory stimulus must have physically changed between observations.
-            </button>
-
-            <button
-              class="choice-button"
-              type="button"
-              data-final="correct">
-
-              Perception is constructed from sensory input and can also be influenced
-              by attention, context, expectations, prior experience, and perceptual organization.
-            </button>
-
-            <button
-              class="choice-button"
-              type="button"
-              data-final="wrong2">
-
-              Perception is simply an exact copy of sensory information entering the nervous system.
-            </button>
-
+          <div class="final-lock">
+            <label for="final-two">2. A very faint light is detected on some trials and missed on others. Which idea fits best?</label>
+            <select id="final-two" required>
+              <option value="">Choose a concept</option>
+              <option value="closure">Gestalt closure</option>
+              <option value="signal">Signal detection and the probabilistic nature of a threshold</option>
+              <option value="pitch">Place theory of pitch</option>
+            </select>
           </div>
-
-          <div
-            id="final-feedback"
-            class="feedback"
-            role="status"
-            aria-live="polite">
-
-            Review the evidence in your gallery satchel before choosing your conclusion.
+          <div class="final-lock">
+            <label for="final-three">3. Your mind sees a complete circle even when small sections are missing. Which principle is at work?</label>
+            <select id="final-three" required>
+              <option value="">Choose a principle</option>
+              <option value="closure">Closure</option>
+              <option value="amplitude">Amplitude</option>
+              <option value="adaptation">Sensory adaptation</option>
+            </select>
           </div>
+          <div class="final-lock">
+            <label for="portal-code">4. Arrange your seven letter fragments to enter the gallery code.</label>
+            <input id="portal-code" class="portal-code" type="text" maxlength="7" autocomplete="off" spellcheck="false" placeholder="Seven-letter code" required>
+          </div>
+          <button class="control-button final-submit" type="submit">Unlock the Final Frame</button>
+        </form>
+        <p id="final-feedback" role="status" aria-live="polite">Complete every gallery to reveal this chamber’s code.</p>
 
-        </section>
-
-      </div>
-
-
-      <aside class="sidebar" aria-label="Perception Gallery tools">
-
-        <section class="panel" aria-labelledby="progress-heading">
-
-          <h2 id="progress-heading">
-            Gallery Progress
-          </h2>
-
-          <progress
-            id="progress-bar"
-            value="0"
-            max="7">
-
-            0 of 7 exhibits completed
-          </progress>
-
-          <p id="progress-text">
-            0 of 7 exhibits completed
+        <section id="badge-maker" class="badge-maker" aria-labelledby="badge-heading" hidden>
+          <h3 id="badge-heading">Your Perception Detective Badge</h3>
+          <p>
+            You followed sensory information from physical energy to meaningful experience. Enter your name, generate
+            your personalized badge, and save the image for your Canvas submission.
           </p>
-
+          <label for="learner-name">Name to appear on the badge</label>
+          <input id="learner-name" type="text" maxlength="60" autocomplete="name" placeholder="Enter your name">
+          <div class="badge-actions">
+            <button id="generate-badge" class="action-button primary" type="button">Generate My Badge</button>
+            <button id="download-badge" class="action-button" type="button" disabled>Download Badge as PNG</button>
+            <button id="print-badge" class="action-button" type="button">Print Badge</button>
+          </div>
+          <p id="badge-message" role="status" aria-live="polite"></p>
+          <canvas id="badge-canvas" class="badge-preview" width="1400" height="1000" aria-label="Personalized Week 5 Perception Detective completion badge"></canvas>
         </section>
-
-
-        <section class="panel panel-green" aria-labelledby="inventory-heading">
-
-          <h2 id="inventory-heading">
-            Evidence Satchel
-          </h2>
-
-          <ul id="inventory-list" class="inventory-list">
-            <li>No evidence collected yet.</li>
-          </ul>
-
-        </section>
-
-
-        <section class="panel panel-gold" aria-labelledby="achievement-heading">
-
-          <h2 id="achievement-heading">
-            Hidden Achievements
-          </h2>
-
-          <ul id="achievement-list" class="achievement-list">
-            <li>
-              Optional achievements will appear as you investigate.
-            </li>
-          </ul>
-
-        </section>
-
-
-        <section class="panel" aria-labelledby="notes-heading">
-
-          <h2 id="notes-heading">
-            Gallery Notebook
-          </h2>
-
-          <label for="sensation-notes">
-            Sensation and perception notes
-          </label>
-
-          <textarea
-            id="sensation-notes"
-            data-note="sensation"></textarea>
-
-          <label for="evidence-notes">
-            Evidence and observations
-          </label>
-
-          <textarea
-            id="evidence-notes"
-            data-note="evidence"></textarea>
-
-          <label for="final-notes">
-            Final mystery notes
-          </label>
-
-          <textarea
-            id="final-notes"
-            data-note="final"></textarea>
-
-        </section>
-
-      </aside>
-
+      </section>
     </div>
 
-  </main>
+    <aside class="sidebar" aria-label="Perception Gallery tools">
+      <section class="panel" aria-labelledby="progress-heading">
+        <h2 id="progress-heading">Gallery Progress</h2>
+        <progress id="progress-bar" value="0" max="7">0 of 7 galleries complete</progress>
+        <p id="progress-text" class="progress-text">0 of 7 galleries complete</p>
+        <p id="lock-progress" class="quiet">0 of 14 knowledge locks solved</p>
+      </section>
 
+      <section class="panel panel-gold" aria-labelledby="fragment-heading">
+        <h2 id="fragment-heading">Letter Fragments</h2>
+        <ol id="fragment-rack" class="fragment-rack" aria-label="Collected code fragments"></ol>
+        <p class="quiet">Complete a gallery to illuminate its letter.</p>
+      </section>
 
-  <footer>
+      <section class="panel panel-green" aria-labelledby="evidence-heading">
+        <h2 id="evidence-heading">Curator’s Evidence</h2>
+        <ul id="inventory-list" class="inventory-list"><li>No evidence collected yet.</li></ul>
+      </section>
 
-    <div class="container">
+      <section class="panel" aria-labelledby="achievement-heading">
+        <h2 id="achievement-heading">Discoveries</h2>
+        <ul id="achievement-list" class="achievement-list"><li>Your optional discoveries will appear here.</li></ul>
+      </section>
 
-      <p>
-        Psychology Academy · Week 5 · The Perception Gallery
-      </p>
+      <section class="panel notebook" aria-labelledby="notebook-heading">
+        <h2 id="notebook-heading">Gallery Notebook</h2>
+        <label for="observation-notes"><strong>What surprised you?</strong></label>
+        <textarea id="observation-notes" placeholder="Record a visual effect, concept, or connection..."></textarea>
+        <label for="transfer-notes"><strong>Where could this appear in everyday life?</strong></label>
+        <textarea id="transfer-notes" placeholder="Connect perception to studying, driving, design, music, food, or another safe example..."></textarea>
+        <p id="save-status" class="save-status" role="status">Notebook entries save automatically in this browser.</p>
+        <div class="notebook-actions">
+          <button id="download-notes" class="action-button" type="button">Download My Gallery Notes</button>
+          <button id="reset-progress" class="danger-button" type="button">Reset Week 5 Progress</button>
+        </div>
+        <div id="reset-box" class="reset-box" hidden>
+          <strong>Reset all Week 5 progress and notes?</strong>
+          <div class="control-row">
+            <button id="confirm-reset" class="danger-button" type="button">Yes, Reset</button>
+            <button id="cancel-reset" class="action-button" type="button">Cancel</button>
+          </div>
+        </div>
+      </section>
+    </aside>
+  </div>
 
-      <p>
-        Dr. Tonya Holdaway
-      </p>
+  <section class="panel reading-panel" aria-labelledby="reading-heading">
+    <h2 id="reading-heading">Chapter 5 Reading Trail &amp; Credits</h2>
+    <p>These activities paraphrase and apply concepts from OpenStax <em>Psychology 2e</em>, Chapter 5.</p>
+    <details>
+      <summary>Open the Chapter 5 reading trail</summary>
+      <ul>
+        <li><a href="https://openstax.org/books/psychology-2e/pages/5-1-sensation-versus-perception" target="_blank" rel="noopener">5.1 Sensation versus Perception</a></li>
+        <li><a href="https://openstax.org/books/psychology-2e/pages/5-2-waves-and-wavelengths" target="_blank" rel="noopener">5.2 Waves and Wavelengths</a></li>
+        <li><a href="https://openstax.org/books/psychology-2e/pages/5-3-vision" target="_blank" rel="noopener">5.3 Vision</a></li>
+        <li><a href="https://openstax.org/books/psychology-2e/pages/5-4-hearing" target="_blank" rel="noopener">5.4 Hearing</a></li>
+        <li><a href="https://openstax.org/books/psychology-2e/pages/5-5-the-other-senses" target="_blank" rel="noopener">5.5 The Other Senses</a></li>
+        <li><a href="https://openstax.org/books/psychology-2e/pages/5-6-gestalt-principles-of-perception" target="_blank" rel="noopener">5.6 Gestalt Principles of Perception</a></li>
+      </ul>
+    </details>
+    <p class="quiet">
+      Textbook reference: Spielman, R. M., Jenkins, W. J., &amp; Lovett, M. D. (2020). <em>Psychology 2e</em>. OpenStax.
+      Museum ambience is optional and stored with the Psychology Academy site.
+    </p>
+  </section>
+</main>
 
-      <p>
-        <a href="../index.html">
-          Return to Psychology Academy
-        </a>
-      </p>
+<p id="mobile-progress" class="mobile-progress"><a href="#map-heading">0/7 galleries · 0/14 locks</a></p>
 
+<footer>
+  <div class="container footer-grid">
+    <div>
+      <h2>Psychology Academy · Week 5</h2>
+      <p>The Perception Gallery · Sensation and Perception · Dr. Tonya Holdaway</p>
     </div>
-
-  </footer>
-
+    <div>
+      <p><a href="#top">Return to the top</a><br><a href="../index.html">Return to Psychology Academy</a></p>
+    </div>
+  </div>
+</footer>
 
   <script>
+(() => {
+  "use strict";
 
-    const storageKey =
-      "psychologyPerceptionWeek5";
+  const STORAGE_KEY = "psychologyPerceptionWeek5";
+  const COMPLETION_KEY = "psychologyAcademyWeek5Complete";
+  const TOTAL_LOCKS = 14;
+  const $ = (id) => document.getElementById(id);
 
-    const completionKey =
-      "psychologyAcademyWeek5Complete";
+  const rooms = [
+    {
+      id: "portal",
+      fragment: "P",
+      title: "The Sensation Portal",
+      subtitle: "From physical energy to meaningful experience",
+      source: "5.1 Sensation versus Perception",
+      sourceUrl: "https://openstax.org/books/psychology-2e/pages/5-1-sensation-versus-perception",
+      concepts: ["sensation", "perception", "transduction"],
+      evidence: "Sensory receptors detect physical energy; the nervous system converts it into neural signals, and the brain organizes those signals into perception.",
+      requiredActions: ["portal-run"]
+    },
+    {
+      id: "threshold",
+      fragment: "E",
+      title: "The Threshold Lantern Laboratory",
+      subtitle: "How faint is faint enough to notice?",
+      source: "5.1 Sensation versus Perception",
+      sourceUrl: "https://openstax.org/books/psychology-2e/pages/5-1-sensation-versus-perception",
+      concepts: ["absolute threshold", "difference threshold", "sensory adaptation"],
+      evidence: "Detection is probabilistic: the absolute threshold is the minimum stimulation detected on about half of trials, while a difference threshold concerns a change between stimuli.",
+      requiredActions: ["threshold-slider", "adapt"]
+    },
+    {
+      id: "waves",
+      fragment: "R",
+      title: "The Waveweaver Hall",
+      subtitle: "Turn energy into color, pitch, brightness, and loudness",
+      source: "5.2 Waves and Wavelengths",
+      sourceUrl: "https://openstax.org/books/psychology-2e/pages/5-2-waves-and-wavelengths",
+      concepts: ["wavelength", "frequency", "amplitude"],
+      evidence: "For light, wavelength is associated with hue and amplitude with brightness. For sound, frequency is associated with pitch and amplitude with loudness.",
+      requiredActions: ["light-wave", "sound-wave"]
+    },
+    {
+      id: "vision",
+      fragment: "C",
+      title: "The Living Eye Observatory",
+      subtitle: "Follow light through the eye and compare its receptors",
+      source: "5.3 Vision",
+      sourceUrl: "https://openstax.org/books/psychology-2e/pages/5-3-vision",
+      concepts: ["retina", "rods and cones", "depth cues"],
+      evidence: "Light is focused onto the retina. Rods support dim-light vision, while cones support color and fine detail in brighter conditions.",
+      requiredActions: ["photon", "receptors"]
+    },
+    {
+      id: "hearing",
+      fragment: "E",
+      title: "The Resonance Corridor",
+      subtitle: "Trace a sound wave from air pressure to neural activity",
+      source: "5.4 Hearing",
+      sourceUrl: "https://openstax.org/books/psychology-2e/pages/5-4-hearing",
+      concepts: ["cochlea", "hair cells", "sound localization"],
+      evidence: "Sound moves the eardrum and ossicles, creates fluid motion in the cochlea, bends hair cells, and becomes neural information carried by the auditory nerve.",
+      requiredActions: ["sound", "localize"]
+    },
+    {
+      id: "other",
+      fragment: "P",
+      title: "The More-Than-Five Chamber",
+      subtitle: "Mix flavor and map the senses that guide the body",
+      source: "5.5 The Other Senses",
+      sourceUrl: "https://openstax.org/books/psychology-2e/pages/5-5-the-other-senses",
+      concepts: ["chemical senses", "vestibular sense", "proprioception"],
+      evidence: "Everyday experience integrates many systems. Taste and smell contribute to flavor, while vestibular and proprioceptive information help guide balance and body position.",
+      requiredActions: ["flavor", "body"]
+    },
+    {
+      id: "grand",
+      fragment: "T",
+      title: "The Attention & Gestalt Grand Gallery",
+      subtitle: "Notice what attention selects and how the mind organizes",
+      source: "5.1 and 5.6",
+      sourceUrl: "https://openstax.org/books/psychology-2e/pages/5-6-gestalt-principles-of-perception",
+      concepts: ["selective attention", "inattentional blindness", "Gestalt principles"],
+      evidence: "Attention selects part of the available input, and Gestalt principles such as proximity, similarity, and closure help the brain organize what remains into meaningful wholes.",
+      requiredActions: ["attention", "gestalt"]
+    }
+  ];
 
-    const state = {
-      completed: [],
-      evidence: [],
-      achievements: [],
-      notes: {}
+  const questions = [
+    [
+      {
+        prompt: "Which example is sensation?",
+        choices: ["Photoreceptors respond to light entering the eye.", "A shadow is interpreted as a familiar person.", "Context changes the meaning of an image."],
+        correct: 0,
+        explanation: "Sensation begins when sensory receptors detect stimulus energy."
+      },
+      {
+        prompt: "What is transduction?",
+        choices: ["Ignoring a constant background smell", "Converting stimulus energy into neural signals", "Grouping nearby objects together"],
+        correct: 1,
+        explanation: "Transduction converts physical energy, such as light or pressure, into signals the nervous system can use."
+      }
+    ],
+    [
+      {
+        prompt: "An absolute threshold is best described as…",
+        choices: ["the strongest stimulus a person can tolerate", "the minimum stimulation detected about 50% of the time", "the smallest change between two stimuli"],
+        correct: 1,
+        explanation: "Absolute threshold refers to the lowest level detected on about half of trials, not a perfectly fixed boundary."
+      },
+      {
+        prompt: "Noticing that one lantern has become slightly brighter demonstrates…",
+        choices: ["a difference threshold", "closure", "binocular disparity"],
+        correct: 0,
+        explanation: "A difference threshold is the smallest detectable difference between two stimuli."
+      }
+    ],
+    [
+      {
+        prompt: "As wavelength becomes longer, frequency generally becomes…",
+        choices: ["higher", "lower", "identical to amplitude"],
+        correct: 1,
+        explanation: "Wavelength and frequency have an inverse relationship: longer wavelengths have lower frequencies."
+      },
+      {
+        prompt: "For sound waves, greater amplitude is usually experienced as greater…",
+        choices: ["pitch", "wavelength", "loudness"],
+        correct: 2,
+        explanation: "Sound-wave amplitude relates to loudness; frequency relates to pitch."
+      }
+    ],
+    [
+      {
+        prompt: "Where are rods and cones located?",
+        choices: ["In the lens", "In the retina", "In the optic nerve"],
+        correct: 1,
+        explanation: "Rods and cones are photoreceptors in the retina."
+      },
+      {
+        prompt: "Which receptor is most associated with color and fine detail in bright light?",
+        choices: ["Cones", "Rods", "Hair cells"],
+        correct: 0,
+        explanation: "Cones support color vision and high visual acuity, especially in brighter conditions."
+      }
+    ],
+    [
+      {
+        prompt: "Which sequence correctly follows a sound into the inner ear?",
+        choices: ["Cochlea → eardrum → auditory canal → ossicles", "Ossicles → auditory canal → eardrum → cornea", "Auditory canal → eardrum → ossicles → cochlea"],
+        correct: 2,
+        explanation: "Sound travels through the auditory canal, vibrates the eardrum and ossicles, and then moves fluid in the cochlea."
+      },
+      {
+        prompt: "The brain can help locate a sound by comparing…",
+        choices: ["arrival time and intensity at the two ears", "the number of cones in each eye", "taste and temperature only"],
+        correct: 0,
+        explanation: "Differences in arrival time and sound level at the ears provide important localization cues."
+      }
+    ],
+    [
+      {
+        prompt: "Why can food seem less flavorful when the nose is blocked?",
+        choices: ["Vision stops completely", "Smell normally combines with taste in flavor perception", "The vestibular system turns off"],
+        correct: 1,
+        explanation: "Flavor is multisensory; olfactory information makes a major contribution alongside taste and texture."
+      },
+      {
+        prompt: "Which sense provides information about balance and head movement?",
+        choices: ["Gustation", "Proprioception only", "The vestibular sense"],
+        correct: 2,
+        explanation: "The vestibular system in the inner ear supports balance and information about head movement."
+      }
+    ],
+    [
+      {
+        prompt: "Failing to notice a visible, unexpected object while concentrating elsewhere is…",
+        choices: ["inattentional blindness", "sensory transduction", "a difference threshold"],
+        correct: 0,
+        explanation: "Inattentional blindness can occur when selective attention is focused on another task."
+      },
+      {
+        prompt: "Seeing a complete figure even though parts of its outline are missing illustrates…",
+        choices: ["frequency", "sensory adaptation", "closure"],
+        correct: 2,
+        explanation: "Closure is the tendency to perceptually complete an incomplete figure."
+      }
+    ]
+  ];
+
+  const allActions = rooms.flatMap((room) => room.requiredActions);
+  const allRoomIds = rooms.map((room) => room.id);
+  const freshState = () => ({
+    version: 2,
+    completed: [],
+    solved: [],
+    actions: [],
+    evidence: [],
+    achievements: [],
+    notes: { observations: "", transfer: "" },
+    escaped: false,
+    learner: "",
+    motionPaused: false,
+    settings: { volume: .24 }
+  });
+
+  let storageAvailable = true;
+  let activeIndex = -1;
+  let state = loadState();
+
+  function readCompletionFlag() {
+    try { return localStorage.getItem(COMPLETION_KEY) === "true"; }
+    catch (error) { storageAvailable = false; return false; }
+  }
+
+  function loadState() {
+    const base = freshState();
+    let parsed = null;
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      parsed = raw ? JSON.parse(raw) : null;
+    } catch (error) {
+      storageAvailable = false;
+    }
+    if (!parsed || typeof parsed !== "object") return base;
+
+    /* Preserve a finished legacy mission when upgrading from the earlier Week 5 page. */
+    const legacyComplete = !parsed.version && Array.isArray(parsed.completed) && parsed.completed.length >= 7 && readCompletionFlag();
+    if (legacyComplete) {
+      return {
+        ...base,
+        completed: [...allRoomIds],
+        solved: Array.from({ length: TOTAL_LOCKS }, (_, index) => index),
+        actions: [...allActions],
+        evidence: rooms.map((room) => room.evidence),
+        achievements: ["Legacy Gallery Graduate", "Gallery Completionist"],
+        notes: typeof parsed.notes === "object" ? {
+          observations: parsed.notes.sensation || parsed.notes.evidence || "",
+          transfer: parsed.notes.final || ""
+        } : base.notes,
+        escaped: true
+      };
+    }
+
+    return {
+      ...base,
+      completed: Array.isArray(parsed.completed) ? [...new Set(parsed.completed.filter((id) => allRoomIds.includes(id)))] : [],
+      solved: Array.isArray(parsed.solved) ? [...new Set(parsed.solved.filter((n) => Number.isInteger(n) && n >= 0 && n < TOTAL_LOCKS))] : [],
+      actions: Array.isArray(parsed.actions) ? [...new Set(parsed.actions.filter((id) => allActions.includes(id)))] : [],
+      evidence: Array.isArray(parsed.evidence) ? parsed.evidence.filter((item) => typeof item === "string") : [],
+      achievements: Array.isArray(parsed.achievements) ? parsed.achievements.filter((item) => typeof item === "string") : [],
+      notes: {
+        observations: parsed.notes && typeof parsed.notes.observations === "string" ? parsed.notes.observations : "",
+        transfer: parsed.notes && typeof parsed.notes.transfer === "string" ? parsed.notes.transfer : ""
+      },
+      escaped: parsed.escaped === true || readCompletionFlag(),
+      learner: typeof parsed.learner === "string" ? parsed.learner.slice(0, 60) : "",
+      motionPaused: parsed.motionPaused === true,
+      settings: { volume: Number.isFinite(parsed.settings && parsed.settings.volume) ? Math.min(1, Math.max(0, parsed.settings.volume)) : .24 }
     };
+  }
 
+  function saveState(message = "Progress saved in this browser.") {
+    state.version = 2;
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      if (state.escaped) localStorage.setItem(COMPLETION_KEY, "true");
+      storageAvailable = true;
+    } catch (error) {
+      storageAvailable = false;
+    }
+    if ($("save-status")) {
+      $("save-status").textContent = storageAvailable ? message : "This browser is blocking saved progress. Keep this tab open until you finish.";
+    }
+  }
 
-    const experienceOrder = [
-      "entrance",
-      "threshold",
-      "attention",
-      "senses",
-      "gestalt",
-      "video",
-      "five"
+  function miniArt(index) {
+    const art = [
+      `<svg viewBox="0 0 260 82" aria-hidden="true"><path class="mini-wave" d="M5 41h62"/><path d="M79 16l34 55H45z" fill="#d8f4f222" stroke="#94ddd7" stroke-width="2"/><path class="mini-wave" d="M93 41h52" stroke="#efc46f"/><path d="M139 41q39-32 78 0-39 32-78 0z" fill="#ecfbfb" stroke="#e3c56c" stroke-width="2"/><circle cx="178" cy="41" r="14" fill="#40a2a6"/><circle cx="178" cy="41" r="6" fill="#06101d"/><path class="mini-wave" d="M221 41h35"/></svg>`,
+      `<svg viewBox="0 0 260 82" aria-hidden="true"><rect x="22" y="14" width="216" height="54" rx="27" fill="#0b1b30" stroke="#9a864c"/><g class="mini-orbit"><circle cx="130" cy="41" r="25" fill="none" stroke="#4c7181" stroke-dasharray="4 7"/><circle cx="130" cy="16" r="5" fill="#f8d870"/></g><path d="M49 51h53" stroke="#5ba99f" stroke-width="8"/><path d="M103 51h108" stroke="#f1d16c" stroke-width="8" opacity=".28"/><text x="108" y="46" fill="#fff6cf" font-size="15" font-family="Arial">50%</text></svg>`,
+      `<svg viewBox="0 0 260 82" aria-hidden="true"><path class="mini-wave" d="M0 42c20-47 40 47 60 0s40 47 60 0 40 47 60 0 40 47 60 0"/><circle class="mini-float" cx="224" cy="25" r="13" fill="#e9c862"/><path d="M30 67h195" stroke="#8ca5ae" stroke-width="1"/></svg>`,
+      `<svg viewBox="0 0 260 82" aria-hidden="true"><path d="M31 41q54-46 108 0-54 46-108 0z" fill="#efffff" stroke="#d8be69" stroke-width="2"/><circle cx="85" cy="41" r="22" fill="#62bbb4"/><circle cx="85" cy="41" r="9" fill="#06111e"/><path class="mini-wave" d="M139 41h87"/><circle class="mini-orbit" cx="225" cy="41" r="18" fill="none" stroke="#eccb6c" stroke-dasharray="3 5"/></svg>`,
+      `<svg viewBox="0 0 260 82" aria-hidden="true"><path class="mini-wave" d="M5 41c12-25 24 25 36 0s24 25 36 0"/><path d="M102 17c-27 6-31 54 4 52 31-2 14-28 30-33 14-5 22 15 6 23" fill="none" stroke="#8fd6d1" stroke-width="7" stroke-linecap="round"/><path d="M170 26q22 15 0 30m18-42q38 27 0 54" fill="none" stroke="#e6c465" stroke-width="3"/></svg>`,
+      `<svg viewBox="0 0 260 82" aria-hidden="true"><path d="M54 19h30v18l23 35H31l23-35z" fill="#edf9f8" stroke="#8ad1ca" stroke-width="2"/><path d="M38 58h61l8 14H31z" fill="#e4a168"/><path class="mini-wave" d="M68 17c-13-18 19-15 5-33" stroke="#cf95df"/><g class="mini-orbit"><path d="M174 10v62M143 41h62" stroke="#e5cb77" stroke-width="2"/><circle cx="174" cy="41" r="28" fill="none" stroke="#7bbab5"/><circle cx="174" cy="13" r="5" fill="#f0ce6c"/><circle cx="202" cy="41" r="5" fill="#91d6d0"/><circle cx="174" cy="69" r="5" fill="#d98ca0"/><circle cx="146" cy="41" r="5" fill="#fff"/></g></svg>`,
+      `<svg viewBox="0 0 260 82" aria-hidden="true"><g fill="#77c8c1"><circle cx="32" cy="25" r="8"/><circle cx="54" cy="25" r="8"/><circle cx="32" cy="49" r="8"/><circle cx="54" cy="49" r="8"/></g><g fill="#e1bd61"><circle cx="117" cy="25" r="8"/><circle cx="139" cy="25" r="8"/><circle cx="117" cy="49" r="8"/><circle cx="139" cy="49" r="8"/></g><path d="M186 58a27 27 0 1 1 28-37" fill="none" stroke="#b993d6" stroke-width="8"/><path class="mini-wave" d="M5 72h245"/></svg>`
     ];
+    return art[index];
+  }
 
-    const evidenceMap = {
-      entrance:
-        "Sensation and Perception Distinction Card",
+  function renderMap() {
+    const grid = $("room-grid");
+    grid.innerHTML = rooms.map((room, index) => {
+      const complete = state.completed.includes(room.id);
+      const active = index === activeIndex;
+      return `<button id="room-${index}" class="map-button${complete ? " complete" : ""}" type="button" data-room="${index}" aria-pressed="${active}">
+        <span class="map-art">${miniArt(index)}</span>
+        <span class="map-title">${index + 1}. ${room.title}</span>
+        <span class="map-subtitle">${room.subtitle}</span>
+        <span class="map-status">${complete ? `Complete · Fragment ${room.fragment}` : actionSummary(room)}</span>
+      </button>`;
+    }).join("");
 
-      threshold:
-        "Threshold Calibration Record",
+    grid.querySelectorAll("[data-room]").forEach((button) => {
+      button.addEventListener("click", () => openRoom(Number(button.dataset.room)));
+      button.addEventListener("pointermove", (event) => {
+        if (reduceMotion()) return;
+        const rect = button.getBoundingClientRect();
+        const x = (event.clientX - rect.left) / rect.width - .5;
+        const y = (event.clientY - rect.top) / rect.height - .5;
+        button.style.setProperty("--tilt-x", `${x * 4}deg`);
+        button.style.setProperty("--tilt-y", `${y * -4}deg`);
+      });
+      button.addEventListener("pointerleave", () => {
+        button.style.removeProperty("--tilt-x");
+        button.style.removeProperty("--tilt-y");
+      });
+    });
+  }
 
-      attention:
-        "Selective Attention Report",
+  function actionSummary(room) {
+    const done = room.requiredActions.filter((action) => state.actions.includes(action)).length;
+    return done ? `${done}/${room.requiredActions.length} instruments explored` : "Ready to investigate";
+  }
 
-      senses:
-        "Multisensory Integration Report",
+  function roomHeader(index, instructions, labMarkup) {
+    const room = rooms[index];
+    return `<article class="activity-card" aria-labelledby="room-heading-${index}">
+      <div class="room-heading">
+        <div><span class="room-number">Gallery ${index + 1} of 7 · Fragment ${room.fragment}</span><h2 id="room-heading-${index}">${room.title}</h2><p>${room.subtitle}</p></div>
+        <span class="chapter-tag">OpenStax connection: <a href="${room.sourceUrl}" target="_blank" rel="noopener">${room.source}</a></span>
+      </div>
+      <div class="concept-strip">${room.concepts.map((concept) => `<span>${concept}</span>`).join("")}</div>
+      <p class="activity-instructions"><strong>Investigate:</strong> ${instructions}</p>
+      ${labMarkup}
+      <p id="explore-status-${index}" class="exploration-check">${explorationStatus(index)}</p>
+      <section class="lock-zone" aria-labelledby="lock-heading-${index}">
+        <h3 id="lock-heading-${index}">Knowledge Locks</h3>
+        <p>Solve both locks. A missed answer gives you a hint and never lowers a score.</p>
+        <div id="questions-${index}"></div>
+      </section>
+      <div id="clue-holder-${index}">${state.completed.includes(room.id) ? clueMarkup(index) : ""}</div>
+    </article>`;
+  }
 
-      gestalt:
-        "Gestalt Restoration Key",
+  function explorationStatus(index) {
+    const room = rooms[index];
+    const done = room.requiredActions.filter((action) => state.actions.includes(action)).length;
+    if (done === room.requiredActions.length) return "✓ Interactive investigation complete. Now solve both knowledge locks.";
+    return `Interactive investigation: ${done} of ${room.requiredActions.length} instrument${room.requiredActions.length === 1 ? "" : "s"} explored.`;
+  }
 
-      video:
-        "Recovered Gallery Film Notes",
+  function clueMarkup(index) {
+    const room = rooms[index];
+    return `<div class="clue-card" role="status"><span class="fragment-reveal" aria-hidden="true">${room.fragment}</span><strong>Gallery restored!</strong><br>${room.evidence}</div>`;
+  }
 
-      five:
-        "Expanded Sensory Systems Plaque"
+  function openRoom(index) {
+    activeIndex = index;
+    renderMap();
+    const renderers = [renderPortal, renderThreshold, renderWaves, renderVision, renderHearing, renderOtherSenses, renderGrandGallery];
+    renderers[index]();
+    renderQuestions(index);
+    const heading = $(`room-heading-${index}`);
+    if (heading) {
+      heading.setAttribute("tabindex", "-1");
+      heading.focus({ preventScroll: true });
+      $("active-area").scrollIntoView({ behavior: reduceMotion() ? "auto" : "smooth", block: "start" });
+    }
+  }
+
+  function renderPortal() {
+    const lab = `<section class="lab-scene" aria-labelledby="portal-lab-heading">
+      <h3 id="portal-lab-heading">The Four-Step Sensory Pathway</h3>
+      <p>Send one sparkle through the system. Watch where detection ends and interpretation begins.</p>
+      <div class="pathway-stage" aria-label="Stimulus to perception pathway">
+        <div class="path-node" data-path-node="0"><span class="path-icon" aria-hidden="true">✦</span>Physical stimulus</div>
+        <div class="path-node" data-path-node="1"><span class="path-icon" aria-hidden="true">◉</span>Sensory receptor</div>
+        <div class="path-node" data-path-node="2"><span class="path-icon" aria-hidden="true">〰</span>Neural signal</div>
+        <div class="path-node" data-path-node="3"><span class="path-icon" aria-hidden="true">🧠</span>Organized perception</div>
+      </div>
+      <div class="control-row"><button id="run-pathway" class="action-button primary" type="button">Send a Sparkle Through the Pathway</button></div>
+      <div id="portal-caption" class="scene-caption">A physical stimulus must be detected before it can be interpreted.</div>
+    </section>`;
+    $("active-area").innerHTML = roomHeader(0, "Activate the pathway. Sensation includes receptor detection and neural signaling; perception gives the incoming pattern meaning.", lab);
+    $("run-pathway").addEventListener("click", () => {
+      const nodes = [...document.querySelectorAll("[data-path-node]")];
+      nodes.forEach((node) => node.classList.remove("lit"));
+      nodes.forEach((node, position) => {
+        window.setTimeout(() => node.classList.add("lit"), reduceMotion() ? 0 : position * 520);
+      });
+      $("portal-caption").innerHTML = "<strong>Sensation:</strong> receptors detect energy and transduce it into neural activity. <strong>Perception:</strong> the brain organizes and interprets that activity.";
+      $("portal-caption").classList.add("success");
+      recordAction("portal-run", 0);
+    });
+  }
+
+  function renderThreshold() {
+    const dots = Array.from({ length: 26 }, (_, i) => `<i class="noise-dot" style="left:${(i * 37) % 96}%;top:${(i * 53) % 88}%;animation-delay:-${i % 4}s"></i>`).join("");
+    const lab = `<section class="lab-scene" aria-labelledby="threshold-lab-heading">
+      <h3 id="threshold-lab-heading">Faint-Light Detector</h3>
+      <div class="range-grid">
+        <div class="threshold-sky" id="threshold-sky" aria-hidden="true">${dots}<span class="threshold-star" id="threshold-star"></span></div>
+        <div class="range-card">
+          <label for="intensity">Lantern intensity: <output id="intensity-output">18</output>%</label>
+          <input id="intensity" type="range" min="0" max="100" value="18">
+          <div class="meter"><span id="threshold-meter" style="--meter:18%"></span></div>
+          <p id="threshold-readout" class="readout">Very faint: the signal may be difficult to separate from background noise.</p>
+        </div>
+      </div>
+      <div class="scene-caption">A threshold is not a magic on/off line. Near the threshold, detection can vary with attention, expectations, motivation, and background noise.</div>
+    </section>
+    <section class="lab-scene" aria-labelledby="adapt-heading">
+      <h3 id="adapt-heading">Adaptation Lantern</h3>
+      <p>Imagine entering a room with a constant scent or steady hum. The stimulus remains, but your sensitivity to it may decrease.</p>
+      <div id="adapt-orb" class="adapt-orb" aria-hidden="true"></div>
+      <div class="control-row"><button id="adapt-button" class="action-button" type="button" aria-pressed="false">Hold the Stimulus Constant</button></div>
+      <div id="adapt-caption" class="scene-caption">The lantern is vivid because it has just appeared.</div>
+    </section>`;
+    $("active-area").innerHTML = roomHeader(1, "Move the faint-light slider, then hold the adaptation lantern constant. Compare detection with a decrease in responsiveness over time.", lab);
+    const updateIntensity = () => {
+      const value = Number($("intensity").value);
+      $("intensity-output").value = value;
+      $("threshold-star").style.setProperty("--star-alpha", String(Math.max(.015, value / 100)));
+      $("threshold-star").style.setProperty("--star-glow", `${Math.round(value / 4)}px`);
+      $("threshold-meter").style.setProperty("--meter", `${value}%`);
+      $("threshold-readout").textContent = value < 25 ? "Very faint: the signal may be difficult to separate from background noise." : value < 58 ? "Near threshold: detection may occur on some trials and not others." : "Clearly visible: the signal now stands out from the background.";
+      recordAction("threshold-slider", 1);
     };
+    $("intensity").addEventListener("input", updateIntensity);
+    $("adapt-button").addEventListener("click", () => {
+      const adapted = $("adapt-orb").classList.toggle("adapted");
+      $("adapt-button").setAttribute("aria-pressed", String(adapted));
+      $("adapt-button").textContent = adapted ? "Restore the Lantern" : "Hold the Stimulus Constant";
+      $("adapt-caption").textContent = adapted ? "Sensory adaptation: responsiveness to an unchanging stimulus has decreased, even though the stimulus is still present." : "Sensitivity returns when the display is refreshed; real sensory systems adapt in different ways and at different rates.";
+      $("adapt-caption").classList.add("success");
+      recordAction("adapt", 1);
+    });
+  }
 
-
-    function loadState() {
-
-      try {
-
-        const saved =
-          JSON.parse(
-            localStorage.getItem(
-              storageKey
-            )
-          );
-
-        if (saved) {
-
-          state.completed =
-            Array.isArray(saved.completed)
-              ? saved.completed
-              : [];
-
-          state.evidence =
-            Array.isArray(saved.evidence)
-              ? saved.evidence
-              : [];
-
-          state.achievements =
-            Array.isArray(saved.achievements)
-              ? saved.achievements
-              : [];
-
-          state.notes =
-            saved.notes || {};
-        }
-
-      } catch (error) {
-
-        console.warn(
-          "Saved Perception Gallery progress could not be loaded."
-        );
+  function renderWaves() {
+    const lab = `<section class="lab-scene" aria-labelledby="wave-lab-heading">
+      <h3 id="wave-lab-heading">The Light-and-Sound Loom</h3>
+      <p>Switch between light and sound. Change frequency or wavelength and amplitude, then watch the wave and perceptual readout change.</p>
+      <div class="control-row" role="group" aria-label="Wave type">
+        <button class="tab-button" type="button" data-wave-mode="light" aria-pressed="true">Light</button>
+        <button class="tab-button" type="button" data-wave-mode="sound" aria-pressed="false">Sound</button>
+      </div>
+      <div class="wave-stage">
+        <svg viewBox="0 0 700 170" role="img" aria-labelledby="wave-svg-title"><title id="wave-svg-title">An adjustable wave</title><line class="wave-axis" x1="10" y1="85" x2="690" y2="85"/><path id="wave-path" d=""/><circle class="wave-orb" cx="650" cy="32" r="18"/></svg>
+        <p id="wave-reading" aria-live="polite"></p>
+      </div>
+      <div class="range-grid">
+        <div class="range-card"><label id="frequency-label" for="frequency">Wavelength: <output id="frequency-output">540</output> nm</label><input id="frequency" type="range" min="380" max="740" value="540"></div>
+        <div class="range-card"><label for="amplitude">Amplitude: <output id="amplitude-output">55</output>%</label><input id="amplitude" type="range" min="10" max="95" value="55"></div>
+      </div>
+      <div id="wave-caption" class="scene-caption">Light mode: wavelength relates to hue; amplitude relates to brightness.</div>
+    </section>`;
+    $("active-area").innerHTML = roomHeader(2, "Explore both modes. The same wave vocabulary describes physical properties, but those properties correspond to different experiences for light and sound.", lab);
+    let mode = "light";
+    const updateWave = (mark = true) => {
+      const raw = Number($("frequency").value);
+      const amp = Number($("amplitude").value);
+      const cycles = mode === "light" ? 10 - ((raw - 380) / 360) * 5 : 3 + ((raw - 100) / 900) * 8;
+      const height = 12 + amp * .55;
+      const points = [];
+      for (let x = 10; x <= 690; x += 5) {
+        const y = 85 + Math.sin(((x - 10) / 680) * Math.PI * 2 * cycles) * height;
+        points.push(`${x === 10 ? "M" : "L"}${x.toFixed(1)} ${y.toFixed(1)}`);
       }
-    }
-
-
-    function saveState() {
-
-      localStorage.setItem(
-        storageKey,
-        JSON.stringify(state)
-      );
-    }
-
-
-    function getNextIncompleteExperience(currentId) {
-
-      const currentIndex =
-        experienceOrder.indexOf(currentId);
-
-      for (
-        let i = currentIndex + 1;
-        i < experienceOrder.length;
-        i++
-      ) {
-
-        if (
-          !state.completed.includes(
-            experienceOrder[i]
-          )
-        ) {
-
-          return experienceOrder[i];
-        }
-      }
-
-      for (
-        let i = 0;
-        i < currentIndex;
-        i++
-      ) {
-
-        if (
-          !state.completed.includes(
-            experienceOrder[i]
-          )
-        ) {
-
-          return experienceOrder[i];
-        }
-      }
-
-      return null;
-    }
-
-
-    function getExperienceTitle(id) {
-
-      const button =
-        document.querySelector(
-          '[data-experience="' + id + '"]'
-        );
-
-      if (!button) {
-        return "the next exhibit";
-      }
-
-      const title =
-        button.querySelector(
-          ".room-title"
-        );
-
-      return title
-        ? title.textContent.trim()
-        : "the next exhibit";
-    }
-
-
-    function moveToNextExperience(currentId) {
-
-      const nextId =
-        getNextIncompleteExperience(currentId);
-
-      if (nextId) {
-
-        showExperience(nextId);
-
-        window.setTimeout(
-          function() {
-
-            const heading =
-              document.querySelector(
-                "#active-area h2"
-              );
-
-            if (heading) {
-
-              heading.setAttribute(
-                "tabindex",
-                "-1"
-              );
-
-              heading.focus({
-                preventScroll: true
-              });
-            }
-          },
-          350
-        );
-
-        return;
-      }
-
-      const finalCase =
-        document.getElementById(
-          "final-case"
-        );
-
-      finalCase.classList.remove(
-        "hidden"
-      );
-
-      finalCase.scrollIntoView({
-        behavior:
-          window.matchMedia(
-            "(prefers-reduced-motion: reduce)"
-          ).matches
-            ? "auto"
-            : "smooth",
-        block: "start"
-      });
-
-      window.setTimeout(
-        function() {
-
-          const finalHeading =
-            document.getElementById(
-              "final-heading"
-            );
-
-          if (finalHeading) {
-
-            finalHeading.setAttribute(
-              "tabindex",
-              "-1"
-            );
-
-            finalHeading.focus({
-              preventScroll: true
-            });
-          }
-        },
-        350
-      );
-    }
-
-
-    function addNextStep(feedback, currentId) {
-
-      if (!feedback) {
-        return;
-      }
-
-      const oldNextStep =
-        feedback.querySelector(
-          ".next-step-wrap"
-        );
-
-      if (oldNextStep) {
-        oldNextStep.remove();
-      }
-
-      const nextId =
-        getNextIncompleteExperience(currentId);
-
-      const wrapper =
-        document.createElement(
-          "div"
-        );
-
-      wrapper.className =
-        "next-step-wrap";
-
-      const label =
-        document.createElement(
-          "p"
-        );
-
-      label.className =
-        "next-step-label";
-
-      label.textContent =
-        nextId
-          ? "Exhibit complete. Your next Gallery room is ready."
-          : "All seven Gallery exhibits are complete. Your final perception mystery is ready.";
-
-      const button =
-        document.createElement(
-          "button"
-        );
-
-      button.type =
-        "button";
-
-      button.className =
-        "next-step-button";
-
-      button.textContent =
-        nextId
-          ? "Continue to " +
-            getExperienceTitle(nextId) +
-            " →"
-          : "Proceed to the Final Perception Mystery →";
-
-      button.addEventListener(
-        "click",
-        function() {
-
-          moveToNextExperience(
-            currentId
-          );
-        }
-      );
-
-      wrapper.appendChild(
-        label
-      );
-
-      wrapper.appendChild(
-        button
-      );
-
-      feedback.appendChild(
-        wrapper
-      );
-    }
-
-
-    function completeExperience(id) {
-
-      if (
-        !state.completed.includes(id)
-      ) {
-
-        state.completed.push(id);
-
-        if (
-          !state.evidence.includes(
-            evidenceMap[id]
-          )
-        ) {
-
-          state.evidence.push(
-            evidenceMap[id]
-          );
-        }
-
-        saveState();
-      }
-
-      updateDashboard();
-    }
-
-
-    function awardAchievement(
-      achievement
-    ) {
-
-      if (
-        !state.achievements.includes(
-          achievement
-        )
-      ) {
-
-        state.achievements.push(
-          achievement
-        );
-
-        saveState();
-      }
-
-      updateDashboard();
-    }
-
-
-    function updateDashboard() {
-
-      const progressBar =
-        document.getElementById(
-          "progress-bar"
-        );
-
-      const progressText =
-        document.getElementById(
-          "progress-text"
-        );
-
-      progressBar.value =
-        state.completed.length;
-
-      progressText.textContent =
-        state.completed.length +
-        " of 7 exhibits completed";
-
-
-      const inventoryList =
-        document.getElementById(
-          "inventory-list"
-        );
-
-      inventoryList.innerHTML = "";
-
-      if (
-        state.evidence.length === 0
-      ) {
-
-        inventoryList.innerHTML =
-          "<li>No evidence collected yet.</li>";
-
+      $("wave-path").setAttribute("d", points.join(" "));
+      $("amplitude-output").value = amp;
+      if (mode === "light") {
+        const hue = 270 - ((raw - 380) / 360) * 270;
+        $("wave-path").style.stroke = `hsl(${hue} 78% 68%)`;
+        $("wave-path").style.strokeWidth = String(2 + amp / 20);
+        $("wave-path").style.setProperty("--wave-color", `hsl(${hue} 78% 68%)`);
+        $("frequency-output").value = raw;
+        const hueWord = raw < 450 ? "violet-blue" : raw < 500 ? "blue-green" : raw < 580 ? "green-yellow" : raw < 650 ? "orange" : "red";
+        $("wave-reading").textContent = `${raw} nm appears toward ${hueWord}; amplitude ${amp}% produces ${amp < 40 ? "lower" : amp < 70 ? "moderate" : "greater"} brightness.`;
       } else {
-
-        state.evidence.forEach(
-          function(item) {
-
-            const li =
-              document.createElement(
-                "li"
-              );
-
-            li.textContent =
-              item;
-
-            inventoryList.appendChild(
-              li
-            );
-          }
-        );
+        $("wave-path").style.stroke = "#7ce0d7";
+        $("wave-path").style.strokeWidth = String(2 + amp / 20);
+        $("frequency-output").value = raw;
+        $("wave-reading").textContent = `${raw} Hz is a ${raw < 400 ? "lower" : raw < 720 ? "middle" : "higher"} pitch; amplitude ${amp}% represents ${amp < 40 ? "softer" : amp < 70 ? "moderate" : "louder"} sound.`;
       }
-
-
-      const achievementList =
-        document.getElementById(
-          "achievement-list"
-        );
-
-      achievementList.innerHTML = "";
-
-      if (
-        state.achievements.length === 0
-      ) {
-
-        achievementList.innerHTML =
-          "<li>Optional achievements will appear as you investigate.</li>";
-
+      if (mark) recordAction(`${mode}-wave`, 2);
+    };
+    document.querySelectorAll("[data-wave-mode]").forEach((button) => button.addEventListener("click", () => {
+      mode = button.dataset.waveMode;
+      document.querySelectorAll("[data-wave-mode]").forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
+      const slider = $("frequency");
+      if (mode === "light") {
+        slider.min = "380"; slider.max = "740"; slider.value = "540";
+        $("frequency-label").firstChild.textContent = "Wavelength: ";
+        $("frequency-output").nextSibling.textContent = " nm";
+        $("wave-caption").textContent = "Light mode: wavelength relates to hue; amplitude relates to brightness.";
       } else {
-
-        state.achievements.forEach(
-          function(item) {
-
-            const li =
-              document.createElement(
-                "li"
-              );
-
-            li.textContent =
-              item;
-
-            achievementList.appendChild(
-              li
-            );
-          }
-        );
+        slider.min = "100"; slider.max = "1000"; slider.value = "550";
+        $("frequency-label").firstChild.textContent = "Frequency: ";
+        $("frequency-output").nextSibling.textContent = " Hz";
+        $("wave-caption").textContent = "Sound mode: frequency relates to pitch; amplitude relates to loudness.";
       }
-
-
-      document
-        .querySelectorAll(
-          "[data-experience]"
-        )
-        .forEach(
-          function(button) {
-
-            const id =
-              button.dataset.experience;
-
-            const complete =
-              state.completed.includes(id);
-
-            button.setAttribute(
-              "aria-pressed",
-              complete
-                ? "true"
-                : "false"
-            );
-
-            button
-              .querySelector(
-                ".status-text"
-              )
-              .textContent =
-              complete
-                ? "Completed"
-                : "Not yet completed";
-          }
-        );
-
-
-      if (
-        state.completed.length === 7
-      ) {
-
-        document
-          .getElementById(
-            "final-case"
-          )
-          .classList.remove(
-            "hidden"
-          );
-      }
-    }
-
-
-    function showEntranceHall() {
-
-      const active =
-        document.getElementById(
-          "active-area"
-        );
-
-      active.innerHTML = `
-        <section class="activity-card">
-
-          <h2>
-            Entrance Hall: Sensation or Perception?
-          </h2>
-
-          <p>
-            A visitor's eyes detect light reflected from a painting.
-            Moments later, the visitor recognizes the image as a face.
-          </p>
-
-          <p>
-            Which explanation best describes what happened?
-          </p>
-
-          <div class="choice-grid">
-
-            <button
-              class="choice-button"
-              type="button"
-              data-entrance="correct">
-
-              Detecting the light is sensation; recognizing the face is perception.
-            </button>
-
-            <button
-              class="choice-button"
-              type="button"
-              data-entrance="wrong1">
-
-              Recognizing the face is sensation and detecting light is perception.
-            </button>
-
-            <button
-              class="choice-button"
-              type="button"
-              data-entrance="wrong2">
-
-              Sensation and perception are identical processes.
-            </button>
-
-          </div>
-
-          <div
-            id="entrance-feedback"
-            class="feedback"
-            role="status"
-            aria-live="polite">
-
-            Choose the explanation that best separates detection from interpretation.
-          </div>
-
-        </section>
-      `;
-
-      active
-        .querySelectorAll(
-          "[data-entrance]"
-        )
-        .forEach(
-          function(button) {
-
-            button.addEventListener(
-              "click",
-              function() {
-
-                const feedback =
-                  document.getElementById(
-                    "entrance-feedback"
-                  );
-
-                if (
-                  button.dataset.entrance ===
-                  "correct"
-                ) {
-
-                  feedback.className =
-                    "feedback correct";
-
-                  feedback.innerHTML =
-                    "Exactly. Sensation begins with detecting sensory stimulation, while perception involves organizing and interpreting that information.<br><strong>Evidence collected: Sensation and Perception Distinction Card</strong>";
-
-                  completeExperience(
-                    "entrance"
-                  );
-
-                  addNextStep(
-                    feedback,
-                    "entrance"
-                  );
-
-                } else {
-
-                  feedback.className =
-                    "feedback incorrect";
-
-                  feedback.textContent =
-                    "Investigation detour. Think about the difference between detecting stimulation and interpreting what that stimulation means.";
-                }
-              }
-            );
-          }
-        );
-
-      active.scrollIntoView({
-        behavior:
-          window.matchMedia(
-            "(prefers-reduced-motion: reduce)"
-          ).matches
-            ? "auto"
-            : "smooth",
-        block: "start"
-      });
-    }
-
-
-    function showThresholdRoom() {
-
-      const active =
-        document.getElementById(
-          "active-area"
-        );
-
-      active.innerHTML = `
-        <section class="activity-card">
-
-          <h2>
-            Threshold Testing Room
-          </h2>
-
-          <p>
-            This is a simplified simulation rather than a calibrated
-            laboratory threshold test.
-          </p>
-
-          <p>
-            Imagine that each panel represents a stimulus becoming easier
-            to detect. Select the point where you first become confident
-            that a signal is present.
-          </p>
-
-          <div class="threshold-zone">
-
-            <button
-              class="threshold-button light-1"
-              type="button"
-              data-threshold="1">
-
-              Signal 1
-            </button>
-
-            <button
-              class="threshold-button light-2"
-              type="button"
-              data-threshold="2">
-
-              Signal 2
-            </button>
-
-            <button
-              class="threshold-button light-3"
-              type="button"
-              data-threshold="3">
-
-              Signal 3
-            </button>
-
-            <button
-              class="threshold-button light-4"
-              type="button"
-              data-threshold="4">
-
-              Signal 4
-            </button>
-
-            <button
-              class="threshold-button light-5"
-              type="button"
-              data-threshold="5">
-
-              Signal 5
-            </button>
-
-          </div>
-
-          <div
-            id="threshold-feedback"
-            class="feedback"
-            role="status"
-            aria-live="polite">
-
-            Choose any signal that represents your first confident detection.
-          </div>
-
-        </section>
-      `;
-
-      active
-        .querySelectorAll(
-          "[data-threshold]"
-        )
-        .forEach(
-          function(button) {
-
-            button.addEventListener(
-              "click",
-              function() {
-
-                const feedback =
-                  document.getElementById(
-                    "threshold-feedback"
-                  );
-
-                feedback.className =
-                  "feedback correct";
-
-                feedback.innerHTML =
-                  "In actual psychophysical research, an absolute threshold refers to the minimum stimulus intensity detected about 50% of the time. Individual detection can vary, which is why repeated trials are important.<br><strong>Evidence collected: Threshold Calibration Record</strong>";
-
-                completeExperience(
-                  "threshold"
-                );
-
-                  addNextStep(
-                    feedback,
-                    "threshold"
-                  );
-              }
-            );
-          }
-        );
-
-      active.scrollIntoView({
-        behavior:
-          window.matchMedia(
-            "(prefers-reduced-motion: reduce)"
-          ).matches
-            ? "auto"
-            : "smooth",
-        block: "start"
-      });
-    }
-
-
-    function showAttentionExperiment() {
-
-      const active =
-        document.getElementById(
-          "active-area"
-        );
-
-      active.innerHTML = `
-        <section class="activity-card">
-
-          <h2>
-            Attention Experiment
-          </h2>
-
-          <p>
-            Focus on the row below and count only the circles.
-          </p>
-
-          <div class="gestalt-display" aria-label="Visual attention symbols">
-            ○ △ ○ □ ◇ ○ △ □ ○ ◇
-          </div>
-
-          <p>
-            How many circles did you count?
-          </p>
-
-          <div class="choice-grid">
-
-            <button
-              class="choice-button"
-              type="button"
-              data-attention="4">
-
-              Four
-            </button>
-
-            <button
-              class="choice-button"
-              type="button"
-              data-attention="5">
-
-              Five
-            </button>
-
-            <button
-              class="choice-button"
-              type="button"
-              data-attention="6">
-
-              Six
-            </button>
-
-          </div>
-
-          <div
-            id="attention-feedback"
-            class="feedback"
-            role="status"
-            aria-live="polite">
-
-            Count carefully before selecting.
-          </div>
-
-        </section>
-      `;
-
-      active
-        .querySelectorAll(
-          "[data-attention]"
-        )
-        .forEach(
-          function(button) {
-
-            button.addEventListener(
-              "click",
-              function() {
-
-                const feedback =
-                  document.getElementById(
-                    "attention-feedback"
-                  );
-
-                if (
-                  button.dataset.attention ===
-                  "4"
-                ) {
-
-                  feedback.className =
-                    "feedback correct";
-
-                  feedback.innerHTML = `
-                    <p>
-                      Correct. There are four circles.
-                    </p>
-
-                    <p>
-                      Now a second question: while counting circles,
-                      did you notice that several other shapes were also present?
-                    </p>
-
-                    <p>
-                      Selective attention allows us to focus on some information
-                      while other available information receives less attention.
-                    </p>
-
-                    <p>
-                      <strong>
-                        Evidence collected: Selective Attention Report
-                      </strong>
-                    </p>
-                  `;
-
-                  completeExperience(
-                    "attention"
-                  );
-
-                  addNextStep(
-                    feedback,
-                    "attention"
-                  );
-
-                } else {
-
-                  feedback.className =
-                    "feedback incorrect";
-
-                  feedback.textContent =
-                    "Try the count again. Focus only on the circle symbols.";
-                }
-              }
-            );
-          }
-        );
-
-      active.scrollIntoView({
-        behavior:
-          window.matchMedia(
-            "(prefers-reduced-motion: reduce)"
-          ).matches
-            ? "auto"
-            : "smooth",
-        block: "start"
-      });
-    }
-
-
-    function showSensoryLab() {
-
-      const active =
-        document.getElementById(
-          "active-area"
-        );
-
-      active.innerHTML = `
-        <section class="activity-card">
-
-          <h2>
-            Sensory Integration Laboratory
-          </h2>
-
-          <p>
-            The Gallery's sensory integration system is malfunctioning.
-            Open the University of Utah Sensory Systems resource and investigate
-            how sensory systems contribute to everyday experience.
-          </p>
-
-          <p>
-            Pay particular attention to the idea that sensory systems do not
-            operate completely in isolation.
-          </p>
-
-          <a
-            class="resource-button"
-            href="https://learn.genetics.utah.edu/content/senses/"
-            target="_blank"
-            rel="noopener">
-
-            Open University of Utah Sensory Systems Lab
-          </a>
-
-          <p>
-            When you return, choose the statement that best represents what
-            you discovered.
-          </p>
-
-          <div class="choice-grid">
-
-            <button
-              class="choice-button"
-              type="button"
-              data-senses="correct">
-
-              The brain can combine information from multiple sensory systems
-              to build a unified experience.
-            </button>
-
-            <button
-              class="choice-button"
-              type="button"
-              data-senses="wrong1">
-
-              Every sensory system works independently and never influences another.
-            </button>
-
-            <button
-              class="choice-button"
-              type="button"
-              data-senses="wrong2">
-
-              Sensory receptors directly create fully interpreted perceptions
-              without additional brain processing.
-            </button>
-
-          </div>
-
-          <div
-            id="senses-feedback"
-            class="feedback"
-            role="status"
-            aria-live="polite">
-
-            Explore the external research lab, then return with your conclusion.
-          </div>
-
-        </section>
-      `;
-
-      active
-        .querySelectorAll(
-          "[data-senses]"
-        )
-        .forEach(
-          function(button) {
-
-            button.addEventListener(
-              "click",
-              function() {
-
-                const feedback =
-                  document.getElementById(
-                    "senses-feedback"
-                  );
-
-                if (
-                  button.dataset.senses ===
-                  "correct"
-                ) {
-
-                  feedback.className =
-                    "feedback correct";
-
-                  feedback.innerHTML =
-                    "Evidence accepted. Sensory systems interact, and the brain integrates information from multiple sources to construct experience.<br><strong>Evidence collected: Multisensory Integration Report</strong>";
-
-                  completeExperience(
-                    "senses"
-                  );
-
-                  addNextStep(
-                    feedback,
-                    "senses"
-                  );
-
-                } else {
-
-                  feedback.className =
-                    "feedback incorrect";
-
-                  feedback.textContent =
-                    "That conclusion does not match the sensory systems evidence. Revisit the resource and look for how sensory systems work together.";
-                }
-              }
-            );
-          }
-        );
-
-      active.scrollIntoView({
-        behavior:
-          window.matchMedia(
-            "(prefers-reduced-motion: reduce)"
-          ).matches
-            ? "auto"
-            : "smooth",
-        block: "start"
-      });
-    }
-
-
-    function showGestaltGallery() {
-
-      const active =
-        document.getElementById(
-          "active-area"
-        );
-
-      active.innerHTML = `
-        <section class="activity-card">
-
-          <h2>
-            Gestalt Gallery
-          </h2>
-
-          <p>
-            A damaged artwork contains several symbols that viewers
-            automatically organize into groups.
-          </p>
-
-          <div class="gestalt-display">
-            ● ●      ● ●      ● ●
-          </div>
-
-          <p>
-            Which Gestalt principle most directly explains why the nearby
-            dots tend to be perceived as groups?
-          </p>
-
-          <div class="choice-grid">
-
-            <button
-              class="gestalt-button"
-              type="button"
-              data-gestalt="proximity">
-
-              Proximity
-            </button>
-
-            <button
-              class="gestalt-button"
-              type="button"
-              data-gestalt="closure">
-
-              Closure
-            </button>
-
-            <button
-              class="gestalt-button"
-              type="button"
-              data-gestalt="figure">
-
-              Figure-ground
-            </button>
-
-          </div>
-
-          <div
-            id="gestalt-feedback"
-            class="feedback"
-            role="status"
-            aria-live="polite">
-
-            Choose the perceptual organization principle that best fits the display.
-          </div>
-
-        </section>
-      `;
-
-      active
-        .querySelectorAll(
-          "[data-gestalt]"
-        )
-        .forEach(
-          function(button) {
-
-            button.addEventListener(
-              "click",
-              function() {
-
-                const feedback =
-                  document.getElementById(
-                    "gestalt-feedback"
-                  );
-
-                if (
-                  button.dataset.gestalt ===
-                  "proximity"
-                ) {
-
-                  feedback.className =
-                    "feedback correct";
-
-                  feedback.innerHTML =
-                    "Artwork restored. The principle of proximity describes our tendency to perceive nearby elements as belonging together.<br><strong>Evidence collected: Gestalt Restoration Key</strong>";
-
-                  completeExperience(
-                    "gestalt"
-                  );
-
-                  addNextStep(
-                    feedback,
-                    "gestalt"
-                  );
-
-                } else {
-
-                  feedback.className =
-                    "feedback incorrect";
-
-                  feedback.textContent =
-                    "That principle is important, but it does not best explain why spatially close dots appear grouped. Try again.";
-                }
-              }
-            );
-          }
-        );
-
-      active.scrollIntoView({
-        behavior:
-          window.matchMedia(
-            "(prefers-reduced-motion: reduce)"
-          ).matches
-            ? "auto"
-            : "smooth",
-        block: "start"
-      });
-    }
-
-
-    function showVideoRoom() {
-
-      const active =
-        document.getElementById(
-          "active-area"
-        );
-
-      active.innerHTML = `
-        <section class="activity-card">
-
-          <h2>
-            Recovered Gallery Film
-          </h2>
-
-          <p>
-            A recovered film from the Academy archive contains additional
-            evidence related to sensation and perception.
-          </p>
-
-          <div class="video-wrapper">
-
-            <iframe
-              src="https://www.youtube.com/embed/4w-RIR5iZ24"
-              title="Week 5 sensation and perception video"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowfullscreen>
-            </iframe>
-
-          </div>
-
-          <p>
-            After watching, which broad principle best fits the Gallery's investigation?
-          </p>
-
-          <div class="choice-grid">
-
-            <button
-              class="choice-button"
-              type="button"
-              data-video="correct">
-
-              What we consciously experience depends on both sensory input
-              and how the nervous system processes and interprets that information.
-            </button>
-
-            <button
-              class="choice-button"
-              type="button"
-              data-video="wrong">
-
-              Perception is always a perfect and complete copy of the physical environment.
-            </button>
-
-          </div>
-
-          <div
-            id="video-feedback"
-            class="feedback"
-            role="status"
-            aria-live="polite">
-
-            Watch the recovered film before selecting your conclusion.
-          </div>
-
-        </section>
-      `;
-
-      active
-        .querySelectorAll(
-          "[data-video]"
-        )
-        .forEach(
-          function(button) {
-
-            button.addEventListener(
-              "click",
-              function() {
-
-                const feedback =
-                  document.getElementById(
-                    "video-feedback"
-                  );
-
-                if (
-                  button.dataset.video ===
-                  "correct"
-                ) {
-
-                  feedback.className =
-                    "feedback correct";
-
-                  feedback.innerHTML =
-                    "Film evidence accepted.<br><strong>Evidence collected: Recovered Gallery Film Notes</strong>";
-
-                  completeExperience(
-                    "video"
-                  );
-
-                  addNextStep(
-                    feedback,
-                    "video"
-                  );
-
-                } else {
-
-                  feedback.className =
-                    "feedback incorrect";
-
-                  feedback.textContent =
-                    "That conclusion treats perception as a perfect recording rather than an active psychological process. Review the evidence and try again.";
-                }
-              }
-            );
-          }
-        );
-
-      active.scrollIntoView({
-        behavior:
-          window.matchMedia(
-            "(prefers-reduced-motion: reduce)"
-          ).matches
-            ? "auto"
-            : "smooth",
-        block: "start"
-      });
-    }
-
-
-    function showFiveSenses() {
-
-      const active =
-        document.getElementById(
-          "active-area"
-        );
-
-      active.innerHTML = `
-        <section class="activity-card">
-
-          <h2>
-            The Five-Senses Plaque
-          </h2>
-
-          <p>
-            An old Academy plaque reads:
-          </p>
-
-          <blockquote>
-            “Humans possess exactly five senses.”
-          </blockquote>
-
-          <p>
-            The Gallery curator suspects that this statement is incomplete.
-            Consult the University of Utah resource on the Twenty Senses.
-          </p>
-
-          <a
-            class="resource-button"
-            href="https://learn.genetics.utah.edu/content/senses/twentysenses/"
-            target="_blank"
-            rel="noopener">
-
-            Investigate the Twenty Senses
-          </a>
-
-          <p>
-            Which conclusion should replace the old plaque?
-          </p>
-
-          <div class="choice-grid">
-
-            <button
-              class="choice-button"
-              type="button"
-              data-five="correct">
-
-              The traditional five-sense model is useful, but sensory systems
-              can also be categorized more specifically based on receptors,
-              signals, and functions.
-            </button>
-
-            <button
-              class="choice-button"
-              type="button"
-              data-five="wrong">
-
-              Scientists agree that only five distinct forms of sensory information exist.
-            </button>
-
-          </div>
-
-          <div
-            id="five-feedback"
-            class="feedback"
-            role="status"
-            aria-live="polite">
-
-            Investigate the evidence before rewriting the plaque.
-          </div>
-
-        </section>
-      `;
-
-      active
-        .querySelectorAll(
-          "[data-five]"
-        )
-        .forEach(
-          function(button) {
-
-            button.addEventListener(
-              "click",
-              function() {
-
-                const feedback =
-                  document.getElementById(
-                    "five-feedback"
-                  );
-
-                if (
-                  button.dataset.five ===
-                  "correct"
-                ) {
-
-                  feedback.className =
-                    "feedback correct";
-
-                  feedback.innerHTML =
-                    "Plaque corrected. Sensory systems can be classified in more detailed ways than the traditional five categories.<br><strong>Evidence collected: Expanded Sensory Systems Plaque</strong>";
-
-                  completeExperience(
-                    "five"
-                  );
-
-                  addNextStep(
-                    feedback,
-                    "five"
-                  );
-
-                  awardAchievement(
-                    "Beyond Five: Discovered a more complex model of human sensory systems."
-                  );
-
-                } else {
-
-                  feedback.className =
-                    "feedback incorrect";
-
-                  feedback.textContent =
-                    "The evidence suggests the traditional five-sense model is not the only scientifically useful way to categorize sensory systems.";
-                }
-              }
-            );
-          }
-        );
-
-      active.scrollIntoView({
-        behavior:
-          window.matchMedia(
-            "(prefers-reduced-motion: reduce)"
-          ).matches
-            ? "auto"
-            : "smooth",
-        block: "start"
-      });
-    }
-
-
-    function showExperience(id) {
-
-      if (id === "entrance") {
-        showEntranceHall();
-      }
-
-      if (id === "threshold") {
-        showThresholdRoom();
-      }
-
-      if (id === "attention") {
-        showAttentionExperiment();
-      }
-
-      if (id === "senses") {
-        showSensoryLab();
-      }
-
-      if (id === "gestalt") {
-        showGestaltGallery();
-      }
-
-      if (id === "video") {
-        showVideoRoom();
-      }
-
-      if (id === "five") {
-        showFiveSenses();
-      }
-    }
-
-
-    function configureNotes() {
-
-      document
-        .querySelectorAll(
-          "[data-note]"
-        )
-        .forEach(
-          function(textarea) {
-
-            const key =
-              textarea.dataset.note;
-
-            textarea.value =
-              state.notes[key] || "";
-
-            textarea.addEventListener(
-              "input",
-              function() {
-
-                state.notes[key] =
-                  textarea.value;
-
-                saveState();
-              }
-            );
-          }
-        );
-    }
-
-
-    function configureAudio() {
-
-      const audio =
-        document.getElementById(
-          "gallery-audio"
-        );
-
-      const playButton =
-        document.getElementById(
-          "play-audio"
-        );
-
-      const pauseButton =
-        document.getElementById(
-          "pause-audio"
-        );
-
-      const status =
-        document.getElementById(
-          "audio-status"
-        );
-
-      audio.volume = 0.28;
-
-      playButton.addEventListener(
-        "click",
-        async function() {
-
-          try {
-
-            await audio.play();
-
-            playButton.textContent =
-              "Museum Ambience Playing";
-
-            status.textContent =
-              "Museum ambience is playing at a low volume.";
-
-          } catch (error) {
-
-            console.error(
-              "Audio playback error:",
-              error
-            );
-
-            status.textContent =
-              "Your browser could not start the optional museum ambience. You can continue the mission normally without sound.";
-          }
-        }
-      );
-
-
-      pauseButton.addEventListener(
-        "click",
-        function() {
-
-          audio.pause();
-
-          playButton.textContent =
-            "Play Museum Ambience";
-
-          status.textContent =
-            "Museum ambience is currently paused.";
-        }
-      );
-    }
-
-
-    function wrapCanvasText(
-      ctx,
-      text,
-      x,
-      y,
-      maxWidth,
-      lineHeight
-    ) {
-
-      const words =
-        text.split(" ");
-
-      let line = "";
-      let currentY = y;
-
-      words.forEach(
-        function(word) {
-
-          const test =
-            line + word + " ";
-
-          if (
-            ctx.measureText(test).width > maxWidth &&
-            line !== ""
-          ) {
-
-            ctx.fillText(
-              line.trim(),
-              x,
-              currentY
-            );
-
-            line =
-              word + " ";
-
-            currentY +=
-              lineHeight;
-
-          } else {
-
-            line = test;
-          }
-        }
-      );
-
-      ctx.fillText(
-        line.trim(),
-        x,
-        currentY
-      );
-
-      return currentY;
-    }
-
-
-    function downloadBadge() {
-
-      const name =
-        document
-          .getElementById(
-            "badge-name"
-          )
-          .value
-          .trim();
-
-      const status =
-        document.getElementById(
-          "badge-status"
-        );
-
-      if (!name) {
-
-        status.textContent =
-          "Please enter your name before downloading your badge.";
-
+      $("wave-caption").classList.add("success");
+      updateWave(true);
+    }));
+    $("frequency").addEventListener("input", () => updateWave(true));
+    $("amplitude").addEventListener("input", () => updateWave(true));
+    updateWave(false);
+  }
+
+  function renderVision() {
+    const lab = `<section class="lab-scene" aria-labelledby="eye-lab-heading">
+      <h3 id="eye-lab-heading">Photon Passage</h3>
+      <div id="eye-stage" class="eye-stage">
+        <svg viewBox="0 0 700 290" role="img" aria-labelledby="eye-svg-title"><title id="eye-svg-title">A simplified cutaway eye pathway from cornea to retina and optic nerve</title>
+          <path d="M80 145q105-116 245 0Q185 261 80 145z" fill="#e6f7f7" stroke="#d5bd66" stroke-width="3"/>
+          <path d="M86 145q28-55 66 0-38 55-66 0z" fill="#83c7c5aa" stroke="#fff" stroke-width="3"/>
+          <ellipse cx="156" cy="145" rx="15" ry="54" fill="#8fd2d066" stroke="#c9f6f3" stroke-width="3"/>
+          <ellipse cx="194" cy="145" rx="17" ry="67" fill="#fff4c588" stroke="#e4c769" stroke-width="3"/>
+          <path d="M292 75q32 70 0 140" fill="none" stroke="#dfb85d" stroke-width="8"/>
+          <g class="retina-rods"><rect x="279" y="96" width="7" height="25" rx="3"/><rect x="282" y="127" width="7" height="25" rx="3"/><rect x="279" y="160" width="7" height="25" rx="3"/></g>
+          <g class="retina-cones"><path d="M299 101l6 23h-12z"/><path d="M299 133l6 23h-12z"/><path d="M299 165l6 23h-12z"/></g>
+          <path d="M307 145c60 0 80 54 120 54h89" fill="none" stroke="#d8b65c" stroke-width="7"/>
+          <circle class="photon" id="photon" cx="34" cy="145" r="10" fill="#fff5ad" filter="drop-shadow(0 0 9px #fff0a2)"/>
+          <text class="eye-label" x="79" y="245">cornea</text><text class="eye-label" x="139" y="245">pupil</text><text class="eye-label" x="184" y="245">lens</text><text class="eye-label" x="266" y="245">retina</text><text class="eye-label" x="395" y="245">optic nerve</text>
+        </svg>
+      </div>
+      <div class="control-row"><button id="send-photon" class="action-button primary" type="button">Send a Photon</button><button class="tab-button" data-receptor="rods" type="button" aria-pressed="false">Explore Rods</button><button class="tab-button" data-receptor="cones" type="button" aria-pressed="false">Explore Cones</button></div>
+      <div id="eye-caption" class="scene-caption">Light passes through the cornea and pupil. The lens helps focus it on the retina.</div>
+    </section>
+    <section class="lab-scene" aria-labelledby="depth-heading">
+      <h3 id="depth-heading">Monocular Depth Stage</h3>
+      <p>Move the gallery statue “farther away.” Notice how relative size and position in the scene can create depth from one eye’s image.</p>
+      <div id="depth-scene" class="depth-scene" style="--depth:45" aria-hidden="true"><div class="depth-road"></div><span class="depth-object">🏛️</span></div>
+      <label for="depth-range"><strong>Apparent distance</strong></label><input id="depth-range" type="range" min="0" max="100" value="45">
+      <div id="depth-caption" class="scene-caption">Depth perception combines several cues. Relative size and linear perspective are monocular cues.</div>
+    </section>`;
+    $("active-area").innerHTML = roomHeader(3, "Send a photon through the eye, then compare rods and cones. The depth stage is an optional extension.", lab);
+    $("send-photon").addEventListener("click", () => {
+      const photon = $("photon");
+      photon.classList.remove("travel");
+      void photon.getBoundingClientRect();
+      photon.classList.add("travel");
+      $("eye-caption").innerHTML = "The cornea and lens focus light on the <strong>retina</strong>. Photoreceptors transduce light; signals leave through the optic nerve for further processing.";
+      $("eye-caption").classList.add("success");
+      recordAction("photon", 3);
+    });
+    document.querySelectorAll("[data-receptor]").forEach((button) => button.addEventListener("click", () => {
+      const receptor = button.dataset.receptor;
+      $("eye-stage").classList.remove("rods", "cones");
+      $("eye-stage").classList.add(receptor);
+      document.querySelectorAll("[data-receptor]").forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
+      $("eye-caption").textContent = receptor === "rods" ? "Rods are numerous outside the fovea and are especially useful in dim light, but they do not provide color vision." : "Cones are concentrated in the fovea and support color vision and fine detail in brighter light.";
+      $("eye-caption").classList.add("success");
+      recordAction("receptors", 3);
+    }));
+    $("depth-range").addEventListener("input", (event) => {
+      const value = Number(event.target.value);
+      $("depth-scene").style.setProperty("--depth", value);
+      $("depth-caption").textContent = value > 65 ? "The smaller, higher object appears farther away. Your brain interprets relative size and position as depth cues." : "Moving lower and appearing larger makes the same object seem closer.";
+    });
+  }
+
+  function renderHearing() {
+    const lab = `<section class="lab-scene" aria-labelledby="ear-lab-heading">
+      <h3 id="ear-lab-heading">The Traveling Sound</h3>
+      <div id="ear-stage" class="ear-stage">
+        <svg viewBox="0 0 700 290" role="img" aria-labelledby="ear-svg-title"><title id="ear-svg-title">A simplified sound pathway through the ear to cochlear hair cells</title>
+          <path d="M70 75c-47 6-48 133-2 142 46 8 28-60 73-58" fill="none" stroke="#dcaa86" stroke-width="20" stroke-linecap="round"/>
+          <path d="M119 158h130" stroke="#aadbd7" stroke-width="20" stroke-linecap="round"/>
+          <path d="M251 101v115" stroke="#e6c46e" stroke-width="8"/>
+          <g class="ossicle" fill="none" stroke="#efddb0" stroke-width="8" stroke-linecap="round"><path d="M273 133l29 22 24-35 29 36"/></g>
+          <path d="M360 91c93 0 109 125 20 133-67 6-71-74-21-82 42-6 51 47 17 51" fill="none" stroke="#ba8ed8" stroke-width="18" stroke-linecap="round"/>
+          <g fill="#82d2ca"><rect class="hair-cell" x="376" y="154" width="7" height="24"/><rect class="hair-cell" x="393" y="144" width="7" height="32"/><rect class="hair-cell" x="410" y="148" width="7" height="29"/></g>
+          <path d="M457 169c57 0 67 41 119 41h73" fill="none" stroke="#dfbd62" stroke-width="7"/>
+          <circle class="sound-pulse" id="sound-pulse" cx="36" cy="156" r="13" fill="#8be1dc" filter="drop-shadow(0 0 10px #7fddd6)"/>
+          <text class="ear-label" x="84" y="258">canal</text><text class="ear-label" x="222" y="258">eardrum</text><text class="ear-label" x="285" y="258">ossicles</text><text class="ear-label" x="373" y="258">cochlea</text><text class="ear-label" x="540" y="258">auditory nerve</text>
+        </svg>
+      </div>
+      <div class="control-row"><button id="send-sound" class="action-button primary" type="button">Send a Sound Wave</button></div>
+      <div id="ear-caption" class="scene-caption">Air-pressure changes enter the auditory canal and vibrate the eardrum.</div>
+    </section>
+    <section class="lab-scene" aria-labelledby="localizer-heading">
+      <h3 id="localizer-heading">Two-Ear Sound Localizer</h3>
+      <div id="localizer" class="localizer" style="--source-x:50%" aria-hidden="true"><span class="sound-source">🔔</span><span class="head-icon">🧑</span></div>
+      <label for="sound-position"><strong>Move the bell from left to right</strong></label><input id="sound-position" type="range" min="-100" max="100" value="0">
+      <div class="range-grid"><div class="range-card">Left-ear cue<div class="meter"><span id="left-ear-meter" style="--meter:50%"></span></div></div><div class="range-card">Right-ear cue<div class="meter"><span id="right-ear-meter" style="--meter:50%"></span></div></div></div>
+      <div id="localizer-caption" class="scene-caption">With the source centered, timing and intensity cues at the two ears are similar.</div>
+    </section>`;
+    $("active-area").innerHTML = roomHeader(4, "Send a wave through the auditory system, then move the bell so the brain receives different information at the two ears.", lab);
+    $("send-sound").addEventListener("click", () => {
+      const pulse = $("sound-pulse");
+      const stage = $("ear-stage");
+      pulse.classList.remove("travel"); stage.classList.remove("ringing");
+      void pulse.getBoundingClientRect();
+      pulse.classList.add("travel"); stage.classList.add("ringing");
+      $("ear-caption").innerHTML = "The eardrum and ossicles transmit vibration to the cochlea. Fluid movement bends <strong>hair cells</strong>, producing signals that travel along the auditory nerve.";
+      $("ear-caption").classList.add("success");
+      recordAction("sound", 4);
+    });
+    $("sound-position").addEventListener("input", (event) => {
+      const value = Number(event.target.value);
+      const x = 50 + value * .38;
+      $("localizer").style.setProperty("--source-x", `${x}%`);
+      $("left-ear-meter").style.setProperty("--meter", `${50 - value * .42}%`);
+      $("right-ear-meter").style.setProperty("--meter", `${50 + value * .42}%`);
+      $("localizer-caption").textContent = Math.abs(value) < 12 ? "The source is centered, so the cues at the ears are similar." : value < 0 ? "The bell is left of center. It generally reaches the left ear sooner and with greater intensity than the right." : "The bell is right of center. It generally reaches the right ear sooner and with greater intensity than the left.";
+      $("localizer-caption").classList.add("success");
+      recordAction("localize", 4);
+    });
+  }
+
+  function renderOtherSenses() {
+    const lab = `<section class="lab-scene" aria-labelledby="flavor-heading">
+      <h3 id="flavor-heading">Multisensory Flavor Cauldron</h3>
+      <div class="flavor-lab">
+        <div id="flask" class="flask" aria-hidden="true"><div class="aroma"></div><div class="flask-neck"></div><div class="flask-body"><div id="flavor-liquid" class="flavor-liquid"></div></div></div>
+        <div>
+          <p>Choose ingredients, then mix. No food or personal disclosure is required—this is a conceptual model.</p>
+          <div class="control-row"><button class="tab-button flavor-part" data-flavor="taste" type="button" aria-pressed="false">Taste</button><button class="tab-button flavor-part" data-flavor="smell" type="button" aria-pressed="false">Smell</button><button class="tab-button flavor-part" data-flavor="texture" type="button" aria-pressed="false">Texture</button></div>
+          <button id="mix-flavor" class="action-button primary" type="button">Mix the Experience</button>
+        </div>
+      </div>
+      <div id="flavor-caption" class="scene-caption">Flavor is an integrated perceptual experience, not the work of taste alone.</div>
+    </section>
+    <section class="lab-scene" aria-labelledby="body-heading">
+      <h3 id="body-heading">The Hidden-Senses Compass</h3>
+      <p>Select a system to reveal information it contributes.</p>
+      <div class="sense-compass">
+        <button class="sense-card" data-body-sense="vestibular" type="button" aria-pressed="false"><strong>Vestibular</strong><br><span class="quiet">Balance and head movement</span></button>
+        <button class="sense-card" data-body-sense="proprioception" type="button" aria-pressed="false"><strong>Proprioception</strong><br><span class="quiet">Position of body parts</span></button>
+        <button class="sense-card" data-body-sense="thermoception" type="button" aria-pressed="false"><strong>Thermoception</strong><br><span class="quiet">Temperature</span></button>
+        <button class="sense-card" data-body-sense="interoception" type="button" aria-pressed="false"><strong>Interoception</strong><br><span class="quiet">Internal bodily state</span></button>
+      </div>
+      <div id="body-caption" class="scene-caption">The “five senses” list is a useful starting point, but it does not capture every sensory system.</div>
+    </section>`;
+    $("active-area").innerHTML = roomHeader(5, "Combine at least one flavor ingredient and inspect one body-guidance system. Notice how perception depends on coordinated sources of information.", lab);
+    const selected = new Set();
+    document.querySelectorAll(".flavor-part").forEach((button) => button.addEventListener("click", () => {
+      const part = button.dataset.flavor;
+      if (selected.has(part)) selected.delete(part); else selected.add(part);
+      button.setAttribute("aria-pressed", String(selected.has(part)));
+    }));
+    $("mix-flavor").addEventListener("click", () => {
+      const count = selected.size;
+      $("flavor-liquid").style.setProperty("--flavor-fill", `${18 + count * 23}%`);
+      $("flask").classList.toggle("aromatic", selected.has("smell"));
+      if (!count) {
+        $("flavor-caption").textContent = "Choose at least one ingredient, then mix again.";
         return;
       }
-
-      const canvas =
-        document.createElement(
-          "canvas"
-        );
-
-      canvas.width = 1200;
-      canvas.height = 1200;
-
-      const ctx =
-        canvas.getContext(
-          "2d"
-        );
-
-      ctx.fillStyle =
-        "#f6f1e5";
-
-      ctx.fillRect(
-        0,
-        0,
-        1200,
-        1200
-      );
-
-      ctx.strokeStyle =
-        "#102f4a";
-
-      ctx.lineWidth = 32;
-
-      ctx.strokeRect(
-        38,
-        38,
-        1124,
-        1124
-      );
-
-      ctx.strokeStyle =
-        "#c5a84f";
-
-      ctx.lineWidth = 12;
-
-      ctx.strokeRect(
-        72,
-        72,
-        1056,
-        1056
-      );
-
-      ctx.beginPath();
-
-      ctx.arc(
-        600,
-        305,
-        150,
-        0,
-        Math.PI * 2
-      );
-
-      ctx.fillStyle =
-        "#102f4a";
-
-      ctx.fill();
-
-      ctx.strokeStyle =
-        "#c5a84f";
-
-      ctx.lineWidth = 14;
-
-      ctx.stroke();
-
-      ctx.fillStyle =
-        "#ffffff";
-
-      ctx.font =
-        "bold 125px Arial";
-
-      ctx.textAlign =
-        "center";
-
-      ctx.textBaseline =
-        "middle";
-
-      ctx.fillText(
-        "👁",
-        600,
-        305
-      );
-
-      ctx.textBaseline =
-        "alphabetic";
-
-      ctx.fillStyle =
-        "#102f4a";
-
-      ctx.font =
-        "bold 42px Arial";
-
-      ctx.fillText(
-        "PSYCHOLOGY ACADEMY",
-        600,
-        125
-      );
-
-      ctx.fillStyle =
-        "#315f40";
-
-      ctx.font =
-        "bold 61px Georgia";
-
-      ctx.fillText(
-        "PERCEPTION DETECTIVE",
-        600,
-        525
-      );
-
-      ctx.fillStyle =
-        "#1f2933";
-
-      ctx.font =
-        "32px Arial";
-
-      ctx.fillText(
-        "Achievement Unlocked",
-        600,
-        585
-      );
-
-      ctx.font =
-        "28px Arial";
-
-      ctx.fillText(
-        "Awarded to",
-        600,
-        660
-      );
-
-      ctx.fillStyle =
-        "#102f4a";
-
-      ctx.font =
-        "bold 44px Georgia";
-
-      wrapCanvasText(
-        ctx,
-        name,
-        600,
-        720,
-        900,
-        52
-      );
-
-      ctx.fillStyle =
-        "#1f2933";
-
-      ctx.font =
-        "28px Arial";
-
-      ctx.fillText(
-        "For successfully completing",
-        600,
-        810
-      );
-
-      ctx.font =
-        "bold 32px Arial";
-
-      ctx.fillText(
-        "Week 5: The Perception Gallery",
-        600,
-        860
-      );
-
-      ctx.font =
-        "25px Arial";
-
-      ctx.fillText(
-        "Sensation and Perception",
-        600,
-        910
-      );
-
-      const date =
-        new Date().toLocaleDateString(
-          "en-US",
-          {
-            year: "numeric",
-            month: "long",
-            day: "numeric"
-          }
-        );
-
-      ctx.font =
-        "24px Arial";
-
-      ctx.fillText(
-        "Completed " + date,
-        600,
-        965
-      );
-
-      ctx.font =
-        "21px Arial";
-
-      wrapCanvasText(
-        ctx,
-        "Verification phrase: The brain interprets the world rather than simply recording it.",
-        600,
-        1020,
-        900,
-        31
-      );
-
-      ctx.font =
-        "bold 24px Georgia";
-
-      ctx.fillStyle =
-        "#315f40";
-
-      ctx.fillText(
-        "Dr. Tonya Holdaway",
-        600,
-        1100
-      );
-
-      const safeName =
-        name
-          .replace(
-            /[^a-z0-9]/gi,
-            "-"
-          )
-          .replace(
-            /-+/g,
-            "-"
-          );
-
-      const link =
-        document.createElement(
-          "a"
-        );
-
-      link.download =
-        "Psychology-Academy-Week-5-Perception-Detective-" +
-        safeName +
-        ".png";
-
-      link.href =
-        canvas.toDataURL(
-          "image/png"
-        );
-
-      document.body.appendChild(
-        link
-      );
-
-      link.click();
-
-      document.body.removeChild(
-        link
-      );
-
-      status.textContent =
-        "Your Perception Detective badge has been created. Check your Downloads folder.";
-    }
-
-
-    function configureFinalCase() {
-
-      document
-        .querySelectorAll(
-          "[data-final]"
-        )
-        .forEach(
-          function(button) {
-
-            button.addEventListener(
-              "click",
-              function() {
-
-                const feedback =
-                  document.getElementById(
-                    "final-feedback"
-                  );
-
-                if (
-                  button.dataset.final ===
-                  "correct"
-                ) {
-
-                  localStorage.setItem(
-                    completionKey,
-                    "true"
-                  );
-
-                  feedback.className =
-                    "feedback correct";
-
-                  feedback.innerHTML = `
-                    <h3>
-                      Perception Mystery Solved
-                    </h3>
-
-                    <p>
-                      Your conclusion fits the evidence.
-                      Sensory systems detect information, but conscious
-                      perception reflects how the nervous system organizes
-                      and interprets that information.
-                    </p>
-
-                    <p>
-                      Attention, context, previous experience, expectations,
-                      and perceptual organization can all influence what we perceive.
-                    </p>
-
-                    <p>
-                      <strong>
-                        Completion phrase:
-                      </strong>
-                      The brain interprets the world rather than simply recording it.
-                    </p>
-
-                    <div
-                      class="badge-maker"
-                      aria-labelledby="badge-maker-heading">
-
-                      <h3 id="badge-maker-heading">
-                        Achievement Unlocked: Perception Detective
-                      </h3>
-
-                      <p>
-                        Enter your name below to create your personalized
-                        Week 5 Psychology Academy badge.
-                      </p>
-
-                      <label for="badge-name">
-                        Name to appear on your badge
-                      </label>
-
-                      <input
-                        id="badge-name"
-                        class="badge-name-input"
-                        type="text"
-                        maxlength="60"
-                        autocomplete="name">
-
-                      <br>
-
-                      <button
-                        id="download-badge"
-                        class="badge-download-button"
-                        type="button">
-
-                        Download My Perception Detective Badge
-                      </button>
-
-                      <p
-                        id="badge-status"
-                        role="status"
-                        aria-live="polite">
-                      </p>
-
-                    </div>
-
-                    <a
-                      class="return-button"
-                      href="../index.html">
-
-                      Return to Psychology Academy
-                    </a>
-                  `;
-
-                  document
-                    .getElementById(
-                      "download-badge"
-                    )
-                    .addEventListener(
-                      "click",
-                      downloadBadge
-                    );
-
-                } else {
-
-                  feedback.className =
-                    "feedback incorrect";
-
-                  feedback.textContent =
-                    "That conclusion does not account for the evidence collected throughout the Gallery. Review your satchel and try again.";
-                }
-              }
-            );
-          }
-        );
-    }
-
-
-    function startMission() {
-
-      loadState();
-
-      document
-        .querySelectorAll(
-          "[data-experience]"
-        )
-        .forEach(
-          function(button) {
-
-            button.addEventListener(
-              "click",
-              function() {
-
-                showExperience(
-                  button.dataset.experience
-                );
-              }
-            );
-          }
-        );
-
-      configureNotes();
-
-      configureAudio();
-
-      configureFinalCase();
-
+      const joined = [...selected].join(", ");
+      $("flavor-caption").textContent = `You combined ${joined}. Taste and smell are chemical senses, and texture adds somatosensory information; the resulting flavor is multisensory.`;
+      $("flavor-caption").classList.add("success");
+      recordAction("flavor", 5);
+    });
+    const bodyText = {
+      vestibular: "The vestibular organs of the inner ear provide information about balance, acceleration, and head movement.",
+      proprioception: "Proprioceptors help you sense the position of muscles, joints, and body parts without watching them.",
+      thermoception: "Thermoreceptors contribute information about temperature and changes in temperature.",
+      interoception: "Interoception refers to sensing internal bodily conditions, such as fullness or the rhythm of a heartbeat."
+    };
+    document.querySelectorAll("[data-body-sense]").forEach((button) => button.addEventListener("click", () => {
+      document.querySelectorAll("[data-body-sense]").forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
+      $("body-caption").textContent = bodyText[button.dataset.bodySense];
+      $("body-caption").classList.add("success");
+      recordAction("body", 5);
+    }));
+  }
+
+  function renderGrandGallery() {
+    const shapes = [
+      [12, 23, "circle", "●"], [34, 65, "square", "■"], [56, 28, "circle", "●"], [75, 67, "square", "■"], [87, 20, "star", "✦"], [20, 76, "circle", "●"]
+    ].map((item, index) => `<span class="moving-shape ${item[2]}" style="left:${item[0]}%;top:${item[1]}%;--shape-speed:${6 + index}s;animation-delay:-${index}s">${item[3]}</span>`).join("");
+    const lab = `<section class="lab-scene" aria-labelledby="attention-heading">
+      <h3 id="attention-heading">The Attention Spotlight</h3>
+      <p>Move the spotlight across the stage. What is easiest to notice inside the beam? What remains physically present outside it?</p>
+      <div id="attention-stage" class="attention-stage" style="--focus-x:30%" aria-hidden="true">${shapes}<div class="attention-mask"></div></div>
+      <label for="attention-range"><strong>Move focused attention</strong></label><input id="attention-range" type="range" min="8" max="92" value="30">
+      <div id="attention-caption" class="scene-caption">Selective attention improves processing of some input while other visible information may receive less processing.</div>
+    </section>
+    <section class="lab-scene" aria-labelledby="gestalt-heading">
+      <h3 id="gestalt-heading">Restore the Gestalt Mosaic</h3>
+      <div id="gestalt-board" class="gestalt-board">
+        <svg viewBox="0 0 620 200" role="img" aria-labelledby="gestalt-title"><title id="gestalt-title">Dots and incomplete shapes that can be reorganized by Gestalt principles</title>
+          <g class="left-cluster" fill="#4e9d96"><circle class="gestalt-dot" cx="70" cy="55" r="13"/><circle class="gestalt-dot alt-dot" cx="116" cy="55" r="13"/><circle class="gestalt-dot" cx="70" cy="101" r="13"/><circle class="gestalt-dot alt-dot" cx="116" cy="101" r="13"/></g>
+          <g class="right-cluster" fill="#4e9d96"><circle class="gestalt-dot" cx="245" cy="55" r="13"/><circle class="gestalt-dot alt-dot" cx="291" cy="55" r="13"/><circle class="gestalt-dot" cx="245" cy="101" r="13"/><circle class="gestalt-dot alt-dot" cx="291" cy="101" r="13"/></g>
+          <g transform="translate(460 98)" fill="none" stroke="#815fa1" stroke-width="14" stroke-linecap="round"><path class="closure-piece" d="M-55-13a58 58 0 0 1 42-43" style="transform:rotate(-24deg) translate(-8px,-4px)"/><path class="closure-piece" d="M13-56a58 58 0 0 1 43 42" style="transform:rotate(22deg) translate(8px,-4px)"/><path class="closure-piece" d="M56 14a58 58 0 0 1-42 43" style="transform:rotate(-18deg) translate(7px,7px)"/><path class="closure-piece" d="M-14 57a58 58 0 0 1-43-42" style="transform:rotate(20deg) translate(-8px,6px)"/></g>
+        </svg>
+      </div>
+      <div class="control-row"><button class="tab-button" data-gestalt="proximity" type="button" aria-pressed="false">Proximity</button><button class="tab-button" data-gestalt="similarity" type="button" aria-pressed="false">Similarity</button><button class="tab-button" data-gestalt="closure" type="button" aria-pressed="false">Closure</button></div>
+      <div id="gestalt-caption" class="scene-caption">The elements are unchanged. Use the buttons to change how their relationships encourage organization.</div>
+    </section>
+    <section class="lab-scene" aria-labelledby="context-heading">
+      <h3 id="context-heading">The Context Frame</h3>
+      <p>The center symbol is physically the same. Change its neighbors and notice how context alters the likely interpretation.</p>
+      <div class="gestalt-board"><svg viewBox="0 0 620 200" role="img" aria-labelledby="context-title"><title id="context-title">An ambiguous symbol shown between letters or numbers</title><text id="context-left" class="context-glyph" x="115" y="120">A</text><g class="ambiguous-mark" aria-hidden="true"><path d="M278 63v76"/><path d="M304 64c44-3 47 33 4 38 46-1 47 39-4 37"/></g><text id="context-right" class="context-glyph" x="455" y="120">C</text></svg></div>
+      <div class="control-row"><button id="letter-context" class="tab-button" type="button" aria-pressed="true">Letter Context</button><button id="number-context" class="tab-button" type="button" aria-pressed="false">Number Context</button></div>
+      <div id="context-caption" class="scene-caption">Between A and C, the center shape is likely read as B.</div>
+    </section>`;
+    $("active-area").innerHTML = roomHeader(6, "Move the attention spotlight and restore the mosaic with a Gestalt principle. The context frame is an optional extension.", lab);
+    $("attention-range").addEventListener("input", (event) => {
+      const value = Number(event.target.value);
+      $("attention-stage").style.setProperty("--focus-x", `${value}%`);
+      $("attention-caption").textContent = value > 78 ? "The gold star is now inside the spotlight. It was physically present before you attended to that region." : "The spotlight makes selected shapes easier to process while other information remains outside the focus.";
+      $("attention-caption").classList.add("success");
+      recordAction("attention", 6);
+    });
+    document.querySelectorAll("[data-gestalt]").forEach((button) => button.addEventListener("click", () => {
+      const principle = button.dataset.gestalt;
+      $("gestalt-board").className = `gestalt-board ${principle}`;
+      document.querySelectorAll("[data-gestalt]").forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
+      const text = {
+        proximity: "Proximity: nearby elements are likely to be grouped together.",
+        similarity: "Similarity: elements with shared features are likely to be grouped together.",
+        closure: "Closure: the mind tends to fill in missing information and perceive a complete form."
+      };
+      $("gestalt-caption").textContent = text[principle];
+      $("gestalt-caption").classList.add("success");
+      recordAction("gestalt", 6);
+    }));
+    $("letter-context").addEventListener("click", () => setContext("letter"));
+    $("number-context").addEventListener("click", () => setContext("number"));
+  }
+
+  function setContext(mode) {
+    const letters = mode === "letter";
+    $("context-left").textContent = letters ? "A" : "12";
+    $("context-right").textContent = letters ? "C" : "14";
+    $("letter-context").setAttribute("aria-pressed", String(letters));
+    $("number-context").setAttribute("aria-pressed", String(!letters));
+    $("context-caption").textContent = letters ? "Between A and C, the center shape is likely read as B." : "Between 12 and 14, the identical center shape is likely read as 13. Expectations created by context guide perception.";
+    $("context-caption").classList.add("success");
+  }
+
+  function recordAction(action, roomIndex) {
+    if (!state.actions.includes(action)) state.actions.push(action);
+    const status = $(`explore-status-${roomIndex}`);
+    if (status) status.textContent = explorationStatus(roomIndex);
+    maybeCompleteRoom(roomIndex);
+    updateDashboard();
+    saveState();
+  }
+
+  function renderQuestions(roomIndex) {
+    const container = $(`questions-${roomIndex}`);
+    container.innerHTML = questions[roomIndex].map((question, questionIndex) => {
+      const lockId = roomIndex * 2 + questionIndex;
+      const solved = state.solved.includes(lockId);
+      return `<fieldset id="question-${lockId}" class="question-card${solved ? " solved" : ""}">
+        <legend>Lock ${lockId + 1}: ${question.prompt}</legend>
+        <div class="choice-grid">${question.choices.map((choice, choiceIndex) => `<button class="choice-button${solved && choiceIndex === question.correct ? " correct-choice" : ""}" type="button" data-lock="${lockId}" data-choice="${choiceIndex}" ${solved ? "disabled" : ""}>${choice}</button>`).join("")}</div>
+        <p id="feedback-${lockId}" class="feedback ${solved ? "good" : ""}" role="status">${solved ? `✓ ${question.explanation}` : "Choose the best answer."}</p>
+      </fieldset>`;
+    }).join("");
+
+    container.querySelectorAll("[data-lock]").forEach((button) => button.addEventListener("click", () => checkAnswer(roomIndex, button)));
+  }
+
+  function checkAnswer(roomIndex, button) {
+    const lockId = Number(button.dataset.lock);
+    const localIndex = lockId % 2;
+    const question = questions[roomIndex][localIndex];
+    const choice = Number(button.dataset.choice);
+    const feedback = $(`feedback-${lockId}`);
+    if (choice === question.correct) {
+      if (!state.solved.includes(lockId)) state.solved.push(lockId);
+      const card = $(`question-${lockId}`);
+      card.classList.add("solved");
+      card.querySelectorAll("[data-choice]").forEach((item) => {
+        item.disabled = true;
+        if (Number(item.dataset.choice) === question.correct) item.classList.add("correct-choice");
+      });
+      feedback.textContent = `✓ ${question.explanation}`;
+      feedback.className = "feedback good";
+      maybeCompleteRoom(roomIndex);
       updateDashboard();
-
-      if (
-        state.completed.length === 7
-      ) {
-
-        awardAchievement(
-          "Gallery Completionist: Investigated every Perception Gallery exhibit."
-        );
-      }
+      saveState();
+    } else {
+      button.classList.add("wrong-choice");
+      feedback.textContent = "Not quite yet. Compare the answer choices with the interactive model and try again.";
+      feedback.className = "feedback try";
+      window.setTimeout(() => button.classList.remove("wrong-choice"), 900);
     }
+  }
 
+  function roomReady(index) {
+    const room = rooms[index];
+    const instrumentsDone = room.requiredActions.every((action) => state.actions.includes(action));
+    const locksDone = state.solved.includes(index * 2) && state.solved.includes(index * 2 + 1);
+    return instrumentsDone && locksDone;
+  }
 
-    document.addEventListener(
-      "DOMContentLoaded",
-      startMission
-    );
+  function maybeCompleteRoom(index) {
+    const room = rooms[index];
+    if (!roomReady(index) || state.completed.includes(room.id)) return;
+    state.completed.push(room.id);
+    if (!state.evidence.includes(room.evidence)) state.evidence.push(room.evidence);
+    if (state.completed.length === 1) addAchievement("First Light: restored your first perception gallery.");
+    if (room.id === "waves") addAchievement("Spectrum Scholar: compared light and sound waves.");
+    if (room.id === "other") addAchievement("Multisensory Thinker: explored senses beyond the traditional five.");
+    if (state.completed.length === rooms.length) addAchievement("Gallery Completionist: restored all seven galleries.");
+    const holder = $(`clue-holder-${index}`);
+    if (holder) holder.innerHTML = clueMarkup(index);
+    renderMap();
+    updateDashboard();
+    saveState("Gallery restored and progress saved.");
+  }
+
+  function addAchievement(text) {
+    if (!state.achievements.includes(text)) state.achievements.push(text);
+  }
+
+  function updateDashboard() {
+    const complete = state.completed.length;
+    $("progress-bar").value = complete;
+    $("progress-bar").textContent = `${complete} of 7 galleries complete`;
+    $("progress-text").textContent = `${complete} of 7 galleries complete`;
+    $("lock-progress").textContent = `${state.solved.length} of ${TOTAL_LOCKS} knowledge locks solved`;
+    $("mobile-progress").innerHTML = `<a href="#map-heading">${complete}/7 galleries · ${state.solved.length}/${TOTAL_LOCKS} locks</a>`;
+
+    $("fragment-rack").innerHTML = rooms.map((room, index) => {
+      const collected = state.completed.includes(room.id);
+      return `<li class="fragment${collected ? " collected" : ""}">${collected ? room.fragment : "?"}<small>${index + 1}</small><span class="sr-only">${collected ? `Fragment ${room.fragment} collected` : `Fragment ${index + 1} locked`}</span></li>`;
+    }).join("");
+
+    $("inventory-list").innerHTML = state.evidence.length ? state.evidence.map((item) => `<li>${item}</li>`).join("") : "<li>No evidence collected yet.</li>";
+    $("achievement-list").innerHTML = state.achievements.length ? state.achievements.map((item) => `<li>${item}</li>`).join("") : "<li>Your optional discoveries will appear here.</li>";
+
+    const ready = complete === rooms.length;
+    $("final-case").hidden = !ready;
+    if (ready && !state.escaped) $("final-feedback").textContent = "The letters glow in map order. Arrange them into the seven-letter code and solve the three synthesis locks.";
+    if (state.escaped) showCompletedFinal(false);
+  }
+
+  function handleFinal(event) {
+    event.preventDefault();
+    const answers = {
+      one: $("final-one").value,
+      two: $("final-two").value,
+      three: $("final-three").value,
+      code: $("portal-code").value.trim().toUpperCase()
+    };
+    const correct = answers.one === "construct" && answers.two === "signal" && answers.three === "closure" && answers.code === "PERCEPT";
+    if (!correct) {
+      const missed = [];
+      if (answers.one !== "construct") missed.push("ambiguous image");
+      if (answers.two !== "signal") missed.push("faint-signal concept");
+      if (answers.three !== "closure") missed.push("incomplete circle");
+      if (answers.code !== "PERCEPT") missed.push("fragment code");
+      $("final-feedback").textContent = `The frame remains locked. Revisit: ${missed.join(", ")}. Your fragments appear in gallery order.`;
+      return;
+    }
+    state.escaped = true;
+    addAchievement("Master Curator: solved the final perception mystery.");
+    saveState("Mission complete. Your badge is ready.");
+    showCompletedFinal(true);
+    updateDashboard();
+  }
+
+  function showCompletedFinal(celebrate) {
+    $("final-case").hidden = false;
+    $("badge-maker").hidden = false;
+    $("final-form").hidden = true;
+    $("final-feedback").textContent = "✓ Final frame unlocked. Perception is an active construction shaped by sensory input, attention, organization, context, and experience.";
+    if (state.learner) {
+      $("learner-name").value = state.learner;
+      drawBadge(state.learner);
+      $("download-badge").disabled = false;
+    } else {
+      drawBadge("Academy Scholar");
+    }
+    if (celebrate) launchConfetti();
+  }
+
+  function launchConfetti() {
+    if (reduceMotion()) return;
+    const colors = ["#e2bd5b", "#75d4cc", "#9a74c7", "#f08c91", "#ffffff"];
+    $("confetti").innerHTML = Array.from({ length: 48 }, (_, i) => `<i style="left:${(i * 37) % 100}%;--drift:${(i % 2 ? 1 : -1) * (20 + (i % 7) * 7)}px;--confetti:${colors[i % colors.length]};animation-delay:${(i % 12) * .08}s"></i>`).join("");
+    window.setTimeout(() => { $("confetti").innerHTML = ""; }, 4200);
+  }
+
+  function drawBadge(name) {
+    const canvas = $("badge-canvas");
+    const ctx = canvas.getContext("2d");
+    const width = canvas.width;
+    const height = canvas.height;
+    const gradient = ctx.createLinearGradient(0, 0, width, height);
+    gradient.addColorStop(0, "#071528");
+    gradient.addColorStop(.55, "#174b5b");
+    gradient.addColorStop(1, "#3b235b");
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, width, height);
+
+    const glow = ctx.createRadialGradient(width * .5, height * .38, 20, width * .5, height * .38, 480);
+    glow.addColorStop(0, "rgba(114, 220, 208, .28)");
+    glow.addColorStop(1, "rgba(0,0,0,0)");
+    ctx.fillStyle = glow;
+    ctx.fillRect(0, 0, width, height);
+
+    ctx.strokeStyle = "#ddbd61";
+    ctx.lineWidth = 13;
+    ctx.strokeRect(34, 34, width - 68, height - 68);
+    ctx.strokeStyle = "#84d6cf";
+    ctx.lineWidth = 3;
+    ctx.strokeRect(55, 55, width - 110, height - 110);
+
+    ctx.save();
+    ctx.translate(width / 2, 230);
+    ctx.strokeStyle = "#efe3ae";
+    ctx.lineWidth = 7;
+    ctx.beginPath();
+    ctx.moveTo(-110, 0); ctx.lineTo(-10, -150); ctx.lineTo(95, 0); ctx.closePath(); ctx.stroke();
+    const rayColors = ["#ef7184", "#e7b95f", "#70d18d", "#70cbe5", "#a98ae3"];
+    rayColors.forEach((color, index) => {
+      ctx.strokeStyle = color; ctx.lineWidth = 7; ctx.beginPath();
+      ctx.moveTo(38, -66 + index * 5); ctx.lineTo(250, -128 + index * 32); ctx.stroke();
+    });
+    ctx.strokeStyle = "#f9ecc0"; ctx.lineWidth = 8; ctx.beginPath(); ctx.moveTo(-310, -72); ctx.lineTo(-78, -72); ctx.stroke();
+    ctx.restore();
+
+    ctx.textAlign = "center";
+    ctx.fillStyle = "#e5c76e";
+    ctx.font = "700 34px Arial";
+    ctx.fillText("PSYCHOLOGY ACADEMY · WEEK 5", width / 2, 390);
+    ctx.fillStyle = "#ffffff";
+    ctx.font = "700 72px Georgia";
+    ctx.fillText("Perception Detective", width / 2, 490);
+    ctx.fillStyle = "#a9ebe4";
+    ctx.font = "32px Georgia";
+    ctx.fillText("The Perception Gallery", width / 2, 545);
+
+    ctx.fillStyle = "#fff9e8";
+    ctx.font = "italic 48px Georgia";
+    fitText(ctx, name, width - 220, 48);
+    ctx.fillText(name, width / 2, 655);
+    ctx.strokeStyle = "#d8bd69";
+    ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(270, 687); ctx.lineTo(width - 270, 687); ctx.stroke();
+
+    ctx.fillStyle = "#e9f3ef";
+    ctx.font = "26px Arial";
+    ctx.fillText("Restored seven galleries · Solved fourteen knowledge locks", width / 2, 750);
+    ctx.fillText("Applied sensation, perception, sensory systems, attention, and Gestalt principles", width / 2, 795);
+    ctx.fillStyle = "#e5c76e";
+    ctx.font = "700 27px Arial";
+    ctx.fillText("MISSION CODE: PERCEPT", width / 2, 858);
+    ctx.fillStyle = "#dce8e5";
+    ctx.font = "22px Arial";
+    ctx.fillText(`Completed ${new Date().toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" })} · Dr. Tonya Holdaway`, width / 2, 912);
+
+    for (let i = 0; i < 32; i += 1) {
+      const angle = (i / 32) * Math.PI * 2;
+      const radius = i % 2 ? 570 : 610;
+      const x = width / 2 + Math.cos(angle) * radius;
+      const y = height / 2 + Math.sin(angle) * radius * .65;
+      ctx.fillStyle = i % 3 ? "#e3c368" : "#8ee1d9";
+      ctx.beginPath(); ctx.arc(x, y, i % 2 ? 3 : 5, 0, Math.PI * 2); ctx.fill();
+    }
+  }
+
+  function fitText(ctx, text, maxWidth, startSize) {
+    let size = startSize;
+    while (size > 28 && ctx.measureText(text).width > maxWidth) {
+      size -= 2;
+      ctx.font = `italic ${size}px Georgia`;
+    }
+  }
+
+  function generateBadge() {
+    const name = $("learner-name").value.trim().replace(/\s+/g, " ");
+    if (!name) {
+      $("badge-message").textContent = "Please enter your name before generating the badge.";
+      $("learner-name").focus();
+      return;
+    }
+    state.learner = name.slice(0, 60);
+    drawBadge(state.learner);
+    $("download-badge").disabled = false;
+    $("badge-message").textContent = "Your personalized badge is ready. Select Download Badge as PNG.";
+    saveState("Personalized badge name saved.");
+  }
+
+  function downloadBadge() {
+    if (!state.learner) {
+      $("badge-message").textContent = "Generate the badge with your name first.";
+      return;
+    }
+    const canvas = $("badge-canvas");
+    const filename = `week-5-perception-detective-${safeFilename(state.learner)}.png`;
+    if (canvas.toBlob) {
+      canvas.toBlob((blob) => {
+        if (!blob) return;
+        downloadBlob(blob, filename);
+        $("badge-message").textContent = "Badge downloaded. Check your Downloads folder, then upload the PNG to Canvas.";
+      }, "image/png");
+    } else {
+      const link = document.createElement("a");
+      link.href = canvas.toDataURL("image/png"); link.download = filename; link.click();
+    }
+  }
+
+  function safeFilename(value) {
+    return value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "student";
+  }
+
+  function downloadBlob(blob, filename) {
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url; link.download = filename; document.body.appendChild(link); link.click(); link.remove();
+    window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+
+  function downloadNotes() {
+    const lines = [
+      "WEEK 5: THE PERCEPTION GALLERY", "", `Galleries completed: ${state.completed.length}/7`, `Knowledge locks solved: ${state.solved.length}/14`,
+      "", "COLLECTED EVIDENCE", ...(state.evidence.length ? state.evidence.map((item, index) => `${index + 1}. ${item}`) : ["No evidence collected yet."]),
+      "", "WHAT SURPRISED ME", state.notes.observations || "(No note entered)", "", "EVERYDAY-LIFE CONNECTION", state.notes.transfer || "(No note entered)",
+      "", "Textbook: Spielman, R. M., Jenkins, W. J., & Lovett, M. D. (2020). Psychology 2e. OpenStax."
+    ];
+    downloadBlob(new Blob([lines.join("\n")], { type: "text/plain;charset=utf-8" }), "week-5-perception-gallery-notes.txt");
+  }
+
+  const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+  function reduceMotion() { return state.motionPaused || media.matches; }
+  function updateMotion() {
+    document.body.classList.toggle("no-motion", reduceMotion());
+    $("motion-toggle").textContent = state.motionPaused ? "Resume Animations" : "Pause Animations";
+    $("motion-toggle").setAttribute("aria-pressed", String(state.motionPaused));
+    $("motion-status").textContent = media.matches ? "Your device’s reduced-motion preference is active. Activities remain fully usable." : state.motionPaused ? "Animations are paused. Activities remain fully usable." : "Animations are on. Hover near the Gallery to stir its light.";
+  }
+
+  function setupAudio() {
+    const audio = $("gallery-audio");
+    audio.volume = state.settings.volume;
+    $("volume").value = String(state.settings.volume);
+    $("music-toggle").addEventListener("click", async () => {
+      if (audio.paused) {
+        try {
+          await audio.play();
+          $("music-toggle").textContent = "Pause Museum Ambience";
+          $("music-toggle").setAttribute("aria-pressed", "true");
+          $("audio-status").textContent = "Museum ambience is playing.";
+        } catch (error) {
+          $("audio-status").textContent = "The ambience file could not start. The mission works normally without audio.";
+        }
+      } else {
+        audio.pause();
+        $("music-toggle").textContent = "Play Museum Ambience";
+        $("music-toggle").setAttribute("aria-pressed", "false");
+        $("audio-status").textContent = "Museum ambience is paused.";
+      }
+    });
+    $("volume").addEventListener("input", (event) => {
+      state.settings.volume = Number(event.target.value);
+      audio.volume = state.settings.volume;
+      saveState("Volume preference saved.");
+    });
+    audio.addEventListener("error", () => { $("audio-status").textContent = "Museum ambience is unavailable in this copy. All learning activities still work."; });
+  }
+
+  function setupNotes() {
+    $("observation-notes").value = state.notes.observations;
+    $("transfer-notes").value = state.notes.transfer;
+    $("observation-notes").addEventListener("input", (event) => { state.notes.observations = event.target.value; saveState("Notebook saved."); });
+    $("transfer-notes").addEventListener("input", (event) => { state.notes.transfer = event.target.value; saveState("Notebook saved."); });
+  }
+
+  function resetMission() {
+    const volume = state.settings.volume;
+    const motionPaused = state.motionPaused;
+    state = freshState();
+    state.settings.volume = volume;
+    state.motionPaused = motionPaused;
+    activeIndex = -1;
+    try { localStorage.removeItem(COMPLETION_KEY); } catch (error) { storageAvailable = false; }
+    $("active-area").replaceChildren();
+    $("observation-notes").value = "";
+    $("transfer-notes").value = "";
+    $("learner-name").value = "";
+    $("final-form").reset();
+    $("final-form").hidden = false;
+    $("badge-maker").hidden = true;
+    $("download-badge").disabled = true;
+    $("reset-box").hidden = true;
+    saveState("Week 5 progress reset.");
+    renderMap();
+    updateDashboard();
+    $("room-0").focus();
+  }
+
+  function createMotes() {
+    $("motes").innerHTML = Array.from({ length: 24 }, (_, i) => `<i class="mote" style="left:${(i * 43) % 100}%;top:${(i * 17) % 100}%;--mote-speed:${13 + (i % 9)}s;animation-delay:-${i % 13}s"></i>`).join("");
+  }
+
+  function initialize() {
+    createMotes();
+    renderMap();
+    setupAudio();
+    setupNotes();
+    updateMotion();
+    updateDashboard();
+    saveState();
+
+    $("final-form").addEventListener("submit", handleFinal);
+    $("generate-badge").addEventListener("click", generateBadge);
+    $("download-badge").addEventListener("click", downloadBadge);
+    $("print-badge").addEventListener("click", () => window.print());
+    $("download-notes").addEventListener("click", downloadNotes);
+    $("motion-toggle").addEventListener("click", () => { state.motionPaused = !state.motionPaused; updateMotion(); saveState("Motion preference saved."); });
+    if (media.addEventListener) media.addEventListener("change", updateMotion);
+
+    $("reset-progress").addEventListener("click", () => { $("reset-box").hidden = false; $("confirm-reset").focus(); });
+    $("cancel-reset").addEventListener("click", () => { $("reset-box").hidden = true; $("reset-progress").focus(); });
+    $("confirm-reset").addEventListener("click", resetMission);
+
+    $("learner-name").value = state.learner;
+    document.querySelector(".hero").addEventListener("pointermove", (event) => {
+      const rect = event.currentTarget.getBoundingClientRect();
+      event.currentTarget.style.setProperty("--pointer-x", `${((event.clientX - rect.left) / rect.width) * 100}%`);
+      event.currentTarget.style.setProperty("--pointer-y", `${((event.clientY - rect.top) / rect.height) * 100}%`);
+    });
+  }
+
+  initialize();
+})();
 
   </script>
-
 </body>
 </html>
