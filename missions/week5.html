@@ -245,6 +245,25 @@ input[type="range"] { width: 100%; min-height: 34px; accent-color: #176e78; }
 .clue-card { position: relative; overflow: hidden; margin-top: 18px; padding: 18px; border: 2px solid #a98129; border-radius: 13px; background: linear-gradient(135deg, #fff8df, #fffef7); }
 .clue-card::after { content: "✦"; position: absolute; right: 16px; top: 10px; color: #b99136; font-size: 2rem; animation: twinkle 2.5s ease-in-out infinite alternate; }
 .fragment-reveal { display: inline-grid; place-items: center; width: 54px; height: 54px; margin-right: 10px; border-radius: 50%; color: #fff; background: linear-gradient(145deg, #5a3683, #173f59); box-shadow: 0 0 0 4px #e2c56d, 0 0 20px #ceb460; font: 800 1.6rem Georgia, serif; }
+.room-nav {
+  display: grid; grid-template-columns: 1fr; gap: 14px; align-items: center;
+  margin-top: 20px; padding: 18px; border: 2px solid #718e9c; border-radius: 15px;
+  background: linear-gradient(135deg, #edf7f6, #fdf9e9); box-shadow: 0 8px 22px #10273a14;
+}
+.room-nav.route-ready { border-color: #a47b22; background: linear-gradient(135deg, #fff9df, #ecf8f3); }
+.room-nav-label { display: block; margin-bottom: 3px; color: #6f5217; font-size: .76rem; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
+.room-nav strong { display: block; color: #153e57; font: 700 1.08rem/1.3 Georgia, serif; }
+.room-nav p { margin: 5px 0 0; color: #4b5b67; font-size: .86rem; }
+.room-nav-actions { display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 9px; }
+.route-button {
+  min-height: 46px; padding: 10px 14px; border: 2px solid #315d72; border-radius: 10px;
+  color: #17384e; background: #fff; cursor: pointer; font-weight: 800;
+}
+.route-button:hover { background: #e7f5f2; border-color: #1b707a; }
+.route-button.primary-route { color: #fff; border-color: #174b5d; background: #174b5d; box-shadow: 0 0 0 3px #fff, 0 0 0 5px #d1b251; }
+.route-button.primary-route:hover { background: #0e6671; }
+.route-button.final-route { background: linear-gradient(135deg, #523477, #173f59); border-color: #d7b95e; }
+.route-button[disabled] { opacity: .58; cursor: not-allowed; box-shadow: none; }
 
 /* Simulations */
 .pathway-stage { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; align-items: stretch; margin: 15px 0; }
@@ -415,6 +434,8 @@ footer p { font-size: .9rem; }
   .chapter-tag { display: inline-block; margin-top: 5px; }
   .footer-grid { grid-template-columns: 1fr; }
   .activity-card, .gallery-map, .final-case, .panel { padding: 18px; }
+  .room-nav { grid-template-columns: 1fr; }
+  .room-nav-actions { justify-content: flex-start; }
 }
 @media (max-width: 430px) {
   .container { width: calc(100% - 22px); }
@@ -423,6 +444,7 @@ footer p { font-size: .9rem; }
   .map-art { height: 58px; }
   .pathway-stage, .sense-compass { grid-template-columns: 1fr; }
   .control-row > button { width: 100%; }
+  .room-nav-actions, .room-nav-actions .route-button { width: 100%; }
   .fragment-rack { grid-template-columns: repeat(4, 1fr); }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -1059,6 +1081,7 @@ footer p { font-size: .9rem; }
         <div id="questions-${index}"></div>
       </section>
       <div id="clue-holder-${index}">${state.completed.includes(room.id) ? clueMarkup(index) : ""}</div>
+      <div id="room-nav-${index}">${roomNavigationMarkup(index)}</div>
     </article>`;
   }
 
@@ -1080,12 +1103,66 @@ footer p { font-size: .9rem; }
     const renderers = [renderPortal, renderThreshold, renderWaves, renderVision, renderHearing, renderOtherSenses, renderGrandGallery];
     renderers[index]();
     renderQuestions(index);
+    wireRoomNavigation(index);
     const heading = $(`room-heading-${index}`);
     if (heading) {
       heading.setAttribute("tabindex", "-1");
       heading.focus({ preventScroll: true });
       $("active-area").scrollIntoView({ behavior: reduceMotion() ? "auto" : "smooth", block: "start" });
     }
+  }
+
+  function roomNavigationMarkup(index) {
+    const currentComplete = state.completed.includes(rooms[index].id);
+    const isLast = index === rooms.length - 1;
+    let destinationTitle = "";
+    let destinationText = "";
+    let primaryButton = "";
+
+    if (!isLast) {
+      destinationTitle = `Next: Gallery ${index + 2} · ${rooms[index + 1].title}`;
+      destinationText = currentComplete
+        ? `Fragment ${rooms[index].fragment} is secure. Continue directly to the next challenge.`
+        : "You may continue now and return later; unfinished progress in this gallery is preserved.";
+      primaryButton = `<button class="route-button primary-route" type="button" data-next-room="${index + 1}">Continue to Next Gallery →</button>`;
+    } else if (state.completed.length === rooms.length) {
+      destinationTitle = "All seven galleries are restored";
+      destinationText = "Your PERCEPT fragments are ready. Continue directly to the Curator’s Final Perception Mystery.";
+      primaryButton = `<button class="route-button primary-route final-route" type="button" data-final-route>Enter the Final Mystery ✦</button>`;
+    } else {
+      const remaining = rooms.length - state.completed.length;
+      destinationTitle = `${remaining} gallery${remaining === 1 ? " remains" : " galleries remain"}`;
+      destinationText = "Return to the map to revisit any gallery that still needs an instrument or knowledge lock.";
+      primaryButton = `<button class="route-button primary-route" type="button" data-map-route>Find My Remaining Gallery</button>`;
+    }
+
+    return `<nav class="room-nav${currentComplete ? " route-ready" : ""}" aria-label="Gallery route controls">
+      <div><span class="room-nav-label">Your Route Forward</span><strong>${destinationTitle}</strong><p>${destinationText}</p></div>
+      <div class="room-nav-actions">
+        ${index > 0 ? `<button class="route-button" type="button" data-previous-room="${index - 1}">← Previous Gallery</button>` : ""}
+        <button class="route-button" type="button" data-map-route>Gallery Map</button>
+        ${primaryButton}
+      </div>
+    </nav>`;
+  }
+
+  function wireRoomNavigation(index) {
+    const container = $(`room-nav-${index}`);
+    if (!container) return;
+    container.querySelectorAll("[data-next-room]").forEach((button) => button.addEventListener("click", () => openRoom(Number(button.dataset.nextRoom))));
+    container.querySelectorAll("[data-previous-room]").forEach((button) => button.addEventListener("click", () => openRoom(Number(button.dataset.previousRoom))));
+    container.querySelectorAll("[data-map-route]").forEach((button) => button.addEventListener("click", () => {
+      const heading = $("map-heading");
+      heading.setAttribute("tabindex", "-1");
+      heading.focus({ preventScroll: true });
+      heading.scrollIntoView({ behavior: reduceMotion() ? "auto" : "smooth", block: "start" });
+    }));
+    container.querySelectorAll("[data-final-route]").forEach((button) => button.addEventListener("click", () => {
+      const heading = $("final-heading");
+      heading.setAttribute("tabindex", "-1");
+      heading.focus({ preventScroll: true });
+      heading.scrollIntoView({ behavior: reduceMotion() ? "auto" : "smooth", block: "start" });
+    }));
   }
 
   function renderPortal() {
@@ -1522,6 +1599,11 @@ footer p { font-size: .9rem; }
     if (state.completed.length === rooms.length) addAchievement("Gallery Completionist: restored all seven galleries.");
     const holder = $(`clue-holder-${index}`);
     if (holder) holder.innerHTML = clueMarkup(index);
+    const route = $(`room-nav-${index}`);
+    if (route) {
+      route.innerHTML = roomNavigationMarkup(index);
+      wireRoomNavigation(index);
+    }
     renderMap();
     updateDashboard();
     saveState("Gallery restored and progress saved.");
