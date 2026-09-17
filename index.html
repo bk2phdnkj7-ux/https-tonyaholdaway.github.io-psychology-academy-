@@ -11,7 +11,7 @@
 
   <meta
     name="description"
-    content="Psychology Academy: an interactive Introduction to Psychology learning experience created by Dr. Tonya Holdaway.">
+    content="Psychology Academy by Dr. Tonya Holdaway. Weeks 1–9 are open, including the new Lifespan Conservatory: animated learning activities, clues, optional music, and completion badges.">
 
   <title>Psychology Academy | Dr. Tonya Holdaway</title>
 
@@ -1719,6 +1719,96 @@
     @keyframes academy-enchanted-sky { from { background-position: 0% 30%; } to { background-position: 100% 70%; } }
     @media (max-width: 600px) { .cloud-four, .cloud-six { display: none; } }
 
+
+/* Week 9: a living conservatory joins the Academy skyline. */
+.academy-open-guide{background:linear-gradient(120deg,#edf5ec,#f8f4e6);border:2px solid #7f977a;border-left:8px solid #315f40;border-radius:18px;padding:26px;margin:28px 0;box-shadow:0 8px 20px #163a5910}.academy-open-guide h2{font-family:Georgia,serif;color:#173c35;margin-top:0}.open-guide-eyebrow{font-size:.87rem;font-weight:bold;letter-spacing:.06em;color:#345c3e;text-transform:uppercase;margin:0 0 8px}.open-mission-list{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;padding:0;margin:22px 0}.open-mission-list a{display:block;height:100%;padding:11px 14px;border:1px solid #819883;border-radius:8px;color:#173c35;background:#fffdf6;font-size:.91rem;text-decoration:underline;min-height:48px}.open-mission-list .new-mission-link{background:#173c35;color:white;border-color:#173c35}.open-guide-footer,.week9-card-note{font-size:.88rem}.open-guide-footer{margin-bottom:0}.lifespan-feature-card{border-color:#81966d!important}.card-life-tree{height:90px;margin:8px 0;border-radius:8px;background:linear-gradient(135deg,#edf3df,#f8f2df)}.card-life-tree svg{display:block;width:100%;height:100%}.lifespan-leaf-cluster{transform-box:fill-box;transform-origin:center bottom}.academy-lifespan-motes{position:absolute;inset:0;z-index:2;pointer-events:none;overflow:hidden}.academy-leaf{position:absolute;color:#587b54;font-size:22px;opacity:.45;transform-origin:50% 100%}.academy-leaf:nth-child(1){left:8%;top:28%;--leaf-delay:-3s}.academy-leaf:nth-child(2){right:10%;top:46%;--leaf-delay:-7s}.academy-leaf:nth-child(3){left:21%;top:70%;--leaf-delay:-10s}.academy-leaf:nth-child(4){right:25%;top:18%;--leaf-delay:-5s}.conservatory-glow{filter:drop-shadow(0 0 2px #c8ad63)}html.academy-motion-on .academy-leaf{animation:academy-leaf-drift 15s ease-in-out infinite alternate;animation-delay:var(--leaf-delay)}html.academy-motion-on .lifespan-leaf-cluster{animation:academy-growth-sway 7s ease-in-out infinite alternate}html.academy-motion-on .conservatory-glow{animation:academy-conservatory-light 6s ease-in-out infinite alternate}html.academy-motion-on .academy-hero.is-pointer-near .academy-leaf{animation-duration:8s}html.academy-motion-on .lifespan-feature-card:hover .lifespan-leaf-cluster,html.academy-motion-on .lifespan-feature-card:focus-within .lifespan-leaf-cluster{animation-duration:3s}@keyframes academy-leaf-drift{from{transform:translate(-7px,-12px) rotate(-18deg)}to{transform:translate(24px,25px) rotate(24deg)}}@keyframes academy-growth-sway{from{transform:rotate(-3deg)}to{transform:rotate(3deg)}}@keyframes academy-conservatory-light{from{opacity:.65;filter:drop-shadow(0 0 1px #bc9b45)}to{opacity:1;filter:drop-shadow(0 0 5px #bc9b45)}}@media(max-width:800px){.open-mission-list{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:500px){.open-mission-list{grid-template-columns:1fr}.academy-open-guide{padding:20px}.academy-leaf:nth-child(3),.academy-leaf:nth-child(4){display:none}}@media print{.academy-lifespan-motes,.card-life-tree{display:none}}@media(prefers-reduced-motion:reduce){.academy-leaf,.lifespan-leaf-cluster,.conservatory-glow{animation:none!important;transition:none!important}}
+
+/* The living Academy: mountains, two new halls, and one synchronized sky. */
+.academy-hero{--night:0;--dusk:0;--daylight:1;--hero-ink:#17344f;--cloud-alpha:.7;background:#dceef3;isolation:isolate}
+html.academy-motion-on .academy-hero{animation:none}
+.academy-hero::before{z-index:1}
+.academy-hero::after{display:none}
+.hero-content{padding-bottom:350px}
+.academy-hero h1,.academy-hero .eyebrow,.academy-tagline,.academy-motion-status{color:var(--hero-ink)}
+.academy-sky-colors,.academy-mountains,.academy-celestial,.academy-weather,.academy-birds{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.academy-sky-colors{z-index:0;background:linear-gradient(160deg,#d4eaf7 0%,#e5edf8 45%,#faf0d4 78%,#ccdbc0 100%)}
+.academy-sky-colors::before,.academy-sky-colors::after{content:"";position:absolute;inset:0}
+.academy-sky-colors::before{background:linear-gradient(150deg,#8075a9 0%,#c2a5c1 38%,#efc99d 72%,#a4b4a8 100%);opacity:var(--dusk)}
+.academy-sky-colors::after{background:linear-gradient(160deg,#12263e 0%,#293457 40%,#42405d 72%,#647184 100%);opacity:var(--night)}
+.academy-celestial{z-index:0}
+.academy-celestial svg{width:100%;height:100%;display:block}
+.academy-sun{opacity:var(--daylight);filter:drop-shadow(0 0 16px #fff1b099)}
+.academy-moon,.academy-night-stars{opacity:var(--night)}
+.academy-moon{filter:drop-shadow(0 0 13px #f3dfbd77)}
+.academy-mountains{inset:auto 0 0;height:560px;z-index:1}
+.academy-mountains svg{display:block;width:100%;height:100%}
+.mountain-near{fill:#6b8792}.mountain-far{fill:#a3b7c6}.mountain-mid{fill:#859ba9}.mountain-shadow{fill:#3d6078;opacity:.35}.mountain-snow{fill:#e5eced;opacity:.8}
+.mountain-night-shade{opacity:calc(var(--night) * .54)}
+.mountain-mist{opacity:calc(.25 + var(--daylight) * .17)}
+.cloud{z-index:2;opacity:var(--cloud-alpha)}
+.cloud-three{top:5%;left:35%}.cloud-four{top:33%;left:-60px}.cloud-five{top:58%;right:-80px}.cloud-six{top:auto;bottom:300px;left:10%}
+html.academy-motion-on .cloud{animation:academy-cloud-journey var(--cloud-time,36s) ease-in-out infinite alternate;animation-delay:var(--cloud-delay,-4s)}
+.cloud-one{--cloud-time:32s;--cloud-delay:-7s}.cloud-two{--cloud-time:39s;--cloud-delay:-25s}.cloud-three{--cloud-time:47s;--cloud-delay:-12s}.cloud-four{--cloud-time:35s;--cloud-delay:-29s}.cloud-five{--cloud-time:43s;--cloud-delay:-16s}.cloud-six{--cloud-time:38s;--cloud-delay:-30s}
+@keyframes academy-cloud-journey{from{transform:translate(-125px,6px)}to{transform:translate(145px,-9px)}}
+.academy-weather{z-index:2;inset:auto 0 235px;height:360px}
+.academy-weather svg{width:100%;height:100%}
+.sky-lightning{opacity:0;fill:none;stroke:#e2dbf2;stroke-width:2.6;stroke-linejoin:round;stroke-linecap:round;filter:drop-shadow(0 0 5px #e7dafa77)}
+.sky-lightning .bolt-branch{stroke-width:1.2;opacity:.6}
+html.academy-motion-on .sky-lightning.is-striking{animation:academy-distant-lightning 1.7s ease-out 1}
+@keyframes academy-distant-lightning{0%{opacity:0}16%{opacity:.66}100%{opacity:0}}
+.academy-birds{z-index:3;inset:auto 0 270px;height:230px;opacity:var(--daylight)}
+.academy-birds svg{display:block;width:100%;height:100%;overflow:visible}
+.academy-bird-flight{transform:translate(var(--bird-start,200px),var(--bird-y,70px));color:#4c406b}
+.academy-bird-flight:nth-child(2n){color:#506d79}
+.bird-shape{filter:drop-shadow(0 1px 3px #fff7ce99)}
+.bird-wing{transform-box:fill-box;transform-origin:50% 90%}
+.bird-wing.right{transform-origin:20% 90%}
+.bird-magic-trail{fill:#c1a463;opacity:.8}
+html.academy-motion-on .academy-bird-flight{animation:academy-bird-cross var(--bird-time,30s) linear infinite;animation-delay:var(--bird-delay,0s)}
+html.academy-motion-on .bird-wing{animation:academy-bird-wing .9s ease-in-out infinite alternate}
+html.academy-motion-on .bird-wing.right{animation-delay:-.3s}
+@keyframes academy-bird-cross{0%{transform:translate(-90px,var(--bird-y,70px))}25%{transform:translate(250px,calc(var(--bird-y,70px) - 25px))}60%{transform:translate(770px,calc(var(--bird-y,70px) + 15px))}100%{transform:translate(1320px,var(--bird-y,70px))}}
+@keyframes academy-bird-wing{from{transform:scaleY(.32) rotate(-8deg)}to{transform:scaleY(1) rotate(9deg)}}
+.campus-skyline{height:350px;z-index:3;overflow:visible}
+.campus-skyline svg{min-width:0;width:100%;height:100%;overflow:visible}
+.academy-hall .hall-wall{fill:#c8c1b2}.academy-hall .hall-roof{fill:#344f68}.academy-hall .hall-detail{fill:#93a2ab}
+.academy-hall-east .hall-wall{fill:#d4cab5}.academy-hall-east .hall-roof{fill:#41485f}
+.hall-window{fill:#ffdc91;opacity:.8;filter:drop-shadow(0 0 1px #ffcb72)}
+html.academy-motion-on .hall-window{animation:academy-candle var(--candle-time,8s) ease-in-out infinite;animation-delay:var(--candle-delay,0s)}
+@keyframes academy-candle{0%,100%{opacity:.6;fill:#e2b365}28%{opacity:.9;fill:#ffe8ad}42%{opacity:.7}69%{opacity:1;fill:#ffe8ad}85%{opacity:.72}}
+.academy-banner{transform-box:fill-box;transform-origin:0% 50%}
+html.academy-motion-on .academy-banner{animation:academy-silk-wave 3.8s ease-in-out infinite alternate;animation-delay:var(--banner-delay,0s)}
+@keyframes academy-silk-wave{from{transform:skewY(-6deg) scaleX(.91)}to{transform:skewY(7deg) scaleX(1)}}
+.scholar-walk{transform:translateX(var(--walk-start,0px))}
+.scholar-body,.scholar-leg,.scholar-tassel,.scholar-sleeve{transform-box:fill-box;transform-origin:50% 5%}
+html.academy-motion-on .scholar-walk{animation:academy-scholar-stroll var(--walk-time,32s) linear infinite alternate;animation-delay:var(--walk-delay,0s)}
+html.academy-motion-on .scholar-body{animation:academy-scholar-bob 1.1s ease-in-out infinite alternate}
+html.academy-motion-on .scholar-leg{animation:academy-scholar-step 1.1s ease-in-out infinite alternate}
+html.academy-motion-on .scholar-leg.second{animation-delay:-1.1s}
+html.academy-motion-on .scholar-sleeve,html.academy-motion-on .scholar-tassel{animation:academy-scholar-step 1.7s ease-in-out infinite alternate}
+@keyframes academy-scholar-stroll{from{transform:translateX(var(--walk-start,0px))}to{transform:translateX(var(--walk-end,90px))}}
+@keyframes academy-scholar-bob{from{transform:translateY(0)}to{transform:translateY(-.65px)}}
+@keyframes academy-scholar-step{from{transform:rotate(-13deg)}to{transform:rotate(13deg)}}
+html.academy-motion-on .academy-hero.is-pointer-near .academy-banner{animation-duration:2.5s}
+html.academy-motion-on .academy-hero.is-pointer-near .bird-wing{animation-duration:.65s}
+html.academy-motion-on .academy-hero.is-pointer-near .hall-window{filter:drop-shadow(0 0 3px #fbd386)}
+.academy-sky-controls{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:12px;font-size:.84rem}
+.academy-sky-picker{display:flex;align-items:center;gap:7px;padding:6px 10px;border:1px solid #8b967d;border-radius:22px;background:#fffdf7;color:#244839}
+.academy-sky-picker select{max-width:180px;font:inherit;color:#244839;background:#fffdf7;border:0;padding:6px 1px;cursor:pointer;min-height:32px}
+.academy-sky-picker select:focus-visible{outline:3px solid #254c65;outline-offset:3px}
+.academy-weather-toggle{min-height:46px;border:1px solid #8b967d;border-radius:24px;padding:7px 14px;background:#fffdf7;color:#244839;font-size:inherit}
+.academy-weather-toggle:disabled{opacity:.6;cursor:default}
+.sky-scene-label{position:absolute;bottom:9px;left:50%;transform:translateX(-50%);z-index:5;margin:0;padding:4px 14px;border:1px solid #d8c28b55;border-radius:20px;background:#193640;color:#fff0c8;letter-spacing:.18em;text-transform:uppercase;font:10px Georgia,serif;white-space:nowrap;pointer-events:none}
+html.academy-motion-on.academy-scene-paused .academy-hero *,html.academy-motion-on.academy-scene-paused .academy-hero::before,html.academy-motion-on.academy-scene-paused .academy-hero::after{animation-play-state:paused!important}
+@media(min-width:1600px){.campus-skyline{height:400px}.hero-content{padding-bottom:410px}.academy-mountains{height:660px}.academy-birds{bottom:335px}}
+@media(max-width:760px){.hero-content{padding-bottom:250px}.campus-skyline{height:250px}.academy-mountains{height:385px}.academy-birds{bottom:155px;height:200px}.academy-weather{bottom:140px;height:300px}.cloud-six{bottom:200px}.sky-scene-label{bottom:6px;font-size:9px}}
+@media(max-width:480px){.hero-content{padding-bottom:200px}.campus-skyline{height:195px}.academy-mountains{height:300px}.academy-birds{bottom:110px;height:150px}.academy-weather{bottom:100px;height:230px}.academy-sky-controls{gap:8px}.academy-sky-picker{padding:4px 7px}.academy-weather-toggle{padding:7px 10px}.sky-scene-label{font-size:8px;letter-spacing:.12em}}
+@media(prefers-reduced-motion:reduce){.sky-lightning{display:none!important}}
+@media print{.academy-sky-colors,.academy-mountains,.academy-celestial,.academy-weather,.academy-birds,.academy-sky-controls,.sky-scene-label{display:none!important}.hero-content{padding-bottom:20px!important}.academy-hero{--hero-ink:#17344f!important;background:white!important}}
+/* Give the courtyard its own space above the soundtrack card. */
+.soundscape-wrap{margin-top:24px}
+.academy-tagline,.academy-motion-status{background:#fffdf7;color:#243d4f;border-radius:12px;padding:8px 14px;width:fit-content}
+
   </style>
 
 </head>
@@ -1738,15 +1828,62 @@
        ======================================================= -->
 
   <header class="academy-hero">
+<div class="academy-sky-colors" aria-hidden="true"></div>
+<div class="academy-celestial" aria-hidden="true"><svg viewBox="0 0 1200 900" preserveAspectRatio="xMidYMin meet" focusable="false"><defs><radialGradient id="academy-sun-halo"><stop stop-color="#fff3bd" stop-opacity=".7"/><stop offset="1" stop-color="#fff3bd" stop-opacity="0"/></radialGradient></defs><g class="academy-sun"><circle cx="1050" cy="150" r="120" fill="url(#academy-sun-halo)"/><circle cx="1050" cy="150" r="41" fill="#fff0b9"/></g><g class="academy-moon"><path d="M1033 95A43 43 0 1 0 1080 160A38 38 0 0 1 1033 95Z" fill="#eee4d1"/></g><g class="academy-night-stars"><circle cx="44" cy="80" r="1.5" fill="#f6e7be"/><circle cx="155" cy="43" r="1.1" fill="#f6e7be"/><circle cx="267" cy="163" r="1.7" fill="#f6e7be"/><circle cx="430" cy="51" r="1.2" fill="#f6e7be"/><circle cx="580" cy="112" r="1.5" fill="#f6e7be"/><circle cx="800" cy="29" r="1" fill="#f6e7be"/><circle cx="948" cy="162" r="1.2" fill="#f6e7be"/><circle cx="1078" cy="70" r="1.6" fill="#f6e7be"/><circle cx="1150" cy="257" r="1.2" fill="#f6e7be"/><circle cx="32" cy="288" r="1" fill="#f6e7be"/><circle cx="1025" cy="378" r="1.8" fill="#f6e7be"/><circle cx="184" cy="369" r="1.3" fill="#f6e7be"/></g></svg></div>
+<div class="academy-mountains" aria-hidden="true"><svg viewBox="0 0 1600 650" preserveAspectRatio="xMidYMax slice" focusable="false"><defs><linearGradient id="academy-mountain-haze" x2="0" y2="1"><stop stop-color="#e4eced" stop-opacity="0"/><stop offset="1" stop-color="#e0e6df" stop-opacity=".8"/></linearGradient></defs>
+<path class="mountain-far" d="M-80 370L65 200 105 235 260 38 420 275 528 163 650 333 783 170 870 235 1010 54 1084 133 1130 113 1300 328 1430 137 1690 375V650H-80Z"/>
+<path class="mountain-snow" d="M201 112L260 38 331 145 278 116 256 130 239 99Z M950 128L1010 54 1084 133 1130 113 1164 157 1109 147 1073 163 1014 101 987 137Z M1389 201L1430 137 1480 206 1443 188 1421 195 1410 176Z"/>
+<path class="mountain-shadow" d="M260 38L307 299 420 275Z M1010 54L1047 319 1138 321 1084 133Z M1430 137L1484 385 1565 286Z"/>
+<path class="mountain-mid" d="M-70 466L114 334 185 377 372 170 559 417 699 320 785 368 932 231 1100 420 1215 244 1308 292 1407 252 1660 488V650H-70Z"/>
+<path class="mountain-snow" d="M321 235L372 170 430 247 394 231 377 250 354 219Z M1179 290L1215 244 1260 269 1281 285 1231 271 1211 287 1197 278Z" opacity=".4"/>
+<path class="mountain-shadow" d="M372 170L413 433 559 417Z M932 231L988 483 1100 420Z M1215 244L1246 500 1308 292Z"/>
+<path class="mountain-near" d="M-70 550L123 458 243 490 358 439 530 550 673 459 800 491 938 442 1107 529 1253 408 1400 497 1521 421 1680 565V650H-70Z"/>
+<path d="M0 510Q365 448 780 525T1600 512V650H0Z" fill="url(#academy-mountain-haze)"/>
+<path class="mountain-night-shade" d="M-80 370L65 200 105 235 260 38 420 275 528 163 650 333 783 170 870 235 1010 54 1084 133 1130 113 1300 328 1430 137 1690 375V650H-80Z" fill="#102741"/>
+<g class="mountain-mist" fill="#e6edef"><path d="M0 443Q250 409 532 451T1100 434T1600 457V475Q1370 450 1100 459T545 474T0 461Z"/><path d="M0 536Q225 510 480 546T1000 535T1600 540V554Q1260 540 985 553T480 562T0 551Z"/></g></svg></div>
+<div class="academy-weather" aria-hidden="true"><svg viewBox="0 0 1200 360" preserveAspectRatio="xMidYMax slice" focusable="false"><g class="sky-lightning"><path d="M162 24L145 73 171 66 131 131 150 122 118 177"/><path class="bolt-branch" d="M151 95L183 109 174 130M142 66L124 90"/></g><g class="sky-lightning"><path d="M1023 35L1006 78 1028 72 1001 119 1016 114 982 176"/><path class="bolt-branch" d="M1010 104L1034 121 1030 140"/></g><g class="sky-lightning"><path d="M285 8L268 47 289 42 262 90 275 87 249 140"/><path class="bolt-branch" d="M273 70L298 83 303 97"/></g></svg></div>
+<div class="academy-birds" aria-hidden="true"><svg viewBox="0 0 1200 230" preserveAspectRatio="xMidYMid slice" focusable="false"><g class="academy-bird-flight" style="--bird-start:80px;--bird-y:45px;--bird-time:27s;--bird-delay:-4s"><g class="bird-shape" transform="scale(0.7)"><path class="bird-wing" d="M0 0Q-10-21-29-17Q-14-6 0 3Z" fill="currentColor"/><path class="bird-wing right" d="M0 1Q13-26 31-19Q15-8 0 4Z" fill="currentColor"/><ellipse cy="3" rx="7" ry="3" fill="currentColor"/><path d="M7 2l6 1-6 2M-5 3l-9 5 3-6" fill="currentColor"/><g class="bird-magic-trail"><circle cx="-27" cy="9" r="1.4"/><circle cx="-41" cy="13" r="1"/><path d="M-52 9v6m-3-3h6" stroke="#e9d396" stroke-width="1"/></g></g></g><g class="academy-bird-flight" style="--bird-start:300px;--bird-y:75px;--bird-time:31s;--bird-delay:-12s"><g class="bird-shape" transform="scale(0.7799999999999999)"><path class="bird-wing" d="M0 0Q-10-21-29-17Q-14-6 0 3Z" fill="currentColor"/><path class="bird-wing right" d="M0 1Q13-26 31-19Q15-8 0 4Z" fill="currentColor"/><ellipse cy="3" rx="7" ry="3" fill="currentColor"/><path d="M7 2l6 1-6 2M-5 3l-9 5 3-6" fill="currentColor"/><g class="bird-magic-trail"><circle cx="-27" cy="9" r="1.4"/><circle cx="-41" cy="13" r="1"/><path d="M-52 9v6m-3-3h6" stroke="#e9d396" stroke-width="1"/></g></g></g><g class="academy-bird-flight" style="--bird-start:520px;--bird-y:105px;--bird-time:35s;--bird-delay:-20s"><g class="bird-shape" transform="scale(0.86)"><path class="bird-wing" d="M0 0Q-10-21-29-17Q-14-6 0 3Z" fill="currentColor"/><path class="bird-wing right" d="M0 1Q13-26 31-19Q15-8 0 4Z" fill="currentColor"/><ellipse cy="3" rx="7" ry="3" fill="currentColor"/><path d="M7 2l6 1-6 2M-5 3l-9 5 3-6" fill="currentColor"/><g class="bird-magic-trail"><circle cx="-27" cy="9" r="1.4"/><circle cx="-41" cy="13" r="1"/><path d="M-52 9v6m-3-3h6" stroke="#e9d396" stroke-width="1"/></g></g></g><g class="academy-bird-flight" style="--bird-start:740px;--bird-y:135px;--bird-time:39s;--bird-delay:-28s"><g class="bird-shape" transform="scale(0.94)"><path class="bird-wing" d="M0 0Q-10-21-29-17Q-14-6 0 3Z" fill="currentColor"/><path class="bird-wing right" d="M0 1Q13-26 31-19Q15-8 0 4Z" fill="currentColor"/><ellipse cy="3" rx="7" ry="3" fill="currentColor"/><path d="M7 2l6 1-6 2M-5 3l-9 5 3-6" fill="currentColor"/><g class="bird-magic-trail"><circle cx="-27" cy="9" r="1.4"/><circle cx="-41" cy="13" r="1"/><path d="M-52 9v6m-3-3h6" stroke="#e9d396" stroke-width="1"/></g></g></g><g class="academy-bird-flight" style="--bird-start:960px;--bird-y:165px;--bird-time:43s;--bird-delay:-36s"><g class="bird-shape" transform="scale(1.02)"><path class="bird-wing" d="M0 0Q-10-21-29-17Q-14-6 0 3Z" fill="currentColor"/><path class="bird-wing right" d="M0 1Q13-26 31-19Q15-8 0 4Z" fill="currentColor"/><ellipse cy="3" rx="7" ry="3" fill="currentColor"/><path d="M7 2l6 1-6 2M-5 3l-9 5 3-6" fill="currentColor"/><g class="bird-magic-trail"><circle cx="-27" cy="9" r="1.4"/><circle cx="-41" cy="13" r="1"/><path d="M-52 9v6m-3-3h6" stroke="#e9d396" stroke-width="1"/></g></g></g></svg></div>
+<div class="academy-lifespan-motes" aria-hidden="true"><span class="academy-leaf">❧</span><span class="academy-leaf">❧</span><span class="academy-leaf">❧</span><span class="academy-leaf">❧</span></div>
+
 <div class="cloud cloud-three" aria-hidden="true"></div>
 <div class="cloud cloud-four" aria-hidden="true"></div>
 <div class="cloud cloud-five" aria-hidden="true"></div>
 <div class="cloud cloud-six" aria-hidden="true"></div>
 <div class="academy-sparkles" aria-hidden="true"><span class="academy-sparkle" style="--spark-x:5%;--spark-y:17%;--spark-size:23px;--spark-duration:9s;--spark-delay:-3s">✦</span><span class="academy-sparkle" style="--spark-x:94%;--spark-y:25%;--spark-size:20px;--spark-duration:11s;--spark-delay:-8s">✦</span><span class="academy-sparkle" style="--spark-x:13%;--spark-y:40%;--spark-size:17px;--spark-duration:10s;--spark-delay:-6s">✦</span><span class="academy-sparkle" style="--spark-x:87%;--spark-y:47%;--spark-size:25px;--spark-duration:12s;--spark-delay:-2s">✦</span><span class="academy-sparkle" style="--spark-x:4%;--spark-y:66%;--spark-size:19px;--spark-duration:13s;--spark-delay:-9s">✦</span><span class="academy-sparkle" style="--spark-x:95%;--spark-y:72%;--spark-size:24px;--spark-duration:10s;--spark-delay:-4s">✦</span><span class="academy-sparkle" style="--spark-x:23%;--spark-y:9%;--spark-size:16px;--spark-duration:14s;--spark-delay:-10s">✦</span><span class="academy-sparkle" style="--spark-x:75%;--spark-y:12%;--spark-size:22px;--spark-duration:12s;--spark-delay:-6s">✦</span><span class="academy-sparkle" style="--spark-x:29%;--spark-y:85%;--spark-size:20px;--spark-duration:10s;--spark-delay:-1s">✦</span><span class="academy-sparkle" style="--spark-x:73%;--spark-y:85%;--spark-size:16px;--spark-duration:11s;--spark-delay:-7s">✦</span><span class="academy-sparkle" style="--spark-x:7%;--spark-y:89%;--spark-size:20px;--spark-duration:13s;--spark-delay:-8s">✦</span><span class="academy-sparkle" style="--spark-x:90%;--spark-y:90%;--spark-size:18px;--spark-duration:14s;--spark-delay:-3s">✦</span></div>
-<div class="campus-skyline" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -24 1200 244" preserveAspectRatio="xMidYMax meet" aria-hidden="true" focusable="false">
+<div class="campus-skyline" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -112 1200 366" preserveAspectRatio="xMidYMax meet" aria-hidden="true" focusable="false">
   <path d="M0 186 Q190 134 340 174 T660 177 T980 163 T1200 182 V220 H0Z" fill="#b2c9a5"/>
   <path d="M0 202 Q190 168 330 197 T640 193 T920 190 T1200 197 V220 H0Z" fill="#789970"/>
-  <g stroke="#254758" stroke-width="2.5" stroke-linejoin="round">
+  <g class="academy-hall academy-hall-west" transform="translate(55 0)" stroke="#334a5e" stroke-width="2" stroke-linejoin="round"><path class="hall-wall" d="M10 77H225V200H10Z"/><path class="hall-roof" d="M-3 80L51 28H182L237 80Z"/>
+    <path d="M35 68H203M46 56H191M58 44H177" stroke="#879099" opacity=".45"/>
+    <path class="hall-wall" d="M24 30H66V202H24Z M167 6H211V202H167Z"/>
+    <path class="hall-roof" d="M14 33L45 -33 77 33Z M155 9L189 -65 222 9Z"/>
+    <path d="M45 -33v-18M189 -65v-15" stroke="#c2ac76"/>
+    <circle cx="45" cy="-52" r="3" fill="#d5be83"/><circle cx="189" cy="-81" r="3" fill="#d5be83"/>
+    <path class="hall-detail" d="M22 33h46v8H22Z M164 9h50v9h-50Z M21 88h48v7H21Z M164 70h50v7h-50Z"/>
+    <path class="hall-wall" d="M85 71V54H97V62H110V54H122V62H135V54H147V71H151V201H81V71Z"/>
+    <path d="M81 78h70M81 153h70M14 193h209" stroke="#a29883"/>
+    <path d="M100 201V176Q116 152 132 176V201Z" fill="#263d52"/>
+    <path d="M116 166V201M107 179h18" stroke="#bcab7e" stroke-width="1.2"/>
+    <circle cx="116" cy="104" r="16" fill="#344f68" stroke="#d4b875"/><path d="M116 93v22m-8-20v8q0 5 8 5t8-5v-8" fill="none" stroke="#e6cd8a" stroke-width="2"/>
+    <path d="M74 207H159M69 213H164" stroke="#8c968e" stroke-width="4"/>
+    <path d="M26 116h38M26 159h38M169 107h40M169 153h40" stroke="#9b978b" stroke-width="1"/>
+    <path d="M11 140h12m44 0h13m72 0h15m45 0h13" stroke="#a19886" stroke-width="1"/>
+    <path class="hall-window" style="--candle-delay:-0s;--candle-time:6s" d="M36 66V54Q40.5 45 45 54V66Z" stroke="#445569" stroke-width="1.5"/><path d="M40.5 51V66" stroke="#6a6b64" stroke-width=".7"/><path class="hall-window" style="--candle-delay:-1s;--candle-time:7s" d="M36 118V106Q40.5 97 45 106V118Z" stroke="#445569" stroke-width="1.5"/><path d="M40.5 103V118" stroke="#6a6b64" stroke-width=".7"/><path class="hall-window" style="--candle-delay:-2s;--candle-time:8s" d="M36 158V146Q40.5 137 45 146V158Z" stroke="#445569" stroke-width="1.5"/><path d="M40.5 143V158" stroke="#6a6b64" stroke-width=".7"/><path class="hall-window" style="--candle-delay:-3s;--candle-time:9s" d="M181 45V33Q185.5 24 190 33V45Z" stroke="#445569" stroke-width="1.5"/><path d="M185.5 30V45" stroke="#6a6b64" stroke-width=".7"/><path class="hall-window" style="--candle-delay:-4s;--candle-time:10s" d="M181 102V90Q185.5 81 190 90V102Z" stroke="#445569" stroke-width="1.5"/><path d="M185.5 87V102" stroke="#6a6b64" stroke-width=".7"/><path class="hall-window" style="--candle-delay:-5s;--candle-time:11s" d="M181 145V133Q185.5 124 190 133V145Z" stroke="#445569" stroke-width="1.5"/><path d="M185.5 130V145" stroke="#6a6b64" stroke-width=".7"/><path class="hall-window" style="--candle-delay:-6s;--candle-time:12s" d="M91 144V132Q95.5 123 100 132V144Z" stroke="#445569" stroke-width="1.5"/><path d="M95.5 129V144" stroke="#6a6b64" stroke-width=".7"/><path class="hall-window" style="--candle-delay:-7s;--candle-time:6s" d="M132 144V132Q136.5 123 141 132V144Z" stroke="#445569" stroke-width="1.5"/><path d="M136.5 129V144" stroke="#6a6b64" stroke-width=".7"/><path class="hall-window" style="--candle-delay:-8s;--candle-time:7s" d="M13 118V106Q17.5 97 22 106V118Z" stroke="#445569" stroke-width="1.5"/><path d="M17.5 103V118" stroke="#6a6b64" stroke-width=".7"/><path class="hall-window" style="--candle-delay:-0s;--candle-time:8s" d="M212 120V108Q216.5 99 221 108V120Z" stroke="#445569" stroke-width="1.5"/><path d="M216.5 105V120" stroke="#6a6b64" stroke-width=".7"/><path class="hall-window" style="--candle-delay:-1s;--candle-time:9s" d="M13 172V160Q17.5 151 22 160V172Z" stroke="#445569" stroke-width="1.5"/><path d="M17.5 157V172" stroke="#6a6b64" stroke-width=".7"/><path class="hall-window" style="--candle-delay:-2s;--candle-time:10s" d="M214 171V159Q218.5 150 223 159V171Z" stroke="#445569" stroke-width="1.5"/><path d="M218.5 156V171" stroke="#6a6b64" stroke-width=".7"/><g transform="translate(70 -4)"><path d="M0 37V-3" stroke="#d8bd7b" stroke-width="1.8"/><circle cy="-4" r="2.4" fill="#f4d797"/><g class="academy-banner" style="--banner-delay:-1s"><path d="M1 0 Q16 -5 33 1L31 22Q16 16 1 20Z" fill="#783e55" stroke="#d1b578" stroke-width="1"/><path d="M16 4v11m-6-10v4q0 4 6 4t6-4V5" stroke="#f9e4b6" stroke-width="1.7" fill="none"/><path d="M8 17h17" stroke="#f9e4b6" stroke-width=".7"/></g></g><g transform="translate(209 42)"><path d="M0 37V-3" stroke="#d8bd7b" stroke-width="1.8"/><circle cy="-4" r="2.4" fill="#f4d797"/><g class="academy-banner" style="--banner-delay:0s"><path d="M1 0 Q16 -5 33 1L31 22Q16 16 1 20Z" fill="#305968" stroke="#d1b578" stroke-width="1"/><path d="M16 4v11m-6-10v4q0 4 6 4t6-4V5" stroke="#f9e4b6" stroke-width="1.7" fill="none"/><path d="M8 17h17" stroke="#f9e4b6" stroke-width=".7"/></g></g></g><g class="academy-hall academy-hall-east" transform="translate(895 0)" stroke="#334a5e" stroke-width="2" stroke-linejoin="round"><path class="hall-wall" d="M10 77H225V200H10Z"/><path class="hall-roof" d="M-3 80L51 28H182L237 80Z"/>
+    <path d="M35 68H203M46 56H191M58 44H177" stroke="#879099" opacity=".45"/>
+    <path class="hall-wall" d="M24 30H66V202H24Z M167 6H211V202H167Z"/>
+    <path class="hall-roof" d="M14 33L45 -33 77 33Z M155 9L189 -65 222 9Z"/>
+    <path d="M45 -33v-18M189 -65v-15" stroke="#c2ac76"/>
+    <circle cx="45" cy="-52" r="3" fill="#d5be83"/><circle cx="189" cy="-81" r="3" fill="#d5be83"/>
+    <path class="hall-detail" d="M22 33h46v8H22Z M164 9h50v9h-50Z M21 88h48v7H21Z M164 70h50v7h-50Z"/>
+    <path class="hall-wall" d="M85 71V54H97V62H110V54H122V62H135V54H147V71H151V201H81V71Z"/>
+    <path d="M81 78h70M81 153h70M14 193h209" stroke="#a29883"/>
+    <path d="M100 201V176Q116 152 132 176V201Z" fill="#263d52"/>
+    <path d="M116 166V201M107 179h18" stroke="#bcab7e" stroke-width="1.2"/>
+    <circle cx="116" cy="104" r="16" fill="#344f68" stroke="#d4b875"/><path d="M116 93v22m-8-20v8q0 5 8 5t8-5v-8" fill="none" stroke="#e6cd8a" stroke-width="2"/>
+    <path d="M74 207H159M69 213H164" stroke="#8c968e" stroke-width="4"/>
+    <path d="M26 116h38M26 159h38M169 107h40M169 153h40" stroke="#9b978b" stroke-width="1"/>
+    <path d="M11 140h12m44 0h13m72 0h15m45 0h13" stroke="#a19886" stroke-width="1"/>
+    <path class="hall-window" style="--candle-delay:-4s;--candle-time:10s" d="M36 66V54Q40.5 45 45 54V66Z" stroke="#445569" stroke-width="1.5"/><path d="M40.5 51V66" stroke="#6a6b64" stroke-width=".7"/><path class="hall-window" style="--candle-delay:-5s;--candle-time:11s" d="M36 118V106Q40.5 97 45 106V118Z" stroke="#445569" stroke-width="1.5"/><path d="M40.5 103V118" stroke="#6a6b64" stroke-width=".7"/><path class="hall-window" style="--candle-delay:-6s;--candle-time:12s" d="M36 158V146Q40.5 137 45 146V158Z" stroke="#445569" stroke-width="1.5"/><path d="M40.5 143V158" stroke="#6a6b64" stroke-width=".7"/><path class="hall-window" style="--candle-delay:-7s;--candle-time:6s" d="M181 45V33Q185.5 24 190 33V45Z" stroke="#445569" stroke-width="1.5"/><path d="M185.5 30V45" stroke="#6a6b64" stroke-width=".7"/><path class="hall-window" style="--candle-delay:-8s;--candle-time:7s" d="M181 102V90Q185.5 81 190 90V102Z" stroke="#445569" stroke-width="1.5"/><path d="M185.5 87V102" stroke="#6a6b64" stroke-width=".7"/><path class="hall-window" style="--candle-delay:-0s;--candle-time:8s" d="M181 145V133Q185.5 124 190 133V145Z" stroke="#445569" stroke-width="1.5"/><path d="M185.5 130V145" stroke="#6a6b64" stroke-width=".7"/><path class="hall-window" style="--candle-delay:-1s;--candle-time:9s" d="M91 144V132Q95.5 123 100 132V144Z" stroke="#445569" stroke-width="1.5"/><path d="M95.5 129V144" stroke="#6a6b64" stroke-width=".7"/><path class="hall-window" style="--candle-delay:-2s;--candle-time:10s" d="M132 144V132Q136.5 123 141 132V144Z" stroke="#445569" stroke-width="1.5"/><path d="M136.5 129V144" stroke="#6a6b64" stroke-width=".7"/><path class="hall-window" style="--candle-delay:-3s;--candle-time:11s" d="M13 118V106Q17.5 97 22 106V118Z" stroke="#445569" stroke-width="1.5"/><path d="M17.5 103V118" stroke="#6a6b64" stroke-width=".7"/><path class="hall-window" style="--candle-delay:-4s;--candle-time:12s" d="M212 120V108Q216.5 99 221 108V120Z" stroke="#445569" stroke-width="1.5"/><path d="M216.5 105V120" stroke="#6a6b64" stroke-width=".7"/><path class="hall-window" style="--candle-delay:-5s;--candle-time:6s" d="M13 172V160Q17.5 151 22 160V172Z" stroke="#445569" stroke-width="1.5"/><path d="M17.5 157V172" stroke="#6a6b64" stroke-width=".7"/><path class="hall-window" style="--candle-delay:-6s;--candle-time:7s" d="M214 171V159Q218.5 150 223 159V171Z" stroke="#445569" stroke-width="1.5"/><path d="M218.5 156V171" stroke="#6a6b64" stroke-width=".7"/><g transform="translate(70 -4)"><path d="M0 37V-3" stroke="#d8bd7b" stroke-width="1.8"/><circle cy="-4" r="2.4" fill="#f4d797"/><g class="academy-banner" style="--banner-delay:-2s"><path d="M1 0 Q16 -5 33 1L31 22Q16 16 1 20Z" fill="#3a6761" stroke="#d1b578" stroke-width="1"/><path d="M16 4v11m-6-10v4q0 4 6 4t6-4V5" stroke="#f9e4b6" stroke-width="1.7" fill="none"/><path d="M8 17h17" stroke="#f9e4b6" stroke-width=".7"/></g></g><g transform="translate(209 42)"><path d="M0 37V-3" stroke="#d8bd7b" stroke-width="1.8"/><circle cy="-4" r="2.4" fill="#f4d797"/><g class="academy-banner" style="--banner-delay:-3s"><path d="M1 0 Q16 -5 33 1L31 22Q16 16 1 20Z" fill="#4b4c76" stroke="#d1b578" stroke-width="1"/><path d="M16 4v11m-6-10v4q0 4 6 4t6-4V5" stroke="#f9e4b6" stroke-width="1.7" fill="none"/><path d="M8 17h17" stroke="#f9e4b6" stroke-width=".7"/></g></g></g><g fill="#bac1b2" stroke="#4c6472" stroke-width="2"><path d="M275 146H356V181H275ZM844 145H911V181H844Z"/><path d="M271 145H360M840 144H915" stroke="#d6cda9" stroke-width="5"/><path d="M285 182V160Q294 147 303 160V182M318 182V160Q327 147 336 160V182M855 181V158Q864 145 873 158V181M882 181V158Q891 145 900 158V181" fill="#405971"/></g><g stroke="#254758" stroke-width="2.5" stroke-linejoin="round">
     <path d="M353 111 H511 V196 H353Z M689 111 H847 V196 H689Z" fill="#d9d3bc"/>
     <path d="M335 113 L375 82 H506 L530 113Z M670 113 L694 82 H825 L865 113Z" fill="#3c6171"/>
     <path d="M499 82 H701 V201 H499Z" fill="#e9dfc8"/>
@@ -1769,13 +1906,26 @@
     <path d="M514 145 H686" stroke="#b39c6f"/>
     <path d="M599 205 L565 220 H635 L601 205Z" fill="#dfceb0" stroke="none"/>
   </g>
-  <g class="campus-tree"><path d="M186 199 V133" stroke="#725e48" stroke-width="9"/><path d="M138 151 Q123 119 146 99 Q143 68 173 70 Q196 47 217 76 Q249 78 247 112 Q267 145 233 158 Q206 183 181 157 Q154 170 138 151Z" fill="#547852"/><path d="M186 142 L165 119 M188 151 L215 126" stroke="#416541" stroke-width="4"/></g>
-  <g class="campus-tree"><path d="M997 205 V133" stroke="#725e48" stroke-width="9"/><path d="M958 154 Q936 133 957 106 Q952 80 982 77 Q1001 59 1022 84 Q1053 84 1050 119 Q1071 147 1040 164 Q1018 179 997 164 Q971 177 958 154Z" fill="#63875a"/></g>
-  <g class="campus-tree"><path d="M84 210 V167" stroke="#725e48" stroke-width="6"/><ellipse cx="84" cy="148" rx="33" ry="40" fill="#789666"/></g>
-  <g class="campus-tree"><path d="M1118 210 V166" stroke="#725e48" stroke-width="6"/><ellipse cx="1118" cy="149" rx="32" ry="42" fill="#789666"/></g>
-  <path d="M287 203 V147 M912 203 V147" stroke="#35565c" stroke-width="4"/>
+  <g transform="translate(-95 85) scale(.55)"><g class="campus-tree"><path d="M186 199 V133" stroke="#725e48" stroke-width="9"/><path d="M138 151 Q123 119 146 99 Q143 68 173 70 Q196 47 217 76 Q249 78 247 112 Q267 145 233 158 Q206 183 181 157 Q154 170 138 151Z" fill="#547852"/><path d="M186 142 L165 119 M188 151 L215 126" stroke="#416541" stroke-width="4"/></g>
+  </g><g transform="translate(570 85) scale(.55)"><g class="campus-tree"><path d="M997 205 V133" stroke="#725e48" stroke-width="9"/><path d="M958 154 Q936 133 957 106 Q952 80 982 77 Q1001 59 1022 84 Q1053 84 1050 119 Q1071 147 1040 164 Q1018 179 997 164 Q971 177 958 154Z" fill="#63875a"/></g>
+  </g><g transform="translate(-31 63) scale(.7)"><g class="campus-tree"><path d="M84 210 V167" stroke="#725e48" stroke-width="6"/><ellipse cx="84" cy="148" rx="33" ry="40" fill="#789666"/></g>
+  </g><g transform="translate(405 63) scale(.7)"><g class="campus-tree"><path d="M1118 210 V166" stroke="#725e48" stroke-width="6"/><ellipse cx="1118" cy="149" rx="32" ry="42" fill="#789666"/></g>
+  </g><path d="M287 203 V147 M912 203 V147" stroke="#35565c" stroke-width="4"/>
   <g stroke="#35565c" stroke-width="3"><path fill="#f5d887" class="campus-window" d="M280 139 H294 L292 155 H282Z M905 139 H919 L917 155 H907Z"/><path d="M276 138 L287 129 L298 138Z M901 138 L912 129 L923 138Z" fill="#35565c"/></g>
-</svg>
+
+  <g class="campus-conservatory" stroke="#375a52" stroke-width="2" aria-hidden="true">
+    <path d="M234 200V163q0-43 49-43t49 43v37Z" fill="#d9eadc"/>
+    <path d="M234 162h98M245 200v-38q0-36 38-42 38 6 38 42v38M283 120v80M234 184h98" fill="none" stroke="#8b9d82"/>
+    <path d="M269 200v-33q14-16 28 0v33" fill="#355f5a"/>
+    <path d="M254 183v-28m0 15-10-9m10 2 10-11M309 183v-28m0 15-9-10m9 4 10-12" fill="none" stroke="#648657" stroke-width="3"/>
+    <g class="conservatory-glow" fill="#e4c979" stroke="none"><circle cx="252" cy="147" r="4"/><circle cx="312" cy="147" r="4"/><circle cx="283" cy="134" r="4"/></g>
+    <path d="M230 202h106" stroke="#567657" stroke-width="4"/>
+  </g>
+<path d="M0 227Q260 201 457 224T890 222T1200 222V254H0Z" fill="#839780"/>
+<path d="M0 238Q270 211 600 233T1200 231" fill="none" stroke="#d0c4a7" stroke-width="15"/>
+<path d="M105 220L133 233M605 219L600 233M1012 215L1040 233" stroke="#d0c4a7" stroke-width="12"/>
+<path d="M0 242Q260 217 600 239T1200 237" fill="none" stroke="#afab95" stroke-width="1"/>
+<g transform="translate(110 228)"><g class="scholar-walk" style="--walk-start:0px;--walk-end:125px;--walk-time:28s;--walk-delay:-0s"><g class="scholar-body"><path class="scholar-leg" d="M-2-6v8h-2" fill="none" stroke="#263847" stroke-width="1.7"/><path class="scholar-leg second" d="M2-6v8h2" fill="none" stroke="#263847" stroke-width="1.7"/><path d="M-4-19Q0-22 4-19L7-5Q0-2-7-5Z" fill="#31465c"/><path d="M-2-18L0-10 2-18" fill="none" stroke="#d9be7a" stroke-width="1.5"/><path class="scholar-sleeve" d="M-4-18L-9-9-6-8-1-17" fill="#31465c"/><path d="M4-17L8-10" stroke="#31465c" stroke-width="3"/><rect x="5" y="-13" width="4" height="5" rx=".6" fill="#d1ba8d" transform="rotate(-12 5 -13)"/><circle cy="-23" r="3.4" fill="#b88360"/><path d="M-6-27L0-30 6-27 0-24Z M-3-26V-23H3V-26" fill="#263747"/><path class="scholar-tassel" d="M5-27V-21" stroke="#eac779" stroke-width=".8"/></g></g></g><g transform="translate(357 227)"><g class="scholar-walk" style="--walk-start:0px;--walk-end:120px;--walk-time:33s;--walk-delay:-6s"><g class="scholar-body"><path class="scholar-leg" d="M-2-6v8h-2" fill="none" stroke="#263847" stroke-width="1.7"/><path class="scholar-leg second" d="M2-6v8h2" fill="none" stroke="#263847" stroke-width="1.7"/><path d="M-4-19Q0-22 4-19L7-5Q0-2-7-5Z" fill="#563f69"/><path d="M-2-18L0-10 2-18" fill="none" stroke="#d9be7a" stroke-width="1.5"/><path class="scholar-sleeve" d="M-4-18L-9-9-6-8-1-17" fill="#563f69"/><path d="M4-17L8-10" stroke="#563f69" stroke-width="3"/><rect x="5" y="-13" width="4" height="5" rx=".6" fill="#d1ba8d" transform="rotate(-12 5 -13)"/><circle cy="-23" r="3.4" fill="#d4a581"/><path d="M-6-27L0-30 6-27 0-24Z M-3-26V-23H3V-26" fill="#263747"/><path class="scholar-tassel" d="M5-27V-21" stroke="#eac779" stroke-width=".8"/></g></g></g><g transform="translate(480 237)"><g class="scholar-walk" style="--walk-start:0px;--walk-end:-95px;--walk-time:38s;--walk-delay:-12s"><g class="scholar-body"><path class="scholar-leg" d="M-2-6v8h-2" fill="none" stroke="#263847" stroke-width="1.7"/><path class="scholar-leg second" d="M2-6v8h2" fill="none" stroke="#263847" stroke-width="1.7"/><path d="M-4-19Q0-22 4-19L7-5Q0-2-7-5Z" fill="#2f615b"/><path d="M-2-18L0-10 2-18" fill="none" stroke="#d9be7a" stroke-width="1.5"/><path class="scholar-sleeve" d="M-4-18L-9-9-6-8-1-17" fill="#2f615b"/><path d="M4-17L8-10" stroke="#2f615b" stroke-width="3"/><rect x="5" y="-13" width="4" height="5" rx=".6" fill="#d1ba8d" transform="rotate(-12 5 -13)"/><circle cy="-23" r="3.4" fill="#845a44"/><path d="M-6-27L0-30 6-27 0-24Z M-3-26V-23H3V-26" fill="#263747"/><path class="scholar-tassel" d="M5-27V-21" stroke="#eac779" stroke-width=".8"/></g></g></g><g transform="translate(748 233)"><g class="scholar-walk" style="--walk-start:0px;--walk-end:116px;--walk-time:43s;--walk-delay:-18s"><g class="scholar-body"><path class="scholar-leg" d="M-2-6v8h-2" fill="none" stroke="#263847" stroke-width="1.7"/><path class="scholar-leg second" d="M2-6v8h2" fill="none" stroke="#263847" stroke-width="1.7"/><path d="M-4-19Q0-22 4-19L7-5Q0-2-7-5Z" fill="#803f57"/><path d="M-2-18L0-10 2-18" fill="none" stroke="#d9be7a" stroke-width="1.5"/><path class="scholar-sleeve" d="M-4-18L-9-9-6-8-1-17" fill="#803f57"/><path d="M4-17L8-10" stroke="#803f57" stroke-width="3"/><rect x="5" y="-13" width="4" height="5" rx=".6" fill="#d1ba8d" transform="rotate(-12 5 -13)"/><circle cy="-23" r="3.4" fill="#edc6a0"/><path d="M-6-27L0-30 6-27 0-24Z M-3-26V-23H3V-26" fill="#263747"/><path class="scholar-tassel" d="M5-27V-21" stroke="#eac779" stroke-width=".8"/></g></g></g><g transform="translate(986 228)"><g class="scholar-walk" style="--walk-start:0px;--walk-end:-100px;--walk-time:48s;--walk-delay:-24s"><g class="scholar-body"><path class="scholar-leg" d="M-2-6v8h-2" fill="none" stroke="#263847" stroke-width="1.7"/><path class="scholar-leg second" d="M2-6v8h2" fill="none" stroke="#263847" stroke-width="1.7"/><path d="M-4-19Q0-22 4-19L7-5Q0-2-7-5Z" fill="#34576b"/><path d="M-2-18L0-10 2-18" fill="none" stroke="#d9be7a" stroke-width="1.5"/><path class="scholar-sleeve" d="M-4-18L-9-9-6-8-1-17" fill="#34576b"/><path d="M4-17L8-10" stroke="#34576b" stroke-width="3"/><rect x="5" y="-13" width="4" height="5" rx=".6" fill="#d1ba8d" transform="rotate(-12 5 -13)"/><circle cy="-23" r="3.4" fill="#b88360"/><path d="M-6-27L0-30 6-27 0-24Z M-3-26V-23H3V-26" fill="#263747"/><path class="scholar-tassel" d="M5-27V-21" stroke="#eac779" stroke-width=".8"/></g></g></g><g transform="translate(640 238)"><g class="scholar-walk" style="--walk-start:0px;--walk-end:70px;--walk-time:53s;--walk-delay:-30s"><g class="scholar-body"><path class="scholar-leg" d="M-2-6v8h-2" fill="none" stroke="#263847" stroke-width="1.7"/><path class="scholar-leg second" d="M2-6v8h2" fill="none" stroke="#263847" stroke-width="1.7"/><path d="M-4-19Q0-22 4-19L7-5Q0-2-7-5Z" fill="#474364"/><path d="M-2-18L0-10 2-18" fill="none" stroke="#d9be7a" stroke-width="1.5"/><path class="scholar-sleeve" d="M-4-18L-9-9-6-8-1-17" fill="#474364"/><path d="M4-17L8-10" stroke="#474364" stroke-width="3"/><rect x="5" y="-13" width="4" height="5" rx=".6" fill="#d1ba8d" transform="rotate(-12 5 -13)"/><circle cy="-23" r="3.4" fill="#80563f"/><path d="M-6-27L0-30 6-27 0-24Z M-3-26V-23H3V-26" fill="#263747"/><path class="scholar-tassel" d="M5-27V-21" stroke="#eac779" stroke-width=".8"/></g></g></g></svg>
 </div>
 
     <div
@@ -1788,7 +1938,8 @@
       aria-hidden="true">
     </div>
 
-    <div class="container hero-content">
+    <p class="sky-scene-label" aria-hidden="true">Curiosity · Evidence · Discovery</p>
+<div class="container hero-content">
 
       <div
         class="academy-seal"
@@ -1819,7 +1970,11 @@
 
       <div class="academy-motion-tools">
         <button id="academy-motion-toggle" class="academy-motion-button" type="button" aria-pressed="false" aria-describedby="academy-motion-status" hidden>✦ Animations: Off</button>
-        <p id="academy-motion-status" class="academy-motion-status" role="status">Optional atmosphere. All Academy missions work with animations off.</p>
+        <div class="academy-sky-controls" hidden>
+<label class="academy-sky-picker" for="academy-sky-mode">Sky <select id="academy-sky-mode"><option value="cycle">Day → night cycle</option><option value="day">Keep daylight</option><option value="night">Keep moonlight</option></select></label>
+<button id="academy-lightning-toggle" class="academy-weather-toggle" type="button" aria-pressed="true">Sky lightning: On</button>
+</div>
+<p id="academy-motion-status" class="academy-motion-status" role="status">Optional atmosphere. All Academy missions work with animations off.</p>
       </div>
 
       <section
@@ -1853,9 +2008,10 @@
 
         <p style="margin-bottom: 0;">
 
-          Eight Academy destinations are currently
-          open for exploration. More will appear
-          as our semester journey continues.
+          Nine Academy destinations are now open: Weeks 1–9.
+          Our newest adventure is The Lifespan Conservatory,
+          where a living chronicle awaits restoration. Weeks 10–16
+          will open as our semester journey continues.
 
         </p>
 
@@ -2006,6 +2162,14 @@
   <main
     id="main-content"
     class="container">
+
+
+    <section class="academy-open-guide" aria-labelledby="open-guide-heading">
+      <div class="open-guide-copy"><p class="open-guide-eyebrow">Now exploring · Weeks 1–9</p><h2 id="open-guide-heading">Nine doors are open. Your next discovery awaits.</h2><p>Start with psychology’s foundations, investigate research and the brain, and continue through consciousness, perception, learning, thinking, memory, and lifespan development. Each open destination has its own mission entrance below.</p><p><strong>New this week:</strong> Restore the Chronicle of Becoming in <a href="missions/week9.html">The Lifespan Conservatory</a>. Eight interactive rooms connect OpenStax Chapter 9 to everyday examples.</p></div>
+      <nav aria-label="Currently open Academy missions"><ol class="open-mission-list">
+      <li><a href="missions/week1.html">1 · Psychology Museum</a></li><li><a href="missions/week2.html">2 · Research Conservatory</a></li><li><a href="missions/week3.html">3 · Brain Institute</a></li><li><a href="missions/week4.html">4 · Consciousness Observatory</a></li><li><a href="missions/week5.html">5 · Perception Gallery</a></li><li><a href="missions/week6.html">6 · Conditioning Vault</a></li><li><a href="missions/week7.html">7 · Thinking Workshop</a></li><li><a href="missions/week8.html">8 · Memory Library</a></li><li><a class="new-mission-link" href="missions/week9.html">9 · Lifespan Conservatory — New</a></li></ol></nav>
+      <p class="open-guide-footer">Weeks 10–16 remain marked “Opening Later.” Use your Canvas assignment for submission instructions and due dates.</p>
+    </section>
 
     <!-- PROGRESS -->
 
@@ -2485,48 +2649,18 @@
           <div class="mission-grid">
 
             <!-- WEEK 9 -->
-
-            <article
-              class="mission-card development-theme">
-
+            <article class="mission-card development-theme lifespan-feature-card" id="week9-card">
               <div>
-
-                <p class="mission-number">
-
-                  Week 9
-
-                </p>
-
-                <span
-                  class="mission-icon"
-                  aria-hidden="true">
-
-                  🌱
-
-                </span>
-
-                <h3>
-
-                  Development Village
-
-                </h3>
-
-                <p>
-
-                  Journey through physical,
-                  cognitive, emotional, and social
-                  development across the lifespan.
-
-                </p>
-
-                <p class="mission-status coming">
-
-                  Opening Later
-
-                </p>
-
+                <p class="mission-number">Week 9 · Newly Open</p>
+                <span class="mission-icon" aria-hidden="true">🌱</span>
+                <h3>The Lifespan Conservatory</h3>
+                <p>The Chronicle of Becoming</p>
+                <div class="card-life-tree" aria-hidden="true"><svg viewBox="0 0 240 90"><path d="M120 85V22M120 62Q78 59 66 33M120 43Q156 37 174 14M120 32 105 12" stroke="#786232" stroke-width="5" fill="none" stroke-linecap="round"/><g class="lifespan-leaf-cluster" fill="#769b75"><ellipse cx="66" cy="33" rx="16" ry="8" transform="rotate(35 66 33)"/><ellipse cx="174" cy="14" rx="17" ry="8" transform="rotate(-25 174 14)"/><ellipse cx="105" cy="12" rx="13" ry="7"/><ellipse cx="143" cy="43" rx="17" ry="8" transform="rotate(-20 143 43)"/></g><g class="conservatory-glow" fill="#c2a253"><circle cx="83" cy="53" r="4"/><circle cx="157" cy="31" r="4"/><circle cx="120" cy="22" r="5"/></g></svg></div>
+                <p>Explore eight animated rooms across the lifespan. Reveal a hidden star, experiment with conservation, turn Erikson’s stage wheel, and investigate moral reasoning. Collect eight fragments, restore the Chronicle, and earn your Lifespan Explorer badge.</p>
+                <p class="week9-card-note">OpenStax Chapter 9 links in every room · Optional whimsical music · A choice of final-room learning routes</p>
+                <p class="mission-status available" id="week9-status">Available Now</p>
               </div>
-
+              <a class="mission-link" href="missions/week9.html">Enter the Lifespan Conservatory</a>
             </article>
 
             <!-- WEEK 10 -->
@@ -3058,6 +3192,11 @@
           <h3>Memory Archivist</h3>
           <p id="badge-week8-text">Collect all seven fragments and solve the final case in the Memory Library to earn this badge.</p>
         </article>
+        <article id="badge-week9" class="badge-card badge-locked">
+          <span class="badge-symbol" aria-hidden="true">🌳</span>
+          <h3>Lifespan Explorer</h3>
+          <p id="badge-week9-text">Explore eight rooms, collect all eight fragments, and restore the Chronicle in the Lifespan Conservatory to earn this badge.</p>
+        </article>
 
 
       </div>
@@ -3250,21 +3389,10 @@
             </tr>
 
             <tr>
-
               <th scope="row">9</th>
-
-              <td>
-                Development Village
-              </td>
-
-              <td>
-                Lifespan Development
-              </td>
-
-              <td>
-                Opening Later
-              </td>
-
+              <td><a href="missions/week9.html">The Lifespan Conservatory</a><br>The Chronicle of Becoming</td>
+              <td>Lifespan Development</td>
+              <td id="directory-week9-status">Available Now</td>
             </tr>
 
             <tr>
@@ -3827,6 +3955,21 @@
         badgeTextId: "badge-week8-text",
         badgeText: "Earned: Memory Archivist",
         lockedBadgeText: "Collect all seven fragments and solve the final case in the Memory Library to earn this badge."
+      },
+      {
+        week: 9,
+        storageKey: "psychologyLifespanWeek9_v1",
+        progressProperty: "solved",
+        completionKey: "psychologyAcademyWeek9Complete",
+        requiredCount: 8,
+        unitLabel: "fragments",
+        requiresFinalCase: true,
+        statusId: "week9-status",
+        directoryStatusId: "directory-week9-status",
+        badgeId: "badge-week9",
+        badgeTextId: "badge-week9-text",
+        badgeText: "Earned: Lifespan Explorer",
+        lockedBadgeText: "Explore eight rooms, collect all eight fragments, and restore the Chronicle in the Lifespan Conservatory to earn this badge."
       }
     ];
 
@@ -3844,6 +3987,17 @@
             )
 
           );
+
+        if (mission.week === 9) {
+          if (!saved || !Array.isArray(saved.solved) || !Array.isArray(saved.explored)) return 0;
+          const solved = new Set(saved.solved);
+          const explored = new Set(saved.explored);
+          let fragments = 0;
+          for (let i = 0; i < 8; i++) {
+            if (explored.has(i) && solved.has(i * 2) && solved.has(i * 2 + 1)) fragments++;
+          }
+          return fragments;
+        }
 
         if (
 
@@ -3962,7 +4116,7 @@
 
         completedCount +
 
-        " of 16 Academy missions completed";
+        " of 16 Academy missions completed · 9 missions currently open";
 
       if (
         completedCount === 0
@@ -4122,7 +4276,7 @@
         if (reduced) {
           status.textContent = 'Animations are off to match your device’s reduced-motion setting.';
         } else {
-          status.textContent = enabled ? 'Gentle sparkles and campus motion are on. Select the button to turn them off.' : 'Animations are off. Select the button to bring back the campus sparkle.';
+          status.textContent = enabled ? 'The sky changes slowly from day to night. Birds, flags and scholars are moving. Pause all animations or choose your sky.' : 'Animations are off. Select the button to bring back the campus sparkle.';
           if (!canSave) status.textContent += ' Your choice applies to this visit.';
         }
         if (!enabled) { resetPointer(); cards.forEach(function(card) { card.classList.remove('card-arriving'); }); }
@@ -4161,6 +4315,102 @@
         observedItems.forEach(function(item) { item.classList.add('is-in-view'); });
       }
     })();
+
+/* One clock coordinates daylight, moonlight, birds and distant lightning.
+   No sounds or full-screen flashes. This clock stops offscreen or when paused. */
+(function setupLivingAcademy() {
+  'use strict';
+  const root = document.documentElement, hero = document.querySelector('.academy-hero');
+  const picker = document.getElementById('academy-sky-mode');
+  const weatherButton = document.getElementById('academy-lightning-toggle');
+  const bolts = Array.from(document.querySelectorAll('.sky-lightning'));
+  const controls = document.querySelector('.academy-sky-controls');
+  if (!hero || !picker || !weatherButton) return;
+  const storageKey = 'psychologyAcademySky_v1';
+  const reduced = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
+  let mode = 'cycle', lightning = true, elapsed = 0, lastTime = null, lastPaint = 0;
+  let frame = null, inView = true, nextStrike = 0, lastStrike = -20000;
+  let wasNightfall = false;
+  try {
+    const saved = JSON.parse(localStorage.getItem(storageKey) || 'null');
+    if (saved && ['cycle','day','night'].includes(saved.mode)) mode = saved.mode;
+    if (saved && typeof saved.lightning === 'boolean') lightning = saved.lightning;
+  } catch (_) {}
+  controls.hidden = false;
+  picker.value = mode;
+  function save() { try { localStorage.setItem(storageKey, JSON.stringify({mode,lightning})); } catch (_) {} }
+  function smooth(value) { const t=Math.max(0,Math.min(1,value)); return t*t*(3-2*t); }
+  function active() { return root.classList.contains('academy-motion-on') && !(reduced && reduced.matches) && !document.hidden && inView; }
+  function clearBolts() { bolts.forEach(b=>b.classList.remove('is-striking')); }
+  function setControls() {
+    weatherButton.disabled = !root.classList.contains('academy-motion-on') || Boolean(reduced && reduced.matches);
+    weatherButton.setAttribute('aria-pressed', String(lightning));
+    weatherButton.textContent = 'Sky lightning: ' + (lightning ? 'On' : 'Off');
+  }
+  function paint() {
+    const phase = (elapsed % 112000) / 112000;
+    let night = phase < .6 ? smooth((phase-.18)/.26) : 1-smooth((phase-.60)/.24);
+    if (mode === 'day') night = 0;
+    if (mode === 'night') night = 1;
+    const dusk = Math.sin(night*Math.PI)*.8;
+    hero.style.setProperty('--night', night.toFixed(4));
+    hero.style.setProperty('--daylight', (1-night).toFixed(4));
+    hero.style.setProperty('--dusk', dusk.toFixed(4));
+    hero.style.setProperty('--cloud-alpha', (.7-night*.42).toFixed(4));
+    // Keep title contrast across the entire crossfade. Body copy stays on cream panels.
+    const lightText = night > .46;
+    hero.style.setProperty('--hero-ink', lightText ? '#fff6df' : '#17344f');
+    hero.dataset.skyPhase = night>.8 ? 'night' : night<.15 ? 'day' : 'twilight';
+    const nightfall = mode === 'night' || (mode === 'cycle' && phase>.30 && phase<.57);
+    if (nightfall && !wasNightfall) nextStrike = elapsed + 1000 + Math.random()*3500;
+    wasNightfall = nightfall;
+    if (active() && lightning && nightfall && elapsed>=nextStrike && elapsed-lastStrike>8000) {
+      const bolt=bolts[Math.floor(Math.random()*bolts.length)];
+      if (bolt) { clearBolts(); bolt.classList.add('is-striking'); }
+      lastStrike=elapsed;
+      nextStrike=elapsed+10000+Math.random()*9000;
+    }
+  }
+  function tick(time) {
+    frame = null;
+    if (!active()) { lastTime=null; return; }
+    if (lastTime !== null) elapsed += Math.min(time-lastTime,200);
+    lastTime=time;
+    if (time-lastPaint>=80) { paint(); lastPaint=time; }
+    frame=requestAnimationFrame(tick);
+  }
+  function sync() {
+    setControls();
+    if (!active()) {
+      if (frame !== null) cancelAnimationFrame(frame);
+      frame=null; lastTime=null; clearBolts();
+    } else if (frame === null) { lastTime=null; frame=requestAnimationFrame(tick); }
+    paint();
+  }
+  picker.addEventListener('change',()=>{mode=picker.value;wasNightfall=false;clearBolts();save();sync();});
+  weatherButton.addEventListener('click',()=>{lightning=!lightning;clearBolts();save();setControls();});
+  bolts.forEach(b=>b.addEventListener('animationend',()=>b.classList.remove('is-striking')));
+  new MutationObserver(sync).observe(root,{attributes:true,attributeFilter:['class']});
+  document.addEventListener('visibilitychange',sync);
+  window.addEventListener('pageshow',sync);
+  if (reduced && reduced.addEventListener) reduced.addEventListener('change',sync);
+  window.addEventListener('storage',event=>{
+    if(event.key!==storageKey && event.key!==null)return;
+    try {
+      const saved=JSON.parse(localStorage.getItem(storageKey)||'null');
+      mode=saved && ['cycle','day','night'].includes(saved.mode)?saved.mode:'cycle';
+      lightning=!(saved && saved.lightning===false);picker.value=mode;wasNightfall=false;clearBolts();sync();
+    }catch(_){}
+  });
+  if (window.IntersectionObserver) {
+    new IntersectionObserver(entries=>{
+      inView=entries[0].isIntersecting;
+      root.classList.toggle('academy-scene-paused',!inView);
+      sync();
+    },{threshold:0}).observe(hero);
+  }
+  sync();
+})();
 
   </script>
 
