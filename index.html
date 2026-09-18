@@ -11,7 +11,7 @@
 
   <meta
     name="description"
-    content="Psychology Academy by Dr. Tonya Holdaway. Weeks 1–9 are open, including the new Lifespan Conservatory: animated learning activities, clues, optional music, and completion badges.">
+    content="Psychology Academy by Dr. Tonya Holdaway. Weeks 1–10 are open, including the new Emberheart Atrium for motivation and emotion: animated learning activities, clues, optional music, and completion badges.">
 
   <title>Psychology Academy | Dr. Tonya Holdaway</title>
 
@@ -1809,6 +1809,180 @@ html.academy-motion-on.academy-scene-paused .academy-hero *,html.academy-motion-
 .soundscape-wrap{margin-top:24px}
 .academy-tagline,.academy-motion-status{background:#fffdf7;color:#243d4f;border-radius:12px;padding:8px 14px;width:fit-content}
 
+
+/* ==========================================================
+   WEEK 10 INDEX REFRESH: ACADEMIC CARD PALETTE + MINI-SCENES
+   ========================================================== */
+.mission-card.card-tone-blue {
+  --card-border: #3d647e;
+  --card-accent: #2e6f7b;
+  --card-highlight: #c5a24d;
+  background: linear-gradient(145deg, #f2f7fa 0%, #dce9ef 100%);
+  border-color: var(--card-border);
+}
+.mission-card.card-tone-slate {
+  --card-border: #67777e;
+  --card-accent: #587479;
+  --card-highlight: #b3944b;
+  background: linear-gradient(145deg, #f6f7f6 0%, #e1e6e7 100%);
+  border-color: var(--card-border);
+}
+.mission-card.card-tone-gold {
+  --card-border: #8b6a22;
+  --card-accent: #4e7164;
+  --card-highlight: #b88827;
+  background: linear-gradient(145deg, #fffaf0 0%, #f1e4bd 100%);
+  border-color: var(--card-border);
+}
+.mission-card.card-tone-blue::after,
+.mission-card.card-tone-slate::after,
+.mission-card.card-tone-gold::after {
+  background: rgba(255, 255, 255, .34);
+}
+.mission-card .mission-number { color: #3f5562; }
+.mission-card.card-tone-gold .mission-number { color: #725714; }
+.mission-card.card-tone-blue .mission-status,
+.mission-card.card-tone-slate .mission-status,
+.mission-card.card-tone-gold .mission-status { border-color: var(--card-border); }
+.mission-card.card-tone-blue .mission-link,
+.mission-card.card-tone-slate .mission-link,
+.mission-card.card-tone-gold .mission-link {
+  background: #17384d;
+  border-color: #0e293a;
+}
+.mission-card.card-tone-gold .mission-link {
+  background: #66501f;
+  border-color: #493813;
+}
+.mission-visual {
+  position: relative;
+  height: 108px;
+  margin: 10px 0 13px;
+  overflow: hidden;
+  border: 2px solid var(--card-border);
+  border-radius: 13px;
+  background:
+    radial-gradient(circle at 76% 24%, rgba(225, 195, 111, .2), transparent 22%),
+    linear-gradient(135deg, #11283a, #294555);
+  box-shadow: inset 0 0 26px rgba(6, 20, 35, .28);
+}
+.card-tone-slate .mission-visual { background: linear-gradient(135deg, #243846, #52656b); }
+.card-tone-gold .mission-visual { background: linear-gradient(135deg, #273c3a, #6f6546); }
+.mission-visual::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(105deg, transparent 25%, rgba(255,255,255,.12) 48%, transparent 70%);
+  transform: translateX(-130%);
+}
+.mission-visual svg { display: block; width: 100%; height: 100%; }
+.mv-cream { fill: #f8f1d9; }
+.mv-gold { fill: #d7b85f; }
+.mv-green { fill: #6f936f; }
+.mv-blue { fill: #73a8b4; }
+.mv-slate { fill: #aebbc0; }
+.mv-dark { fill: #173346; }
+.mv-stroke-cream { fill: none; stroke: #f8f1d9; }
+.mv-stroke-gold { fill: none; stroke: #d7b85f; }
+.mv-stroke-green { fill: none; stroke: #7aa27c; }
+.mv-stroke-blue { fill: none; stroke: #86c0c8; }
+.mission-card-note { margin: 8px 0 0; color: #435661; font-size: .88rem; }
+.mission-card.card-tone-gold .mission-card-note { color: #62552f; }
+.badge-sigil {
+  display: grid;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  margin: 0 auto 10px;
+  border: 2px solid #b79543;
+  border-radius: 50%;
+  color: #17384d;
+  background: linear-gradient(145deg, #fffaf0, #dfe9ec);
+  font: 800 .92rem/1 Georgia, "Times New Roman", serif;
+  letter-spacing: .02em;
+  box-shadow: inset 0 0 0 5px rgba(255,255,255,.55);
+}
+.badge-earned .badge-sigil { background: linear-gradient(145deg, #f6efcf, #d7eadf); }
+.mission-visual .mv-spin,
+.mission-visual .mv-pulse,
+.mission-visual .mv-float,
+.mission-visual .mv-sway,
+.mission-visual .mv-travel,
+.mission-visual .mv-flow,
+.mission-visual .mv-breathe,
+.mission-visual .mv-reveal,
+.mission-visual .mv-bell,
+.mission-visual .mv-page,
+.mission-visual .mv-door,
+.mission-visual .mv-window,
+.mission-visual .mv-needle,
+.mission-visual .mv-grow { transform-box: fill-box; }
+.mission-visual .mv-spin,
+.mission-visual .mv-pulse,
+.mission-visual .mv-float,
+.mission-visual .mv-sway,
+.mission-visual .mv-breathe,
+.mission-visual .mv-bell,
+.mission-visual .mv-page,
+.mission-visual .mv-window,
+.mission-visual .mv-needle,
+.mission-visual .mv-grow { transform-origin: center; }
+.mission-visual .mv-sway,
+.mission-visual .mv-grow { transform-origin: center bottom; }
+.mission-visual .mv-flow { stroke-dasharray: 7 9; }
+.mission-visual .mv-reveal { opacity: .38; }
+.mission-visual .mv-door { transform-origin: left center; }
+html.academy-motion-on .mission-card.is-in-view .mission-visual::after { animation: academy-visual-sheen 8s ease-in-out infinite; }
+html.academy-motion-on .mission-card.is-in-view .mv-spin { animation: academy-visual-spin 12s linear infinite; }
+html.academy-motion-on .mission-card.is-in-view .mv-pulse { animation: academy-visual-pulse 3.4s ease-in-out infinite; }
+html.academy-motion-on .mission-card.is-in-view .mv-float { animation: academy-visual-float 4.8s ease-in-out infinite alternate; }
+html.academy-motion-on .mission-card.is-in-view .mv-sway { animation: academy-visual-sway 5.5s ease-in-out infinite alternate; }
+html.academy-motion-on .mission-card.is-in-view .mv-travel { animation: academy-visual-travel 6s ease-in-out infinite; }
+html.academy-motion-on .mission-card.is-in-view .mv-flow { animation: academy-visual-flow 5s linear infinite; }
+html.academy-motion-on .mission-card.is-in-view .mv-breathe { animation: academy-visual-breathe 4.5s ease-in-out infinite; }
+html.academy-motion-on .mission-card.is-in-view .mv-reveal { animation: academy-visual-reveal 4s ease-in-out infinite alternate; }
+html.academy-motion-on .mission-card.is-in-view .mv-bell { animation: academy-visual-bell 5s ease-in-out infinite; }
+html.academy-motion-on .mission-card.is-in-view .mv-page { animation: academy-visual-page 5.5s ease-in-out infinite; }
+html.academy-motion-on .mission-card.is-in-view .mv-door { animation: academy-visual-door 6s ease-in-out infinite; }
+html.academy-motion-on .mission-card.is-in-view .mv-window { animation: academy-visual-window 3.8s ease-in-out infinite alternate; }
+html.academy-motion-on .mission-card.is-in-view .mv-needle { animation: academy-visual-needle 5s ease-in-out infinite alternate; }
+html.academy-motion-on .mission-card.is-in-view .mv-grow { animation: academy-visual-grow 5.5s ease-in-out infinite alternate; }
+html.academy-motion-on .mission-card:hover .mission-visual::after,
+html.academy-motion-on .mission-card:focus-within .mission-visual::after { animation-duration: 2s; }
+html.academy-motion-on .mission-card:hover .mv-spin,
+html.academy-motion-on .mission-card:focus-within .mv-spin { animation-duration: 4s; }
+html.academy-motion-on .mission-card:hover .mv-pulse,
+html.academy-motion-on .mission-card:focus-within .mv-pulse,
+html.academy-motion-on .mission-card:hover .mv-flow,
+html.academy-motion-on .mission-card:focus-within .mv-flow,
+html.academy-motion-on .mission-card:hover .mv-grow,
+html.academy-motion-on .mission-card:focus-within .mv-grow { animation-duration: 2.3s; }
+@keyframes academy-visual-sheen { 0%,52% { transform:translateX(-130%); } 75%,100% { transform:translateX(130%); } }
+@keyframes academy-visual-spin { to { transform:rotate(360deg); } }
+@keyframes academy-visual-pulse { 0%,100% { opacity:.55; transform:scale(.88); } 50% { opacity:1; transform:scale(1.13); } }
+@keyframes academy-visual-float { from { transform:translateY(5px); } to { transform:translateY(-7px); } }
+@keyframes academy-visual-sway { from { transform:rotate(-3deg); } to { transform:rotate(3deg); } }
+@keyframes academy-visual-travel { 0%,100% { transform:translateX(-34px); opacity:.25; } 50% { transform:translateX(34px); opacity:1; } }
+@keyframes academy-visual-flow { to { stroke-dashoffset:-64; } }
+@keyframes academy-visual-breathe { 0%,100% { transform:scale(.92); opacity:.72; } 50% { transform:scale(1.06); opacity:1; } }
+@keyframes academy-visual-reveal { from { opacity:.25; } to { opacity:1; } }
+@keyframes academy-visual-bell { 0%,75%,100% { transform:rotate(0); } 80% { transform:rotate(-7deg); } 86% { transform:rotate(7deg); } 92% { transform:rotate(-4deg); } }
+@keyframes academy-visual-page { 0%,35%,100% { transform:skewY(0); } 55%,75% { transform:skewY(-9deg); } }
+@keyframes academy-visual-door { 0%,25%,100% { transform:scaleX(1); } 50%,75% { transform:scaleX(.28); } }
+@keyframes academy-visual-window { from { opacity:.42; } to { opacity:1; filter:drop-shadow(0 0 6px #efd283); } }
+@keyframes academy-visual-needle { from { transform:rotate(-34deg); } to { transform:rotate(34deg); } }
+@keyframes academy-visual-grow { from { transform:scale(.91) rotate(-2deg); } to { transform:scale(1.05) rotate(2deg); } }
+@media (max-width: 600px) {
+  .mission-visual { height: 96px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mission-visual *, .mission-visual::after { animation: none !important; transition: none !important; }
+}
+@media print {
+  .mission-visual { display: none; }
+}
+
   </style>
 
 </head>
@@ -2008,9 +2182,9 @@ html.academy-motion-on.academy-scene-paused .academy-hero *,html.academy-motion-
 
         <p style="margin-bottom: 0;">
 
-          Nine Academy destinations are now open: Weeks 1–9.
-          Our newest adventure is The Lifespan Conservatory,
-          where a living chronicle awaits restoration. Weeks 10–16
+          Ten Academy destinations are now open: Weeks 1–10.
+          Our newest adventure is The Emberheart Atrium,
+          where motives become action and feelings gain meaning. Weeks 11–16
           will open as our semester journey continues.
 
         </p>
@@ -2165,10 +2339,25 @@ html.academy-motion-on.academy-scene-paused .academy-hero *,html.academy-motion-
 
 
     <section class="academy-open-guide" aria-labelledby="open-guide-heading">
-      <div class="open-guide-copy"><p class="open-guide-eyebrow">Now exploring · Weeks 1–9</p><h2 id="open-guide-heading">Nine doors are open. Your next discovery awaits.</h2><p>Start with psychology’s foundations, investigate research and the brain, and continue through consciousness, perception, learning, thinking, memory, and lifespan development. Each open destination has its own mission entrance below.</p><p><strong>New this week:</strong> Restore the Chronicle of Becoming in <a href="missions/week9.html">The Lifespan Conservatory</a>. Eight interactive rooms connect OpenStax Chapter 9 to everyday examples.</p></div>
+      <div class="open-guide-copy">
+        <p class="open-guide-eyebrow">Now exploring · Weeks 1–10</p>
+        <h2 id="open-guide-heading">Ten doors are open. Your next discovery awaits.</h2>
+        <p>Begin with psychology’s foundations, investigate research and the brain, and continue through consciousness, perception, learning, thinking, memory, lifespan development, motivation, and emotion. Each open destination has its own mission entrance below.</p>
+        <p><strong>New this week:</strong> Reawaken eight chambers in <a href="missions/week10.html">The Emberheart Atrium</a>. Its interactive instruments and sixteen knowledge locks connect OpenStax Chapter 10 to realistic, respectful examples.</p>
+      </div>
       <nav aria-label="Currently open Academy missions"><ol class="open-mission-list">
-      <li><a href="missions/week1.html">1 · Psychology Museum</a></li><li><a href="missions/week2.html">2 · Research Conservatory</a></li><li><a href="missions/week3.html">3 · Brain Institute</a></li><li><a href="missions/week4.html">4 · Consciousness Observatory</a></li><li><a href="missions/week5.html">5 · Perception Gallery</a></li><li><a href="missions/week6.html">6 · Conditioning Vault</a></li><li><a href="missions/week7.html">7 · Thinking Workshop</a></li><li><a href="missions/week8.html">8 · Memory Library</a></li><li><a class="new-mission-link" href="missions/week9.html">9 · Lifespan Conservatory — New</a></li></ol></nav>
-      <p class="open-guide-footer">Weeks 10–16 remain marked “Opening Later.” Use your Canvas assignment for submission instructions and due dates.</p>
+        <li><a href="missions/week1.html">1 · Psychology Museum</a></li>
+        <li><a href="missions/week2.html">2 · Research Conservatory</a></li>
+        <li><a href="missions/week3.html">3 · Brain Institute</a></li>
+        <li><a href="missions/week4.html">4 · Consciousness Observatory</a></li>
+        <li><a href="missions/week5.html">5 · Perception Gallery</a></li>
+        <li><a href="missions/week6.html">6 · Conditioning Vault</a></li>
+        <li><a href="missions/week7.html">7 · Thinking Workshop</a></li>
+        <li><a href="missions/week8.html">8 · Memory Library</a></li>
+        <li><a href="missions/week9.html">9 · Lifespan Conservatory</a></li>
+        <li><a class="new-mission-link" href="missions/week10.html">10 · Emberheart Atrium — New</a></li>
+      </ol></nav>
+      <p class="open-guide-footer">Weeks 11–16 remain marked “Opening Later.” Use your Canvas assignment for submission instructions and due dates.</p>
     </section>
 
     <!-- PROGRESS -->
@@ -2271,740 +2460,272 @@ html.academy-motion-on.academy-scene-paused .academy-hero *,html.academy-motion-
       <div class="campus-path">
 
         <!-- DISTRICT 1 -->
-
-        <section
-          class="district"
-          aria-labelledby="foundations-heading">
-
-          <h3
-            id="foundations-heading"
-            class="district-title">
-
-            Foundational Sciences District
-
-          </h3>
-
+        <section class="district" aria-labelledby="foundations-heading">
+          <h3 id="foundations-heading" class="district-title">Foundational Sciences District</h3>
           <div class="mission-grid">
-
             <!-- WEEK 1 -->
-
-            <article
-              class="mission-card museum-theme">
-
+            <article class="mission-card museum-theme card-tone-blue" data-week="1">
               <div>
-
-                <p class="mission-number">
-
-                  Week 1
-
-                </p>
-
-                <span
-                  class="mission-icon"
-                  aria-hidden="true">
-
-                  🏛️
-
-                </span>
-
-                <h3>
-
-                  The Psychology Museum
-
-                </h3>
-
-                <p>
-
-                  Explore the origins of psychology,
-                  important perspectives, scientific
-                  thinking, and the thinkers who
-                  helped shape the field.
-
-                </p>
-
-                <p
-                  class="mission-status available"
-                  id="week1-status">
-
-                  Available Now
-
-                </p>
-
+                <p class="mission-number">Week 1</p>
+                <div class="mission-visual" aria-hidden="true"><svg viewBox="0 0 320 108" focusable="false">
+                  <path class="mv-cream" d="M56 38h208l-104-28z"/><path class="mv-gold" d="M45 91h230v8H45z"/>
+                  <g class="mv-float"><path class="mv-blue" d="M72 42h28v47H72zm50 0h28v47h-28zm50 0h28v47h-28zm50 0h28v47h-28z"/><path class="mv-cream" d="M66 36h40v8H66zm50 0h40v8h-40zm50 0h40v8h-40zm50 0h40v8h-40z"/></g>
+                  <path class="mv-stroke-gold mv-flow" d="M30 100h260" stroke-width="3"/><circle class="mv-gold mv-travel" cx="160" cy="100" r="6"/>
+                </svg></div>
+                <h3>The Psychology Museum</h3>
+                <p>Explore psychology’s origins, major perspectives, scientific thinking, and the thinkers who helped shape the field.</p>
+                <p class="mission-status available" id="week1-status">Available Now</p>
               </div>
-
-              <a
-                class="mission-link"
-                href="missions/week1.html">
-
-                Enter the Psychology Museum
-
-              </a>
-
+              <a class="mission-link" href="missions/week1.html">Enter the Psychology Museum</a>
             </article>
 
             <!-- WEEK 2 -->
-
-            <article
-              class="mission-card research-theme">
-
+            <article class="mission-card research-theme card-tone-slate" data-week="2">
               <div>
-
-                <p class="mission-number">
-
-                  Week 2
-
-                </p>
-
-                <span
-                  class="mission-icon"
-                  aria-hidden="true">
-
-                  🔬
-
-                </span>
-
-                <h3>
-
-                  The Research Conservatory
-
-                </h3>
-
-                <p>
-
-                  Investigate questions, hypotheses,
-                  variables, research methods,
-                  correlation, ethics, and misleading
-                  scientific claims.
-
-                </p>
-
-                <p
-                  class="mission-status available"
-                  id="week2-status">
-
-                  Available Now
-
-                </p>
-
+                <p class="mission-number">Week 2</p>
+                <div class="mission-visual" aria-hidden="true"><svg viewBox="0 0 320 108" focusable="false">
+                  <g class="mv-sway"><path class="mv-stroke-cream" d="M110 21l33 18-14 25-33-18zM111 51L84 88h92" stroke-width="7" stroke-linecap="round"/><circle class="mv-gold" cx="126" cy="34" r="10"/><path class="mv-blue" d="M159 62h52v9h-52z"/></g>
+                  <path class="mv-stroke-blue mv-flow" d="M185 86q25-43 48-10t50-35" stroke-width="4"/><g class="mv-pulse"><circle class="mv-gold" cx="187" cy="86" r="5"/><circle class="mv-green" cx="233" cy="76" r="5"/><circle class="mv-cream" cx="283" cy="41" r="5"/></g>
+                </svg></div>
+                <h3>The Research Conservatory</h3>
+                <p>Investigate questions, hypotheses, variables, research methods, correlation, ethics, and misleading scientific claims.</p>
+                <p class="mission-status available" id="week2-status">Available Now</p>
               </div>
-
-              <a
-                class="mission-link"
-                href="missions/week2.html">
-
-                Enter the Research Conservatory
-
-              </a>
-
+              <a class="mission-link" href="missions/week2.html">Enter the Research Conservatory</a>
             </article>
 
             <!-- WEEK 3 -->
-
-            <article
-              class="mission-card brain-theme">
-
+            <article class="mission-card brain-theme card-tone-gold" data-week="3">
               <div>
-
-                <p class="mission-number">
-
-                  Week 3
-
-                </p>
-
-                <span
-                  class="mission-icon"
-                  aria-hidden="true">
-
-                  🧠
-
-                </span>
-
-                <h3>
-
-                  The Brain Institute
-
-                </h3>
-
-                <p>
-
-                  Restore the neural network while
-                  exploring neurons, neurotransmitters,
-                  the nervous system, brain structures,
-                  hormones, genetics, and biological
-                  influences on behavior.
-
-                </p>
-
-                <p
-                  class="mission-status available"
-                  id="week3-status">
-
-                  Available Now
-
-                </p>
-
+                <p class="mission-number">Week 3</p>
+                <div class="mission-visual" aria-hidden="true"><svg viewBox="0 0 320 108" focusable="false">
+                  <path class="mv-stroke-cream" d="M131 26c-20-25-55-2-43 27-19 11-8 41 15 40 7 19 39 14 40-6 9 19 40 13 40-9 28-5 27-39 6-47-1-29-39-34-58-5z" stroke-width="4"/>
+                  <path class="mv-stroke-blue mv-flow" d="M143 18v72M109 32q34 12 34 31M98 59q27-10 45 4m31-34q-30 13-31 34m45-10q-27-4-45 10M191 61h40l22-27 31 18" stroke-width="3"/>
+                  <g class="mv-pulse"><circle class="mv-gold" cx="143" cy="63" r="7"/><circle class="mv-green" cx="231" cy="61" r="6"/><circle class="mv-gold" cx="284" cy="52" r="6"/></g>
+                </svg></div>
+                <h3>The Brain Institute</h3>
+                <p>Restore a neural network while exploring neurons, brain structures, the nervous system, hormones, genetics, and behavior.</p>
+                <p class="mission-status available" id="week3-status">Available Now</p>
               </div>
-
-              <a
-                class="mission-link"
-                href="missions/week3.html">
-
-                Enter the Brain Institute
-
-              </a>
-
+              <a class="mission-link" href="missions/week3.html">Enter the Brain Institute</a>
             </article>
 
             <!-- WEEK 4 -->
-
-            <article
-              class="mission-card consciousness-theme">
-
+            <article class="mission-card consciousness-theme card-tone-blue" data-week="4">
               <div>
-
-                <p class="mission-number">
-
-                  Week 4
-
-                </p>
-
-                <span
-                  class="mission-icon"
-                  aria-hidden="true">
-
-                  🌙
-
-                </span>
-
-                <h3>
-
-                  The Consciousness Observatory
-
-                </h3>
-
-                <p>
-
-                  Take the Night Shift and investigate
-                  circadian rhythms, sleep stages,
-                  dreams, sleep deprivation, sleep
-                  disorders, learning, memory, and
-                  altered states of consciousness.
-
-                </p>
-
-                <p
-                  class="mission-status available"
-                  id="week4-status">
-
-                  Available Now
-
-                </p>
-
+                <p class="mission-number">Week 4</p>
+                <div class="mission-visual" aria-hidden="true"><svg viewBox="0 0 320 108" focusable="false">
+                  <path class="mv-cream mv-float" d="M105 14a37 37 0 1 0 35 60 32 32 0 0 1-35-60z"/>
+                  <g class="mv-reveal mv-gold"><circle cx="57" cy="27" r="3"/><circle cx="168" cy="20" r="4"/><circle cx="226" cy="34" r="3"/><circle cx="277" cy="18" r="4"/></g>
+                  <path class="mv-stroke-blue mv-flow" d="M142 78q18-24 36 0t36 0 36 0 36 0" stroke-width="5"/><path class="mv-stroke-gold" d="M143 91h143" stroke-width="2" opacity=".7"/>
+                </svg></div>
+                <h3>The Consciousness Observatory</h3>
+                <p>Investigate circadian rhythms, sleep stages, dreams, sleep deprivation, sleep disorders, learning, and altered consciousness.</p>
+                <p class="mission-status available" id="week4-status">Available Now</p>
               </div>
-
-              <a
-                class="mission-link"
-                href="missions/week4.html">
-
-                Enter the Consciousness Observatory
-
-              </a>
-
+              <a class="mission-link" href="missions/week4.html">Enter the Consciousness Observatory</a>
             </article>
-
           </div>
-
         </section>
 
         <!-- DISTRICT 2 -->
-
-        <section
-          class="district"
-          aria-labelledby="cognition-heading">
-
-          <h3
-            id="cognition-heading"
-            class="district-title">
-
-            Learning and Cognition District
-
-          </h3>
-
+        <section class="district" aria-labelledby="cognition-heading">
+          <h3 id="cognition-heading" class="district-title">Learning and Cognition District</h3>
           <div class="mission-grid">
-
             <!-- WEEK 5 -->
-
-            <article
-              class="mission-card perception-theme">
-
+            <article class="mission-card perception-theme card-tone-slate" data-week="5">
               <div>
-
-                <p class="mission-number">
-
-                  Week 5
-
-                </p>
-
-                <span
-                  class="mission-icon"
-                  aria-hidden="true">
-
-                  👁️
-
-                </span>
-
-                <h3>
-
-                  The Perception Gallery
-
-                </h3>
-
-                <p>
-
-                  Investigate sensation, perception,
-                  thresholds, selective attention,
-                  sensory integration, Gestalt
-                  principles, and the ways the brain
-                  interprets the world.
-
-                </p>
-
-                <p
-                  class="mission-status available"
-                  id="week5-status">
-
-                  Available Now
-
-                </p>
-
+                <p class="mission-number">Week 5</p>
+                <div class="mission-visual" aria-hidden="true"><svg viewBox="0 0 320 108" focusable="false">
+                  <path class="mv-stroke-cream" d="M34 54q56-58 126 0-70 58-126 0zm126 0q58-55 126 0-68 55-126 0" stroke-width="4"/>
+                  <g class="mv-spin"><circle class="mv-blue" cx="160" cy="54" r="27"/><path class="mv-stroke-gold" d="M160 30v48M136 54h48M143 37l34 34m0-34-34 34" stroke-width="4"/></g><circle class="mv-dark mv-pulse" cx="160" cy="54" r="9"/>
+                  <path class="mv-stroke-blue mv-flow" d="M35 92h250" stroke-width="3"/>
+                </svg></div>
+                <h3>The Perception Gallery</h3>
+                <p>Test sensation, thresholds, attention, sensory integration, Gestalt principles, and the brain’s interpretation of the world.</p>
+                <p class="mission-status available" id="week5-status">Available Now</p>
               </div>
-
-              <a
-                class="mission-link"
-                href="missions/week5.html">
-
-                Enter the Perception Gallery
-
-              </a>
-
+              <a class="mission-link" href="missions/week5.html">Enter the Perception Gallery</a>
             </article>
 
             <!-- WEEK 6 -->
-            <article class="mission-card learning-theme">
+            <article class="mission-card learning-theme card-tone-gold" data-week="6">
               <div>
                 <p class="mission-number">Week 6</p>
-                <span class="mission-icon" aria-hidden="true">🔔</span>
+                <div class="mission-visual" aria-hidden="true"><svg viewBox="0 0 320 108" focusable="false">
+                  <g class="mv-bell"><path class="mv-gold" d="M111 76h79q-13-12-13-34 0-29-26-29t-26 29q0 22-14 34z"/><circle class="mv-cream" cx="151" cy="83" r="8"/><path class="mv-stroke-cream" d="M118 83h67" stroke-width="5" stroke-linecap="round"/></g>
+                  <path class="mv-stroke-blue mv-reveal" d="M95 31q-24 23 0 46M207 31q24 23 0 46M77 18q-42 37 0 74M226 18q42 37 0 74" stroke-width="3"/>
+                  <g class="mv-pulse"><circle class="mv-green" cx="267" cy="53" r="14"/><circle class="mv-gold" cx="267" cy="53" r="5"/></g>
+                </svg></div>
                 <h3>The Conditioning Vault</h3>
-                <p>Pavlov Gardens and Skinner Hall</p>
-                <p>Explore seven research rooms, collect clues, and unlock the vault. Investigate classical conditioning, operant conditioning, reinforcement schedules, shaping, and observational learning.</p>
+                <p><strong>Pavlov Gardens and Skinner Hall.</strong> Explore classical conditioning, operant conditioning, reinforcement schedules, shaping, and observational learning.</p>
                 <p class="mission-status available" id="week6-status">Available Now</p>
               </div>
               <a class="mission-link" href="missions/week6.html">Enter the Conditioning Vault</a>
             </article>
 
             <!-- WEEK 7 -->
-            <article class="mission-card thinking-theme">
+            <article class="mission-card thinking-theme card-tone-blue" data-week="7">
               <div>
                 <p class="mission-number">Week 7</p>
-                <span class="mission-icon" aria-hidden="true">🧩</span>
+                <div class="mission-visual" aria-hidden="true"><svg viewBox="0 0 320 108" focusable="false">
+                  <path class="mv-stroke-cream" d="M38 22h89v22H82v19h45v23H38V64h24V44H38zm145 0h99v64h-99V65h29V44h-29z" stroke-width="4"/>
+                  <path class="mv-stroke-gold mv-flow" d="M48 75h26V54h45M193 34h59v39h-30" stroke-width="4"/>
+                  <g class="mv-float"><path class="mv-green" d="M145 35h28v22h-7q3 12-7 12t-7-12h-7z"/><circle class="mv-gold" cx="159" cy="30" r="5"/></g>
+                </svg></div>
                 <h3>The Thinking Workshop</h3>
-                <p>The Missing Mindprint</p>
-                <p>Explore interactive desks, inspect evidence, collect seven fragments, and restore the Academy’s missing guide. Investigate language, problem solving, creativity, and intelligence with linked OpenStax research files.</p>
+                <p><strong>The Missing Mindprint.</strong> Investigate language, problem solving, creativity, concepts, decision-making, and theories of intelligence.</p>
                 <p class="mission-status available" id="week7-status">Available Now</p>
               </div>
               <a class="mission-link" href="missions/week7.html">Enter the Thinking Workshop</a>
             </article>
 
             <!-- WEEK 8 -->
-            <article class="mission-card memory-theme">
+            <article class="mission-card memory-theme card-tone-slate" data-week="8">
               <div>
                 <p class="mission-number">Week 8</p>
-                <span class="mission-icon" aria-hidden="true">📚</span>
+                <div class="mission-visual" aria-hidden="true"><svg viewBox="0 0 320 108" focusable="false">
+                  <path class="mv-cream" d="M57 23q50-13 101 11v58q-51-22-101-8zm205 0q-51-13-102 11v58q51-22 102-8z"/>
+                  <path class="mv-stroke-gold mv-page" d="M160 35v56M72 43q36-7 72 6M72 57q36-7 72 6M176 45q34-8 70-3M176 59q34-8 70-3" stroke-width="3"/>
+                  <path class="mv-stroke-blue mv-flow" d="M83 77q37-8 65 4m24 0q34-12 67-5" stroke-width="4"/><g class="mv-pulse mv-green"><circle cx="104" cy="77" r="5"/><circle cx="214" cy="75" r="5"/></g>
+                </svg></div>
                 <h3>The Memory Library</h3>
-                <p>The Lost Archive</p>
-                <p>Try memory demonstrations, light up a brain network, inspect misleading details, and build a study plan. Collect seven fragments, restore the archive, and earn your Memory Archivist badge. Each room links to OpenStax Chapter 8.</p>
+                <p><strong>The Lost Archive.</strong> Try memory demonstrations, inspect misleading details, explore encoding and retrieval, and build a stronger study plan.</p>
                 <p class="mission-status available" id="week8-status">Available Now</p>
               </div>
               <a class="mission-link" href="missions/week8.html">Enter the Memory Library</a>
             </article>
-
           </div>
-
         </section>
 
         <!-- DISTRICT 3 -->
-
-        <section
-          class="district"
-          aria-labelledby="human-heading">
-
-          <h3
-            id="human-heading"
-            class="district-title">
-
-            Human Experience District
-
-          </h3>
-
+        <section class="district" aria-labelledby="human-heading">
+          <h3 id="human-heading" class="district-title">Human Experience District</h3>
           <div class="mission-grid">
-
             <!-- WEEK 9 -->
-            <article class="mission-card development-theme lifespan-feature-card" id="week9-card">
+            <article class="mission-card development-theme card-tone-gold lifespan-feature-card" id="week9-card" data-week="9">
               <div>
-                <p class="mission-number">Week 9 · Newly Open</p>
-                <span class="mission-icon" aria-hidden="true">🌱</span>
+                <p class="mission-number">Week 9</p>
+                <div class="mission-visual" aria-hidden="true"><svg viewBox="0 0 320 108" focusable="false">
+                  <g class="mv-grow"><path class="mv-stroke-gold" d="M160 101V35M160 77q-48-2-61-31M160 57q43-8 62-35M160 45l-18-24" stroke-width="6" stroke-linecap="round"/><g class="mv-green"><ellipse cx="98" cy="45" rx="20" ry="10" transform="rotate(32 98 45)"/><ellipse cx="222" cy="22" rx="21" ry="10" transform="rotate(-28 222 22)"/><ellipse cx="142" cy="20" rx="17" ry="9"/><ellipse cx="188" cy="54" rx="21" ry="10" transform="rotate(-20 188 54)"/></g></g>
+                  <g class="mv-pulse mv-gold"><circle cx="119" cy="70" r="5"/><circle cx="198" cy="41" r="5"/><circle cx="160" cy="35" r="6"/></g>
+                </svg></div>
                 <h3>The Lifespan Conservatory</h3>
-                <p>The Chronicle of Becoming</p>
-                <div class="card-life-tree" aria-hidden="true"><svg viewBox="0 0 240 90"><path d="M120 85V22M120 62Q78 59 66 33M120 43Q156 37 174 14M120 32 105 12" stroke="#786232" stroke-width="5" fill="none" stroke-linecap="round"/><g class="lifespan-leaf-cluster" fill="#769b75"><ellipse cx="66" cy="33" rx="16" ry="8" transform="rotate(35 66 33)"/><ellipse cx="174" cy="14" rx="17" ry="8" transform="rotate(-25 174 14)"/><ellipse cx="105" cy="12" rx="13" ry="7"/><ellipse cx="143" cy="43" rx="17" ry="8" transform="rotate(-20 143 43)"/></g><g class="conservatory-glow" fill="#c2a253"><circle cx="83" cy="53" r="4"/><circle cx="157" cy="31" r="4"/><circle cx="120" cy="22" r="5"/></g></svg></div>
-                <p>Explore eight animated rooms across the lifespan. Reveal a hidden star, experiment with conservation, turn Erikson’s stage wheel, and investigate moral reasoning. Collect eight fragments, restore the Chronicle, and earn your Lifespan Explorer badge.</p>
-                <p class="week9-card-note">OpenStax Chapter 9 links in every room · Optional whimsical music · A choice of final-room learning routes</p>
+                <p><strong>The Chronicle of Becoming.</strong> Explore eight animated rooms across the lifespan, including conservation, Erikson’s stages, attachment, and moral reasoning.</p>
+                <p class="mission-card-note">OpenStax Chapter 9 connections · Eight fragments · Personalized Lifespan Explorer badge</p>
                 <p class="mission-status available" id="week9-status">Available Now</p>
               </div>
               <a class="mission-link" href="missions/week9.html">Enter the Lifespan Conservatory</a>
             </article>
 
             <!-- WEEK 10 -->
-
-            <article
-              class="mission-card emotion-theme">
-
+            <article class="mission-card emotion-theme card-tone-blue emberheart-feature-card" id="week10-card" data-week="10">
               <div>
-
-                <p class="mission-number">
-
-                  Week 10
-
-                </p>
-
-                <span
-                  class="mission-icon"
-                  aria-hidden="true">
-
-                  🌸
-
-                </span>
-
-                <h3>
-
-                  Motivation and Emotion Gardens
-
-                </h3>
-
-                <p>
-
-                  Explore motivation, emotion,
-                  human needs, achievement,
-                  biological drives, and
-                  emotional experience.
-
-                </p>
-
-                <p class="mission-status coming">
-
-                  Opening Later
-
-                </p>
-
+                <p class="mission-number">Week 10 · Newly Open</p>
+                <div class="mission-visual mission-visual-emberheart" aria-hidden="true"><svg viewBox="0 0 320 108" focusable="false">
+                  <path class="mv-stroke-gold mv-flow" d="M35 91q54-22 106 0t105 0 42-18" stroke-width="3"/>
+                  <g class="mv-grow"><path class="mv-stroke-green" d="M160 102V62M160 83q-28-16-47-2M160 77q28-20 51-4" stroke-width="6" stroke-linecap="round"/><ellipse class="mv-green" cx="117" cy="80" rx="22" ry="10" transform="rotate(22 117 80)"/><ellipse class="mv-green" cx="207" cy="72" rx="23" ry="11" transform="rotate(-22 207 72)"/>
+                  <g fill="#71906a"><ellipse cx="160" cy="45" rx="13" ry="27"/><ellipse cx="160" cy="45" rx="13" ry="27" transform="rotate(72 160 45)"/><ellipse cx="160" cy="45" rx="13" ry="27" transform="rotate(144 160 45)"/><ellipse cx="160" cy="45" rx="13" ry="27" transform="rotate(216 160 45)"/><ellipse cx="160" cy="45" rx="13" ry="27" transform="rotate(288 160 45)"/></g></g>
+                  <circle class="mv-gold mv-pulse" cx="160" cy="45" r="15"/><path class="mv-stroke-cream" d="M160 55s-11-7-11-15c0-8 9-10 11-4 2-6 11-4 11 4 0 8-11 15-11 15z" stroke-width="2"/>
+                </svg></div>
+                <h3>The Emberheart Atrium</h3>
+                <p><strong>Where needs become action and feelings become meaning.</strong> Reawaken eight chambers by exploring motives, homeostasis, arousal, hunger, human diversity, emotion theories, expression, and culture.</p>
+                <p class="mission-card-note">OpenStax Chapter 10 connections · Sixteen knowledge locks · Optional ambient guitar · Affective Science Navigator badge</p>
+                <p class="mission-status available" id="week10-status">Available Now</p>
               </div>
-
+              <a class="mission-link" href="missions/week10.html">Enter the Emberheart Atrium</a>
             </article>
 
             <!-- WEEK 11 -->
-
-            <article
-              class="mission-card personality-theme">
-
+            <article class="mission-card personality-theme card-tone-slate" data-week="11">
               <div>
-
-                <p class="mission-number">
-
-                  Week 11
-
-                </p>
-
-                <span
-                  class="mission-icon"
-                  aria-hidden="true">
-
-                  🏡
-
-                </span>
-
-                <h3>
-
-                  Personality House
-
-                </h3>
-
-                <p>
-
-                  Visit rooms inspired by major
-                  theories of personality, traits,
-                  assessment, and individual
-                  differences.
-
-                </p>
-
-                <p class="mission-status coming">
-
-                  Opening Later
-
-                </p>
-
+                <p class="mission-number">Week 11</p>
+                <div class="mission-visual" aria-hidden="true"><svg viewBox="0 0 320 108" focusable="false">
+                  <path class="mv-slate" d="M92 94V43l68-31 68 31v51z"/><path class="mv-gold" d="M80 46l80-38 80 38-7 10-73-34-73 34z"/>
+                  <g class="mv-window"><rect class="mv-blue" x="111" y="53" width="25" height="25" rx="4"/><rect class="mv-green" x="148" y="53" width="25" height="25" rx="4"/><rect class="mv-gold" x="185" y="53" width="25" height="25" rx="4"/></g><path class="mv-stroke-cream" d="M160 94V72" stroke-width="15"/>
+                </svg></div>
+                <h3>Personality House</h3>
+                <p>Visit rooms inspired by major theories of personality, traits, assessment, identity, and individual differences.</p>
+                <p class="mission-status coming">Opening Later</p>
               </div>
-
             </article>
 
             <!-- WEEK 12 -->
-
-            <article
-              class="mission-card social-theme">
-
+            <article class="mission-card social-theme card-tone-gold" data-week="12">
               <div>
-
-                <p class="mission-number">
-
-                  Week 12
-
-                </p>
-
-                <span
-                  class="mission-icon"
-                  aria-hidden="true">
-
-                  👥
-
-                </span>
-
-                <h3>
-
-                  Social Psychology Commons
-
-                </h3>
-
-                <p>
-
-                  Explore conformity, persuasion,
-                  relationships, prejudice, helping
-                  behavior, groups, and social
-                  influence.
-
-                </p>
-
-                <p class="mission-status coming">
-
-                  Opening Later
-
-                </p>
-
+                <p class="mission-number">Week 12</p>
+                <div class="mission-visual" aria-hidden="true"><svg viewBox="0 0 320 108" focusable="false">
+                  <path class="mv-stroke-blue mv-flow" d="M64 54h75m42 0h75M111 32l49 22-49 23m98-45-49 22 49 23" stroke-width="4"/>
+                  <g class="mv-pulse"><circle class="mv-gold" cx="64" cy="54" r="17"/><circle class="mv-green" cx="160" cy="54" r="20"/><circle class="mv-cream" cx="256" cy="54" r="17"/><circle class="mv-blue" cx="111" cy="32" r="12"/><circle class="mv-blue" cx="209" cy="32" r="12"/></g>
+                </svg></div>
+                <h3>Social Psychology Commons</h3>
+                <p>Explore conformity, persuasion, relationships, prejudice, helping behavior, groups, and social influence.</p>
+                <p class="mission-status coming">Opening Later</p>
               </div>
-
             </article>
-
           </div>
-
         </section>
 
         <!-- DISTRICT 4 -->
-
-        <section
-          class="district"
-          aria-labelledby="applied-heading">
-
-          <h3
-            id="applied-heading"
-            class="district-title">
-
-            Wellness and Applied Psychology District
-
-          </h3>
-
+        <section class="district" aria-labelledby="applied-heading">
+          <h3 id="applied-heading" class="district-title">Wellness and Applied Psychology District</h3>
           <div class="mission-grid">
-
             <!-- WEEK 13 -->
-
-            <article
-              class="mission-card workplace-theme">
-
+            <article class="mission-card workplace-theme card-tone-blue" data-week="13">
               <div>
-
-                <p class="mission-number">
-
-                  Week 13
-
-                </p>
-
-                <span
-                  class="mission-icon"
-                  aria-hidden="true">
-
-                  🏢
-
-                </span>
-
-                <h3>
-
-                  Workplace Psychology Center
-
-                </h3>
-
-                <p>
-
-                  Explore psychology in organizations,
-                  leadership, work, motivation, teams,
-                  and human performance.
-
-                </p>
-
-                <p class="mission-status coming">
-
-                  Opening Later
-
-                </p>
-
+                <p class="mission-number">Week 13</p>
+                <div class="mission-visual" aria-hidden="true"><svg viewBox="0 0 320 108" focusable="false">
+                  <path class="mv-slate" d="M47 97V31h90v66zm136 0V14h90v83z"/><g class="mv-window mv-gold"><path d="M63 45h18v13H63zm28 0h18v13H91zm28 0h18v13h-18zM63 69h18v13H63zm28 0h18v13H91zm28 0h18v13h-18zM199 29h18v13h-18zm28 0h18v13h-18zm-28 24h18v13h-18zm28 0h18v13h-18z"/></g>
+                  <g class="mv-spin"><circle class="mv-green" cx="160" cy="65" r="22"/><circle class="mv-dark" cx="160" cy="65" r="9"/><path class="mv-stroke-cream" d="M160 36v10m0 38v10m-29-29h10m38 0h10m-49-20 8 8m24 24 8 8m0-40-8 8m-24 24-8 8" stroke-width="5"/></g>
+                </svg></div>
+                <h3>Workplace Psychology Center</h3>
+                <p>Explore psychology in organizations, leadership, work, motivation, teamwork, and human performance.</p>
+                <p class="mission-status coming">Opening Later</p>
               </div>
-
             </article>
 
             <!-- WEEK 14 -->
-
-            <article
-              class="mission-card wellness-theme">
-
+            <article class="mission-card wellness-theme card-tone-slate" data-week="14">
               <div>
-
-                <p class="mission-number">
-
-                  Week 14
-
-                </p>
-
-                <span
-                  class="mission-icon"
-                  aria-hidden="true">
-
-                  🌿
-
-                </span>
-
-                <h3>
-
-                  Stress and Wellness Retreat
-
-                </h3>
-
-                <p>
-
-                  Explore stress, coping, health
-                  psychology, resilience, wellness,
-                  and the mind body connection.
-
-                </p>
-
-                <p class="mission-status coming">
-
-                  Opening Later
-
-                </p>
-
+                <p class="mission-number">Week 14</p>
+                <div class="mission-visual" aria-hidden="true"><svg viewBox="0 0 320 108" focusable="false">
+                  <g class="mv-breathe"><path class="mv-green" d="M151 93q-63-9-70-67 58 0 70 49z"/><path class="mv-blue" d="M169 93q63-9 70-67-58 0-70 49z"/><path class="mv-stroke-cream" d="M160 94V36m0 38-47-34m47 34 47-34" stroke-width="4"/></g>
+                  <path class="mv-stroke-gold mv-flow" d="M33 84h42l11-18 14 31 17-44 18 31h38l12-15 14 28 16-45 17 32h55" stroke-width="4"/>
+                </svg></div>
+                <h3>Stress and Wellness Retreat</h3>
+                <p>Explore stress, coping, health psychology, resilience, wellness, and the mind–body connection.</p>
+                <p class="mission-status coming">Opening Later</p>
               </div>
-
             </article>
 
             <!-- WEEK 15 -->
-
-            <article
-              class="mission-card disorders-theme">
-
+            <article class="mission-card disorders-theme card-tone-gold" data-week="15">
               <div>
-
-                <p class="mission-number">
-
-                  Week 15
-
-                </p>
-
-                <span
-                  class="mission-icon"
-                  aria-hidden="true">
-
-                  🧭
-
-                </span>
-
-                <h3>
-
-                  Psychological Disorders Center
-
-                </h3>
-
-                <p>
-
-                  Explore psychological disorders,
-                  classification, symptoms, stigma,
-                  and evidence based understanding.
-
-                </p>
-
-                <p class="mission-status coming">
-
-                  Opening Later
-
-                </p>
-
+                <p class="mission-number">Week 15</p>
+                <div class="mission-visual" aria-hidden="true"><svg viewBox="0 0 320 108" focusable="false">
+                  <circle class="mv-stroke-cream" cx="160" cy="54" r="42" stroke-width="4"/><path class="mv-stroke-blue" d="M160 12v84M118 54h84M130 24l60 60m0-60-60 60" stroke-width="2" opacity=".65"/>
+                  <g class="mv-needle"><path class="mv-gold" d="M154 58l12-37 2 39-8 29z"/><circle class="mv-green" cx="160" cy="54" r="8"/></g><g class="mv-reveal mv-cream"><circle cx="91" cy="26" r="4"/><circle cx="231" cy="33" r="4"/><circle cx="246" cy="80" r="4"/></g>
+                </svg></div>
+                <h3>Psychological Disorders Center</h3>
+                <p>Explore classification, symptoms, stigma, context, and evidence-based understanding with person-centered language.</p>
+                <p class="mission-status coming">Opening Later</p>
               </div>
-
             </article>
 
             <!-- WEEK 16 -->
-
-            <article
-              class="mission-card graduation-theme">
-
+            <article class="mission-card graduation-theme card-tone-blue" data-week="16">
               <div>
-
-                <p class="mission-number">
-
-                  Week 16
-
-                </p>
-
-                <span
-                  class="mission-icon"
-                  aria-hidden="true">
-
-                  🎓
-
-                </span>
-
-                <h3>
-
-                  Therapy and Graduation Hall
-
-                </h3>
-
-                <p>
-
-                  Explore psychological treatment,
-                  therapy approaches, change,
-                  reflection, and your final journey
-                  through the Academy.
-
-                </p>
-
-                <p class="mission-status coming">
-
-                  Grand Opening at the End
-                  of the Semester
-
-                </p>
-
+                <p class="mission-number">Week 16</p>
+                <div class="mission-visual" aria-hidden="true"><svg viewBox="0 0 320 108" focusable="false">
+                  <path class="mv-slate" d="M95 98V24h105v74z"/><path class="mv-gold" d="M83 26L148 7l65 19-65 19z"/><path class="mv-stroke-gold" d="M204 28v34" stroke-width="4"/><circle class="mv-gold mv-pulse" cx="204" cy="66" r="6"/>
+                  <path class="mv-cream mv-door" d="M120 98V43h55v55z"/><path class="mv-stroke-blue mv-flow" d="M35 100q55-30 112-2t139-10" stroke-width="5"/><g class="mv-reveal mv-gold"><path d="M245 20h5v13h-5zm-8 5h21v5h-21z"/></g>
+                </svg></div>
+                <h3>Therapy and Graduation Hall</h3>
+                <p>Explore psychological treatment, therapy approaches, change, reflection, and your final Academy journey.</p>
+                <p class="mission-status coming">Grand Opening at the End of the Semester</p>
               </div>
-
             </article>
-
           </div>
-
         </section>
 
       </div>
@@ -3042,162 +2763,56 @@ html.academy-motion-on.academy-scene-paused .academy-hero *,html.academy-motion-
 
       <div class="badge-shelf">
 
-        <article
-          id="badge-week1"
-          class="badge-card badge-locked">
-
-          <span
-            class="badge-symbol"
-            aria-hidden="true">
-
-            🏛️
-
-          </span>
-
-          <h3>
-
-            Museum Curator
-
-          </h3>
-
-          <p id="badge-week1-text">
-
-            Complete the Psychology Museum
-            to earn this badge.
-
-          </p>
-
+        <article id="badge-week1" class="badge-card badge-locked">
+          <span class="badge-symbol badge-sigil" aria-hidden="true">Ψ</span>
+          <h3>Museum Curator</h3>
+          <p id="badge-week1-text">Complete the Psychology Museum to earn this badge.</p>
         </article>
-
-        <article
-          id="badge-week2"
-          class="badge-card badge-locked">
-
-          <span
-            class="badge-symbol"
-            aria-hidden="true">
-
-            🔬
-
-          </span>
-
-          <h3>
-
-            Research Investigator
-
-          </h3>
-
-          <p id="badge-week2-text">
-
-            Complete the Research Conservatory
-            to earn this badge.
-
-          </p>
-
+        <article id="badge-week2" class="badge-card badge-locked">
+          <span class="badge-symbol badge-sigil" aria-hidden="true">Σ</span>
+          <h3>Research Investigator</h3>
+          <p id="badge-week2-text">Complete the Research Conservatory to earn this badge.</p>
         </article>
-
-        <article
-          id="badge-week3"
-          class="badge-card badge-locked">
-
-          <span
-            class="badge-symbol"
-            aria-hidden="true">
-
-            🧠
-
-          </span>
-
-          <h3>
-
-            Brain Explorer
-
-          </h3>
-
-          <p id="badge-week3-text">
-
-            Complete the Brain Institute
-            to earn this badge.
-
-          </p>
-
+        <article id="badge-week3" class="badge-card badge-locked">
+          <span class="badge-symbol badge-sigil" aria-hidden="true">N</span>
+          <h3>Brain Explorer</h3>
+          <p id="badge-week3-text">Complete the Brain Institute to earn this badge.</p>
         </article>
-
-        <article
-          id="badge-week4"
-          class="badge-card badge-locked">
-
-          <span
-            class="badge-symbol"
-            aria-hidden="true">
-
-            🌙
-
-          </span>
-
-          <h3>
-
-            Night Shift Investigator
-
-          </h3>
-
-          <p id="badge-week4-text">
-
-            Complete the Consciousness Observatory
-            to earn this badge.
-
-          </p>
-
+        <article id="badge-week4" class="badge-card badge-locked">
+          <span class="badge-symbol badge-sigil" aria-hidden="true">REM</span>
+          <h3>Night Shift Investigator</h3>
+          <p id="badge-week4-text">Complete the Consciousness Observatory to earn this badge.</p>
         </article>
-
-        <article
-          id="badge-week5"
-          class="badge-card badge-locked">
-
-          <span
-            class="badge-symbol"
-            aria-hidden="true">
-
-            👁️
-
-          </span>
-
-          <h3>
-
-            Perception Detective
-
-          </h3>
-
-          <p id="badge-week5-text">
-
-            Complete the Perception Gallery
-            to earn this badge.
-
-          </p>
-
+        <article id="badge-week5" class="badge-card badge-locked">
+          <span class="badge-symbol badge-sigil" aria-hidden="true">Φ</span>
+          <h3>Perception Detective</h3>
+          <p id="badge-week5-text">Complete the Perception Gallery to earn this badge.</p>
         </article>
-
         <article id="badge-week6" class="badge-card badge-locked">
-          <span class="badge-symbol" aria-hidden="true">🔑</span>
+          <span class="badge-symbol badge-sigil" aria-hidden="true">C→R</span>
           <h3>Learning Investigator</h3>
           <p id="badge-week6-text">Collect all seven evidence cards and solve the final case in the Conditioning Vault to earn this badge.</p>
         </article>
         <article id="badge-week7" class="badge-card badge-locked">
-          <span class="badge-symbol" aria-hidden="true">🧩</span>
+          <span class="badge-symbol badge-sigil" aria-hidden="true">IQ</span>
           <h3>Mindprint Investigator</h3>
           <p id="badge-week7-text">Collect all seven fragments and solve the final case in the Thinking Workshop to earn this badge.</p>
         </article>
         <article id="badge-week8" class="badge-card badge-locked">
-          <span class="badge-symbol" aria-hidden="true">📚</span>
+          <span class="badge-symbol badge-sigil" aria-hidden="true">M</span>
           <h3>Memory Archivist</h3>
           <p id="badge-week8-text">Collect all seven fragments and solve the final case in the Memory Library to earn this badge.</p>
         </article>
         <article id="badge-week9" class="badge-card badge-locked">
-          <span class="badge-symbol" aria-hidden="true">🌳</span>
+          <span class="badge-symbol badge-sigil" aria-hidden="true">LIFE</span>
           <h3>Lifespan Explorer</h3>
           <p id="badge-week9-text">Explore eight rooms, collect all eight fragments, and restore the Chronicle in the Lifespan Conservatory to earn this badge.</p>
         </article>
-
+        <article id="badge-week10" class="badge-card badge-locked">
+          <span class="badge-symbol badge-sigil" aria-hidden="true">M↔E</span>
+          <h3>Affective Science Navigator</h3>
+          <p id="badge-week10-text">Restore all eight Emberheart chambers, solve sixteen knowledge locks, and complete the final integration to earn this badge.</p>
+        </article>
 
       </div>
 
@@ -3396,21 +3011,10 @@ html.academy-motion-on.academy-scene-paused .academy-hero *,html.academy-motion-
             </tr>
 
             <tr>
-
               <th scope="row">10</th>
-
-              <td>
-                Motivation and Emotion Gardens
-              </td>
-
-              <td>
-                Motivation and Emotion
-              </td>
-
-              <td>
-                Opening Later
-              </td>
-
+              <td><a href="missions/week10.html">The Emberheart Atrium</a><br>Where Needs Become Action and Feelings Become Meaning</td>
+              <td>Motivation and Emotion</td>
+              <td id="directory-week10-status">Available Now</td>
             </tr>
 
             <tr>
@@ -3971,6 +3575,22 @@ html.academy-motion-on.academy-scene-paused .academy-hero *,html.academy-motion-
         badgeText: "Earned: Lifespan Explorer",
         lockedBadgeText: "Explore eight rooms, collect all eight fragments, and restore the Chronicle in the Lifespan Conservatory to earn this badge."
       }
+    ,
+      {
+        week: 10,
+        storageKey: "psychologyMotivationEmotionWeek10_v1",
+        progressProperty: "completed",
+        completionKey: "psychologyAcademyWeek10Complete",
+        requiredCount: 8,
+        unitLabel: "chambers",
+        requiresFinalCase: true,
+        statusId: "week10-status",
+        directoryStatusId: "directory-week10-status",
+        badgeId: "badge-week10",
+        badgeTextId: "badge-week10-text",
+        badgeText: "Earned: Affective Science Navigator",
+        lockedBadgeText: "Restore all eight Emberheart chambers, solve sixteen knowledge locks, and complete the final integration to earn this badge."
+      }
     ];
 
     function getMissionProgress(
@@ -4116,7 +3736,7 @@ html.academy-motion-on.academy-scene-paused .academy-hero *,html.academy-motion-
 
         completedCount +
 
-        " of 16 Academy missions completed · 9 missions currently open";
+        " of 16 Academy missions completed · 10 missions currently open";
 
       if (
         completedCount === 0
