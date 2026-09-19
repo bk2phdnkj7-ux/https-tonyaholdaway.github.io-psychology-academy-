@@ -1,674 +1,1415 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Week 6: The Conditioning Vault | Psychology Academy</title><style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="An immersive, animated Week 6 learning mission based on OpenStax Psychology 2e, Chapter 6.">
+  <meta name="theme-color" content="#071b29">
+  <title>Week 6: The Conditioning Vault | Psychology Academy</title>
+  <style>
     :root {
-      --ink: #1f2933;
-      --navy: #102f4a;
-      --navy-dark: #071826;
-      --blue: #315f87;
-      --blue-light: #eaf3f8;
-      --green: #315f40;
-      --green-light: #eef8f2;
-      --gold: #745500;
-      --gold-light: #fff8e8;
-      --cream: #fffdf7;
-      --red: #7b1f1f;
-      --red-light: #fff1f1;
-      --white: #ffffff;
-      --border: #617486;
-      --shadow: 0 12px 30px rgba(8, 34, 54, 0.16);
-      --radius: 16px;
+      --midnight: #071b29;
+      --navy: #113951;
+      --steel: #4f6d7c;
+      --teal: #17766e;
+      --mint: #82d5bd;
+      --gold: #d6b75f;
+      --amber: #f2a64a;
+      --cream: #fffaf0;
+      --paper: #fffef9;
+      --ink: #1d2b35;
+      --muted: #526570;
+      --green: #286447;
+      --green-soft: #e9f6ee;
+      --red: #8b3439;
+      --red-soft: #fff0f1;
+      --blue-soft: #eaf5f7;
+      --line: #7f929d;
+      --shadow: 0 18px 48px rgba(4, 25, 38, .18);
+      --radius: 18px;
     }
 
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
       margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
+      min-width: 280px;
       color: var(--ink);
-      background-color: #f5f6f3;
-      line-height: 1.7;
-      font-size: 18px;
-    }
-
-    a {
-      color: #174c74;
-      text-decoration: underline;
-      text-underline-offset: 0.16em;
-      font-weight: bold;
-    }
-
-    button,
-    input,
-    textarea {
-      font: inherit;
-    }
-
-    button:focus,
-    input:focus,
-    textarea:focus,
-    a:focus {
-      outline: 4px solid #111111;
-      outline-offset: 3px;
-    }
-
-    .skip-link {
-      position: absolute;
-      left: 16px;
-      top: -100px;
-      z-index: 5000;
-      background-color: var(--white);
-      color: #111111;
-      border: 3px solid #111111;
-      padding: 12px 16px;
-    }
-
-    .skip-link:focus {
-      top: 16px;
-    }
-
-    .container {
-      width: min(1180px, calc(100% - 32px));
-      margin: 0 auto;
-    }
-
-    .hero {
-      position: relative;
-      overflow: hidden;
       background:
-        radial-gradient(
-          circle at 15% 25%,
-          rgba(255,255,255,0.32),
-          transparent 18%
-        ),
-        radial-gradient(
-          circle at 82% 22%,
-          rgba(255,255,255,0.22),
-          transparent 20%
-        ),
-        linear-gradient(
-          to bottom,
-          #dfeaf2 0%,
-          #eef3ec 52%,
-          #f6f1e5 100%
-        );
-      border-bottom: 5px solid var(--navy);
-      padding: 38px 0 48px;
+        radial-gradient(circle at 8% 20%, rgba(72, 168, 154, .10), transparent 25rem),
+        radial-gradient(circle at 92% 46%, rgba(214, 183, 95, .11), transparent 27rem),
+        #f3f5f1;
+      font: 18px/1.67 Arial, Helvetica, sans-serif;
+    }
+    button, input, textarea, select { font: inherit; }
+    button { touch-action: manipulation; }
+    a { color: #12577a; font-weight: 700; text-underline-offset: .16em; }
+    :focus-visible { outline: 4px solid #9b6500; outline-offset: 4px; }
+    [hidden] { display: none !important; }
+    .sr-only {
+      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+    }
+    .skip-link {
+      position: fixed; left: 16px; top: -90px; z-index: 9999;
+      padding: 12px 17px; border: 3px solid #111; border-radius: 8px;
+      color: #111; background: #fff;
+    }
+    .skip-link:focus { top: 14px; }
+    .container { width: min(1200px, calc(100% - 32px)); margin-inline: auto; }
+
+    /* Animated laboratory atmosphere */
+    .lab-sky { position: fixed; inset: 0; overflow: hidden; pointer-events: none; z-index: -1; }
+    .lab-aurora {
+      position: absolute; width: 70vw; height: 35vw; min-height: 270px;
+      border-radius: 50%; filter: blur(58px); opacity: .11; mix-blend-mode: multiply;
+      animation: auroraDrift 18s ease-in-out infinite alternate;
+    }
+    .lab-aurora.one { top: -14%; left: -15%; background: linear-gradient(90deg, #2eaa9d, #2e617f); }
+    .lab-aurora.two { right: -22%; top: 36%; background: linear-gradient(90deg, #234c67, #d9b75f); animation-delay: -8s; }
+    .spark {
+      position: absolute; width: 5px; height: 5px; border-radius: 50%;
+      background: #e9c66c; box-shadow: 0 0 11px #f7dc8b;
+      opacity: .28; animation: sparkRise var(--spark-speed, 17s) linear infinite;
     }
 
-    .hero::before {
-      content: "◯   ◇   △   ◌   □   ◇   ◯";
-      position: absolute;
-      top: 42px;
-      right: 4%;
-      color: rgba(16, 47, 74, 0.28);
-      font-size: 1.5rem;
-      letter-spacing: 10px;
-      animation: shiftShapes 7s ease-in-out infinite alternate;
-      pointer-events: none;
+    /* Hero */
+    .hero {
+      position: relative; overflow: hidden; color: #f7f7ed;
+      border-bottom: 5px solid #b99338;
+      background:
+        radial-gradient(circle at var(--pointer-x, 68%) var(--pointer-y, 30%), rgba(130, 213, 189, .18), transparent 17rem),
+        linear-gradient(135deg, #071b29 0%, #113951 48%, #102c33 100%);
     }
-
-    @keyframes shiftShapes {
-      from {
-        transform: translateX(-10px);
-        opacity: 0.35;
-      }
-
-      to {
-        transform: translateX(10px);
-        opacity: 0.75;
-      }
+    .hero::after {
+      content: ""; position: absolute; inset: 0; pointer-events: none;
+      background-image: linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size: 32px 32px; mask-image: linear-gradient(to bottom, #000, transparent 90%);
     }
-
+    .hero .container { position: relative; z-index: 1; padding-block: 28px 46px; }
     .academy-link {
-      display: inline-block;
-      margin-bottom: 18px;
-      padding: 10px 15px;
-      background-color: var(--white);
-      color: var(--navy);
-      border: 2px solid var(--navy);
-      border-radius: 8px;
-      text-decoration: underline;
-      font-weight: bold;
+      display: inline-block; margin-bottom: 22px; padding: 10px 15px;
+      border: 2px solid #d7bf74; border-radius: 9px; color: #fff9e7;
+      background: rgba(5, 21, 32, .72); text-decoration: none;
     }
-
-    .eyebrow {
-      margin: 0 0 8px;
-      color: var(--navy);
-      font-weight: bold;
-      letter-spacing: 0.09em;
-      text-transform: uppercase;
-    }
-
+    .academy-link:hover { background: #173f52; }
+    .hero-grid { display: grid; grid-template-columns: 1.04fr .96fr; gap: 26px; align-items: center; }
+    .eyebrow { margin: 0 0 8px; color: #9ce0ca; font-weight: 800; letter-spacing: .09em; text-transform: uppercase; }
     .hero h1 {
-      margin: 0;
-      color: var(--navy-dark);
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(2.6rem, 7vw, 4.8rem);
-      line-height: 1.08;
+      margin: 0; color: #fff; font: 700 clamp(2.65rem, 6vw, 5rem)/1.03 Georgia, "Times New Roman", serif;
+      text-shadow: 0 4px 26px rgba(0,0,0,.5);
     }
+    .hero-subtitle { margin: 12px 0 0; color: #f0cd75; font: 1.35rem/1.4 Georgia, "Times New Roman", serif; }
+    .hero-text { max-width: 800px; margin: 18px 0 0; }
+    .hero-chips { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 20px; }
+    .hero-chip { padding: 7px 11px; border: 1px solid rgba(255,255,255,.35); border-radius: 999px; background: rgba(0,0,0,.22); font-size: .86rem; }
+    .hero-scene { position: relative; min-height: 370px; display: grid; place-items: center; }
+    .hero-scene svg { width: 100%; max-width: 650px; filter: drop-shadow(0 20px 24px rgba(0,0,0,.28)); }
+    .vault-ring { transform-origin: 380px 210px; animation: slowTurn 24s linear infinite; }
+    .vault-ring.reverse { animation-direction: reverse; animation-duration: 18s; }
+    .vault-glow { animation: glowPulse 2.8s ease-in-out infinite; }
+    .bell { transform-origin: 146px 146px; animation: bellRing 4.4s ease-in-out infinite; }
+    .lever-arm { transform-origin: 589px 254px; animation: leverMove 4.4s ease-in-out infinite; }
+    .signal-dot { animation: signalTravel 2.2s ease-in-out infinite; }
+    .observer-eye { animation: blink 5.5s ease-in-out infinite; transform-origin: center; }
 
-    .hero-subtitle {
-      margin: 10px 0 0;
-      color: #5e4e26;
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(1.25rem, 3vw, 1.85rem);
-    }
-
-    .hero-text {
-      max-width: 850px;
-      margin: 18px 0 0;
-      font-size: 1.1rem;
-    }
-
-    main {
-      padding: 32px 0 54px;
-    }
-
-    h2,
-    h3 {
-      color: var(--navy);
-      line-height: 1.3;
-    }
-
+    main { padding-block: 30px 58px; }
+    h2, h3 { color: var(--navy); line-height: 1.25; }
+    h2 { font-family: Georgia, "Times New Roman", serif; }
     .panel {
-      background-color: var(--white);
-      border: 2px solid var(--border);
-      border-left: 8px solid var(--blue);
-      border-radius: var(--radius);
-      padding: 23px;
-      margin-bottom: 24px;
-      box-shadow: var(--shadow);
+      margin-bottom: 24px; padding: 23px; border: 2px solid var(--line); border-left: 8px solid #2f7186;
+      border-radius: var(--radius); background: var(--paper); box-shadow: var(--shadow);
     }
+    .panel h2 { margin-top: 0; }
+    .panel-green { border-left-color: var(--green); }
+    .panel-gold { border-left-color: #99731e; }
 
-    .panel-green {
-      border-left-color: var(--green);
+    /* Atmosphere controls */
+    .atmosphere {
+      margin-bottom: 26px; padding: 23px; color: #fff;
+      border: 3px solid #071723; border-radius: var(--radius);
+      background: linear-gradient(135deg, #092233, #164b5c); box-shadow: var(--shadow);
     }
-
-    .panel-gold {
-      border-left-color: var(--gold);
+    .atmosphere h2 { margin-top: 0; color: #fff; }
+    .control-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 14px; }
+    .control-button, .action-button, .danger-button {
+      min-height: 46px; padding: 10px 15px; border: 2px solid #fff; border-radius: 9px;
+      color: #fff; background: #174f66; font-weight: 800; cursor: pointer;
     }
+    .control-button:hover, .control-button[aria-pressed="true"] { color: #102533; background: #f3d98f; border-color: #f3d98f; }
+    .atmosphere label { font-weight: 800; }
+    .atmosphere input[type="range"] { accent-color: #f1ce73; }
+    .status-light { margin-bottom: 0; color: #e3efe9; font-size: .92rem; }
+    .sound-viz { display: inline-flex; align-items: end; gap: 2px; height: 15px; margin-left: 6px; }
+    .sound-viz i { display: block; width: 3px; height: 5px; background: currentColor; }
+    .sound-on .sound-viz i { animation: soundBars .7s ease-in-out infinite alternate; }
+    .sound-on .sound-viz i:nth-child(2) { animation-delay: -.3s; }
+    .sound-on .sound-viz i:nth-child(3) { animation-delay: -.5s; }
+    .briefing-grid { display: grid; grid-template-columns: 1.08fr .92fr; gap: 24px; }
+    .source-note { padding: 14px 16px; border-left: 5px solid #98701d; background: #fff7dd; }
+    .objective-list { padding-left: 23px; columns: 2; column-gap: 28px; }
+    .objective-list li { break-inside: avoid; margin-bottom: 8px; }
 
-    .gallery-panel {
-      background-color: var(--navy-dark);
-      color: var(--white);
-      border: 3px solid #04121c;
-      border-radius: var(--radius);
-      padding: 22px;
-      margin-bottom: 24px;
-      box-shadow: var(--shadow);
-    }
-
-    .gallery-panel h2 {
-      color: var(--white);
-      margin-top: 0;
-    }
-
-    .audio-controls {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 14px;
-    }
-
-    .audio-button {
-      background-color: var(--white);
-      color: var(--navy);
-      border: 2px solid var(--white);
-      border-radius: 8px;
-      padding: 10px 14px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    .audio-status {
-      margin-top: 12px;
-      margin-bottom: 0;
-      color: var(--white);
-      font-weight: bold;
-    }
-
-    .mission-layout {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) 350px;
-      gap: 24px;
-      align-items: start;
-    }
-
-    .sidebar {
-      position: sticky;
-      top: 16px;
-    }
-
+    /* Mission map and cards */
+    .mission-layout { display: grid; grid-template-columns: minmax(0, 1fr) 350px; gap: 24px; align-items: start; }
+    .sidebar { position: sticky; top: 14px; }
     .gallery-map {
-      background-color: #eef2e8;
-      border: 3px solid #63705b;
-      border-radius: 20px;
-      padding: 24px;
+      position: relative; overflow: hidden; margin-bottom: 24px; padding: 25px;
+      border: 3px solid #526d76; border-radius: 22px;
+      background:
+        radial-gradient(circle at 12% 8%, rgba(255,255,255,.82), transparent 15rem),
+        linear-gradient(145deg, #e4f0ed, #eef2e4 55%, #f5ead2);
       box-shadow: var(--shadow);
     }
-
-    .gallery-map h2 {
-      margin-top: 0;
-    }
-
-    .room-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
-    }
-
+    .gallery-map::before { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .22; background-image: radial-gradient(#28596b 1px, transparent 1px); background-size: 20px 20px; }
+    .gallery-map > * { position: relative; }
+    .gallery-map h2 { margin-top: 0; }
+    .room-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
     .room-button {
-      width: 100%;
-      min-height: 190px;
-      padding: 18px;
-      text-align: left;
-      background-color: var(--white);
-      color: var(--ink);
-      border: 2px solid var(--border);
-      border-left: 8px solid var(--blue);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      cursor: pointer;
+      position: relative; overflow: hidden; width: 100%; min-height: 225px; padding: 18px;
+      text-align: left; cursor: pointer; color: var(--ink); background: rgba(255,255,255,.94);
+      border: 2px solid #738994; border-left: 8px solid #2e7186; border-radius: 15px; box-shadow: 0 9px 20px rgba(17,54,70,.13);
+      transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
     }
+    .room-button:hover { transform: translateY(-4px); box-shadow: 0 15px 30px rgba(17,54,70,.2); }
+    .room-button[aria-pressed="true"] { border-color: #184c62; outline: 3px solid #b68d2f; outline-offset: 2px; }
+    .room-button.complete { border-left-color: var(--green); background: linear-gradient(145deg, #fff, #e9f6ee); }
+    .room-button.charging::after { content: ""; position: absolute; left: 0; bottom: 0; height: 5px; width: var(--charge, 0%); background: linear-gradient(90deg, #318779, #d7b85f); transition: width .35s ease; }
+    .map-icon { display: block; width: 82px; height: 70px; margin-bottom: 8px; color: #1a6070; }
+    .map-icon svg { width: 100%; height: 100%; overflow: visible; }
+    .map-icon .animated-part { transform-origin: center; animation: iconFloat 3.2s ease-in-out infinite; }
+    .room-title { display: block; color: var(--navy); font: 700 1.12rem/1.25 Georgia, "Times New Roman", serif; }
+    .map-source { display: block; margin-top: 5px; color: #4c626d; font-size: .79rem; font-weight: 700; }
+    .map-status { display: block; margin-top: 11px; font-size: .84rem; font-weight: 800; }
 
-    .room-button:hover {
-      transform: translateY(-2px);
+    /* Room content */
+    .active-area { margin-bottom: 26px; scroll-margin-top: 16px; }
+    .room-card {
+      overflow: hidden; border: 3px solid #57717b; border-radius: 22px;
+      background: var(--paper); box-shadow: var(--shadow);
     }
-
-    .room-button[aria-pressed="true"] {
-      background-color: var(--green-light);
-      border-left-color: var(--green);
+    .room-heading { display: flex; justify-content: space-between; gap: 18px; padding: 24px; color: #fff; background: linear-gradient(135deg, #0e3449, #17635f); }
+    .room-heading h2 { margin: 2px 0 5px; color: #fff; }
+    .room-heading p { margin: 0; }
+    .room-number { color: #f4d784; font-size: .82rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+    .chapter-tag { align-self: start; flex: 0 0 auto; max-width: 250px; padding: 8px 11px; border: 1px solid rgba(255,255,255,.45); border-radius: 8px; background: rgba(0,0,0,.18); font-size: .78rem; }
+    .chapter-tag a { color: #fff; }
+    .room-content { padding: 24px; }
+    .concept-tags { display: flex; flex-wrap: wrap; gap: 7px; margin: 0 0 16px; }
+    .concept-tag { padding: 5px 9px; border-radius: 999px; color: #16475a; background: #dfeff0; font-size: .78rem; font-weight: 800; }
+    .lab-console {
+      position: relative; overflow: hidden; margin: 20px 0; padding: 21px;
+      border: 2px solid #5f7882; border-radius: 15px;
+      background: linear-gradient(145deg, #e6f3f2, #f9f5e8);
     }
-
-    .room-icon {
-      display: block;
-      font-size: 2.3rem;
-      margin-bottom: 8px;
+    .lab-console::before { content: ""; position: absolute; inset: 0; pointer-events: none; background-image: linear-gradient(rgba(20,76,91,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(20,76,91,.04) 1px, transparent 1px); background-size: 22px 22px; }
+    .lab-console > * { position: relative; }
+    .lab-console h3 { margin-top: 0; }
+    .instrument-status { min-height: 60px; padding: 12px 14px; border: 2px solid #718690; border-left: 7px solid #2a7181; border-radius: 10px; background: #fff; }
+    .instrument-status.success { border-left-color: var(--green); background: var(--green-soft); }
+    .instrument-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+    .instrument-button {
+      min-height: 45px; padding: 9px 13px; cursor: pointer; color: #fff; background: #245f74;
+      border: 2px solid #113d50; border-radius: 8px; font-weight: 800;
     }
+    .instrument-button:hover, .instrument-button[aria-pressed="true"] { color: #162a34; background: #f2d68d; }
+    .instrument-meter { height: 18px; margin: 13px 0; overflow: hidden; border: 2px solid #536975; border-radius: 999px; background: #fff; }
+    .instrument-meter > i { display: block; width: var(--meter, 0%); height: 100%; background: linear-gradient(90deg, #3e9989, #f2b75a); transition: width .4s ease; }
+    .visual-stage { min-height: 180px; display: grid; place-items: center; margin: 14px 0; }
+    .visual-stage svg { width: min(100%, 620px); height: auto; overflow: visible; }
+    .ring-now { animation: bellRing .65s ease-in-out 2; transform-origin: center; }
+    .salivate-now { animation: glowPulse .8s ease-in-out 2; }
+    .wave-line { fill: none; stroke: #1c6b7d; stroke-width: 5; stroke-linecap: round; }
+    .wave-dash { stroke-dasharray: 10 8; animation: dashMove 2s linear infinite; }
+    .tone-board { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .matrix { display: grid; grid-template-columns: 130px repeat(2, minmax(0,1fr)); gap: 8px; margin-top: 14px; }
+    .matrix-cell { min-height: 80px; display: grid; place-items: center; padding: 9px; border: 2px solid #6e818b; border-radius: 9px; text-align: center; background: #fff; font-weight: 800; }
+    .matrix-cell.heading { min-height: auto; color: #fff; background: #174d63; }
+    .matrix-cell.active { outline: 4px solid #bb8c20; background: #fff1bc; transform: scale(1.02); }
+    .schedule-display { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: center; }
+    .lever-machine { position: relative; min-height: 210px; border: 4px solid #536974; border-radius: 20px; background: #dbe6e4; }
+    .lever-slot { position: absolute; left: 18%; right: 18%; bottom: 28px; height: 35px; border: 4px solid #536974; background: #fff; }
+    .lever-handle { position: absolute; left: 50%; top: 44px; width: 12px; height: 95px; border-radius: 8px; background: #6b4a26; transform-origin: bottom; transform: rotate(-20deg); transition: transform .2s ease; }
+    .lever-handle::before { content: ""; position: absolute; left: -11px; top: -17px; width: 34px; height: 34px; border-radius: 50%; background: #d2a34d; border: 3px solid #72511b; }
+    .lever-machine.pressed .lever-handle { transform: rotate(19deg); }
+    .token { position: absolute; left: calc(50% - 13px); top: 138px; width: 26px; height: 26px; border: 3px solid #80631e; border-radius: 50%; background: #f1cd62; opacity: 0; }
+    .token.drop { animation: tokenDrop .7s ease-out; }
+    .shaping-steps { display: grid; grid-template-columns: repeat(4, 1fr); align-items: end; gap: 8px; min-height: 225px; }
+    .shape-step { display: grid; place-items: center; min-height: var(--step-height); padding: 8px; border: 2px solid #507281; border-radius: 8px 8px 0 0; background: #fff; text-align: center; font-size: .82rem; transition: background .25s, transform .25s; }
+    .shape-step.active { color: #173d2c; background: #bfe6cf; transform: translateY(-5px); }
+    .model-stage { display: grid; grid-template-columns: 1fr auto 1fr; gap: 12px; align-items: center; margin-top: 18px; }
+    .model-person { padding: 14px; border: 2px solid #617985; border-radius: 12px; text-align: center; background: #fff; }
+    .model-arrow { color: #a16f0b; font-size: 2.4rem; font-weight: 800; }
+    .action-checklist { padding: 13px 16px; border: 2px solid #78909a; border-radius: 10px; background: #f5fbfa; }
+    .action-checklist strong { color: var(--navy); }
+    details.hint { margin: 18px 0; padding: 12px 15px; border: 1px solid #82949c; border-radius: 9px; background: #f8fbfb; }
+    details.hint summary { cursor: pointer; color: var(--navy); font-weight: 800; }
+    .questions { margin-top: 24px; }
+    .question-card { margin: 18px 0; padding: 17px; border: 2px solid #738791; border-radius: 12px; }
+    .question-card.solved { border-left: 8px solid var(--green); background: var(--green-soft); }
+    .question-card legend { padding: 0 8px; color: var(--navy); font-weight: 800; }
+    .choice-grid { display: grid; gap: 10px; margin-top: 12px; }
+    .choice-button { width: 100%; padding: 12px 14px; cursor: pointer; text-align: left; color: var(--ink); background: #fff; border: 2px solid #758892; border-radius: 8px; }
+    .choice-button:hover:not(:disabled) { background: #e7f2f4; }
+    .choice-button.correct-choice { border-color: var(--green); background: #cfead9; font-weight: 800; }
+    .choice-button.wrong-choice { animation: shake .35s linear; border-color: var(--red); background: var(--red-soft); }
+    .choice-button:disabled { color: #253640; opacity: .8; cursor: default; }
+    .feedback { min-height: 50px; margin: 12px 0 0; padding: 11px 13px; border-left: 6px solid #50788a; background: var(--blue-soft); }
+    .feedback.good { border-left-color: var(--green); background: #ddf1e4; }
+    .feedback.try { border-left-color: var(--red); background: var(--red-soft); }
+    .clue-holder { margin-top: 20px; }
+    .clue-card { position: relative; overflow: hidden; padding: 18px; border: 3px solid #96711e; border-radius: 13px; background: linear-gradient(135deg, #fff7d8, #edf7f2); }
+    .clue-letter { float: left; display: grid; place-items: center; width: 62px; height: 62px; margin: 0 14px 6px 0; color: #fff; background: #174f61; border: 4px solid #d6b65d; border-radius: 50%; font: 700 2rem Georgia, serif; box-shadow: 0 0 20px rgba(214,182,93,.55); }
+    .room-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 17px; padding-top: 16px; border-top: 2px solid rgba(88,112,122,.3); }
+    .next-button { min-height: 48px; padding: 10px 14px; cursor: pointer; color: #fff; background: var(--green); border: 3px solid #173e2a; border-radius: 9px; font-weight: 800; }
+    .map-button { color: var(--navy); background: #fff; border-color: #647b86; }
 
-    .room-title {
-      display: block;
-      color: var(--navy);
-      font-weight: bold;
-      margin-bottom: 6px;
+    /* Sidebar progress and charging letters */
+    progress { width: 100%; height: 26px; accent-color: var(--teal); }
+    .progress-text { margin-bottom: 3px; font-weight: 800; }
+    .quiet { color: var(--muted); font-size: .88rem; }
+    .fragment-rack { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 14px 0; padding: 0; list-style: none; }
+    .fragment {
+      position: relative; display: grid; place-items: center; aspect-ratio: 1; overflow: hidden;
+      border: 3px solid #7b8790; border-radius: 12px; color: #5c6870; background: #e5e7e5;
+      font: 700 1.55rem Georgia, serif; transition: transform .3s, background .3s, box-shadow .3s;
     }
+    .fragment::before { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: var(--charge, 0%); background: linear-gradient(to top, rgba(42,133,118,.7), rgba(226,190,91,.65)); transition: height .4s ease; }
+    .fragment > span, .fragment > small { position: relative; z-index: 1; }
+    .fragment small { position: absolute; right: 5px; bottom: 2px; color: inherit; font: 700 .6rem Arial; }
+    .fragment.stage-1, .fragment.stage-2, .fragment.stage-3 { border-color: #8b7636; color: #243b41; }
+    .fragment.collected { color: #fff; border-color: #f0d47f; background: #174f61; box-shadow: 0 0 19px rgba(214,183,95,.68); transform: translateY(-2px); }
+    .fragment.collected::before { height: 100%; opacity: .35; }
+    .inventory-list, .achievement-list { padding-left: 22px; }
+    .inventory-list li, .achievement-list li { margin-bottom: 9px; }
+    .notebook textarea { width: 100%; min-height: 90px; padding: 10px; border: 2px solid #748993; border-radius: 8px; resize: vertical; }
+    .notebook label { display: block; margin-top: 12px; }
+    .notebook-actions { display: grid; gap: 9px; margin-top: 13px; }
+    .action-button { color: #fff; background: #18586e; border-color: #123d4c; }
+    .action-button:hover { background: #0e4357; }
+    .danger-button { color: #651d24; background: #fff; border-color: #8b3439; }
+    .reset-box { margin-top: 12px; padding: 13px; border: 2px solid var(--red); border-radius: 8px; background: var(--red-soft); }
+    .save-status { color: #4f616a; font-size: .82rem; }
 
-    .status-text {
-      display: block;
-      margin-top: 10px;
-      font-weight: bold;
-    }
+    /* Final vault and badge */
+    .final-case { position: relative; overflow: hidden; margin-top: 28px; padding: 25px; color: #fff; border: 4px solid #a47d27; border-radius: 22px; background: linear-gradient(145deg, #071b29, #174856 65%, #1f604f); box-shadow: var(--shadow); scroll-margin-top: 16px; }
+    .final-case h2, .final-case h3 { color: #fff; }
+    .learned-code { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 18px 0; }
+    .learned-code span { display: grid; place-items: center; width: 56px; height: 62px; border: 3px solid #e1c56c; border-radius: 10px; color: #fff; background: #113c4d; font: 700 2rem Georgia, serif; box-shadow: 0 0 16px rgba(225,197,108,.45); }
+    .final-form { display: grid; gap: 14px; }
+    .final-lock { padding: 15px; border: 1px solid rgba(255,255,255,.42); border-radius: 10px; background: rgba(0,0,0,.2); }
+    .final-lock label { display: block; margin-bottom: 7px; font-weight: 800; }
+    .final-lock select, .final-lock input { width: 100%; padding: 11px; border: 2px solid #536b75; border-radius: 8px; color: var(--ink); background: #fff; }
+    .final-submit { justify-self: start; }
+    #final-feedback { padding: 13px; border-left: 6px solid #e1c56c; background: rgba(255,255,255,.12); }
+    .badge-maker { margin-top: 22px; padding: 20px; color: var(--ink); border: 3px solid #96711f; border-radius: 14px; background: var(--cream); }
+    .badge-maker h3 { color: var(--navy); }
+    .badge-maker label { display: block; font-weight: 800; }
+    .badge-maker input { width: 100%; max-width: 520px; padding: 11px; border: 2px solid #657b86; border-radius: 8px; }
+    .badge-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 13px; }
+    .badge-preview { display: block; width: min(100%, 700px); height: auto; margin: 18px auto 0; border: 2px solid #72591f; border-radius: 10px; background: #102e3e; }
+    .confetti { position: absolute; inset: 0; pointer-events: none; }
+    .confetti i { position: absolute; top: -25px; width: 9px; height: 15px; background: var(--confetti); animation: confettiFall 3.5s ease-in forwards; }
 
-    .active-area {
-      margin-top: 26px;
-    }
+    .reading-panel details { padding: 12px 15px; border: 1px solid #8799a0; border-radius: 9px; background: #f7faf9; }
+    .reading-panel summary { cursor: pointer; color: var(--navy); font-weight: 800; }
+    .mobile-progress { display: none; }
+    footer { padding: 26px 0; color: #fff; border-top: 5px solid #b99338; background: var(--midnight); }
+    footer h2 { margin: 0; color: #fff; }
+    footer a { color: #fff; }
+    .footer-grid { display: flex; justify-content: space-between; gap: 22px; }
 
-    .activity-card {
-      background-color: var(--white);
-      border: 2px solid var(--border);
-      border-left: 8px solid var(--blue);
-      border-radius: var(--radius);
-      padding: 24px;
-      box-shadow: var(--shadow);
-    }
+    /* Lighting modes */
+    body.lighting-garden { --blue-soft: #edf7ef; }
+    body.lighting-garden .hero { background: radial-gradient(circle at var(--pointer-x, 68%) var(--pointer-y, 30%), rgba(163,227,185,.2), transparent 17rem), linear-gradient(135deg, #08251f, #1d5a48 50%, #163b3d); }
+    body.lighting-garden .lab-aurora.one { background: linear-gradient(90deg, #59bc8e, #bfd17d); }
+    body.lighting-gold .hero { background: radial-gradient(circle at var(--pointer-x, 68%) var(--pointer-y, 30%), rgba(255,210,108,.2), transparent 17rem), linear-gradient(135deg, #211909, #604420 49%, #253b40); }
+    body.lighting-gold .lab-aurora.two { background: linear-gradient(90deg, #9e7429, #e2bb55); }
 
-    .choice-grid {
-      display: grid;
-      gap: 12px;
-      margin: 18px 0;
-    }
+    /* Motion */
+    @keyframes auroraDrift { to { transform: translate(7vw, 4vh) scale(1.12); } }
+    @keyframes sparkRise { from { transform: translateY(105vh) scale(.6); } to { transform: translateY(-15vh) scale(1.2); } }
+    @keyframes slowTurn { to { transform: rotate(360deg); } }
+    @keyframes glowPulse { 50% { opacity: 1; filter: drop-shadow(0 0 18px #f2d06f); transform: scale(1.04); } }
+    @keyframes bellRing { 0%, 76%, 100% { transform: rotate(0); } 82% { transform: rotate(-9deg); } 88% { transform: rotate(9deg); } 94% { transform: rotate(-4deg); } }
+    @keyframes leverMove { 0%, 65%, 100% { transform: rotate(0); } 76% { transform: rotate(19deg); } }
+    @keyframes signalTravel { 0%, 100% { opacity: .25; transform: translateX(-12px); } 50% { opacity: 1; transform: translateX(15px); } }
+    @keyframes blink { 0%, 45%, 49%, 100% { transform: scaleY(1); } 47% { transform: scaleY(.08); } }
+    @keyframes soundBars { to { height: 15px; } }
+    @keyframes iconFloat { 50% { transform: translateY(-4px); } }
+    @keyframes dashMove { to { stroke-dashoffset: -36; } }
+    @keyframes tokenDrop { 0% { opacity: 1; transform: translateY(-20px); } 100% { opacity: 0; transform: translateY(45px); } }
+    @keyframes shake { 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
+    @keyframes confettiFall { to { transform: translate(var(--drift), 650px) rotate(700deg); opacity: 0; } }
 
-    .choice-button,
-    .action-button,
-    .threshold-button,
-    .gestalt-button {
-      width: 100%;
-      padding: 14px 16px;
-      border: 2px solid var(--border);
-      border-radius: 9px;
-      background-color: var(--white);
-      color: var(--ink);
-      cursor: pointer;
-      text-align: left;
-    }
-
-    .action-button {
-      width: auto;
-      background-color: var(--blue);
-      color: var(--white);
-      border-color: var(--navy);
-      font-weight: bold;
-      text-decoration: underline;
-    }
-
-    .feedback {
-      margin-top: 16px;
-      padding: 16px;
-      border: 2px solid var(--border);
-      border-left: 8px solid var(--blue);
-      border-radius: 10px;
-      background-color: #f8fbfd;
-      color: var(--ink);
-    }
-
-    .feedback.correct {
-      background-color: var(--green-light);
-      border-left-color: var(--green);
-    }
-
-    .feedback.incorrect {
-      background-color: var(--red-light);
-      border-left-color: var(--red);
-    }
-
-    /* Guided next-exhibit navigation */
-    .next-step-wrap {
-      margin-top: 18px;
-      padding-top: 16px;
-      border-top: 2px solid rgba(97, 116, 134, 0.35);
-    }
-
-    .next-step-label {
-      margin: 0 0 10px;
-      font-weight: bold;
-      color: var(--navy);
-    }
-
-    .next-step-button {
-      width: 100%;
-      padding: 14px 18px;
-      background-color: var(--green);
-      color: var(--white);
-      border: 3px solid #173d26;
-      border-radius: 10px;
-      font-weight: bold;
-      text-align: center;
-      text-decoration: underline;
-      cursor: pointer;
-    }
-
-    .next-step-button:hover {
-      background-color: #214f34;
-    }
-
-    .threshold-zone {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 10px;
-      margin: 18px 0;
-    }
-
-    .threshold-light {
-      min-height: 80px;
-      border: 2px solid #5d6870;
-      border-radius: 8px;
-    }
-
-    .light-1 {
-      background-color: #f4f4f4;
-    }
-
-    .light-2 {
-      background-color: #e7e7e7;
-    }
-
-    .light-3 {
-      background-color: #d2d2d2;
-    }
-
-    .light-4 {
-      background-color: #b8b8b8;
-    }
-
-    .light-5 {
-      background-color: #969696;
-    }
-
-    .gestalt-display {
-      background-color: #fafafa;
-      border: 2px solid var(--border);
-      border-radius: 10px;
-      padding: 24px;
-      margin: 18px 0;
-      text-align: center;
-      font-size: 2rem;
-      letter-spacing: 12px;
-    }
-
-    .video-wrapper {
-      position: relative;
-      width: 100%;
-      padding-top: 56.25%;
-      margin: 18px 0;
-      overflow: hidden;
-      border-radius: 10px;
-      border: 2px solid var(--border);
-      background-color: #000000;
-    }
-
-    .video-wrapper iframe {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      border: 0;
-    }
-
-    .resource-button {
-      display: inline-block;
-      margin-top: 8px;
-      padding: 13px 18px;
-      background-color: var(--navy);
-      color: var(--white);
-      border: 3px solid #071826;
-      border-radius: 9px;
-      font-weight: bold;
-      text-decoration: underline;
-    }
-
-    progress {
-      width: 100%;
-      height: 24px;
-    }
-
-    .inventory-list,
-    .achievement-list {
-      padding-left: 22px;
-    }
-
-    label {
-      display: block;
-      margin-top: 14px;
-      font-weight: bold;
-    }
-
-    textarea {
-      width: 100%;
-      min-height: 90px;
-      margin-top: 6px;
-      padding: 10px;
-      border: 2px solid var(--border);
-      border-radius: 8px;
-    }
-
-    .final-case {
-      margin-top: 28px;
-      padding: 25px;
-      background-color: var(--navy);
-      color: var(--white);
-      border: 3px solid #071826;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-    }
-
-    .final-case h2 {
-      color: var(--white);
-    }
-
-    .final-case .feedback {
-      background-color: var(--white);
-      color: var(--ink);
-    }
-
-    .badge-maker {
-      margin-top: 22px;
-      padding: 20px;
-      background-color: var(--gold-light);
-      color: var(--ink);
-      border: 3px solid #80651c;
-      border-radius: 12px;
-    }
-
-    .badge-maker h3 {
-      color: #634900;
-      margin-top: 0;
-    }
-
-    .badge-name-input {
-      width: 100%;
-      max-width: 500px;
-      margin: 6px 0 14px;
-      padding: 12px;
-      border: 2px solid var(--border);
-      border-radius: 8px;
-    }
-
-    .badge-download-button {
-      display: inline-block;
-      background-color: var(--navy);
-      color: var(--white);
-      border: 3px solid var(--navy-dark);
-      border-radius: 9px;
-      padding: 14px 20px;
-      cursor: pointer;
-      font-weight: bold;
-      text-decoration: underline;
-    }
-
-    .return-button {
-      display: inline-block;
-      margin-top: 14px;
-      padding: 14px 20px;
-      background-color: var(--green);
-      color: var(--white);
-      border: 3px solid #173d26;
-      border-radius: 9px;
-      font-weight: bold;
-      text-decoration: underline;
-    }
-
-    .hidden {
-      display: none;
-    }
-
-    footer {
-      background-color: var(--navy-dark);
-      color: var(--white);
-      padding: 24px 0;
-      border-top: 4px solid #c5a84f;
-    }
-
-    footer a {
-      color: var(--white);
-    }
-
-    @media (max-width: 920px) {
-      .mission-layout {
-        grid-template-columns: 1fr;
-      }
-
-      .sidebar {
-        position: static;
-      }
-    }
-
-    @media (max-width: 700px) {
-      .room-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .threshold-zone {
-        grid-template-columns: 1fr;
-      }
-    }
-
+    .no-motion *, .no-motion *::before, .no-motion *::after { animation: none !important; scroll-behavior: auto !important; transition: none !important; }
     @media (prefers-reduced-motion: reduce) {
-      html {
-        scroll-behavior: auto;
-      }
-
-      .hero::before {
-        animation: none;
-      }
-
-      .room-button:hover {
-        transform: none;
-      }
+      *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; }
     }
-  
-.hero::before{content:"◇   🔑   ◇";animation:none}button:disabled{opacity:.65;cursor:not-allowed}.lab-scene{background:#eaf3f8;border:2px solid #617486;border-radius:12px;padding:20px;margin:16px 0;text-align:center}.lab-icons{font-size:2.6rem;letter-spacing:12px}.pulse{animation:pulse .6s ease-out}@keyframes pulse{50%{transform:scale(1.07)}}.controls{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0}.controls button{padding:10px 14px}.clue{background:#fff8e8;border:2px solid #745500;padding:14px;border-radius:10px;margin-top:18px}.room-button[aria-pressed="true"]{outline:3px solid #315f40;outline-offset:2px}summary{cursor:pointer;font-weight:bold}select{font:inherit;max-width:100%;padding:10px;border:2px solid #617486;border-radius:6px}fieldset{border:1px solid #617486;border-radius:10px;margin:16px 0;padding:16px}legend{font-weight:bold}input[type=range]{max-width:100%}.gallery-panel label{color:white}.final-case a{color:white}.final-case select{display:block;background:white;color:#1f2933;width:100%}[hidden]{display:none!important}.no-motion *{animation:none!important;scroll-behavior:auto!important;transition:none!important}.choice-button:hover:not(:disabled){background:#eaf3f8}.badge-maker label{color:#1f2933}.quiet{font-size:.9rem}.save-status{font-size:.85rem}h2:focus{outline:3px solid #111;outline-offset:4px} @media(prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important}}@media print{.hero,.gallery-panel,.gallery-map,#active-area,footer,.controls,#reset,.skip-link{display:none}.mission-layout{display:block}.sidebar{position:static}.panel,.final-case{box-shadow:none;color:#111;background:white}body{font-size:12pt}}
-</style></head><body><a class="skip-link" href="#main-content">Skip to main content</a>
-<header class="hero"><div class="container"><a class="academy-link" href="https://bk2phdnkj7-ux.github.io/https-tonyaholdaway.github.io-psychology-academy-/">Return to Psychology Academy</a><p class="eyebrow">Week 6 Psychology Mission</p><h1>The Conditioning Vault</h1><p class="hero-subtitle">Pavlov's signals. Skinner's consequences. Your escape.</p><p class="hero-text">The Academy's learning records are locked inside a vault. Seven research rooms hold the missing clues. Investigate how behavior changes, recover each evidence card, and use what you learn to reopen the archive.</p></div></header>
-<main id="main-content" class="container"><noscript><section class="panel">This activity needs JavaScript. Enable it to play, or use the linked OpenStax readings and ask Dr. Holdaway for an alternative activity.</section></noscript>
-<section class="gallery-panel" aria-labelledby="audio-heading"><h2 id="audio-heading">Academy Atmosphere</h2><p>Optional instrumental music. All clues are also written; sound is never required.</p><div class="audio-controls"><button id="music" class="audio-button" aria-pressed="false">Play Academy Music</button><button id="motion" class="audio-button" aria-pressed="false">Turn Animations Off</button></div><label for="volume">Music volume</label><input id="volume" type="range" min="0" max="0.3" step="0.01" value="0.08"><p id="audio-status" role="status">Music is off.</p></section>
-<section class="panel panel-gold"><h2>Mission Briefing</h2><p>Open any room, explore its evidence, and solve both locks to earn a clue letter. Collect seven letters, then solve the final case and arrange the letters into the seven-letter word that completes “A response acquired through experience has been _______.”</p><p>No timer and no penalty for retries. Read the feedback, use hints, and try again. Allow about 25–40 minutes. Demonstrations are simplified teaching models, not real experimental data.</p><p>Progress and notes are saved in this browser when storage is available. Download your notebook before changing devices or using a shared computer. This activity does not automatically submit a Canvas grade.</p><p id="save-status" class="save-status" role="status"></p></section>
-<section class="panel panel-green"><h2>Your Learning Goals</h2><ul><li>Distinguish classical, operant, and observational learning.</li><li>Identify stimuli and responses in Pavlov's conditioning model.</li><li>Explain extinction, spontaneous recovery, generalization, and discrimination.</li><li>Classify consequences and reinforcement schedules.</li><li>Use shaping and modeling to explain a new skill.</li></ul><p>Pavlov was a physiologist whose research influenced behaviorism. Skinner studied operant conditioning. Bandura's work extends this mission to observational learning.</p></section>
-<div class="mission-layout"><div><section class="gallery-map"><h2>Learning Laboratory Map</h2><p>Choose a room. You can revisit completed rooms for practice.</p><div id="rooms" class="room-grid"></div></section><div id="active-area" class="active-area"></div>
-<section id="final-case" class="final-case" aria-labelledby="final-heading"><h2 id="final-heading" tabindex="-1">The Final Vault</h2><p id="gate-status">Collect all seven evidence cards to activate the vault.</p><form id="final-form" hidden><p>A student watches a tutor demonstrate flashcards, copies the method, and starts earning a token after each completed practice set. Practice increases. Separately, after a tone repeatedly precedes a lemon taste, the tone alone elicits salivation.</p><label for="f1">1. Learning the method by watching the tutor</label><select id="f1" required><option value="">Choose a process</option><option>Classical conditioning</option><option>Operant conditioning</option><option>Observational learning</option></select><label for="f2">2. More practice after tokens are added</label><select id="f2" required><option value="">Choose a consequence</option><option>Negative reinforcement</option><option>Positive reinforcement</option><option>Positive punishment</option></select><label for="f3">3. Salivation to the tone alone</label><select id="f3" required><option value="">Choose a process</option><option>Observational learning</option><option>Operant conditioning</option><option>Classical conditioning</option></select><label for="code">4. Arrange your seven clue letters into the vault word</label><p>Hint: Complete the sentence: “A response acquired through experience has been _______.” Seven letters; begins with L.</p><input id="code" class="badge-name-input" maxlength="20" autocomplete="off" required><button class="action-button" type="submit">Unlock the Vault</button></form><p id="final-feedback" class="feedback" role="status">Your evidence satchel will help you solve the final case.</p><div id="badge" class="badge-maker" hidden><h3>Vault Open: Learning Investigator</h3><p>You recovered all seven clues and solved the final case. Download your notebook and optional badge. Follow your Canvas assignment directions for any required submission.</p><label for="learner">Name for your badge (optional)</label><input id="learner" class="badge-name-input" maxlength="50" placeholder="Learning Investigator"><button id="badge-download" class="badge-download-button">Download PNG Badge</button></div></section></div>
-<aside class="sidebar" aria-label="Mission tools"><section class="panel"><h2>Mission Progress</h2><label for="progress-bar">Evidence cards collected</label><progress id="progress-bar" max="7" value="0"></progress><p id="progress-text" role="status"></p></section><section class="panel panel-green"><h2>Evidence Satchel</h2><ul id="inventory-list"></ul></section><section class="panel panel-gold"><h2>Achievements</h2><ul id="achievement-list"></ul></section><section class="panel"><h2>Investigator Notebook</h2><label for="notes">Write an example, a correction, or a question for Dr. Holdaway.</label><textarea id="notes" rows="7"></textarea><div class="controls"><button id="download-notes" class="action-button">Download Notebook</button><button id="reset">Reset This Mission</button></div><div id="reset-confirm" hidden><p>Erase this mission's saved progress and notes on this browser?</p><button id="confirm-reset">Yes, erase this mission</button> <button id="cancel-reset">Keep my progress</button></div></section></aside></div>
-<section class="panel" style="margin-top:28px"><h2>Research Desk</h2><p>Use these readings whenever you need a clue. Activities and scenarios are original instructional examples aligned with OpenStax <em>Psychology 2e</em>, Chapter 6.</p><ul><li><a href="https://openstax.org/books/psychology-2e/pages/6-1-what-is-learning" target="_blank" rel="noopener">6.1 What Is Learning? (new tab)</a></li><li><a href="https://openstax.org/books/psychology-2e/pages/6-2-classical-conditioning" target="_blank" rel="noopener">6.2 Classical Conditioning (new tab)</a></li><li><a href="https://openstax.org/books/psychology-2e/pages/6-3-operant-conditioning" target="_blank" rel="noopener">6.3 Operant Conditioning (new tab)</a></li><li><a href="https://openstax.org/books/psychology-2e/pages/6-4-observational-learning-modeling" target="_blank" rel="noopener">6.4 Observational Learning (new tab)</a></li></ul><p class="quiet">Spielman, R. M., Jenkins, W. J., &amp; Lovett, M. D. (2020). <em>Psychology 2e.</em> OpenStax. No external audio or image files are required. Music is a simple synthesized sequence created for this activity.</p></section></main><footer><div class="container"><p>Psychology Academy · Week 6 · The Conditioning Vault</p><p>Dr. Tonya Holdaway</p><a href="https://bk2phdnkj7-ux.github.io/https-tonyaholdaway.github.io-psychology-academy-/">Return to Psychology Academy</a></div></footer><script>
-'use strict';
-const $=id=>document.getElementById(id);
-const rooms=[
-{title:"Pavlov's Signal Lab",icon:'🔔',letter:'R',card:'Signal Record',fact:'A learned signal can elicit a response.',section:'6.2',intro:'A tone initially does not elicit salivation. Food does. Explore what changes when the tone repeatedly precedes food.',sim:'pavlov',hint:'Identify what elicits the response before learning, then what elicits it after learning.',q:[
-['Food naturally elicits salivation. Which pairing identifies the unconditioned stimulus and response?',['Tone and salivation','Food and salivation','Salivation and food','Food and tone'],1,'Food is the unconditioned stimulus (UCS); salivation to food is the unconditioned response (UCR).'],
-['After tone–food pairings, the tone alone elicits salivation. What are the tone and salivation now?',['Tone = UCS; salivation = UCR','Tone = response; food = CS','Tone = CS; salivation = CR','Tone = reinforcer; salivation = punishment'],2,'The tone is now a conditioned stimulus (CS). Salivation to that tone is the conditioned response (CR).']]},
-{title:'The Fading Signal',icon:'📉',letter:'E',card:'Extinction Log',fact:'A response can weaken and later briefly return.',section:'6.2',intro:'An archive note says: “The tone was presented repeatedly without food. Salivation declined. After a rest, the tone briefly elicited salivation again.” Decode both events.',hint:'Extinction concerns a weakening response. Spontaneous recovery follows a pause after extinction.',q:[
-['The tone repeatedly occurs without food, and salivation decreases. What is happening?',['Discrimination','Positive punishment','Acquisition','Extinction'],3,'Extinction occurs when the conditioned stimulus is repeatedly presented without the unconditioned stimulus and the conditioned response weakens.'],
-['After a rest, salivation briefly returns to the tone. What is the best interpretation?',['Spontaneous recovery; extinction did not necessarily erase the original learning','Acquisition; the dog must have received food again','Shaping; closer approximations were reinforced','Punishment; the tone removed a reward'],0,'Spontaneous recovery is a return of an extinguished conditioned response after a pause.']]},
-{title:'The Sound Detective',icon:'🎛️',letter:'A',card:'Discrimination Key',fact:'Similar cues can evoke responses, but cues can also be distinguished.',section:'6.2',intro:'An Academy dog learned that a low tone predicts food. Later, a similar medium tone also elicits salivation. After training in which only the low tone predicts food, the dog responds mainly to the low tone.',hint:'Generalization spreads a response to similar stimuli. Discrimination makes the response more selective.',q:[
-['Salivation also occurs to the similar medium tone. Which process fits?',['Extinction','Stimulus generalization','Negative reinforcement','Observational learning'],1,'Stimulus generalization occurs when stimuli resembling the trained cue also elicit the conditioned response.'],
-['After selective training, salivation occurs mainly to the low tone. Which process fits?',['Spontaneous recovery','Variable-ratio reinforcement','Stimulus discrimination','Positive punishment'],2,'Stimulus discrimination involves responding differently to cues associated with different outcomes.']]},
-{title:"Skinner's Consequence Room",icon:'⚙️',letter:'L',card:'Consequence Compass',fact:'Added or removed? Behavior increases or decreases?',section:'6.3',intro:'Skinner examined how consequences shape behavior. Classify each example by the observed change in behavior, not by whether the consequence sounds pleasant.',hint:'Positive means added; negative means removed. Reinforcement increases behavior; punishment decreases it.',q:[
-['An Academy apprentice earns a token after each completed practice set. Practice increases. What process is shown?',['Negative reinforcement','Positive punishment','Negative punishment','Positive reinforcement'],3,'A token is added and practice increases: positive reinforcement. A consequence is a reinforcer because of its effect on behavior.'],
-['Buckling a seat belt stops a reminder sound. The student buckles sooner on later trips. What process is shown?',['Negative reinforcement','Negative punishment','Positive reinforcement','Classical extinction'],0,'An aversive sound is removed and buckling increases: negative reinforcement, not punishment.']]},
-{title:'The Consequence Switchboard',icon:'🔀',letter:'N',card:'Punishment Decoder',fact:'Punishment is defined by a decrease in behavior.',section:'6.3',intro:'Two fictional records describe consequences. Identify the process without treating either record as advice about how people should be treated.',hint:'First confirm that the behavior decreased. Then ask whether something was added or removed.',q:[
-['After unsafe equipment use, a trainee receives an extra corrective task. Unsafe use subsequently decreases. Which classification fits?',['Positive reinforcement','Negative reinforcement','Positive punishment','Negative punishment'],2,'An extra task is added and the target behavior decreases: positive punishment. Classification does not establish that this is the best intervention.'],
-['After repeated interruptions, a participant loses a game privilege. Interruptions decrease. Which classification fits?',['Positive punishment','Negative punishment','Negative reinforcement','Stimulus discrimination'],1,'A privilege is removed and interruptions decrease: negative punishment. Negative does not mean harmful; it identifies removal.']]},
-{title:'The Schedule Engine',icon:'⏱️',letter:'D',card:'Schedule Gear',fact:'Ratio counts responses; interval concerns time.',section:'6.3',intro:'Repair the reinforcement engine. Ratio schedules depend on response counts. Interval schedules reinforce the first eligible response after time passes. Fixed is predictable; variable changes.',sim:'schedule',hint:'Look for a response count versus elapsed time, then predictability versus variability.',q:[
-['A dispenser provides one token after every third lever press. Which schedule runs the engine?',['Fixed ratio','Variable ratio','Fixed interval','Variable interval'],0,'Three responses are required each time: a fixed-ratio schedule. The engine is an illustration, not a prediction of real response rates.'],
-['The first correct check-in after an unpredictable waiting period earns a token. Which schedule is this?',['Fixed ratio','Variable ratio','Fixed interval','Variable interval'],3,'Eligibility depends on varying amounts of time, followed by a response: variable interval. A variable-ratio schedule would vary the number of responses.']]},
-{title:'The New-Skill Workshop',icon:'🧩',letter:'E',card:'Skill Blueprint',fact:'Skills can be shaped through approximations or learned by observing models.',section:'6.4 + 6.3',intro:'One apprentice is reinforced first for opening a practice file, then for completing one item, and finally for completing a full set. Another watches a mentor demonstrate a new method and later reproduces it.',hint:'Shaping reinforces successive approximations. Observational learning involves a model and processes such as attention and retention.',q:[
-['Reinforcement shifts toward increasingly complete versions of the target skill. What is this?',['Extinction','Shaping','Stimulus generalization','Spontaneous recovery'],1,'Shaping reinforces successive approximations to a target behavior, rather than waiting for the full behavior at the start.'],
-['An apprentice watches a mentor and later copies the demonstrated method without having received a reward for watching. What does this illustrate?',['Learning requires direct reinforcement on every trial','The mentor is an unconditioned stimulus','Observational learning can occur without direct reinforcement of the observer','Every copied behavior is a reflex'],2,'Bandura emphasized learning from models. Attention, retention, ability to reproduce the behavior, and motivation help explain whether learning is expressed.']]}
-];
-const KEY='psychologyConditioningWeek6_v1', COMPLETE='psychologyAcademyWeek6Complete';
-let state={solved:[],notes:'',escaped:false,experiment:false,motion:false},active=-1,storageOK=true;
-try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&typeof s==='object'){state.solved=Array.isArray(s.solved)?[...new Set(s.solved.filter(x=>Number.isInteger(x)&&x>=0&&x<14))]:[];state.notes=typeof s.notes==='string'?s.notes:'';state.escaped=s.escaped===true&&state.solved.length===14;state.experiment=s.experiment===true;state.motion=s.motion===true;}}catch(e){storageOK=false;}
-function save(){try{localStorage.setItem(KEY,JSON.stringify(state));if(state.escaped)localStorage.setItem(COMPLETE,'true');$('save-status').textContent='Progress and notes saved in this browser.';}catch(e){storageOK=false;$('save-status').textContent='Browser saving is unavailable. Keep this tab open and download your notebook before leaving.';}}
-function done(i){return state.solved.includes(i*2)&&state.solved.includes(i*2+1);}
-function el(tag,text,cls){const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n;}
-function dashboard(){let count=rooms.filter((_,i)=>done(i)).length;$('progress-bar').value=count;$('progress-text').textContent=count+' of 7 evidence cards collected'+(state.escaped?' · Vault open!':'');$('inventory-list').replaceChildren();rooms.forEach((r,i)=>{if(done(i))$('inventory-list').append(el('li',r.card+' — letter '+r.letter+'. '+r.fact));const b=$('room-'+i);if(b){b.querySelector('.status-text').textContent=done(i)?'✓ Clue collected':'Open · '+r.q.filter((_,j)=>state.solved.includes(i*2+j)).length+'/2 locks solved';b.setAttribute('aria-pressed',String(active===i));}});if(!count)$('inventory-list').append(el('li','Solve both locks in a room to collect its clue.'));$('achievement-list').replaceChildren();if(state.experiment)$('achievement-list').append(el('li','Experimenter: Explored a lab demonstration.'));if(count===7)$('achievement-list').append(el('li','Archive Detective: Recovered all seven cards.'));if(state.escaped)$('achievement-list').append(el('li','Learning Investigator: Opened the vault.'));if(!$('achievement-list').children.length)$('achievement-list').append(el('li','Achievements appear as you investigate.'));$('final-form').hidden=count<7||state.escaped;$('badge').hidden=!state.escaped;$('gate-status').textContent=state.escaped?'Mission complete. Your badge and notebook are ready.':count===7?'All seven cards recovered. Solve the case and enter the vault word.':'Collect all seven evidence cards to activate the vault.';}
-rooms.forEach((r,i)=>{let b=el('button',undefined,'room-button');b.type='button';b.id='room-'+i;b.setAttribute('aria-pressed','false');const icon=el('span',r.icon,'room-icon');icon.setAttribute('aria-hidden','true');b.append(icon,el('span',r.title,'room-title'),el('span','OpenStax '+r.section),el('span','','status-text'));b.addEventListener('click',()=>openRoom(i));$('rooms').append(b);});
-function openRoom(i){active=i;const r=rooms[i],a=$('active-area');a.replaceChildren();let box=el('section',undefined,'activity-card'),h=el('h2',r.title);h.tabIndex=-1;box.append(h,el('p',r.intro));if(r.sim)box.append(simulation(r.sim));const hint=el('details');hint.append(el('summary','Click here to open a research hint'),el('p',r.hint));box.append(hint);r.q.forEach((q,j)=>{let field=el('fieldset');field.append(el('legend','Lock '+(j+1)),el('p',q[0]));const opts=el('div',undefined,'choice-grid'),feedback=el('p',state.solved.includes(i*2+j)?'✓ Previously solved. '+q[3]:'Choose one answer. You may retry.', 'feedback');feedback.id='feedback-'+j;feedback.setAttribute('role','status');q[1].forEach((option,k)=>{let btn=el('button',String.fromCharCode(65+k)+'. '+option,'choice-button');btn.type='button';btn.addEventListener('click',()=>{if(k===q[2]){if(!state.solved.includes(i*2+j))state.solved.push(i*2+j);save();feedback.className='feedback correct';feedback.textContent='✓ Lock solved. '+q[3];updateClue();dashboard();}else{feedback.className='feedback incorrect';feedback.textContent='Not quite. '+r.hint+' Review the scenario and try again.';}});opts.append(btn);});field.append(opts,feedback);box.append(field);});const clue=el('div');clue.id='room-clue';box.append(clue);a.append(box);updateClue();dashboard();h.focus();}
-function updateClue(){const n=$('room-clue');if(!n)return;n.replaceChildren();if(done(active)){const r=rooms[active];n.className='clue';n.append(el('strong','Evidence recovered: '+r.card+' · '+r.letter),el('p',r.fact));let next=el('button',rooms.every((_,i)=>done(i))?'Go to the Final Vault':'Continue to the Next Unsolved Room','next-step-button');next.type='button';next.onclick=()=>{let idx=rooms.findIndex((_,i)=>!done(i));if(idx<0){$('final-heading').focus();$('final-case').scrollIntoView({block:'start'});}else openRoom(idx);};n.append(next);}else{n.className='';n.append(el('p','Solve both locks to reveal this room’s clue.'));}}
-function simulation(type){const box=el('div',undefined,'lab-scene');const icons=el('div',type==='pavlov'?'🔔 🐕 🍽️':'⚙️ 🪙','lab-icons');icons.setAttribute('aria-hidden','true');const status=el('p',type==='pavlov'?'Untrained model: the tone alone does not elicit salivation.':'Fixed-ratio 3 engine: 0 presses, 0 tokens.');status.setAttribute('role','status');box.append(icons,status);const c=el('div',undefined,'controls');let pair=0,press=0;function pulse(){icons.classList.remove('pulse');void icons.offsetWidth;icons.classList.add('pulse');state.experiment=true;save();dashboard();}function button(label,fn){const b=el('button',label);b.type='button';b.onclick=()=>{fn();pulse();};c.append(b);}if(type==='pavlov'){button('Present Tone Alone',()=>status.textContent=pair>=3?'Tone alone → salivation (CR). The tone now functions as a CS.':'Tone alone → no learned salivation in this model.');button('Pair Tone, Then Food',()=>{pair++;status.textContent='Pairing '+pair+': Tone → food → salivation to food (UCR). '+(pair>=3?'Now test the tone alone.':'Try another pairing.');});button('Reset Demonstration',()=>{pair=0;status.textContent='Model reset: tone is neutral with respect to salivation.';});box.append(el('p','Teaching simplification: three pairings unlock the model response; real learning does not follow a universal three-trial rule.','quiet'));}else{button('Press Lever',()=>{press++;status.textContent=press+' presses · '+Math.floor(press/3)+' tokens. '+(press%3===0?'Token delivered after three more presses.':'No token yet.');});button('Reset Engine',()=>{press=0;status.textContent='Fixed-ratio 3 engine: 0 presses, 0 tokens.';});box.append(el('p','Each click represents one response. This device illustrates a contingency, not an animal’s learning rate.','quiet'));}box.append(c);return box;}
-$('notes').value=state.notes;$('notes').oninput=()=>{state.notes=$('notes').value;save();};
-$('final-form').onsubmit=e=>{e.preventDefault();if(!rooms.every((_,i)=>done(i)))return;const results=[$('f1').value==='Observational learning',$('f2').value==='Positive reinforcement',$('f3').value==='Classical conditioning',$('code').value.trim().toUpperCase()==='LEARNED'];if(results.every(Boolean)){state.escaped=true;save();dashboard();$('final-feedback').textContent='✓ Vault open! Watching a model is observational learning; added tokens that increase practice demonstrate positive reinforcement; salivation to the learned tone is classical conditioning. Your clues spell LEARNED.';$('badge-download').focus();}else{$('final-feedback').textContent='Keep investigating: '+results.map((r,i)=>r?'Part '+(i+1)+' solved':(['Part 1: Look for learning from a model.','Part 2: What was added, and did practice increase?','Part 3: Look for an association between two stimuli.','Part 4: Use all seven letters, including both Es.'][i])).join(' ');}};
-function download(blob,name){const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
-$('download-notes').onclick=()=>{const lines=['PSYCHOLOGY ACADEMY — THE CONDITIONING VAULT','Status: '+(state.escaped?'Vault opened':'In progress'),'Evidence: '+rooms.filter((_,i)=>done(i)).length+'/7','',...rooms.filter((_,i)=>done(i)).map(r=>r.card+' ['+r.letter+']: '+r.fact),'','MY NOTES',state.notes,'','This local record is not an automatically submitted grade.'];download(new Blob([lines.join('\n')],{type:'text/plain;charset=utf-8'}),'conditioning-vault-notebook.txt');};
-$('badge-download').onclick=()=>{if(!state.escaped)return;let c=document.createElement('canvas');c.width=1200;c.height=720;let g=c.getContext('2d');g.fillStyle='#102f4a';g.fillRect(0,0,1200,720);g.strokeStyle='#d4bc70';g.lineWidth=12;g.strokeRect(28,28,1144,664);g.textAlign='center';g.fillStyle='#fff8e8';g.font='bold 30px Arial';g.fillText('PSYCHOLOGY ACADEMY · CHAPTER 6',600,115);g.font='bold 58px Georgia';g.fillText('Learning Investigator',600,245);g.font='32px Arial';g.fillText('THE CONDITIONING VAULT · MISSION COMPLETE',600,335);let name=$('learner').value.trim()||'Learning Investigator';let size=44;g.font=size+'px Arial';while(g.measureText(name).width>1050){size--;g.font=size+'px Arial';}g.fillText(name,600,450);g.font='26px Arial';g.fillText('Seven evidence cards recovered · Final case solved',600,540);g.fillText('Dr. Tonya Holdaway',600,605);c.toBlob(b=>{if(b)download(b,'conditioning-vault-badge.png');});};
-$('reset').onclick=()=>{$('reset-confirm').hidden=false;$('confirm-reset').focus();};$('cancel-reset').onclick=()=>{$('reset-confirm').hidden=true;$('reset').focus();};$('confirm-reset').onclick=()=>{state={solved:[],notes:'',escaped:false,experiment:false,motion:state.motion};try{localStorage.removeItem(COMPLETE);}catch(e){}save();$('notes').value='';$('learner').value='';$('final-form').reset();$('final-feedback').textContent='Your evidence satchel will help you solve the final case.';$('active-area').replaceChildren();active=-1;$('reset-confirm').hidden=true;dashboard();$('room-0').focus();};
-let ctx=null,bus=null,timer=null,musicOn=false,step=0;
-function setMusicUI(){ $('music').textContent=musicOn?'Pause Academy Music':'Play Academy Music';$('music').setAttribute('aria-pressed',String(musicOn));$('audio-status').textContent=musicOn?'Academy music is playing.':'Music is off.';}
-function note(){if(!musicOn||!ctx)return;const melody=[261.63,329.63,392,329.63,293.66,349.23,440,349.23,246.94,293.66,392,293.66,261.63,329.63,523.25,392],now=ctx.currentTime;const o=ctx.createOscillator(),g=ctx.createGain();o.type='sine';o.frequency.value=melody[step++%melody.length];g.gain.setValueAtTime(0,now);g.gain.linearRampToValueAtTime(.3,now+.06);g.gain.exponentialRampToValueAtTime(.001,now+1.2);o.connect(g);g.connect(bus);o.start(now);o.stop(now+1.3);o.onended=()=>{o.disconnect();g.disconnect();};}
-async function stopMusic(){musicOn=false;clearInterval(timer);if(ctx)await ctx.suspend();setMusicUI();}
-$('music').onclick=async()=>{try{if(musicOn){await stopMusic();return;}const AC=window.AudioContext||window.webkitAudioContext;if(!AC)throw Error('unsupported');if(!ctx){ctx=new AC();bus=ctx.createGain();bus.connect(ctx.destination);}await ctx.resume();bus.gain.value=Number($('volume').value);musicOn=true;note();timer=setInterval(note,650);setMusicUI();}catch(e){musicOn=false;$('audio-status').textContent='Audio is unavailable in this browser. All activities work without music.';}};
-$('volume').oninput=()=>{if(bus)bus.gain.setTargetAtTime(Number($('volume').value),ctx.currentTime,.05);};document.addEventListener('visibilitychange',()=>{if(document.hidden&&musicOn)stopMusic();});
-function motionUI(){document.body.classList.toggle('no-motion',state.motion);$('motion').setAttribute('aria-pressed',String(state.motion));$('motion').textContent=state.motion?'Turn Animations On':'Turn Animations Off';} $('motion').onclick=()=>{state.motion=!state.motion;motionUI();save();};motionUI();dashboard();save();
-</script></body></html>
+    @media (max-width: 960px) {
+      .hero-grid, .briefing-grid, .mission-layout { grid-template-columns: 1fr; }
+      .hero-scene { min-height: 300px; }
+      .sidebar { position: static; }
+      .mobile-progress { display: block; position: sticky; z-index: 60; bottom: 10px; width: max-content; max-width: calc(100% - 24px); margin: 0 auto 10px; padding: 8px 14px; border: 2px solid #d4b455; border-radius: 999px; background: #0c3244; box-shadow: var(--shadow); }
+      .mobile-progress a { color: #fff; text-decoration: none; }
+    }
+    @media (max-width: 680px) {
+      body { font-size: 17px; }
+      .room-grid, .objective-list, .schedule-display { grid-template-columns: 1fr; columns: 1; }
+      .room-heading { display: block; }
+      .chapter-tag { display: inline-block; margin-top: 12px; }
+      .tone-board, .shaping-steps { grid-template-columns: 1fr 1fr; }
+      .matrix { grid-template-columns: 90px repeat(2, minmax(0,1fr)); font-size: .78rem; }
+      .room-nav, .footer-grid { grid-template-columns: 1fr; display: grid; }
+      .model-stage { grid-template-columns: 1fr; }
+      .model-arrow { transform: rotate(90deg); text-align: center; }
+    }
+    @media (max-width: 420px) {
+      .fragment-rack { grid-template-columns: repeat(4, 1fr); gap: 5px; }
+      .fragment { font-size: 1.15rem; }
+      .tone-board, .shaping-steps { grid-template-columns: 1fr; }
+    }
+    @media print {
+      .lab-sky, .hero, .atmosphere, .gallery-map, .active-area, .sidebar, .mobile-progress, footer, .final-form, .badge-actions, .badge-maker label, .badge-maker input, #badge-message { display: none !important; }
+      body { color: #111; background: #fff; font-size: 12pt; }
+      .mission-layout { display: block; }
+      .panel, .final-case, .badge-maker { color: #111; border: 0; background: #fff; box-shadow: none; }
+      .final-case { display: block !important; }
+      .final-case > h2, .final-case > p, .learned-code, #final-feedback { display: none; }
+      .badge-preview { width: 100%; border: 0; }
+    }
+  </style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to the Week 6 mission</a>
+
+<div class="lab-sky" aria-hidden="true">
+  <div class="lab-aurora one"></div>
+  <div class="lab-aurora two"></div>
+  <div id="sparks"></div>
+</div>
+
+<header class="hero" id="top">
+  <div class="container">
+    <a class="academy-link" href="../index.html">← Return to Psychology Academy</a>
+    <div class="hero-grid">
+      <div>
+        <p class="eyebrow">Week 6 Psychology Mission · OpenStax Chapter 6</p>
+        <h1>The Conditioning Vault</h1>
+        <p class="hero-subtitle">Pavlov’s signals. Skinner’s consequences. Bandura’s models. Your escape.</p>
+        <p class="hero-text">
+          The Academy’s learning archive has sealed itself behind seven experimental chambers. Activate each apparatus,
+          test how experience changes behavior, and recover the seven evidence letters that reopen the vault.
+        </p>
+        <div class="hero-chips" aria-label="Mission features">
+          <span class="hero-chip">7 animated laboratories</span>
+          <span class="hero-chip">14 knowledge locks</span>
+          <span class="hero-chip">Progress lights as you work</span>
+          <span class="hero-chip">Personalized completion badge</span>
+        </div>
+      </div>
+
+      <div class="hero-scene" aria-hidden="true">
+        <svg viewBox="0 0 760 430" role="img">
+          <title>An animated conditioning laboratory with a ringing bell, rotating vault, signal path, lever, and observer</title>
+          <defs>
+            <radialGradient id="vaultCore"><stop offset="0" stop-color="#fff3b1"/><stop offset=".32" stop-color="#d9b75d"/><stop offset="1" stop-color="#1d6a67"/></radialGradient>
+            <linearGradient id="steelGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9db7bd"/><stop offset=".5" stop-color="#31576a"/><stop offset="1" stop-color="#102b3b"/></linearGradient>
+          </defs>
+          <path d="M42 385V144Q42 35 156 35h448q114 0 114 109v241" fill="none" stroke="#d9bd6e" stroke-width="3" opacity=".46"/>
+          <g class="bell" transform="translate(74 87)">
+            <path d="M72 18c-35 0-50 27-50 59v36L8 132h128l-14-19V77c0-32-15-59-50-59z" fill="#d8b45b" stroke="#fff0b2" stroke-width="4"/>
+            <circle cx="72" cy="139" r="12" fill="#f7d679"/>
+            <path d="M45 148h54" stroke="#fff0b2" stroke-width="5" stroke-linecap="round"/>
+          </g>
+          <path d="M208 212C242 169 257 250 292 207" fill="none" stroke="#83d8c2" stroke-width="5" stroke-dasharray="10 9"/>
+          <circle class="signal-dot" cx="249" cy="204" r="8" fill="#f5cf67"/>
+          <g transform="translate(380 210)">
+            <circle class="vault-glow" r="132" fill="#3fb09a" opacity=".13"/>
+            <circle r="112" fill="url(#steelGrad)" stroke="#d7bb6b" stroke-width="7"/>
+            <g class="vault-ring">
+              <circle r="86" fill="none" stroke="#91cfc1" stroke-width="5" stroke-dasharray="12 9"/>
+              <circle cx="0" cy="-86" r="8" fill="#f2cf6e"/><circle cx="86" cy="0" r="8" fill="#f2cf6e"/><circle cx="0" cy="86" r="8" fill="#f2cf6e"/><circle cx="-86" cy="0" r="8" fill="#f2cf6e"/>
+            </g>
+            <g class="vault-ring reverse">
+              <path d="M-56 0h112M0-56v112M-40-40l80 80M40-40l-80 80" stroke="#d9bd6e" stroke-width="8" stroke-linecap="round"/>
+              <circle r="31" fill="url(#vaultCore)" stroke="#fff1ad" stroke-width="4"/>
+            </g>
+          </g>
+          <path d="M468 208C505 171 514 247 545 211" fill="none" stroke="#f1c95f" stroke-width="5" stroke-dasharray="10 9"/>
+          <circle class="signal-dot" cx="510" cy="207" r="8" fill="#82d8bf" style="animation-delay:-1s"/>
+          <g transform="translate(550 78)">
+            <rect x="0" y="82" width="130" height="157" rx="16" fill="#234b5b" stroke="#a9c4c3" stroke-width="5"/>
+            <rect x="20" y="103" width="90" height="68" rx="9" fill="#e6f1e9" stroke="#d5b45d" stroke-width="4"/>
+            <path class="lever-arm" d="M39 217l49-83" stroke="#d8b45b" stroke-width="12" stroke-linecap="round"/>
+            <circle cx="39" cy="217" r="15" fill="#93b7b8" stroke="#fff0b2" stroke-width="4"/>
+            <circle cx="88" cy="134" r="17" fill="#e3bd62"/>
+          </g>
+          <g transform="translate(553 30)">
+            <path d="M20 30q35-34 70 0-35 32-70 0z" fill="#f7f4df" stroke="#d8b45b" stroke-width="4"/>
+            <ellipse class="observer-eye" cx="55" cy="30" rx="11" ry="15" fill="#1a6172"/>
+          </g>
+          <text x="83" y="363" fill="#c5eee3" font-size="15" font-family="Arial">association</text>
+          <text x="330" y="386" fill="#ffe29a" font-size="15" font-family="Arial">experience</text>
+          <text x="574" y="363" fill="#c5eee3" font-size="15" font-family="Arial">consequence</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main id="main-content" class="container">
+  <noscript><section class="panel"><h2>JavaScript Is Needed</h2><p>This interactive mission needs JavaScript. Enable it to play, or use the linked OpenStax readings and contact Dr. Holdaway for an alternative activity.</p></section></noscript>
+
+  <section class="atmosphere" aria-labelledby="atmosphere-heading">
+    <h2 id="atmosphere-heading">Set the Vault Atmosphere</h2>
+    <p>Choose lighting that supports your learning. Music and motion are optional; neither affects your answers or progress.</p>
+    <audio id="vault-audio" loop preload="none" aria-label="Optional Conditioning Vault music"></audio>
+    <div class="control-row" role="group" aria-label="Vault lighting">
+      <button class="control-button lighting-choice" type="button" data-lighting="blue" aria-pressed="true">Archive Blue</button>
+      <button class="control-button lighting-choice" type="button" data-lighting="garden" aria-pressed="false">Pavlov Garden</button>
+      <button class="control-button lighting-choice" type="button" data-lighting="gold" aria-pressed="false">Skinner Gold</button>
+    </div>
+    <div class="control-row">
+      <button id="music-toggle" class="control-button" type="button" aria-pressed="false">Play Vault Music <span class="sound-viz" aria-hidden="true"><i></i><i></i><i></i></span></button>
+      <button id="motion-toggle" class="control-button" type="button" aria-pressed="false">Pause Animations</button>
+      <label for="volume">Music volume</label>
+      <input id="volume" type="range" min="0" max="1" step="0.01" value="0.18">
+    </div>
+    <p id="audio-status" class="status-light" role="status" aria-live="polite">Vault music is ready. Select Play when you would like it.</p>
+    <p id="motion-status" class="status-light"></p>
+  </section>
+
+  <div class="briefing-grid">
+    <section class="panel panel-gold" aria-labelledby="briefing-heading">
+      <h2 id="briefing-heading">Your Mission</h2>
+      <p>Enter each laboratory, operate its interactive instrument, and solve two knowledge locks. Every action and correct answer sends energy to the progress display. Complete a room to reveal one letter.</p>
+      <p>Collect all seven letters, solve the final synthesis case, and enter the word that completes: “A response acquired through experience has been _______.”</p>
+      <p>There is no timer and no penalty for retries. Navigation buttons beneath each room move you forward without requiring you to scroll back to the map.</p>
+      <p class="source-note"><strong>Each laboratory identifies its OpenStax connection.</strong> The visual demonstrations are simplified teaching models aligned with Chapter 6; they are not real experimental data.</p>
+    </section>
+
+    <section class="panel panel-green" aria-labelledby="objectives-heading">
+      <h2 id="objectives-heading">What You Will Practice</h2>
+      <ul class="objective-list">
+        <li>Distinguish classical, operant, and observational learning.</li>
+        <li>Identify conditioned and unconditioned stimuli and responses.</li>
+        <li>Explain extinction and spontaneous recovery.</li>
+        <li>Compare generalization and discrimination.</li>
+        <li>Classify reinforcement and punishment.</li>
+        <li>Distinguish reinforcement schedules.</li>
+        <li>Apply shaping and modeling to new skills.</li>
+      </ul>
+    </section>
+  </div>
+
+  <section class="panel" aria-labelledby="respect-heading">
+    <h2 id="respect-heading">A Safe Behavioral Science Laboratory</h2>
+    <p>This mission uses neutral examples involving studying, skills, reminders, tokens, and practice. The interactive instruments illustrate psychological principles without asking you to disclose distressing experiences or imitate historical animal research.</p>
+  </section>
+
+  <div class="mission-layout">
+    <div>
+      <section class="gallery-map" aria-labelledby="map-heading">
+        <h2 id="map-heading">The Seven-Laboratory Vault Map</h2>
+        <p>Follow the suggested Chapter 6 route or enter any room. Your work saves automatically in this browser.</p>
+        <div id="room-grid" class="room-grid"></div>
+      </section>
+
+      <div id="active-area" class="active-area" tabindex="-1" aria-live="polite"></div>
+
+      <section id="final-case" class="final-case" aria-labelledby="final-heading" hidden>
+        <div id="confetti" class="confetti" aria-hidden="true"></div>
+        <h2 id="final-heading">The Final Learning Archive</h2>
+        <p>All seven evidence cards now surround the vault’s central mechanism. Integrate classical, operant, and observational learning to reopen the archive.</p>
+        <div id="learned-code" class="learned-code" aria-label="Collected evidence letters"></div>
+        <form id="final-form" class="final-form">
+          <div class="final-lock">
+            <label for="final-one">1. A student watches a tutor demonstrate flashcards and later copies the method. Which process is most evident?</label>
+            <select id="final-one" required><option value="">Choose a process</option><option value="classical">Classical conditioning</option><option value="operant">Operant conditioning</option><option value="observational">Observational learning</option></select>
+          </div>
+          <div class="final-lock">
+            <label for="final-two">2. The student receives a token after each completed practice set, and practice increases. Which consequence fits?</label>
+            <select id="final-two" required><option value="">Choose a consequence</option><option value="negative-reinforcement">Negative reinforcement</option><option value="positive-reinforcement">Positive reinforcement</option><option value="positive-punishment">Positive punishment</option></select>
+          </div>
+          <div class="final-lock">
+            <label for="final-three">3. After a tone repeatedly precedes lemon juice, the tone alone elicits salivation. Which process fits?</label>
+            <select id="final-three" required><option value="">Choose a process</option><option value="observational">Observational learning</option><option value="operant">Operant conditioning</option><option value="classical">Classical conditioning</option></select>
+          </div>
+          <div class="final-lock">
+            <label for="portal-code">4. Enter the seven-letter word formed by your evidence letters.</label>
+            <input id="portal-code" type="text" maxlength="7" autocomplete="off" spellcheck="false" placeholder="Seven-letter code" required>
+          </div>
+          <button class="control-button final-submit" type="submit">Open the Conditioning Vault</button>
+        </form>
+        <p id="final-feedback" role="status" aria-live="polite">Complete all seven laboratories to activate this final vault.</p>
+
+        <section id="badge-maker" class="badge-maker" aria-labelledby="badge-heading" hidden>
+          <h3 id="badge-heading">Your Learning Investigator Badge</h3>
+          <p>You recovered seven evidence cards, solved fourteen knowledge locks, and integrated three major forms of learning. Enter your name, generate the badge, and save the PNG for your Canvas submission.</p>
+          <label for="learner-name">Name to appear on the badge</label>
+          <input id="learner-name" type="text" maxlength="60" autocomplete="name" placeholder="Enter your name">
+          <div class="badge-actions">
+            <button id="generate-badge" class="action-button" type="button">Generate My Badge</button>
+            <button id="download-badge" class="action-button" type="button" disabled>Download Badge as PNG</button>
+            <button id="print-badge" class="action-button" type="button">Print Badge</button>
+          </div>
+          <p id="badge-message" role="status" aria-live="polite"></p>
+          <canvas id="badge-canvas" class="badge-preview" width="1400" height="1000" aria-label="Personalized Week 6 Learning Investigator completion badge"></canvas>
+        </section>
+      </section>
+    </div>
+
+    <aside class="sidebar" aria-label="Conditioning Vault tools">
+      <section class="panel" aria-labelledby="progress-heading">
+        <h2 id="progress-heading">Vault Energy</h2>
+        <progress id="progress-bar" value="0" max="28">0 of 28 mission steps complete</progress>
+        <p id="progress-text" class="progress-text">0 of 28 mission steps complete</p>
+        <p id="room-progress" class="quiet">0 of 7 laboratories restored</p>
+        <p id="lock-progress" class="quiet">0 of 14 knowledge locks solved</p>
+        <p id="explore-progress" class="quiet">0 of 14 laboratory actions completed</p>
+      </section>
+      <section class="panel panel-gold" aria-labelledby="fragment-heading">
+        <h2 id="fragment-heading">Evidence Letters</h2>
+        <ol id="fragment-rack" class="fragment-rack" aria-label="Charging evidence letters"></ol>
+        <p class="quiet">Each letter warms as you explore and solve locks, then fully illuminates when its laboratory is restored.</p>
+      </section>
+      <section class="panel panel-green" aria-labelledby="evidence-heading">
+        <h2 id="evidence-heading">Evidence Satchel</h2>
+        <ul id="inventory-list" class="inventory-list"><li>No evidence collected yet.</li></ul>
+      </section>
+      <section class="panel" aria-labelledby="achievement-heading">
+        <h2 id="achievement-heading">Discoveries</h2>
+        <ul id="achievement-list" class="achievement-list"><li>Your discoveries will appear here.</li></ul>
+      </section>
+      <section class="panel notebook" aria-labelledby="notebook-heading">
+        <h2 id="notebook-heading">Investigator Notebook</h2>
+        <label for="observation-notes"><strong>Concept or correction I want to remember</strong></label>
+        <textarea id="observation-notes" placeholder="Record a distinction, example, or question..."></textarea>
+        <label for="transfer-notes"><strong>Safe real-world application</strong></label>
+        <textarea id="transfer-notes" placeholder="Apply learning to studying, practice, habits, coaching, or another everyday example..."></textarea>
+        <p id="save-status" class="save-status" role="status">Notebook entries save automatically in this browser.</p>
+        <div class="notebook-actions">
+          <button id="download-notes" class="action-button" type="button">Download My Vault Notes</button>
+          <button id="reset-progress" class="danger-button" type="button">Reset Week 6 Progress</button>
+        </div>
+        <div id="reset-box" class="reset-box" hidden>
+          <strong>Reset all Week 6 progress and notes?</strong>
+          <div class="control-row"><button id="confirm-reset" class="danger-button" type="button">Yes, Reset</button><button id="cancel-reset" class="action-button" type="button">Cancel</button></div>
+        </div>
+      </section>
+    </aside>
+  </div>
+
+  <section class="panel reading-panel" aria-labelledby="reading-heading">
+    <h2 id="reading-heading">Chapter 6 Reading Trail &amp; Credits</h2>
+    <p>These original activities paraphrase and apply concepts from OpenStax <em>Psychology 2e</em>, Chapter 6.</p>
+    <details>
+      <summary>Open the Chapter 6 reading trail</summary>
+      <ul>
+        <li><a href="https://openstax.org/books/psychology-2e/pages/6-1-what-is-learning" target="_blank" rel="noopener">6.1 What Is Learning?</a></li>
+        <li><a href="https://openstax.org/books/psychology-2e/pages/6-2-classical-conditioning" target="_blank" rel="noopener">6.2 Classical Conditioning</a></li>
+        <li><a href="https://openstax.org/books/psychology-2e/pages/6-3-operant-conditioning" target="_blank" rel="noopener">6.3 Operant Conditioning</a></li>
+        <li><a href="https://openstax.org/books/psychology-2e/pages/6-4-observational-learning-modeling" target="_blank" rel="noopener">6.4 Observational Learning (Modeling)</a></li>
+      </ul>
+    </details>
+    <p class="quiet">Textbook reference: Spielman, R. M., Jenkins, W. J., &amp; Lovett, M. D. (2020). <em>Psychology 2e</em>. OpenStax. The instruments are simplified instructional simulations. Optional music is not necessary for any activity.</p>
+  </section>
+</main>
+
+<p id="mobile-progress" class="mobile-progress"><a href="#map-heading">0/7 laboratories · 0/28 steps</a></p>
+
+<footer>
+  <div class="container footer-grid">
+    <div><h2>Psychology Academy · Week 6</h2><p>The Conditioning Vault · Learning · Dr. Tonya Holdaway</p></div>
+    <div><p><a href="#top">Return to the top</a><br><a href="../index.html">Return to Psychology Academy</a></p></div>
+  </div>
+</footer>
+
+<script>
+(() => {
+  "use strict";
+
+  const STORAGE_KEY = "psychologyConditioningWeek6_v2";
+  const LEGACY_KEY = "psychologyConditioningWeek6_v1";
+  const COMPLETION_KEY = "psychologyAcademyWeek6Complete";
+  const AUDIO_SOURCE = "../assets/audio/asproductionmusic-ambient-guitar-589419.mp3";
+  const TOTAL_LOCKS = 14;
+  const TOTAL_ACTIONS = 14;
+  const TOTAL_STEPS = TOTAL_LOCKS + TOTAL_ACTIONS;
+  const $ = (id) => document.getElementById(id);
+
+  const rooms = [
+    {
+      id: "pavlov",
+      fragment: "L",
+      title: "Pavlov’s Signal Laboratory",
+      subtitle: "Build an association between a neutral signal and food",
+      source: "6.2 Classical Conditioning",
+      sourceUrl: "https://openstax.org/books/psychology-2e/pages/6-2-classical-conditioning",
+      concepts: ["neutral stimulus", "UCS and UCR", "CS and CR", "acquisition"],
+      evidence: "A previously neutral stimulus can become a conditioned stimulus after it reliably predicts an unconditioned stimulus.",
+      requiredActions: ["pavlov-pair", "pavlov-test"]
+    },
+    {
+      id: "extinction",
+      fragment: "E",
+      title: "The Fading Signal Chamber",
+      subtitle: "Watch a conditioned response weaken, rest, and briefly return",
+      source: "6.2 Classical Conditioning",
+      sourceUrl: "https://openstax.org/books/psychology-2e/pages/6-2-classical-conditioning",
+      concepts: ["extinction", "spontaneous recovery", "conditioned response"],
+      evidence: "Repeatedly presenting the conditioned stimulus without the unconditioned stimulus can weaken the conditioned response; a brief return may follow a rest.",
+      requiredActions: ["extinction-run", "recovery-rest"]
+    },
+    {
+      id: "sound",
+      fragment: "A",
+      title: "The Sound Detective",
+      subtitle: "Test when responses spread and when cues become distinct",
+      source: "6.2 Classical Conditioning",
+      sourceUrl: "https://openstax.org/books/psychology-2e/pages/6-2-classical-conditioning",
+      concepts: ["stimulus generalization", "stimulus discrimination"],
+      evidence: "Generalization extends a learned response to similar stimuli, whereas discrimination narrows responding to cues that predict different outcomes.",
+      requiredActions: ["general-tone", "discriminate-tone"]
+    },
+    {
+      id: "consequence",
+      fragment: "R",
+      title: "Skinner’s Consequence Room",
+      subtitle: "Map added and removed outcomes that increase behavior",
+      source: "6.3 Operant Conditioning",
+      sourceUrl: "https://openstax.org/books/psychology-2e/pages/6-3-operant-conditioning",
+      concepts: ["operant conditioning", "positive reinforcement", "negative reinforcement"],
+      evidence: "Reinforcement is defined by an increase in behavior; positive adds a consequence, while negative removes one.",
+      requiredActions: ["positive-map", "negative-map"]
+    },
+    {
+      id: "punishment",
+      fragment: "N",
+      title: "The Consequence Switchboard",
+      subtitle: "Separate punishment from reinforcement without relying on everyday meanings",
+      source: "6.3 Operant Conditioning",
+      sourceUrl: "https://openstax.org/books/psychology-2e/pages/6-3-operant-conditioning",
+      concepts: ["positive punishment", "negative punishment", "behavioral effect"],
+      evidence: "Punishment is defined by a decrease in behavior; positive adds a consequence, while negative removes one.",
+      requiredActions: ["switch-add", "switch-remove"]
+    },
+    {
+      id: "schedule",
+      fragment: "E",
+      title: "The Schedule Engine",
+      subtitle: "Compare response counts, time intervals, and predictability",
+      source: "6.3 Operant Conditioning",
+      sourceUrl: "https://openstax.org/books/psychology-2e/pages/6-3-operant-conditioning",
+      concepts: ["fixed ratio", "variable ratio", "fixed interval", "variable interval"],
+      evidence: "Ratio schedules depend on response counts, interval schedules depend on time, fixed schedules are predictable, and variable schedules change.",
+      requiredActions: ["lever-run", "schedule-compare"]
+    },
+    {
+      id: "skill",
+      fragment: "D",
+      title: "The New-Skill Workshop",
+      subtitle: "Climb through successive approximations and observe a model",
+      source: "6.3 and 6.4",
+      sourceUrl: "https://openstax.org/books/psychology-2e/pages/6-4-observational-learning-modeling",
+      concepts: ["shaping", "successive approximations", "modeling", "observational learning"],
+      evidence: "Complex behavior can be shaped by reinforcing successive approximations or learned by attending to and remembering a model.",
+      requiredActions: ["shape-run", "model-watch"]
+    }
+  ];
+
+  const questions = [
+    [
+      {
+        prompt: "Food naturally elicits salivation. Which pairing identifies the unconditioned stimulus and unconditioned response?",
+        choices: ["Tone and salivation", "Food and salivation", "Salivation and food", "Food and tone"],
+        correct: 1,
+        explanation: "Food is the unconditioned stimulus (UCS), and salivation to food is the unconditioned response (UCR)."
+      },
+      {
+        prompt: "After tone–food pairings, the tone alone elicits salivation. What are the tone and salivation now?",
+        choices: ["Tone = UCS; salivation = UCR", "Tone = response; food = CS", "Tone = CS; salivation = CR", "Tone = reinforcer; salivation = punishment"],
+        correct: 2,
+        explanation: "The tone has become a conditioned stimulus (CS), and salivation to that tone is a conditioned response (CR)."
+      }
+    ],
+    [
+      {
+        prompt: "The tone repeatedly occurs without food, and salivation decreases. What is happening?",
+        choices: ["Discrimination", "Positive punishment", "Acquisition", "Extinction"],
+        correct: 3,
+        explanation: "Extinction occurs when the conditioned stimulus is repeatedly presented without the unconditioned stimulus and the conditioned response weakens."
+      },
+      {
+        prompt: "After a rest, salivation briefly returns to the tone. What is the best interpretation?",
+        choices: ["Spontaneous recovery; extinction did not necessarily erase the original learning", "Acquisition; food must have been presented again", "Shaping; closer approximations were reinforced", "Punishment; the tone removed a reward"],
+        correct: 0,
+        explanation: "Spontaneous recovery is the return of an extinguished conditioned response after a pause."
+      }
+    ],
+    [
+      {
+        prompt: "Salivation also occurs to a medium tone that resembles the trained low tone. Which process fits?",
+        choices: ["Extinction", "Stimulus generalization", "Negative reinforcement", "Observational learning"],
+        correct: 1,
+        explanation: "Stimulus generalization occurs when stimuli resembling the trained cue also elicit the conditioned response."
+      },
+      {
+        prompt: "After selective training, salivation occurs mainly to the low tone. Which process fits?",
+        choices: ["Spontaneous recovery", "Variable-ratio reinforcement", "Stimulus discrimination", "Positive punishment"],
+        correct: 2,
+        explanation: "Stimulus discrimination involves responding differently to cues associated with different outcomes."
+      }
+    ],
+    [
+      {
+        prompt: "An apprentice earns a token after each completed practice set. Practice increases. What process is shown?",
+        choices: ["Negative reinforcement", "Positive punishment", "Negative punishment", "Positive reinforcement"],
+        correct: 3,
+        explanation: "A token is added and practice increases: positive reinforcement. A consequence is a reinforcer because of its effect on behavior."
+      },
+      {
+        prompt: "Buckling a seat belt stops a reminder sound. The student buckles sooner on later trips. What process is shown?",
+        choices: ["Negative reinforcement", "Negative punishment", "Positive reinforcement", "Classical extinction"],
+        correct: 0,
+        explanation: "An aversive sound is removed and buckling increases: negative reinforcement, not punishment."
+      }
+    ],
+    [
+      {
+        prompt: "After unsafe equipment use, a trainee receives an extra corrective task. Unsafe use subsequently decreases. Which classification fits?",
+        choices: ["Positive reinforcement", "Negative reinforcement", "Positive punishment", "Negative punishment"],
+        correct: 2,
+        explanation: "An extra task is added and the target behavior decreases: positive punishment. Classification alone does not establish that an intervention is appropriate."
+      },
+      {
+        prompt: "After repeated interruptions, a participant loses a game privilege. Interruptions decrease. Which classification fits?",
+        choices: ["Positive punishment", "Negative punishment", "Negative reinforcement", "Stimulus discrimination"],
+        correct: 1,
+        explanation: "A privilege is removed and interruptions decrease: negative punishment. Negative identifies removal; it does not mean bad."
+      }
+    ],
+    [
+      {
+        prompt: "A dispenser provides one token after every third lever press. Which schedule runs the engine?",
+        choices: ["Fixed ratio", "Variable ratio", "Fixed interval", "Variable interval"],
+        correct: 0,
+        explanation: "Three responses are required each time, making this a fixed-ratio schedule."
+      },
+      {
+        prompt: "The first correct check-in after an unpredictable waiting period earns a token. Which schedule is this?",
+        choices: ["Fixed ratio", "Variable ratio", "Fixed interval", "Variable interval"],
+        correct: 3,
+        explanation: "Eligibility depends on varying amounts of time followed by a response: variable interval."
+      }
+    ],
+    [
+      {
+        prompt: "Reinforcement shifts toward increasingly complete versions of a target skill. What is this?",
+        choices: ["Extinction", "Shaping", "Stimulus generalization", "Spontaneous recovery"],
+        correct: 1,
+        explanation: "Shaping reinforces successive approximations instead of waiting for the full target behavior at the start."
+      },
+      {
+        prompt: "An apprentice watches a mentor and later copies the demonstrated method without receiving a reward for watching. What does this illustrate?",
+        choices: ["Learning requires direct reinforcement on every trial", "The mentor is an unconditioned stimulus", "Observational learning can occur without direct reinforcement of the observer", "Every copied behavior is a reflex"],
+        correct: 2,
+        explanation: "Bandura emphasized learning from models. Attention, retention, reproduction, and motivation influence whether learning is expressed."
+      }
+    ]
+  ];
+
+  function freshState() {
+    return {
+      solved: [], actions: [], completed: [], evidence: [], achievements: [], escaped: false,
+      notes: { observations: "", transfer: "" }, learner: "", lighting: "blue",
+      motionPaused: false, settings: { volume: 0.18 }
+    };
+  }
+
+  let storageAvailable = true;
+
+  function normalizeState(raw) {
+    const next = freshState();
+    if (!raw || typeof raw !== "object") return next;
+    next.solved = Array.isArray(raw.solved) ? [...new Set(raw.solved.filter((value) => Number.isInteger(value) && value >= 0 && value < TOTAL_LOCKS))] : [];
+    next.actions = Array.isArray(raw.actions) ? [...new Set(raw.actions.filter((value) => typeof value === "string"))] : [];
+    next.completed = Array.isArray(raw.completed) ? [...new Set(raw.completed.filter((value) => rooms.some((room) => room.id === value)))] : [];
+    next.evidence = Array.isArray(raw.evidence) ? raw.evidence.filter((value) => typeof value === "string") : [];
+    next.achievements = Array.isArray(raw.achievements) ? raw.achievements.filter((value) => typeof value === "string") : [];
+    next.escaped = raw.escaped === true;
+    if (typeof raw.notes === "string") next.notes.observations = raw.notes;
+    else if (raw.notes && typeof raw.notes === "object") {
+      next.notes.observations = typeof raw.notes.observations === "string" ? raw.notes.observations : "";
+      next.notes.transfer = typeof raw.notes.transfer === "string" ? raw.notes.transfer : "";
+    }
+    next.learner = typeof raw.learner === "string" ? raw.learner.slice(0, 60) : "";
+    next.lighting = ["blue", "garden", "gold"].includes(raw.lighting) ? raw.lighting : "blue";
+    next.motionPaused = raw.motionPaused === true || raw.motion === true;
+    if (raw.settings && Number.isFinite(Number(raw.settings.volume))) next.settings.volume = Math.min(1, Math.max(0, Number(raw.settings.volume)));
+    return next;
+  }
+
+  function migrateLegacy(legacy) {
+    const next = normalizeState(legacy);
+    rooms.forEach((room, index) => {
+      const bothLocks = next.solved.includes(index * 2) && next.solved.includes(index * 2 + 1);
+      if (bothLocks) room.requiredActions.forEach((action) => { if (!next.actions.includes(action)) next.actions.push(action); });
+      if (bothLocks && !next.completed.includes(room.id)) next.completed.push(room.id);
+      if (bothLocks && !next.evidence.includes(room.evidence)) next.evidence.push(room.evidence);
+    });
+    if (legacy && legacy.experiment === true && !next.actions.includes("pavlov-pair")) next.actions.push("pavlov-pair");
+    if (next.escaped) {
+      next.solved = Array.from({ length: TOTAL_LOCKS }, (_, index) => index);
+      next.actions = rooms.flatMap((room) => room.requiredActions);
+      next.completed = rooms.map((room) => room.id);
+      next.evidence = rooms.map((room) => room.evidence);
+    }
+    return next;
+  }
+
+  function loadState() {
+    try {
+      const current = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
+      if (current) return normalizeState(current);
+      const legacy = JSON.parse(localStorage.getItem(LEGACY_KEY) || "null");
+      return legacy ? migrateLegacy(legacy) : freshState();
+    } catch (error) {
+      storageAvailable = false;
+      return freshState();
+    }
+  }
+
+  let state = loadState();
+  let activeIndex = -1;
+
+  function saveState(message) {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      if (state.escaped) localStorage.setItem(COMPLETION_KEY, "true");
+      if ($("save-status")) $("save-status").textContent = message || "Progress and notes saved in this browser.";
+    } catch (error) {
+      storageAvailable = false;
+      if ($("save-status")) $("save-status").textContent = "Browser saving is unavailable. Keep this tab open and download your notes before leaving.";
+    }
+  }
+
+  function iconMarkup(id) {
+    const icons = {
+      pavlov: `<svg viewBox="0 0 100 80" aria-hidden="true"><g class="animated-part"><path d="M50 8c-18 0-27 15-27 34v12L15 66h70L77 54V42C77 23 68 8 50 8z" fill="#d8b65e" stroke="currentColor" stroke-width="4"/><circle cx="50" cy="69" r="7" fill="#d8b65e"/></g></svg>`,
+      extinction: `<svg viewBox="0 0 100 80" aria-hidden="true"><path d="M6 24c12-22 22 22 34 0s22 22 34 0 18 4 20 8" fill="none" stroke="currentColor" stroke-width="5"/><path d="M6 56c13-12 20 12 32 0s18 8 30 0 17 2 24 5" fill="none" stroke="#c09a3f" stroke-width="4" stroke-dasharray="7 6"/><path class="animated-part" d="M74 63l18 0-7-7m7 7-7 7" fill="none" stroke="currentColor" stroke-width="4"/></svg>`,
+      sound: `<svg viewBox="0 0 100 80" aria-hidden="true"><path d="M7 50q10-34 20 0t20 0t20 0t20 0" fill="none" stroke="currentColor" stroke-width="5"/><circle class="animated-part" cx="25" cy="23" r="8" fill="#d8b65e"/><circle cx="50" cy="23" r="6" fill="#7fcdb7"/><circle cx="75" cy="23" r="4" fill="#7fcdb7"/></svg>`,
+      consequence: `<svg viewBox="0 0 100 80" aria-hidden="true"><rect x="10" y="10" width="34" height="25" rx="4" fill="#dff0ec" stroke="currentColor" stroke-width="4"/><rect x="56" y="10" width="34" height="25" rx="4" fill="#fff0c7" stroke="currentColor" stroke-width="4"/><rect x="10" y="45" width="34" height="25" rx="4" fill="#fff0c7" stroke="currentColor" stroke-width="4"/><rect x="56" y="45" width="34" height="25" rx="4" fill="#dff0ec" stroke="currentColor" stroke-width="4"/><path class="animated-part" d="M50 4v72M4 40h92" stroke="#d2ae51" stroke-width="3"/></svg>`,
+      punishment: `<svg viewBox="0 0 100 80" aria-hidden="true"><path d="M18 65V18h64v47z" fill="#e8f1ee" stroke="currentColor" stroke-width="4"/><circle cx="35" cy="34" r="8" fill="#d6b55b"/><circle cx="65" cy="34" r="8" fill="#6abca9"/><path class="animated-part" d="M28 56h44M50 47v18" stroke="currentColor" stroke-width="5" stroke-linecap="round"/></svg>`,
+      schedule: `<svg viewBox="0 0 100 80" aria-hidden="true"><circle cx="49" cy="41" r="27" fill="#dcebea" stroke="currentColor" stroke-width="5"/><path class="animated-part" d="M49 41V20M49 41l17 8" stroke="#b88923" stroke-width="5" stroke-linecap="round"/><path d="M18 14h62" stroke="currentColor" stroke-width="4"/><circle cx="82" cy="60" r="9" fill="#d8b65e" stroke="currentColor" stroke-width="3"/></svg>`,
+      skill: `<svg viewBox="0 0 100 80" aria-hidden="true"><path d="M7 69h22V54h22V39h22V24h20" fill="none" stroke="currentColor" stroke-width="8" stroke-linejoin="round"/><circle class="animated-part" cx="82" cy="13" r="10" fill="#d8b65e"/><path d="M18 20q18-17 36 0-18 16-36 0z" fill="#dff0ec" stroke="currentColor" stroke-width="3"/><circle cx="36" cy="20" r="5" fill="currentColor"/></svg>`
+    };
+    return icons[id] || "";
+  }
+
+  function roomActionCount(index) {
+    return rooms[index].requiredActions.filter((action) => state.actions.includes(action)).length;
+  }
+
+  function roomLockCount(index) {
+    return [index * 2, index * 2 + 1].filter((lock) => state.solved.includes(lock)).length;
+  }
+
+  function roomCharge(index) {
+    return roomActionCount(index) + roomLockCount(index);
+  }
+
+  function actionSummary(index) {
+    const charge = roomCharge(index);
+    return charge === 0 ? "Unexplored · 0/4 energy links" : `Charging · ${charge}/4 energy links`;
+  }
+
+  function renderMap() {
+    $("room-grid").innerHTML = rooms.map((room, index) => {
+      const complete = state.completed.includes(room.id);
+      const charge = roomCharge(index);
+      return `<button id="room-${index}" class="room-button charging${complete ? " complete" : ""}" type="button" data-room="${index}" aria-pressed="${activeIndex === index}" style="--charge:${charge * 25}%">
+        <span class="map-icon">${iconMarkup(room.id)}</span>
+        <span class="room-title">${index + 1}. ${room.title}</span>
+        <span class="map-source">OpenStax ${room.source}</span>
+        <span class="map-status">${complete ? `Restored · Evidence ${room.fragment}` : actionSummary(index)}</span>
+      </button>`;
+    }).join("");
+    $("room-grid").querySelectorAll("[data-room]").forEach((button) => button.addEventListener("click", () => openRoom(Number(button.dataset.room))));
+  }
+
+  function explorationStatus(index) {
+    const count = roomActionCount(index);
+    return count === 2 ? "✓ Both laboratory actions complete. The instrument is fully energized." : `${count} of 2 laboratory actions complete. Operate the highlighted instrument controls.`;
+  }
+
+  function roomMarkup(index) {
+    const room = rooms[index];
+    return `<article class="room-card" aria-labelledby="room-heading-${index}">
+      <div class="room-heading">
+        <div><span class="room-number">Laboratory ${index + 1} of 7 · Evidence ${room.fragment}</span><h2 id="room-heading-${index}" tabindex="-1">${room.title}</h2><p>${room.subtitle}</p></div>
+        <span class="chapter-tag">OpenStax connection: <a href="${room.sourceUrl}" target="_blank" rel="noopener">${room.source}</a></span>
+      </div>
+      <div class="room-content">
+        <div class="concept-tags" aria-label="Concepts in this laboratory">${room.concepts.map((concept) => `<span class="concept-tag">${concept}</span>`).join("")}</div>
+        ${explorationMarkup(index)}
+        <p id="explore-status-${index}" class="action-checklist" role="status"><strong>Instrument status:</strong> ${explorationStatus(index)}</p>
+        <details class="hint"><summary>Open a research hint</summary><p>${hintFor(index)}</p></details>
+        <section class="questions" aria-labelledby="locks-heading-${index}"><h3 id="locks-heading-${index}">Knowledge Locks</h3><div id="questions-${index}"></div></section>
+        <div id="clue-holder-${index}" class="clue-holder">${clueMarkup(index)}</div>
+        <div id="room-nav-${index}" class="room-nav">${roomNavigationMarkup(index)}</div>
+      </div>
+    </article>`;
+  }
+
+  function hintFor(index) {
+    return [
+      "Identify what naturally elicits the response before learning, and then identify what elicits it after learning.",
+      "Extinction concerns a weakening response. Spontaneous recovery follows a pause after extinction.",
+      "Generalization spreads a response to similar stimuli. Discrimination makes responding more selective.",
+      "First ask whether behavior increased or decreased. Then ask whether a consequence was added or removed.",
+      "Punishment means behavior decreased. Positive and negative mean added and removed—not good and bad.",
+      "Ratio counts responses; interval concerns time. Fixed is predictable; variable changes.",
+      "Shaping reinforces successive approximations. Observational learning begins with attention to a model."
+    ][index];
+  }
+
+  function explorationMarkup(index) {
+    if (index === 0) return `<section class="lab-console" aria-labelledby="instrument-0"><h3 id="instrument-0">Acquisition Console</h3><p>Pair the tone with food three times, then test the tone alone.</p><div class="visual-stage"><svg viewBox="0 0 600 210" role="img" aria-labelledby="pavlov-title"><title id="pavlov-title">A bell sends a signal toward a dog and food dish as an acquisition meter fills</title><g id="sim-bell"><path d="M90 42c-34 0-46 28-46 62v23l-15 22h122l-15-22v-23c0-34-12-62-46-62z" fill="#d6b45d" stroke="#194f61" stroke-width="6"/><circle cx="90" cy="159" r="12" fill="#d6b45d"/></g><path d="M166 107h150" class="wave-line wave-dash"/><circle cx="238" cy="107" r="9" fill="#e2b956"/><g transform="translate(340 40)"><path d="M42 48q20-37 50-8 40 1 50 38v56H25V82q0-26 17-34z" fill="#d9e8e5" stroke="#194f61" stroke-width="6"/><circle cx="108" cy="67" r="5" fill="#194f61"/><path d="M124 82q27 11 0 22" fill="none" stroke="#194f61" stroke-width="5"/><path id="saliva-drop" d="M136 105q14 18 0 28-14-10 0-28z" fill="#62bca8" opacity=".15"/></g><g transform="translate(500 105)"><ellipse cx="35" cy="49" rx="33" ry="13" fill="#f2e3bd" stroke="#7c6431" stroke-width="4"/><circle cx="35" cy="32" r="23" fill="#d99858"/></g></svg></div><div class="instrument-meter" aria-label="Acquisition pairing meter"><i id="pair-meter"></i></div><p id="pavlov-status" class="instrument-status" role="status">The tone is currently neutral with respect to salivation.</p><div class="instrument-actions"><button id="pair-tone-food" class="instrument-button" type="button">Pair Tone → Food</button><button id="test-tone" class="instrument-button" type="button">Test Tone Alone</button><button id="reset-pavlov" class="instrument-button" type="button">Reset Demonstration</button></div><p class="quiet">Teaching simplification: three pairings activate this display. Real acquisition does not follow one universal number of trials.</p></section>`;
+    if (index === 1) return `<section class="lab-console" aria-labelledby="instrument-1"><h3 id="instrument-1">Extinction &amp; Recovery Tracer</h3><p>Present the learned tone without food across repeated trials, then allow a simulated rest.</p><div class="visual-stage"><svg viewBox="0 0 600 190" role="img" aria-labelledby="ext-title"><title id="ext-title">A response graph declines across extinction trials and rises slightly after rest</title><path d="M55 20v130h500" fill="none" stroke="#4f6874" stroke-width="5"/><path id="extinction-path" d="M65 42" fill="none" stroke="#1f766d" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><path id="recovery-path" d="" fill="none" stroke="#d3a83f" stroke-width="8" stroke-linecap="round"/><text x="12" y="30" font-size="16" fill="#344e59">CR</text><text x="470" y="180" font-size="16" fill="#344e59">trials / rest</text></svg></div><div class="instrument-meter"><i id="extinction-meter"></i></div><p id="extinction-status" class="instrument-status" role="status">Conditioned response strength begins at 100%.</p><div class="instrument-actions"><button id="extinction-trial" class="instrument-button" type="button">Present Tone Without Food</button><button id="recovery-rest" class="instrument-button" type="button">Simulate Rest</button><button id="reset-extinction" class="instrument-button" type="button">Reset Tracer</button></div></section>`;
+    if (index === 2) return `<section class="lab-console" aria-labelledby="instrument-2"><h3 id="instrument-2">Tone Spectrum Scanner</h3><p>The low tone predicts food. Test nearby tones before and after selective training.</p><div class="tone-board"><button class="instrument-button" type="button" data-tone="low">Low Tone</button><button class="instrument-button" type="button" data-tone="medium">Similar Medium Tone</button><button class="instrument-button" type="button" data-tone="high">Distant High Tone</button></div><div class="visual-stage"><svg viewBox="0 0 600 180" role="img" aria-labelledby="tone-title"><title id="tone-title">Three tone waves and a response dial illustrate similarity and discrimination</title><path d="M35 80q18-55 36 0t36 0t36 0" class="wave-line"/><path d="M220 80q13-40 26 0t26 0t26 0t26 0" class="wave-line" opacity=".75"/><path d="M400 80q8-25 16 0t16 0t16 0t16 0t16 0" class="wave-line" opacity=".5"/><path d="M535 135a42 42 0 1 0-1 0" fill="#fff" stroke="#526d78" stroke-width="5"/><path id="response-needle" d="M535 135l0-30" stroke="#c18c21" stroke-width="7" stroke-linecap="round" transform="rotate(-70 535 135)"/><text x="508" y="165" font-size="14" fill="#344e59">response</text></svg></div><p id="tone-status" class="instrument-status" role="status">Generalization test ready. Select the similar medium tone.</p><div class="instrument-actions"><button id="train-discrimination" class="instrument-button" type="button">Train: Only Low Tone Predicts Food</button><button id="reset-tones" class="instrument-button" type="button">Reset Scanner</button></div></section>`;
+    if (index === 3) return `<section class="lab-console" aria-labelledby="instrument-3"><h3 id="instrument-3">Reinforcement Compass</h3><p>Map the two examples using direction of behavior and whether a consequence is added or removed.</p><div class="matrix" aria-label="Operant consequence matrix"><span></span><span class="matrix-cell heading">Behavior increases</span><span class="matrix-cell heading">Behavior decreases</span><span class="matrix-cell heading">Something added</span><span id="cell-pr" class="matrix-cell">Positive reinforcement</span><span class="matrix-cell">Positive punishment</span><span class="matrix-cell heading">Something removed</span><span id="cell-nr" class="matrix-cell">Negative reinforcement</span><span class="matrix-cell">Negative punishment</span></div><p id="consequence-status" class="instrument-status" role="status">Select each scenario to light its location on the compass.</p><div class="instrument-actions"><button class="instrument-button" type="button" data-map="positive">Add a token → practice increases</button><button class="instrument-button" type="button" data-map="negative">Remove reminder sound → buckling increases</button></div></section>`;
+    if (index === 4) return `<section class="lab-console" aria-labelledby="instrument-4"><h3 id="instrument-4">Punishment Switchboard</h3><p>Trace two fictional outcomes. Classification describes what happened to behavior; it does not determine whether a strategy is ethical or effective in every setting.</p><div class="matrix" aria-label="Punishment classification board"><span></span><span class="matrix-cell heading">Added</span><span class="matrix-cell heading">Removed</span><span class="matrix-cell heading">Behavior decreases</span><span id="cell-pp" class="matrix-cell">Positive punishment</span><span id="cell-np" class="matrix-cell">Negative punishment</span></div><p id="switch-status" class="instrument-status" role="status">Activate both switches to compare added and removed consequences.</p><div class="instrument-actions"><button class="instrument-button" type="button" data-switch="add">Add corrective task → unsafe use decreases</button><button class="instrument-button" type="button" data-switch="remove">Remove game privilege → interruptions decrease</button></div></section>`;
+    if (index === 5) return `<section class="lab-console" aria-labelledby="instrument-5"><h3 id="instrument-5">Schedule Engine</h3><div class="schedule-display"><div class="lever-machine" id="lever-machine" aria-hidden="true"><div class="lever-handle"></div><div id="token" class="token"></div><div class="lever-slot"></div></div><div><p>Press the lever. This fixed-ratio 3 demonstration releases a token after every third response.</p><p id="lever-status" class="instrument-status" role="status">0 responses · 0 tokens.</p><button id="press-lever" class="instrument-button" type="button">Press Lever</button><button id="reset-lever" class="instrument-button" type="button">Reset Engine</button></div></div><div class="instrument-actions"><button class="instrument-button schedule-choice" type="button" data-schedule="fr">Fixed ratio</button><button class="instrument-button schedule-choice" type="button" data-schedule="vr">Variable ratio</button><button class="instrument-button schedule-choice" type="button" data-schedule="fi">Fixed interval</button><button class="instrument-button schedule-choice" type="button" data-schedule="vi">Variable interval</button></div><p id="schedule-status" class="instrument-status" role="status">Select at least two schedules to compare response counts, time, and predictability.</p></section>`;
+    return `<section class="lab-console" aria-labelledby="instrument-6"><h3 id="instrument-6">Skill Construction Platform</h3><p>First, reinforce increasingly complete versions of a study routine. Then move through the processes that support observational learning.</p><div class="shaping-steps" aria-label="Four shaping steps"><div class="shape-step" style="--step-height:70px">Open practice file</div><div class="shape-step" style="--step-height:105px">Complete one item</div><div class="shape-step" style="--step-height:145px">Complete one set</div><div class="shape-step" style="--step-height:190px">Complete full routine</div></div><div class="instrument-actions"><button id="advance-shaping" class="instrument-button" type="button">Reinforce Next Approximation</button><button id="reset-shaping" class="instrument-button" type="button">Reset Steps</button></div><div class="model-stage"><div class="model-person"><strong>Mentor</strong><p>Demonstrates an organized flashcard method.</p></div><div class="model-arrow" aria-hidden="true">→</div><div class="model-person"><strong>Observer</strong><p id="model-process">Ready to attend to the model.</p></div></div><div class="instrument-actions"><button id="advance-model" class="instrument-button" type="button">Advance Modeling Process</button></div><p id="skill-status" class="instrument-status" role="status">Complete both the shaping staircase and the four modeling processes.</p></section>`;
+  }
+
+  function openRoom(index) {
+    activeIndex = index;
+    $("active-area").innerHTML = roomMarkup(index);
+    renderQuestions(index);
+    wireExploration(index);
+    wireRoomNavigation(index);
+    renderMap();
+    updateDashboard();
+    const heading = $(`room-heading-${index}`);
+    heading.focus({ preventScroll: true });
+    $("active-area").scrollIntoView({ block: "start", behavior: reduceMotion() ? "auto" : "smooth" });
+  }
+
+  function wireExploration(index) {
+    if (index === 0) wirePavlov();
+    else if (index === 1) wireExtinction();
+    else if (index === 2) wireTones();
+    else if (index === 3) wireConsequence();
+    else if (index === 4) wirePunishment();
+    else if (index === 5) wireSchedule();
+    else wireSkill();
+  }
+
+  function wirePavlov() {
+    let pairings = state.actions.includes("pavlov-pair") ? 3 : 0;
+    const status = $("pavlov-status"), meter = $("pair-meter"), bell = $("sim-bell"), drop = $("saliva-drop");
+    const paint = () => { meter.style.setProperty("--meter", `${Math.min(100, pairings / 3 * 100)}%`); };
+    paint();
+    $("pair-tone-food").addEventListener("click", () => {
+      pairings = Math.min(3, pairings + 1); paint(); animateBell(bell);
+      status.textContent = `Pairing ${pairings}: tone → food → salivation to food (UCR). ${pairings === 3 ? "Association console charged. Now test the tone alone." : "Repeat the pairing."}`;
+      if (pairings === 3) { status.classList.add("success"); recordAction("pavlov-pair", 0); }
+    });
+    $("test-tone").addEventListener("click", () => {
+      animateBell(bell);
+      if (pairings < 3) { status.textContent = "Tone alone → no learned salivation yet in this teaching model. Complete three pairings first."; return; }
+      drop.style.opacity = "1"; drop.classList.remove("salivate-now"); void drop.getBoundingClientRect(); drop.classList.add("salivate-now");
+      status.textContent = "Tone alone → salivation (CR). The tone now functions as a conditioned stimulus (CS)."; status.classList.add("success"); recordAction("pavlov-test", 0);
+    });
+    $("reset-pavlov").addEventListener("click", () => { pairings = 0; paint(); drop.style.opacity = ".15"; status.classList.remove("success"); status.textContent = "Demonstration reset. Saved mission progress remains intact."; });
+  }
+
+  function animateBell(bell) {
+    bell.classList.remove("ring-now"); void bell.getBoundingClientRect(); bell.classList.add("ring-now");
+  }
+
+  function wireExtinction() {
+    const strengths = [100, 78, 57, 38, 22, 10];
+    let trial = state.actions.includes("extinction-run") ? 5 : 0;
+    const status = $("extinction-status"), path = $("extinction-path"), recovery = $("recovery-path"), meter = $("extinction-meter");
+    const draw = () => {
+      const points = strengths.slice(0, trial + 1).map((strength, index) => `${65 + index * 75},${140 - strength}`).join(" ");
+      path.setAttribute("d", points ? `M${points.replaceAll(" ", " L")}` : "M65 40");
+      meter.style.setProperty("--meter", `${strengths[trial]}%`);
+    };
+    draw();
+    $("extinction-trial").addEventListener("click", () => {
+      trial = Math.min(5, trial + 1); draw(); status.textContent = `Trial ${trial}: tone without food. Conditioned-response strength is ${strengths[trial]}% in this teaching model.`;
+      if (trial === 5) { status.classList.add("success"); status.textContent += " The declining response illustrates extinction."; recordAction("extinction-run", 1); }
+    });
+    $("recovery-rest").addEventListener("click", () => {
+      if (trial < 5) { status.textContent = "Complete the extinction trials before simulating a rest."; return; }
+      recovery.setAttribute("d", "M440 130 Q490 74 535 108"); status.classList.add("success"); status.textContent = "After a rest, the response briefly rises above its extinguished level: spontaneous recovery."; recordAction("recovery-rest", 1);
+    });
+    $("reset-extinction").addEventListener("click", () => { trial = 0; recovery.setAttribute("d", ""); status.classList.remove("success"); status.textContent = "Tracer reset. Saved mission progress remains intact."; draw(); });
+  }
+
+  function wireTones() {
+    let trained = state.actions.includes("discriminate-tone");
+    const status = $("tone-status"), needle = $("response-needle");
+    const respond = (tone) => {
+      const before = { low: 62, medium: 48, high: 10 }, after = { low: 68, medium: 13, high: 4 };
+      const strength = (trained ? after : before)[tone];
+      needle.setAttribute("transform", `rotate(${-70 + strength * 1.35} 535 135)`);
+      if (!trained && tone === "medium") { status.classList.add("success"); status.textContent = "The similar medium tone produces a response before selective training: stimulus generalization."; recordAction("general-tone", 2); }
+      else if (trained && tone === "low") { status.classList.add("success"); status.textContent = "After selective training, the low predictive tone produces the strongest response: stimulus discrimination."; recordAction("discriminate-tone", 2); }
+      else status.textContent = `${tone[0].toUpperCase() + tone.slice(1)} tone tested. Response strength: ${strength}%. ${trained ? "Selective training is active." : "Generalization mode is active."}`;
+    };
+    document.querySelectorAll("[data-tone]").forEach((button) => button.addEventListener("click", () => respond(button.dataset.tone)));
+    $("train-discrimination").addEventListener("click", () => { trained = true; status.classList.remove("success"); status.textContent = "Selective training active: only the low tone predicts food. Now test the low tone."; });
+    $("reset-tones").addEventListener("click", () => { trained = false; status.classList.remove("success"); status.textContent = "Scanner reset to generalization mode. Saved mission progress remains intact."; needle.setAttribute("transform", "rotate(-70 535 135)"); });
+  }
+
+  function wireConsequence() {
+    const status = $("consequence-status");
+    document.querySelectorAll("[data-map]").forEach((button) => button.addEventListener("click", () => {
+      const positive = button.dataset.map === "positive";
+      $("cell-pr").classList.toggle("active", positive); $("cell-nr").classList.toggle("active", !positive);
+      if (positive) { status.textContent = "Token added + practice increases = positive reinforcement."; recordAction("positive-map", 3); }
+      else { status.textContent = "Reminder sound removed + buckling increases = negative reinforcement."; recordAction("negative-map", 3); }
+      status.classList.add("success");
+    }));
+  }
+
+  function wirePunishment() {
+    const status = $("switch-status");
+    document.querySelectorAll("[data-switch]").forEach((button) => button.addEventListener("click", () => {
+      const added = button.dataset.switch === "add";
+      $("cell-pp").classList.toggle("active", added); $("cell-np").classList.toggle("active", !added);
+      if (added) { status.textContent = "Corrective task added + unsafe use decreases = positive punishment."; recordAction("switch-add", 4); }
+      else { status.textContent = "Privilege removed + interruptions decrease = negative punishment."; recordAction("switch-remove", 4); }
+      status.classList.add("success");
+    }));
+  }
+
+  function wireSchedule() {
+    let presses = 0;
+    const seen = new Set();
+    const machine = $("lever-machine"), token = $("token"), leverStatus = $("lever-status"), scheduleStatus = $("schedule-status");
+    $("press-lever").addEventListener("click", () => {
+      presses += 1; machine.classList.add("pressed"); window.setTimeout(() => machine.classList.remove("pressed"), 220);
+      const tokens = Math.floor(presses / 3), delivered = presses % 3 === 0;
+      leverStatus.textContent = `${presses} responses · ${tokens} token${tokens === 1 ? "" : "s"}. ${delivered ? "Token delivered after the third response." : "No token yet."}`;
+      if (delivered) { token.classList.remove("drop"); void token.getBoundingClientRect(); token.classList.add("drop"); leverStatus.classList.add("success"); recordAction("lever-run", 5); }
+    });
+    $("reset-lever").addEventListener("click", () => { presses = 0; leverStatus.classList.remove("success"); leverStatus.textContent = "0 responses · 0 tokens. Saved mission progress remains intact."; });
+    const definitions = {
+      fr: "Fixed ratio: reinforcement follows a predictable number of responses.",
+      vr: "Variable ratio: reinforcement follows a changing, unpredictable number of responses.",
+      fi: "Fixed interval: the first eligible response after a predictable amount of time is reinforced.",
+      vi: "Variable interval: the first eligible response after changing, unpredictable time periods is reinforced."
+    };
+    document.querySelectorAll("[data-schedule]").forEach((button) => button.addEventListener("click", () => {
+      seen.add(button.dataset.schedule); button.setAttribute("aria-pressed", "true"); scheduleStatus.textContent = definitions[button.dataset.schedule];
+      if (seen.size >= 2) { scheduleStatus.classList.add("success"); scheduleStatus.textContent += " You have now compared response-based or time-based schedules."; recordAction("schedule-compare", 5); }
+    }));
+  }
+
+  function wireSkill() {
+    let step = state.actions.includes("shape-run") ? 4 : 0;
+    let model = state.actions.includes("model-watch") ? 4 : 0;
+    const steps = [...document.querySelectorAll(".shape-step")], process = $("model-process"), status = $("skill-status");
+    const modelLabels = ["Ready to attend to the model.", "Attention: focuses on the demonstrated method.", "Retention: mentally represents and remembers the steps.", "Reproduction: practices producing the observed behavior.", "Motivation: has a reason to perform the learned behavior."];
+    const paint = () => { steps.forEach((item, index) => item.classList.toggle("active", index < step)); process.textContent = modelLabels[model]; };
+    paint();
+    $("advance-shaping").addEventListener("click", () => { step = Math.min(4, step + 1); paint(); status.textContent = `Shaping step ${step} of 4 reinforced. ${step === 4 ? "The full routine has been reached through successive approximations." : "The criterion now moves closer to the target behavior."}`; if (step === 4) { status.classList.add("success"); recordAction("shape-run", 6); } });
+    $("reset-shaping").addEventListener("click", () => { step = 0; paint(); status.classList.remove("success"); status.textContent = "Shaping staircase reset. Saved mission progress remains intact."; });
+    $("advance-model").addEventListener("click", () => { model = Math.min(4, model + 1); paint(); status.textContent = modelLabels[model]; if (model === 4) { status.classList.add("success"); status.textContent += " The four modeled-learning processes have been traced."; recordAction("model-watch", 6); } });
+  }
+
+  function recordAction(action, roomIndex) {
+    if (!state.actions.includes(action)) state.actions.push(action);
+    const status = $(`explore-status-${roomIndex}`);
+    if (status) status.innerHTML = `<strong>Instrument status:</strong> ${explorationStatus(roomIndex)}`;
+    maybeCompleteRoom(roomIndex);
+    renderMap(); updateDashboard(); saveState();
+  }
+
+  function renderQuestions(roomIndex) {
+    const container = $(`questions-${roomIndex}`);
+    container.innerHTML = questions[roomIndex].map((question, localIndex) => {
+      const lockId = roomIndex * 2 + localIndex;
+      const solved = state.solved.includes(lockId);
+      return `<fieldset id="question-${lockId}" class="question-card${solved ? " solved" : ""}">
+        <legend>Lock ${localIndex + 1}: ${question.prompt}</legend>
+        <div class="choice-grid">${question.choices.map((choice, choiceIndex) => `<button class="choice-button${solved && choiceIndex === question.correct ? " correct-choice" : ""}" type="button" data-lock="${lockId}" data-choice="${choiceIndex}" ${solved ? "disabled" : ""}>${String.fromCharCode(65 + choiceIndex)}. ${choice}</button>`).join("")}</div>
+        <p id="feedback-${lockId}" class="feedback ${solved ? "good" : ""}" role="status">${solved ? `✓ ${question.explanation}` : "Choose the best answer. You may retry."}</p>
+      </fieldset>`;
+    }).join("");
+    container.querySelectorAll("[data-lock]").forEach((button) => button.addEventListener("click", () => checkAnswer(roomIndex, button)));
+  }
+
+  function checkAnswer(roomIndex, button) {
+    const lockId = Number(button.dataset.lock);
+    const question = questions[roomIndex][lockId % 2];
+    const choice = Number(button.dataset.choice);
+    const feedback = $(`feedback-${lockId}`);
+    if (choice === question.correct) {
+      if (!state.solved.includes(lockId)) state.solved.push(lockId);
+      const card = $(`question-${lockId}`);
+      card.classList.add("solved");
+      card.querySelectorAll("[data-choice]").forEach((item) => { item.disabled = true; if (Number(item.dataset.choice) === question.correct) item.classList.add("correct-choice"); });
+      feedback.textContent = `✓ ${question.explanation}`; feedback.className = "feedback good";
+      maybeCompleteRoom(roomIndex); renderMap(); updateDashboard(); saveState("Knowledge lock solved and progress saved.");
+    } else {
+      button.classList.add("wrong-choice"); feedback.textContent = `Not quite yet. ${hintFor(roomIndex)} Review the example and try again.`; feedback.className = "feedback try";
+      window.setTimeout(() => button.classList.remove("wrong-choice"), 900);
+    }
+  }
+
+  function roomReady(index) {
+    return rooms[index].requiredActions.every((action) => state.actions.includes(action)) && state.solved.includes(index * 2) && state.solved.includes(index * 2 + 1);
+  }
+
+  function maybeCompleteRoom(index) {
+    const room = rooms[index];
+    if (!roomReady(index) || state.completed.includes(room.id)) return;
+    state.completed.push(room.id);
+    if (!state.evidence.includes(room.evidence)) state.evidence.push(room.evidence);
+    if (state.completed.length === 1) addAchievement("First Association: restored your first learning laboratory.");
+    if (room.id === "pavlov") addAchievement("Signal Scientist: traced a neutral stimulus becoming a CS.");
+    if (room.id === "consequence") addAchievement("Consequence Cartographer: separated positive from negative reinforcement.");
+    if (room.id === "schedule") addAchievement("Schedule Engineer: compared response- and time-based contingencies.");
+    if (room.id === "skill") addAchievement("Modeling Mentor: connected shaping with observational learning.");
+    if (state.completed.length === rooms.length) addAchievement("Archive Detective: restored all seven laboratories.");
+    const holder = $(`clue-holder-${index}`); if (holder) holder.innerHTML = clueMarkup(index);
+    const route = $(`room-nav-${index}`); if (route) { route.innerHTML = roomNavigationMarkup(index); wireRoomNavigation(index); }
+    saveState("Laboratory restored and evidence letter illuminated.");
+  }
+
+  function addAchievement(text) {
+    if (!state.achievements.includes(text)) state.achievements.push(text);
+  }
+
+  function clueMarkup(index) {
+    const room = rooms[index];
+    if (!state.completed.includes(room.id)) return `<div class="action-checklist"><strong>Evidence seal:</strong> ${roomCharge(index)} of 4 energy links active. Complete both instrument actions and both knowledge locks to reveal the letter.</div>`;
+    return `<div class="clue-card"><span class="clue-letter">${room.fragment}</span><strong>Evidence recovered: ${room.title}</strong><p>${room.evidence}</p></div>`;
+  }
+
+  function nextUnfinished(afterIndex) {
+    for (let offset = 1; offset <= rooms.length; offset += 1) {
+      const index = (afterIndex + offset) % rooms.length;
+      if (!state.completed.includes(rooms[index].id)) return index;
+    }
+    return -1;
+  }
+
+  function roomNavigationMarkup(index) {
+    const ready = state.completed.includes(rooms[index].id);
+    const next = nextUnfinished(index);
+    const label = ready ? "Evidence secured. Continue directly to the next destination." : "You may continue now and return later; unfinished work remains saved.";
+    return `<p style="grid-column:1/-1;margin:0"><strong>${label}</strong></p>
+      <button class="next-button" type="button" data-next-room="${next}">${next < 0 ? "Go to the Final Vault" : "Continue to Next Unfinished Laboratory"}</button>
+      <button class="next-button map-button" type="button" data-return-map>Return to Laboratory Map</button>`;
+  }
+
+  function wireRoomNavigation(index) {
+    const holder = $(`room-nav-${index}`);
+    if (!holder) return;
+    holder.querySelector("[data-next-room]").addEventListener("click", (event) => {
+      const next = Number(event.currentTarget.dataset.nextRoom);
+      if (next < 0) { $("final-case").hidden = false; $("final-heading").focus({ preventScroll: true }); $("final-case").scrollIntoView({ behavior: reduceMotion() ? "auto" : "smooth", block: "start" }); }
+      else openRoom(next);
+    });
+    holder.querySelector("[data-return-map]").addEventListener("click", () => { $("map-heading").focus?.(); $("map-heading").scrollIntoView({ behavior: reduceMotion() ? "auto" : "smooth", block: "start" }); });
+  }
+
+  function updateDashboard() {
+    const completed = state.completed.length;
+    const actionCount = state.actions.filter((action) => rooms.some((room) => room.requiredActions.includes(action))).length;
+    const steps = state.solved.length + actionCount;
+    $("progress-bar").value = steps;
+    $("progress-bar").textContent = `${steps} of ${TOTAL_STEPS} mission steps complete`;
+    $("progress-text").textContent = `${steps} of ${TOTAL_STEPS} mission steps complete`;
+    $("room-progress").textContent = `${completed} of 7 laboratories restored`;
+    $("lock-progress").textContent = `${state.solved.length} of ${TOTAL_LOCKS} knowledge locks solved`;
+    $("explore-progress").textContent = `${actionCount} of ${TOTAL_ACTIONS} laboratory actions completed`;
+    $("mobile-progress").innerHTML = `<a href="#map-heading">${completed}/7 laboratories · ${steps}/${TOTAL_STEPS} steps</a>`;
+    $("fragment-rack").innerHTML = rooms.map((room, index) => {
+      const charge = roomCharge(index), collected = state.completed.includes(room.id);
+      const percent = charge * 25;
+      return `<li class="fragment stage-${charge}${collected ? " collected" : ""}" style="--charge:${percent}%"><span>${collected ? room.fragment : charge ? "◦" : "?"}</span><small>${index + 1}</small><span class="sr-only">${collected ? `Evidence letter ${room.fragment} collected` : `Evidence letter ${index + 1} is ${percent}% charged`}</span></li>`;
+    }).join("");
+    $("inventory-list").innerHTML = state.evidence.length ? state.evidence.map((item) => `<li>${item}</li>`).join("") : "<li>No evidence collected yet.</li>";
+    $("achievement-list").innerHTML = state.achievements.length ? state.achievements.map((item) => `<li>${item}</li>`).join("") : "<li>Your discoveries will appear here.</li>";
+    const ready = completed === rooms.length;
+    $("final-case").hidden = !ready;
+    $("learned-code").innerHTML = ready ? rooms.map((room) => `<span>${room.fragment}</span>`).join("") : "";
+    if (ready && !state.escaped) $("final-feedback").textContent = "The letters glow in laboratory order. Solve the synthesis locks and enter the seven-letter code.";
+    if (state.escaped) showCompletedFinal(false);
+  }
+
+  function handleFinal(event) {
+    event.preventDefault();
+    const values = [$("final-one").value, $("final-two").value, $("final-three").value, $("portal-code").value.trim().toUpperCase()];
+    const expected = ["observational", "positive-reinforcement", "classical", "LEARNED"];
+    if (!values.every((value, index) => value === expected[index])) {
+      const missed = [];
+      if (values[0] !== expected[0]) missed.push("learning from the tutor");
+      if (values[1] !== expected[1]) missed.push("the token consequence");
+      if (values[2] !== expected[2]) missed.push("the tone association");
+      if (values[3] !== expected[3]) missed.push("the evidence-letter code");
+      $("final-feedback").textContent = `The vault is still calibrating. Revisit: ${missed.join(", ")}. The letters appear in laboratory order.`;
+      return;
+    }
+    state.escaped = true;
+    addAchievement("Learning Investigator: opened the Conditioning Vault.");
+    saveState("Mission complete. Your badge is ready.");
+    showCompletedFinal(true); updateDashboard();
+  }
+
+  function showCompletedFinal(celebrate) {
+    $("final-case").hidden = false; $("badge-maker").hidden = false; $("final-form").hidden = true;
+    $("final-feedback").textContent = "✓ Vault open! Classical conditioning links stimuli, operant conditioning links behavior with consequences, and observational learning draws on models.";
+    if (state.learner) { $("learner-name").value = state.learner; drawBadge(state.learner); $("download-badge").disabled = false; }
+    else drawBadge("Academy Scholar");
+    if (celebrate) launchConfetti();
+  }
+
+  function launchConfetti() {
+    if (reduceMotion()) return;
+    const colors = ["#e2bd62", "#78cfb7", "#4f92ad", "#ffffff"];
+    $("confetti").innerHTML = Array.from({ length: 52 }, (_, index) => `<i style="left:${(index * 37) % 100}%;--drift:${(index % 2 ? 1 : -1) * (20 + (index % 7) * 7)}px;--confetti:${colors[index % colors.length]};animation-delay:${(index % 12) * .08}s"></i>`).join("");
+    window.setTimeout(() => { $("confetti").innerHTML = ""; }, 4200);
+  }
+
+  function drawBadge(name) {
+    const canvas = $("badge-canvas"), ctx = canvas.getContext("2d"), width = canvas.width, height = canvas.height;
+    const bg = ctx.createLinearGradient(0, 0, width, height); bg.addColorStop(0, "#061b29"); bg.addColorStop(.52, "#174e5d"); bg.addColorStop(1, "#215d4d"); ctx.fillStyle = bg; ctx.fillRect(0, 0, width, height);
+    const glow = ctx.createRadialGradient(width / 2, 290, 20, width / 2, 290, 430); glow.addColorStop(0, "rgba(244,205,103,.35)"); glow.addColorStop(1, "rgba(0,0,0,0)"); ctx.fillStyle = glow; ctx.fillRect(0, 0, width, height);
+    ctx.strokeStyle = "#e1bd63"; ctx.lineWidth = 13; ctx.strokeRect(34, 34, width - 68, height - 68); ctx.strokeStyle = "#82d5bd"; ctx.lineWidth = 3; ctx.strokeRect(56, 56, width - 112, height - 112);
+    ctx.save(); ctx.translate(width / 2, 258); ctx.strokeStyle = "#dcb95f"; ctx.lineWidth = 12; ctx.beginPath(); ctx.arc(0, 0, 155, 0, Math.PI * 2); ctx.stroke(); ctx.strokeStyle = "#8dd7c3"; ctx.lineWidth = 5; ctx.setLineDash([18, 12]); ctx.beginPath(); ctx.arc(0, 0, 124, 0, Math.PI * 2); ctx.stroke(); ctx.setLineDash([]);
+    for (let index = 0; index < 7; index += 1) {
+      const angle = index / 7 * Math.PI * 2 - Math.PI / 2, x = Math.cos(angle) * 155, y = Math.sin(angle) * 155;
+      ctx.fillStyle = index % 2 ? "#74cbb3" : "#e1bd63"; ctx.beginPath(); ctx.arc(x, y, 25, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = "#0e3040"; ctx.font = "700 25px Arial"; ctx.textAlign = "center"; ctx.fillText("LEARNED"[index], x, y + 9);
+    }
+    ctx.fillStyle = "#e7c66b"; ctx.beginPath(); ctx.arc(0, 0, 70, 0, Math.PI * 2); ctx.fill(); ctx.strokeStyle = "#fff2bb"; ctx.lineWidth = 5; ctx.stroke();
+    ctx.strokeStyle = "#174556"; ctx.lineWidth = 10; for (let index = 0; index < 4; index += 1) { const angle = index * Math.PI / 2; ctx.beginPath(); ctx.moveTo(Math.cos(angle) * 22, Math.sin(angle) * 22); ctx.lineTo(Math.cos(angle) * 58, Math.sin(angle) * 58); ctx.stroke(); }
+    ctx.restore();
+    ctx.textAlign = "center"; ctx.fillStyle = "#e9c86e"; ctx.font = "700 32px Arial"; ctx.fillText("PSYCHOLOGY ACADEMY · WEEK 6", width / 2, 475); ctx.fillStyle = "#fff"; ctx.font = "700 68px Georgia"; ctx.fillText("Learning Investigator", width / 2, 568); ctx.fillStyle = "#a9ead8"; ctx.font = "31px Georgia"; ctx.fillText("The Conditioning Vault", width / 2, 622);
+    ctx.fillStyle = "#fff7e3"; ctx.font = "italic 49px Georgia"; fitText(ctx, name, width - 220, 49); ctx.fillText(name, width / 2, 722); ctx.strokeStyle = "#e2bd64"; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(270, 752); ctx.lineTo(width - 270, 752); ctx.stroke();
+    ctx.fillStyle = "#eaf4ef"; ctx.font = "25px Arial"; ctx.fillText("Restored seven laboratories · Solved fourteen knowledge locks", width / 2, 814); ctx.fillText("Applied classical, operant, and observational learning", width / 2, 856); ctx.fillStyle = "#f0cb6d"; ctx.font = "700 27px Arial"; ctx.fillText("MISSION CODE: LEARNED", width / 2, 901); ctx.fillStyle = "#dfe9e6"; ctx.font = "22px Arial"; ctx.fillText(`Completed ${new Date().toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" })} · Dr. Tonya Holdaway`, width / 2, 946);
+  }
+
+  function fitText(ctx, text, maxWidth, startSize) {
+    let size = startSize;
+    while (size > 28 && ctx.measureText(text).width > maxWidth) { size -= 2; ctx.font = `italic ${size}px Georgia`; }
+  }
+
+  function safeFilename(value) {
+    return value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "student";
+  }
+
+  function downloadBlob(blob, filename) {
+    const url = URL.createObjectURL(blob), link = document.createElement("a");
+    link.href = url; link.download = filename; document.body.appendChild(link); link.click(); link.remove();
+    window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+
+  function generateBadge() {
+    const name = $("learner-name").value.trim().replace(/\s+/g, " ");
+    if (!name) { $("badge-message").textContent = "Please enter your name before generating the badge."; $("learner-name").focus(); return; }
+    state.learner = name.slice(0, 60); drawBadge(state.learner); $("download-badge").disabled = false;
+    $("badge-message").textContent = "Your personalized badge is ready. Select Download Badge as PNG."; saveState("Personalized badge name saved.");
+  }
+
+  function downloadBadge() {
+    if (!state.learner) { $("badge-message").textContent = "Generate the badge with your name first."; return; }
+    const canvas = $("badge-canvas"), filename = `week-6-learning-investigator-${safeFilename(state.learner)}.png`;
+    if (canvas.toBlob) canvas.toBlob((blob) => { if (!blob) return; downloadBlob(blob, filename); $("badge-message").textContent = "Badge downloaded. Check your Downloads folder, then upload the PNG to Canvas."; }, "image/png");
+    else { const link = document.createElement("a"); link.href = canvas.toDataURL("image/png"); link.download = filename; link.click(); }
+  }
+
+  function downloadNotes() {
+    const lines = [
+      "WEEK 6: THE CONDITIONING VAULT", "", `Laboratories restored: ${state.completed.length}/7`,
+      `Knowledge locks solved: ${state.solved.length}/14`, `Laboratory actions completed: ${state.actions.length}/14`, "",
+      "COLLECTED EVIDENCE", ...(state.evidence.length ? state.evidence.map((item, index) => `${index + 1}. ${item}`) : ["No evidence collected yet."]), "",
+      "CONCEPT OR CORRECTION I WANT TO REMEMBER", state.notes.observations || "(No note entered)", "",
+      "SAFE REAL-WORLD APPLICATION", state.notes.transfer || "(No note entered)", "",
+      "Textbook: Spielman, R. M., Jenkins, W. J., & Lovett, M. D. (2020). Psychology 2e. OpenStax."
+    ];
+    downloadBlob(new Blob([lines.join("\n")], { type: "text/plain;charset=utf-8" }), "week-6-conditioning-vault-notes.txt");
+  }
+
+  const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+  function reduceMotion() { return state.motionPaused || media.matches; }
+  function updateMotion() {
+    document.body.classList.toggle("no-motion", reduceMotion());
+    $("motion-toggle").textContent = state.motionPaused ? "Resume Animations" : "Pause Animations";
+    $("motion-toggle").setAttribute("aria-pressed", String(state.motionPaused));
+    $("motion-status").textContent = media.matches ? "Your device’s reduced-motion preference is active. Activities remain fully usable." : state.motionPaused ? "Animations are paused. Activities remain fully usable." : "Animations are on. Move near the vault to awaken its laboratory light.";
+  }
+
+  function applyLighting(value, save = true) {
+    state.lighting = value;
+    document.body.classList.remove("lighting-blue", "lighting-garden", "lighting-gold");
+    document.body.classList.add(`lighting-${value}`);
+    document.querySelectorAll("[data-lighting]").forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.lighting === value)));
+    if (save) saveState("Lighting preference saved.");
+  }
+
+  function setupAudio() {
+    const audio = $("vault-audio"), button = $("music-toggle");
+    audio.volume = state.settings.volume; $("volume").value = String(state.settings.volume); audio.src = AUDIO_SOURCE;
+    $("audio-status").textContent = "Vault music is off.";
+    button.addEventListener("click", async () => {
+      if (audio.paused) {
+        try { await audio.play(); button.classList.add("sound-on"); button.setAttribute("aria-pressed", "true"); button.firstChild.textContent = "Pause Vault Music "; $("audio-status").textContent = "Vault music is playing."; }
+        catch (error) { $("audio-status").textContent = "The music could not start. The mission works normally without audio."; }
+      } else {
+        audio.pause(); button.classList.remove("sound-on"); button.setAttribute("aria-pressed", "false"); button.firstChild.textContent = "Play Vault Music "; $("audio-status").textContent = "Vault music is paused.";
+      }
+    });
+    $("volume").addEventListener("input", (event) => { state.settings.volume = Number(event.target.value); audio.volume = state.settings.volume; saveState("Volume preference saved."); });
+    audio.addEventListener("error", () => { $("audio-status").textContent = "The selected music file is unavailable. All learning activities still work."; });
+    document.addEventListener("visibilitychange", () => { if (document.hidden && !audio.paused) { audio.pause(); button.classList.remove("sound-on"); button.setAttribute("aria-pressed", "false"); button.firstChild.textContent = "Play Vault Music "; $("audio-status").textContent = "Music paused when the tab became inactive."; } });
+  }
+
+  function setupNotes() {
+    $("observation-notes").value = state.notes.observations; $("transfer-notes").value = state.notes.transfer;
+    $("observation-notes").addEventListener("input", (event) => { state.notes.observations = event.target.value; saveState("Notebook saved."); });
+    $("transfer-notes").addEventListener("input", (event) => { state.notes.transfer = event.target.value; saveState("Notebook saved."); });
+  }
+
+  function resetMission() {
+    const volume = state.settings.volume, motionPaused = state.motionPaused, lighting = state.lighting;
+    state = freshState(); state.settings.volume = volume; state.motionPaused = motionPaused; state.lighting = lighting; activeIndex = -1;
+    try { localStorage.removeItem(COMPLETION_KEY); localStorage.removeItem(LEGACY_KEY); } catch (error) { storageAvailable = false; }
+    $("active-area").replaceChildren(); $("observation-notes").value = ""; $("transfer-notes").value = ""; $("learner-name").value = "";
+    $("final-form").reset(); $("final-form").hidden = false; $("badge-maker").hidden = true; $("download-badge").disabled = true; $("reset-box").hidden = true;
+    saveState("Week 6 progress reset."); renderMap(); updateDashboard(); $("room-0").focus();
+  }
+
+  function createSparks() {
+    $("sparks").innerHTML = Array.from({ length: 28 }, (_, index) => `<i class="spark" style="left:${(index * 43) % 100}%;top:${(index * 17) % 100}%;--spark-speed:${13 + (index % 9)}s;animation-delay:-${index % 13}s;background:${index % 3 === 0 ? "#76cfb5" : index % 3 === 1 ? "#edc864" : "#6e9fba"}"></i>`).join("");
+  }
+
+  function initialize() {
+    createSparks(); applyLighting(state.lighting, false); renderMap(); setupAudio(); setupNotes(); updateMotion(); updateDashboard(); saveState();
+    $("final-form").addEventListener("submit", handleFinal); $("generate-badge").addEventListener("click", generateBadge); $("download-badge").addEventListener("click", downloadBadge); $("print-badge").addEventListener("click", () => window.print()); $("download-notes").addEventListener("click", downloadNotes);
+    $("motion-toggle").addEventListener("click", () => { state.motionPaused = !state.motionPaused; updateMotion(); saveState("Motion preference saved."); });
+    if (media.addEventListener) media.addEventListener("change", updateMotion);
+    document.querySelectorAll("[data-lighting]").forEach((button) => button.addEventListener("click", () => applyLighting(button.dataset.lighting)));
+    $("reset-progress").addEventListener("click", () => { $("reset-box").hidden = false; $("confirm-reset").focus(); });
+    $("cancel-reset").addEventListener("click", () => { $("reset-box").hidden = true; $("reset-progress").focus(); });
+    $("confirm-reset").addEventListener("click", resetMission);
+    $("learner-name").value = state.learner;
+    document.querySelector(".hero").addEventListener("pointermove", (event) => { const rect = event.currentTarget.getBoundingClientRect(); event.currentTarget.style.setProperty("--pointer-x", `${(event.clientX - rect.left) / rect.width * 100}%`); event.currentTarget.style.setProperty("--pointer-y", `${(event.clientY - rect.top) / rect.height * 100}%`); });
+  }
+
+  initialize();
+})();
+</script>
+</body>
+</html>
