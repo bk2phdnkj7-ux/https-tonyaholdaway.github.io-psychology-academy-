@@ -1792,6 +1792,20 @@ html.academy-motion-on .scholar-sleeve,html.academy-motion-on .scholar-tassel{an
 html.academy-motion-on .academy-hero.is-pointer-near .academy-banner{animation-duration:2.5s}
 html.academy-motion-on .academy-hero.is-pointer-near .bird-wing{animation-duration:.65s}
 html.academy-motion-on .academy-hero.is-pointer-near .hall-window{filter:drop-shadow(0 0 3px #fbd386)}
+.flag-psychology-symbol{fill:#fff2c9;stroke:none;font-family:Georgia,"Times New Roman",serif;font-size:15px;font-weight:700;text-anchor:middle;dominant-baseline:middle;pointer-events:none;user-select:none}
+.campus-flag .flag-psychology-symbol{font-size:16px}
+
+/* Random sky streaks and softly glowing mountain messages are decorative. */
+.academy-shooting-stars{position:absolute;inset:0;z-index:1;overflow:hidden;pointer-events:none}
+.academy-shooting-star{position:absolute;left:var(--star-left,10%);top:var(--star-top,18%);width:var(--star-length,110px);height:2px;border-radius:999px;background:linear-gradient(90deg,transparent 0%,rgba(255,241,188,.12) 28%,rgba(255,241,188,.78) 78%,#fffdf2 100%);filter:drop-shadow(0 0 4px rgba(255,238,170,.92)) drop-shadow(0 0 8px rgba(64,83,113,.42));opacity:0;transform:translate3d(0,0,0) rotate(var(--star-angle,18deg));transform-origin:100% 50%;will-change:transform,opacity}
+.academy-shooting-star::after{content:"";position:absolute;right:-2px;top:50%;width:5px;height:5px;border-radius:50%;background:#fffef7;box-shadow:0 0 8px 2px rgba(255,240,175,.86);transform:translateY(-50%)}
+html.academy-motion-on .academy-shooting-star.is-flying{animation:academy-shooting-star var(--star-duration,1200ms) cubic-bezier(.2,.62,.36,1) forwards}
+@keyframes academy-shooting-star{0%{opacity:0;transform:translate3d(0,0,0) rotate(var(--star-angle,18deg))}10%{opacity:.98}68%{opacity:.88}100%{opacity:0;transform:translate3d(var(--star-travel-x,360px),var(--star-travel-y,145px),0) rotate(var(--star-angle,18deg))}}
+
+.academy-mountain-secrets{position:absolute;inset:auto 0 0;height:560px;z-index:2;overflow:hidden;pointer-events:none}
+.academy-mountain-secret{position:absolute;left:var(--secret-left,50%);top:var(--secret-top,30%);margin:0;color:#fff0b8;font:700 clamp(11px,1.25vw,18px) Georgia,"Times New Roman",serif;letter-spacing:.28em;text-transform:uppercase;white-space:nowrap;opacity:0;transform:translate(-50%,8px) rotate(var(--secret-tilt,0deg)) scale(.94);text-shadow:0 1px 2px rgba(15,42,60,.95),0 0 7px rgba(255,222,126,.88),0 0 18px rgba(255,222,126,.52);will-change:transform,opacity,filter}
+html.academy-motion-on .academy-mountain-secret.is-revealing{animation:academy-mountain-secret-reveal var(--secret-duration,4600ms) ease-in-out forwards}
+@keyframes academy-mountain-secret-reveal{0%{opacity:0;filter:blur(5px);transform:translate(-50%,8px) rotate(var(--secret-tilt,0deg)) scale(.94)}18%{opacity:.82;filter:blur(0);transform:translate(-50%,0) rotate(var(--secret-tilt,0deg)) scale(1)}62%{opacity:.72;filter:blur(0);transform:translate(-50%,-2px) rotate(var(--secret-tilt,0deg)) scale(1.02)}100%{opacity:0;filter:blur(4px);transform:translate(-50%,-8px) rotate(var(--secret-tilt,0deg)) scale(1.05)}}
 .academy-sky-controls{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:12px;font-size:.84rem}
 .academy-sky-picker{display:flex;align-items:center;gap:7px;padding:6px 10px;border:1px solid #8b967d;border-radius:22px;background:#fffdf7;color:#244839}
 .academy-sky-picker select{max-width:180px;font:inherit;color:#244839;background:#fffdf7;border:0;padding:6px 1px;cursor:pointer;min-height:32px}
@@ -1800,11 +1814,11 @@ html.academy-motion-on .academy-hero.is-pointer-near .hall-window{filter:drop-sh
 .academy-weather-toggle:disabled{opacity:.6;cursor:default}
 .sky-scene-label{position:absolute;bottom:9px;left:50%;transform:translateX(-50%);z-index:5;margin:0;padding:4px 14px;border:1px solid #d8c28b55;border-radius:20px;background:#193640;color:#fff0c8;letter-spacing:.18em;text-transform:uppercase;font:10px Georgia,serif;white-space:nowrap;pointer-events:none}
 html.academy-motion-on.academy-scene-paused .academy-hero *,html.academy-motion-on.academy-scene-paused .academy-hero::before,html.academy-motion-on.academy-scene-paused .academy-hero::after{animation-play-state:paused!important}
-@media(min-width:1600px){.campus-skyline{height:400px}.hero-content{padding-bottom:410px}.academy-mountains{height:660px}.academy-birds{bottom:335px}}
-@media(max-width:760px){.hero-content{padding-bottom:250px}.campus-skyline{height:250px}.academy-mountains{height:385px}.academy-birds{bottom:155px;height:200px}.academy-weather{bottom:140px;height:300px}.cloud-six{bottom:200px}.sky-scene-label{bottom:6px;font-size:9px}}
-@media(max-width:480px){.hero-content{padding-bottom:200px}.campus-skyline{height:195px}.academy-mountains{height:300px}.academy-birds{bottom:110px;height:150px}.academy-weather{bottom:100px;height:230px}.academy-sky-controls{gap:8px}.academy-sky-picker{padding:4px 7px}.academy-weather-toggle{padding:7px 10px}.sky-scene-label{font-size:8px;letter-spacing:.12em}}
-@media(prefers-reduced-motion:reduce){.sky-lightning{display:none!important}}
-@media print{.academy-sky-colors,.academy-mountains,.academy-celestial,.academy-weather,.academy-birds,.academy-sky-controls,.sky-scene-label{display:none!important}.hero-content{padding-bottom:20px!important}.academy-hero{--hero-ink:#17344f!important;background:white!important}}
+@media(min-width:1600px){.campus-skyline{height:400px}.hero-content{padding-bottom:410px}.academy-mountains,.academy-mountain-secrets{height:660px}.academy-birds{bottom:335px}}
+@media(max-width:760px){.hero-content{padding-bottom:250px}.campus-skyline{height:250px}.academy-mountains,.academy-mountain-secrets{height:385px}.academy-birds{bottom:155px;height:200px}.academy-weather{bottom:140px;height:300px}.cloud-six{bottom:200px}.sky-scene-label{bottom:6px;font-size:9px}.academy-mountain-secret{font-size:11px;letter-spacing:.2em}}
+@media(max-width:480px){.hero-content{padding-bottom:200px}.campus-skyline{height:195px}.academy-mountains,.academy-mountain-secrets{height:300px}.academy-birds{bottom:110px;height:150px}.academy-weather{bottom:100px;height:230px}.academy-sky-controls{gap:8px}.academy-sky-picker{padding:4px 7px}.academy-weather-toggle{padding:7px 10px}.sky-scene-label{font-size:8px;letter-spacing:.12em}.academy-shooting-star{--star-length:76px}}
+@media(prefers-reduced-motion:reduce){.sky-lightning,.academy-shooting-stars,.academy-mountain-secrets{display:none!important}}
+@media print{.academy-sky-colors,.academy-mountains,.academy-celestial,.academy-weather,.academy-birds,.academy-shooting-stars,.academy-mountain-secrets,.academy-sky-controls,.sky-scene-label{display:none!important}.hero-content{padding-bottom:20px!important}.academy-hero{--hero-ink:#17344f!important;background:white!important}}
 /* Give the courtyard its own space above the soundtrack card. */
 .soundscape-wrap{margin-top:24px}
 .academy-tagline,.academy-motion-status{background:#fffdf7;color:#243d4f;border-radius:12px;padding:8px 14px;width:fit-content}
@@ -2004,6 +2018,7 @@ html.academy-motion-on .mission-card:focus-within .mv-grow { animation-duration:
   <header class="academy-hero">
 <div class="academy-sky-colors" aria-hidden="true"></div>
 <div class="academy-celestial" aria-hidden="true"><svg viewBox="0 0 1200 900" preserveAspectRatio="xMidYMin meet" focusable="false"><defs><radialGradient id="academy-sun-halo"><stop stop-color="#fff3bd" stop-opacity=".7"/><stop offset="1" stop-color="#fff3bd" stop-opacity="0"/></radialGradient></defs><g class="academy-sun"><circle cx="1050" cy="150" r="120" fill="url(#academy-sun-halo)"/><circle cx="1050" cy="150" r="41" fill="#fff0b9"/></g><g class="academy-moon"><path d="M1033 95A43 43 0 1 0 1080 160A38 38 0 0 1 1033 95Z" fill="#eee4d1"/></g><g class="academy-night-stars"><circle cx="44" cy="80" r="1.5" fill="#f6e7be"/><circle cx="155" cy="43" r="1.1" fill="#f6e7be"/><circle cx="267" cy="163" r="1.7" fill="#f6e7be"/><circle cx="430" cy="51" r="1.2" fill="#f6e7be"/><circle cx="580" cy="112" r="1.5" fill="#f6e7be"/><circle cx="800" cy="29" r="1" fill="#f6e7be"/><circle cx="948" cy="162" r="1.2" fill="#f6e7be"/><circle cx="1078" cy="70" r="1.6" fill="#f6e7be"/><circle cx="1150" cy="257" r="1.2" fill="#f6e7be"/><circle cx="32" cy="288" r="1" fill="#f6e7be"/><circle cx="1025" cy="378" r="1.8" fill="#f6e7be"/><circle cx="184" cy="369" r="1.3" fill="#f6e7be"/></g></svg></div>
+<div class="academy-shooting-stars" aria-hidden="true"></div>
 <div class="academy-mountains" aria-hidden="true"><svg viewBox="0 0 1600 650" preserveAspectRatio="xMidYMax slice" focusable="false"><defs><linearGradient id="academy-mountain-haze" x2="0" y2="1"><stop stop-color="#e4eced" stop-opacity="0"/><stop offset="1" stop-color="#e0e6df" stop-opacity=".8"/></linearGradient></defs>
 <path class="mountain-far" d="M-80 370L65 200 105 235 260 38 420 275 528 163 650 333 783 170 870 235 1010 54 1084 133 1130 113 1300 328 1430 137 1690 375V650H-80Z"/>
 <path class="mountain-snow" d="M201 112L260 38 331 145 278 116 256 130 239 99Z M950 128L1010 54 1084 133 1130 113 1164 157 1109 147 1073 163 1014 101 987 137Z M1389 201L1430 137 1480 206 1443 188 1421 195 1410 176Z"/>
@@ -2015,6 +2030,7 @@ html.academy-motion-on .mission-card:focus-within .mv-grow { animation-duration:
 <path d="M0 510Q365 448 780 525T1600 512V650H0Z" fill="url(#academy-mountain-haze)"/>
 <path class="mountain-night-shade" d="M-80 370L65 200 105 235 260 38 420 275 528 163 650 333 783 170 870 235 1010 54 1084 133 1130 113 1300 328 1430 137 1690 375V650H-80Z" fill="#102741"/>
 <g class="mountain-mist" fill="#e6edef"><path d="M0 443Q250 409 532 451T1100 434T1600 457V475Q1370 450 1100 459T545 474T0 461Z"/><path d="M0 536Q225 510 480 546T1000 535T1600 540V554Q1260 540 985 553T480 562T0 551Z"/></g></svg></div>
+<div class="academy-mountain-secrets" aria-hidden="true"></div>
 <div class="academy-weather" aria-hidden="true"><svg viewBox="0 0 1200 360" preserveAspectRatio="xMidYMax slice" focusable="false"><g class="sky-lightning"><path d="M162 24L145 73 171 66 131 131 150 122 118 177"/><path class="bolt-branch" d="M151 95L183 109 174 130M142 66L124 90"/></g><g class="sky-lightning"><path d="M1023 35L1006 78 1028 72 1001 119 1016 114 982 176"/><path class="bolt-branch" d="M1010 104L1034 121 1030 140"/></g><g class="sky-lightning"><path d="M285 8L268 47 289 42 262 90 275 87 249 140"/><path class="bolt-branch" d="M273 70L298 83 303 97"/></g></svg></div>
 <div class="academy-birds" aria-hidden="true"><svg viewBox="0 0 1200 230" preserveAspectRatio="xMidYMid slice" focusable="false"><g class="academy-bird-flight" style="--bird-start:80px;--bird-y:45px;--bird-time:27s;--bird-delay:-4s"><g class="bird-shape" transform="scale(0.7)"><path class="bird-wing" d="M0 0Q-10-21-29-17Q-14-6 0 3Z" fill="currentColor"/><path class="bird-wing right" d="M0 1Q13-26 31-19Q15-8 0 4Z" fill="currentColor"/><ellipse cy="3" rx="7" ry="3" fill="currentColor"/><path d="M7 2l6 1-6 2M-5 3l-9 5 3-6" fill="currentColor"/><g class="bird-magic-trail"><circle cx="-27" cy="9" r="1.4"/><circle cx="-41" cy="13" r="1"/><path d="M-52 9v6m-3-3h6" stroke="#e9d396" stroke-width="1"/></g></g></g><g class="academy-bird-flight" style="--bird-start:300px;--bird-y:75px;--bird-time:31s;--bird-delay:-12s"><g class="bird-shape" transform="scale(0.7799999999999999)"><path class="bird-wing" d="M0 0Q-10-21-29-17Q-14-6 0 3Z" fill="currentColor"/><path class="bird-wing right" d="M0 1Q13-26 31-19Q15-8 0 4Z" fill="currentColor"/><ellipse cy="3" rx="7" ry="3" fill="currentColor"/><path d="M7 2l6 1-6 2M-5 3l-9 5 3-6" fill="currentColor"/><g class="bird-magic-trail"><circle cx="-27" cy="9" r="1.4"/><circle cx="-41" cy="13" r="1"/><path d="M-52 9v6m-3-3h6" stroke="#e9d396" stroke-width="1"/></g></g></g><g class="academy-bird-flight" style="--bird-start:520px;--bird-y:105px;--bird-time:35s;--bird-delay:-20s"><g class="bird-shape" transform="scale(0.86)"><path class="bird-wing" d="M0 0Q-10-21-29-17Q-14-6 0 3Z" fill="currentColor"/><path class="bird-wing right" d="M0 1Q13-26 31-19Q15-8 0 4Z" fill="currentColor"/><ellipse cy="3" rx="7" ry="3" fill="currentColor"/><path d="M7 2l6 1-6 2M-5 3l-9 5 3-6" fill="currentColor"/><g class="bird-magic-trail"><circle cx="-27" cy="9" r="1.4"/><circle cx="-41" cy="13" r="1"/><path d="M-52 9v6m-3-3h6" stroke="#e9d396" stroke-width="1"/></g></g></g><g class="academy-bird-flight" style="--bird-start:740px;--bird-y:135px;--bird-time:39s;--bird-delay:-28s"><g class="bird-shape" transform="scale(0.94)"><path class="bird-wing" d="M0 0Q-10-21-29-17Q-14-6 0 3Z" fill="currentColor"/><path class="bird-wing right" d="M0 1Q13-26 31-19Q15-8 0 4Z" fill="currentColor"/><ellipse cy="3" rx="7" ry="3" fill="currentColor"/><path d="M7 2l6 1-6 2M-5 3l-9 5 3-6" fill="currentColor"/><g class="bird-magic-trail"><circle cx="-27" cy="9" r="1.4"/><circle cx="-41" cy="13" r="1"/><path d="M-52 9v6m-3-3h6" stroke="#e9d396" stroke-width="1"/></g></g></g><g class="academy-bird-flight" style="--bird-start:960px;--bird-y:165px;--bird-time:43s;--bird-delay:-36s"><g class="bird-shape" transform="scale(1.02)"><path class="bird-wing" d="M0 0Q-10-21-29-17Q-14-6 0 3Z" fill="currentColor"/><path class="bird-wing right" d="M0 1Q13-26 31-19Q15-8 0 4Z" fill="currentColor"/><ellipse cy="3" rx="7" ry="3" fill="currentColor"/><path d="M7 2l6 1-6 2M-5 3l-9 5 3-6" fill="currentColor"/><g class="bird-magic-trail"><circle cx="-27" cy="9" r="1.4"/><circle cx="-41" cy="13" r="1"/><path d="M-52 9v6m-3-3h6" stroke="#e9d396" stroke-width="1"/></g></g></g></svg></div>
 <div class="academy-lifespan-motes" aria-hidden="true"><span class="academy-leaf">❧</span><span class="academy-leaf">❧</span><span class="academy-leaf">❧</span><span class="academy-leaf">❧</span></div>
@@ -2042,7 +2058,7 @@ html.academy-motion-on .mission-card:focus-within .mv-grow { animation-duration:
     <path d="M74 207H159M69 213H164" stroke="#8c968e" stroke-width="4"/>
     <path d="M26 116h38M26 159h38M169 107h40M169 153h40" stroke="#9b978b" stroke-width="1"/>
     <path d="M11 140h12m44 0h13m72 0h15m45 0h13" stroke="#a19886" stroke-width="1"/>
-    <path class="hall-window" style="--candle-delay:-0s;--candle-time:6s" d="M36 66V54Q40.5 45 45 54V66Z" stroke="#445569" stroke-width="1.5"/><path d="M40.5 51V66" stroke="#6a6b64" stroke-width=".7"/><path class="hall-window" style="--candle-delay:-1s;--candle-time:7s" d="M36 118V106Q40.5 97 45 106V118Z" stroke="#445569" stroke-width="1.5"/><path d="M40.5 103V118" stroke="#6a6b64" stroke-width=".7"/><path class="hall-window" style="--candle-delay:-2s;--candle-time:8s" d="M36 158V146Q40.5 137 45 146V158Z" stroke="#445569" stroke-width="1.5"/><path d="M40.5 143V158" stroke="#6a6b64" stroke-width=".7"/><path class="hall-window" style="--candle-delay:-3s;--candle-time:9s" d="M181 45V33Q185.5 24 190 33V45Z" stroke="#445569" stroke-width="1.5"/><path d="M185.5 30V45" stroke="#6a6b64" stroke-width=".7"/><path class="hall-window" style="--candle-delay:-4s;--candle-time:10s" d="M181 102V90Q185.5 81 190 90V102Z" stroke="#445569" stroke-width="1.5"/><path d="M185.5 87V102" stroke="#6a6b64" stroke-width=".7"/><path class="hall-window" style="--candle-delay:-5s;--candle-time:11s" d="M181 145V133Q185.5 124 190 133V145Z" stroke="#445569" stroke-width="1.5"/><path d="M185.5 130V145" stroke="#6a6b64" stroke-width=".7"/><path class="hall-window" style="--candle-delay:-6s;--candle-time:12s" d="M91 144V132Q95.5 123 100 132V144Z" stroke="#445569" stroke-width="1.5"/><path d="M95.5 129V144" stroke="#6a6b64" stroke-width=".7"/><path class="hall-window" style="--candle-delay:-7s;--candle-time:6s" d="M132 144V132Q136.5 123 141 132V144Z" stroke="#445569" stroke-width="1.5"/><path d="M136.5 129V144" stroke="#6a6b64" stroke-width=".7"/><path class="hall-window" style="--candle-delay:-8s;--candle-time:7s" d="M13 118V106Q17.5 97 22 106V118Z" stroke="#445569" stroke-width="1.5"/><path d="M17.5 103V118" stroke="#6a6b64" stroke-width=".7"/><path class="hall-window" style="--candle-delay:-0s;--candle-time:8s" d="M212 120V108Q216.5 99 221 108V120Z" stroke="#445569" stroke-width="1.5"/><path d="M216.5 105V120" stroke="#6a6b64" stroke-width=".7"/><path class="hall-window" style="--candle-delay:-1s;--candle-time:9s" d="M13 172V160Q17.5 151 22 160V172Z" stroke="#445569" stroke-width="1.5"/><path d="M17.5 157V172" stroke="#6a6b64" stroke-width=".7"/><path class="hall-window" style="--candle-delay:-2s;--candle-time:10s" d="M214 171V159Q218.5 150 223 159V171Z" stroke="#445569" stroke-width="1.5"/><path d="M218.5 156V171" stroke="#6a6b64" stroke-width=".7"/><g transform="translate(70 -4)"><path d="M0 37V-3" stroke="#d8bd7b" stroke-width="1.8"/><circle cy="-4" r="2.4" fill="#f4d797"/><g class="academy-banner" style="--banner-delay:-1s"><path d="M1 0 Q16 -5 33 1L31 22Q16 16 1 20Z" fill="#783e55" stroke="#d1b578" stroke-width="1"/><path d="M16 4v11m-6-10v4q0 4 6 4t6-4V5" stroke="#f9e4b6" stroke-width="1.7" fill="none"/><path d="M8 17h17" stroke="#f9e4b6" stroke-width=".7"/></g></g><g transform="translate(209 42)"><path d="M0 37V-3" stroke="#d8bd7b" stroke-width="1.8"/><circle cy="-4" r="2.4" fill="#f4d797"/><g class="academy-banner" style="--banner-delay:0s"><path d="M1 0 Q16 -5 33 1L31 22Q16 16 1 20Z" fill="#305968" stroke="#d1b578" stroke-width="1"/><path d="M16 4v11m-6-10v4q0 4 6 4t6-4V5" stroke="#f9e4b6" stroke-width="1.7" fill="none"/><path d="M8 17h17" stroke="#f9e4b6" stroke-width=".7"/></g></g></g><g class="academy-hall academy-hall-east" transform="translate(895 0)" stroke="#334a5e" stroke-width="2" stroke-linejoin="round"><path class="hall-wall" d="M10 77H225V200H10Z"/><path class="hall-roof" d="M-3 80L51 28H182L237 80Z"/>
+    <path class="hall-window" style="--candle-delay:-0s;--candle-time:6s" d="M36 66V54Q40.5 45 45 54V66Z" stroke="#445569" stroke-width="1.5"/><path d="M40.5 51V66" stroke="#6a6b64" stroke-width=".7"/><path class="hall-window" style="--candle-delay:-1s;--candle-time:7s" d="M36 118V106Q40.5 97 45 106V118Z" stroke="#445569" stroke-width="1.5"/><path d="M40.5 103V118" stroke="#6a6b64" stroke-width=".7"/><path class="hall-window" style="--candle-delay:-2s;--candle-time:8s" d="M36 158V146Q40.5 137 45 146V158Z" stroke="#445569" stroke-width="1.5"/><path d="M40.5 143V158" stroke="#6a6b64" stroke-width=".7"/><path class="hall-window" style="--candle-delay:-3s;--candle-time:9s" d="M181 45V33Q185.5 24 190 33V45Z" stroke="#445569" stroke-width="1.5"/><path d="M185.5 30V45" stroke="#6a6b64" stroke-width=".7"/><path class="hall-window" style="--candle-delay:-4s;--candle-time:10s" d="M181 102V90Q185.5 81 190 90V102Z" stroke="#445569" stroke-width="1.5"/><path d="M185.5 87V102" stroke="#6a6b64" stroke-width=".7"/><path class="hall-window" style="--candle-delay:-5s;--candle-time:11s" d="M181 145V133Q185.5 124 190 133V145Z" stroke="#445569" stroke-width="1.5"/><path d="M185.5 130V145" stroke="#6a6b64" stroke-width=".7"/><path class="hall-window" style="--candle-delay:-6s;--candle-time:12s" d="M91 144V132Q95.5 123 100 132V144Z" stroke="#445569" stroke-width="1.5"/><path d="M95.5 129V144" stroke="#6a6b64" stroke-width=".7"/><path class="hall-window" style="--candle-delay:-7s;--candle-time:6s" d="M132 144V132Q136.5 123 141 132V144Z" stroke="#445569" stroke-width="1.5"/><path d="M136.5 129V144" stroke="#6a6b64" stroke-width=".7"/><path class="hall-window" style="--candle-delay:-8s;--candle-time:7s" d="M13 118V106Q17.5 97 22 106V118Z" stroke="#445569" stroke-width="1.5"/><path d="M17.5 103V118" stroke="#6a6b64" stroke-width=".7"/><path class="hall-window" style="--candle-delay:-0s;--candle-time:8s" d="M212 120V108Q216.5 99 221 108V120Z" stroke="#445569" stroke-width="1.5"/><path d="M216.5 105V120" stroke="#6a6b64" stroke-width=".7"/><path class="hall-window" style="--candle-delay:-1s;--candle-time:9s" d="M13 172V160Q17.5 151 22 160V172Z" stroke="#445569" stroke-width="1.5"/><path d="M17.5 157V172" stroke="#6a6b64" stroke-width=".7"/><path class="hall-window" style="--candle-delay:-2s;--candle-time:10s" d="M214 171V159Q218.5 150 223 159V171Z" stroke="#445569" stroke-width="1.5"/><path d="M218.5 156V171" stroke="#6a6b64" stroke-width=".7"/><g transform="translate(45 -50)"><path d="M0 37V-3" stroke="#d8bd7b" stroke-width="1.8"/><circle cy="-4" r="2.4" fill="#f4d797"/><g class="academy-banner" style="--banner-delay:-1s"><path d="M1 0 Q16 -5 33 1L31 22Q16 16 1 20Z" fill="#783e55" stroke="#d1b578" stroke-width="1"/><text class="flag-psychology-symbol" x="17" y="12">Ψ</text></g></g><g transform="translate(189 -78)"><path d="M0 37V-3" stroke="#d8bd7b" stroke-width="1.8"/><circle cy="-4" r="2.4" fill="#f4d797"/><g class="academy-banner" style="--banner-delay:0s"><path d="M1 0 Q16 -5 33 1L31 22Q16 16 1 20Z" fill="#305968" stroke="#d1b578" stroke-width="1"/><text class="flag-psychology-symbol" x="17" y="12">Ψ</text></g></g></g><g class="academy-hall academy-hall-east" transform="translate(895 0)" stroke="#334a5e" stroke-width="2" stroke-linejoin="round"><path class="hall-wall" d="M10 77H225V200H10Z"/><path class="hall-roof" d="M-3 80L51 28H182L237 80Z"/>
     <path d="M35 68H203M46 56H191M58 44H177" stroke="#879099" opacity=".45"/>
     <path class="hall-wall" d="M24 30H66V202H24Z M167 6H211V202H167Z"/>
     <path class="hall-roof" d="M14 33L45 -33 77 33Z M155 9L189 -65 222 9Z"/>
@@ -2057,7 +2073,7 @@ html.academy-motion-on .mission-card:focus-within .mv-grow { animation-duration:
     <path d="M74 207H159M69 213H164" stroke="#8c968e" stroke-width="4"/>
     <path d="M26 116h38M26 159h38M169 107h40M169 153h40" stroke="#9b978b" stroke-width="1"/>
     <path d="M11 140h12m44 0h13m72 0h15m45 0h13" stroke="#a19886" stroke-width="1"/>
-    <path class="hall-window" style="--candle-delay:-4s;--candle-time:10s" d="M36 66V54Q40.5 45 45 54V66Z" stroke="#445569" stroke-width="1.5"/><path d="M40.5 51V66" stroke="#6a6b64" stroke-width=".7"/><path class="hall-window" style="--candle-delay:-5s;--candle-time:11s" d="M36 118V106Q40.5 97 45 106V118Z" stroke="#445569" stroke-width="1.5"/><path d="M40.5 103V118" stroke="#6a6b64" stroke-width=".7"/><path class="hall-window" style="--candle-delay:-6s;--candle-time:12s" d="M36 158V146Q40.5 137 45 146V158Z" stroke="#445569" stroke-width="1.5"/><path d="M40.5 143V158" stroke="#6a6b64" stroke-width=".7"/><path class="hall-window" style="--candle-delay:-7s;--candle-time:6s" d="M181 45V33Q185.5 24 190 33V45Z" stroke="#445569" stroke-width="1.5"/><path d="M185.5 30V45" stroke="#6a6b64" stroke-width=".7"/><path class="hall-window" style="--candle-delay:-8s;--candle-time:7s" d="M181 102V90Q185.5 81 190 90V102Z" stroke="#445569" stroke-width="1.5"/><path d="M185.5 87V102" stroke="#6a6b64" stroke-width=".7"/><path class="hall-window" style="--candle-delay:-0s;--candle-time:8s" d="M181 145V133Q185.5 124 190 133V145Z" stroke="#445569" stroke-width="1.5"/><path d="M185.5 130V145" stroke="#6a6b64" stroke-width=".7"/><path class="hall-window" style="--candle-delay:-1s;--candle-time:9s" d="M91 144V132Q95.5 123 100 132V144Z" stroke="#445569" stroke-width="1.5"/><path d="M95.5 129V144" stroke="#6a6b64" stroke-width=".7"/><path class="hall-window" style="--candle-delay:-2s;--candle-time:10s" d="M132 144V132Q136.5 123 141 132V144Z" stroke="#445569" stroke-width="1.5"/><path d="M136.5 129V144" stroke="#6a6b64" stroke-width=".7"/><path class="hall-window" style="--candle-delay:-3s;--candle-time:11s" d="M13 118V106Q17.5 97 22 106V118Z" stroke="#445569" stroke-width="1.5"/><path d="M17.5 103V118" stroke="#6a6b64" stroke-width=".7"/><path class="hall-window" style="--candle-delay:-4s;--candle-time:12s" d="M212 120V108Q216.5 99 221 108V120Z" stroke="#445569" stroke-width="1.5"/><path d="M216.5 105V120" stroke="#6a6b64" stroke-width=".7"/><path class="hall-window" style="--candle-delay:-5s;--candle-time:6s" d="M13 172V160Q17.5 151 22 160V172Z" stroke="#445569" stroke-width="1.5"/><path d="M17.5 157V172" stroke="#6a6b64" stroke-width=".7"/><path class="hall-window" style="--candle-delay:-6s;--candle-time:7s" d="M214 171V159Q218.5 150 223 159V171Z" stroke="#445569" stroke-width="1.5"/><path d="M218.5 156V171" stroke="#6a6b64" stroke-width=".7"/><g transform="translate(70 -4)"><path d="M0 37V-3" stroke="#d8bd7b" stroke-width="1.8"/><circle cy="-4" r="2.4" fill="#f4d797"/><g class="academy-banner" style="--banner-delay:-2s"><path d="M1 0 Q16 -5 33 1L31 22Q16 16 1 20Z" fill="#3a6761" stroke="#d1b578" stroke-width="1"/><path d="M16 4v11m-6-10v4q0 4 6 4t6-4V5" stroke="#f9e4b6" stroke-width="1.7" fill="none"/><path d="M8 17h17" stroke="#f9e4b6" stroke-width=".7"/></g></g><g transform="translate(209 42)"><path d="M0 37V-3" stroke="#d8bd7b" stroke-width="1.8"/><circle cy="-4" r="2.4" fill="#f4d797"/><g class="academy-banner" style="--banner-delay:-3s"><path d="M1 0 Q16 -5 33 1L31 22Q16 16 1 20Z" fill="#4b4c76" stroke="#d1b578" stroke-width="1"/><path d="M16 4v11m-6-10v4q0 4 6 4t6-4V5" stroke="#f9e4b6" stroke-width="1.7" fill="none"/><path d="M8 17h17" stroke="#f9e4b6" stroke-width=".7"/></g></g></g><g fill="#bac1b2" stroke="#4c6472" stroke-width="2"><path d="M275 146H356V181H275ZM844 145H911V181H844Z"/><path d="M271 145H360M840 144H915" stroke="#d6cda9" stroke-width="5"/><path d="M285 182V160Q294 147 303 160V182M318 182V160Q327 147 336 160V182M855 181V158Q864 145 873 158V181M882 181V158Q891 145 900 158V181" fill="#405971"/></g><g stroke="#254758" stroke-width="2.5" stroke-linejoin="round">
+    <path class="hall-window" style="--candle-delay:-4s;--candle-time:10s" d="M36 66V54Q40.5 45 45 54V66Z" stroke="#445569" stroke-width="1.5"/><path d="M40.5 51V66" stroke="#6a6b64" stroke-width=".7"/><path class="hall-window" style="--candle-delay:-5s;--candle-time:11s" d="M36 118V106Q40.5 97 45 106V118Z" stroke="#445569" stroke-width="1.5"/><path d="M40.5 103V118" stroke="#6a6b64" stroke-width=".7"/><path class="hall-window" style="--candle-delay:-6s;--candle-time:12s" d="M36 158V146Q40.5 137 45 146V158Z" stroke="#445569" stroke-width="1.5"/><path d="M40.5 143V158" stroke="#6a6b64" stroke-width=".7"/><path class="hall-window" style="--candle-delay:-7s;--candle-time:6s" d="M181 45V33Q185.5 24 190 33V45Z" stroke="#445569" stroke-width="1.5"/><path d="M185.5 30V45" stroke="#6a6b64" stroke-width=".7"/><path class="hall-window" style="--candle-delay:-8s;--candle-time:7s" d="M181 102V90Q185.5 81 190 90V102Z" stroke="#445569" stroke-width="1.5"/><path d="M185.5 87V102" stroke="#6a6b64" stroke-width=".7"/><path class="hall-window" style="--candle-delay:-0s;--candle-time:8s" d="M181 145V133Q185.5 124 190 133V145Z" stroke="#445569" stroke-width="1.5"/><path d="M185.5 130V145" stroke="#6a6b64" stroke-width=".7"/><path class="hall-window" style="--candle-delay:-1s;--candle-time:9s" d="M91 144V132Q95.5 123 100 132V144Z" stroke="#445569" stroke-width="1.5"/><path d="M95.5 129V144" stroke="#6a6b64" stroke-width=".7"/><path class="hall-window" style="--candle-delay:-2s;--candle-time:10s" d="M132 144V132Q136.5 123 141 132V144Z" stroke="#445569" stroke-width="1.5"/><path d="M136.5 129V144" stroke="#6a6b64" stroke-width=".7"/><path class="hall-window" style="--candle-delay:-3s;--candle-time:11s" d="M13 118V106Q17.5 97 22 106V118Z" stroke="#445569" stroke-width="1.5"/><path d="M17.5 103V118" stroke="#6a6b64" stroke-width=".7"/><path class="hall-window" style="--candle-delay:-4s;--candle-time:12s" d="M212 120V108Q216.5 99 221 108V120Z" stroke="#445569" stroke-width="1.5"/><path d="M216.5 105V120" stroke="#6a6b64" stroke-width=".7"/><path class="hall-window" style="--candle-delay:-5s;--candle-time:6s" d="M13 172V160Q17.5 151 22 160V172Z" stroke="#445569" stroke-width="1.5"/><path d="M17.5 157V172" stroke="#6a6b64" stroke-width=".7"/><path class="hall-window" style="--candle-delay:-6s;--candle-time:7s" d="M214 171V159Q218.5 150 223 159V171Z" stroke="#445569" stroke-width="1.5"/><path d="M218.5 156V171" stroke="#6a6b64" stroke-width=".7"/><g transform="translate(45 -50)"><path d="M0 37V-3" stroke="#d8bd7b" stroke-width="1.8"/><circle cy="-4" r="2.4" fill="#f4d797"/><g class="academy-banner" style="--banner-delay:-2s"><path d="M1 0 Q16 -5 33 1L31 22Q16 16 1 20Z" fill="#3a6761" stroke="#d1b578" stroke-width="1"/><text class="flag-psychology-symbol" x="17" y="12">Ψ</text></g></g><g transform="translate(189 -78)"><path d="M0 37V-3" stroke="#d8bd7b" stroke-width="1.8"/><circle cy="-4" r="2.4" fill="#f4d797"/><g class="academy-banner" style="--banner-delay:-3s"><path d="M1 0 Q16 -5 33 1L31 22Q16 16 1 20Z" fill="#4b4c76" stroke="#d1b578" stroke-width="1"/><text class="flag-psychology-symbol" x="17" y="12">Ψ</text></g></g></g><g fill="#bac1b2" stroke="#4c6472" stroke-width="2"><path d="M275 146H356V181H275ZM844 145H911V181H844Z"/><path d="M271 145H360M840 144H915" stroke="#d6cda9" stroke-width="5"/><path d="M285 182V160Q294 147 303 160V182M318 182V160Q327 147 336 160V182M855 181V158Q864 145 873 158V181M882 181V158Q891 145 900 158V181" fill="#405971"/></g><g stroke="#254758" stroke-width="2.5" stroke-linejoin="round">
     <path d="M353 111 H511 V196 H353Z M689 111 H847 V196 H689Z" fill="#d9d3bc"/>
     <path d="M335 113 L375 82 H506 L530 113Z M670 113 L694 82 H825 L865 113Z" fill="#3c6171"/>
     <path d="M499 82 H701 V201 H499Z" fill="#e9dfc8"/>
@@ -2069,8 +2085,12 @@ html.academy-motion-on .mission-card:focus-within .mv-grow { animation-duration:
     <path d="M487 203 H713 M478 211 H722" fill="none" stroke="#5a6e62" stroke-width="5"/>
     <circle cx="600" cy="55" r="15" fill="#fff8e3"/>
     <path d="M600 44 V55 L609 60" fill="none"/>
-    <path d="M637 6 V-16" fill="none"/>
-    <path class="campus-flag" d="M637 -14 Q653 -20 672 -10 L669 6 Q651 -5 637 0Z" fill="#783b50" stroke="#c8a75a" stroke-width="1"/>
+    <path d="M600 6 V-28" fill="none"/>
+    <circle cx="600" cy="-29" r="2.4" fill="#f4d797" stroke="none"/>
+    <g class="campus-flag">
+      <path d="M600 -26 Q616 -32 635 -22 L632 -6 Q616 -17 600 -12Z" fill="#783b50" stroke="#c8a75a" stroke-width="1"/>
+      <text class="flag-psychology-symbol" x="617" y="-17">Ψ</text>
+    </g>
     <g class="campus-window" fill="#f5d887"><path d="M519 109 Q528 95 537 109 V132 H519Z M663 109 Q672 95 681 109 V132 H663Z"/></g>
     <g class="campus-window" fill="#f5d887"><path d="M561 110 Q570 96 579 110 V133 H561Z M621 110 Q630 96 639 110 V133 H621Z"/></g>
     <g class="campus-window" fill="#f5d887"><path d="M371 132 H391 V157 H371Z M411 132 H431 V157 H411Z M451 132 H471 V157 H451Z"/></g>
@@ -3896,7 +3916,7 @@ html.academy-motion-on .mission-card:focus-within .mv-grow { animation-duration:
         if (reduced) {
           status.textContent = 'Animations are off to match your device’s reduced-motion setting.';
         } else {
-          status.textContent = enabled ? 'The sky changes slowly from day to night. Birds, flags and scholars are moving. Pause all animations or choose your sky.' : 'Animations are off. Select the button to bring back the campus sparkle.';
+          status.textContent = enabled ? 'The sky changes slowly from day to night. Birds, flags, scholars, shooting stars, and mountain messages are moving. Pause all animations or choose your sky.' : 'Animations are off. Select the button to bring back the campus sparkle.';
           if (!canSave) status.textContent += ' Your choice applies to this visit.';
         }
         if (!enabled) { resetPointer(); cards.forEach(function(card) { card.classList.remove('card-arriving'); }); }
@@ -4030,6 +4050,135 @@ html.academy-motion-on .mission-card:focus-within .mv-grow { animation-duration:
     },{threshold:0}).observe(hero);
   }
   sync();
+})();
+
+/* Decorative Academy magic: occasional shooting stars and mountain words.
+   Both effects follow the page animation control, reduced-motion preference,
+   tab visibility, and the hero's existing offscreen pause state. */
+(function setupAcademySkySecrets() {
+  'use strict';
+  const root = document.documentElement;
+  const hero = document.querySelector('.academy-hero');
+  const starField = document.querySelector('.academy-shooting-stars');
+  const secretField = document.querySelector('.academy-mountain-secrets');
+  if (!hero || !starField || !secretField) return;
+
+  const reduced = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
+  const secretWords = ['PSYCHE', 'CURIOSITY', 'INSIGHT', 'WONDER', 'IMAGINE', 'DISCOVER', 'AWAKEN', 'DREAM', 'EUREKA'];
+  const secretPlaces = [
+    { left: 13, top: 34, tilt: -3 },
+    { left: 27, top: 20, tilt: 2 },
+    { left: 41, top: 39, tilt: -2 },
+    { left: 57, top: 27, tilt: 3 },
+    { left: 72, top: 18, tilt: -2 },
+    { left: 86, top: 35, tilt: 2 }
+  ];
+  let starTimer = null;
+  let secretTimer = null;
+  let lastWord = -1;
+  let lastPlace = -1;
+
+  function randomBetween(min, max) {
+    return min + Math.random() * (max - min);
+  }
+
+  function motionIsActive() {
+    return root.classList.contains('academy-motion-on') &&
+      !root.classList.contains('academy-scene-paused') &&
+      !(reduced && reduced.matches) &&
+      !document.hidden;
+  }
+
+  function chooseDifferent(length, previous) {
+    if (length < 2) return 0;
+    let choice = Math.floor(Math.random() * length);
+    if (choice === previous) choice = (choice + 1 + Math.floor(Math.random() * (length - 1))) % length;
+    return choice;
+  }
+
+  function createShootingStar() {
+    if (!motionIsActive()) return;
+    const star = document.createElement('span');
+    const angle = randomBetween(14, 25);
+    const travelX = Math.min(Math.max(hero.clientWidth * randomBetween(.24, .42), 150), 520);
+    const travelY = travelX * Math.tan(angle * Math.PI / 180);
+    star.className = 'academy-shooting-star';
+    star.style.setProperty('--star-left', randomBetween(3, 66).toFixed(1) + '%');
+    star.style.setProperty('--star-top', randomBetween(5, 42).toFixed(1) + '%');
+    star.style.setProperty('--star-length', Math.round(randomBetween(78, 145)) + 'px');
+    star.style.setProperty('--star-angle', angle.toFixed(1) + 'deg');
+    star.style.setProperty('--star-travel-x', travelX.toFixed(0) + 'px');
+    star.style.setProperty('--star-travel-y', travelY.toFixed(0) + 'px');
+    star.style.setProperty('--star-duration', Math.round(randomBetween(900, 1500)) + 'ms');
+    star.setAttribute('aria-hidden', 'true');
+    star.addEventListener('animationend', function() { star.remove(); }, { once: true });
+    starField.appendChild(star);
+    window.requestAnimationFrame(function() { star.classList.add('is-flying'); });
+  }
+
+  function revealMountainSecret() {
+    if (!motionIsActive()) return;
+    lastWord = chooseDifferent(secretWords.length, lastWord);
+    lastPlace = chooseDifferent(secretPlaces.length, lastPlace);
+    const place = secretPlaces[lastPlace];
+    const secret = document.createElement('span');
+    secret.className = 'academy-mountain-secret';
+    secret.textContent = secretWords[lastWord];
+    secret.style.setProperty('--secret-left', place.left + '%');
+    secret.style.setProperty('--secret-top', place.top + '%');
+    secret.style.setProperty('--secret-tilt', place.tilt + 'deg');
+    secret.style.setProperty('--secret-duration', Math.round(randomBetween(4100, 5200)) + 'ms');
+    secret.setAttribute('aria-hidden', 'true');
+    secret.addEventListener('animationend', function() { secret.remove(); }, { once: true });
+    secretField.textContent = '';
+    secretField.appendChild(secret);
+    window.requestAnimationFrame(function() { secret.classList.add('is-revealing'); });
+  }
+
+  function scheduleStar(delay) {
+    if (starTimer !== null || !motionIsActive()) return;
+    starTimer = window.setTimeout(function() {
+      starTimer = null;
+      if (motionIsActive()) createShootingStar();
+      scheduleStar(randomBetween(3200, 7800));
+    }, delay);
+  }
+
+  function scheduleSecret(delay) {
+    if (secretTimer !== null || !motionIsActive()) return;
+    secretTimer = window.setTimeout(function() {
+      secretTimer = null;
+      if (motionIsActive()) revealMountainSecret();
+      scheduleSecret(randomBetween(7200, 12800));
+    }, delay);
+  }
+
+  function stopAndClear() {
+    if (starTimer !== null) window.clearTimeout(starTimer);
+    if (secretTimer !== null) window.clearTimeout(secretTimer);
+    starTimer = null;
+    secretTimer = null;
+    starField.textContent = '';
+    secretField.textContent = '';
+  }
+
+  function syncMagic() {
+    if (!motionIsActive()) {
+      stopAndClear();
+      return;
+    }
+    scheduleStar(randomBetween(1200, 3900));
+    scheduleSecret(randomBetween(3200, 6900));
+  }
+
+  new MutationObserver(syncMagic).observe(root, { attributes: true, attributeFilter: ['class'] });
+  document.addEventListener('visibilitychange', syncMagic);
+  window.addEventListener('pageshow', syncMagic);
+  if (reduced) {
+    if (typeof reduced.addEventListener === 'function') reduced.addEventListener('change', syncMagic);
+    else if (typeof reduced.addListener === 'function') reduced.addListener(syncMagic);
+  }
+  syncMagic();
 })();
 
   </script>
