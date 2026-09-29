@@ -433,7 +433,10 @@
             <circle r="112" fill="url(#steelGrad)" stroke="#d7bb6b" stroke-width="7"/>
             <g class="vault-ring">
               <circle r="86" fill="none" stroke="#91cfc1" stroke-width="5" stroke-dasharray="12 9"/>
-              <circle cx="0" cy="-86" r="8" fill="#f2cf6e"/><circle cx="86" cy="0" r="8" fill="#f2cf6e"/><circle cx="0" cy="86" r="8" fill="#f2cf6e"/><circle cx="-86" cy="0" r="8" fill="#f2cf6e"/>
+              <circle cx="0" cy="-86" r="8" fill="#f2cf6e"/>
+              <circle cx="86" cy="0" r="8" fill="#f2cf6e"/>
+              <circle cx="0" cy="86" r="8" fill="#f2cf6e"/>
+              <circle cx="-86" cy="0" r="8" fill="#f2cf6e"/>
             </g>
             <g class="vault-ring reverse">
               <path d="M-56 0h112M0-56v112M-40-40l80 80M40-40l-80 80" stroke="#d9bd6e" stroke-width="8" stroke-linecap="round"/>
@@ -463,7 +466,12 @@
 </header>
 
 <main id="main-content" class="container">
-  <noscript><section class="panel"><h2>JavaScript Is Needed</h2><p>This interactive mission needs JavaScript. Enable it to play, or use the linked OpenStax readings and contact Dr. Holdaway for an alternative activity.</p></section></noscript>
+  <noscript>
+    <section class="panel">
+      <h2>JavaScript Is Needed</h2>
+      <p>This interactive mission needs JavaScript. Enable it to play, or use the linked OpenStax readings and contact Dr. Holdaway for an alternative activity.</p>
+    </section>
+  </noscript>
 
   <section class="atmosphere" aria-labelledby="atmosphere-heading">
     <h2 id="atmosphere-heading">Set the Vault Atmosphere</h2>
@@ -527,18 +535,34 @@
         <h2 id="final-heading" tabindex="-1">The Final Learning Archive</h2>
         <p>All seven evidence cards now surround the vault’s central mechanism. Integrate classical, operant, and observational learning to reopen the archive.</p>
         <div id="learned-code" class="learned-code" aria-label="Collected evidence letters"></div>
+
         <form id="final-form" class="final-form">
           <div class="final-lock">
             <label for="final-one">1. A student watches a tutor demonstrate flashcards and later copies the method. Which process is most evident?</label>
-            <select id="final-one" required><option value="">Choose a process</option><option value="classical">Classical conditioning</option><option value="operant">Operant conditioning</option><option value="observational">Observational learning</option></select>
+            <select id="final-one" required>
+              <option value="">Choose a process</option>
+              <option value="classical">Classical conditioning</option>
+              <option value="operant">Operant conditioning</option>
+              <option value="observational">Observational learning</option>
+            </select>
           </div>
           <div class="final-lock">
             <label for="final-two">2. The student receives a token after each completed practice set, and practice increases. Which consequence fits?</label>
-            <select id="final-two" required><option value="">Choose a consequence</option><option value="negative-reinforcement">Negative reinforcement</option><option value="positive-reinforcement">Positive reinforcement</option><option value="positive-punishment">Positive punishment</option></select>
+            <select id="final-two" required>
+              <option value="">Choose a consequence</option>
+              <option value="negative-reinforcement">Negative reinforcement</option>
+              <option value="positive-reinforcement">Positive reinforcement</option>
+              <option value="positive-punishment">Positive punishment</option>
+            </select>
           </div>
           <div class="final-lock">
             <label for="final-three">3. After a tone repeatedly precedes lemon juice, the tone alone elicits salivation. Which process fits?</label>
-            <select id="final-three" required><option value="">Choose a process</option><option value="observational">Observational learning</option><option value="operant">Operant conditioning</option><option value="classical">Classical conditioning</option></select>
+            <select id="final-three" required>
+              <option value="">Choose a process</option>
+              <option value="observational">Observational learning</option>
+              <option value="operant">Operant conditioning</option>
+              <option value="classical">Classical conditioning</option>
+            </select>
           </div>
           <div class="final-lock">
             <label for="portal-code">4. Enter the seven-letter word formed by your evidence letters.</label>
@@ -546,6 +570,7 @@
           </div>
           <button class="control-button final-submit" type="submit">Open the Conditioning Vault</button>
         </form>
+
         <p id="final-feedback" role="status" aria-live="polite">Complete all seven laboratories to activate this final vault.</p>
 
         <section id="badge-maker" class="badge-maker" aria-labelledby="badge-heading" hidden>
@@ -573,19 +598,23 @@
         <p id="lock-progress" class="quiet">0 of 14 knowledge locks solved</p>
         <p class="quiet">Demonstrations are optional. No animation clicks are required.</p>
       </section>
+
       <section class="panel panel-gold" aria-labelledby="fragment-heading">
         <h2 id="fragment-heading">Evidence Letters</h2>
         <ol id="fragment-rack" class="fragment-rack" aria-label="Evidence letters unlocked by correct answers"></ol>
         <p class="quiet">Each correct answer adds energy. A letter is revealed only after both knowledge locks in its laboratory are solved.</p>
       </section>
+
       <section class="panel panel-green" aria-labelledby="evidence-heading">
         <h2 id="evidence-heading">Evidence Satchel</h2>
         <ul id="inventory-list" class="inventory-list"><li>No evidence collected yet.</li></ul>
       </section>
+
       <section class="panel" aria-labelledby="achievement-heading">
         <h2 id="achievement-heading">Discoveries</h2>
         <ul id="achievement-list" class="achievement-list"><li>Your discoveries will appear here.</li></ul>
       </section>
+
       <section class="panel notebook" aria-labelledby="notebook-heading">
         <h2 id="notebook-heading">Investigator Notebook</h2>
         <label for="observation-notes"><strong>Concept or correction I want to remember</strong></label>
@@ -599,7 +628,10 @@
         </div>
         <div id="reset-box" class="reset-box" hidden>
           <strong>Reset all Week 6 progress and notes?</strong>
-          <div class="control-row"><button id="confirm-reset" class="danger-button" type="button">Yes, Reset</button><button id="cancel-reset" class="action-button" type="button">Cancel</button></div>
+          <div class="control-row">
+            <button id="confirm-reset" class="danger-button" type="button">Yes, Reset</button>
+            <button id="cancel-reset" class="action-button" type="button">Cancel</button>
+          </div>
         </div>
       </section>
     </aside>
@@ -625,8 +657,13 @@
 
 <footer>
   <div class="container footer-grid">
-    <div><h2>Psychology Academy · Week 6</h2><p>The Conditioning Vault · Learning · Dr. Tonya Holdaway</p></div>
-    <div><p><a href="#top">Return to the top</a><br><a href="../index.html">Return to Psychology Academy</a></p></div>
+    <div>
+      <h2>Psychology Academy · Week 6</h2>
+      <p>The Conditioning Vault · Learning · Dr. Tonya Holdaway</p>
+    </div>
+    <div>
+      <p><a href="#top">Return to the top</a><br><a href="../index.html">Return to Psychology Academy</a></p>
+    </div>
   </div>
 </footer>
 
@@ -825,9 +862,17 @@
 
   function freshState() {
     return {
-      solved: [], actions: [], completed: [], evidence: [], achievements: [], escaped: false,
-      notes: { observations: "", transfer: "" }, learner: "", lighting: "blue",
-      motionPaused: false, settings: { volume: 0.18 }
+      solved: [],
+      actions: [],
+      completed: [],
+      evidence: [],
+      achievements: [],
+      escaped: false,
+      notes: { observations: "", transfer: "" },
+      learner: "",
+      lighting: "blue",
+      motionPaused: false,
+      settings: { volume: 0.18 }
     };
   }
 
@@ -836,23 +881,50 @@
   function normalizeState(raw) {
     const next = freshState();
     if (!raw || typeof raw !== "object") return next;
-    next.solved = Array.isArray(raw.solved) ? [...new Set(raw.solved.filter((value) => Number.isInteger(value) && value >= 0 && value < TOTAL_LOCKS))] : [];
-    next.actions = Array.isArray(raw.actions) ? [...new Set(raw.actions.filter((value) => rooms.some((room) => room.demoActions.includes(value))))] : [];
-    // Existing completed missions remain complete. All other room progress comes from answers.
-    if (raw.escaped === true) next.solved = Array.from({ length: TOTAL_LOCKS }, (_, index) => index);
-    next.completed = rooms.filter((room, index) => next.solved.includes(index * 2) && next.solved.includes(index * 2 + 1)).map((room) => room.id);
-    next.evidence = rooms.filter((room) => next.completed.includes(room.id)).map((room) => room.evidence);
-    next.achievements = Array.isArray(raw.achievements) ? raw.achievements.filter((value) => typeof value === "string") : [];
+
+    next.solved = Array.isArray(raw.solved)
+      ? [...new Set(raw.solved.filter((value) => Number.isInteger(value) && value >= 0 && value < TOTAL_LOCKS))]
+      : [];
+
+    next.actions = Array.isArray(raw.actions)
+      ? [...new Set(raw.actions.filter((value) => rooms.some((room) => room.demoActions.includes(value))))]
+      : [];
+
+    // Previously completed missions remain complete.
+    // All other room progress comes from correct answers.
+    if (raw.escaped === true) {
+      next.solved = Array.from({ length: TOTAL_LOCKS }, (_, index) => index);
+    }
+
+    next.completed = rooms
+      .filter((room, index) => next.solved.includes(index * 2) && next.solved.includes(index * 2 + 1))
+      .map((room) => room.id);
+
+    next.evidence = rooms
+      .filter((room) => next.completed.includes(room.id))
+      .map((room) => room.evidence);
+
+    next.achievements = Array.isArray(raw.achievements)
+      ? raw.achievements.filter((value) => typeof value === "string")
+      : [];
+
     next.escaped = raw.escaped === true;
-    if (typeof raw.notes === "string") next.notes.observations = raw.notes;
-    else if (raw.notes && typeof raw.notes === "object") {
+
+    if (typeof raw.notes === "string") {
+      next.notes.observations = raw.notes;
+    } else if (raw.notes && typeof raw.notes === "object") {
       next.notes.observations = typeof raw.notes.observations === "string" ? raw.notes.observations : "";
       next.notes.transfer = typeof raw.notes.transfer === "string" ? raw.notes.transfer : "";
     }
+
     next.learner = typeof raw.learner === "string" ? raw.learner.slice(0, 60) : "";
     next.lighting = ["blue", "garden", "gold"].includes(raw.lighting) ? raw.lighting : "blue";
     next.motionPaused = raw.motionPaused === true || raw.motion === true;
-    if (raw.settings && Number.isFinite(Number(raw.settings.volume))) next.settings.volume = Math.min(1, Math.max(0, Number(raw.settings.volume)));
+
+    if (raw.settings && Number.isFinite(Number(raw.settings.volume))) {
+      next.settings.volume = Math.min(1, Math.max(0, Number(raw.settings.volume)));
+    }
+
     return next;
   }
 
@@ -879,10 +951,14 @@
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
       if (state.escaped) localStorage.setItem(COMPLETION_KEY, "true");
-      if ($("save-status")) $("save-status").textContent = message || "Progress and notes saved in this browser.";
+      if ($("save-status")) {
+        $("save-status").textContent = message || "Progress and notes saved in this browser.";
+      }
     } catch (error) {
       storageAvailable = false;
-      if ($("save-status")) $("save-status").textContent = "Browser saving is unavailable. Keep this tab open and download your notes before leaving.";
+      if ($("save-status")) {
+        $("save-status").textContent = "Browser saving is unavailable. Keep this tab open and download your notes before leaving.";
+      }
     }
   }
 
@@ -898,8 +974,6 @@
     };
     return icons[id] || "";
   }
-
-
 
   function roomLockCount(index) {
     return [index * 2, index * 2 + 1].filter((lock) => state.solved.includes(lock)).length;
@@ -918,6 +992,7 @@
     $("room-grid").innerHTML = rooms.map((room, index) => {
       const complete = state.completed.includes(room.id);
       const charge = roomCharge(index);
+
       return `<button id="room-${index}" class="room-button charging${complete ? " complete" : ""}" type="button" data-room="${index}" aria-pressed="${activeIndex === index}" style="--charge:${charge * 50}%">
         <span class="map-icon">${iconMarkup(room.id)}</span>
         <span class="room-title">${index + 1}. ${room.title}</span>
@@ -925,20 +1000,28 @@
         <span class="map-status">${complete ? `Restored · Evidence ${room.fragment}` : actionSummary(index)}</span>
       </button>`;
     }).join("");
-    $("room-grid").querySelectorAll("[data-room]").forEach((button) => button.addEventListener("click", () => openRoom(Number(button.dataset.room))));
+
+    $("room-grid").querySelectorAll("[data-room]").forEach((button) => {
+      button.addEventListener("click", () => openRoom(Number(button.dataset.room)));
+    });
   }
-
-
 
   function roomMarkup(index) {
     const room = rooms[index];
+
     return `<article class="room-card" aria-labelledby="room-heading-${index}">
       <div class="room-heading">
-        <div><span class="room-number" id="room-number-${index}">Laboratory ${index + 1} of 7 · ${state.completed.includes(room.id) ? `Evidence ${room.fragment}` : "Evidence sealed"}</span><h2 id="room-heading-${index}" tabindex="-1">${room.title}</h2><p>${room.subtitle}</p></div>
+        <div>
+          <span class="room-number" id="room-number-${index}">Laboratory ${index + 1} of 7 · ${state.completed.includes(room.id) ? `Evidence ${room.fragment}` : "Evidence sealed"}</span>
+          <h2 id="room-heading-${index}" tabindex="-1">${room.title}</h2>
+          <p>${room.subtitle}</p>
+        </div>
         <span class="chapter-tag">OpenStax connection: <a href="${room.sourceUrl}" target="_blank" rel="noopener">${room.source}</a></span>
       </div>
       <div class="room-content">
-        <div class="concept-tags" aria-label="Concepts in this laboratory">${room.concepts.map((concept) => `<span class="concept-tag">${concept}</span>`).join("")}</div>
+        <div class="concept-tags" aria-label="Concepts in this laboratory">
+          ${room.concepts.map((concept) => `<span class="concept-tag">${concept}</span>`).join("")}
+        </div>
         <div class="demo-toolbar">
           <p><strong>Optional demonstration:</strong> One click plays the full sequence. You can answer the knowledge locks at any time.</p>
           <div class="instrument-actions">
@@ -948,8 +1031,14 @@
           <p id="demo-playback-status" class="quiet" role="status">No demonstration clicks are needed to earn the evidence letter.</p>
         </div>
         ${explorationMarkup(index)}
-        <details class="hint"><summary>Open a research hint</summary><p>${hintFor(index)}</p></details>
-        <section class="questions" aria-labelledby="locks-heading-${index}"><h3 id="locks-heading-${index}" tabindex="-1">Knowledge Locks</h3><div id="questions-${index}"></div></section>
+        <details class="hint">
+          <summary>Open a research hint</summary>
+          <p>${hintFor(index)}</p>
+        </details>
+        <section class="questions" aria-labelledby="locks-heading-${index}">
+          <h3 id="locks-heading-${index}" tabindex="-1">Knowledge Locks</h3>
+          <div id="questions-${index}"></div>
+        </section>
         <div id="clue-holder-${index}" class="clue-holder">${clueMarkup(index)}</div>
         <div id="room-nav-${index}" class="room-nav">${roomNavigationMarkup(index)}</div>
       </div>
@@ -969,13 +1058,192 @@
   }
 
   function explorationMarkup(index) {
-    if (index === 0) return `<section class="lab-console" aria-labelledby="instrument-0"><h3 id="instrument-0">Acquisition Console</h3><p>Watch three tone–food pairings followed by a tone-alone test, or use the individual controls below.</p><div class="visual-stage"><svg viewBox="0 0 600 210" role="img" aria-labelledby="pavlov-title"><title id="pavlov-title">A bell sends a signal toward a dog and food dish as an acquisition meter fills</title><g id="sim-bell"><path d="M90 42c-34 0-46 28-46 62v23l-15 22h122l-15-22v-23c0-34-12-62-46-62z" fill="#d6b45d" stroke="#194f61" stroke-width="6"/><circle cx="90" cy="159" r="12" fill="#d6b45d"/></g><path d="M166 107h150" class="wave-line wave-dash"/><circle cx="238" cy="107" r="9" fill="#e2b956"/><g transform="translate(340 40)"><path d="M42 48q20-37 50-8 40 1 50 38v56H25V82q0-26 17-34z" fill="#d9e8e5" stroke="#194f61" stroke-width="6"/><circle cx="108" cy="67" r="5" fill="#194f61"/><path d="M124 82q27 11 0 22" fill="none" stroke="#194f61" stroke-width="5"/><path id="saliva-drop" d="M136 105q14 18 0 28-14-10 0-28z" fill="#62bca8" opacity=".15"/></g><g transform="translate(500 105)"><ellipse cx="35" cy="49" rx="33" ry="13" fill="#f2e3bd" stroke="#7c6431" stroke-width="4"/><circle cx="35" cy="32" r="23" fill="#d99858"/></g></svg></div><div class="instrument-meter" aria-label="Acquisition pairing meter"><i id="pair-meter"></i></div><p id="pavlov-status" class="instrument-status" role="status">The tone is currently neutral with respect to salivation.</p><div class="instrument-actions"><button id="pair-tone-food" class="instrument-button" type="button">Pair Tone → Food</button><button id="test-tone" class="instrument-button" type="button">Test Tone Alone</button><button id="reset-pavlov" class="instrument-button" type="button">Reset Demonstration</button></div><p class="quiet">Teaching simplification: three pairings activate this display. Real acquisition does not follow one universal number of trials.</p></section>`;
-    if (index === 1) return `<section class="lab-console" aria-labelledby="instrument-1"><h3 id="instrument-1">Extinction &amp; Recovery Tracer</h3><p>Present the learned tone without food across repeated trials, then allow a simulated rest.</p><div class="visual-stage"><svg viewBox="0 0 600 190" role="img" aria-labelledby="ext-title"><title id="ext-title">A response graph declines across extinction trials and rises slightly after rest</title><path d="M55 20v130h500" fill="none" stroke="#4f6874" stroke-width="5"/><path id="extinction-path" d="M65 42" fill="none" stroke="#1f766d" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><path id="recovery-path" d="" fill="none" stroke="#d3a83f" stroke-width="8" stroke-linecap="round"/><text x="12" y="30" font-size="16" fill="#344e59">CR</text><text x="470" y="180" font-size="16" fill="#344e59">trials / rest</text></svg></div><div class="instrument-meter"><i id="extinction-meter"></i></div><p id="extinction-status" class="instrument-status" role="status">Conditioned response strength begins at 100%.</p><div class="instrument-actions"><button id="extinction-trial" class="instrument-button" type="button">Present Tone Without Food</button><button id="recovery-rest" class="instrument-button" type="button">Simulate Rest</button><button id="reset-extinction" class="instrument-button" type="button">Reset Tracer</button></div></section>`;
-    if (index === 2) return `<section class="lab-console" aria-labelledby="instrument-2"><h3 id="instrument-2">Tone Spectrum Scanner</h3><p>The low tone predicts food. Test nearby tones before and after selective training.</p><div class="tone-board"><button class="instrument-button" type="button" data-tone="low">Low Tone</button><button class="instrument-button" type="button" data-tone="medium">Similar Medium Tone</button><button class="instrument-button" type="button" data-tone="high">Distant High Tone</button></div><div class="visual-stage"><svg viewBox="0 0 600 180" role="img" aria-labelledby="tone-title"><title id="tone-title">Three tone waves and a response dial illustrate similarity and discrimination</title><path d="M35 80q18-55 36 0t36 0t36 0" class="wave-line"/><path d="M220 80q13-40 26 0t26 0t26 0t26 0" class="wave-line" opacity=".75"/><path d="M400 80q8-25 16 0t16 0t16 0t16 0t16 0" class="wave-line" opacity=".5"/><path d="M535 135a42 42 0 1 0-1 0" fill="#fff" stroke="#526d78" stroke-width="5"/><path id="response-needle" d="M535 135l0-30" stroke="#c18c21" stroke-width="7" stroke-linecap="round" transform="rotate(-70 535 135)"/><text x="508" y="165" font-size="14" fill="#344e59">response</text></svg></div><p id="tone-status" class="instrument-status" role="status">Generalization test ready. Select the similar medium tone.</p><div class="instrument-actions"><button id="train-discrimination" class="instrument-button" type="button">Train: Only Low Tone Predicts Food</button><button id="reset-tones" class="instrument-button" type="button">Reset Scanner</button></div></section>`;
-    if (index === 3) return `<section class="lab-console" aria-labelledby="instrument-3"><h3 id="instrument-3">Reinforcement Compass</h3><p>Map the two examples using direction of behavior and whether a consequence is added or removed.</p><div class="matrix" aria-label="Operant consequence matrix"><span></span><span class="matrix-cell heading">Behavior increases</span><span class="matrix-cell heading">Behavior decreases</span><span class="matrix-cell heading">Something added</span><span id="cell-pr" class="matrix-cell">Positive reinforcement</span><span class="matrix-cell">Positive punishment</span><span class="matrix-cell heading">Something removed</span><span id="cell-nr" class="matrix-cell">Negative reinforcement</span><span class="matrix-cell">Negative punishment</span></div><p id="consequence-status" class="instrument-status" role="status">Select each scenario to light its location on the compass.</p><div class="instrument-actions"><button class="instrument-button" type="button" data-map="positive">Add a token → practice increases</button><button class="instrument-button" type="button" data-map="negative">Remove reminder sound → buckling increases</button></div></section>`;
-    if (index === 4) return `<section class="lab-console" aria-labelledby="instrument-4"><h3 id="instrument-4">Punishment Switchboard</h3><p>Trace two fictional outcomes. Classification describes what happened to behavior; it does not determine whether a strategy is ethical or effective in every setting.</p><div class="matrix" aria-label="Punishment classification board"><span></span><span class="matrix-cell heading">Added</span><span class="matrix-cell heading">Removed</span><span class="matrix-cell heading">Behavior decreases</span><span id="cell-pp" class="matrix-cell">Positive punishment</span><span id="cell-np" class="matrix-cell">Negative punishment</span></div><p id="switch-status" class="instrument-status" role="status">Activate both switches to compare added and removed consequences.</p><div class="instrument-actions"><button class="instrument-button" type="button" data-switch="add">Add corrective task → unsafe use decreases</button><button class="instrument-button" type="button" data-switch="remove">Remove game privilege → interruptions decrease</button></div></section>`;
-    if (index === 5) return `<section class="lab-console" aria-labelledby="instrument-5"><h3 id="instrument-5">Schedule Engine</h3><div class="schedule-display"><div class="lever-machine" id="lever-machine" aria-hidden="true"><div class="lever-handle"></div><div id="token" class="token"></div><div class="lever-slot"></div></div><div><p>Press the lever. This fixed-ratio 3 demonstration releases a token after every third response.</p><p id="lever-status" class="instrument-status" role="status">0 responses · 0 tokens.</p><button id="press-lever" class="instrument-button" type="button">Press Lever</button><button id="reset-lever" class="instrument-button" type="button">Reset Engine</button></div></div><div class="instrument-actions"><button class="instrument-button schedule-choice" type="button" data-schedule="fr">Fixed ratio</button><button class="instrument-button schedule-choice" type="button" data-schedule="vr">Variable ratio</button><button class="instrument-button schedule-choice" type="button" data-schedule="fi">Fixed interval</button><button class="instrument-button schedule-choice" type="button" data-schedule="vi">Variable interval</button></div><p id="schedule-status" class="instrument-status" role="status">Select any schedule to review it, or play the full demonstration to compare all four.</p></section>`;
-    return `<section class="lab-console" aria-labelledby="instrument-6"><h3 id="instrument-6">Skill Construction Platform</h3><p>First, reinforce increasingly complete versions of a study routine. Then move through the processes that support observational learning.</p><div class="shaping-steps" aria-label="Four shaping steps"><div class="shape-step" style="--step-height:70px">Open practice file</div><div class="shape-step" style="--step-height:105px">Complete one item</div><div class="shape-step" style="--step-height:145px">Complete one set</div><div class="shape-step" style="--step-height:190px">Complete full routine</div></div><div class="instrument-actions"><button id="advance-shaping" class="instrument-button" type="button">Reinforce Next Approximation</button><button id="reset-shaping" class="instrument-button" type="button">Reset Workshop</button></div><div class="model-stage"><div class="model-person"><strong>Mentor</strong><p>Demonstrates an organized flashcard method.</p></div><div class="model-arrow" aria-hidden="true">→</div><div class="model-person"><strong>Observer</strong><p id="model-process">Ready to attend to the model.</p></div></div><div class="instrument-actions"><button id="advance-model" class="instrument-button" type="button">Advance Modeling Process</button></div><p id="skill-status" class="instrument-status" role="status">Explore shaping and the four modeling processes, or go straight to the knowledge locks.</p></section>`;
+    if (index === 0) {
+      return `<section class="lab-console" aria-labelledby="instrument-0">
+        <h3 id="instrument-0">Acquisition Console</h3>
+        <p>Watch three tone–food pairings followed by a tone-alone test, or use the individual controls below.</p>
+        <div class="visual-stage">
+          <svg viewBox="0 0 600 210" role="img" aria-labelledby="pavlov-title">
+            <title id="pavlov-title">A bell sends a signal toward a dog and food dish as an acquisition meter fills</title>
+            <g id="sim-bell">
+              <path d="M90 42c-34 0-46 28-46 62v23l-15 22h122l-15-22v-23c0-34-12-62-46-62z" fill="#d6b45d" stroke="#194f61" stroke-width="6"/>
+              <circle cx="90" cy="159" r="12" fill="#d6b45d"/>
+            </g>
+            <path d="M166 107h150" class="wave-line wave-dash"/>
+            <circle cx="238" cy="107" r="9" fill="#e2b956"/>
+            <g transform="translate(340 40)">
+              <path d="M42 48q20-37 50-8 40 1 50 38v56H25V82q0-26 17-34z" fill="#d9e8e5" stroke="#194f61" stroke-width="6"/>
+              <circle cx="108" cy="67" r="5" fill="#194f61"/>
+              <path d="M124 82q27 11 0 22" fill="none" stroke="#194f61" stroke-width="5"/>
+              <path id="saliva-drop" d="M136 105q14 18 0 28-14-10 0-28z" fill="#62bca8" opacity=".15"/>
+            </g>
+            <g transform="translate(500 105)">
+              <ellipse cx="35" cy="49" rx="33" ry="13" fill="#f2e3bd" stroke="#7c6431" stroke-width="4"/>
+              <circle cx="35" cy="32" r="23" fill="#d99858"/>
+            </g>
+          </svg>
+        </div>
+        <div class="instrument-meter" aria-label="Acquisition pairing meter"><i id="pair-meter"></i></div>
+        <p id="pavlov-status" class="instrument-status" role="status">The tone is currently neutral with respect to salivation.</p>
+        <div class="instrument-actions">
+          <button id="pair-tone-food" class="instrument-button" type="button">Pair Tone → Food</button>
+          <button id="test-tone" class="instrument-button" type="button">Test Tone Alone</button>
+          <button id="reset-pavlov" class="instrument-button" type="button">Reset Demonstration</button>
+        </div>
+        <p class="quiet">Teaching simplification: three pairings activate this display. Real acquisition does not follow one universal number of trials.</p>
+      </section>`;
+    }
+
+    if (index === 1) {
+      return `<section class="lab-console" aria-labelledby="instrument-1">
+        <h3 id="instrument-1">Extinction &amp; Recovery Tracer</h3>
+        <p>Present the learned tone without food across repeated trials, then allow a simulated rest.</p>
+        <div class="visual-stage">
+          <svg viewBox="0 0 600 190" role="img" aria-labelledby="ext-title">
+            <title id="ext-title">A response graph declines across extinction trials and rises slightly after rest</title>
+            <path d="M55 20v130h500" fill="none" stroke="#4f6874" stroke-width="5"/>
+            <path id="extinction-path" d="M65 42" fill="none" stroke="#1f766d" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+            <path id="recovery-path" d="" fill="none" stroke="#d3a83f" stroke-width="8" stroke-linecap="round"/>
+            <text x="12" y="30" font-size="16" fill="#344e59">CR</text>
+            <text x="470" y="180" font-size="16" fill="#344e59">trials / rest</text>
+          </svg>
+        </div>
+        <div class="instrument-meter"><i id="extinction-meter"></i></div>
+        <p id="extinction-status" class="instrument-status" role="status">Conditioned response strength begins at 100%.</p>
+        <div class="instrument-actions">
+          <button id="extinction-trial" class="instrument-button" type="button">Present Tone Without Food</button>
+          <button id="recovery-rest" class="instrument-button" type="button">Simulate Rest</button>
+          <button id="reset-extinction" class="instrument-button" type="button">Reset Tracer</button>
+        </div>
+      </section>`;
+    }
+
+    if (index === 2) {
+      return `<section class="lab-console" aria-labelledby="instrument-2">
+        <h3 id="instrument-2">Tone Spectrum Scanner</h3>
+        <p>The low tone predicts food. Test nearby tones before and after selective training.</p>
+        <div class="tone-board">
+          <button class="instrument-button" type="button" data-tone="low">Low Tone</button>
+          <button class="instrument-button" type="button" data-tone="medium">Similar Medium Tone</button>
+          <button class="instrument-button" type="button" data-tone="high">Distant High Tone</button>
+        </div>
+        <div class="visual-stage">
+          <svg viewBox="0 0 600 180" role="img" aria-labelledby="tone-title">
+            <title id="tone-title">Three tone waves and a response dial illustrate similarity and discrimination</title>
+            <path d="M35 80q18-55 36 0t36 0t36 0" class="wave-line"/>
+            <path d="M220 80q13-40 26 0t26 0t26 0t26 0" class="wave-line" opacity=".75"/>
+            <path d="M400 80q8-25 16 0t16 0t16 0t16 0t16 0" class="wave-line" opacity=".5"/>
+            <path d="M535 135a42 42 0 1 0-1 0" fill="#fff" stroke="#526d78" stroke-width="5"/>
+            <path id="response-needle" d="M535 135l0-30" stroke="#c18c21" stroke-width="7" stroke-linecap="round" transform="rotate(-70 535 135)"/>
+            <text x="508" y="165" font-size="14" fill="#344e59">response</text>
+          </svg>
+        </div>
+        <p id="tone-status" class="instrument-status" role="status">Generalization test ready. Select the similar medium tone.</p>
+        <div class="instrument-actions">
+          <button id="train-discrimination" class="instrument-button" type="button">Train: Only Low Tone Predicts Food</button>
+          <button id="reset-tones" class="instrument-button" type="button">Reset Scanner</button>
+        </div>
+      </section>`;
+    }
+
+    if (index === 3) {
+      return `<section class="lab-console" aria-labelledby="instrument-3">
+        <h3 id="instrument-3">Reinforcement Compass</h3>
+        <p>Map the two examples using direction of behavior and whether a consequence is added or removed.</p>
+        <div class="matrix" aria-label="Operant consequence matrix">
+          <span></span>
+          <span class="matrix-cell heading">Behavior increases</span>
+          <span class="matrix-cell heading">Behavior decreases</span>
+          <span class="matrix-cell heading">Something added</span>
+          <span id="cell-pr" class="matrix-cell">Positive reinforcement</span>
+          <span class="matrix-cell">Positive punishment</span>
+          <span class="matrix-cell heading">Something removed</span>
+          <span id="cell-nr" class="matrix-cell">Negative reinforcement</span>
+          <span class="matrix-cell">Negative punishment</span>
+        </div>
+        <p id="consequence-status" class="instrument-status" role="status">Select each scenario to light its location on the compass.</p>
+        <div class="instrument-actions">
+          <button class="instrument-button" type="button" data-map="positive">Add a token → practice increases</button>
+          <button class="instrument-button" type="button" data-map="negative">Remove reminder sound → buckling increases</button>
+        </div>
+      </section>`;
+    }
+
+    if (index === 4) {
+      return `<section class="lab-console" aria-labelledby="instrument-4">
+        <h3 id="instrument-4">Punishment Switchboard</h3>
+        <p>Trace two fictional outcomes. Classification describes what happened to behavior; it does not determine whether a strategy is ethical or effective in every setting.</p>
+        <div class="matrix" aria-label="Punishment classification board">
+          <span></span>
+          <span class="matrix-cell heading">Added</span>
+          <span class="matrix-cell heading">Removed</span>
+          <span class="matrix-cell heading">Behavior decreases</span>
+          <span id="cell-pp" class="matrix-cell">Positive punishment</span>
+          <span id="cell-np" class="matrix-cell">Negative punishment</span>
+        </div>
+        <p id="switch-status" class="instrument-status" role="status">Activate both switches to compare added and removed consequences.</p>
+        <div class="instrument-actions">
+          <button class="instrument-button" type="button" data-switch="add">Add corrective task → unsafe use decreases</button>
+          <button class="instrument-button" type="button" data-switch="remove">Remove game privilege → interruptions decrease</button>
+        </div>
+      </section>`;
+    }
+
+    if (index === 5) {
+      return `<section class="lab-console" aria-labelledby="instrument-5">
+        <h3 id="instrument-5">Schedule Engine</h3>
+        <div class="schedule-display">
+          <div class="lever-machine" id="lever-machine" aria-hidden="true">
+            <div class="lever-handle"></div>
+            <div id="token" class="token"></div>
+            <div class="lever-slot"></div>
+          </div>
+          <div>
+            <p>Press the lever. This fixed-ratio 3 demonstration releases a token after every third response.</p>
+            <p id="lever-status" class="instrument-status" role="status">0 responses · 0 tokens.</p>
+            <button id="press-lever" class="instrument-button" type="button">Press Lever</button>
+            <button id="reset-lever" class="instrument-button" type="button">Reset Engine</button>
+          </div>
+        </div>
+        <div class="instrument-actions">
+          <button class="instrument-button schedule-choice" type="button" data-schedule="fr">Fixed ratio</button>
+          <button class="instrument-button schedule-choice" type="button" data-schedule="vr">Variable ratio</button>
+          <button class="instrument-button schedule-choice" type="button" data-schedule="fi">Fixed interval</button>
+          <button class="instrument-button schedule-choice" type="button" data-schedule="vi">Variable interval</button>
+        </div>
+        <p id="schedule-status" class="instrument-status" role="status">Select any schedule to review it, or play the full demonstration to compare all four.</p>
+      </section>`;
+    }
+
+    return `<section class="lab-console" aria-labelledby="instrument-6">
+      <h3 id="instrument-6">Skill Construction Platform</h3>
+      <p>First, reinforce increasingly complete versions of a study routine. Then move through the processes that support observational learning.</p>
+      <div class="shaping-steps" aria-label="Four shaping steps">
+        <div class="shape-step" style="--step-height:70px">Open practice file</div>
+        <div class="shape-step" style="--step-height:105px">Complete one item</div>
+        <div class="shape-step" style="--step-height:145px">Complete one set</div>
+        <div class="shape-step" style="--step-height:190px">Complete full routine</div>
+      </div>
+      <div class="instrument-actions">
+        <button id="advance-shaping" class="instrument-button" type="button">Reinforce Next Approximation</button>
+        <button id="reset-shaping" class="instrument-button" type="button">Reset Workshop</button>
+      </div>
+      <div class="model-stage">
+        <div class="model-person">
+          <strong>Mentor</strong>
+          <p>Demonstrates an organized flashcard method.</p>
+        </div>
+        <div class="model-arrow" aria-hidden="true">→</div>
+        <div class="model-person">
+          <strong>Observer</strong>
+          <p id="model-process">Ready to attend to the model.</p>
+        </div>
+      </div>
+      <div class="instrument-actions">
+        <button id="advance-model" class="instrument-button" type="button">Advance Modeling Process</button>
+      </div>
+      <p id="skill-status" class="instrument-status" role="status">Explore shaping and the four modeling processes, or go straight to the knowledge locks.</p>
+    </section>`;
   }
 
   function openRoom(index) {
@@ -984,18 +1252,28 @@
     $("active-area").innerHTML = roomMarkup(index);
     renderQuestions(index);
     wireExploration(index);
+
     $("play-full-demo").addEventListener("click", () => runDemo(index));
+
     $("active-area").querySelectorAll(".lab-console .instrument-button").forEach((button) => {
       button.addEventListener("click", () => {
-        if (!demoDispatching && demoRunning) stopDemo("Demonstration stopped. Explore the controls or replay the full sequence.");
+        if (!demoDispatching && demoRunning) {
+          stopDemo("Demonstration stopped. Explore the controls or replay the full sequence.");
+        }
       }, true);
     });
+
     wireRoomNavigation(index);
     renderMap();
     updateDashboard();
+
     const heading = $(`room-heading-${index}`);
     heading.focus({ preventScroll: true });
-    $("active-area").scrollIntoView({ block: "start", behavior: reduceMotion() ? "auto" : "smooth" });
+
+    $("active-area").scrollIntoView({
+      block: "start",
+      behavior: reduceMotion() ? "auto" : "smooth"
+    });
   }
 
   let demoRunning = false;
@@ -1008,50 +1286,134 @@
     demoTimers.forEach((timer) => window.clearTimeout(timer));
     demoTimers.clear();
     demoRunning = false;
+
     const button = $("play-full-demo");
-    if (button) { button.textContent = "Play Full Demonstration"; button.setAttribute("aria-pressed", "false"); }
-    if (message && $("demo-playback-status")) $("demo-playback-status").textContent = message;
+    if (button) {
+      button.textContent = "Play Full Demonstration";
+      button.setAttribute("aria-pressed", "false");
+    }
+
+    if (message && $("demo-playback-status")) {
+      $("demo-playback-status").textContent = message;
+    }
   }
 
   function runDemo(index) {
-    if (demoRunning) { stopDemo("Demonstration stopped. Your answers and mission progress are unchanged."); return; }
+    if (demoRunning) {
+      stopDemo("Demonstration stopped. Your answers and mission progress are unchanged.");
+      return;
+    }
+
     stopDemo();
+
     const sequences = [
-      ["#reset-pavlov", "#pair-tone-food", "#pair-tone-food", "#pair-tone-food", "#test-tone"],
-      ["#reset-extinction", "#extinction-trial", "#extinction-trial", "#extinction-trial", "#extinction-trial", "#extinction-trial", "#recovery-rest"],
-      ["#reset-tones", '[data-tone="medium"]', "#train-discrimination", '[data-tone="low"]'],
-      ['[data-map="positive"]', '[data-map="negative"]'],
-      ['[data-switch="add"]', '[data-switch="remove"]'],
-      ["#reset-lever", "#press-lever", "#press-lever", "#press-lever", '[data-schedule="fr"]', '[data-schedule="vr"]', '[data-schedule="fi"]', '[data-schedule="vi"]'],
-      ["#reset-shaping", "#advance-shaping", "#advance-shaping", "#advance-shaping", "#advance-shaping", "#advance-model", "#advance-model", "#advance-model", "#advance-model"]
+      [
+        "#reset-pavlov",
+        "#pair-tone-food",
+        "#pair-tone-food",
+        "#pair-tone-food",
+        "#test-tone"
+      ],
+      [
+        "#reset-extinction",
+        "#extinction-trial",
+        "#extinction-trial",
+        "#extinction-trial",
+        "#extinction-trial",
+        "#extinction-trial",
+        "#recovery-rest"
+      ],
+      [
+        "#reset-tones",
+        '[data-tone="medium"]',
+        "#train-discrimination",
+        '[data-tone="low"]'
+      ],
+      [
+        '[data-map="positive"]',
+        '[data-map="negative"]'
+      ],
+      [
+        '[data-switch="add"]',
+        '[data-switch="remove"]'
+      ],
+      [
+        "#reset-lever",
+        "#press-lever",
+        "#press-lever",
+        "#press-lever",
+        '[data-schedule="fr"]',
+        '[data-schedule="vr"]',
+        '[data-schedule="fi"]',
+        '[data-schedule="vi"]'
+      ],
+      [
+        "#reset-shaping",
+        "#advance-shaping",
+        "#advance-shaping",
+        "#advance-shaping",
+        "#advance-shaping",
+        "#advance-model",
+        "#advance-model",
+        "#advance-model",
+        "#advance-model"
+      ]
     ];
+
     const generation = demoGeneration;
     const button = $("play-full-demo");
+
     demoRunning = true;
     button.textContent = "Stop Demonstration";
     button.setAttribute("aria-pressed", "true");
-    $("demo-playback-status").textContent = "The full sequence is playing. You may answer questions or continue to another room at any time.";
+
+    $("demo-playback-status").textContent =
+      "The full sequence is playing. You may answer questions or continue to another room at any time.";
+
     const step = (selector) => {
       if (generation !== demoGeneration || activeIndex !== index) return;
+
       const control = $("active-area").querySelector(selector);
       if (control) {
         demoDispatching = true;
-        try { control.click(); } finally { demoDispatching = false; }
+        try {
+          control.click();
+        } finally {
+          demoDispatching = false;
+        }
       }
     };
+
     const finish = () => {
       if (generation !== demoGeneration || activeIndex !== index) return;
+
       demoRunning = false;
       button.textContent = "Replay Full Demonstration";
       button.setAttribute("aria-pressed", "false");
-      $("demo-playback-status").textContent = reduceMotion() ? "The demonstration's final state is shown without animation. Use the controls to review individual examples, or answer the knowledge locks." : "Full demonstration complete. Replay it, explore the controls, or answer the knowledge locks.";
+
+      $("demo-playback-status").textContent = reduceMotion()
+        ? "The demonstration's final state is shown without animation. Use the controls to review individual examples, or answer the knowledge locks."
+        : "Full demonstration complete. Replay it, explore the controls, or answer the knowledge locks.";
     };
-    if (reduceMotion()) { sequences[index].forEach(step); finish(); return; }
+
+    if (reduceMotion()) {
+      sequences[index].forEach(step);
+      finish();
+      return;
+    }
+
     const later = (callback, delay) => {
-      const timer = window.setTimeout(() => { demoTimers.delete(timer); callback(); }, delay);
+      const timer = window.setTimeout(() => {
+        demoTimers.delete(timer);
+        callback();
+      }, delay);
       demoTimers.add(timer);
     };
-    sequences[index].forEach((selector, position) => later(() => step(selector), position * 1100));
+
+    sequences[index].forEach((selector, position) => {
+      later(() => step(selector), position * 1100);
+    });
+
     later(finish, sequences[index].length * 1100);
   }
 
@@ -1067,119 +1429,317 @@
 
   function wirePavlov() {
     let pairings = state.actions.includes("pavlov-pair") ? 3 : 0;
-    const status = $("pavlov-status"), meter = $("pair-meter"), bell = $("sim-bell"), drop = $("saliva-drop");
-    const paint = () => { meter.style.setProperty("--meter", `${Math.min(100, pairings / 3 * 100)}%`); };
+
+    const status = $("pavlov-status");
+    const meter = $("pair-meter");
+    const bell = $("sim-bell");
+    const drop = $("saliva-drop");
+
+    const paint = () => {
+      meter.style.setProperty("--meter", `${Math.min(100, pairings / 3 * 100)}%`);
+    };
+
     paint();
+
     $("pair-tone-food").addEventListener("click", () => {
-      pairings = Math.min(3, pairings + 1); paint(); animateBell(bell);
+      pairings = Math.min(3, pairings + 1);
+      paint();
+      animateBell(bell);
+
       status.textContent = `Pairing ${pairings}: tone → food → salivation to food (UCR). ${pairings === 3 ? "Association console charged. Now test the tone alone." : "Repeat the pairing."}`;
-      if (pairings === 3) { status.classList.add("success"); recordAction("pavlov-pair", 0); }
+
+      if (pairings === 3) {
+        status.classList.add("success");
+        recordAction("pavlov-pair", 0);
+      }
     });
+
     $("test-tone").addEventListener("click", () => {
       animateBell(bell);
-      if (pairings < 3) { status.textContent = "Tone alone → no learned salivation yet in this teaching model. Complete three pairings first."; return; }
-      drop.style.opacity = "1"; drop.classList.remove("salivate-now"); void drop.getBoundingClientRect(); drop.classList.add("salivate-now");
-      status.textContent = "Tone alone → salivation (CR). The tone now functions as a conditioned stimulus (CS)."; status.classList.add("success"); recordAction("pavlov-test", 0);
+
+      if (pairings < 3) {
+        status.textContent = "Tone alone → no learned salivation yet in this teaching model. Complete three pairings first.";
+        return;
+      }
+
+      drop.style.opacity = "1";
+      drop.classList.remove("salivate-now");
+      void drop.getBoundingClientRect();
+      drop.classList.add("salivate-now");
+
+      status.textContent = "Tone alone → salivation (CR). The tone now functions as a conditioned stimulus (CS).";
+      status.classList.add("success");
+      recordAction("pavlov-test", 0);
     });
-    $("reset-pavlov").addEventListener("click", () => { pairings = 0; paint(); drop.style.opacity = ".15"; status.classList.remove("success"); status.textContent = "Demonstration reset. Saved mission progress remains intact."; });
+
+    $("reset-pavlov").addEventListener("click", () => {
+      pairings = 0;
+      paint();
+      drop.style.opacity = ".15";
+      status.classList.remove("success");
+      status.textContent = "Demonstration reset. Saved mission progress remains intact.";
+    });
   }
 
   function animateBell(bell) {
-    bell.classList.remove("ring-now"); void bell.getBoundingClientRect(); bell.classList.add("ring-now");
+    bell.classList.remove("ring-now");
+    void bell.getBoundingClientRect();
+    bell.classList.add("ring-now");
   }
 
   function wireExtinction() {
     const strengths = [100, 78, 57, 38, 22, 10];
     let trial = state.actions.includes("extinction-run") ? 5 : 0;
-    const status = $("extinction-status"), path = $("extinction-path"), recovery = $("recovery-path"), meter = $("extinction-meter");
+
+    const status = $("extinction-status");
+    const path = $("extinction-path");
+    const recovery = $("recovery-path");
+    const meter = $("extinction-meter");
+
     const draw = () => {
-      const points = strengths.slice(0, trial + 1).map((strength, index) => `${65 + index * 75},${140 - strength}`).join(" ");
+      const points = strengths.slice(0, trial + 1)
+        .map((strength, index) => `${65 + index * 75},${140 - strength}`)
+        .join(" ");
+
       path.setAttribute("d", points ? `M${points.replaceAll(" ", " L")}` : "M65 40");
       meter.style.setProperty("--meter", `${strengths[trial]}%`);
     };
+
     draw();
+
     $("extinction-trial").addEventListener("click", () => {
-      trial = Math.min(5, trial + 1); draw(); status.textContent = `Trial ${trial}: tone without food. Conditioned-response strength is ${strengths[trial]}% in this teaching model.`;
-      if (trial === 5) { status.classList.add("success"); status.textContent += " The declining response illustrates extinction."; recordAction("extinction-run", 1); }
+      trial = Math.min(5, trial + 1);
+      draw();
+
+      status.textContent = `Trial ${trial}: tone without food. Conditioned-response strength is ${strengths[trial]}% in this teaching model.`;
+
+      if (trial === 5) {
+        status.classList.add("success");
+        status.textContent += " The declining response illustrates extinction.";
+        recordAction("extinction-run", 1);
+      }
     });
+
     $("recovery-rest").addEventListener("click", () => {
-      if (trial < 5) { status.textContent = "Complete the extinction trials before simulating a rest."; return; }
-      recovery.setAttribute("d", "M440 130 Q490 74 535 108"); status.classList.add("success"); status.textContent = "After a rest, the response briefly rises above its extinguished level: spontaneous recovery."; recordAction("recovery-rest", 1);
+      if (trial < 5) {
+        status.textContent = "Complete the extinction trials before simulating a rest.";
+        return;
+      }
+
+      recovery.setAttribute("d", "M440 130 Q490 74 535 108");
+      status.classList.add("success");
+      status.textContent = "After a rest, the response briefly rises above its extinguished level: spontaneous recovery.";
+      recordAction("recovery-rest", 1);
     });
-    $("reset-extinction").addEventListener("click", () => { trial = 0; recovery.setAttribute("d", ""); status.classList.remove("success"); status.textContent = "Tracer reset. Saved mission progress remains intact."; draw(); });
+
+    $("reset-extinction").addEventListener("click", () => {
+      trial = 0;
+      recovery.setAttribute("d", "");
+      status.classList.remove("success");
+      status.textContent = "Tracer reset. Saved mission progress remains intact.";
+      draw();
+    });
   }
 
   function wireTones() {
     let trained = state.actions.includes("discriminate-tone");
-    const status = $("tone-status"), needle = $("response-needle");
+    const status = $("tone-status");
+    const needle = $("response-needle");
+
     const respond = (tone) => {
-      const before = { low: 62, medium: 48, high: 10 }, after = { low: 68, medium: 13, high: 4 };
+      const before = { low: 62, medium: 48, high: 10 };
+      const after = { low: 68, medium: 13, high: 4 };
       const strength = (trained ? after : before)[tone];
+
       needle.setAttribute("transform", `rotate(${-70 + strength * 1.35} 535 135)`);
-      if (!trained && tone === "medium") { status.classList.add("success"); status.textContent = "The similar medium tone produces a response before selective training: stimulus generalization."; recordAction("general-tone", 2); }
-      else if (trained && tone === "low") { status.classList.add("success"); status.textContent = "After selective training, the low predictive tone produces the strongest response: stimulus discrimination."; recordAction("discriminate-tone", 2); }
-      else status.textContent = `${tone[0].toUpperCase() + tone.slice(1)} tone tested. Response strength: ${strength}%. ${trained ? "Selective training is active." : "Generalization mode is active."}`;
+
+      if (!trained && tone === "medium") {
+        status.classList.add("success");
+        status.textContent = "The similar medium tone produces a response before selective training: stimulus generalization.";
+        recordAction("general-tone", 2);
+      } else if (trained && tone === "low") {
+        status.classList.add("success");
+        status.textContent = "After selective training, the low predictive tone produces the strongest response: stimulus discrimination.";
+        recordAction("discriminate-tone", 2);
+      } else {
+        status.textContent = `${tone[0].toUpperCase() + tone.slice(1)} tone tested. Response strength: ${strength}%. ${trained ? "Selective training is active." : "Generalization mode is active."}`;
+      }
     };
-    document.querySelectorAll("[data-tone]").forEach((button) => button.addEventListener("click", () => respond(button.dataset.tone)));
-    $("train-discrimination").addEventListener("click", () => { trained = true; status.classList.remove("success"); status.textContent = "Selective training active: only the low tone predicts food. Now test the low tone."; });
-    $("reset-tones").addEventListener("click", () => { trained = false; status.classList.remove("success"); status.textContent = "Scanner reset to generalization mode. Saved mission progress remains intact."; needle.setAttribute("transform", "rotate(-70 535 135)"); });
+
+    document.querySelectorAll("[data-tone]").forEach((button) => {
+      button.addEventListener("click", () => respond(button.dataset.tone));
+    });
+
+    $("train-discrimination").addEventListener("click", () => {
+      trained = true;
+      status.classList.remove("success");
+      status.textContent = "Selective training active: only the low tone predicts food. Now test the low tone.";
+    });
+
+    $("reset-tones").addEventListener("click", () => {
+      trained = false;
+      status.classList.remove("success");
+      status.textContent = "Scanner reset to generalization mode. Saved mission progress remains intact.";
+      needle.setAttribute("transform", "rotate(-70 535 135)");
+    });
   }
 
   function wireConsequence() {
     const status = $("consequence-status");
-    document.querySelectorAll("[data-map]").forEach((button) => button.addEventListener("click", () => {
-      const positive = button.dataset.map === "positive";
-      $("cell-pr").classList.toggle("active", positive); $("cell-nr").classList.toggle("active", !positive);
-      if (positive) { status.textContent = "Token added + practice increases = positive reinforcement."; recordAction("positive-map", 3); }
-      else { status.textContent = "Reminder sound removed + buckling increases = negative reinforcement."; recordAction("negative-map", 3); }
-      status.classList.add("success");
-    }));
+
+    document.querySelectorAll("[data-map]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const positive = button.dataset.map === "positive";
+
+        $("cell-pr").classList.toggle("active", positive);
+        $("cell-nr").classList.toggle("active", !positive);
+
+        if (positive) {
+          status.textContent = "Token added + practice increases = positive reinforcement.";
+          recordAction("positive-map", 3);
+        } else {
+          status.textContent = "Reminder sound removed + buckling increases = negative reinforcement.";
+          recordAction("negative-map", 3);
+        }
+
+        status.classList.add("success");
+      });
+    });
   }
 
   function wirePunishment() {
     const status = $("switch-status");
-    document.querySelectorAll("[data-switch]").forEach((button) => button.addEventListener("click", () => {
-      const added = button.dataset.switch === "add";
-      $("cell-pp").classList.toggle("active", added); $("cell-np").classList.toggle("active", !added);
-      if (added) { status.textContent = "Corrective task added + unsafe use decreases = positive punishment."; recordAction("switch-add", 4); }
-      else { status.textContent = "Privilege removed + interruptions decrease = negative punishment."; recordAction("switch-remove", 4); }
-      status.classList.add("success");
-    }));
+
+    document.querySelectorAll("[data-switch]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const added = button.dataset.switch === "add";
+
+        $("cell-pp").classList.toggle("active", added);
+        $("cell-np").classList.toggle("active", !added);
+
+        if (added) {
+          status.textContent = "Corrective task added + unsafe use decreases = positive punishment.";
+          recordAction("switch-add", 4);
+        } else {
+          status.textContent = "Privilege removed + interruptions decrease = negative punishment.";
+          recordAction("switch-remove", 4);
+        }
+
+        status.classList.add("success");
+      });
+    });
   }
 
   function wireSchedule() {
     let presses = 0;
     const seen = new Set();
-    const machine = $("lever-machine"), token = $("token"), leverStatus = $("lever-status"), scheduleStatus = $("schedule-status");
+
+    const machine = $("lever-machine");
+    const token = $("token");
+    const leverStatus = $("lever-status");
+    const scheduleStatus = $("schedule-status");
+
     $("press-lever").addEventListener("click", () => {
-      presses += 1; machine.classList.add("pressed"); window.setTimeout(() => machine.classList.remove("pressed"), 220);
-      const tokens = Math.floor(presses / 3), delivered = presses % 3 === 0;
+      presses += 1;
+      machine.classList.add("pressed");
+      window.setTimeout(() => machine.classList.remove("pressed"), 220);
+
+      const tokens = Math.floor(presses / 3);
+      const delivered = presses % 3 === 0;
+
       leverStatus.textContent = `${presses} responses · ${tokens} token${tokens === 1 ? "" : "s"}. ${delivered ? "Token delivered after the third response." : "No token yet."}`;
-      if (delivered) { token.classList.remove("drop"); void token.getBoundingClientRect(); token.classList.add("drop"); leverStatus.classList.add("success"); recordAction("lever-run", 5); }
+
+      if (delivered) {
+        token.classList.remove("drop");
+        void token.getBoundingClientRect();
+        token.classList.add("drop");
+        leverStatus.classList.add("success");
+        recordAction("lever-run", 5);
+      }
     });
-    $("reset-lever").addEventListener("click", () => { presses = 0; leverStatus.classList.remove("success"); leverStatus.textContent = "0 responses · 0 tokens. Saved mission progress remains intact."; });
+
+    $("reset-lever").addEventListener("click", () => {
+      presses = 0;
+      leverStatus.classList.remove("success");
+      leverStatus.textContent = "0 responses · 0 tokens. Saved mission progress remains intact.";
+    });
+
     const definitions = {
       fr: "Fixed ratio: reinforcement follows a predictable number of responses.",
       vr: "Variable ratio: reinforcement follows a changing, unpredictable number of responses.",
       fi: "Fixed interval: the first eligible response after a predictable amount of time is reinforced.",
       vi: "Variable interval: the first eligible response after changing, unpredictable time periods is reinforced."
     };
-    document.querySelectorAll("[data-schedule]").forEach((button) => button.addEventListener("click", () => {
-      seen.add(button.dataset.schedule); button.setAttribute("aria-pressed", "true"); scheduleStatus.textContent = definitions[button.dataset.schedule];
-      if (seen.size >= 2) { scheduleStatus.classList.add("success"); scheduleStatus.textContent += " You have now compared response-based or time-based schedules."; recordAction("schedule-compare", 5); }
-    }));
+
+    document.querySelectorAll("[data-schedule]").forEach((button) => {
+      button.addEventListener("click", () => {
+        seen.add(button.dataset.schedule);
+        button.setAttribute("aria-pressed", "true");
+        scheduleStatus.textContent = definitions[button.dataset.schedule];
+
+        if (seen.size >= 2) {
+          scheduleStatus.classList.add("success");
+          scheduleStatus.textContent += " You have now compared response-based or time-based schedules.";
+          recordAction("schedule-compare", 5);
+        }
+      });
+    });
   }
 
   function wireSkill() {
     let step = state.actions.includes("shape-run") ? 4 : 0;
     let model = state.actions.includes("model-watch") ? 4 : 0;
-    const steps = [...document.querySelectorAll(".shape-step")], process = $("model-process"), status = $("skill-status");
-    const modelLabels = ["Ready to attend to the model.", "Attention: focuses on the demonstrated method.", "Retention: mentally represents and remembers the steps.", "Reproduction: practices producing the observed behavior.", "Motivation: has a reason to perform the learned behavior."];
-    const paint = () => { steps.forEach((item, index) => item.classList.toggle("active", index < step)); process.textContent = modelLabels[model]; };
+
+    const steps = [...document.querySelectorAll(".shape-step")];
+    const process = $("model-process");
+    const status = $("skill-status");
+
+    const modelLabels = [
+      "Ready to attend to the model.",
+      "Attention: focuses on the demonstrated method.",
+      "Retention: mentally represents and remembers the steps.",
+      "Reproduction: practices producing the observed behavior.",
+      "Motivation: has a reason to perform the learned behavior."
+    ];
+
+    const paint = () => {
+      steps.forEach((item, index) => item.classList.toggle("active", index < step));
+      process.textContent = modelLabels[model];
+    };
+
     paint();
-    $("advance-shaping").addEventListener("click", () => { step = Math.min(4, step + 1); paint(); status.textContent = `Shaping step ${step} of 4 reinforced. ${step === 4 ? "The full routine has been reached through successive approximations." : "The criterion now moves closer to the target behavior."}`; if (step === 4) { status.classList.add("success"); recordAction("shape-run", 6); } });
-    $("reset-shaping").addEventListener("click", () => { step = 0; model = 0; paint(); status.classList.remove("success"); status.textContent = "Shaping staircase reset. Saved mission progress remains intact."; });
-    $("advance-model").addEventListener("click", () => { model = Math.min(4, model + 1); paint(); status.textContent = modelLabels[model]; if (model === 4) { status.classList.add("success"); status.textContent += " The four modeled-learning processes have been traced."; recordAction("model-watch", 6); } });
+
+    $("advance-shaping").addEventListener("click", () => {
+      step = Math.min(4, step + 1);
+      paint();
+
+      status.textContent = `Shaping step ${step} of 4 reinforced. ${step === 4 ? "The full routine has been reached through successive approximations." : "The criterion now moves closer to the target behavior."}`;
+
+      if (step === 4) {
+        status.classList.add("success");
+        recordAction("shape-run", 6);
+      }
+    });
+
+    $("reset-shaping").addEventListener("click", () => {
+      step = 0;
+      model = 0;
+      paint();
+      status.classList.remove("success");
+      status.textContent = "Shaping staircase reset. Saved mission progress remains intact.";
+    });
+
+    $("advance-model").addEventListener("click", () => {
+      model = Math.min(4, model + 1);
+      paint();
+      status.textContent = modelLabels[model];
+
+      if (model === 4) {
+        status.classList.add("success");
+        status.textContent += " The four modeled-learning processes have been traced.";
+        recordAction("model-watch", 6);
+      }
+    });
   }
 
   function recordAction(action, roomIndex) {
@@ -1190,16 +1750,25 @@
 
   function renderQuestions(roomIndex) {
     const container = $(`questions-${roomIndex}`);
+
     container.innerHTML = questions[roomIndex].map((question, localIndex) => {
       const lockId = roomIndex * 2 + localIndex;
       const solved = state.solved.includes(lockId);
+
       return `<fieldset id="question-${lockId}" class="question-card${solved ? " solved" : ""}">
         <legend>Lock ${localIndex + 1}: ${question.prompt}</legend>
-        <div class="choice-grid">${question.choices.map((choice, choiceIndex) => `<button class="choice-button${solved && choiceIndex === question.correct ? " correct-choice" : ""}" type="button" data-lock="${lockId}" data-choice="${choiceIndex}" ${solved ? "disabled" : ""}>${String.fromCharCode(65 + choiceIndex)}. ${choice}</button>`).join("")}</div>
+        <div class="choice-grid">
+          ${question.choices.map((choice, choiceIndex) => `
+            <button class="choice-button${solved && choiceIndex === question.correct ? " correct-choice" : ""}" type="button" data-lock="${lockId}" data-choice="${choiceIndex}" ${solved ? "disabled" : ""}>${String.fromCharCode(65 + choiceIndex)}. ${choice}</button>
+          `).join("")}
+        </div>
         <p id="feedback-${lockId}" class="feedback ${solved ? "good" : ""}" role="status">${solved ? `✓ ${question.explanation}` : "Choose the best answer. You may retry."}</p>
       </fieldset>`;
     }).join("");
-    container.querySelectorAll("[data-lock]").forEach((button) => button.addEventListener("click", () => checkAnswer(roomIndex, button)));
+
+    container.querySelectorAll("[data-lock]").forEach((button) => {
+      button.addEventListener("click", () => checkAnswer(roomIndex, button));
+    });
   }
 
   function checkAnswer(roomIndex, button) {
@@ -1207,18 +1776,36 @@
     const question = questions[roomIndex][lockId % 2];
     const choice = Number(button.dataset.choice);
     const feedback = $(`feedback-${lockId}`);
+
     if (choice === question.correct) {
       if (!state.solved.includes(lockId)) state.solved.push(lockId);
+
       const card = $(`question-${lockId}`);
       card.classList.add("solved");
-      card.querySelectorAll("[data-choice]").forEach((item) => { item.disabled = true; if (Number(item.dataset.choice) === question.correct) item.classList.add("correct-choice"); });
-      feedback.textContent = `✓ ${question.explanation}`; feedback.className = "feedback good";
+
+      card.querySelectorAll("[data-choice]").forEach((item) => {
+        item.disabled = true;
+        if (Number(item.dataset.choice) === question.correct) {
+          item.classList.add("correct-choice");
+        }
+      });
+
+      feedback.textContent = `✓ ${question.explanation}`;
+      feedback.className = "feedback good";
+
       maybeCompleteRoom(roomIndex);
+
       $(`clue-holder-${roomIndex}`).innerHTML = clueMarkup(roomIndex);
-      $(`room-number-${roomIndex}`).textContent = `Laboratory ${roomIndex + 1} of 7 · ${roomReady(roomIndex) ? `Evidence ${rooms[roomIndex].fragment}` : "Evidence sealed"}`;
-      renderMap(); updateDashboard(); saveState("Knowledge lock solved and progress saved.");
+      $(`room-number-${roomIndex}`).textContent =
+        `Laboratory ${roomIndex + 1} of 7 · ${roomReady(roomIndex) ? `Evidence ${rooms[roomIndex].fragment}` : "Evidence sealed"}`;
+
+      renderMap();
+      updateDashboard();
+      saveState("Knowledge lock solved and progress saved.");
     } else {
-      button.classList.add("wrong-choice"); feedback.textContent = `Not quite yet. ${hintFor(roomIndex)} Review the example and try again.`; feedback.className = "feedback try";
+      button.classList.add("wrong-choice");
+      feedback.textContent = `Not quite yet. ${hintFor(roomIndex)} Review the example and try again.`;
+      feedback.className = "feedback try";
       window.setTimeout(() => button.classList.remove("wrong-choice"), 900);
     }
   }
@@ -1229,17 +1816,48 @@
 
   function maybeCompleteRoom(index) {
     const room = rooms[index];
+
     if (!roomReady(index) || state.completed.includes(room.id)) return;
+
     state.completed.push(room.id);
-    if (!state.evidence.includes(room.evidence)) state.evidence.push(room.evidence);
-    if (state.completed.length === 1) addAchievement("First Association: restored your first learning laboratory.");
-    if (room.id === "pavlov") addAchievement("Signal Scientist: traced a neutral stimulus becoming a CS.");
-    if (room.id === "consequence") addAchievement("Consequence Cartographer: separated positive from negative reinforcement.");
-    if (room.id === "schedule") addAchievement("Schedule Engineer: compared response- and time-based contingencies.");
-    if (room.id === "skill") addAchievement("Modeling Mentor: connected shaping with observational learning.");
-    if (state.completed.length === rooms.length) addAchievement("Archive Detective: restored all seven laboratories.");
-    const holder = $(`clue-holder-${index}`); if (holder) holder.innerHTML = clueMarkup(index);
-    const route = $(`room-nav-${index}`); if (route) { route.innerHTML = roomNavigationMarkup(index); wireRoomNavigation(index); }
+
+    if (!state.evidence.includes(room.evidence)) {
+      state.evidence.push(room.evidence);
+    }
+
+    if (state.completed.length === 1) {
+      addAchievement("First Association: restored your first learning laboratory.");
+    }
+
+    if (room.id === "pavlov") {
+      addAchievement("Signal Scientist: traced a neutral stimulus becoming a CS.");
+    }
+
+    if (room.id === "consequence") {
+      addAchievement("Consequence Cartographer: separated positive from negative reinforcement.");
+    }
+
+    if (room.id === "schedule") {
+      addAchievement("Schedule Engineer: compared response- and time-based contingencies.");
+    }
+
+    if (room.id === "skill") {
+      addAchievement("Modeling Mentor: connected shaping with observational learning.");
+    }
+
+    if (state.completed.length === rooms.length) {
+      addAchievement("Archive Detective: restored all seven laboratories.");
+    }
+
+    const holder = $(`clue-holder-${index}`);
+    if (holder) holder.innerHTML = clueMarkup(index);
+
+    const route = $(`room-nav-${index}`);
+    if (route) {
+      route.innerHTML = roomNavigationMarkup(index);
+      wireRoomNavigation(index);
+    }
+
     saveState("Laboratory restored and evidence letter illuminated.");
   }
 
@@ -1249,8 +1867,19 @@
 
   function clueMarkup(index) {
     const room = rooms[index];
-    if (!state.completed.includes(room.id)) return `<div class="action-checklist"><strong>Evidence seal:</strong> ${roomLockCount(index)} of 2 knowledge locks solved. Answer both correctly to reveal the letter. Demonstrations are optional.</div>`;
-    return `<div class="clue-card"><span class="clue-letter">${room.fragment}</span><strong>Evidence recovered: ${room.title}</strong><p>${room.evidence}</p></div>`;
+
+    if (!state.completed.includes(room.id)) {
+      return `<div class="action-checklist">
+        <strong>Evidence seal:</strong> ${roomLockCount(index)} of 2 knowledge locks solved.
+        Answer both correctly to reveal the letter. Demonstrations are optional.
+      </div>`;
+    }
+
+    return `<div class="clue-card">
+      <span class="clue-letter">${room.fragment}</span>
+      <strong>Evidence recovered: ${room.title}</strong>
+      <p>${room.evidence}</p>
+    </div>`;
   }
 
   function nextUnfinished(afterIndex) {
@@ -1264,7 +1893,11 @@
   function roomNavigationMarkup(index) {
     const ready = state.completed.includes(rooms[index].id);
     const next = nextUnfinished(index);
-    const label = ready ? "Evidence secured. Continue directly to the next destination." : "You may continue now and return later; unfinished work remains saved.";
+
+    const label = ready
+      ? "Evidence secured. Continue directly to the next destination."
+      : "You may continue now and return later; unfinished work remains saved.";
+
     return `<p style="grid-column:1/-1;margin:0"><strong>${label}</strong></p>
       <button class="next-button" type="button" data-next-room="${next}">${next < 0 ? "Go to the Final Vault" : next === index ? "Return to This Laboratory’s Knowledge Locks" : "Continue to Next Unfinished Laboratory"}</button>
       <button class="next-button map-button" type="button" data-return-map>Return to Laboratory Map</button>`;
@@ -1273,100 +1906,290 @@
   function wireRoomNavigation(index) {
     const holder = $(`room-nav-${index}`);
     if (!holder) return;
+
     holder.querySelector("[data-next-room]").addEventListener("click", (event) => {
       const next = Number(event.currentTarget.dataset.nextRoom);
-      if (next < 0) { $("final-case").hidden = false; $("final-heading").focus({ preventScroll: true }); $("final-case").scrollIntoView({ behavior: reduceMotion() ? "auto" : "smooth", block: "start" }); }
-      else if (next === index) {
+
+      if (next < 0) {
+        $("final-case").hidden = false;
+        $("final-heading").focus({ preventScroll: true });
+        $("final-case").scrollIntoView({
+          behavior: reduceMotion() ? "auto" : "smooth",
+          block: "start"
+        });
+      } else if (next === index) {
         $(`locks-heading-${index}`).focus({ preventScroll: true });
-        $(`locks-heading-${index}`).scrollIntoView({ behavior: reduceMotion() ? "auto" : "smooth", block: "start" });
-      } else openRoom(next);
+        $(`locks-heading-${index}`).scrollIntoView({
+          behavior: reduceMotion() ? "auto" : "smooth",
+          block: "start"
+        });
+      } else {
+        openRoom(next);
+      }
     });
-    holder.querySelector("[data-return-map]").addEventListener("click", () => { $("map-heading").focus?.(); $("map-heading").scrollIntoView({ behavior: reduceMotion() ? "auto" : "smooth", block: "start" }); });
+
+    holder.querySelector("[data-return-map]").addEventListener("click", () => {
+      $("map-heading").focus?.();
+      $("map-heading").scrollIntoView({
+        behavior: reduceMotion() ? "auto" : "smooth",
+        block: "start"
+      });
+    });
   }
 
   function updateDashboard() {
     const completed = state.completed.length;
     const steps = state.solved.length;
+
     $("progress-bar").value = steps;
     $("progress-bar").textContent = `${steps} of ${TOTAL_STEPS} knowledge locks solved`;
     $("progress-text").textContent = `${steps} of ${TOTAL_STEPS} knowledge locks solved`;
     $("room-progress").textContent = `${completed} of 7 laboratories restored`;
     $("lock-progress").textContent = `${state.solved.length} of ${TOTAL_LOCKS} knowledge locks solved`;
-    $("mobile-progress").innerHTML = `<a href="#map-heading">${completed}/7 laboratories · ${steps}/${TOTAL_STEPS} locks</a>`;
+
+    $("mobile-progress").innerHTML =
+      `<a href="#map-heading">${completed}/7 laboratories · ${steps}/${TOTAL_STEPS} locks</a>`;
+
     $("fragment-rack").innerHTML = rooms.map((room, index) => {
-      const charge = roomCharge(index), collected = state.completed.includes(room.id);
+      const charge = roomCharge(index);
+      const collected = state.completed.includes(room.id);
       const percent = charge * 50;
-      return `<li class="fragment stage-${charge}${collected ? " collected" : ""}" style="--charge:${percent}%"><span>${collected ? room.fragment : charge ? "◦" : "?"}</span><small>${index + 1}</small><span class="sr-only">${collected ? `Evidence letter ${room.fragment} collected` : `Evidence letter ${index + 1} is ${percent}% charged`}</span></li>`;
+
+      return `<li class="fragment stage-${charge}${collected ? " collected" : ""}" style="--charge:${percent}%">
+        <span>${collected ? room.fragment : charge ? "◦" : "?"}</span>
+        <small>${index + 1}</small>
+        <span class="sr-only">${collected ? `Evidence letter ${room.fragment} collected` : `Evidence letter ${index + 1} is ${percent}% charged`}</span>
+      </li>`;
     }).join("");
-    $("inventory-list").innerHTML = state.evidence.length ? state.evidence.map((item) => `<li>${item}</li>`).join("") : "<li>No evidence collected yet.</li>";
-    $("achievement-list").innerHTML = state.achievements.length ? state.achievements.map((item) => `<li>${item}</li>`).join("") : "<li>Your discoveries will appear here.</li>";
+
+    $("inventory-list").innerHTML = state.evidence.length
+      ? state.evidence.map((item) => `<li>${item}</li>`).join("")
+      : "<li>No evidence collected yet.</li>";
+
+    $("achievement-list").innerHTML = state.achievements.length
+      ? state.achievements.map((item) => `<li>${item}</li>`).join("")
+      : "<li>Your discoveries will appear here.</li>";
+
     const ready = completed === rooms.length;
     $("final-case").hidden = !ready;
-    $("learned-code").innerHTML = ready ? rooms.map((room) => `<span>${room.fragment}</span>`).join("") : "";
-    if (ready && !state.escaped) $("final-feedback").textContent = "The letters glow in laboratory order. Solve the synthesis locks and enter the seven-letter code.";
+    $("learned-code").innerHTML = ready
+      ? rooms.map((room) => `<span>${room.fragment}</span>`).join("")
+      : "";
+
+    if (ready && !state.escaped) {
+      $("final-feedback").textContent =
+        "The letters glow in laboratory order. Solve the synthesis locks and enter the seven-letter code.";
+    }
+
     if (state.escaped) showCompletedFinal(false);
   }
 
   function handleFinal(event) {
     event.preventDefault();
+
     if (!rooms.every((room, index) => roomReady(index))) {
-      $("final-feedback").textContent = "Solve all fourteen knowledge locks to collect the seven letters before opening the final vault.";
+      $("final-feedback").textContent =
+        "Solve all fourteen knowledge locks to collect the seven letters before opening the final vault.";
       return;
     }
-    const values = [$("final-one").value, $("final-two").value, $("final-three").value, $("portal-code").value.trim().toUpperCase()];
-    const expected = ["observational", "positive-reinforcement", "classical", "LEARNED"];
+
+    const values = [
+      $("final-one").value,
+      $("final-two").value,
+      $("final-three").value,
+      $("portal-code").value.trim().toUpperCase()
+    ];
+
+    const expected = [
+      "observational",
+      "positive-reinforcement",
+      "classical",
+      "LEARNED"
+    ];
+
     if (!values.every((value, index) => value === expected[index])) {
       const missed = [];
       if (values[0] !== expected[0]) missed.push("learning from the tutor");
       if (values[1] !== expected[1]) missed.push("the token consequence");
       if (values[2] !== expected[2]) missed.push("the tone association");
       if (values[3] !== expected[3]) missed.push("the evidence-letter code");
-      $("final-feedback").textContent = `The vault is still calibrating. Revisit: ${missed.join(", ")}. The letters appear in laboratory order.`;
+
+      $("final-feedback").textContent =
+        `The vault is still calibrating. Revisit: ${missed.join(", ")}. The letters appear in laboratory order.`;
+
       return;
     }
+
     state.escaped = true;
     addAchievement("Learning Investigator: opened the Conditioning Vault.");
     saveState("Mission complete. Your badge is ready.");
-    showCompletedFinal(true); updateDashboard();
+    showCompletedFinal(true);
+    updateDashboard();
   }
 
   function showCompletedFinal(celebrate) {
-    $("final-case").hidden = false; $("badge-maker").hidden = false; $("final-form").hidden = true;
-    $("final-feedback").textContent = "✓ Vault open! Classical conditioning links stimuli, operant conditioning links behavior with consequences, and observational learning draws on models.";
-    if (state.learner) { $("learner-name").value = state.learner; drawBadge(state.learner); $("download-badge").disabled = false; }
-    else drawBadge("Academy Scholar");
+    $("final-case").hidden = false;
+    $("badge-maker").hidden = false;
+    $("final-form").hidden = true;
+
+    $("final-feedback").textContent =
+      "✓ Vault open! Classical conditioning links stimuli, operant conditioning links behavior with consequences, and observational learning draws on models.";
+
+    if (state.learner) {
+      $("learner-name").value = state.learner;
+      drawBadge(state.learner);
+      $("download-badge").disabled = false;
+    } else {
+      drawBadge("Academy Scholar");
+    }
+
     if (celebrate) launchConfetti();
   }
 
   function launchConfetti() {
     if (reduceMotion()) return;
+
     const colors = ["#e2bd62", "#78cfb7", "#4f92ad", "#ffffff"];
-    $("confetti").innerHTML = Array.from({ length: 52 }, (_, index) => `<i style="left:${(index * 37) % 100}%;--drift:${(index % 2 ? 1 : -1) * (20 + (index % 7) * 7)}px;--confetti:${colors[index % colors.length]};animation-delay:${(index % 12) * .08}s"></i>`).join("");
-    window.setTimeout(() => { $("confetti").innerHTML = ""; }, 4200);
+
+    $("confetti").innerHTML = Array.from({ length: 52 }, (_, index) =>
+      `<i style="left:${(index * 37) % 100}%;--drift:${(index % 2 ? 1 : -1) * (20 + (index % 7) * 7)}px;--confetti:${colors[index % colors.length]};animation-delay:${(index % 12) * .08}s"></i>`
+    ).join("");
+
+    window.setTimeout(() => {
+      $("confetti").innerHTML = "";
+    }, 4200);
   }
 
   function drawBadge(name) {
-    const canvas = $("badge-canvas"), ctx = canvas.getContext("2d"), width = canvas.width, height = canvas.height;
-    const bg = ctx.createLinearGradient(0, 0, width, height); bg.addColorStop(0, "#061b29"); bg.addColorStop(.52, "#174e5d"); bg.addColorStop(1, "#215d4d"); ctx.fillStyle = bg; ctx.fillRect(0, 0, width, height);
-    const glow = ctx.createRadialGradient(width / 2, 290, 20, width / 2, 290, 430); glow.addColorStop(0, "rgba(244,205,103,.35)"); glow.addColorStop(1, "rgba(0,0,0,0)"); ctx.fillStyle = glow; ctx.fillRect(0, 0, width, height);
-    ctx.strokeStyle = "#e1bd63"; ctx.lineWidth = 13; ctx.strokeRect(34, 34, width - 68, height - 68); ctx.strokeStyle = "#82d5bd"; ctx.lineWidth = 3; ctx.strokeRect(56, 56, width - 112, height - 112);
-    ctx.save(); ctx.translate(width / 2, 258); ctx.strokeStyle = "#dcb95f"; ctx.lineWidth = 12; ctx.beginPath(); ctx.arc(0, 0, 155, 0, Math.PI * 2); ctx.stroke(); ctx.strokeStyle = "#8dd7c3"; ctx.lineWidth = 5; ctx.setLineDash([18, 12]); ctx.beginPath(); ctx.arc(0, 0, 124, 0, Math.PI * 2); ctx.stroke(); ctx.setLineDash([]);
+    const canvas = $("badge-canvas");
+    const ctx = canvas.getContext("2d");
+    const width = canvas.width;
+    const height = canvas.height;
+
+    const bg = ctx.createLinearGradient(0, 0, width, height);
+    bg.addColorStop(0, "#061b29");
+    bg.addColorStop(.52, "#174e5d");
+    bg.addColorStop(1, "#215d4d");
+    ctx.fillStyle = bg;
+    ctx.fillRect(0, 0, width, height);
+
+    const glow = ctx.createRadialGradient(width / 2, 290, 20, width / 2, 290, 430);
+    glow.addColorStop(0, "rgba(244,205,103,.35)");
+    glow.addColorStop(1, "rgba(0,0,0,0)");
+    ctx.fillStyle = glow;
+    ctx.fillRect(0, 0, width, height);
+
+    ctx.strokeStyle = "#e1bd63";
+    ctx.lineWidth = 13;
+    ctx.strokeRect(34, 34, width - 68, height - 68);
+
+    ctx.strokeStyle = "#82d5bd";
+    ctx.lineWidth = 3;
+    ctx.strokeRect(56, 56, width - 112, height - 112);
+
+    ctx.save();
+    ctx.translate(width / 2, 258);
+    ctx.strokeStyle = "#dcb95f";
+    ctx.lineWidth = 12;
+    ctx.beginPath();
+    ctx.arc(0, 0, 155, 0, Math.PI * 2);
+    ctx.stroke();
+
+    ctx.strokeStyle = "#8dd7c3";
+    ctx.lineWidth = 5;
+    ctx.setLineDash([18, 12]);
+    ctx.beginPath();
+    ctx.arc(0, 0, 124, 0, Math.PI * 2);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
     for (let index = 0; index < 7; index += 1) {
-      const angle = index / 7 * Math.PI * 2 - Math.PI / 2, x = Math.cos(angle) * 155, y = Math.sin(angle) * 155;
-      ctx.fillStyle = index % 2 ? "#74cbb3" : "#e1bd63"; ctx.beginPath(); ctx.arc(x, y, 25, 0, Math.PI * 2); ctx.fill();
-      ctx.fillStyle = "#0e3040"; ctx.font = "700 25px Arial"; ctx.textAlign = "center"; ctx.fillText("LEARNED"[index], x, y + 9);
+      const angle = index / 7 * Math.PI * 2 - Math.PI / 2;
+      const x = Math.cos(angle) * 155;
+      const y = Math.sin(angle) * 155;
+
+      ctx.fillStyle = index % 2 ? "#74cbb3" : "#e1bd63";
+      ctx.beginPath();
+      ctx.arc(x, y, 25, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = "#0e3040";
+      ctx.font = "700 25px Arial";
+      ctx.textAlign = "center";
+      ctx.fillText("LEARNED"[index], x, y + 9);
     }
-    ctx.fillStyle = "#e7c66b"; ctx.beginPath(); ctx.arc(0, 0, 70, 0, Math.PI * 2); ctx.fill(); ctx.strokeStyle = "#fff2bb"; ctx.lineWidth = 5; ctx.stroke();
-    ctx.strokeStyle = "#174556"; ctx.lineWidth = 10; for (let index = 0; index < 4; index += 1) { const angle = index * Math.PI / 2; ctx.beginPath(); ctx.moveTo(Math.cos(angle) * 22, Math.sin(angle) * 22); ctx.lineTo(Math.cos(angle) * 58, Math.sin(angle) * 58); ctx.stroke(); }
+
+    ctx.fillStyle = "#e7c66b";
+    ctx.beginPath();
+    ctx.arc(0, 0, 70, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.strokeStyle = "#fff2bb";
+    ctx.lineWidth = 5;
+    ctx.stroke();
+
+    ctx.strokeStyle = "#174556";
+    ctx.lineWidth = 10;
+
+    for (let index = 0; index < 4; index += 1) {
+      const angle = index * Math.PI / 2;
+      ctx.beginPath();
+      ctx.moveTo(Math.cos(angle) * 22, Math.sin(angle) * 22);
+      ctx.lineTo(Math.cos(angle) * 58, Math.sin(angle) * 58);
+      ctx.stroke();
+    }
+
     ctx.restore();
-    ctx.textAlign = "center"; ctx.fillStyle = "#e9c86e"; ctx.font = "700 32px Arial"; ctx.fillText("PSYCHOLOGY ACADEMY · WEEK 6", width / 2, 475); ctx.fillStyle = "#fff"; ctx.font = "700 68px Georgia"; ctx.fillText("Learning Investigator", width / 2, 568); ctx.fillStyle = "#a9ead8"; ctx.font = "31px Georgia"; ctx.fillText("The Conditioning Vault", width / 2, 622);
-    ctx.fillStyle = "#fff7e3"; ctx.font = "italic 49px Georgia"; fitText(ctx, name, width - 220, 49); ctx.fillText(name, width / 2, 722); ctx.strokeStyle = "#e2bd64"; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(270, 752); ctx.lineTo(width - 270, 752); ctx.stroke();
-    ctx.fillStyle = "#eaf4ef"; ctx.font = "25px Arial"; ctx.fillText("Restored seven laboratories · Solved fourteen knowledge locks", width / 2, 814); ctx.fillText("Applied classical, operant, and observational learning", width / 2, 856); ctx.fillStyle = "#f0cb6d"; ctx.font = "700 27px Arial"; ctx.fillText("MISSION CODE: LEARNED", width / 2, 901); ctx.fillStyle = "#dfe9e6"; ctx.font = "22px Arial"; ctx.fillText(`Completed ${new Date().toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" })} · Dr. Tonya Holdaway`, width / 2, 946);
+
+    ctx.textAlign = "center";
+    ctx.fillStyle = "#e9c86e";
+    ctx.font = "700 32px Arial";
+    ctx.fillText("PSYCHOLOGY ACADEMY · WEEK 6", width / 2, 475);
+
+    ctx.fillStyle = "#fff";
+    ctx.font = "700 68px Georgia";
+    ctx.fillText("Learning Investigator", width / 2, 568);
+
+    ctx.fillStyle = "#a9ead8";
+    ctx.font = "31px Georgia";
+    ctx.fillText("The Conditioning Vault", width / 2, 622);
+
+    ctx.fillStyle = "#fff7e3";
+    ctx.font = "italic 49px Georgia";
+    fitText(ctx, name, width - 220, 49);
+    ctx.fillText(name, width / 2, 722);
+
+    ctx.strokeStyle = "#e2bd64";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(270, 752);
+    ctx.lineTo(width - 270, 752);
+    ctx.stroke();
+
+    ctx.fillStyle = "#eaf4ef";
+    ctx.font = "25px Arial";
+    ctx.fillText("Restored seven laboratories · Solved fourteen knowledge locks", width / 2, 814);
+    ctx.fillText("Applied classical, operant, and observational learning", width / 2, 856);
+
+    ctx.fillStyle = "#f0cb6d";
+    ctx.font = "700 27px Arial";
+    ctx.fillText("MISSION CODE: LEARNED", width / 2, 901);
+
+    ctx.fillStyle = "#dfe9e6";
+    ctx.font = "22px Arial";
+    ctx.fillText(
+      `Completed ${new Date().toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" })} · Dr. Tonya Holdaway`,
+      width / 2,
+      946
+    );
   }
 
   function fitText(ctx, text, maxWidth, startSize) {
     let size = startSize;
-    while (size > 28 && ctx.measureText(text).width > maxWidth) { size -= 2; ctx.font = `italic ${size}px Georgia`; }
+    while (size > 28 && ctx.measureText(text).width > maxWidth) {
+      size -= 2;
+      ctx.font = `italic ${size}px Georgia`;
+    }
   }
 
   function safeFilename(value) {
@@ -1374,103 +2197,281 @@
   }
 
   function downloadBlob(blob, filename) {
-    const url = URL.createObjectURL(blob), link = document.createElement("a");
-    link.href = url; link.download = filename; document.body.appendChild(link); link.click(); link.remove();
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+
+    link.href = url;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+
     window.setTimeout(() => URL.revokeObjectURL(url), 1000);
   }
 
   function generateBadge() {
     const name = $("learner-name").value.trim().replace(/\s+/g, " ");
-    if (!name) { $("badge-message").textContent = "Please enter your name before generating the badge."; $("learner-name").focus(); return; }
-    state.learner = name.slice(0, 60); drawBadge(state.learner); $("download-badge").disabled = false;
-    $("badge-message").textContent = "Your personalized badge is ready. Select Download Badge as PNG."; saveState("Personalized badge name saved.");
+
+    if (!name) {
+      $("badge-message").textContent = "Please enter your name before generating the badge.";
+      $("learner-name").focus();
+      return;
+    }
+
+    state.learner = name.slice(0, 60);
+    drawBadge(state.learner);
+    $("download-badge").disabled = false;
+    $("badge-message").textContent = "Your personalized badge is ready. Select Download Badge as PNG.";
+    saveState("Personalized badge name saved.");
   }
 
   function downloadBadge() {
-    if (!state.learner) { $("badge-message").textContent = "Generate the badge with your name first."; return; }
-    const canvas = $("badge-canvas"), filename = `week-6-learning-investigator-${safeFilename(state.learner)}.png`;
-    if (canvas.toBlob) canvas.toBlob((blob) => { if (!blob) return; downloadBlob(blob, filename); $("badge-message").textContent = "Badge downloaded. Check your Downloads folder, then upload the PNG to Canvas."; }, "image/png");
-    else { const link = document.createElement("a"); link.href = canvas.toDataURL("image/png"); link.download = filename; link.click(); }
+    if (!state.learner) {
+      $("badge-message").textContent = "Generate the badge with your name first.";
+      return;
+    }
+
+    const canvas = $("badge-canvas");
+    const filename = `week-6-learning-investigator-${safeFilename(state.learner)}.png`;
+
+    if (canvas.toBlob) {
+      canvas.toBlob((blob) => {
+        if (!blob) return;
+        downloadBlob(blob, filename);
+        $("badge-message").textContent = "Badge downloaded. Check your Downloads folder, then upload the PNG to Canvas.";
+      }, "image/png");
+    } else {
+      const link = document.createElement("a");
+      link.href = canvas.toDataURL("image/png");
+      link.download = filename;
+      link.click();
+    }
   }
 
   function downloadNotes() {
     const lines = [
-      "WEEK 6: THE CONDITIONING VAULT", "", `Laboratories restored: ${state.completed.length}/7`,
-      `Knowledge locks solved: ${state.solved.length}/14`, "Demonstrations are optional and do not affect mission progress.", "",
-      "COLLECTED EVIDENCE", ...(state.evidence.length ? state.evidence.map((item, index) => `${index + 1}. ${item}`) : ["No evidence collected yet."]), "",
-      "CONCEPT OR CORRECTION I WANT TO REMEMBER", state.notes.observations || "(No note entered)", "",
-      "SAFE REAL-WORLD APPLICATION", state.notes.transfer || "(No note entered)", "",
+      "WEEK 6: THE CONDITIONING VAULT",
+      "",
+      `Laboratories restored: ${state.completed.length}/7`,
+      `Knowledge locks solved: ${state.solved.length}/14`,
+      "Demonstrations are optional and do not affect mission progress.",
+      "",
+      "COLLECTED EVIDENCE",
+      ...(state.evidence.length
+        ? state.evidence.map((item, index) => `${index + 1}. ${item}`)
+        : ["No evidence collected yet."]),
+      "",
+      "CONCEPT OR CORRECTION I WANT TO REMEMBER",
+      state.notes.observations || "(No note entered)",
+      "",
+      "SAFE REAL-WORLD APPLICATION",
+      state.notes.transfer || "(No note entered)",
+      "",
       "Textbook: Spielman, R. M., Jenkins, W. J., & Lovett, M. D. (2020). Psychology 2e. OpenStax."
     ];
-    downloadBlob(new Blob([lines.join("\n")], { type: "text/plain;charset=utf-8" }), "week-6-conditioning-vault-notes.txt");
+
+    downloadBlob(
+      new Blob([lines.join("\n")], { type: "text/plain;charset=utf-8" }),
+      "week-6-conditioning-vault-notes.txt"
+    );
   }
 
   const media = window.matchMedia("(prefers-reduced-motion: reduce)");
-  function reduceMotion() { return state.motionPaused || media.matches; }
+
+  function reduceMotion() {
+    return state.motionPaused || media.matches;
+  }
+
   function updateMotion() {
-    if (reduceMotion() && demoRunning) stopDemo("Demonstration stopped because motion is paused. You can still answer every knowledge lock.");
+    if (reduceMotion() && demoRunning) {
+      stopDemo("Demonstration stopped because motion is paused. You can still answer every knowledge lock.");
+    }
+
     document.body.classList.toggle("no-motion", reduceMotion());
     $("motion-toggle").textContent = state.motionPaused ? "Resume Animations" : "Pause Animations";
     $("motion-toggle").setAttribute("aria-pressed", String(state.motionPaused));
-    $("motion-status").textContent = media.matches ? "Your device’s reduced-motion preference is active. Activities remain fully usable." : state.motionPaused ? "Animations are paused. Activities remain fully usable." : "Animations are on. Move near the vault to awaken its laboratory light.";
+
+    $("motion-status").textContent = media.matches
+      ? "Your device’s reduced-motion preference is active. Activities remain fully usable."
+      : state.motionPaused
+        ? "Animations are paused. Activities remain fully usable."
+        : "Animations are on. Move near the vault to awaken its laboratory light.";
   }
 
   function applyLighting(value, save = true) {
     state.lighting = value;
+
     document.body.classList.remove("lighting-blue", "lighting-garden", "lighting-gold");
     document.body.classList.add(`lighting-${value}`);
-    document.querySelectorAll("[data-lighting]").forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.lighting === value)));
+
+    document.querySelectorAll("[data-lighting]").forEach((button) => {
+      button.setAttribute("aria-pressed", String(button.dataset.lighting === value));
+    });
+
     if (save) saveState("Lighting preference saved.");
   }
 
   function setupAudio() {
-    const audio = $("vault-audio"), button = $("music-toggle");
-    audio.volume = state.settings.volume; $("volume").value = String(state.settings.volume); audio.src = AUDIO_SOURCE;
+    const audio = $("vault-audio");
+    const button = $("music-toggle");
+
+    audio.volume = state.settings.volume;
+    $("volume").value = String(state.settings.volume);
+    audio.src = AUDIO_SOURCE;
     $("audio-status").textContent = "Vault music is off.";
+
     button.addEventListener("click", async () => {
       if (audio.paused) {
-        try { await audio.play(); button.classList.add("sound-on"); button.setAttribute("aria-pressed", "true"); button.firstChild.textContent = "Pause Vault Music "; $("audio-status").textContent = "Vault music is playing."; }
-        catch (error) { $("audio-status").textContent = "The music could not start. The mission works normally without audio."; }
+        try {
+          await audio.play();
+          button.classList.add("sound-on");
+          button.setAttribute("aria-pressed", "true");
+          button.firstChild.textContent = "Pause Vault Music ";
+          $("audio-status").textContent = "Vault music is playing.";
+        } catch (error) {
+          $("audio-status").textContent = "The music could not start. The mission works normally without audio.";
+        }
       } else {
-        audio.pause(); button.classList.remove("sound-on"); button.setAttribute("aria-pressed", "false"); button.firstChild.textContent = "Play Vault Music "; $("audio-status").textContent = "Vault music is paused.";
+        audio.pause();
+        button.classList.remove("sound-on");
+        button.setAttribute("aria-pressed", "false");
+        button.firstChild.textContent = "Play Vault Music ";
+        $("audio-status").textContent = "Vault music is paused.";
       }
     });
-    $("volume").addEventListener("input", (event) => { state.settings.volume = Number(event.target.value); audio.volume = state.settings.volume; saveState("Volume preference saved."); });
-    audio.addEventListener("error", () => { $("audio-status").textContent = "The selected music file is unavailable. All learning activities still work."; });
-    document.addEventListener("visibilitychange", () => { if (document.hidden && !audio.paused) { audio.pause(); button.classList.remove("sound-on"); button.setAttribute("aria-pressed", "false"); button.firstChild.textContent = "Play Vault Music "; $("audio-status").textContent = "Music paused when the tab became inactive."; } });
+
+    $("volume").addEventListener("input", (event) => {
+      state.settings.volume = Number(event.target.value);
+      audio.volume = state.settings.volume;
+      saveState("Volume preference saved.");
+    });
+
+    audio.addEventListener("error", () => {
+      $("audio-status").textContent = "The selected music file is unavailable. All learning activities still work.";
+    });
+
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden && !audio.paused) {
+        audio.pause();
+        button.classList.remove("sound-on");
+        button.setAttribute("aria-pressed", "false");
+        button.firstChild.textContent = "Play Vault Music ";
+        $("audio-status").textContent = "Music paused when the tab became inactive.";
+      }
+    });
   }
 
   function setupNotes() {
-    $("observation-notes").value = state.notes.observations; $("transfer-notes").value = state.notes.transfer;
-    $("observation-notes").addEventListener("input", (event) => { state.notes.observations = event.target.value; saveState("Notebook saved."); });
-    $("transfer-notes").addEventListener("input", (event) => { state.notes.transfer = event.target.value; saveState("Notebook saved."); });
+    $("observation-notes").value = state.notes.observations;
+    $("transfer-notes").value = state.notes.transfer;
+
+    $("observation-notes").addEventListener("input", (event) => {
+      state.notes.observations = event.target.value;
+      saveState("Notebook saved.");
+    });
+
+    $("transfer-notes").addEventListener("input", (event) => {
+      state.notes.transfer = event.target.value;
+      saveState("Notebook saved.");
+    });
   }
 
   function resetMission() {
     stopDemo();
-    const volume = state.settings.volume, motionPaused = state.motionPaused, lighting = state.lighting;
-    state = freshState(); state.settings.volume = volume; state.motionPaused = motionPaused; state.lighting = lighting; activeIndex = -1;
-    try { localStorage.removeItem(COMPLETION_KEY); localStorage.removeItem(LEGACY_KEY); } catch (error) { storageAvailable = false; }
-    $("active-area").replaceChildren(); $("observation-notes").value = ""; $("transfer-notes").value = ""; $("learner-name").value = "";
-    $("final-form").reset(); $("final-form").hidden = false; $("badge-maker").hidden = true; $("download-badge").disabled = true; $("reset-box").hidden = true;
-    saveState("Week 6 progress reset."); renderMap(); updateDashboard(); $("room-0").focus();
+
+    const volume = state.settings.volume;
+    const motionPaused = state.motionPaused;
+    const lighting = state.lighting;
+
+    state = freshState();
+    state.settings.volume = volume;
+    state.motionPaused = motionPaused;
+    state.lighting = lighting;
+    activeIndex = -1;
+
+    try {
+      localStorage.removeItem(COMPLETION_KEY);
+      localStorage.removeItem(LEGACY_KEY);
+    } catch (error) {
+      storageAvailable = false;
+    }
+
+    $("active-area").replaceChildren();
+    $("observation-notes").value = "";
+    $("transfer-notes").value = "";
+    $("learner-name").value = "";
+    $("final-form").reset();
+    $("final-form").hidden = false;
+    $("badge-maker").hidden = true;
+    $("download-badge").disabled = true;
+    $("reset-box").hidden = true;
+
+    saveState("Week 6 progress reset.");
+    renderMap();
+    updateDashboard();
+    $("room-0").focus();
   }
 
   function createSparks() {
-    $("sparks").innerHTML = Array.from({ length: 28 }, (_, index) => `<i class="spark" style="left:${(index * 43) % 100}%;top:${(index * 17) % 100}%;--spark-speed:${13 + (index % 9)}s;animation-delay:-${index % 13}s;background:${index % 3 === 0 ? "#76cfb5" : index % 3 === 1 ? "#edc864" : "#6e9fba"}"></i>`).join("");
+    $("sparks").innerHTML = Array.from({ length: 28 }, (_, index) =>
+      `<i class="spark" style="left:${(index * 43) % 100}%;top:${(index * 17) % 100}%;--spark-speed:${13 + (index % 9)}s;animation-delay:-${index % 13}s;background:${index % 3 === 0 ? "#76cfb5" : index % 3 === 1 ? "#edc864" : "#6e9fba"}"></i>`
+    ).join("");
   }
 
   function initialize() {
-    createSparks(); applyLighting(state.lighting, false); renderMap(); setupAudio(); setupNotes(); updateMotion(); updateDashboard(); saveState();
-    $("final-form").addEventListener("submit", handleFinal); $("generate-badge").addEventListener("click", generateBadge); $("download-badge").addEventListener("click", downloadBadge); $("print-badge").addEventListener("click", () => window.print()); $("download-notes").addEventListener("click", downloadNotes);
-    $("motion-toggle").addEventListener("click", () => { state.motionPaused = !state.motionPaused; updateMotion(); saveState("Motion preference saved."); });
-    if (media.addEventListener) media.addEventListener("change", updateMotion);
-    document.querySelectorAll("[data-lighting]").forEach((button) => button.addEventListener("click", () => applyLighting(button.dataset.lighting)));
-    $("reset-progress").addEventListener("click", () => { $("reset-box").hidden = false; $("confirm-reset").focus(); });
-    $("cancel-reset").addEventListener("click", () => { $("reset-box").hidden = true; $("reset-progress").focus(); });
+    createSparks();
+    applyLighting(state.lighting, false);
+    renderMap();
+    setupAudio();
+    setupNotes();
+    updateMotion();
+    updateDashboard();
+    saveState();
+
+    $("final-form").addEventListener("submit", handleFinal);
+    $("generate-badge").addEventListener("click", generateBadge);
+    $("download-badge").addEventListener("click", downloadBadge);
+    $("print-badge").addEventListener("click", () => window.print());
+    $("download-notes").addEventListener("click", downloadNotes);
+
+    $("motion-toggle").addEventListener("click", () => {
+      state.motionPaused = !state.motionPaused;
+      updateMotion();
+      saveState("Motion preference saved.");
+    });
+
+    if (media.addEventListener) {
+      media.addEventListener("change", updateMotion);
+    }
+
+    document.querySelectorAll("[data-lighting]").forEach((button) => {
+      button.addEventListener("click", () => applyLighting(button.dataset.lighting));
+    });
+
+    $("reset-progress").addEventListener("click", () => {
+      $("reset-box").hidden = false;
+      $("confirm-reset").focus();
+    });
+
+    $("cancel-reset").addEventListener("click", () => {
+      $("reset-box").hidden = true;
+      $("reset-progress").focus();
+    });
+
     $("confirm-reset").addEventListener("click", resetMission);
     $("learner-name").value = state.learner;
-    document.querySelector(".hero").addEventListener("pointermove", (event) => { const rect = event.currentTarget.getBoundingClientRect(); event.currentTarget.style.setProperty("--pointer-x", `${(event.clientX - rect.left) / rect.width * 100}%`); event.currentTarget.style.setProperty("--pointer-y", `${(event.clientY - rect.top) / rect.height * 100}%`); });
+
+    document.querySelector(".hero").addEventListener("pointermove", (event) => {
+      const rect = event.currentTarget.getBoundingClientRect();
+      event.currentTarget.style.setProperty(
+        "--pointer-x",
+        `${(event.clientX - rect.left) / rect.width * 100}%`
+      );
+      event.currentTarget.style.setProperty(
+        "--pointer-y",
+        `${(event.clientY - rect.top) / rect.height * 100}%`
+      );
+    });
   }
 
   initialize();
