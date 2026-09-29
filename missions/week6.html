@@ -213,6 +213,10 @@
       border: 2px solid #113d50; border-radius: 8px; font-weight: 800;
     }
     .instrument-button:hover, .instrument-button[aria-pressed="true"] { color: #162a34; background: #f2d68d; }
+    .demo-toolbar { margin: 16px 0; padding: 16px; border-left: 5px solid #2a7181; border-radius: 9px; background: #eaf5f7; }
+    .demo-toolbar p { margin: 0 0 10px; }
+    .demo-toolbar .quiet { margin: 10px 0 0; }
+    .demo-skip { display: inline-flex; align-items: center; min-height: 45px; padding: 8px 12px; border: 2px solid #245f74; border-radius: 8px; background: #fff; }
     .instrument-meter { height: 18px; margin: 13px 0; overflow: hidden; border: 2px solid #536975; border-radius: 999px; background: #fff; }
     .instrument-meter > i { display: block; width: var(--meter, 0%); height: 100%; background: linear-gradient(90deg, #3e9989, #f2b75a); transition: width .4s ease; }
     .visual-stage { min-height: 180px; display: grid; place-items: center; margin: 14px 0; }
@@ -398,8 +402,8 @@
         <h1>The Conditioning Vault</h1>
         <p class="hero-subtitle">Pavlov’s signals. Skinner’s consequences. Bandura’s models. Your escape.</p>
         <p class="hero-text">
-          The Academy’s learning archive has sealed itself behind seven experimental chambers. Activate each apparatus,
-          test how experience changes behavior, and recover the seven evidence letters that reopen the vault.
+          The Academy’s learning archive has sealed itself behind seven experimental chambers. Explore the demonstrations
+          if you wish, solve the knowledge locks, and recover the seven evidence letters that reopen the vault.
         </p>
         <div class="hero-chips" aria-label="Mission features">
           <span class="hero-chip">7 animated laboratories</span>
@@ -483,7 +487,7 @@
   <div class="briefing-grid">
     <section class="panel panel-gold" aria-labelledby="briefing-heading">
       <h2 id="briefing-heading">Your Mission</h2>
-      <p>Enter each laboratory, operate its interactive instrument, and solve two knowledge locks. Every action and correct answer sends energy to the progress display. Complete a room to reveal one letter.</p>
+      <p>Enter each laboratory and correctly answer its two knowledge locks to reveal one letter. Demonstrations are optional: play a complete sequence with one click, explore its controls, or go straight to the questions. Only correct answers advance your mission progress.</p>
       <p>Collect all seven letters, solve the final synthesis case, and enter the word that completes: “A response acquired through experience has been _______.”</p>
       <p>There is no timer and no penalty for retries. Navigation buttons beneath each room move you forward without requiring you to scroll back to the map.</p>
       <p class="source-note"><strong>Each laboratory identifies its OpenStax connection.</strong> The visual demonstrations are simplified teaching models aligned with Chapter 6; they are not real experimental data.</p>
@@ -511,7 +515,7 @@
   <div class="mission-layout">
     <div>
       <section class="gallery-map" aria-labelledby="map-heading">
-        <h2 id="map-heading">The Seven-Laboratory Vault Map</h2>
+        <h2 id="map-heading" tabindex="-1">The Seven-Laboratory Vault Map</h2>
         <p>Follow the suggested Chapter 6 route or enter any room. Your work saves automatically in this browser.</p>
         <div id="room-grid" class="room-grid"></div>
       </section>
@@ -520,7 +524,7 @@
 
       <section id="final-case" class="final-case" aria-labelledby="final-heading" hidden>
         <div id="confetti" class="confetti" aria-hidden="true"></div>
-        <h2 id="final-heading">The Final Learning Archive</h2>
+        <h2 id="final-heading" tabindex="-1">The Final Learning Archive</h2>
         <p>All seven evidence cards now surround the vault’s central mechanism. Integrate classical, operant, and observational learning to reopen the archive.</p>
         <div id="learned-code" class="learned-code" aria-label="Collected evidence letters"></div>
         <form id="final-form" class="final-form">
@@ -563,16 +567,16 @@
     <aside class="sidebar" aria-label="Conditioning Vault tools">
       <section class="panel" aria-labelledby="progress-heading">
         <h2 id="progress-heading">Vault Energy</h2>
-        <progress id="progress-bar" value="0" max="28">0 of 28 mission steps complete</progress>
-        <p id="progress-text" class="progress-text">0 of 28 mission steps complete</p>
+        <progress id="progress-bar" value="0" max="14">0 of 14 knowledge locks solved</progress>
+        <p id="progress-text" class="progress-text">0 of 14 knowledge locks solved</p>
         <p id="room-progress" class="quiet">0 of 7 laboratories restored</p>
         <p id="lock-progress" class="quiet">0 of 14 knowledge locks solved</p>
-        <p id="explore-progress" class="quiet">0 of 14 laboratory actions completed</p>
+        <p class="quiet">Demonstrations are optional. No animation clicks are required.</p>
       </section>
       <section class="panel panel-gold" aria-labelledby="fragment-heading">
         <h2 id="fragment-heading">Evidence Letters</h2>
-        <ol id="fragment-rack" class="fragment-rack" aria-label="Charging evidence letters"></ol>
-        <p class="quiet">Each letter warms as you explore and solve locks, then fully illuminates when its laboratory is restored.</p>
+        <ol id="fragment-rack" class="fragment-rack" aria-label="Evidence letters unlocked by correct answers"></ol>
+        <p class="quiet">Each correct answer adds energy. A letter is revealed only after both knowledge locks in its laboratory are solved.</p>
       </section>
       <section class="panel panel-green" aria-labelledby="evidence-heading">
         <h2 id="evidence-heading">Evidence Satchel</h2>
@@ -617,7 +621,7 @@
   </section>
 </main>
 
-<p id="mobile-progress" class="mobile-progress"><a href="#map-heading">0/7 laboratories · 0/28 steps</a></p>
+<p id="mobile-progress" class="mobile-progress"><a href="#map-heading">0/7 laboratories · 0/14 locks</a></p>
 
 <footer>
   <div class="container footer-grid">
@@ -635,8 +639,7 @@
   const COMPLETION_KEY = "psychologyAcademyWeek6Complete";
   const AUDIO_SOURCE = "../assets/audio/asproductionmusic-ambient-guitar-589419.mp3";
   const TOTAL_LOCKS = 14;
-  const TOTAL_ACTIONS = 14;
-  const TOTAL_STEPS = TOTAL_LOCKS + TOTAL_ACTIONS;
+  const TOTAL_STEPS = TOTAL_LOCKS;
   const $ = (id) => document.getElementById(id);
 
   const rooms = [
@@ -649,7 +652,7 @@
       sourceUrl: "https://openstax.org/books/psychology-2e/pages/6-2-classical-conditioning",
       concepts: ["neutral stimulus", "UCS and UCR", "CS and CR", "acquisition"],
       evidence: "A previously neutral stimulus can become a conditioned stimulus after it reliably predicts an unconditioned stimulus.",
-      requiredActions: ["pavlov-pair", "pavlov-test"]
+      demoActions: ["pavlov-pair", "pavlov-test"]
     },
     {
       id: "extinction",
@@ -660,7 +663,7 @@
       sourceUrl: "https://openstax.org/books/psychology-2e/pages/6-2-classical-conditioning",
       concepts: ["extinction", "spontaneous recovery", "conditioned response"],
       evidence: "Repeatedly presenting the conditioned stimulus without the unconditioned stimulus can weaken the conditioned response; a brief return may follow a rest.",
-      requiredActions: ["extinction-run", "recovery-rest"]
+      demoActions: ["extinction-run", "recovery-rest"]
     },
     {
       id: "sound",
@@ -671,7 +674,7 @@
       sourceUrl: "https://openstax.org/books/psychology-2e/pages/6-2-classical-conditioning",
       concepts: ["stimulus generalization", "stimulus discrimination"],
       evidence: "Generalization extends a learned response to similar stimuli, whereas discrimination narrows responding to cues that predict different outcomes.",
-      requiredActions: ["general-tone", "discriminate-tone"]
+      demoActions: ["general-tone", "discriminate-tone"]
     },
     {
       id: "consequence",
@@ -682,7 +685,7 @@
       sourceUrl: "https://openstax.org/books/psychology-2e/pages/6-3-operant-conditioning",
       concepts: ["operant conditioning", "positive reinforcement", "negative reinforcement"],
       evidence: "Reinforcement is defined by an increase in behavior; positive adds a consequence, while negative removes one.",
-      requiredActions: ["positive-map", "negative-map"]
+      demoActions: ["positive-map", "negative-map"]
     },
     {
       id: "punishment",
@@ -693,7 +696,7 @@
       sourceUrl: "https://openstax.org/books/psychology-2e/pages/6-3-operant-conditioning",
       concepts: ["positive punishment", "negative punishment", "behavioral effect"],
       evidence: "Punishment is defined by a decrease in behavior; positive adds a consequence, while negative removes one.",
-      requiredActions: ["switch-add", "switch-remove"]
+      demoActions: ["switch-add", "switch-remove"]
     },
     {
       id: "schedule",
@@ -704,7 +707,7 @@
       sourceUrl: "https://openstax.org/books/psychology-2e/pages/6-3-operant-conditioning",
       concepts: ["fixed ratio", "variable ratio", "fixed interval", "variable interval"],
       evidence: "Ratio schedules depend on response counts, interval schedules depend on time, fixed schedules are predictable, and variable schedules change.",
-      requiredActions: ["lever-run", "schedule-compare"]
+      demoActions: ["lever-run", "schedule-compare"]
     },
     {
       id: "skill",
@@ -715,7 +718,7 @@
       sourceUrl: "https://openstax.org/books/psychology-2e/pages/6-4-observational-learning-modeling",
       concepts: ["shaping", "successive approximations", "modeling", "observational learning"],
       evidence: "Complex behavior can be shaped by reinforcing successive approximations or learned by attending to and remembering a model.",
-      requiredActions: ["shape-run", "model-watch"]
+      demoActions: ["shape-run", "model-watch"]
     }
   ];
 
@@ -834,9 +837,11 @@
     const next = freshState();
     if (!raw || typeof raw !== "object") return next;
     next.solved = Array.isArray(raw.solved) ? [...new Set(raw.solved.filter((value) => Number.isInteger(value) && value >= 0 && value < TOTAL_LOCKS))] : [];
-    next.actions = Array.isArray(raw.actions) ? [...new Set(raw.actions.filter((value) => typeof value === "string"))] : [];
-    next.completed = Array.isArray(raw.completed) ? [...new Set(raw.completed.filter((value) => rooms.some((room) => room.id === value)))] : [];
-    next.evidence = Array.isArray(raw.evidence) ? raw.evidence.filter((value) => typeof value === "string") : [];
+    next.actions = Array.isArray(raw.actions) ? [...new Set(raw.actions.filter((value) => rooms.some((room) => room.demoActions.includes(value))))] : [];
+    // Existing completed missions remain complete. All other room progress comes from answers.
+    if (raw.escaped === true) next.solved = Array.from({ length: TOTAL_LOCKS }, (_, index) => index);
+    next.completed = rooms.filter((room, index) => next.solved.includes(index * 2) && next.solved.includes(index * 2 + 1)).map((room) => room.id);
+    next.evidence = rooms.filter((room) => next.completed.includes(room.id)).map((room) => room.evidence);
     next.achievements = Array.isArray(raw.achievements) ? raw.achievements.filter((value) => typeof value === "string") : [];
     next.escaped = raw.escaped === true;
     if (typeof raw.notes === "string") next.notes.observations = raw.notes;
@@ -852,21 +857,7 @@
   }
 
   function migrateLegacy(legacy) {
-    const next = normalizeState(legacy);
-    rooms.forEach((room, index) => {
-      const bothLocks = next.solved.includes(index * 2) && next.solved.includes(index * 2 + 1);
-      if (bothLocks) room.requiredActions.forEach((action) => { if (!next.actions.includes(action)) next.actions.push(action); });
-      if (bothLocks && !next.completed.includes(room.id)) next.completed.push(room.id);
-      if (bothLocks && !next.evidence.includes(room.evidence)) next.evidence.push(room.evidence);
-    });
-    if (legacy && legacy.experiment === true && !next.actions.includes("pavlov-pair")) next.actions.push("pavlov-pair");
-    if (next.escaped) {
-      next.solved = Array.from({ length: TOTAL_LOCKS }, (_, index) => index);
-      next.actions = rooms.flatMap((room) => room.requiredActions);
-      next.completed = rooms.map((room) => room.id);
-      next.evidence = rooms.map((room) => room.evidence);
-    }
-    return next;
+    return normalizeState(legacy);
   }
 
   function loadState() {
@@ -908,28 +899,26 @@
     return icons[id] || "";
   }
 
-  function roomActionCount(index) {
-    return rooms[index].requiredActions.filter((action) => state.actions.includes(action)).length;
-  }
+
 
   function roomLockCount(index) {
     return [index * 2, index * 2 + 1].filter((lock) => state.solved.includes(lock)).length;
   }
 
   function roomCharge(index) {
-    return roomActionCount(index) + roomLockCount(index);
+    return roomLockCount(index);
   }
 
   function actionSummary(index) {
     const charge = roomCharge(index);
-    return charge === 0 ? "Unexplored · 0/4 energy links" : `Charging · ${charge}/4 energy links`;
+    return charge === 0 ? "Ready · 0/2 knowledge locks" : `Charging · ${charge}/2 knowledge locks`;
   }
 
   function renderMap() {
     $("room-grid").innerHTML = rooms.map((room, index) => {
       const complete = state.completed.includes(room.id);
       const charge = roomCharge(index);
-      return `<button id="room-${index}" class="room-button charging${complete ? " complete" : ""}" type="button" data-room="${index}" aria-pressed="${activeIndex === index}" style="--charge:${charge * 25}%">
+      return `<button id="room-${index}" class="room-button charging${complete ? " complete" : ""}" type="button" data-room="${index}" aria-pressed="${activeIndex === index}" style="--charge:${charge * 50}%">
         <span class="map-icon">${iconMarkup(room.id)}</span>
         <span class="room-title">${index + 1}. ${room.title}</span>
         <span class="map-source">OpenStax ${room.source}</span>
@@ -939,24 +928,28 @@
     $("room-grid").querySelectorAll("[data-room]").forEach((button) => button.addEventListener("click", () => openRoom(Number(button.dataset.room))));
   }
 
-  function explorationStatus(index) {
-    const count = roomActionCount(index);
-    return count === 2 ? "✓ Both laboratory actions complete. The instrument is fully energized." : `${count} of 2 laboratory actions complete. Operate the highlighted instrument controls.`;
-  }
+
 
   function roomMarkup(index) {
     const room = rooms[index];
     return `<article class="room-card" aria-labelledby="room-heading-${index}">
       <div class="room-heading">
-        <div><span class="room-number">Laboratory ${index + 1} of 7 · Evidence ${room.fragment}</span><h2 id="room-heading-${index}" tabindex="-1">${room.title}</h2><p>${room.subtitle}</p></div>
+        <div><span class="room-number" id="room-number-${index}">Laboratory ${index + 1} of 7 · ${state.completed.includes(room.id) ? `Evidence ${room.fragment}` : "Evidence sealed"}</span><h2 id="room-heading-${index}" tabindex="-1">${room.title}</h2><p>${room.subtitle}</p></div>
         <span class="chapter-tag">OpenStax connection: <a href="${room.sourceUrl}" target="_blank" rel="noopener">${room.source}</a></span>
       </div>
       <div class="room-content">
         <div class="concept-tags" aria-label="Concepts in this laboratory">${room.concepts.map((concept) => `<span class="concept-tag">${concept}</span>`).join("")}</div>
+        <div class="demo-toolbar">
+          <p><strong>Optional demonstration:</strong> One click plays the full sequence. You can answer the knowledge locks at any time.</p>
+          <div class="instrument-actions">
+            <button id="play-full-demo" class="instrument-button" type="button" aria-pressed="false">Play Full Demonstration</button>
+            <a class="demo-skip" href="#locks-heading-${index}">Go to Knowledge Locks</a>
+          </div>
+          <p id="demo-playback-status" class="quiet" role="status">No demonstration clicks are needed to earn the evidence letter.</p>
+        </div>
         ${explorationMarkup(index)}
-        <p id="explore-status-${index}" class="action-checklist" role="status"><strong>Instrument status:</strong> ${explorationStatus(index)}</p>
         <details class="hint"><summary>Open a research hint</summary><p>${hintFor(index)}</p></details>
-        <section class="questions" aria-labelledby="locks-heading-${index}"><h3 id="locks-heading-${index}">Knowledge Locks</h3><div id="questions-${index}"></div></section>
+        <section class="questions" aria-labelledby="locks-heading-${index}"><h3 id="locks-heading-${index}" tabindex="-1">Knowledge Locks</h3><div id="questions-${index}"></div></section>
         <div id="clue-holder-${index}" class="clue-holder">${clueMarkup(index)}</div>
         <div id="room-nav-${index}" class="room-nav">${roomNavigationMarkup(index)}</div>
       </div>
@@ -976,26 +969,90 @@
   }
 
   function explorationMarkup(index) {
-    if (index === 0) return `<section class="lab-console" aria-labelledby="instrument-0"><h3 id="instrument-0">Acquisition Console</h3><p>Pair the tone with food three times, then test the tone alone.</p><div class="visual-stage"><svg viewBox="0 0 600 210" role="img" aria-labelledby="pavlov-title"><title id="pavlov-title">A bell sends a signal toward a dog and food dish as an acquisition meter fills</title><g id="sim-bell"><path d="M90 42c-34 0-46 28-46 62v23l-15 22h122l-15-22v-23c0-34-12-62-46-62z" fill="#d6b45d" stroke="#194f61" stroke-width="6"/><circle cx="90" cy="159" r="12" fill="#d6b45d"/></g><path d="M166 107h150" class="wave-line wave-dash"/><circle cx="238" cy="107" r="9" fill="#e2b956"/><g transform="translate(340 40)"><path d="M42 48q20-37 50-8 40 1 50 38v56H25V82q0-26 17-34z" fill="#d9e8e5" stroke="#194f61" stroke-width="6"/><circle cx="108" cy="67" r="5" fill="#194f61"/><path d="M124 82q27 11 0 22" fill="none" stroke="#194f61" stroke-width="5"/><path id="saliva-drop" d="M136 105q14 18 0 28-14-10 0-28z" fill="#62bca8" opacity=".15"/></g><g transform="translate(500 105)"><ellipse cx="35" cy="49" rx="33" ry="13" fill="#f2e3bd" stroke="#7c6431" stroke-width="4"/><circle cx="35" cy="32" r="23" fill="#d99858"/></g></svg></div><div class="instrument-meter" aria-label="Acquisition pairing meter"><i id="pair-meter"></i></div><p id="pavlov-status" class="instrument-status" role="status">The tone is currently neutral with respect to salivation.</p><div class="instrument-actions"><button id="pair-tone-food" class="instrument-button" type="button">Pair Tone → Food</button><button id="test-tone" class="instrument-button" type="button">Test Tone Alone</button><button id="reset-pavlov" class="instrument-button" type="button">Reset Demonstration</button></div><p class="quiet">Teaching simplification: three pairings activate this display. Real acquisition does not follow one universal number of trials.</p></section>`;
+    if (index === 0) return `<section class="lab-console" aria-labelledby="instrument-0"><h3 id="instrument-0">Acquisition Console</h3><p>Watch three tone–food pairings followed by a tone-alone test, or use the individual controls below.</p><div class="visual-stage"><svg viewBox="0 0 600 210" role="img" aria-labelledby="pavlov-title"><title id="pavlov-title">A bell sends a signal toward a dog and food dish as an acquisition meter fills</title><g id="sim-bell"><path d="M90 42c-34 0-46 28-46 62v23l-15 22h122l-15-22v-23c0-34-12-62-46-62z" fill="#d6b45d" stroke="#194f61" stroke-width="6"/><circle cx="90" cy="159" r="12" fill="#d6b45d"/></g><path d="M166 107h150" class="wave-line wave-dash"/><circle cx="238" cy="107" r="9" fill="#e2b956"/><g transform="translate(340 40)"><path d="M42 48q20-37 50-8 40 1 50 38v56H25V82q0-26 17-34z" fill="#d9e8e5" stroke="#194f61" stroke-width="6"/><circle cx="108" cy="67" r="5" fill="#194f61"/><path d="M124 82q27 11 0 22" fill="none" stroke="#194f61" stroke-width="5"/><path id="saliva-drop" d="M136 105q14 18 0 28-14-10 0-28z" fill="#62bca8" opacity=".15"/></g><g transform="translate(500 105)"><ellipse cx="35" cy="49" rx="33" ry="13" fill="#f2e3bd" stroke="#7c6431" stroke-width="4"/><circle cx="35" cy="32" r="23" fill="#d99858"/></g></svg></div><div class="instrument-meter" aria-label="Acquisition pairing meter"><i id="pair-meter"></i></div><p id="pavlov-status" class="instrument-status" role="status">The tone is currently neutral with respect to salivation.</p><div class="instrument-actions"><button id="pair-tone-food" class="instrument-button" type="button">Pair Tone → Food</button><button id="test-tone" class="instrument-button" type="button">Test Tone Alone</button><button id="reset-pavlov" class="instrument-button" type="button">Reset Demonstration</button></div><p class="quiet">Teaching simplification: three pairings activate this display. Real acquisition does not follow one universal number of trials.</p></section>`;
     if (index === 1) return `<section class="lab-console" aria-labelledby="instrument-1"><h3 id="instrument-1">Extinction &amp; Recovery Tracer</h3><p>Present the learned tone without food across repeated trials, then allow a simulated rest.</p><div class="visual-stage"><svg viewBox="0 0 600 190" role="img" aria-labelledby="ext-title"><title id="ext-title">A response graph declines across extinction trials and rises slightly after rest</title><path d="M55 20v130h500" fill="none" stroke="#4f6874" stroke-width="5"/><path id="extinction-path" d="M65 42" fill="none" stroke="#1f766d" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><path id="recovery-path" d="" fill="none" stroke="#d3a83f" stroke-width="8" stroke-linecap="round"/><text x="12" y="30" font-size="16" fill="#344e59">CR</text><text x="470" y="180" font-size="16" fill="#344e59">trials / rest</text></svg></div><div class="instrument-meter"><i id="extinction-meter"></i></div><p id="extinction-status" class="instrument-status" role="status">Conditioned response strength begins at 100%.</p><div class="instrument-actions"><button id="extinction-trial" class="instrument-button" type="button">Present Tone Without Food</button><button id="recovery-rest" class="instrument-button" type="button">Simulate Rest</button><button id="reset-extinction" class="instrument-button" type="button">Reset Tracer</button></div></section>`;
     if (index === 2) return `<section class="lab-console" aria-labelledby="instrument-2"><h3 id="instrument-2">Tone Spectrum Scanner</h3><p>The low tone predicts food. Test nearby tones before and after selective training.</p><div class="tone-board"><button class="instrument-button" type="button" data-tone="low">Low Tone</button><button class="instrument-button" type="button" data-tone="medium">Similar Medium Tone</button><button class="instrument-button" type="button" data-tone="high">Distant High Tone</button></div><div class="visual-stage"><svg viewBox="0 0 600 180" role="img" aria-labelledby="tone-title"><title id="tone-title">Three tone waves and a response dial illustrate similarity and discrimination</title><path d="M35 80q18-55 36 0t36 0t36 0" class="wave-line"/><path d="M220 80q13-40 26 0t26 0t26 0t26 0" class="wave-line" opacity=".75"/><path d="M400 80q8-25 16 0t16 0t16 0t16 0t16 0" class="wave-line" opacity=".5"/><path d="M535 135a42 42 0 1 0-1 0" fill="#fff" stroke="#526d78" stroke-width="5"/><path id="response-needle" d="M535 135l0-30" stroke="#c18c21" stroke-width="7" stroke-linecap="round" transform="rotate(-70 535 135)"/><text x="508" y="165" font-size="14" fill="#344e59">response</text></svg></div><p id="tone-status" class="instrument-status" role="status">Generalization test ready. Select the similar medium tone.</p><div class="instrument-actions"><button id="train-discrimination" class="instrument-button" type="button">Train: Only Low Tone Predicts Food</button><button id="reset-tones" class="instrument-button" type="button">Reset Scanner</button></div></section>`;
     if (index === 3) return `<section class="lab-console" aria-labelledby="instrument-3"><h3 id="instrument-3">Reinforcement Compass</h3><p>Map the two examples using direction of behavior and whether a consequence is added or removed.</p><div class="matrix" aria-label="Operant consequence matrix"><span></span><span class="matrix-cell heading">Behavior increases</span><span class="matrix-cell heading">Behavior decreases</span><span class="matrix-cell heading">Something added</span><span id="cell-pr" class="matrix-cell">Positive reinforcement</span><span class="matrix-cell">Positive punishment</span><span class="matrix-cell heading">Something removed</span><span id="cell-nr" class="matrix-cell">Negative reinforcement</span><span class="matrix-cell">Negative punishment</span></div><p id="consequence-status" class="instrument-status" role="status">Select each scenario to light its location on the compass.</p><div class="instrument-actions"><button class="instrument-button" type="button" data-map="positive">Add a token → practice increases</button><button class="instrument-button" type="button" data-map="negative">Remove reminder sound → buckling increases</button></div></section>`;
     if (index === 4) return `<section class="lab-console" aria-labelledby="instrument-4"><h3 id="instrument-4">Punishment Switchboard</h3><p>Trace two fictional outcomes. Classification describes what happened to behavior; it does not determine whether a strategy is ethical or effective in every setting.</p><div class="matrix" aria-label="Punishment classification board"><span></span><span class="matrix-cell heading">Added</span><span class="matrix-cell heading">Removed</span><span class="matrix-cell heading">Behavior decreases</span><span id="cell-pp" class="matrix-cell">Positive punishment</span><span id="cell-np" class="matrix-cell">Negative punishment</span></div><p id="switch-status" class="instrument-status" role="status">Activate both switches to compare added and removed consequences.</p><div class="instrument-actions"><button class="instrument-button" type="button" data-switch="add">Add corrective task → unsafe use decreases</button><button class="instrument-button" type="button" data-switch="remove">Remove game privilege → interruptions decrease</button></div></section>`;
-    if (index === 5) return `<section class="lab-console" aria-labelledby="instrument-5"><h3 id="instrument-5">Schedule Engine</h3><div class="schedule-display"><div class="lever-machine" id="lever-machine" aria-hidden="true"><div class="lever-handle"></div><div id="token" class="token"></div><div class="lever-slot"></div></div><div><p>Press the lever. This fixed-ratio 3 demonstration releases a token after every third response.</p><p id="lever-status" class="instrument-status" role="status">0 responses · 0 tokens.</p><button id="press-lever" class="instrument-button" type="button">Press Lever</button><button id="reset-lever" class="instrument-button" type="button">Reset Engine</button></div></div><div class="instrument-actions"><button class="instrument-button schedule-choice" type="button" data-schedule="fr">Fixed ratio</button><button class="instrument-button schedule-choice" type="button" data-schedule="vr">Variable ratio</button><button class="instrument-button schedule-choice" type="button" data-schedule="fi">Fixed interval</button><button class="instrument-button schedule-choice" type="button" data-schedule="vi">Variable interval</button></div><p id="schedule-status" class="instrument-status" role="status">Select at least two schedules to compare response counts, time, and predictability.</p></section>`;
-    return `<section class="lab-console" aria-labelledby="instrument-6"><h3 id="instrument-6">Skill Construction Platform</h3><p>First, reinforce increasingly complete versions of a study routine. Then move through the processes that support observational learning.</p><div class="shaping-steps" aria-label="Four shaping steps"><div class="shape-step" style="--step-height:70px">Open practice file</div><div class="shape-step" style="--step-height:105px">Complete one item</div><div class="shape-step" style="--step-height:145px">Complete one set</div><div class="shape-step" style="--step-height:190px">Complete full routine</div></div><div class="instrument-actions"><button id="advance-shaping" class="instrument-button" type="button">Reinforce Next Approximation</button><button id="reset-shaping" class="instrument-button" type="button">Reset Steps</button></div><div class="model-stage"><div class="model-person"><strong>Mentor</strong><p>Demonstrates an organized flashcard method.</p></div><div class="model-arrow" aria-hidden="true">→</div><div class="model-person"><strong>Observer</strong><p id="model-process">Ready to attend to the model.</p></div></div><div class="instrument-actions"><button id="advance-model" class="instrument-button" type="button">Advance Modeling Process</button></div><p id="skill-status" class="instrument-status" role="status">Complete both the shaping staircase and the four modeling processes.</p></section>`;
+    if (index === 5) return `<section class="lab-console" aria-labelledby="instrument-5"><h3 id="instrument-5">Schedule Engine</h3><div class="schedule-display"><div class="lever-machine" id="lever-machine" aria-hidden="true"><div class="lever-handle"></div><div id="token" class="token"></div><div class="lever-slot"></div></div><div><p>Press the lever. This fixed-ratio 3 demonstration releases a token after every third response.</p><p id="lever-status" class="instrument-status" role="status">0 responses · 0 tokens.</p><button id="press-lever" class="instrument-button" type="button">Press Lever</button><button id="reset-lever" class="instrument-button" type="button">Reset Engine</button></div></div><div class="instrument-actions"><button class="instrument-button schedule-choice" type="button" data-schedule="fr">Fixed ratio</button><button class="instrument-button schedule-choice" type="button" data-schedule="vr">Variable ratio</button><button class="instrument-button schedule-choice" type="button" data-schedule="fi">Fixed interval</button><button class="instrument-button schedule-choice" type="button" data-schedule="vi">Variable interval</button></div><p id="schedule-status" class="instrument-status" role="status">Select any schedule to review it, or play the full demonstration to compare all four.</p></section>`;
+    return `<section class="lab-console" aria-labelledby="instrument-6"><h3 id="instrument-6">Skill Construction Platform</h3><p>First, reinforce increasingly complete versions of a study routine. Then move through the processes that support observational learning.</p><div class="shaping-steps" aria-label="Four shaping steps"><div class="shape-step" style="--step-height:70px">Open practice file</div><div class="shape-step" style="--step-height:105px">Complete one item</div><div class="shape-step" style="--step-height:145px">Complete one set</div><div class="shape-step" style="--step-height:190px">Complete full routine</div></div><div class="instrument-actions"><button id="advance-shaping" class="instrument-button" type="button">Reinforce Next Approximation</button><button id="reset-shaping" class="instrument-button" type="button">Reset Workshop</button></div><div class="model-stage"><div class="model-person"><strong>Mentor</strong><p>Demonstrates an organized flashcard method.</p></div><div class="model-arrow" aria-hidden="true">→</div><div class="model-person"><strong>Observer</strong><p id="model-process">Ready to attend to the model.</p></div></div><div class="instrument-actions"><button id="advance-model" class="instrument-button" type="button">Advance Modeling Process</button></div><p id="skill-status" class="instrument-status" role="status">Explore shaping and the four modeling processes, or go straight to the knowledge locks.</p></section>`;
   }
 
   function openRoom(index) {
+    stopDemo();
     activeIndex = index;
     $("active-area").innerHTML = roomMarkup(index);
     renderQuestions(index);
     wireExploration(index);
+    $("play-full-demo").addEventListener("click", () => runDemo(index));
+    $("active-area").querySelectorAll(".lab-console .instrument-button").forEach((button) => {
+      button.addEventListener("click", () => {
+        if (!demoDispatching && demoRunning) stopDemo("Demonstration stopped. Explore the controls or replay the full sequence.");
+      }, true);
+    });
     wireRoomNavigation(index);
     renderMap();
     updateDashboard();
     const heading = $(`room-heading-${index}`);
     heading.focus({ preventScroll: true });
     $("active-area").scrollIntoView({ block: "start", behavior: reduceMotion() ? "auto" : "smooth" });
+  }
+
+  let demoRunning = false;
+  let demoDispatching = false;
+  let demoGeneration = 0;
+  const demoTimers = new Set();
+
+  function stopDemo(message = "") {
+    demoGeneration += 1;
+    demoTimers.forEach((timer) => window.clearTimeout(timer));
+    demoTimers.clear();
+    demoRunning = false;
+    const button = $("play-full-demo");
+    if (button) { button.textContent = "Play Full Demonstration"; button.setAttribute("aria-pressed", "false"); }
+    if (message && $("demo-playback-status")) $("demo-playback-status").textContent = message;
+  }
+
+  function runDemo(index) {
+    if (demoRunning) { stopDemo("Demonstration stopped. Your answers and mission progress are unchanged."); return; }
+    stopDemo();
+    const sequences = [
+      ["#reset-pavlov", "#pair-tone-food", "#pair-tone-food", "#pair-tone-food", "#test-tone"],
+      ["#reset-extinction", "#extinction-trial", "#extinction-trial", "#extinction-trial", "#extinction-trial", "#extinction-trial", "#recovery-rest"],
+      ["#reset-tones", '[data-tone="medium"]', "#train-discrimination", '[data-tone="low"]'],
+      ['[data-map="positive"]', '[data-map="negative"]'],
+      ['[data-switch="add"]', '[data-switch="remove"]'],
+      ["#reset-lever", "#press-lever", "#press-lever", "#press-lever", '[data-schedule="fr"]', '[data-schedule="vr"]', '[data-schedule="fi"]', '[data-schedule="vi"]'],
+      ["#reset-shaping", "#advance-shaping", "#advance-shaping", "#advance-shaping", "#advance-shaping", "#advance-model", "#advance-model", "#advance-model", "#advance-model"]
+    ];
+    const generation = demoGeneration;
+    const button = $("play-full-demo");
+    demoRunning = true;
+    button.textContent = "Stop Demonstration";
+    button.setAttribute("aria-pressed", "true");
+    $("demo-playback-status").textContent = "The full sequence is playing. You may answer questions or continue to another room at any time.";
+    const step = (selector) => {
+      if (generation !== demoGeneration || activeIndex !== index) return;
+      const control = $("active-area").querySelector(selector);
+      if (control) {
+        demoDispatching = true;
+        try { control.click(); } finally { demoDispatching = false; }
+      }
+    };
+    const finish = () => {
+      if (generation !== demoGeneration || activeIndex !== index) return;
+      demoRunning = false;
+      button.textContent = "Replay Full Demonstration";
+      button.setAttribute("aria-pressed", "false");
+      $("demo-playback-status").textContent = reduceMotion() ? "The demonstration's final state is shown without animation. Use the controls to review individual examples, or answer the knowledge locks." : "Full demonstration complete. Replay it, explore the controls, or answer the knowledge locks.";
+    };
+    if (reduceMotion()) { sequences[index].forEach(step); finish(); return; }
+    const later = (callback, delay) => {
+      const timer = window.setTimeout(() => { demoTimers.delete(timer); callback(); }, delay);
+      demoTimers.add(timer);
+    };
+    sequences[index].forEach((selector, position) => later(() => step(selector), position * 1100));
+    later(finish, sequences[index].length * 1100);
   }
 
   function wireExploration(index) {
@@ -1121,16 +1178,14 @@
     const paint = () => { steps.forEach((item, index) => item.classList.toggle("active", index < step)); process.textContent = modelLabels[model]; };
     paint();
     $("advance-shaping").addEventListener("click", () => { step = Math.min(4, step + 1); paint(); status.textContent = `Shaping step ${step} of 4 reinforced. ${step === 4 ? "The full routine has been reached through successive approximations." : "The criterion now moves closer to the target behavior."}`; if (step === 4) { status.classList.add("success"); recordAction("shape-run", 6); } });
-    $("reset-shaping").addEventListener("click", () => { step = 0; paint(); status.classList.remove("success"); status.textContent = "Shaping staircase reset. Saved mission progress remains intact."; });
+    $("reset-shaping").addEventListener("click", () => { step = 0; model = 0; paint(); status.classList.remove("success"); status.textContent = "Shaping staircase reset. Saved mission progress remains intact."; });
     $("advance-model").addEventListener("click", () => { model = Math.min(4, model + 1); paint(); status.textContent = modelLabels[model]; if (model === 4) { status.classList.add("success"); status.textContent += " The four modeled-learning processes have been traced."; recordAction("model-watch", 6); } });
   }
 
   function recordAction(action, roomIndex) {
-    if (!state.actions.includes(action)) state.actions.push(action);
-    const status = $(`explore-status-${roomIndex}`);
-    if (status) status.innerHTML = `<strong>Instrument status:</strong> ${explorationStatus(roomIndex)}`;
-    maybeCompleteRoom(roomIndex);
-    renderMap(); updateDashboard(); saveState();
+    if (state.actions.includes(action)) return;
+    state.actions.push(action);
+    saveState("Optional demonstration saved. Correct answers earn the evidence letters.");
   }
 
   function renderQuestions(roomIndex) {
@@ -1158,7 +1213,10 @@
       card.classList.add("solved");
       card.querySelectorAll("[data-choice]").forEach((item) => { item.disabled = true; if (Number(item.dataset.choice) === question.correct) item.classList.add("correct-choice"); });
       feedback.textContent = `✓ ${question.explanation}`; feedback.className = "feedback good";
-      maybeCompleteRoom(roomIndex); renderMap(); updateDashboard(); saveState("Knowledge lock solved and progress saved.");
+      maybeCompleteRoom(roomIndex);
+      $(`clue-holder-${roomIndex}`).innerHTML = clueMarkup(roomIndex);
+      $(`room-number-${roomIndex}`).textContent = `Laboratory ${roomIndex + 1} of 7 · ${roomReady(roomIndex) ? `Evidence ${rooms[roomIndex].fragment}` : "Evidence sealed"}`;
+      renderMap(); updateDashboard(); saveState("Knowledge lock solved and progress saved.");
     } else {
       button.classList.add("wrong-choice"); feedback.textContent = `Not quite yet. ${hintFor(roomIndex)} Review the example and try again.`; feedback.className = "feedback try";
       window.setTimeout(() => button.classList.remove("wrong-choice"), 900);
@@ -1166,7 +1224,7 @@
   }
 
   function roomReady(index) {
-    return rooms[index].requiredActions.every((action) => state.actions.includes(action)) && state.solved.includes(index * 2) && state.solved.includes(index * 2 + 1);
+    return roomLockCount(index) === 2;
   }
 
   function maybeCompleteRoom(index) {
@@ -1191,7 +1249,7 @@
 
   function clueMarkup(index) {
     const room = rooms[index];
-    if (!state.completed.includes(room.id)) return `<div class="action-checklist"><strong>Evidence seal:</strong> ${roomCharge(index)} of 4 energy links active. Complete both instrument actions and both knowledge locks to reveal the letter.</div>`;
+    if (!state.completed.includes(room.id)) return `<div class="action-checklist"><strong>Evidence seal:</strong> ${roomLockCount(index)} of 2 knowledge locks solved. Answer both correctly to reveal the letter. Demonstrations are optional.</div>`;
     return `<div class="clue-card"><span class="clue-letter">${room.fragment}</span><strong>Evidence recovered: ${room.title}</strong><p>${room.evidence}</p></div>`;
   }
 
@@ -1208,7 +1266,7 @@
     const next = nextUnfinished(index);
     const label = ready ? "Evidence secured. Continue directly to the next destination." : "You may continue now and return later; unfinished work remains saved.";
     return `<p style="grid-column:1/-1;margin:0"><strong>${label}</strong></p>
-      <button class="next-button" type="button" data-next-room="${next}">${next < 0 ? "Go to the Final Vault" : "Continue to Next Unfinished Laboratory"}</button>
+      <button class="next-button" type="button" data-next-room="${next}">${next < 0 ? "Go to the Final Vault" : next === index ? "Return to This Laboratory’s Knowledge Locks" : "Continue to Next Unfinished Laboratory"}</button>
       <button class="next-button map-button" type="button" data-return-map>Return to Laboratory Map</button>`;
   }
 
@@ -1218,25 +1276,26 @@
     holder.querySelector("[data-next-room]").addEventListener("click", (event) => {
       const next = Number(event.currentTarget.dataset.nextRoom);
       if (next < 0) { $("final-case").hidden = false; $("final-heading").focus({ preventScroll: true }); $("final-case").scrollIntoView({ behavior: reduceMotion() ? "auto" : "smooth", block: "start" }); }
-      else openRoom(next);
+      else if (next === index) {
+        $(`locks-heading-${index}`).focus({ preventScroll: true });
+        $(`locks-heading-${index}`).scrollIntoView({ behavior: reduceMotion() ? "auto" : "smooth", block: "start" });
+      } else openRoom(next);
     });
     holder.querySelector("[data-return-map]").addEventListener("click", () => { $("map-heading").focus?.(); $("map-heading").scrollIntoView({ behavior: reduceMotion() ? "auto" : "smooth", block: "start" }); });
   }
 
   function updateDashboard() {
     const completed = state.completed.length;
-    const actionCount = state.actions.filter((action) => rooms.some((room) => room.requiredActions.includes(action))).length;
-    const steps = state.solved.length + actionCount;
+    const steps = state.solved.length;
     $("progress-bar").value = steps;
-    $("progress-bar").textContent = `${steps} of ${TOTAL_STEPS} mission steps complete`;
-    $("progress-text").textContent = `${steps} of ${TOTAL_STEPS} mission steps complete`;
+    $("progress-bar").textContent = `${steps} of ${TOTAL_STEPS} knowledge locks solved`;
+    $("progress-text").textContent = `${steps} of ${TOTAL_STEPS} knowledge locks solved`;
     $("room-progress").textContent = `${completed} of 7 laboratories restored`;
     $("lock-progress").textContent = `${state.solved.length} of ${TOTAL_LOCKS} knowledge locks solved`;
-    $("explore-progress").textContent = `${actionCount} of ${TOTAL_ACTIONS} laboratory actions completed`;
-    $("mobile-progress").innerHTML = `<a href="#map-heading">${completed}/7 laboratories · ${steps}/${TOTAL_STEPS} steps</a>`;
+    $("mobile-progress").innerHTML = `<a href="#map-heading">${completed}/7 laboratories · ${steps}/${TOTAL_STEPS} locks</a>`;
     $("fragment-rack").innerHTML = rooms.map((room, index) => {
       const charge = roomCharge(index), collected = state.completed.includes(room.id);
-      const percent = charge * 25;
+      const percent = charge * 50;
       return `<li class="fragment stage-${charge}${collected ? " collected" : ""}" style="--charge:${percent}%"><span>${collected ? room.fragment : charge ? "◦" : "?"}</span><small>${index + 1}</small><span class="sr-only">${collected ? `Evidence letter ${room.fragment} collected` : `Evidence letter ${index + 1} is ${percent}% charged`}</span></li>`;
     }).join("");
     $("inventory-list").innerHTML = state.evidence.length ? state.evidence.map((item) => `<li>${item}</li>`).join("") : "<li>No evidence collected yet.</li>";
@@ -1250,6 +1309,10 @@
 
   function handleFinal(event) {
     event.preventDefault();
+    if (!rooms.every((room, index) => roomReady(index))) {
+      $("final-feedback").textContent = "Solve all fourteen knowledge locks to collect the seven letters before opening the final vault.";
+      return;
+    }
     const values = [$("final-one").value, $("final-two").value, $("final-three").value, $("portal-code").value.trim().toUpperCase()];
     const expected = ["observational", "positive-reinforcement", "classical", "LEARNED"];
     if (!values.every((value, index) => value === expected[index])) {
@@ -1333,7 +1396,7 @@
   function downloadNotes() {
     const lines = [
       "WEEK 6: THE CONDITIONING VAULT", "", `Laboratories restored: ${state.completed.length}/7`,
-      `Knowledge locks solved: ${state.solved.length}/14`, `Laboratory actions completed: ${state.actions.length}/14`, "",
+      `Knowledge locks solved: ${state.solved.length}/14`, "Demonstrations are optional and do not affect mission progress.", "",
       "COLLECTED EVIDENCE", ...(state.evidence.length ? state.evidence.map((item, index) => `${index + 1}. ${item}`) : ["No evidence collected yet."]), "",
       "CONCEPT OR CORRECTION I WANT TO REMEMBER", state.notes.observations || "(No note entered)", "",
       "SAFE REAL-WORLD APPLICATION", state.notes.transfer || "(No note entered)", "",
@@ -1345,6 +1408,7 @@
   const media = window.matchMedia("(prefers-reduced-motion: reduce)");
   function reduceMotion() { return state.motionPaused || media.matches; }
   function updateMotion() {
+    if (reduceMotion() && demoRunning) stopDemo("Demonstration stopped because motion is paused. You can still answer every knowledge lock.");
     document.body.classList.toggle("no-motion", reduceMotion());
     $("motion-toggle").textContent = state.motionPaused ? "Resume Animations" : "Pause Animations";
     $("motion-toggle").setAttribute("aria-pressed", String(state.motionPaused));
@@ -1383,6 +1447,7 @@
   }
 
   function resetMission() {
+    stopDemo();
     const volume = state.settings.volume, motionPaused = state.motionPaused, lighting = state.lighting;
     state = freshState(); state.settings.volume = volume; state.motionPaused = motionPaused; state.lighting = lighting; activeIndex = -1;
     try { localStorage.removeItem(COMPLETION_KEY); localStorage.removeItem(LEGACY_KEY); } catch (error) { storageAvailable = false; }
