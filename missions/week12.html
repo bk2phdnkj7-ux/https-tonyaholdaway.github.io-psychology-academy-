@@ -1,1 +1,728 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Psychology Academy | Week 12: Social Psychology Village</title>
+<style>
+:root {
+  --navy:#163a59;
+  --blue:#225f86;
+  --gold:#ffe09a;
+  --ink:#233b4c;
+}
+* {box-sizing:border-box}
+body {
+  margin:0;
+  font:16px/1.6 Arial,sans-serif;
+  background:#e7f3f8;
+  color:var(--ink);
+}
+button,input {font:inherit}
+button {cursor:pointer}
+button:focus-visible,input:focus-visible,a:focus-visible {
+  outline:4px solid #efaa00;
+  outline-offset:3px;
+}
+main {max-width:1100px;margin:auto;padding:18px}
+header {
+  background:linear-gradient(120deg,#102f4b,#25658a);
+  color:white;
+  padding:30px;
+  border-radius:20px;
+}
+h1,h2 {font-family:Georgia,serif}
+h1 {font-size:clamp(2rem,5vw,3.2rem);margin:8px 0}
+h2 {color:var(--navy)}
+header h1 {color:white}
+.kicker {color:#ffe09a;font-weight:bold;letter-spacing:2px}
+.toolbar {display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.btn {
+  background:white;
+  color:var(--navy);
+  border:2px solid var(--navy);
+  border-radius:10px;
+  padding:11px 17px;
+  font-weight:bold;
+}
+.btn.primary {background:var(--gold)}
+.status,.panel {
+  background:white;
+  border-radius:17px;
+  padding:20px;
+  margin:16px 0;
+  box-shadow:0 5px 16px #17374c16;
+}
+.status {display:flex;gap:15px;flex-wrap:wrap;align-items:center}
+.progress {
+  height:15px;
+  width:220px;
+  max-width:100%;
+  background:#d9e8ef;
+  border-radius:20px;
+  overflow:hidden;
+}
+#fill {height:100%;width:0;background:#247852;transition:width .3s}
+.village {
+  position:relative;
+  min-height:510px;
+  overflow:hidden;
+  border:5px solid white;
+  border-radius:23px;
+  background:linear-gradient(
+    #83c9eb 0%,#d8f2fb 62%,
+    #88bd80 62%,#4a9063 100%
+  );
+}
+.sun {
+  position:absolute;
+  right:65px;top:28px;
+  width:78px;height:78px;
+  border-radius:50%;
+  background:#ffe29a;
+  box-shadow:0 0 50px #ffecac;
+  animation:glow 4s infinite alternate;
+}
+.cloud {
+  position:absolute;
+  left:-150px;top:75px;
+  width:135px;height:36px;
+  background:white;
+  border-radius:40px;
+  animation:drift 35s linear infinite;
+}
+.cloud:before,.cloud:after {
+  content:"";
+  position:absolute;
+  background:white;
+  border-radius:50%;
+  width:58px;height:58px;
+  top:-27px;left:18px;
+}
+.cloud:after {left:61px;top:-36px;width:70px;height:70px}
+.cloud.two {top:140px;animation-duration:48s;animation-delay:-24s}
+.hill {
+  position:absolute;
+  bottom:80px;left:-15%;
+  width:85%;height:145px;
+  background:#76ad70;
+  border-radius:50% 50% 0 0;
+}
+.hill.two {left:43%;background:#5d9c6e}
+.path {
+  position:absolute;
+  bottom:-100px;left:25%;
+  width:55%;height:280px;
+  background:#e6c99c;
+  clip-path:polygon(44% 0,56% 0,100% 100%,0 100%);
+}
+.places {
+  position:relative;
+  z-index:2;
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:14px;
+  padding:190px 20px 25px;
+}
+.place {
+  min-height:145px;
+  background:#fff9e9f2;
+  border:3px solid #244c5d;
+  border-radius:17px;
+  box-shadow:0 7px 0 #244c5d;
+  padding:12px;
+  text-align:center;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  gap:5px;
+  transition:transform .2s;
+}
+.place:hover {transform:translateY(-6px)}
+.place.done {background:#ddf6e1;border-color:#267147}
+.place .art {font-size:2.6rem}
+.place small {font-weight:bold}
+.hidden {display:none!important}
+.question {font-weight:bold;font-size:1.15rem}
+.choices {display:grid;gap:10px;margin:18px 0}
+.choice {
+  background:#f0f7fc;
+  border:2px solid #a9c8d9;
+  border-radius:10px;
+  padding:13px;
+  text-align:left;
+}
+.choice:hover:not(:disabled) {background:#d9edf8}
+.choice:disabled {cursor:default}
+.choice.correct {background:#ddf4e2;border-color:#267147}
+.choice.wrong {background:#ffebe5;border-color:#a4472a}
+.feedback {
+  background:#eef7fc;
+  border-left:5px solid var(--blue);
+  padding:14px;
+  border-radius:7px;
+  margin:15px 0;
+}
+#answer {
+  padding:12px;
+  max-width:200px;
+  border:2px solid var(--blue);
+  border-radius:9px;
+  text-transform:uppercase;
+}
+#badgePreview {
+  display:block;
+  width:min(100%,420px);
+  margin:20px auto;
+  border-radius:14px;
+}
+footer {font-size:.88rem;padding:15px 0 30px}
+@keyframes drift {to {left:115%}}
+@keyframes glow {to {box-shadow:0 0 95px #fff2bb}}
+@media(max-width:720px) {
+  .places {grid-template-columns:repeat(2,minmax(0,1fr));padding-top:185px}
+  .village {min-height:690px}
+  .place {min-height:130px}
+  header {padding:22px}
+}
+@media(prefers-reduced-motion:reduce) {
+  *,*:before,*:after {animation:none!important;transition:none!important}
+}
+.reduce-motion *, .reduce-motion *:before,.reduce-motion *:after {
+  animation:none!important;
+  transition:none!important;
+}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div class="kicker">PSYCHOLOGY ACADEMY · WEEK 12</div>
+  <h1>The Social Psychology Village</h1>
+  <p>
+    Seven locations. Seven social mysteries.
+    Discover how other people influence our thoughts,
+    feelings, decisions, and behaviors.
+  </p>
+  <div class="toolbar">
+    <button class="btn primary" id="start">Begin Adventure</button>
+    <button class="btn" id="motion" aria-pressed="false">Reduce Motion: Off</button>
+    <button class="btn" id="reset">Reset Mission</button>
+  </div>
+</header>
+
+<section class="status" aria-label="Mission progress">
+  <strong id="count">0 of 7 locations completed</strong>
+  <div id="bar" class="progress" role="progressbar"
+       aria-label="Mission completion"
+       aria-valuemin="0" aria-valuemax="7" aria-valuenow="0">
+    <div id="fill"></div>
+  </div>
+  <strong id="clues">Clue letters: —</strong>
+</section>
+
+<section class="village" aria-label="Interactive social psychology village">
+  <div class="sun" aria-hidden="true"></div>
+  <div class="cloud" aria-hidden="true"></div>
+  <div class="cloud two" aria-hidden="true"></div>
+  <div class="hill" aria-hidden="true"></div>
+  <div class="hill two" aria-hidden="true"></div>
+  <div class="path" aria-hidden="true"></div>
+  <div class="places" id="places"></div>
+</section>
+
+<section class="panel" id="intro">
+  <h2>Welcome, Social Detective!</h2>
+  <p>
+    The village needs your help understanding seven social mysteries.
+    Visit each location, read the situation, and apply what you learned
+    from Chapter 12 of OpenStax Psychology 2e.
+  </p>
+  <h3>Your Mission</h3>
+  <ol>
+    <li>Explore all seven village locations.</li>
+    <li>Answer each psychology question correctly.</li>
+    <li>Collect a secret letter after every correct answer.</li>
+    <li>Unscramble the seven letters to solve the final mystery.</li>
+    <li>Download your personalized Academy badge!</li>
+  </ol>
+  <p>
+    Incorrect answers are learning opportunities.
+    You can try again without losing points.
+    Progress is saved in this browser when available.
+  </p>
+  <p>
+    <a href="https://openstax.org/books/psychology-2e/pages/12-introduction"
+       target="_blank" rel="noopener">
+      Read OpenStax Chapter 12: Social Psychology
+    </a>
+  </p>
+</section>
+
+<section class="panel hidden" id="challenge" aria-live="polite">
+  <p id="locationTag"></p>
+  <h2 id="locationTitle"></h2>
+  <p id="scenario"></p>
+  <p class="question" id="question"></p>
+  <div id="choices" class="choices"></div>
+  <div id="feedback" class="feedback hidden" role="status"></div>
+  <button class="btn" id="back">Return to Village</button>
+</section>
+
+<section class="panel hidden" id="final">
+  <h2>Final Mystery: Unlock the Village</h2>
+  <p>
+    Congratulations! You have collected seven letters.
+    Unscramble them to identify a key idea in social psychology:
+    the circumstances surrounding behavior.
+  </p>
+  <p id="letterDisplay" style="font-size:1.5rem;font-weight:bold"></p>
+  <label for="answer"><strong>Enter the seven-letter mystery word:</strong></label>
+  <div class="toolbar">
+    <input id="answer" maxlength="7" autocomplete="off">
+    <button class="btn primary" id="check">Unlock My Badge</button>
+  </div>
+  <div id="finalFeedback" class="feedback hidden" role="status"></div>
+</section>
+
+<section class="panel hidden" id="certificate">
+  <h2>Mission Accomplished!</h2>
+  <p>
+    You completed the Social Psychology Village and unlocked
+    your Psychology Academy Explorer Badge.
+  </p>
+  <label for="studentName"><strong>Enter your name for your badge:</strong></label>
+  <div class="toolbar">
+    <input id="studentName" maxlength="50" placeholder="Your name"
+      style="padding:12px;border:2px solid #225f86;border-radius:9px">
+    <button class="btn primary" id="download">Download My Badge (PNG)</button>
+  </div>
+  <canvas id="badgeCanvas" width="900" height="900" hidden></canvas>
+  <img id="badgePreview" alt="Your Social Psychology Explorer completion badge">
+  <p>
+    Save the PNG image and upload it to your Canvas assignment
+    if your instructor requests proof of completion.
+  </p>
+</section>
+
+<footer>
+  <p>
+    Psychology Academy · Foundations Trail · Mission 12
+  </p>
+  <p>
+    Educational concepts adapted from
+    <a href="https://openstax.org/books/psychology-2e/pages/12-introduction"
+       target="_blank" rel="noopener">
+      OpenStax Psychology 2e, Chapter 12
+    </a>.
+    Original classroom scenarios. No student information is sent to a server.
+  </p>
+</footer>
+</main>
+
+<script>
+"use strict";
+
+const questions = [
+  {
+    title:"The Observation Tower",
+    icon:"🔭",
+    topic:"12.1 Social Psychology",
+    letter:"C",
+    scenario:"Maya talks confidently with close friends, but becomes quiet when unfamiliar people join the conversation.",
+    question:"Which explanation best reflects social psychology?",
+    choices:[
+      "Her behavior must be entirely genetic.",
+      "The social situation may influence how Maya behaves.",
+      "Personality never changes across situations."
+    ],
+    correct:1,
+    explanation:"Social psychology examines how the presence of others and social situations influence thoughts, feelings, and behavior."
+  },
+  {
+    title:"The Mirror House",
+    icon:"🪞",
+    topic:"12.2 Self-Presentation",
+    letter:"O",
+    scenario:"Jordan dresses formally for an interview but wears casual clothing when spending time with friends.",
+    question:"Which concept best explains Jordan's behavior?",
+    choices:[
+      "Self-presentation or impression management",
+      "The bystander effect",
+      "Group polarization"
+    ],
+    correct:0,
+    explanation:"Self-presentation involves managing how others perceive us. People may present themselves differently in different settings."
+  },
+  {
+    title:"The Persuasion Market",
+    icon:"📣",
+    topic:"12.3 Attitudes and Persuasion",
+    letter:"T",
+    scenario:"A campus campaign presents research evidence and detailed arguments to encourage water conservation.",
+    question:"Which route of persuasion emphasizes careful evaluation of arguments?",
+    choices:[
+      "The peripheral route",
+      "The central route",
+      "Obedience to authority"
+    ],
+    correct:1,
+    explanation:"The central route involves evaluating the quality of an argument. Peripheral persuasion relies more on cues such as attractiveness or familiarity."
+  },
+  {
+    title:"The Crowd Square",
+    icon:"👥",
+    topic:"12.4 Conformity, Compliance, and Obedience",
+    letter:"T",
+    scenario:"Everyone in a group gives the same incorrect answer. A student starts doubting their own correct answer.",
+    question:"What social influence process is illustrated?",
+    choices:[
+      "Conformity",
+      "Altruism",
+      "Social loafing"
+    ],
+    correct:0,
+    explanation:"Conformity occurs when people adjust their judgments or behaviors in response to group pressure."
+  },
+  {
+    title:"The Fairness Bridge",
+    icon:"🌉",
+    topic:"12.5 Prejudice and Discrimination",
+    letter:"X",
+    scenario:"A club leader assumes a student will be unreliable because of their group membership and refuses to give them a leadership role.",
+    question:"Which distinction is most accurate?",
+    choices:[
+      "The assumption is discrimination, while denying the role is prejudice.",
+      "Both are necessarily examples of physical aggression.",
+      "The assumption reflects stereotyping or prejudice, while denying the role is discrimination."
+    ],
+    correct:2,
+    explanation:"Stereotypes involve generalized beliefs, prejudice involves attitudes or evaluations, and discrimination involves unfair behavior."
+  },
+  {
+    title:"The Conflict Garden",
+    icon:"🌿",
+    topic:"12.6 Aggression",
+    letter:"E",
+    scenario:"After losing a game, one player insults another. A teammate suggests taking a break and discussing the disagreement calmly.",
+    question:"Which response is most likely to reduce escalation?",
+    choices:[
+      "Responding with more insults",
+      "Taking a pause and communicating calmly",
+      "Assuming aggressive behavior is unavoidable"
+    ],
+    correct:1,
+    explanation:"Emotion regulation, pauses, and constructive communication can help reduce aggressive escalation."
+  },
+  {
+    title:"The Helping Harbor",
+    icon:"🛟",
+    topic:"12.7 Prosocial Behavior",
+    letter:"N",
+    scenario:"A student falls in a crowded hallway. Several people hesitate because each assumes somebody else will help.",
+    question:"What concept may explain this hesitation?",
+    choices:[
+      "Diffusion of responsibility and the bystander effect",
+      "The central route to persuasion",
+      "Self-presentation alone"
+    ],
+    correct:0,
+    explanation:"Diffusion of responsibility can occur when people feel less personally responsible for helping because others are present."
+  }
+];
+
+const KEY="psychology-academy-week12-v2";
+const $=id=>document.getElementById(id);
+let completed=[];
+let unlocked=false;
+let current=-1;
+
+try {
+  const saved=JSON.parse(localStorage.getItem(KEY)||"{}");
+  completed=Array.isArray(saved.completed)
+    ? saved.completed.filter(i=>Number.isInteger(i)&&i>=0&&i<7)
+    : [];
+  unlocked=saved.unlocked===true && completed.length===7;
+} catch(e) {}
+
+function save() {
+  try {
+    localStorage.setItem(KEY,JSON.stringify({completed,unlocked}));
+  } catch(e) {}
+}
+
+function render() {
+  const grid=$("places");
+  grid.replaceChildren();
+
+  questions.forEach((item,i)=>{
+    const btn=document.createElement("button");
+    btn.className="place"+(completed.includes(i)?" done":"");
+
+    const art=document.createElement("span");
+    art.className="art";
+    art.setAttribute("aria-hidden","true");
+    art.textContent=item.icon;
+
+    const name=document.createElement("strong");
+    name.textContent=item.title;
+
+    const status=document.createElement("small");
+    status.textContent=completed.includes(i)?"✓ Solved":"Explore Location";
+
+    btn.append(art,name,status);
+    btn.setAttribute("aria-label",
+      item.title+(completed.includes(i)?", completed":""));
+    btn.addEventListener("click",()=>openLocation(i));
+    grid.appendChild(btn);
+  });
+
+  $("count").textContent=completed.length+" of 7 locations completed";
+  $("fill").style.width=(completed.length/7*100)+"%";
+  $("bar").setAttribute("aria-valuenow",completed.length);
+  $("clues").textContent="Clue letters: "+
+    (completed.length
+      ? completed.map(i=>questions[i].letter).join(" · ")
+      : "—");
+
+  $("final").classList.toggle("hidden",completed.length!==7);
+
+  if(completed.length===7) {
+    $("letterDisplay").textContent=
+      completed.map(i=>questions[i].letter).join("  ·  ");
+  }
+
+  $("certificate").classList.toggle("hidden",!unlocked);
+  if(unlocked) drawBadge();
+}
+
+function openLocation(i) {
+  current=i;
+  const item=questions[i];
+
+  $("intro").classList.add("hidden");
+  $("challenge").classList.remove("hidden");
+  $("locationTag").textContent=item.topic;
+  $("locationTitle").textContent=item.title;
+  $("scenario").textContent=item.scenario;
+  $("question").textContent=item.question;
+  $("feedback").classList.add("hidden");
+
+  const choices=$("choices");
+  choices.replaceChildren();
+
+  item.choices.forEach((answer,j)=>{
+    const btn=document.createElement("button");
+    btn.className="choice";
+    btn.textContent=String.fromCharCode(65+j)+". "+answer;
+    btn.addEventListener("click",()=>respond(j));
+    choices.appendChild(btn);
+  });
+
+  if(completed.includes(i)) {
+    showFeedback("Already solved! "+item.explanation+
+      " Your clue letter is "+item.letter+".");
+    [...choices.children].forEach(btn=>btn.disabled=true);
+  }
+
+  $("challenge").scrollIntoView({block:"start"});
+}
+
+function showFeedback(message) {
+  $("feedback").textContent=message;
+  $("feedback").classList.remove("hidden");
+}
+
+function respond(selected) {
+  const item=questions[current];
+  const buttons=[...$("choices").children];
+
+  if(selected===item.correct) {
+    buttons[selected].classList.add("correct");
+    buttons.forEach(btn=>btn.disabled=true);
+
+    if(!completed.includes(current)) {
+      completed.push(current);
+      save();
+    }
+
+    showFeedback(
+      "Correct! "+item.explanation+
+      " Clue letter earned: "+item.letter+"."
+    );
+    render();
+  } else {
+    buttons[selected].classList.add("wrong");
+    buttons[selected].disabled=true;
+    showFeedback(
+      "Not quite. Think about which specific social psychology "+
+      "concept explains the situation, then try another answer."
+    );
+  }
+}
+
+$("start").addEventListener("click",()=>{
+  document.querySelector(".village").scrollIntoView();
+});
+
+$("back").addEventListener("click",()=>{
+  $("challenge").classList.add("hidden");
+  document.querySelector(".village").scrollIntoView();
+});
+
+$("motion").addEventListener("click",()=>{
+  const active=document.body.classList.toggle("reduce-motion");
+  $("motion").textContent="Reduce Motion: "+(active?"On":"Off");
+  $("motion").setAttribute("aria-pressed",String(active));
+});
+
+$("reset").addEventListener("click",()=>{
+  if(!confirm("Reset your mission progress and completion badge?")) return;
+  completed=[];
+  unlocked=false;
+  $("answer").value="";
+  $("studentName").value="";
+  $("challenge").classList.add("hidden");
+  $("finalFeedback").classList.add("hidden");
+  $("intro").classList.remove("hidden");
+  save();
+  render();
+});
+
+$("check").addEventListener("click",()=>{
+  if(completed.length!==7) return;
+
+  const answer=$("answer").value.trim().toUpperCase();
+  $("finalFeedback").classList.remove("hidden");
+
+  if(answer==="CONTEXT") {
+    unlocked=true;
+    save();
+    $("finalFeedback").textContent=
+      "Congratulations! CONTEXT is correct. "+
+      "Social context helps explain how situations influence behavior. "+
+      "Your Explorer Badge is unlocked!";
+    render();
+    $("certificate").scrollIntoView({block:"start"});
+  } else {
+    $("finalFeedback").textContent=
+      "Try again! Hint: The word begins with CON and "+
+      "describes the circumstances surrounding behavior.";
+  }
+});
+
+function drawBadge() {
+  if(!unlocked) return;
+
+  const canvas=$("badgeCanvas");
+  const ctx=canvas.getContext("2d");
+  const w=900,h=900;
+  const name=$("studentName").value.trim()||"Psychology Explorer";
+
+  ctx.clearRect(0,0,w,h);
+
+  const bg=ctx.createLinearGradient(0,0,900,900);
+  bg.addColorStop(0,"#102f4b");
+  bg.addColorStop(1,"#267c93");
+  ctx.fillStyle=bg;
+  ctx.fillRect(0,0,w,h);
+
+  // Decorative stars
+  ctx.fillStyle="#ffe6a6";
+  for(let i=0;i<32;i++) {
+    const x=65+(i*173)%770;
+    const y=65+(i*251)%770;
+    ctx.beginPath();
+    ctx.arc(x,y,2.5+(i%3),0,Math.PI*2);
+    ctx.fill();
+  }
+
+  // Main medallion
+  ctx.beginPath();
+  ctx.arc(450,440,320,0,Math.PI*2);
+  ctx.fillStyle="#fff8e6";
+  ctx.fill();
+  ctx.lineWidth=19;
+  ctx.strokeStyle="#e8b95a";
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.arc(450,440,291,0,Math.PI*2);
+  ctx.lineWidth=3;
+  ctx.strokeStyle="#1d607b";
+  ctx.stroke();
+
+  ctx.textAlign="center";
+  ctx.fillStyle="#163a59";
+
+  ctx.font="bold 34px Arial";
+  ctx.fillText("PSYCHOLOGY ACADEMY",450,215);
+
+  ctx.font="bold 26px Arial";
+  ctx.fillText("FOUNDATIONS TRAIL",450,260);
+
+  // Stylized social network icon
+  ctx.strokeStyle="#267c93";
+  ctx.lineWidth=12;
+  ctx.beginPath();
+  ctx.moveTo(335,370);
+  ctx.lineTo(450,325);
+  ctx.lineTo(565,370);
+  ctx.moveTo(335,370);
+  ctx.lineTo(450,445);
+  ctx.lineTo(565,370);
+  ctx.stroke();
+
+  [[335,370],[450,325],[565,370],[450,445]].forEach((p,i)=>{
+    ctx.beginPath();
+    ctx.arc(p[0],p[1],28,0,Math.PI*2);
+    ctx.fillStyle=i===3?"#e8b95a":"#267c93";
+    ctx.fill();
+  });
+
+  ctx.fillStyle="#163a59";
+  ctx.font="bold 44px Georgia";
+  ctx.fillText("SOCIAL PSYCHOLOGY",450,525);
+  ctx.font="bold 40px Georgia";
+  ctx.fillText("EXPLORER",450,575);
+
+  ctx.font="bold 26px Arial";
+  ctx.fillText("MISSION 12 COMPLETED",450,625);
+
+  // Personalized name below medallion
+  ctx.fillStyle="#ffffff";
+  ctx.font="bold 34px Arial";
+  let displayName=name;
+  while(ctx.measureText(displayName).width>780 && displayName.length>1) {
+    displayName=displayName.slice(0,-1);
+  }
+  if(displayName!==name) displayName+="…";
+  ctx.fillText(displayName,450,810);
+
+  ctx.font="22px Arial";
+  ctx.fillText("Social Psychology Village · Week 12",450,850);
+
+  $("badgePreview").src=canvas.toDataURL("image/png");
+}
+
+$("studentName").addEventListener("input",drawBadge);
+
+$("download").addEventListener("click",()=>{
+  if(!unlocked) return;
+  drawBadge();
+  const canvas=$("badgeCanvas");
+  const link=document.createElement("a");
+  link.download="Psychology-Academy-Week-12-Badge.png";
+  link.href=canvas.toDataURL("image/png");
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+});
+
+render();
+</script>
+</body>
+</html>
+
