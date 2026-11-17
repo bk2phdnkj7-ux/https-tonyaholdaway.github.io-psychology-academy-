@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Psychology Academy by Dr. Tonya Holdaway. Explore 12 interactive psychology missions with animated destinations, learning challenges, and completion badges.">
+<meta name="description" content="Psychology Academy by Dr. Tonya Holdaway. Explore 13 interactive psychology missions with animated destinations, learning challenges, and completion badges.">
 <title>Psychology Academy | Dr. Tonya Holdaway</title>
 
 <style>
@@ -598,6 +598,32 @@ footer p {margin:4px}
   .hero {min-height:auto}
   .mission-card {break-inside:avoid}
 }
+
+/* Restored psychology flags and academic-robed campus walkers. */
+.campus-art{height:330px}.hero-content{padding-bottom:345px}
+.academy-flag{transform-origin:0 20px;transform-box:view-box}
+.motion-on .academy-flag{animation:psychologyFlagFly 2.6s ease-in-out infinite alternate}
+.motion-on .flag-center{animation-delay:-.8s;animation-duration:3.2s}
+.motion-on .flag-east{animation-delay:-1.6s;animation-duration:2.9s}
+.motion-on .walker-one{animation:scholarStrollA 24s ease-in-out infinite alternate}
+.motion-on .walker-two{animation:scholarStrollB 31s ease-in-out infinite alternate}
+.motion-on .walker-three{animation:scholarStrollC 29s ease-in-out infinite alternate}
+.motion-on .walker-four{animation:scholarStrollD 22s ease-in-out infinite alternate}
+.motion-on .scholar-leg{transform-box:fill-box;transform-origin:50% 0;animation:scholarStep 1s ease-in-out infinite alternate}
+.motion-on .leg-right{animation-delay:-1s}
+.motion-on .scholar-arm{transform-box:fill-box;transform-origin:70% 0;animation:scholarStep 1s -.3s ease-in-out infinite alternate}
+.motion-on .scholar-robe{transform-box:fill-box;transform-origin:50% 0;animation:robeSway 1.2s ease-in-out infinite alternate}
+@keyframes psychologyFlagFly{0%{transform:skewY(-5deg) scaleX(.94)}50%{transform:skewY(2deg) scaleX(1)}100%{transform:skewY(7deg) scaleX(.9)}}
+@keyframes scholarStrollA{from{transform:translateX(0)}to{transform:translateX(570px)}}
+@keyframes scholarStrollB{from{transform:translateX(0)}to{transform:translateX(-280px)}}
+@keyframes scholarStrollC{from{transform:translateX(0)}to{transform:translateX(240px)}}
+@keyframes scholarStrollD{from{transform:translateX(0)}to{transform:translateX(-540px)}}
+@keyframes scholarStep{from{transform:rotate(-12deg)}to{transform:rotate(12deg)}}
+@keyframes robeSway{from{transform:skewX(-1.5deg)}to{transform:skewX(1.5deg)}}
+.week13{border-color:#345e67!important;background:linear-gradient(145deg,#edf6f2,#e7ecf6)!important}
+@media(max-width:560px){.campus-art{height:240px}.hero-content{padding-bottom:260px}}
+@media(prefers-reduced-motion:reduce){.academy-flag,.campus-walker,.scholar-leg,.scholar-arm,.scholar-robe{animation:none!important}}
+@media print{.campus-art{display:none}}
 </style>
 </head>
 
@@ -647,7 +673,7 @@ footer p {margin:4px}
   </div>
 
   <div class="campus-art" aria-hidden="true">
-    <svg viewBox="0 0 1200 270" preserveAspectRatio="xMidYMax meet">
+    <svg viewBox="0 -100 1200 370" preserveAspectRatio="xMidYMax meet">
       <path d="M0 220Q260 180 480 215T950 215T1200 220V270H0Z" fill="#6d9a73"/>
       <path d="M0 245Q250 215 600 245T1200 240" fill="none" stroke="#d9c5a0" stroke-width="22"/>
 
@@ -705,10 +731,17 @@ footer p {margin:4px}
         <circle cx="1180" cy="146" r="30" fill="#6b9665"/>
       </g>
 
-      <!-- Academy Flags -->
-      <path d="M600 0V-35" stroke="#c8a75a" stroke-width="4"/>
-      <path d="M600-35L655-25 650-5 600-15Z" fill="#783b50"/>
-      <text x="623" y="-16" fill="#fff2c9" font-size="21" text-anchor="middle">Ψ</text>
+      <!-- Psychology flags: visible in the expanded SVG sky. -->
+      <g class="academy-flagpoles" stroke="#a0792f" stroke-width="4"><path d="M127 5V-70M600 0V-90M1077 5V-70"/></g>
+      <g transform="translate(127 -70)"><g class="academy-flag flag-west"><path d="M0 0Q24-10 48 0T90 0V47Q65 37 43 47T0 47Z" fill="#234d69" stroke="#e2c574" stroke-width="2"/><text x="45" y="34" fill="#fff1bf" font-family="Georgia" font-size="35" text-anchor="middle">Ψ</text></g></g>
+      <g transform="translate(600 -90)"><g class="academy-flag flag-center"><path d="M0 0Q28-10 56 0T100 0V52Q74 42 48 52T0 52Z" fill="#683d6d" stroke="#e2c574" stroke-width="2"/><text x="48" y="38" fill="#fff1bf" font-family="Georgia" font-size="40" text-anchor="middle">Ψ</text></g></g>
+      <g transform="translate(1077 -70)"><g class="academy-flag flag-east"><path d="M0 0Q24-10 48 0T90 0V47Q65 37 43 47T0 47Z" fill="#286056" stroke="#e2c574" stroke-width="2"/><text x="45" y="34" fill="#fff1bf" font-family="Georgia" font-size="35" text-anchor="middle">Ψ</text></g></g>
+      <!-- Robed scholars: outer groups travel; inner groups keep their walking baseline. -->
+      <defs><g id="robed-scholar"><ellipse cx="0" cy="72" rx="21" ry="4" fill="#233a4b33"/><g class="scholar-leg leg-left"><path d="M-8 48L-12 69" stroke="#263547" stroke-width="6" stroke-linecap="round"/><path d="M-12 69H-20" stroke="#142b3b" stroke-width="5" stroke-linecap="round"/></g><g class="scholar-leg leg-right"><path d="M7 48L12 69" stroke="#263547" stroke-width="6" stroke-linecap="round"/><path d="M12 69H20" stroke="#142b3b" stroke-width="5" stroke-linecap="round"/></g><circle cx="0" cy="-3" r="10" fill="var(--scholar-skin,#b98561)"/><path class="scholar-robe" d="M-11 10L-22 49Q0 60 22 49L11 10Z" fill="var(--scholar-robe,#263c60)" stroke="#172e45" stroke-width="1.5"/><path d="M-8 13L-7 46M8 13L7 46" stroke="#e5c77b" stroke-width="4"/><path class="scholar-arm" d="M-11 16L-25 34" stroke="var(--scholar-robe,#263c60)" stroke-width="9" stroke-linecap="round"/><path d="M11 16L22 31" stroke="var(--scholar-robe,#263c60)" stroke-width="9" stroke-linecap="round"/><path d="M-16-10L0-16 17-10 0-3Z" fill="#243849" stroke="#d7bd75" stroke-width="1"/><path d="M16-10V4" stroke="#e0bd67" stroke-width="2"/><rect x="17" y="28" width="13" height="18" rx="2" fill="#a36d42" stroke="#f0dfae" stroke-width="1.5"/></g></defs>
+      <g class="campus-walker walker-one"><g transform="translate(100 181) scale(.8)" style="--scholar-robe:#304d77;--scholar-skin:#bd8c67"><use href="#robed-scholar"/></g></g>
+      <g class="campus-walker walker-two"><g transform="translate(450 178) scale(.85)" style="--scholar-robe:#694774;--scholar-skin:#754d3e"><use href="#robed-scholar"/></g></g>
+      <g class="campus-walker walker-three"><g transform="translate(810 180) scale(.8)" style="--scholar-robe:#2d665d;--scholar-skin:#e2b598"><use href="#robed-scholar"/></g></g>
+      <g class="campus-walker walker-four"><g transform="translate(1080 185) scale(.72)" style="--scholar-robe:#6e4457;--scholar-skin:#a97d55"><use href="#robed-scholar"/></g></g>
     </svg>
   </div>
 
@@ -747,11 +780,8 @@ footer p {margin:4px}
         to the world around you.
       </p>
       <p>
-        <strong>Twelve Academy destinations are now open: Weeks 1–12!</strong>
-        Our newest adventure is the Social Psychology Village,
-        where seven locations reveal how social situations,
-        relationships, and group influences shape human behavior.
-        Weeks 13–16 will open as our semester journey continues.
+        <strong>Thirteen Academy destinations are now open: Weeks 1–13!</strong>
+        Our newest adventure is the Workwise Guild, where eight workshops explore hiring, training, leadership, workplace culture, and human factors. Weeks 14–16 will open as our semester journey continues.
       </p>
       <div class="actions center">
         <a class="action" href="#campus">Enter the Academy Campus</a>
@@ -789,20 +819,17 @@ footer p {margin:4px}
 
   <!-- OPEN MISSIONS -->
   <section class="open-guide" aria-labelledby="open-heading">
-    <p style="font-weight:bold;color:#315f40">NOW EXPLORING · WEEKS 1–12</p>
-    <h2 id="open-heading">Twelve Doors Are Open. Your Next Discovery Awaits.</h2>
+    <p style="font-weight:bold;color:#315f40">NOW EXPLORING · WEEKS 1–13</p>
+    <h2 id="open-heading">Thirteen Doors Are Open. Your Next Discovery Awaits.</h2>
     <p>
       Begin with psychology's foundations, investigate research and the brain,
       and continue through consciousness, perception, learning, thinking,
       memory, lifespan development, motivation, emotion, personality,
-      and social psychology.
+      social psychology, and the psychology of work.
     </p>
     <p>
       <strong>New this week:</strong>
-      Enter the <a href="missions/week12.html">Social Psychology Village</a>.
-      Visit seven animated locations, investigate social influence,
-      collect seven clue letters, solve the final mystery,
-      and download your personalized Social Psychology Explorer badge.
+      Enter the <a href="missions/week13.html">Workwise Guild</a>. Investigate eight workshops, collect eight code letters, explore a TED human-centered design connection, and earn your Workplace Science Navigator badge.
     </p>
     <nav aria-label="Currently open Academy missions">
       <ol class="open-list">
@@ -817,11 +844,12 @@ footer p {margin:4px}
         <li><a href="missions/week9.html">9 · Lifespan Conservatory</a></li>
         <li><a href="missions/week10.html">10 · Emberheart Atrium</a></li>
         <li><a href="missions/week11.html">11 · Personality House</a></li>
-        <li><a class="new" href="missions/week12.html">12 · Social Psychology Village — NEW!</a></li>
+        <li><a href="missions/week12.html">12 · Social Psychology Village</a></li>
+      <li><a class="new" href="missions/week13.html">13 · Workwise Guild — NEW!</a></li>
       </ol>
     </nav>
     <p style="font-size:.9rem">
-      Weeks 13–16 are opening later. Refer to your Canvas course
+      Weeks 14–16 are opening later. Refer to your Canvas course
       for due dates and assignment submission instructions.
     </p>
   </section>
@@ -1068,15 +1096,7 @@ footer p {margin:4px}
         <h3 id="district4" class="district-title">Wellness and Applied Psychology District</h3>
         <div class="mission-grid">
 
-          <article class="mission-card" data-week="13">
-            <div>
-              <p class="mission-number">Week 13</p>
-              <div class="mission-visual" aria-hidden="true"><span class="mission-icon">🏢</span></div>
-              <h3>Workplace Psychology Center</h3>
-              <p>Explore psychology in organizations, leadership, work, motivation, teamwork, and human performance.</p>
-              <p class="mission-status coming">Opening Later</p>
-            </div>
-          </article>
+          <article class="mission-card week13" data-week="13"><div class="new-ribbon">NEW MISSION</div><div><p class="mission-number">Week 13</p><div class="mission-visual" aria-hidden="true"><svg viewBox="0 0 400 110"><path d="M45 95V40L115 10 185 40V95Z" fill="#bfd4ca" stroke="#173e50" stroke-width="3"/><path d="M215 95V40L285 10 355 40V95Z" fill="#d9c58c" stroke="#173e50" stroke-width="3"/><circle cx="200" cy="52" r="35" fill="#173e50" stroke="#f0d375" stroke-width="3"/><text x="200" y="68" fill="#fff4c8" font-family="Georgia" font-size="46" text-anchor="middle">Ψ</text><path d="M100 98H300" stroke="#e5d9b6" stroke-width="10"/></svg></div><h3>The Workwise Guild</h3><p><strong>Where evidence builds better workplaces.</strong> Explore job analysis, fair selection, training, satisfaction, leadership, culture, and human factors.</p><p class="mission-note">Eight workshops · Sixteen locks · TED design connection · Workplace Science Navigator badge</p><p class="mission-status" id="week13-status">Available Now</p></div><a class="mission-link" href="missions/week13.html">Enter the Workwise Guild</a></article>
 
           <article class="mission-card" data-week="14">
             <div>
@@ -1185,7 +1205,7 @@ footer p {margin:4px}
 /* =====================================================
    ACADEMY MISSION REGISTRY
    Preserves existing localStorage keys for Weeks 1–11.
-   Week 12 uses the new mission's completion state.
+   Weeks 12–13 use their own mission completion states.
    ===================================================== */
 
 const missions = [
@@ -1327,8 +1347,10 @@ const missions = [
     completeKey:null,
     count:7,
     final:true,
-    newMission:true
-  }
+    newMission:false
+  },
+  {week:13,name:"Workwise Guild",topic:"Industrial–Organizational Psychology",badge:"Workplace Science Navigator",symbol:"I/O",key:"psychologyIOWeek13_v1",property:"completed",completeKey:"psychologyAcademyWeek13Complete",count:8,final:true,newMission:true}
+
 ];
 
 const $ = id => document.getElementById(id);
@@ -1420,7 +1442,6 @@ function buildDirectory() {
   tbody.replaceChildren();
 
   const future=[
-    {week:13,name:"Workplace Psychology Center",topic:"Industrial Organizational Psychology"},
     {week:14,name:"Stress and Wellness Retreat",topic:"Stress, Lifestyle, and Health"},
     {week:15,name:"Psychological Disorders Center",topic:"Psychological Disorders"},
     {week:16,name:"Therapy and Graduation Hall",topic:"Therapy and Course Reflection"}
@@ -1434,7 +1455,7 @@ function buildDirectory() {
     week.textContent=m.week;
 
     const destination=document.createElement("td");
-    if(m.week<=12) {
+    if(m.week<=13) {
       const link=document.createElement("a");
       link.href="missions/week"+m.week+".html";
       link.textContent=m.name;
@@ -1448,7 +1469,7 @@ function buildDirectory() {
 
     const status=document.createElement("td");
     status.id="directory-week"+m.week+"-status";
-    status.textContent=m.week<=12?"Available Now":"Opening Later";
+    status.textContent=m.week<=13?"Available Now":"Opening Later";
 
     row.append(week,destination,topic,status);
     tbody.appendChild(row);
@@ -1497,7 +1518,7 @@ function updateAcademyProgress() {
 
   $("academyProgress").value=completed;
   $("progressText").textContent=
-    completed+" of 16 Academy missions completed · 12 missions currently open";
+    completed+" of 16 Academy missions completed · 13 missions currently open";
 
   let level="Beginning Explorer";
   if(completed===1) level="Curious Investigator";
@@ -1573,7 +1594,7 @@ function applyMotion() {
   $("motionStatus").textContent=reduced.matches
     ?"Animations are off to match your device's reduced-motion setting."
     :enabled
-      ?"The Academy campus is alive with clouds, birds, moving trees, and changing skies."
+      ?"The Academy campus is alive with flying psychology flags, walking robed scholars, clouds, birds, and changing skies."
       :"Animations are off. All Academy missions remain available.";
 
   if(enabled&&!document.hidden) startClock();
@@ -1659,3 +1680,4 @@ window.addEventListener("storage",event=>{
 </script>
 </body>
 </html>
+
