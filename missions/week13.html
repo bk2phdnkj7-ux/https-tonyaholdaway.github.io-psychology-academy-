@@ -1,1 +1,787 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Week 13 at Psychology Academy: Industrial–Organizational Psychology, eight interactive workshops, human factors, a TED design connection, and a personalized completion badge."><meta name="theme-color" content="#102f4a"><title>Week 13: The Workwise Guild | Psychology Academy</title><style>
+:root {
+  --night: #071426;
+  --indigo: #16244d;
+  --violet: #55327f;
+  --teal: #0d6c75;
+  --aqua: #7bd6d4;
+  --gold: #d8b45b;
+  --gold-dark: #795917;
+  --cream: #fffaf0;
+  --paper: #fffef9;
+  --ink: #1e2a38;
+  --muted: #516173;
+  --green: #246346;
+  --green-soft: #e8f6ed;
+  --red: #8b3038;
+  --red-soft: #fff0f1;
+  --blue-soft: #eaf5f7;
+  --line: #8a9dae;
+  --shadow: 0 18px 50px rgba(6, 20, 38, .17);
+  --radius: 18px;
+}
 
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  min-width: 280px;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 8% 18%, rgba(123, 214, 212, .12), transparent 22rem),
+    radial-gradient(circle at 92% 44%, rgba(85, 50, 127, .11), transparent 26rem),
+    #f4f5f2;
+  font: 18px/1.67 Arial, Helvetica, sans-serif;
+}
+button, input, textarea, select { font: inherit; }
+button { touch-action: manipulation; }
+a { color: #145779; font-weight: 700; text-underline-offset: .16em; }
+:focus-visible { outline: 4px solid #9b6500; outline-offset: 4px; }
+[hidden] { display: none !important; }
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+.skip-link {
+  position: fixed; left: 16px; top: -90px; z-index: 9999;
+  padding: 12px 17px; border: 3px solid #111; border-radius: 8px;
+  color: #111; background: #fff;
+}
+.skip-link:focus { top: 14px; }
+.container { width: min(1200px, calc(100% - 32px)); margin-inline: auto; }
+
+/* Magical gallery sky */
+.sensory-sky { position: fixed; inset: 0; overflow: hidden; pointer-events: none; z-index: -1; }
+.aurora {
+  position: absolute; width: 68vw; height: 35vw; min-height: 260px;
+  border-radius: 50%; filter: blur(55px); opacity: .12; mix-blend-mode: multiply;
+  animation: auroraDrift 18s ease-in-out infinite alternate;
+}
+.aurora.one { top: -14%; left: -14%; background: linear-gradient(90deg, #36c9bd, #7543b7); }
+.aurora.two { right: -22%; top: 35%; background: linear-gradient(90deg, #6b3ca1, #e1bc5a); animation-delay: -8s; }
+.mote {
+  position: absolute; width: 5px; height: 5px; border-radius: 50%;
+  background: #d6b45c; box-shadow: 0 0 10px #f9df92;
+  opacity: .24; animation: moteRise var(--mote-speed, 16s) linear infinite;
+}
+
+/* Hero */
+.hero {
+  position: relative; overflow: hidden; color: #f7f4e9;
+  border-bottom: 5px solid #b8923c;
+  background:
+    radial-gradient(circle at var(--pointer-x, 74%) var(--pointer-y, 36%), rgba(129, 228, 216, .19), transparent 15rem),
+    linear-gradient(135deg, #071426 0%, #152f51 48%, #3e2864 100%);
+  padding: 30px 0 38px;
+}
+.hero::before, .hero::after {
+  content: ""; position: absolute; pointer-events: none; border-radius: 50%; filter: blur(24px);
+}
+.hero::before { width: 34rem; height: 10rem; right: -8rem; top: -4rem; background: #4ac8bd20; animation: cloudDrift 16s ease-in-out infinite alternate; }
+.hero::after { width: 25rem; height: 8rem; left: -7rem; bottom: -3rem; background: #a978d71a; animation: cloudDrift 22s -9s ease-in-out infinite alternate-reverse; }
+.hero .container { position: relative; z-index: 2; }
+.academy-link {
+  display: inline-block; padding: 9px 14px; margin-bottom: 18px;
+  color: #10243c; background: #fff9e9; border: 2px solid #dec16f;
+  border-radius: 10px; text-decoration: underline;
+}
+.hero-grid { display: grid; grid-template-columns: 1.03fr .97fr; gap: 34px; align-items: center; }
+.eyebrow { margin: 0 0 7px; color: #e6ca7b; font-size: .88rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+.hero h1 { margin: 0; color: #fffaf0; font: 700 clamp(2.8rem, 6.4vw, 5.2rem)/.98 Georgia, "Times New Roman", serif; text-wrap: balance; }
+.hero-subtitle { margin: 14px 0 0; color: #8ee3dc; font: 700 clamp(1.2rem, 2.7vw, 1.75rem)/1.25 Georgia, serif; }
+.hero-text { max-width: 700px; margin: 18px 0 0; font-size: 1.03rem; }
+.hero-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+.hero-chip { padding: 6px 11px; border: 1px solid #c9b76b88; border-radius: 999px; color: #fff9df; background: #081a2f88; font-size: .82rem; }
+.hero-scene {
+  position: relative; overflow: hidden; aspect-ratio: 1.42;
+  border: 2px solid #bda864; border-radius: 190px 190px 24px 24px;
+  background: radial-gradient(circle at 50% 44%, #294b64, #091528 73%);
+  box-shadow: inset 0 0 60px #020712, 0 15px 40px #02081277;
+}
+.hero-scene::after {
+  content: "Move near the gallery to stir the light"; position: absolute; left: 50%; bottom: 8px;
+  transform: translateX(-50%); width: max-content; max-width: 90%; color: #f2dfaa;
+  font-size: .72rem; letter-spacing: .04em; text-align: center;
+}
+.hero-scene svg { width: 100%; height: 100%; display: block; }
+.ray-in { stroke: #f8efc0; stroke-width: 7; stroke-linecap: round; stroke-dasharray: 11 14; animation: rayFlow 3.2s linear infinite; }
+.rainbow-ray { fill: none; stroke-width: 5; stroke-linecap: round; stroke-dasharray: 9 13; animation: rayFlow 4s linear infinite; }
+.prism { fill: #eafcff22; stroke: #c4efec; stroke-width: 3; filter: drop-shadow(0 0 8px #82d9d6); animation: prismFloat 5s ease-in-out infinite alternate; transform-box: fill-box; transform-origin: center; }
+.iris-ring { fill: none; stroke: #7fe2dc; stroke-width: 5; filter: drop-shadow(0 0 7px #6cd0c8); transform-origin: 558px 219px; animation: irisBreathe 4.5s ease-in-out infinite; }
+.pupil { fill: #07111d; transform-origin: 558px 219px; animation: pupilShift 7s ease-in-out infinite; }
+.optic-path { fill: none; stroke: #d9b95d; stroke-width: 3; stroke-dasharray: 7 9; animation: rayFlow 5s linear infinite; }
+.hero-star { fill: #f6dd86; animation: twinkle 3.8s ease-in-out infinite alternate; transform-box: fill-box; transform-origin: center; }
+.hero:hover .rainbow-ray, .hero:hover .ray-in { animation-duration: 1.7s; }
+.hero:hover .iris-ring { animation-duration: 2.5s; }
+
+main { padding: 30px 0 56px; }
+h2, h3 { color: #123954; line-height: 1.25; }
+h2 { font-family: Georgia, "Times New Roman", serif; }
+.panel {
+  margin-bottom: 23px; padding: 23px; border: 2px solid #93a6b5; border-left: 8px solid #2b7080;
+  border-radius: var(--radius); background: rgba(255, 254, 249, .97); box-shadow: var(--shadow);
+}
+.panel h2, .panel h3 { margin-top: 0; }
+.panel-gold { border-left-color: #a67b20; }
+.panel-green { border-left-color: #2b6d4b; }
+.atmosphere {
+  position: relative; overflow: hidden; color: #fff;
+  border: 2px solid #b89b54; border-radius: var(--radius); padding: 20px 22px; margin-bottom: 23px;
+  background: linear-gradient(120deg, #0a1b31, #173d52 60%, #352351); box-shadow: var(--shadow);
+}
+.atmosphere::after { content: "✦  ◌  ✧  ◉  ✦"; position: absolute; right: 3%; top: 13px; color: #e4c46e55; font-size: 1.5rem; letter-spacing: 13px; animation: symbolDrift 9s ease-in-out infinite alternate; }
+.atmosphere h2 { position: relative; color: #fff; margin: 0 0 6px; z-index: 1; }
+.atmosphere p, .atmosphere .control-row, .atmosphere label, .atmosphere input { position: relative; z-index: 1; }
+.control-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 13px 0; }
+.control-button, .action-button, .tab-button, .choice-button, .map-button {
+  border: 2px solid #315d72; border-radius: 10px; background: #fff; color: #17384e;
+  padding: 10px 14px; cursor: pointer; font-weight: 700;
+}
+.control-button:hover, .action-button:hover, .tab-button:hover, .choice-button:hover:not(:disabled) { background: #e9f6f4; border-color: #19717a; }
+.atmosphere .control-button { border-color: #f0d995; }
+.atmosphere input[type="range"] { accent-color: #e2c46f; }
+.quiet { font-size: .88rem; }
+.status-light { margin: 0; color: #f8e8b8; font-size: .9rem; }
+.briefing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.briefing-grid .panel { height: 100%; }
+.objective-list { columns: 2; column-gap: 32px; padding-left: 22px; }
+.objective-list li { break-inside: avoid; margin-bottom: 7px; }
+.source-note { padding: 13px 15px; border-radius: 10px; background: #edf6f5; border: 1px solid #91b9b5; }
+
+/* Mission map and navigation */
+.mission-layout { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 24px; align-items: start; }
+.gallery-map {
+  position: relative; overflow: hidden; padding: 24px; margin-bottom: 24px;
+  border: 3px solid #6b7183; border-radius: 22px;
+  background: linear-gradient(145deg, #f0f4ee, #edf2f7); box-shadow: var(--shadow);
+}
+.gallery-map::before {
+  content: ""; position: absolute; inset: 0; opacity: .2; pointer-events: none;
+  background-image: linear-gradient(#38516618 1px, transparent 1px), linear-gradient(90deg, #38516618 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+.gallery-map > * { position: relative; }
+.gallery-map h2 { margin-top: 0; }
+.room-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 15px; }
+.map-button {
+  position: relative; overflow: hidden; min-height: 218px; padding: 16px; text-align: left;
+  border-color: #768b99; background: #fffef8; box-shadow: 0 8px 18px #10273a14;
+  transition: transform .24s ease, box-shadow .24s ease, border-color .24s;
+  transform: perspective(700px) rotateX(var(--tilt-y, 0deg)) rotateY(var(--tilt-x, 0deg));
+}
+.map-button:hover { transform: perspective(700px) translateY(-5px) rotateX(var(--tilt-y, 0deg)) rotateY(var(--tilt-x, 0deg)); box-shadow: 0 15px 29px #10273a2b; border-color: #277786; }
+.map-button[aria-pressed="true"] { outline: 4px solid #8a661c; outline-offset: 1px; }
+.map-button.complete { border-color: #2f7551; background: linear-gradient(#fafff8, #eef9f1); }
+.map-button.complete::after { content: "✓"; position: absolute; top: 10px; right: 12px; display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; color: #fff; background: #2e6a4c; font-weight: 900; }
+.map-art { display: block; width: 100%; height: 82px; margin-bottom: 7px; border-radius: 10px; background: linear-gradient(135deg, #091b31, #253d63); }
+.map-art svg { width: 100%; height: 100%; display: block; }
+.map-title { display: block; color: #173c57; font: 700 1.05rem/1.2 Georgia, serif; }
+.map-subtitle { display: block; min-height: 2.5em; margin-top: 5px; color: #4a5967; font-size: .82rem; line-height: 1.35; }
+.map-status { display: block; margin-top: 9px; color: #66521a; font-size: .76rem; font-weight: 800; text-transform: uppercase; letter-spacing: .04em; }
+.map-button.complete .map-status { color: #246346; }
+.mini-wave { fill: none; stroke: #76ded5; stroke-width: 3; stroke-dasharray: 8 8; animation: rayFlow 4s linear infinite; }
+.mini-orbit { transform-origin: center; transform-box: fill-box; animation: spin 15s linear infinite; }
+.mini-float { transform-origin: center; transform-box: fill-box; animation: prismFloat 4s ease-in-out infinite alternate; }
+
+/* Active learning room */
+.active-area:empty { display: none; }
+.activity-card {
+  position: relative; overflow: hidden; padding: 25px; margin-bottom: 24px;
+  border: 3px solid #6f8290; border-radius: 22px; background: #fffef9; box-shadow: var(--shadow);
+}
+.activity-card::before { content: ""; position: absolute; width: 220px; height: 220px; right: -100px; top: -110px; border-radius: 50%; background: radial-gradient(#76d8d52b, transparent 70%); pointer-events: none; }
+.room-heading { position: relative; display: flex; gap: 14px; justify-content: space-between; align-items: start; }
+.room-heading h2 { margin: 0 0 7px; }
+.room-number { display: inline-block; margin-bottom: 5px; color: #6b4e14; font-size: .78rem; font-weight: 800; text-transform: uppercase; letter-spacing: .09em; }
+.chapter-tag { flex: none; padding: 7px 10px; border: 1px solid #9bb6b7; border-radius: 999px; color: #174c60; background: #ecf8f7; font-size: .76rem; }
+.chapter-tag a { color: inherit; }
+.concept-strip { display: flex; flex-wrap: wrap; gap: 8px; margin: 15px 0; }
+.concept-strip span { padding: 5px 10px; border: 1px solid #d5b862; border-radius: 999px; color: #5c4514; background: #fff8df; font-size: .8rem; font-weight: 700; }
+.activity-instructions { padding: 13px 15px; border-left: 5px solid #26788a; border-radius: 8px; background: #edf7f8; }
+.lab-scene {
+  position: relative; overflow: hidden; margin: 18px 0; padding: 18px;
+  border: 2px solid #7f9eaa; border-radius: 16px;
+  background: radial-gradient(circle at 50% 18%, #fbfff8, #e8f0f2 72%);
+}
+.lab-scene.dark { color: #fff; background: radial-gradient(circle at 50% 35%, #284f68, #071525 75%); border-color: #bda55a; }
+.lab-scene h3 { margin: 0 0 8px; font-size: 1.15rem; }
+.lab-scene.dark h3 { color: #fff; }
+.scene-art { position: relative; overflow: hidden; min-height: 250px; border-radius: 13px; background: linear-gradient(145deg, #0b1e33, #1d3654); }
+.scene-art svg { display: block; width: 100%; height: 100%; min-height: 250px; }
+.scene-caption { min-height: 65px; margin-top: 12px; padding: 12px 14px; border-left: 5px solid #98711d; border-radius: 7px; background: #fff8df; color: #283847; }
+.scene-caption.success { border-color: #2d714d; background: #eaf7ee; }
+.action-button[aria-pressed="true"], .tab-button[aria-pressed="true"] { color: #fff; background: #174b5d; border-color: #174b5d; }
+.action-button.primary { color: #fff; background: #194d61; border-color: #194d61; }
+.action-button.primary:hover { background: #0d6572; }
+.exploration-check { color: #246346; font-weight: 800; }
+.range-grid { display: grid; grid-template-columns: minmax(190px, 1fr) minmax(180px, 1fr); gap: 17px; align-items: center; }
+.range-card { padding: 14px; border: 1px solid #9fb0bc; border-radius: 11px; background: #fff; }
+.range-card label { display: block; font-weight: 800; }
+input[type="range"] { width: 100%; min-height: 34px; accent-color: #176e78; }
+.readout { margin: 7px 0 0; font-size: .9rem; font-weight: 700; }
+.meter { height: 14px; overflow: hidden; margin-top: 9px; border: 1px solid #748896; border-radius: 999px; background: #e7ebed; }
+.meter > span { display: block; width: var(--meter, 0%); height: 100%; background: linear-gradient(90deg, #3c8c83, #ddba5f); transition: width .3s; }
+.lock-zone { margin-top: 24px; padding-top: 20px; border-top: 2px dashed #82949f; }
+.lock-zone h3 { margin-top: 0; }
+.question-card { padding: 17px; margin: 14px 0; border: 2px solid #9baab4; border-radius: 13px; background: #fbfcfa; }
+.question-card.solved { border-color: #2e7550; background: #eff9f2; }
+.question-card legend { padding: 0 6px; font-weight: 800; color: #203f52; }
+.choice-grid { display: grid; gap: 9px; margin-top: 10px; }
+.choice-button { width: 100%; text-align: left; font-weight: 600; }
+.choice-button.correct-choice { border-color: #2e7550; background: #def2e5; color: #17452e; }
+.choice-button.wrong-choice { border-color: #94404a; background: #ffeaec; color: #67242b; }
+.choice-button:disabled { opacity: 1; cursor: default; }
+.feedback { min-height: 1.5em; margin: 9px 0 0; font-size: .91rem; font-weight: 700; }
+.feedback.good { color: #245f42; }
+.feedback.try { color: #7a2b34; }
+.clue-card { position: relative; overflow: hidden; margin-top: 18px; padding: 18px; border: 2px solid #a98129; border-radius: 13px; background: linear-gradient(135deg, #fff8df, #fffef7); }
+.clue-card::after { content: "✦"; position: absolute; right: 16px; top: 10px; color: #b99136; font-size: 2rem; animation: twinkle 2.5s ease-in-out infinite alternate; }
+.fragment-reveal { display: inline-grid; place-items: center; width: 54px; height: 54px; margin-right: 10px; border-radius: 50%; color: #fff; background: linear-gradient(145deg, #5a3683, #173f59); box-shadow: 0 0 0 4px #e2c56d, 0 0 20px #ceb460; font: 800 1.6rem Georgia, serif; }
+.room-nav {
+  display: grid; grid-template-columns: 1fr; gap: 14px; align-items: center;
+  margin-top: 20px; padding: 18px; border: 2px solid #718e9c; border-radius: 15px;
+  background: linear-gradient(135deg, #edf7f6, #fdf9e9); box-shadow: 0 8px 22px #10273a14;
+}
+.room-nav.route-ready { border-color: #a47b22; background: linear-gradient(135deg, #fff9df, #ecf8f3); }
+.room-nav-label { display: block; margin-bottom: 3px; color: #6f5217; font-size: .76rem; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
+.room-nav strong { display: block; color: #153e57; font: 700 1.08rem/1.3 Georgia, serif; }
+.room-nav p { margin: 5px 0 0; color: #4b5b67; font-size: .86rem; }
+.room-nav-actions { display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 9px; }
+.route-button {
+  min-height: 46px; padding: 10px 14px; border: 2px solid #315d72; border-radius: 10px;
+  color: #17384e; background: #fff; cursor: pointer; font-weight: 800;
+}
+.route-button:hover { background: #e7f5f2; border-color: #1b707a; }
+.route-button.primary-route { color: #fff; border-color: #174b5d; background: #174b5d; box-shadow: 0 0 0 3px #fff, 0 0 0 5px #d1b251; }
+.route-button.primary-route:hover { background: #0e6671; }
+.route-button.final-route { background: linear-gradient(135deg, #523477, #173f59); border-color: #d7b95e; }
+.route-button[disabled] { opacity: .58; cursor: not-allowed; box-shadow: none; }
+
+/* Simulations */
+.pathway-stage { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; align-items: stretch; margin: 15px 0; }
+.path-node { position: relative; display: grid; place-items: center; min-height: 106px; padding: 9px; border: 2px solid #72909a; border-radius: 12px; color: #244252; background: #f8fcfb; text-align: center; font-size: .82rem; font-weight: 800; transition: .45s; }
+.path-node::after { content: "→"; position: absolute; right: -16px; z-index: 2; color: #9a7320; font-size: 1.5rem; }
+.path-node:last-child::after { display: none; }
+.path-node.lit { color: #fff; background: #1e6671; border-color: #e1c46b; box-shadow: 0 0 20px #58bdb5aa; transform: translateY(-5px); }
+.path-icon { font-size: 1.7rem; }
+.threshold-sky { position: relative; height: 220px; border-radius: 12px; background: radial-gradient(circle at 50% 70%, #183351, #071322 75%); overflow: hidden; }
+.threshold-star { position: absolute; left: 50%; top: 43%; width: 22px; height: 22px; transform: translate(-50%, -50%); opacity: var(--star-alpha, .05); filter: drop-shadow(0 0 var(--star-glow, 1px) #fff3b5); transition: opacity .25s, filter .25s; }
+.threshold-star::before { content: "✦"; color: #fff8c4; font-size: 28px; }
+.noise-dot { position: absolute; width: 3px; height: 3px; border-radius: 50%; background: #cbe0e8; opacity: .18; animation: noisePulse 4s ease-in-out infinite alternate; }
+.adapt-orb { width: 94px; height: 94px; margin: 22px auto; border-radius: 50%; background: #efce68; box-shadow: 0 0 44px #f6d267; transition: opacity 1.2s, filter 1.2s; }
+.adapt-orb.adapted { opacity: .22; filter: saturate(.4); }
+.wave-stage { min-height: 245px; padding: 15px; border-radius: 13px; color: #fff; background: #071a2e; }
+.wave-stage svg { width: 100%; height: 170px; display: block; }
+#wave-path { fill: none; stroke: #7ce0d7; stroke-width: 5; filter: drop-shadow(0 0 7px currentColor); }
+.wave-axis { stroke: #d8e5e855; stroke-width: 1; }
+.wave-orb { fill: var(--wave-color, #7ce0d7); filter: drop-shadow(0 0 9px var(--wave-color, #7ce0d7)); }
+.eye-stage, .ear-stage { position: relative; min-height: 290px; color: #fff; border-radius: 13px; background: radial-gradient(circle at 45% 45%, #244a65, #081728 75%); }
+.eye-stage svg, .ear-stage svg { width: 100%; height: 290px; display: block; }
+.photon { opacity: 0; transform: translateX(0); }
+.photon.travel { opacity: 1; animation: photonTravel 3.4s ease-in-out forwards; }
+.eye-label, .ear-label { fill: #f7edc8; font: 700 13px Arial, sans-serif; }
+.retina-rods { fill: #8ec6c7; opacity: .3; transition: opacity .4s; }
+.retina-cones { fill: #efc767; opacity: .3; transition: opacity .4s; }
+.eye-stage.rods .retina-rods, .eye-stage.cones .retina-cones { opacity: 1; filter: drop-shadow(0 0 5px currentColor); }
+.depth-scene { position: relative; height: 190px; overflow: hidden; border-radius: 12px; background: linear-gradient(#cde9ee 0 54%, #bed0a1 54%); perspective: 500px; }
+.depth-road { position: absolute; left: 34%; right: 34%; bottom: 0; height: 100%; background: #7b7f7a; clip-path: polygon(47% 0, 53% 0, 100% 100%, 0 100%); }
+.depth-object { position: absolute; left: calc(10% + var(--depth, 45) * .72%); bottom: calc(12% + var(--depth, 45) * .55%); transform: translateX(-50%) scale(calc(.45 + (100 - var(--depth, 45)) * .008)); transition: .4s; font-size: 2.2rem; }
+.sound-pulse { opacity: 0; }
+.sound-pulse.travel { opacity: 1; animation: soundTravel 3.4s ease-in-out forwards; }
+.ossicle { transform-origin: center; transform-box: fill-box; }
+.ear-stage.ringing .ossicle { animation: ossicleMove .35s ease-in-out 8 alternate; }
+.hair-cell { transform-origin: center bottom; transform-box: fill-box; }
+.ear-stage.ringing .hair-cell { animation: hairBend .4s ease-in-out 7 alternate; }
+.localizer { position: relative; height: 190px; border-radius: 12px; background: linear-gradient(#e7f4f4, #d9e6d2); overflow: hidden; }
+.head-icon { position: absolute; left: 50%; bottom: 17px; transform: translateX(-50%); font-size: 5.4rem; }
+.sound-source { position: absolute; left: var(--source-x, 50%); top: 22px; transform: translateX(-50%); transition: left .4s; font-size: 2.2rem; }
+.flavor-lab { display: grid; grid-template-columns: 180px 1fr; gap: 18px; align-items: center; }
+.flask { position: relative; width: 126px; height: 160px; margin: auto; }
+.flask-neck { position: absolute; left: 45px; top: 0; width: 37px; height: 53px; border: 5px solid #55798a; border-bottom: 0; background: #f8ffffcc; }
+.flask-body { position: absolute; left: 12px; bottom: 0; width: 104px; height: 118px; border: 5px solid #55798a; border-radius: 18px 18px 48px 48px; overflow: hidden; background: #f8ffffcc; }
+.flavor-liquid { position: absolute; left: 0; right: 0; bottom: 0; height: var(--flavor-fill, 18%); background: linear-gradient(#f5cf6f, #d4778e); transition: height .7s; }
+.aroma { position: absolute; left: 48px; top: -8px; width: 34px; height: 34px; border: 4px solid #8a5da2; border-color: #8a5da2 transparent transparent; border-radius: 50%; opacity: 0; }
+.flask.aromatic .aroma { opacity: 1; animation: aromaRise 2.6s ease-out infinite; }
+.sense-compass { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+.sense-card { min-height: 100px; padding: 12px; border: 2px solid #8098a3; border-radius: 11px; background: #fff; cursor: pointer; text-align: left; }
+.sense-card:hover, .sense-card[aria-pressed="true"] { background: #eaf7f2; border-color: #2e7550; }
+.attention-stage { position: relative; height: 260px; overflow: hidden; border-radius: 13px; background: #0a1930; }
+.moving-shape { position: absolute; display: grid; place-items: center; width: 42px; height: 42px; color: #fff; border-radius: 50%; background: #3a8f98; animation: shapeDrift var(--shape-speed, 8s) ease-in-out infinite alternate; }
+.moving-shape.square { border-radius: 7px; background: #b38040; }
+.moving-shape.star { background: transparent; color: #f5da79; font-size: 2.3rem; }
+.attention-mask { position: absolute; inset: 0; background: #030a16d9; mask: radial-gradient(circle 64px at var(--focus-x, 30%) 50%, transparent 0 62px, #000 65px); -webkit-mask: radial-gradient(circle 64px at var(--focus-x, 30%) 50%, transparent 0 62px, #000 65px); pointer-events: none; }
+.gestalt-board { min-height: 220px; padding: 22px; border-radius: 13px; background: #f6f3e6; display: grid; place-items: center; }
+.gestalt-board svg { width: 100%; height: 200px; }
+.gestalt-dot { transition: transform .8s ease, fill .5s; transform-box: fill-box; transform-origin: center; }
+.gestalt-board.proximity .left-cluster { transform: translateX(-22px); }
+.gestalt-board.proximity .right-cluster { transform: translateX(22px); }
+.gestalt-board.similarity .alt-dot { fill: #a15a75; }
+.closure-piece { transition: transform .7s ease; transform-box: fill-box; transform-origin: center; }
+.gestalt-board.closure .closure-piece { transform: rotate(0deg) translate(0); }
+.context-glyph { font: 800 3rem Georgia, serif; fill: #203a51; }
+.ambiguous-mark { fill: none; stroke: #203a51; stroke-width: 10; stroke-linecap: round; stroke-linejoin: round; }
+
+/* Sidebar */
+.sidebar { position: sticky; top: 14px; max-height: calc(100vh - 28px); overflow: auto; padding: 2px 4px 10px; }
+.sidebar .panel { padding: 18px; margin-bottom: 17px; box-shadow: 0 8px 22px #071d2b18; }
+.sidebar h2 { margin: 0 0 10px; font-size: 1.16rem; }
+progress { width: 100%; height: 18px; accent-color: #2d7853; }
+.progress-text { margin: 6px 0 0; font-weight: 800; }
+.fragment-rack { display: grid; grid-template-columns: repeat(4, 1fr); gap: 7px; padding: 0; list-style: none; }
+.fragment { display: grid; place-items: center; min-height: 58px; border: 2px solid #8c9a9f; border-radius: 10px; color: #6e7475; background: #edf0ed; font: 800 1.4rem Georgia, serif; }
+.fragment small { font: 400 .59rem Arial, sans-serif; }
+.fragment.collected { color: #fff9dc; border-color: #d9bd65; background: linear-gradient(145deg, #523478, #163d58); box-shadow: 0 0 13px #d8b45b77; }
+.inventory-list, .achievement-list { padding-left: 21px; font-size: .88rem; }
+.inventory-list li, .achievement-list li { margin-bottom: 8px; }
+.notebook textarea { width: 100%; min-height: 105px; padding: 10px; border: 2px solid #7e909c; border-radius: 9px; resize: vertical; }
+.save-status { color: #465b69; font-size: .79rem; }
+.notebook-actions { display: grid; gap: 8px; margin-top: 10px; }
+.danger-button { border: 2px solid #8b3b3b; border-radius: 9px; padding: 9px; color: #762f34; background: #fff; cursor: pointer; font-weight: 700; }
+.reset-box { margin-top: 9px; padding: 11px; border: 1px solid #b56a6a; border-radius: 8px; background: #fff4f4; }
+
+/* Final mystery and badge */
+.final-case {
+  position: relative; overflow: hidden; padding: 27px; margin-bottom: 24px;
+  border: 3px solid #d0af55; border-radius: 22px; color: #fff;
+  background: radial-gradient(circle at 80% 0, #71459666, transparent 18rem), linear-gradient(135deg, #071629, #16475b 66%, #2d214c);
+  box-shadow: var(--shadow);
+}
+.final-case h2, .final-case h3 { color: #fff; }
+.final-case a { color: #afeae3; }
+.final-lock { padding: 17px; margin: 15px 0; border: 1px solid #a8c7c5; border-radius: 12px; background: #fffdf5; color: var(--ink); }
+.final-lock label { display: block; margin-bottom: 7px; font-weight: 800; }
+.final-lock select, .final-lock input { width: 100%; padding: 10px; border: 2px solid #718b98; border-radius: 8px; background: #fff; }
+.final-submit { color: #132c3f; border: 2px solid #f1d981; background: #fff9df; }
+.final-submit:hover { background: #e8f8ef; }
+.portal-code { text-transform: uppercase; letter-spacing: .15em; }
+.badge-maker { margin-top: 24px; padding: 20px; border-radius: 15px; color: #1e2a38; background: #fffdf6; }
+.badge-maker h3 { color: #153b54; }
+.badge-maker label { display: block; font-weight: 800; }
+.badge-maker input { width: min(100%, 520px); padding: 11px; margin: 7px 0 12px; border: 2px solid #718995; border-radius: 8px; }
+.badge-preview { display: block; width: 100%; max-width: 780px; height: auto; margin: 16px auto 0; border: 2px solid #896f2c; border-radius: 12px; box-shadow: 0 12px 26px #081b2d22; }
+.badge-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.confetti { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.confetti i { position: absolute; top: -20px; width: 8px; height: 14px; background: var(--confetti, #d9b457); animation: confettiFall 3s ease-out forwards; }
+.reading-panel details { padding: 12px 0; border-bottom: 1px solid #c7d0d4; }
+.reading-panel summary { cursor: pointer; color: #153f59; font-weight: 800; }
+.reading-panel li { margin-bottom: 8px; }
+.mobile-progress { display: none; }
+footer { padding: 27px 0; color: #eef5ed; background: #071426; border-top: 5px solid #b8923c; }
+.footer-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 25px; }
+footer h2 { color: #fff; margin-top: 0; font-size: 1.15rem; }
+footer a { color: #9fe2dc; }
+footer p { font-size: .9rem; }
+
+/* Motion */
+@keyframes auroraDrift { to { transform: translate(9vw, 6vh) scale(1.14) rotate(8deg); } }
+@keyframes moteRise { from { transform: translateY(110vh) scale(.5); opacity: 0; } 20% { opacity: .32; } to { transform: translateY(-15vh) translateX(45px) scale(1.2); opacity: 0; } }
+@keyframes cloudDrift { to { transform: translateX(80px) scale(1.1); } }
+@keyframes rayFlow { to { stroke-dashoffset: -44; } }
+@keyframes prismFloat { to { transform: translateY(-8px) rotate(1.5deg); } }
+@keyframes irisBreathe { 50% { transform: scale(1.08); stroke-width: 3; } }
+@keyframes pupilShift { 50% { transform: translateX(5px) scale(.82); } }
+@keyframes twinkle { to { opacity: .35; transform: scale(.72) rotate(12deg); } }
+@keyframes symbolDrift { to { transform: translate(-24px, 9px); opacity: .3; } }
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes noisePulse { to { opacity: .38; transform: scale(1.3); } }
+@keyframes photonTravel { 0% { transform: translateX(0); } 28% { transform: translateX(125px); } 52% { transform: translateX(245px); } 77% { transform: translateX(365px); } 100% { transform: translateX(500px); opacity: .15; } }
+@keyframes soundTravel { 0% { transform: translateX(0); } 27% { transform: translateX(120px); } 52% { transform: translateX(245px); } 76% { transform: translateX(365px); } 100% { transform: translateX(505px); opacity: .2; } }
+@keyframes ossicleMove { to { transform: rotate(9deg); } }
+@keyframes hairBend { to { transform: skewX(13deg); } }
+@keyframes aromaRise { from { transform: translateY(15px) scale(.7); } to { transform: translateY(-48px) scale(1.3); opacity: 0; } }
+@keyframes shapeDrift { from { transform: translate(-12px, -8px) rotate(0); } to { transform: translate(45px, 30px) rotate(120deg); } }
+@keyframes confettiFall { to { transform: translate(var(--drift, 20px), 620px) rotate(540deg); opacity: 0; } }
+
+.no-motion *, .no-motion *::before, .no-motion *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+.no-motion .map-button:hover { transform: none; }
+.no-motion .confetti { display: none; }
+
+@media (max-width: 1020px) {
+  .mission-layout { grid-template-columns: minmax(0, 1fr) 285px; }
+  .hero-grid { gap: 20px; }
+  .room-grid { gap: 11px; }
+}
+@media (max-width: 900px) {
+  .mission-layout { grid-template-columns: 1fr; }
+  .sidebar { position: static; max-height: none; overflow: visible; }
+  .hero-grid { grid-template-columns: 1fr .85fr; }
+  .hero h1 { font-size: 3.35rem; }
+  .briefing-grid { grid-template-columns: 1fr; }
+  .mobile-progress { display: block; position: sticky; bottom: 10px; z-index: 40; width: max-content; max-width: calc(100% - 24px); margin: 0 auto; padding: 9px 16px; border: 2px solid #e0c368; border-radius: 999px; color: #fff; background: #0b364a; box-shadow: 0 8px 25px #0005; font-size: .84rem; }
+  .mobile-progress a { color: #fff; }
+}
+@media (max-width: 700px) {
+  body { font-size: 17px; }
+  .hero-grid { grid-template-columns: 1fr; }
+  .hero-scene { max-height: 320px; aspect-ratio: 1.55; }
+  .hero h1 { font-size: clamp(2.5rem, 13vw, 3.35rem); }
+  .room-grid { grid-template-columns: 1fr 1fr; }
+  .map-button { min-height: 206px; padding: 12px; }
+  .map-art { height: 67px; }
+  .objective-list { columns: 1; }
+  .range-grid, .flavor-lab { grid-template-columns: 1fr; }
+  .pathway-stage { grid-template-columns: 1fr 1fr; }
+  .path-node::after { display: none; }
+  .room-heading { display: block; }
+  .chapter-tag { display: inline-block; margin-top: 5px; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .activity-card, .gallery-map, .final-case, .panel { padding: 18px; }
+  .room-nav { grid-template-columns: 1fr; }
+  .room-nav-actions { justify-content: flex-start; }
+}
+@media (max-width: 430px) {
+  .container { width: calc(100% - 22px); }
+  .room-grid { grid-template-columns: 1fr; }
+  .map-button { min-height: 170px; }
+  .map-art { height: 58px; }
+  .pathway-stage, .sense-compass { grid-template-columns: 1fr; }
+  .control-row > button { width: 100%; }
+  .room-nav-actions, .room-nav-actions .route-button { width: 100%; }
+  .fragment-rack { grid-template-columns: repeat(4, 1fr); }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  .map-button:hover { transform: none; }
+  .confetti, .mote { display: none; }
+}
+@media print {
+  .sensory-sky, .hero, .atmosphere, .gallery-map, .active-area, .sidebar, .mobile-progress, footer, .final-form, .badge-actions, .badge-maker label, .badge-maker input, #badge-message { display: none !important; }
+  body { background: #fff; font-size: 12pt; }
+  .mission-layout { display: block; }
+  .final-case { padding: 0; border: 0; color: #111; background: #fff; box-shadow: none; }
+  .final-case > h2, .final-case > p, .final-case > .final-form, .final-case > #final-feedback { display: none; }
+  .badge-maker { padding: 0; }
+  .badge-preview { max-width: 100%; border: 0; box-shadow: none; }
+}
+
+
+
+body.lighting-calm{background:#edf6f4}body.lighting-calm .hero{background:linear-gradient(135deg,#082b36,#1a4f58,#334e69)}body.lighting-curious .hero{background:linear-gradient(135deg,#071426,#152f51,#3e2864)}body.lighting-energized{background:#fbf5e9}body.lighting-energized .hero{background:linear-gradient(135deg,#263451,#4b3458,#68463e)}
+.code-reveal{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0}.code-reveal span{display:grid;place-items:center;width:45px;height:55px;background:#173f59;color:#fff7d6;border:2px solid #d4b564;border-radius:8px;font:bold 24px Georgia}.final-form{display:grid;gap:18px}.badge-maker canvas{width:100%;height:auto}.hero-scene::after{content:"A workplace is a human system"}.workstation{border:2px solid #8b9da8;border-radius:13px;padding:18px;margin:17px 0;background:#f4f8f6}.workstation h3{font-size:1.1rem}.workstation .scene-caption{margin-bottom:0}.history-note{border:2px solid #a98c4e;border-radius:12px;padding:15px;background:#fff7df}.history-note summary{cursor:pointer;font-weight:bold}.profile-scene{position:relative;display:flex;align-items:center;justify-content:space-evenly;min-height:220px;background:#0f2e43;border-radius:12px}.profile-lantern{width:55px;height:90px;border:3px solid #f4d67a;background:linear-gradient(#5ba9a4,#173d58);border-radius:25px 25px 12px 12px;box-shadow:0 0 25px #73d3c766;transition:transform .3s}.profile-scene>span{position:absolute;bottom:18px;left:0;width:100%;text-align:center;font-size:10px;color:#e8eccd;letter-spacing:1px}.design-console{background:#092033;color:#fff9e0;border:3px solid #cbb66d;border-radius:14px;padding:22px;text-align:center}.console-actions{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:23px 0}.console-actions>span{border:2px solid #a4c1ca;border-radius:9px;padding:12px 5px;background:#314d62;color:#fff;font-size:15px;display:grid;place-items:center}.design-console.clear .console-actions>span{background:#1e5a55;border-color:#e8ca72}.design-console p{font-size:15px}.ted-panel{border:3px solid #6a4385;border-radius:16px;padding:22px;margin:25px 0;background:#f7f2fb}.ted-panel .eyebrow{color:#614178}.ted-panel h3{font-size:1.3rem}#ted-player iframe{width:100%;aspect-ratio:16/9;border:0;margin-top:17px}textarea{font:inherit;width:100%;min-height:120px;resize:vertical;padding:12px;border:2px solid #5b7587;border-radius:8px;background:#fffefb;color:#243746}.work-glyph{fill:none;stroke:#e5c675;stroke-width:3}.guild-orbit{transform-box:fill-box;transform-origin:center;animation:spin 32s linear infinite}.hero-scene text{font-family:Georgia,serif;fill:#f8eac0}.no-motion *, .no-motion *::before,.no-motion *::after{animation-play-state:paused!important;transition:none!important} .reading-panel{margin-top:26px}.reading-panel .chapter-links{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.chapter-links a{display:block;border:1px solid #6d8694;border-radius:8px;padding:12px;background:#f0f7f7;font-size:16px}#completion-description{font-weight:bold}details summary{cursor:pointer}.final-form label{display:block;font-weight:bold}.final-form select,.final-form input{width:100%;padding:12px;border:2px solid #546c7a;border-radius:8px;color:#203c4e;background:#fff} .license-note{font-size:13px}.mission-safety{border-left-color:#59753c;background:#f0f6eb}@media(max-width:600px){.reading-panel .chapter-links{grid-template-columns:1fr}.console-actions{grid-template-columns:repeat(2,1fr)}.room-heading{display:block}.chapter-tag{display:inline-block;margin:9px 0}.hero-scene{border-radius:90px 90px 20px 20px}}</style></head><body id="top"><a class="skip-link" href="#main-content">Skip to mission content</a><div class="sensory-sky" aria-hidden="true"><div class="aurora one"></div><div class="aurora two"></div><div id="motes"></div></div><header class="hero"><div class="container"><a class="academy-link" href="../index.html">← Return to Psychology Academy</a><div class="hero-grid"><div><p class="eyebrow">Week 13 Psychology Mission · OpenStax Chapter 13</p><h1>The Workwise Guild</h1><p class="hero-subtitle">Where evidence builds better workplaces.</p><p class="hero-text">The Academy print shop is missing its Workplace Beacon. Hiring is inconsistent, training is rushed, staff ideas go unheard, and the equipment is confusing. Restore eight workshops and help the Guild design a better way to work.</p><div class="hero-chips"><span class="hero-chip">8 interactive workshops</span><span class="hero-chip">16 knowledge locks</span><span class="hero-chip">No timer or penalty</span><span class="hero-chip">Personalized badge</span></div></div><div class="hero-scene"><svg viewBox="0 0 700 490" role="img" aria-labelledby="guild-title"><title id="guild-title">The Workwise Guild: people, tools, and evidence connected around a psychology beacon</title><defs><linearGradient id="guild-grad" x2="1" y2="1"><stop stop-color="#1b4561"/><stop offset="1" stop-color="#3c3161"/></linearGradient></defs><circle class="guild-orbit" cx="350" cy="220" r="165" fill="none" stroke="#78d4cd" stroke-width="2" stroke-dasharray="6 14"/><path d="M120 388L350 315 580 388 350 465Z" fill="#25394d" stroke="#c3a963" stroke-width="2"/><path d="M195 346V168L350 88 505 168V346L350 421Z" fill="url(#guild-grad)" stroke="#dfc370" stroke-width="4"/><path d="M195 168L350 245 505 168M350 245V421" fill="none" stroke="#d2b363" stroke-width="3"/><circle cx="350" cy="166" r="55" fill="#0c293e" stroke="#f1d580" stroke-width="4"/><text x="350" y="190" font-size="72" text-anchor="middle">Ψ</text><g fill="#83d6c9" stroke="#dce9b7" stroke-width="2"><circle cx="144" cy="223" r="20"/><path d="M112 292L122 248H164L176 292Z"/><circle cx="553" cy="223" r="20"/><path d="M522 292L532 248H574L587 292Z"/></g><path class="mini-wave" d="M176 272H263M438 272H522"/><rect x="281" y="281" width="138" height="64" rx="9" fill="#153e50" stroke="#b8d8c8" stroke-width="3"/><path d="M304 312h30l15-15 17 24 13-15h22" stroke="#f3d782" fill="none" stroke-width="3"/><text x="350" y="46" font-size="21" text-anchor="middle">PEOPLE · EVIDENCE · DESIGN</text><circle class="hero-star" cx="99" cy="105" r="5"/><circle class="hero-star" cx="595" cy="100" r="5"/><circle class="hero-star" cx="350" cy="71" r="4"/></svg></div></div></div></header>
+<main id="main-content" class="container"><section class="atmosphere" aria-labelledby="atmosphere-heading"><h2 id="atmosphere-heading">Set Your Guild Atmosphere</h2><p>Choose a visual setting. Sound and motion are optional; every task also works without them.</p><div class="control-row"><button type="button" class="control-button" data-lighting="calm" aria-pressed="false">Calm Light</button><button type="button" class="control-button" data-lighting="curious" aria-pressed="true">Curious Light</button><button type="button" class="control-button" data-lighting="energized" aria-pressed="false">Energized Light</button></div><div class="control-row"><button id="music-toggle" type="button" class="control-button" aria-pressed="false">Play Guild Music</button><button id="motion-toggle" type="button" class="control-button" aria-pressed="false">Pause Animations</button><label for="volume">Music volume</label><input id="volume" type="range" min="0" max="1" step=".05" value=".22"></div><p id="audio-status" class="status-light" role="status">Music is off.</p><p id="motion-status" class="status-light" role="status"></p><audio id="guild-audio" loop preload="none"></audio></section>
+<div class="briefing-grid"><section class="panel"><h2>Your Mission</h2><p>Open a workshop, inspect its instruments, and solve both locks. Each restored workshop releases a letter. Use the eight letters in workshop order to complete the final workplace challenge.</p><p>Work at your own pace. A missed choice gives a hint. Use the navigation under each workshop to continue or revisit unfinished work.</p><p class="source-note">Read OpenStax Chapter 13 alongside the mission. Each workshop links to its section. The fictional cases are original learning activities, not employment advice.</p></section><section class="panel panel-gold"><h2>What You Will Practice</h2><ul class="objective-list"><li>Distinguish three I/O lenses.</li><li>Analyze job tasks and KSAs.</li><li>Compare selection evidence.</li><li>Evaluate training and feedback.</li><li>Examine satisfaction facets.</li><li>Compare leadership approaches.</li><li>Interpret workplace culture.</li><li>Apply human factors design.</li></ul></section></div>
+<section class="panel mission-safety"><h2>Use a Fictional Workplace</h2><p>No employment, health, or family disclosure is required. Use the supplied cases or invent a workplace. Your progress and notes stay in this browser; they do not automatically submit to Canvas. Check your Canvas assignment for the due date, points, and submission requirements.</p></section>
+<div class="mission-layout"><div><section class="gallery-map" aria-labelledby="map-heading"><h2 id="map-heading" tabindex="-1">The Eight-Workshop Guild Map</h2><p>Follow the suggested route or enter any workshop. Progress saves in this browser when browser storage is available.</p><div id="room-grid" class="room-grid"></div></section><div id="active-area" class="active-area"></div>
+<section id="final-case" class="panel panel-gold" hidden aria-labelledby="final-heading"><h2 id="final-heading" tabindex="-1">The Workplace Beacon Challenge</h2><p>The fictional Academy print shop has rushed hiring, unclear tasks, and repeated printer errors. Choose an evidence-informed plan, then enter your workshop code.</p><div id="workwise-code" class="code-reveal" aria-label="Collected letters in workshop order"></div><form id="final-form" class="final-form"><div><label for="final-one">1. Before redesigning the hiring process, what should the Guild clarify?</label><select id="final-one" required><option value="">Choose an action</option><option value="favorites">The manager’s favorite applicant</option><option value="jobanalysis">Job tasks and required capabilities</option><option value="gossip">Staff gossip about candidates</option></select></div><div><label for="final-two">2. The printer has confusing controls. Which response addresses the work system?</label><select id="final-two" required><option value="">Choose a response</option><option value="blame">Assume staff do not care</option><option value="redesign">Redesign and test clearer controls with users</option><option value="ignore">Ignore repeated errors</option></select></div><div><label for="final-three">3. How could the Guild evaluate the revised process?</label><select id="final-three" required><option value="">Choose an evidence plan</option><option value="guess">Assume the new design must work</option><option value="pilot">Pilot it; compare errors, task success, and worker feedback while considering other changes</option><option value="one">Use one positive comment as proof</option></select></div><div><label for="portal-code">4. Enter the eight-letter workshop code.</label><input id="portal-code" maxlength="20" autocomplete="off" required></div><button class="action-button primary" type="submit">Restore the Workplace Beacon</button></form><p id="final-feedback" role="status">Restore all eight workshops to begin.</p><section id="badge-maker" class="badge-maker" hidden><h3>Your Workplace Science Navigator Badge</h3><p id="completion-description">You restored the Guild and completed the workplace challenge.</p><label for="learner-name">Your name or instructor-approved class name</label><input id="learner-name" maxlength="60" autocomplete="off"><div class="badge-actions"><button id="generate-badge" class="action-button primary" type="button">Generate My Badge</button><button id="download-badge" class="action-button" type="button" disabled>Download Badge as PNG</button><button id="print-badge" class="action-button" type="button">Print / Save Badge as PDF</button></div><p id="badge-message" role="status">Generate your badge, then download it for your Canvas submission.</p><canvas id="badge-canvas" width="1400" height="980" aria-label="Personalized Workplace Science Navigator completion badge">Completion badge: eight workshops, sixteen knowledge locks, and the final workplace challenge completed.</canvas></section></section></div>
+<aside class="sidebar"><section class="panel" aria-labelledby="progress-heading"><h2 id="progress-heading">Guild Progress</h2><progress id="progress-bar" max="8" value="0">0 of 8 workshops complete</progress><p id="progress-text" role="status">0 of 8 workshops complete</p><p id="lock-progress">0 of 16 knowledge locks solved</p><p class="quiet">Progress is device- and browser-specific. Download your notes before changing devices.</p></section><section class="panel panel-gold"><h2>Workplace Fragments</h2><ol id="fragment-rack" class="fragment-rack" aria-label="Collected workshop code fragments"></ol></section><section class="panel panel-green"><h2>Evidence Inventory</h2><ul id="inventory-list"></ul><h3>Discoveries</h3><ul id="achievement-list"></ul></section><section class="panel"><h2>Your Evidence Notebook</h2><label for="observation-notes"><strong>What idea changed or complicated your thinking?</strong></label><textarea id="observation-notes" rows="5" placeholder="Name a concept and explain what you noticed."></textarea><label for="transfer-notes"><strong>How would you improve a fictional workplace?</strong></label><textarea id="transfer-notes" rows="5" placeholder="Propose a change, connect it to a concept, and explain how you would evaluate it."></textarea><p id="save-status" class="save-status" role="status">Notebook entries save in this browser.</p><div class="notebook-actions"><button id="download-notes" class="action-button" type="button">Download My Guild Notes</button><button id="reset-progress" class="danger-button" type="button">Reset Week 13 Progress</button></div><div id="reset-box" class="reset-box" hidden><strong>Reset Week 13 progress and notes?</strong><div class="control-row"><button id="confirm-reset" type="button" class="danger-button">Yes, Reset</button><button id="cancel-reset" type="button" class="action-button">Cancel</button></div></div></section></aside></div>
+<section class="panel reading-panel"><h2>Chapter 13 Reading Trail & Credits</h2><div class="chapter-links"><a href="https://openstax.org/books/psychology-2e/pages/13-1-what-is-industrial-and-organizational-psychology" target="_blank" rel="noopener">13.1 · What Is I/O Psychology?</a><a href="https://openstax.org/books/psychology-2e/pages/13-2-industrial-psychology-selecting-and-evaluating-employees" target="_blank" rel="noopener">13.2 · Selecting & Evaluating Employees</a><a href="https://openstax.org/books/psychology-2e/pages/13-3-organizational-psychology-the-social-dimension-of-work" target="_blank" rel="noopener">13.3 · The Social Dimension of Work</a><a href="https://openstax.org/books/psychology-2e/pages/13-4-human-factors-psychology-and-workplace-design" target="_blank" rel="noopener">13.4 · Human Factors & Workplace Design</a></div><p>Spielman, R. M., Jenkins, W. J., &amp; Lovett, M. D. (2020). <em>Psychology 2e</em>. OpenStax. Original mission cases and activities apply and paraphrase Chapter 13 concepts.</p><p><a href="https://openstax.org/books/psychology-2e/pages/13-summary" target="_blank" rel="noopener">Chapter summary</a> · <a href="https://openstax.org/books/psychology-2e/pages/13-key-terms" target="_blank" rel="noopener">Key terms</a></p><p class="license-note">Access for free at <a href="https://openstax.org/books/psychology-2e/pages/1-introduction" target="_blank" rel="noopener">OpenStax Psychology 2e</a>. Educational adaptation shared under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="license">CC BY-NC-SA 4.0</a>. TED video remains hosted by TED and is linked or embedded without modification.</p></section></main><p id="mobile-progress" class="mobile-progress"><a href="#map-heading">0/8 workshops · 0/16 locks</a></p><footer><div class="container footer-grid"><div><h2>Psychology Academy · Week 13</h2><p>The Workwise Guild · Industrial–Organizational Psychology · Dr. Tonya Holdaway</p></div><p><a href="#top">Back to top</a><br><a href="../index.html">Return to Psychology Academy</a></p></div></footer><div id="confetti" class="confetti" aria-hidden="true"></div><script>(() => { "use strict";
+const STORAGE_KEY="psychologyIOWeek13_v1",COMPLETION_KEY="psychologyAcademyWeek13Complete",AUDIO_SOURCE="https://bk2phdnkj7-ux.github.io/https-tonyaholdaway.github.io-psychology-academy-/assets/audio/asproductionmusic-ambient-guitar-589419.mp3",TOTAL_LOCKS=16,$=id=>document.getElementById(id);
+const rooms=[{"id": "work-science", "fragment": "W", "title": "The Three-Lens Observatory", "subtitle": "See the workplace through three scientific lenses", "source": "13.1", "sourceUrl": "https://openstax.org/books/psychology-2e/pages/13-1-what-is-industrial-and-organizational-psychology", "concepts": ["industrial", "organizational", "human factors"], "evidence": "I/O psychology studies work using evidence; hiring, social systems, and tool design are connected concerns.", "instructions": "Inspect all three lenses, then consider how one campus print shop could need all of them.", "activities": [{"id": "lens-industrial", "prompt": "Inspect the industrial lens", "options": [{"label": "Hiring & training", "text": "Which job tasks matter, and what evidence shows that training supports them?"}]}, {"id": "lens-organizational", "prompt": "Inspect the organizational lens", "options": [{"label": "People & teams", "text": "How do supervision, shared norms, and worker satisfaction shape daily work?"}]}, {"id": "lens-human", "prompt": "Inspect the human factors lens", "options": [{"label": "People & tools", "text": "Can staff understand and use the printer controls without avoidable confusion?"}]}], "requiredActions": ["lens-industrial", "lens-organizational", "lens-human"], "questions": [{"prompt": "Which lens most directly examines printer control labels?", "choices": ["Industrial selection", "Human factors", "Personality typing"], "correct": 1, "explanation": "Human factors examines the fit between people and work tools."}, {"prompt": "A manager observes faster work during a study. What is the careful conclusion?", "choices": ["Observation alone proves the new lights caused it.", "Several changes may explain it; compare conditions.", "Every worker now prefers bright light."], "correct": 1, "explanation": "The Hawthorne tradition invites questions about observation and alternative explanations."}]}, {"id": "job-analysis", "fragment": "O", "title": "The Job Analysis Archive", "subtitle": "Begin with the work, then identify the needed capabilities", "source": "13.2", "sourceUrl": "https://openstax.org/books/psychology-2e/pages/13-2-industrial-psychology-selecting-and-evaluating-employees", "concepts": ["job analysis", "tasks", "knowledge, skills, abilities"], "evidence": "Job analysis describes tasks and the capabilities needed to carry them out.", "instructions": "Open both records for the fictional Academy library assistant.", "activities": [{"id": "task-record", "prompt": "Record A: What must the worker do?", "options": [{"label": "Inspect the task record", "text": "Sort returned books by call number and help a visitor locate a title. This describes work activities."}]}, {"id": "ksa-record", "prompt": "Record B: What does the work require?", "options": [{"label": "Inspect the KSA record", "text": "Knowledge: the catalog system. Skill: searching it accurately. Ability: noticing differences in similar codes."}]}], "requiredActions": ["task-record", "ksa-record"], "questions": [{"prompt": "Which item belongs in a task-oriented description?", "choices": ["Checks returned books against the loan record", "Is a naturally cheerful person", "Has the same hobbies as the manager"], "correct": 0, "explanation": "A task describes an activity performed in the job."}, {"prompt": "Why consult workers, observations, and supervisors?", "choices": ["To replace evidence with popularity", "To collect multiple perspectives on the actual work", "To avoid describing the job"], "correct": 1, "explanation": "Several information sources can help clarify job requirements."}]}, {"id": "selection", "fragment": "R", "title": "The Fair Selection Gate", "subtitle": "Compare evidence rather than first impressions", "source": "13.2", "sourceUrl": "https://openstax.org/books/psychology-2e/pages/13-2-industrial-psychology-selecting-and-evaluating-employees", "concepts": ["structured interview", "work sample", "job-related evidence"], "evidence": "Consistent questions and relevant work samples provide a clearer comparison than liking an applicant.", "instructions": "Compare the two hiring plans. Both applicants meet the stated minimum qualifications.", "activities": [{"id": "selection-a", "prompt": "Plan A: an informal conversation", "options": [{"label": "Inspect Plan A", "text": "Each applicant gets different questions. The decision turns on whether the interviewer feels a personal connection."}]}, {"id": "selection-b", "prompt": "Plan B: a consistent work-related comparison", "options": [{"label": "Inspect Plan B", "text": "Ask the same relevant questions, use the same scoring guide, and compare an accessible catalog-search task."}]}], "requiredActions": ["selection-a", "selection-b"], "questions": [{"prompt": "Which comparison is easier to evaluate consistently?", "choices": ["The same relevant questions scored with shared criteria", "Different questions scored by personal feeling", "A decision based on a shared favorite sport"], "correct": 0, "explanation": "A structured process creates more comparable evidence."}, {"prompt": "An accessible work sample should primarily show…", "choices": ["whether the applicant resembles the interviewer", "how the applicant performs relevant job tasks", "whether the applicant seems fashionable"], "correct": 1, "explanation": "The evidence should connect to actual job requirements."}]}, {"id": "training", "fragment": "K", "title": "The Learning & Feedback Forge", "subtitle": "Distinguish training attendance from learning on the job", "source": "13.2", "sourceUrl": "https://openstax.org/books/psychology-2e/pages/13-2-industrial-psychology-selecting-and-evaluating-employees", "concepts": ["orientation", "mentoring", "performance appraisal"], "evidence": "Orientation, mentoring, and job-related appraisal support development; evidence should examine actual performance.", "instructions": "Visit the two stages of a new employee’s learning plan.", "activities": [{"id": "training-plan", "prompt": "Build a learning opportunity", "options": [{"label": "Inspect the training plan", "text": "Maya receives orientation, watches a demonstration, practices a catalog search, and asks a mentor for feedback."}]}, {"id": "appraisal-plan", "prompt": "Choose evidence of transfer", "options": [{"label": "Inspect the follow-up plan", "text": "A week later, a supervisor checks search accuracy using the same job-related criteria and gives specific feedback."}]}], "requiredActions": ["training-plan", "appraisal-plan"], "questions": [{"prompt": "Which result best shows learning transferred to the job?", "choices": ["The employee enjoyed the slides", "Accurate searches during later work", "The workshop had attractive posters"], "correct": 1, "explanation": "Enjoyment and attendance alone do not establish later job performance."}, {"prompt": "Which appraisal is most directly job-related?", "choices": ["A rating based only on general likability", "A comparison of search accuracy with clearly stated criteria", "A guess about someone’s private life"], "correct": 1, "explanation": "Performance appraisal should evaluate the work rather than unrelated impressions."}]}, {"id": "satisfaction", "fragment": "W", "title": "The Satisfaction Conservatory", "subtitle": "Look at the parts of work, not one satisfaction score", "source": "13.3", "sourceUrl": "https://openstax.org/books/psychology-2e/pages/13-3-organizational-psychology-the-social-dimension-of-work", "concepts": ["job satisfaction", "autonomy", "workload", "work–family balance"], "evidence": "Satisfaction has several facets; a single average cannot explain every worker’s experience.", "instructions": "Adjust at least one work condition, then compare a second profile. The display is a reflection aid, not a prediction.", "activities": [{"id": "conditions-adjusted", "prompt": "Adjust the work profile", "options": []}, {"id": "profile-compared", "prompt": "Compare a contrasting profile", "options": [{"label": "Compare a second profile", "text": "One team has predictable schedules but little decision input. Another has more autonomy but unpredictable shifts. Ask workers which conditions matter and examine the demands together."}]}], "requiredActions": ["conditions-adjusted", "profile-compared"], "questions": [{"prompt": "Which question examines a specific satisfaction facet?", "choices": ["How much control do you have over scheduling?", "Are you a good employee?", "Does everyone enjoy the same things?"], "correct": 0, "explanation": "A focused question helps separate aspects of the work experience."}, {"prompt": "A satisfaction survey and output rise together. Does that prove causation?", "choices": ["Yes, a correlation proves the survey caused output.", "No; other influences and study design still matter.", "Yes, every worker must have improved equally."], "correct": 1, "explanation": "Association alone does not establish which factor caused the change."}]}, {"id": "leadership", "fragment": "I", "title": "The Leadership Council", "subtitle": "Compare assumptions about workers with leadership behavior", "source": "13.3", "sourceUrl": "https://openstax.org/books/psychology-2e/pages/13-3-organizational-psychology-the-social-dimension-of-work", "concepts": ["Theory X / Y", "transactional", "transformational"], "evidence": "Theory X/Y concerns managerial assumptions; transactional and transformational styles describe leadership approaches.", "instructions": "Consult both panels. Read all four approaches, then use the locks to distinguish them.", "activities": [{"id": "assumptions", "prompt": "Compare managerial assumptions", "options": [{"label": "Theory X", "text": "Assumes workers need close control."}, {"label": "Theory Y", "text": "Assumes workers can seek responsibility and contribute ideas."}]}, {"id": "styles", "prompt": "Compare leadership approaches", "options": [{"label": "Transactional", "text": "Uses agreed goals and exchanges such as rewards."}, {"label": "Transformational", "text": "Builds shared purpose, questions habits, and supports individual growth."}]}], "requiredActions": ["assumptions", "styles"], "questions": [{"prompt": "A supervisor invites staff to suggest safer workflows. Which assumption fits?", "choices": ["Theory Y", "Theory X", "Workers have no useful knowledge"], "correct": 0, "explanation": "Theory Y allows for responsibility and participation."}, {"prompt": "A leader builds a shared vision and encourages questioning old routines. Which style fits?", "choices": ["Only mechanical supervision", "Transformational leadership", "A random selection method"], "correct": 1, "explanation": "Transformational leadership emphasizes inspiration, thinking, and development."}]}, {"id": "culture", "fragment": "S", "title": "The Culture & Team Commons", "subtitle": "Compare what the organization says with what it rewards", "source": "13.3", "sourceUrl": "https://openstax.org/books/psychology-2e/pages/13-3-organizational-psychology-the-social-dimension-of-work", "concepts": ["organizational culture", "teamwork", "procedural justice"], "evidence": "Culture appears in everyday practices; procedural justice concerns the fairness of decision processes.", "instructions": "Inspect the official message and the daily practice, then propose a question for the team.", "activities": [{"id": "culture-stated", "prompt": "Read the poster", "options": [{"label": "Inspect the stated value", "text": "The print shop poster says: “Questions improve our work.”"}]}, {"id": "culture-lived", "prompt": "Observe the meeting", "options": [{"label": "Inspect the daily practice", "text": "When Sam asks about a confusing instruction, the supervisor interrupts and praises people who never question a procedure. Which message is being reinforced?"}]}], "requiredActions": ["culture-stated", "culture-lived"], "questions": [{"prompt": "Which observation gives stronger evidence about the lived culture?", "choices": ["Only the slogan on the wall", "How questions and mistakes are handled repeatedly", "The color of the staff mugs"], "correct": 1, "explanation": "Repeated practices can reveal a gap between stated and lived values."}, {"prompt": "Which change most directly improves fairness of the process?", "choices": ["Use clear criteria and let staff understand how decisions are made", "Let the manager pick favorites privately", "Use different rules for each employee"], "correct": 0, "explanation": "Procedural justice examines how decisions are reached."}]}, {"id": "human-factors", "fragment": "E", "title": "The Human Factors Design Studio", "subtitle": "Adapt the work system to the person using it", "source": "13.4", "sourceUrl": "https://openstax.org/books/psychology-2e/pages/13-4-human-factors-psychology-and-workplace-design", "concepts": ["ergonomics", "attention", "interface design", "checklists"], "evidence": "Human factors improves the fit between people, equipment, information, and work environments.", "instructions": "Compare both control panels and open the TED learning connection. Use captions or the transcript.", "activities": [{"id": "design-before", "prompt": "Inspect the original panel", "options": [{"label": "View original controls", "text": "Four similar symbols appear side by side. A new employee cannot tell which resumes printing and which clears a job."}]}, {"id": "design-after", "prompt": "Inspect the redesigned panel", "options": [{"label": "View clearer controls", "text": "Group related actions, label them with words and symbols, and confirm consequential actions. Test the design with the people who use it."}]}, {"id": "ted-connection", "prompt": "Connect the TED talk to the design", "options": [{"label": "Open TED learning connection", "text": "David Kelley centers design on people’s experiences. Identify one example, then apply that approach to a workplace tool."}]}], "requiredActions": ["design-before", "design-after", "ted-connection"], "questions": [{"prompt": "Which change most directly applies human factors?", "choices": ["Blame every mistake on motivation", "Make printer actions clear and test them with users", "Ask staff to memorize ambiguous icons faster"], "correct": 1, "explanation": "Redesign can reduce avoidable confusion in the human–tool interface."}, {"prompt": "What is a sensible purpose of a checklist?", "choices": ["Support reliable completion of important steps", "Replace every judgment or all training", "Guarantee that no error is possible"], "correct": 0, "explanation": "A checklist supports performance; it is not a guarantee or a substitute for all judgment."}]}];
+const questions=rooms.map(room=>room.questions);
+  const allActions = rooms.flatMap((room) => room.requiredActions);
+  const allRoomIds = rooms.map((room) => room.id);
+  const freshState = () => ({
+    version: 1,
+    completed: [], solved: [], actions: [], evidence: [], achievements: [],
+    notes: { observations: "", transfer: "", ted: "" },
+    escaped: false, learner: "", motionPaused: false, lighting: "curious",
+    settings: { volume: .22 }
+  });
+
+  let storageAvailable = true;
+  let activeIndex = -1;
+  let state = loadState();
+
+  function loadState() {
+    const base = freshState();
+    let parsed = null;
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      parsed = raw ? JSON.parse(raw) : null;
+    } catch (error) { storageAvailable = false; }
+    if (!parsed || typeof parsed !== "object") return base;
+    let completeFlag = false;
+    try { completeFlag = localStorage.getItem(COMPLETION_KEY) === "true"; } catch (error) { storageAvailable = false; }
+    return {
+      ...base,
+      completed: Array.isArray(parsed.completed) ? [...new Set(parsed.completed.filter((id) => allRoomIds.includes(id)))] : [],
+      solved: Array.isArray(parsed.solved) ? [...new Set(parsed.solved.filter((n) => Number.isInteger(n) && n >= 0 && n < TOTAL_LOCKS))] : [],
+      actions: Array.isArray(parsed.actions) ? [...new Set(parsed.actions.filter((id) => allActions.includes(id)))] : [],
+      evidence: Array.isArray(parsed.completed) ? rooms.filter(room => parsed.completed.includes(room.id)).map(room => room.evidence) : [],
+      achievements: Array.isArray(parsed.achievements) ? parsed.achievements.filter((item) => typeof item === "string") : [],
+      notes: {
+        observations: parsed.notes && typeof parsed.notes.observations === "string" ? parsed.notes.observations : "",
+        transfer: parsed.notes && typeof parsed.notes.transfer === "string" ? parsed.notes.transfer : "",
+        ted: parsed.notes && typeof parsed.notes.ted === "string" ? parsed.notes.ted : ""
+      },
+      escaped: parsed.escaped === true || completeFlag,
+      learner: typeof parsed.learner === "string" ? parsed.learner.slice(0, 60) : "",
+      motionPaused: parsed.motionPaused === true,
+      lighting: ["calm", "curious", "energized"].includes(parsed.lighting) ? parsed.lighting : "curious",
+      settings: { volume: Number.isFinite(parsed.settings && parsed.settings.volume) ? Math.min(1, Math.max(0, parsed.settings.volume)) : .22 }
+    };
+  }
+
+  function saveState(message = "Progress saved in this browser.") {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      if (state.escaped) localStorage.setItem(COMPLETION_KEY, "true");
+      storageAvailable = true;
+    } catch (error) { storageAvailable = false; }
+    if ($("save-status")) $("save-status").textContent = storageAvailable ? message : "This browser is blocking saved progress. Keep this tab open until you finish.";
+  }
+
+  function miniArt(index) { const symbols=["Ψ","KSA","FAIR","LEARN","WORK","LEAD","TEAM","DESIGN"]; return `<svg viewBox="0 0 260 82" aria-hidden="true"><path class="mini-wave" d="M8 41h64M188 41h64"/><circle cx="130" cy="41" r="32" fill="#1c4b60" stroke="#e8c56d" stroke-width="2"/><text x="130" y="47" fill="#fff3c8" text-anchor="middle" font-family="Georgia" font-size="${symbols[index].length>4?13:18}" font-weight="bold">${symbols[index]}</text><circle class="mini-orbit" cx="130" cy="41" r="37" fill="none" stroke="#84d8cf" stroke-dasharray="3 8"/></svg>`; }
+  function renderMap() {
+    $("room-grid").innerHTML = rooms.map((room, index) => {
+      const complete = state.completed.includes(room.id);
+      return `<button id="room-${index}" class="map-button${complete ? " complete" : ""}" type="button" data-room="${index}" aria-pressed="${index === activeIndex}">
+        <span class="map-art">${miniArt(index)}</span><span class="map-title">${index + 1}. ${room.title}</span>
+        <span class="map-subtitle">${room.subtitle}</span><span class="map-status">${complete ? `Complete · Fragment ${room.fragment}` : actionSummary(room)}</span>
+      </button>`;
+    }).join("");
+    document.querySelectorAll("[data-room]").forEach((button) => {
+      button.addEventListener("click", () => openRoom(Number(button.dataset.room)));
+      button.addEventListener("pointermove", (event) => {
+        if (reduceMotion()) return;
+        const rect = button.getBoundingClientRect();
+        button.style.setProperty("--tilt-x", `${(((event.clientX - rect.left) / rect.width) - .5) * 5}deg`);
+        button.style.setProperty("--tilt-y", `${(((event.clientY - rect.top) / rect.height) - .5) * -5}deg`);
+      });
+      button.addEventListener("pointerleave", () => { button.style.removeProperty("--tilt-x"); button.style.removeProperty("--tilt-y"); });
+    });
+  }
+
+  function actionSummary(room) {
+    const done = room.requiredActions.filter((action) => state.actions.includes(action)).length;
+    return done ? `${done}/${room.requiredActions.length} instruments explored` : "Ready to investigate";
+  }
+
+  function roomHeader(index, instructions, labMarkup) {
+    const room = rooms[index];
+    return `<article class="activity-card" aria-labelledby="room-heading-${index}">
+      <div class="room-heading"><div><span class="room-number">Workshop ${index + 1} of 8 · Fragment ${room.fragment}</span><h2 id="room-heading-${index}">${room.title}</h2><p>${room.subtitle}</p></div><span class="chapter-tag">OpenStax connection: <a href="${room.sourceUrl}" target="_blank" rel="noopener">${room.source}</a></span></div>
+      <div class="concept-strip">${room.concepts.map((concept) => `<span>${concept}</span>`).join("")}</div>
+      <p class="activity-instructions"><strong>Investigate:</strong> ${instructions}</p>${labMarkup}
+      <p id="explore-status-${index}" class="exploration-check">${explorationStatus(index)}</p>
+      <section class="lock-zone" aria-labelledby="lock-heading-${index}"><h3 id="lock-heading-${index}">Knowledge Locks</h3><p>Solve both locks. A missed answer gives you a hint and never lowers a score.</p><div id="questions-${index}"></div></section>
+      <div id="clue-holder-${index}">${state.completed.includes(room.id) ? clueMarkup(index) : ""}</div>
+      <div id="room-nav-${index}">${roomNavigationMarkup(index)}</div>
+    </article>`;
+  }
+
+  function explorationStatus(index) {
+    const room = rooms[index];
+    const done = room.requiredActions.filter((action) => state.actions.includes(action)).length;
+    return done === room.requiredActions.length ? "✓ Interactive investigation complete. Now solve both knowledge locks." : `Interactive investigation: ${done} of ${room.requiredActions.length} instruments explored.`;
+  }
+
+  function clueMarkup(index) {
+    const room = rooms[index];
+    return `<div class="clue-card" role="status"><span class="fragment-reveal" aria-hidden="true">${room.fragment}</span><strong>Workshop restored!</strong><br>${room.evidence}</div>`;
+  }
+
+  function roomNavigationMarkup(index) {
+    const currentComplete = state.completed.includes(rooms[index].id);
+    const last = index === rooms.length - 1;
+    let title, text, primary;
+    if (!last) {
+      title = `Next: Workshop ${index + 2} · ${rooms[index + 1].title}`;
+      text = currentComplete ? `Fragment ${rooms[index].fragment} is secure. Continue directly to the next workshop.` : "You may continue now and return later; unfinished work remains saved.";
+      primary = `<button class="route-button primary-route" type="button" data-next-room="${index + 1}">Continue to Next Workshop →</button>`;
+    } else if (state.completed.length === rooms.length) {
+      title = "All eight workshops are restored";
+      text = "Your WORKWISE fragments are ready. Continue directly to the final integration.";
+      primary = `<button class="route-button primary-route final-route" type="button" data-final-route>Enter the Final Integration ✦</button>`;
+    } else {
+      const remaining = rooms.length - state.completed.length;
+      title = `${remaining} workshop${remaining === 1 ? " remains" : "s remain"}`;
+      text = "Return to the map to revisit a workshop that still needs an instrument or knowledge lock.";
+      primary = `<button class="route-button primary-route" type="button" data-map-route>Find My Remaining Workshop</button>`;
+    }
+    return `<nav class="room-nav${currentComplete ? " route-ready" : ""}" aria-label="Guild route controls"><div><span class="room-nav-label">Your Route Forward</span><strong>${title}</strong><p>${text}</p></div><div class="room-nav-actions">${index > 0 ? `<button class="route-button" type="button" data-previous-room="${index - 1}">← Previous Workshop</button>` : ""}<button class="route-button" type="button" data-map-route>Guild Map</button>${primary}</div></nav>`;
+  }
+
+  function wireRoomNavigation(index) {
+    const container = $(`room-nav-${index}`);
+    if (!container) return;
+    container.querySelectorAll("[data-next-room]").forEach((button) => button.addEventListener("click", () => openRoom(Number(button.dataset.nextRoom))));
+    container.querySelectorAll("[data-previous-room]").forEach((button) => button.addEventListener("click", () => openRoom(Number(button.dataset.previousRoom))));
+    container.querySelectorAll("[data-map-route]").forEach((button) => button.addEventListener("click", () => focusAndScroll("map-heading")));
+    container.querySelectorAll("[data-final-route]").forEach((button) => button.addEventListener("click", () => focusAndScroll("final-heading")));
+  }
+
+  function focusAndScroll(id) {
+    const target = $(id);
+    target.setAttribute("tabindex", "-1");
+    target.focus({ preventScroll: true });
+    target.scrollIntoView({ behavior: reduceMotion() ? "auto" : "smooth", block: "start" });
+  }
+
+  function openRoom(index) {
+    activeIndex = index;
+    renderMap();
+    renderWorkRoom(index);
+    renderQuestions(index);
+    wireRoomNavigation(index);
+    focusAndScroll(`room-heading-${index}`);
+  }
+
+  function renderWorkRoom(index) {
+    const room=rooms[index];
+    const cards=room.activities.filter(a=>a.options.length).map(a=>`<section class="workstation"><h3>${a.prompt}</h3><div class="control-row">${a.options.map((o,j)=>`<button type="button" class="action-button" data-investigate="${a.id}" data-option="${j}" aria-pressed="false">${o.label}</button>`).join("")}</div><p id="detail-${a.id}" class="scene-caption" role="status">Select an instrument to inspect the evidence.</p></section>`).join("");
+    const history=index===0?`<details class="history-note"><summary>History lens: efficiency, people, and evidence</summary><p>Taylor studied workflow efficiency. Lillian Gilbreth examined motion and fatigue. Hawthorne research highlighted questions about social context and being observed. These are historical developments, not proof that one management method fits every workplace.</p></details>`:"";
+    const sliders=index===4?`<section class="workstation"><h3>Build two work profiles</h3><div class="range-grid"><div><label for="work-autonomy">Decision input: <output id="autonomy-value">2</output> / 5</label><input id="work-autonomy" type="range" min="1" max="5" value="2"><label for="work-predictable">Schedule predictability: <output id="predictable-value">2</output> / 5</label><input id="work-predictable" type="range" min="1" max="5" value="2"></div><div class="profile-scene" aria-hidden="true"><div class="profile-lantern one"></div><div class="profile-lantern two"></div><span>DECISION INPUT &nbsp; · &nbsp; SCHEDULE</span></div></div><p id="profile-feedback" class="scene-caption" role="status">This conceptual display does not calculate satisfaction, productivity, or a diagnosis.</p></section>`:"";
+    const design=index===7?`<div id="design-panel" class="design-console" aria-hidden="true"><strong>ACADEMY PRINT STATION</strong><div class="console-actions"><span>◆</span><span>◆</span><span>◆</span><span>◆</span></div><p>Which action does each symbol control?</p></div><section id="ted-panel" class="ted-panel" hidden><p class="eyebrow">TED CONNECTION · CHAPTER 13.4</p><h3>David Kelley: Human-centered design</h3><p>Kelley shifts attention from hardware alone to the user’s experience. Use this as a design example, then examine the workplace task, context, and evidence.</p><button type="button" class="action-button primary" id="load-ted">Load TED video</button><div id="ted-player"></div><p><a href="https://www.ted.com/talks/david_kelley_human_centered_design" target="_blank" rel="noopener">Watch on TED ↗</a> · <a href="https://www.ted.com/talks/david_kelley_human_centered_design?view=transcript" target="_blank" rel="noopener">Read the TED transcript ↗</a></p><p class="quiet">For captions, select the player’s subtitles/CC control and choose your language. On TED, select <strong>Read transcript</strong> for the text alternative. If an embedded player is unavailable, use the direct TED links.</p><label for="ted-note"><strong>Notice → explain → redesign:</strong> Identify one design example from the talk. What user need does it address, and how could you apply the idea to a workplace tool?</label><textarea id="ted-note" rows="4" placeholder="Use the talk and Chapter 13.4; no personal workplace information is required."></textarea><p class="quiet">The TED link does not automatically verify viewing. Use the video or transcript, then record your own observation.</p></section>`:"";
+    $("active-area").innerHTML=roomHeader(index,room.instructions,history+sliders+cards+design);
+    document.querySelectorAll('[data-investigate]').forEach(button=>button.addEventListener('click',()=>{
+      const a=room.activities.find(a=>a.id===button.dataset.investigate);const option=a.options[Number(button.dataset.option)];
+      document.querySelectorAll(`[data-investigate="${a.id}"]`).forEach(b=>b.setAttribute('aria-pressed',String(b===button)));
+      $("detail-"+a.id).textContent=option.text;$("detail-"+a.id).classList.add('success');recordAction(a.id,index);
+      if(a.id==='design-before'||a.id==='design-after'){const improved=a.id==='design-after';$("design-panel").classList.toggle('clear',improved);$("design-panel").querySelector('.console-actions').innerHTML=improved?'<span>Start print</span><span>Pause</span><span>Help</span><span>Clear job<br>Confirm first</span>':'<span>◆</span><span>◆</span><span>◆</span><span>◆</span>';$("design-panel").querySelector('p').textContent=improved?'Word labels and grouped actions make the intended controls clearer.':'Which action does each symbol control?';}
+      if(a.id==='ted-connection'){ $("ted-panel").hidden=false;$("ted-note").value=state.notes.ted||''; }
+    }));
+    if(index===4){ const update=()=>{const a=Number($("work-autonomy").value),p=Number($("work-predictable").value);$("autonomy-value").value=a;$("predictable-value").value=p;$("profile-feedback").textContent=`Profile: decision input ${a}/5; schedule predictability ${p}/5. Ask which needs this profile supports and which demands remain.`;document.querySelector('.profile-lantern.one').style.transform=`scale(${.7+a*.1})`;document.querySelector('.profile-lantern.two').style.transform=`scale(${.7+p*.1})`;recordAction('conditions-adjusted',4);};$("work-autonomy").addEventListener('input',update);$("work-predictable").addEventListener('input',update); }
+    if(index===7){$("load-ted").addEventListener('click',()=>{$("ted-player").innerHTML='<iframe title="TED: David Kelley — Human-centered design" src="https://embed.ted.com/talks/david_kelley_human_centered_design" loading="lazy" allow="fullscreen; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>';$("load-ted").hidden=true;});$("ted-note").addEventListener('input',event=>{state.notes.ted=event.target.value;saveState('TED observation saved.');});if(state.actions.includes('ted-connection')){$("ted-panel").hidden=false;$("ted-note").value=state.notes.ted||'';}}
+  }
+  function recordAction(action, roomIndex) {
+    if (!state.actions.includes(action)) state.actions.push(action);
+    const status = $(`explore-status-${roomIndex}`); if (status) status.textContent = explorationStatus(roomIndex);
+    maybeCompleteRoom(roomIndex); updateDashboard(); saveState();
+  }
+
+  function renderQuestions(roomIndex) {
+    const container = $(`questions-${roomIndex}`);
+    container.innerHTML = questions[roomIndex].map((question, localIndex) => {
+      const lockId = roomIndex * 2 + localIndex, solved = state.solved.includes(lockId);
+      return `<fieldset id="question-${lockId}" class="question-card${solved ? " solved" : ""}"><legend>Lock ${lockId + 1}: ${question.prompt}</legend><div class="choice-grid">${question.choices.map((choice, choiceIndex) => `<button class="choice-button${solved && choiceIndex === question.correct ? " correct-choice" : ""}" type="button" data-lock="${lockId}" data-choice="${choiceIndex}" ${solved ? "disabled" : ""}>${choice}</button>`).join("")}</div><p id="feedback-${lockId}" class="feedback ${solved ? "good" : ""}" role="status">${solved ? `✓ ${question.explanation}` : "Choose the best answer."}</p></fieldset>`;
+    }).join("");
+    container.querySelectorAll("[data-lock]").forEach((button) => button.addEventListener("click", () => checkAnswer(roomIndex, button)));
+  }
+
+  function checkAnswer(roomIndex, button) {
+    const lockId = Number(button.dataset.lock), question = questions[roomIndex][lockId % 2], choice = Number(button.dataset.choice), feedback = $(`feedback-${lockId}`);
+    if (choice === question.correct) {
+      if (!state.solved.includes(lockId)) state.solved.push(lockId);
+      const card = $(`question-${lockId}`); card.classList.add("solved"); card.querySelectorAll("[data-choice]").forEach((item) => { item.disabled = true; if (Number(item.dataset.choice) === question.correct) item.classList.add("correct-choice"); });
+      feedback.textContent = `✓ ${question.explanation}`; feedback.className = "feedback good"; maybeCompleteRoom(roomIndex); updateDashboard(); saveState();
+    } else {
+      button.classList.add("wrong-choice"); feedback.textContent = "Not quite yet. Compare the choices with the interactive model and try again."; feedback.className = "feedback try"; window.setTimeout(() => button.classList.remove("wrong-choice"), 900);
+    }
+  }
+
+  function roomReady(index) {
+    return rooms[index].requiredActions.every((action) => state.actions.includes(action)) && state.solved.includes(index * 2) && state.solved.includes(index * 2 + 1);
+  }
+
+  function maybeCompleteRoom(index) {
+    const room = rooms[index];
+    if (!roomReady(index) || state.completed.includes(room.id)) return;
+    state.completed.push(room.id); if (!state.evidence.includes(room.evidence)) state.evidence.push(room.evidence);
+    if (state.completed.length === 1) addAchievement("First Evidence: restored your first workplace workshop.");
+    if (state.completed.length === rooms.length) addAchievement("Guild Restorer: completed all eight workshops.");
+    const holder = $(`clue-holder-${index}`); if (holder) holder.innerHTML = clueMarkup(index);
+    const route = $(`room-nav-${index}`); if (route) { route.innerHTML = roomNavigationMarkup(index); wireRoomNavigation(index); }
+    renderMap(); updateDashboard(); saveState("Workshop restored and progress saved.");
+  }
+
+  function addAchievement(text) { if (!state.achievements.includes(text)) state.achievements.push(text); }
+
+  function updateDashboard() {
+    const complete = state.completed.length;
+    $("progress-bar").value = complete; $("progress-bar").textContent = `${complete} of 8 workshops complete`; $("progress-text").textContent = `${complete} of 8 workshops complete`; $("lock-progress").textContent = `${state.solved.length} of ${TOTAL_LOCKS} knowledge locks solved`; $("mobile-progress").innerHTML = `<a href="#map-heading">${complete}/8 workshops · ${state.solved.length}/${TOTAL_LOCKS} locks</a>`;
+    $("fragment-rack").innerHTML = rooms.map((room, index) => { const collected = state.completed.includes(room.id); return `<li class="fragment${collected ? " collected" : ""}">${collected ? room.fragment : "?"}<small>${index + 1}</small><span class="sr-only">${collected ? `Fragment ${room.fragment} collected` : `Fragment ${index + 1} locked`}</span></li>`; }).join("");
+    $("inventory-list").innerHTML = state.evidence.length ? state.evidence.map((item) => `<li>${item}</li>`).join("") : "<li>No evidence collected yet.</li>";
+    $("achievement-list").innerHTML = state.achievements.length ? state.achievements.map((item) => `<li>${item}</li>`).join("") : "<li>Your optional discoveries will appear here.</li>";
+    const ready = complete === rooms.length; $("final-case").hidden = !ready; $("workwise-code").innerHTML = ready ? rooms.map((room) => `<span>${room.fragment}</span>`).join("") : "";
+    if (ready && !state.escaped) $("final-feedback").textContent = "The letters glow in workshop order. Enter the eight-letter code and solve the three synthesis locks.";
+    if (state.escaped) showCompletedFinal(false);
+  }
+
+  function handleFinal(event) {
+    event.preventDefault();
+    const values = [$("final-one").value, $("final-two").value, $("final-three").value, $("portal-code").value.trim().toUpperCase()];
+    const expected = ["jobanalysis", "redesign", "pilot", "WORKWISE"];
+    if (!values.every((value, index) => value === expected[index])) {
+      const missed = []; if (values[0] !== expected[0]) missed.push("job analysis"); if (values[1] !== expected[1]) missed.push("human factors"); if (values[2] !== expected[2]) missed.push("evidence plan"); if (values[3] !== expected[3]) missed.push("fragment code");
+      $("final-feedback").textContent = `The Workplace Beacon is still calibrating. Revisit: ${missed.join(", ")}. Your fragments appear in workshop order.`; return;
+    }
+    state.escaped = true; addAchievement("Workplace Science Navigator: restored the Workplace Beacon."); saveState("Mission complete. Your badge is ready."); showCompletedFinal(true); updateDashboard();
+  }
+
+  function showCompletedFinal(celebrate) {
+    $("final-case").hidden = false; $("badge-maker").hidden = false; $("final-form").hidden = true; $("final-feedback").textContent = "✓ Workplace Beacon restored. A better workplace connects job evidence, fair processes, supportive relationships, and usable design.";
+    if (state.learner) { $("learner-name").value = state.learner; drawBadge(state.learner); $("download-badge").disabled = false; } else drawBadge("Academy Scholar");
+    if (celebrate) launchConfetti();
+  }
+
+  function launchConfetti() {
+    if (reduceMotion()) return;
+    const colors = ["#f3bd58", "#74d4ca", "#a67cc7", "#e56c85", "#ffffff"];
+    $("confetti").innerHTML = Array.from({ length: 56 }, (_, i) => `<i style="left:${(i * 37) % 100}%;--drift:${(i % 2 ? 1 : -1) * (20 + (i % 7) * 7)}px;--confetti:${colors[i % colors.length]};animation-delay:${(i % 12) * .08}s"></i>`).join("");
+    window.setTimeout(() => { $("confetti").innerHTML = ""; }, 4200);
+  }
+
+  function drawBadge(name) {
+    const canvas=$("badge-canvas"),ctx=canvas.getContext("2d"),w=canvas.width,h=canvas.height;
+    const bg=ctx.createLinearGradient(0,0,w,h);bg.addColorStop(0,"#071b30");bg.addColorStop(1,"#215c60");ctx.fillStyle=bg;ctx.fillRect(0,0,w,h);
+    ctx.strokeStyle="#dec06e";ctx.lineWidth=12;ctx.strokeRect(30,30,w-60,h-60);ctx.lineWidth=2;ctx.strokeRect(52,52,w-104,h-104);
+    ctx.save();ctx.translate(w/2,220);ctx.fillStyle="#183f53";ctx.strokeStyle="#e8c873";ctx.lineWidth=5;ctx.beginPath();ctx.moveTo(0,-125);ctx.lineTo(118,-72);ctx.lineTo(96,74);ctx.lineTo(0,138);ctx.lineTo(-96,74);ctx.lineTo(-118,-72);ctx.closePath();ctx.fill();ctx.stroke();ctx.fillStyle="#f9e5a0";ctx.textAlign="center";ctx.font="bold 130px Georgia";ctx.fillText("Ψ",0,45);ctx.restore();
+    ctx.textAlign="center";ctx.fillStyle="#e6c875";ctx.font="bold 30px Arial";ctx.fillText("PSYCHOLOGY ACADEMY · WEEK 13",w/2,405);
+    ctx.fillStyle="#fffdf1";ctx.font="bold 57px Georgia";ctx.fillText("Workplace Science Navigator",w/2,492);ctx.fillStyle="#a5e2dc";ctx.font="32px Georgia";ctx.fillText("The Workwise Guild · I/O Psychology",w/2,550);
+    ctx.fillStyle="#fff8e6";ctx.font="italic 46px Georgia";fitText(ctx,name,w-190,46);ctx.fillText(name,w/2,655);
+    ctx.strokeStyle="#dec06e";ctx.beginPath();ctx.moveTo(220,686);ctx.lineTo(w-220,686);ctx.stroke();ctx.fillStyle="#eff8ed";ctx.font="25px Arial";ctx.fillText("8 workshops · 16 knowledge locks · 1 workplace design challenge",w/2,748);ctx.fillText("Selection · Training · Leadership · Culture · Human Factors",w/2,796);
+    ctx.fillStyle="#e8cb7a";ctx.font="bold 28px Arial";ctx.fillText("MISSION CODE: WORKWISE",w/2,850);ctx.fillStyle="#eff8ed";ctx.font="22px Arial";ctx.fillText("Completed "+new Date().toLocaleDateString()+" · Dr. Tonya Holdaway",w/2,910);
+  }
+
+  function fitText(ctx, text, maxWidth, startSize) { let size = startSize; while (size > 28 && ctx.measureText(text).width > maxWidth) { size -= 2; ctx.font = `italic ${size}px Georgia`; } }
+  function safeFilename(value) { return value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "student"; }
+  function downloadBlob(blob, filename) { const url = URL.createObjectURL(blob), link = document.createElement("a"); link.href = url; link.download = filename; document.body.appendChild(link); link.click(); link.remove(); window.setTimeout(() => URL.revokeObjectURL(url), 1000); }
+
+  function generateBadge() {
+    const name = $("learner-name").value.trim().replace(/\s+/g, " "); if (!name) { $("badge-message").textContent = "Please enter your name before generating the badge."; $("learner-name").focus(); return; }
+    state.learner = name.slice(0, 60); drawBadge(state.learner); $("download-badge").disabled = false; $("badge-message").textContent = "Your personalized badge is ready. Select Download Badge as PNG."; saveState("Personalized badge name saved.");
+  }
+
+  function downloadBadge() {
+    if (!state.learner) { $("badge-message").textContent = "Generate the badge with your name first."; return; }
+    const canvas = $("badge-canvas"), filename = `week-13-workplace-science-navigator-${safeFilename(state.learner)}.png`;
+    if (canvas.toBlob) canvas.toBlob((blob) => { if (!blob) return; downloadBlob(blob, filename); $("badge-message").textContent = "Badge downloaded. Check your Downloads folder, then upload the PNG to Canvas."; }, "image/png");
+    else { const link = document.createElement("a"); link.href = canvas.toDataURL("image/png"); link.download = filename; link.click(); }
+  }
+
+  function downloadNotes() {
+    const lines = ["WEEK 13: THE WORKWISE GUILD", "", `Workshops completed: ${state.completed.length}/8`, `Knowledge locks solved: ${state.solved.length}/16`, "", "COLLECTED EVIDENCE", ...(state.evidence.length ? state.evidence.map((item, index) => `${index + 1}. ${item}`) : ["No evidence collected yet."]), "", "CONCEPT THAT CHANGED OR COMPLICATED MY THINKING", state.notes.observations || "(No note entered)", "", "SAFE REAL-WORLD APPLICATION", state.notes.transfer || "(No note entered)", "", "TED HUMAN FACTORS OBSERVATION", state.notes.ted || "(No note entered)", "", "Textbook: Spielman, R. M., Jenkins, W. J., & Lovett, M. D. (2020). Psychology 2e. OpenStax."];
+    downloadBlob(new Blob([lines.join("\n")], { type: "text/plain;charset=utf-8" }), "week-13-io-psychology-notes.txt");
+  }
+
+  const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+  function reduceMotion() { return state.motionPaused || media.matches; }
+  function updateMotion() { document.body.classList.toggle("no-motion", reduceMotion()); $("motion-toggle").textContent = state.motionPaused ? "Resume Animations" : "Pause Animations"; $("motion-toggle").setAttribute("aria-pressed", String(state.motionPaused)); $("motion-status").textContent = media.matches ? "Your device’s reduced-motion preference is active. Activities remain fully usable." : state.motionPaused ? "Animations are paused. Activities remain fully usable." : "Animations are on. The Guild lights are animated. You can pause them at any time."; }
+
+  function applyLighting(value, save = true) {
+    state.lighting = value; document.body.classList.remove("lighting-calm", "lighting-curious", "lighting-energized"); document.body.classList.add(`lighting-${value}`); document.querySelectorAll("[data-lighting]").forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.lighting === value))); if (save) saveState("Lighting preference saved.");
+  }
+
+  function setupAudio() {
+    const audio = $("guild-audio"), button = $("music-toggle"); audio.volume = state.settings.volume; $("volume").value = String(state.settings.volume);
+    if (!AUDIO_SOURCE) { button.disabled = true; button.textContent = "Music Track Ready to Connect"; $("audio-status").textContent = "Choose the Week 13 audio file, place it in assets/audio, and the track can be connected here."; }
+    else { audio.src = AUDIO_SOURCE; $("audio-status").textContent = "Guild music is off."; }
+    button.addEventListener("click", async () => { if (!AUDIO_SOURCE) return; if (audio.paused) { try { await audio.play(); button.classList.add("sound-on"); button.setAttribute("aria-pressed", "true"); button.firstChild.textContent = "Pause Guild Music "; $("audio-status").textContent = "Guild music is playing."; } catch (error) { $("audio-status").textContent = "The music could not start. The mission works normally without audio."; } } else { audio.pause(); button.classList.remove("sound-on"); button.setAttribute("aria-pressed", "false"); button.firstChild.textContent = "Play Guild Music "; $("audio-status").textContent = "Guild music is paused."; } });
+    $("volume").addEventListener("input", (event) => { state.settings.volume = Number(event.target.value); audio.volume = state.settings.volume; saveState("Volume preference saved."); }); audio.addEventListener("error", () => { $("audio-status").textContent = "The selected music file is unavailable. All learning activities still work."; });
+  }
+
+  function setupNotes() {
+    $("observation-notes").value = state.notes.observations; $("transfer-notes").value = state.notes.transfer;
+    $("observation-notes").addEventListener("input", (event) => { state.notes.observations = event.target.value; saveState("Notebook saved."); }); $("transfer-notes").addEventListener("input", (event) => { state.notes.transfer = event.target.value; saveState("Notebook saved."); });
+  }
+
+  function resetMission() {
+    const volume = state.settings.volume, motion = state.motionPaused, lighting = state.lighting; state = freshState(); state.settings.volume = volume; state.motionPaused = motion; state.lighting = lighting; activeIndex = -1;
+    try { localStorage.removeItem(COMPLETION_KEY); } catch (error) { storageAvailable = false; }
+    $("active-area").replaceChildren(); $("observation-notes").value = ""; $("transfer-notes").value = ""; $("learner-name").value = ""; $("final-form").reset(); $("final-form").hidden = false; $("badge-maker").hidden = true; $("download-badge").disabled = true; $("reset-box").hidden = true; saveState("Week 13 progress reset."); renderMap(); updateDashboard(); $("room-0").focus();
+  }
+
+  function createMotes() { $("motes").innerHTML = Array.from({ length: 28 }, (_, i) => `<i class="mote" style="left:${(i * 43) % 100}%;top:${(i * 17) % 100}%;--mote-speed:${13 + (i % 9)}s;animation-delay:-${i % 13}s;background:${i % 3 === 0 ? "#ef8aa0" : i % 3 === 1 ? "#f2cc71" : "#79d5cc"}"></i>`).join(""); }
+
+  function initialize() {
+    createMotes(); applyLighting(state.lighting, false); renderMap(); setupAudio(); setupNotes(); updateMotion(); updateDashboard(); saveState();
+    $("final-form").addEventListener("submit", handleFinal); $("generate-badge").addEventListener("click", generateBadge); $("download-badge").addEventListener("click", downloadBadge); $("print-badge").addEventListener("click", () => window.print()); $("download-notes").addEventListener("click", downloadNotes);
+    $("motion-toggle").addEventListener("click", () => { state.motionPaused = !state.motionPaused; updateMotion(); saveState("Motion preference saved."); }); if (media.addEventListener) media.addEventListener("change", updateMotion);
+    document.querySelectorAll("[data-lighting]").forEach((button) => button.addEventListener("click", () => applyLighting(button.dataset.lighting)));
+    $("reset-progress").addEventListener("click", () => { $("reset-box").hidden = false; $("confirm-reset").focus(); }); $("cancel-reset").addEventListener("click", () => { $("reset-box").hidden = true; $("reset-progress").focus(); }); $("confirm-reset").addEventListener("click", resetMission);
+    $("learner-name").value = state.learner; document.querySelector(".hero").addEventListener("pointermove", (event) => { const rect = event.currentTarget.getBoundingClientRect(); event.currentTarget.style.setProperty("--pointer-x", `${((event.clientX - rect.left) / rect.width) * 100}%`); event.currentTarget.style.setProperty("--pointer-y", `${((event.clientY - rect.top) / rect.height) * 100}%`); });
+  }
+
+  initialize();
+})();</script></body></html>
